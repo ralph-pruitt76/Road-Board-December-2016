@@ -1,0 +1,13 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\bin\armjlink2.dll" 
+
+"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev M BASELINE Dec 9 2016\EWARM\Road Brd MSTR Rev M LEGACY\Exe\Road Board Rev K NUCLEO V1.1 Jul 12 2016.out" 
+
+--plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\bin\armbat.dll" 
+
+--device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\config\debugger\ST\STM32L1xx.dmac" 
+
+
+
+

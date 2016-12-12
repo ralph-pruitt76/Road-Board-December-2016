@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<gatt out="gatt_db.c" header="gatt_db.h" prefix="gattdb_">
+
+    <service uuid="1800">
+      <description>Generic Access Profile</description>
+
+      <characteristic uuid="2a00">
+        <properties read="true" const="true" />
+        <value length="12">Bumper Rev G</value>
+      </characteristic>
+
+      <characteristic uuid="2a01">
+        <properties read="true" const="true" />
+        <value type="hex">0000</value>
+      </characteristic>
+    </service>
+   
+    <service uuid="a0a00000-0000-0000-0000-1234567890ab" advertise="true">
+        <description>Bumper Rev G</description>
+		
+		<characteristic uuid="a1a10000-0000-0000-0000-1234567890ab" id="xgatt_temp0">
+            <description>Ambient Temp</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="a2a20000-0000-0000-0000-1234567890ab" id="xgatt_temp1">
+            <description>Temp 1</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="a3a30000-0000-0000-0000-1234567890ab" id="xgatt_temp2">
+            <description>Temp 2</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="a4a40000-0000-0000-0000-1234567890ab" id="xgatt_temp3">
+            <description>Temp 3</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="a5a50000-0000-0000-0000-1234567890ab" id="xgatt_temp4">
+            <description>Temp 4</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		<characteristic uuid="a6a60000-0000-0000-0000-1234567890ab" id="xgatt_temp5">
+            <description>Temp 5</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="a7a70000-0000-0000-0000-1234567890ab" id="xgatt_temp6">
+            <description>Temp 6</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="a8a80000-0000-0000-0000-1234567890ab" id="xgatt_temp7">
+            <description>Temp 7</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="a9a90000-0000-0000-0000-1234567890ab" id="xgatt_temp8">
+            <description>Temp 8</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="aaaa0000-0000-0000-0000-1234567890ab" id="xgatt_fuel">
+            <description>Fuel Gauge</description>
+            <properties read="true" notify="true" />
+            <value length="3" />
+        </characteristic>	
+		
+		<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="xgatt_humidity">
+            <description>Humidity</description>
+            <properties read="true" notify="true" />
+            <value length="3" />
+        </characteristic>	
+		
+		<characteristic uuid="acac0000-0000-0000-0000-1234567890ab" id="xgatt_barometer">
+            <description>Barometric Pressure</description>
+            <properties read="true" notify="true" />
+            <value length="4" />
+        </characteristic>
+		
+		<characteristic uuid="adad0000-0000-0000-0000-1234567890ab" id="xgatt_lightning">
+            <description>Lightning</description>
+            <properties read="true" notify="true" />
+            <value length="3" />
+        </characteristic>
+
+        <characteristic uuid="aeae0000-0000-0000-0000-1234567890ab" id="xgatt_rev">
+            <description>SN/HWREV/SWREV</description>
+            <properties read="true" notify="true" />
+            <value length="20" />
+        </characteristic>
+		
+	    <characteristic uuid="a0b00000-0000-0000-0000-1234567890ab" id="xgatt_fft1">
+            <description>FFT-1</description>
+            <properties read="true" notify="true" />
+            <value length="20" />
+        </characteristic>
+	
+	    <characteristic uuid="a1b10000-0000-0000-0000-1234567890ab" id="xgatt_fft2">
+            <description>FFT-2</description>
+            <properties read="true" notify="true" />
+            <value length="20" />
+        </characteristic>
+	
+	    <characteristic uuid="a2b20000-0000-0000-0000-1234567890ab" id="xgatt_fft3">
+            <description>FFT-3</description>
+            <properties read="true" notify="true" />
+            <value length="20" />
+        </characteristic>
+	
+	    <characteristic uuid="a3b30000-0000-0000-0000-1234567890ab" id="xgatt_fft4">
+            <description>FFT-4</description>
+            <properties read="true" notify="true" />
+            <value length="20" />
+        </characteristic>
+
+	
+    </service>
+
+</gatt>

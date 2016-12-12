@@ -1,0 +1,171 @@
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[StLinkDriver]
+CStepIntDis=_ 0
+LeaveTargetRunning=_ 0
+stlinkserialNo=FFA873C9
+stlinkfoundProbes=
+[JLinkDriver]
+CStepIntDis=_ 0
+LeaveTargetRunning=_ 1
+TraceBufferSize=0x00010000
+TraceStallIfFIFOFull=0x00000000
+TracePortSize=0x00000004
+[DebugChecksum]
+Checksum=1335051011
+[CodeCoverage]
+Enabled=_ 0
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[SWOTraceHWSettings]
+OverrideDefaultClocks=0
+CpuClock=32000000
+ClockAutoDetect=0
+ClockWanted=2000000
+JtagSpeed=2000000
+Prescaler=16
+TimeStampPrescIndex=0
+TimeStampPrescData=0
+PcSampCYCTAP=1
+PcSampPOSTCNT=15
+PcSampIndex=0
+DataLogMode=0
+ITMportsEnable=0
+ITMportsTermIO=0
+ITMportsLogFile=0
+ITMlogFile=$PROJ_DIR$\ITM.log
+[struct_types]
+Fmt0=PRPressure-RawC	4	0
+Fmt1=WWDG_InitTypeDef-Counter	4	0
+Fmt2=WWDG_InitTypeDef-Prescaler	4	0
+Fmt3=WWDG_InitTypeDef-Window	4	0
+Fmt4=struct Humidty-HRawC	4	0
+Fmt5=struct gecko_cmd_packet-header	4	0
+Fmt6=struct gecko_msg_le_gap_set_mode_rsp_t-result	4	0
+[array_types]
+Fmt0=uint32_t[200]	4	0
+Fmt1=uint32_t[70]	4	0
+[watch_formats]
+Fmt0={W}1:H1_T0_out	3	0
+Fmt1={W}1:T0_degC_x8_u16	4	0
+Fmt2={W}1:T1_degC_x8_u16	4	0
+Fmt3={W}1:calcValue	4	0
+Fmt4={W}1:legacyValue	4	0
+Fmt5={W}1:raw_press	4	0
+Fmt6={W}1:temp1	4	0
+Fmt7={W}1:temp3	4	0
+Fmt8={W}1:tempVal	4	0
+Fmt9={W}1:tempmsg	4	0
+Fmt10={W}1:tmp3	4	0
+[Trace1]
+Enabled=0
+ShowSource=1
+[Trace2]
+Enabled=0
+ShowSource=0
+[SWOTraceWindow]
+PcSampling=0
+InterruptLogs=0
+ForcedTimeStamps=0
+EventCPI=0
+EventEXC=0
+EventFOLD=0
+EventLSU=0
+EventSLEEP=0
+[PowerLog]
+Title_0=I0
+Symbol_0=0 4 0
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+LiveEnabled=0
+LiveFile=PowerLogLive.log
+[DataLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+[EventLog]
+Title_0=Ch3
+Symbol_0=0 4 1
+Title_1=Ch2
+Symbol_1=0 4 1
+Title_2=Ch1
+Symbol_2=0 4 1
+Title_3=Ch0
+Symbol_3=0 4 1
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+SumSortOrder=0
+[InterruptLog]
+LogEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+SumEnabled=0
+ShowTimeSum=1
+SumSortOrder=0
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[DriverProfiling]
+Enabled=0
+Mode=3
+Graph=0
+Symbiont=0
+Exclusions=
+[CallStackLog]
+Enabled=0
+[CallStackStripe]
+ShowTiming=1
+[PowerProbe]
+Frequency=10000
+Probe0=I0
+ProbeSetup0=2 1 1 2 0 0
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.533.1" 0 0 1 "" 0 "" 0
+Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.1003.3" 0 0 1 "" 0 "" 0
+Bp2=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\..\Road Board Rev L BASELINE Sept 26 2016\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal_gpio.c}.441.3" 0 0 1 "" 0 "" 0
+Bp3=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal_uart.c}.1194.3" 0 0 1 "" 0 "" 0
+Bp4=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\i2c.c}.312.3" 0 0 1 "" 0 "" 0
+Bp5=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\usart.c}.758.4" 0 0 1 "" 0 "" 0
+Bp6=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.351.7" 0 0 1 "" 0 "" 0
+Bp7=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.358.7" 0 0 1 "" 0 "" 0
+Bp8=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\usart.c}.86.3" 0 0 1 "" 0 "" 0
+Bp9=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.358.7" 0 0 1 "" 0 "" 0
+Bp10=_ 0 "EMUL_DATA" "blemsgs.msgBuff[69]" 0 0 0 0 4294967295
+Bp11=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\app_data.c}.498.7" 0 0 1 "" 0 "" 0
+Bp12=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\Humidity.c}.298.3" 0 0 1 "" 0 "" 0
+Bp13=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\barometer.c}.351.5" 0 0 1 "" 0 "" 0
+Bp14=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\app_data.c}.456.7" 0 0 1 "" 0 "" 0
+Bp15=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\app_data.c}.189.3" 0 0 1 "" 0 "" 0
+Bp16=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.213.13" 0 0 1 "" 0 "" 0
+Bp17=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.215.13" 0 0 1 "" 0 "" 0
+Bp18=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.191.9" 0 0 1 "" 0 "" 0
+Bp19=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.225.9" 0 0 1 "" 0 "" 0
+Count=20
+[Aliases]
+Count=0
+SuppressDialog=0

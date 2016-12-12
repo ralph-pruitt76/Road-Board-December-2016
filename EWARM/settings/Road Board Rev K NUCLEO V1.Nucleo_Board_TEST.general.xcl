@@ -1,0 +1,15 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\bin\armstlink2.dll" 
+
+"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM\Nucleo Board TEST\Exe\Road Board Rev K NUCLEO V1.1 Jul 12 2016.out" 
+
+--plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\bin\armbat.dll" 
+
+--device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\config\debugger\ST\STM32L1xx.dmac" 
+
+--flash_loader "C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\config\flashloader\ST\FlashSTM32L15xxE.board" 
+
+
+
+
