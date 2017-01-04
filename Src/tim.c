@@ -274,7 +274,7 @@ HAL_StatusTypeDef Proc_Timer2( void )
     }
     // Handle Sensor Stimulus Count;
     SnsrTickCnt--;
-     if ( SnsrTickCnt == 0 )
+    if ( SnsrTickCnt == 0 )
     {
       // Reset Timer;
       SnsrTickCnt = PROCESS_SNSR_TIME;
