@@ -18,6 +18,8 @@
 #define PROCESS_SNSR_TIME       10      // Process all sensors every Second(10 * 100ms tick)
 #define PROCESS_RD_SND_TIME     53      // Process all Road Sound every Second(53 * 100ms tick)...5.3 Seconds
 #define PROCESS_LEDOFF_TIME     1       // Process and turn off all active LEDs. Controls the Blink rate of the LEDs(1 * 50ms tick)
+#define CONNECTION_CNT          18      // 90 Seconds.
+#define HEARTBEAT_CNT           6       // 30 Seconds
 
 typedef enum 
 {
@@ -53,5 +55,8 @@ void Set_DriverStates( task_defs Task, bool State );
 bool Get_DriverStates( task_defs Task );
 uint16_t Get_DriverStatus( void );
 void Test_Connection( void );
+bool Tst_HeartBeat( void );
+void Set_HeartBeat( void );
+void Clr_HeartBeat( void );
 
 #endif

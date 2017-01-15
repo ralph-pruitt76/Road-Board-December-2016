@@ -15,8 +15,8 @@
 /* Definition for USARTx's NVIC */
 #define USARTx_IRQn        USART3_IRQn
 #define BRD_REV         "Rev M"               // PCB Revision          
-#define VERSION_NUM     "M.5"                 // Monitor Revision
-#define REL_DATE        "December 5, 2016"
+#define VERSION_NUM     "M.6"                 // Monitor Revision
+#define REL_DATE        "January 13, 2017"
 #define LEGACY_BANNER   "Rev G+ REV C"        // Needed to allow Legacy Design to work
 
 /* Prototypes */

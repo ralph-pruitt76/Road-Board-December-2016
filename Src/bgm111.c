@@ -225,6 +225,24 @@ void BGM111_ProcessInput(void)
         ble.connection = true;
         ble.evt = NULL;
         break;
+      //case 0x030A0000:
+      case gecko_evt_gatt_server_characteristic_status_id:
+        // Clear Heart Beat... We have detected it.
+        Clr_HeartBeat();
+        ble.evt = NULL;
+        break;
+      case 0x080000A0:
+      case 0x020A0020:
+      case 0x020800A0:
+      case 0x020B00A0:
+      case 0x000000A0:
+//      case 0x200000A0:
+      case 0x050A0020:
+//      case gecko_cmd_gatt_server_send_characteristic_notification_id:
+      /* Dummy catchall */
+        /* Don't handle this event again */
+        ble.evt = NULL;
+        break;
       /* Dummy catchall */
       default:
         /* Don't handle this event again */
@@ -236,7 +254,7 @@ void BGM111_ProcessInput(void)
 
 /* BLE write characteristic */
 
-void BGM111_WriteCharacteristic(uint8_t handle, uint8_t len, uint8_t *data)
+void BGM111_WriteCharacteristic(uint16_t handle, uint8_t len, uint8_t *data)
 {
   /* Write the attribute */
   gecko_cmd_gatt_server_write_attribute_value(handle, 0, len, data);

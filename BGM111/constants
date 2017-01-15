@@ -63,3 +63,8 @@ xgatt_fft1 256
 xgatt_fft2 260
 xgatt_fft3 264
 xgatt_fft4 268
+AnlErrCnt 273
+AnlErrCd 277
+AnlDevCd 281
+AnlTickCnt 285
+AnlHrtBt 289

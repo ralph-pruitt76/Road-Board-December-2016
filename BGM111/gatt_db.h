@@ -74,5 +74,10 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 #define gattdb_xgatt_fft2                     260
 #define gattdb_xgatt_fft3                     264
 #define gattdb_xgatt_fft4                     268
+#define gattdb_AnlErrCnt                      273
+#define gattdb_AnlErrCd                       277
+#define gattdb_AnlDevCd                       281
+#define gattdb_AnlTickCnt                     285
+#define gattdb_AnlHrtBt                       289
 
 #endif

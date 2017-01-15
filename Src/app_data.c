@@ -100,6 +100,11 @@
 #define gattdb_xgatt_fft2                     260
 #define gattdb_xgatt_fft3                     264
 #define gattdb_xgatt_fft4                     268
+#define gattdb_AnlErrCnt                      273
+#define gattdb_AnlErrCd                       277
+#define gattdb_AnlDevCd                       281
+#define gattdb_AnlTickCnt                     285
+#define gattdb_AnlHrtBt                       289
 #endif
 
 // Driver list Structure
@@ -114,6 +119,13 @@ struct
   bool  CoolEye;
   bool  I2CState;
 } static driver_list;
+
+// Analytics Structure
+struct
+{
+  bool  HrtBeat_Flg;
+  uint16_t HrtBeat_Cnt;
+} static analytics;
 
 /* App data measurment structure */
 
@@ -153,6 +165,8 @@ void InitSensors(void)
 {
   data.Legacy_OneTime = true;                   // Clear Legacy One time flag so that we can set key characteristics...once.
   data.task_item = VOLTAGE_MNTR_TASK;           // Initialize the task_item to first item.
+  analytics.HrtBeat_Flg = false;                // Set flasg to clear before using it.
+  analytics.HrtBeat_Cnt = 0;                    // Clear count before using it.
 }
 
 /**
@@ -766,6 +780,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
   */
 void Process_RdSound( void )
 {
+  uint8_t tempStr[13];
+  
   RoadBrd_gpio_On( MICRO_LED );
   // 1. Build and Process Road Sound
   RoadBrdSnd_ProcessSound();
@@ -801,6 +817,13 @@ void Process_RdSound( void )
   BGM111_WriteCharacteristic(gattdb_RdSound48,
                              strlen((char *)data.FFTBin48.dumpStr), (uint8_t *)data.FFTBin48.dumpStr);
 #endif
+  // Test Analytics flag and determine if we need to update that characteristic
+  if (!(Tst_HeartBeat()))
+  {
+    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
+    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
+                             strlen((char *)tempStr), (uint8_t *)tempStr);
+  }
   RoadBrd_gpio_Off( MICRO_LED );
  }
 
@@ -813,29 +836,52 @@ void Process_RdSound( void )
 void Test_Connection( void )
 {
   static uint16_t connection_cnt = 0;
+  static uint16_t HeartBeat_Cnt = 0;
   
   // Test Connection
   if ( BGM111_Connected() )
   {
     // Yes...Clear count
     connection_cnt = 0;
-    
-  }
+    // Test Heart Beat. Has it been cleared?
+    if (Tst_HeartBeat())
+    {
+      // No We need to watch this closely.
+      // Test Heart Beat Count and determine if time to reset.
+      HeartBeat_Cnt++;
+      // Test Heart Beat Count. If expired, reset.
+      if (HeartBeat_Cnt > HEARTBEAT_CNT)
+      {
+        // Has been 30 Seconds....Time to reset Code.
+        RdBrd_ErrCdLogErrCd( ERROR_BGM_HRTBT, MODULE_bgm111 );
+        HeartBeat_Cnt = 0;
+        //RoadBrd_Delay( 1000 );
+        HAL_NVIC_SystemReset();
+      }
+    } // EndIf (Tst_HeartBeat())
+    else
+    {
+      // OK. Clear Count.
+      HeartBeat_Cnt = 0;
+      // Set Heart Beat Flag for next Sequence.
+      Set_HeartBeat();
+    }
+  } // EndIf ( BGM111_Connected() )
   else
   {
-    // No...Increment Count...
+    // No..
     connection_cnt++;
-    
-    if (connection_cnt > 18)
+    // Test Connection Count. If expired, reset.
+    if (connection_cnt > CONNECTION_CNT)
     {
       // Has been 90 Seconds....Time to reset Code.
       RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
       //RoadBrd_Delay( 1000 );
       HAL_NVIC_SystemReset();
     }
-  }
-  
+  } // EndElse ( BGM111_Connected() )
 }
+
   /**
   * @brief  This function resets the driver State List to all off.
   * @param  None
@@ -957,3 +1003,34 @@ uint16_t Get_DriverStatus( void )
     Status += 0x0080;
   return Status;
 }
+
+  /**
+  * @brief  This function returns the status of the Heart Beat Flag.
+  * @param  None
+  * @retval bool: Status of Heart Beat Flag
+  */
+bool Tst_HeartBeat( void )
+{
+  return analytics.HrtBeat_Flg;
+}
+
+  /**
+  * @brief  This function sets the Heart Beat Flag.
+  * @param  None
+  * @retval None
+  */
+void Set_HeartBeat( void )
+{
+  analytics.HrtBeat_Flg = true;
+}
+
+  /**
+  * @brief  This function clears the Heart Beat Flag.
+  * @param  None
+  * @retval None
+  */
+void Clr_HeartBeat( void )
+{
+  analytics.HrtBeat_Flg = false;
+}
+

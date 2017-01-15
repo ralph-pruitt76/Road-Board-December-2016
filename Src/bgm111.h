@@ -50,7 +50,7 @@ void BGM111_Init(void);
 void BGM111_ProcessInput(void);
 
 /* BLE write characteristic */
-void BGM111_WriteCharacteristic(uint8_t handle, uint8_t len, uint8_t *data);
+void BGM111_WriteCharacteristic(uint16_t handle, uint8_t len, uint8_t *data);
 HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c);
 bool RoadBrd_tstReqexec( void );
 void BGM111_UART_IRQHandler(UART_HandleTypeDef *huart);
