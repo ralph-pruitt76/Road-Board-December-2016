@@ -58,5 +58,6 @@ void Test_Connection( void );
 bool Tst_HeartBeat( void );
 void Set_HeartBeat( void );
 void Clr_HeartBeat( void );
+void Clr_HrtBeat_Cnt( void );
 
 #endif

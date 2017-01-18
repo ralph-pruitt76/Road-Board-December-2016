@@ -855,6 +855,7 @@ void Test_Connection( void )
         // Has been 30 Seconds....Time to reset Code.
         RdBrd_ErrCdLogErrCd( ERROR_BGM_HRTBT, MODULE_bgm111 );
         HeartBeat_Cnt = 0;
+        Clr_HrtBeat_Cnt();
         //RoadBrd_Delay( 1000 );
         HAL_NVIC_SystemReset();
       }
@@ -876,6 +877,7 @@ void Test_Connection( void )
     {
       // Has been 90 Seconds....Time to reset Code.
       RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
+      Clr_HrtBeat_Cnt();
       //RoadBrd_Delay( 1000 );
       HAL_NVIC_SystemReset();
     }
@@ -1002,6 +1004,16 @@ uint16_t Get_DriverStatus( void )
   if ( Get_DriverStates( I2C_STATE ) )
     Status += 0x0080;
   return Status;
+}
+
+  /**
+  * @brief  This function Clears the Heart Beat Count.
+  * @param  None
+  * @retval bool: Status of Heart Beat Flag
+  */
+void Clr_HrtBeat_Cnt( void )
+{
+  analytics.HrtBeat_Cnt = 0;
 }
 
   /**

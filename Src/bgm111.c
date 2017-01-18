@@ -211,6 +211,7 @@ void BGM111_ProcessInput(void)
           if (Boot_evt == false)
           {
             RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
+            Clr_HrtBeat_Cnt();
             //RoadBrd_Delay( 1000 );
             HAL_NVIC_SystemReset();
           }
@@ -432,6 +433,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
     if (IsBufFull(ble.rx_wr, ble.rx_rd))
     {
       RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
+      Clr_HrtBeat_Cnt();
       //RoadBrd_Delay( 1000 );
       HAL_NVIC_SystemReset();
       return HAL_ERROR;
@@ -458,6 +460,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
           /* Stay in sync state until we receive a valid start of header */
           // We have detected a SYNC error on BGM111...Log it!
           RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+          Clr_HrtBeat_Cnt();
           //RoadBrd_Delay( 1000 );
           HAL_NVIC_SystemReset();
           break;
