@@ -811,7 +811,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* uartHandle)
   */
 void HAL_UART_ErrorCallback(UART_HandleTypeDef* uartHandle)
 {
-    Error_Handler();
+    //Error_Handler();
 }
 
 #ifndef PATCH_UART

@@ -1779,6 +1779,82 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                       } //EndSwitch ( tempBffr[2] )
                     } //EndElse (Size < 9)
                     break;
+//++++++++++++++++++++++++++++++++++++++++++  Dump Calibration Settings.
+                  case 'C':
+                    // Read Cool Eye/Grid Eye Values.....
+                    if ( Get_DriverStates( GRIDEYE_MNTR_TASK ))
+                    {
+                      Status = RoadBrd_GridEye_ReadValues( &GridMeasure );
+                    }
+                    else if ( Get_DriverStates( COOLEYE_MNTR_TASK ))
+                    {
+                      Status = RoadBrd_CoolEye_ReadValues( &GridMeasure );
+                    }
+                    else
+                      Status = HAL_ERROR;
+                
+                    if (Status == HAL_OK)
+                    {
+                      // OK Next Sensor.
+                      // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
+                      Status = RoadBrd_ReadTemp( &TMeasure );
+                      if (Status == HAL_OK)
+                      {
+                        // OK Next Sensor.
+                        // Read Humidity Sensor sensor and return Humidity results....
+                        Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
+                        if (Status == HAL_OK)
+                        {
+                          // OK Next Sensor.
+                          //Status = RoadBrd_Barometer_Status( &PRMeasure );
+                          Status = RoadBrd_Baro_ReadPressure( &PRPMeasure );
+                          if (Status == HAL_OK)
+                          {
+                            //sprintf( (char *)tempBffr2, "Driver Status: %04x\r\n", DriverStatus );
+                            sprintf( (char *)tempBffr2, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n", (char *)GridMeasure.GridEye1.TempC,
+                                                                                        (char *)GridMeasure.GridEye2.TempC,
+                                                                                        (char *)GridMeasure.GridEye3.TempC,
+                                                                                        (char *)GridMeasure.GridEye4.TempC,
+                                                                                        (char *)GridMeasure.GridEye5.TempC,
+                                                                                        (char *)GridMeasure.GridEye6.TempC,
+                                                                                        (char *)GridMeasure.GridEye7.TempC,
+                                                                                        (char *)GridMeasure.GridEye8.TempC,
+                                                                                        (char *)GridMeasure.Thermistor.TempC,
+                                                                                        (char *)TMeasure.TempC,
+                                                                                        (char *)HMeasure.Humidity,
+                                                                                        (char *)PRPMeasure.Pressure);
+                            // Send string to UART..
+#ifdef NUCLEO
+                            Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                            Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                            if (Status != HAL_OK)
+                              return Status;
+                            // NOW, Build Data String..
+                            sprintf( (char *)tempBffr2, "COMPLETE" );
+                          } // Endif (Status == HAL_OK) RoadBrd_Baro_ReadPressure
+                          else
+                          {
+                            sprintf( (char *)tempBffr2, "Pressure TASKING ERROR!" );
+                          } // EndElse (Status == HAL_OK) RoadBrd_Baro_ReadPressure
+                        } // Endif (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
+                        else
+                        {
+                          sprintf( (char *)tempBffr2, "Humidity TASKING ERROR!" );
+                        } // EndElse (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
+                      } // Endif (Status == HAL_OK) RoadBrd_ReadTemp
+                      else
+                      {
+                        sprintf( (char *)tempBffr2, "AMBIENT TEMPERATURE TASKING ERROR!" );
+                      } // EndElse (Status == HAL_OK) RoadBrd_ReadTemp
+                    } // Endif (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
+                    else
+                    {
+                       sprintf( (char *)tempBffr2, "GRID EYE/COOL EYE TASKING ERROR!" );
+                    } // EndElse (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
+
+                    break;
 //++++++++++++++++++++++++++++++++++++++++++  Dump Driver State.
                   case 'D':
                     // Read Driver Status

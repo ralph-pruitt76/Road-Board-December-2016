@@ -34,6 +34,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "GridEye.h"
+#include <stdio.h>
   /**
   * @brief  This function initializes the Excelitas Cool Eye sensor Hardware. Parameters are as follows:
   * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
@@ -452,6 +453,7 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues( GridEPtr GPtr )
   int num_bytes;
   uint8_t i2cData[20];  
   char tempBffr2[5];
+  
   int x;
   float Temp_C, Temp_F;
   uint16_t tempC;
@@ -515,6 +517,7 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues( GridEPtr GPtr )
     tempC = (uint16_t)(round(Temp_C * 10));
     Temp_F = (Temp_C * 1.8) + 32;
     GPtr->Thermistor.RawC = tempC;
+    
     sprintf( (char *)GPtr->Thermistor.TempC, "%3.1fC", Temp_C );
     sprintf( (char *)GPtr->Thermistor.TempF, "%3.1fF", Temp_F );
     // NOW, Build Raw Data String..
