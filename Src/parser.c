@@ -68,7 +68,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
   #else
     #define RECEIVE_SZ      30
     uint16_t DriverStatus;
-    uint8_t tempBffr2[80];
+    uint8_t tempBffr2[120];
     uint8_t tempBffr3[10];
     uint8_t* BufferPntr;
     HAL_StatusTypeDef Status, Save_Status;

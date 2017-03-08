@@ -70,7 +70,7 @@ extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
 
 /* Size of Trasmission buffer */
-#define TXBUFFERSIZE                      80
+#define TXBUFFERSIZE                      120
 /* Size of Reception buffer */
 #define RXBUFFERSIZE                      TXBUFFERSIZE
   

@@ -96,9 +96,10 @@ HAL_StatusTypeDef RoadBrd_ReadTemp( TempPtr TPtr )
   if (Status == HAL_OK)
   {
     // Now calculate Celcius and Farenheit Temp.
-    //TEST CODE ONLY REMOVE WHEN NOT USED.
-    //i2cData[0] = 0xff;
-    //i2cData[1] = 0x00;
+#ifdef TESTTEMP
+    i2cData[0] = 0xff;
+    i2cData[1] = 0x00;
+#endif
     smallInt = ((i2cData[0]*256) + i2cData[1]) >> 5;
     //**Need to first Convert 2s Compliment 11 bit to int.
     // Is this negative?

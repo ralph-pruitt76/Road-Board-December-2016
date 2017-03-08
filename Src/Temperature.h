@@ -51,8 +51,8 @@
 
 // Structure
 typedef struct Temp {
-   uint8_t TempC[6];
-   uint8_t TempF[6];
+   uint8_t TempC[7];
+   uint8_t TempF[7];
    uint8_t Raw[7];
    uint16_t RawC;
 } Temperature;

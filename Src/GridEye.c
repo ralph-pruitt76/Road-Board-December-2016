@@ -144,6 +144,10 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues( GridEPtr GPtr )
 #endif
   if (Status == HAL_OK)
   {
+#ifdef TESTTEMP
+    i2cData[0] = 0x80;
+    i2cData[1] = 0xff;
+#endif
     // NOW, Build Data String..
     smallInt = ((i2cData[1]*256) + i2cData[0]);
     nativeInt = smallInt;
@@ -205,7 +209,11 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues( GridEPtr GPtr )
     if (Status == HAL_OK)
     {
       // NOW, Build Data String..
-      smallInt = ((i2cData[1]*256) + i2cData[0]);
+ #ifdef TESTTEMP
+      i2cData[0] = 0x80;
+      i2cData[1] = 0xff;
+#endif
+     smallInt = ((i2cData[1]*256) + i2cData[0]);
       nativeInt = smallInt;
       Temp_C = nativeInt/10;
       tempC = (uint16_t)(round(Temp_C * 10));
@@ -502,6 +510,10 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues( GridEPtr GPtr )
   if (Status == HAL_OK)
   {
     // NOW, Build Data String..
+#ifdef TESTTEMP
+    i2cData[0] = 0x80;
+    i2cData[1] = 0xff;
+#endif
     smallInt = ((i2cData[1]*256) + i2cData[0]);
     //**Need to first Convert 2s Compliment 11 bit to int.
     // Is this negative?
@@ -567,6 +579,24 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues( GridEPtr GPtr )
 #endif
   if (Status == HAL_OK)
   {
+#ifdef TESTTEMP
+    i2cData[0] = 0x80;
+    i2cData[1] = 0xff;
+    i2cData[2] = 0x80;
+    i2cData[3] = 0xff;
+    i2cData[4] = 0x80;
+    i2cData[5] = 0xff;
+    i2cData[6] = 0x80;
+    i2cData[7] = 0xff;
+    i2cData[8] = 0x80;
+    i2cData[9] = 0xff;
+    i2cData[10] = 0x80;
+    i2cData[11] = 0xff;
+    i2cData[12] = 0x80;
+    i2cData[13] = 0xff;
+    i2cData[14] = 0x80;
+    i2cData[15] = 0xff;
+#endif
     // NOW, Build Data String..
     for( x=0; x<8; x++)
     {
