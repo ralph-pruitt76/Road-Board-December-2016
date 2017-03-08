@@ -186,6 +186,7 @@ void BGM111_ProcessInput(void)
     {
       /* System boot handler */
       case gecko_evt_system_boot_id:
+//        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_BOOT>");
         Boot_evt = true;
         /* Flag that the BLE module has booted */
         ble.booted = true;
@@ -210,6 +211,7 @@ void BGM111_ProcessInput(void)
           // The following is a simple patch...Best way right now to recover is to force HARD Reset....
           if (Boot_evt == false)
           {
+            RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTCLOSE>");
             RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
             Clr_HrtBeat_Cnt();
             //RoadBrd_Delay( 1000 );
@@ -223,6 +225,7 @@ void BGM111_ProcessInput(void)
       case gecko_evt_le_connection_opened_id:
         /* Open Event...Set Active Connection Flag */
         /* Don't handle this event again */
+//        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTOPEN>");
         ble.connection = true;
         ble.evt = NULL;
         break;
