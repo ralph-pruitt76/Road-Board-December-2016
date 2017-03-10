@@ -166,6 +166,7 @@ void BGM111_Init(void)
 void BGM111_ProcessInput(void)
 {
   uint32_t temp1;
+  uint8_t tempBffr2[20];
   bool Boot_evt = false;
   struct gecko_msg_le_gap_set_mode_rsp_t *Result_Ptr;
   /* Check whether there is an event to service */
@@ -186,7 +187,7 @@ void BGM111_ProcessInput(void)
     {
       /* System boot handler */
       case gecko_evt_system_boot_id:
-//        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_BOOT>");
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_BOOT>");
         Boot_evt = true;
         /* Flag that the BLE module has booted */
         ble.booted = true;
@@ -225,10 +226,11 @@ void BGM111_ProcessInput(void)
       case gecko_evt_le_connection_opened_id:
         /* Open Event...Set Active Connection Flag */
         /* Don't handle this event again */
-//        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTOPEN>");
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTOPEN>");
         ble.connection = true;
         ble.evt = NULL;
         break;
+      // gecko_evt_gatt_server_user_write_request_id
       case 0x020A0020:
         // Clear Heart Beat... We have detected it.
         RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"-*-");
@@ -242,20 +244,30 @@ void BGM111_ProcessInput(void)
         Clr_HeartBeat();
         ble.evt = NULL;
         break;
-      case 0x080000A0:
-      case 0x020800A0:
-      case 0x020B00A0:
-      case 0x000000A0:
+//      case 0x080000A0:
+//      case 0x020B00A0:
+//      case 0x000000A0:
       case 0x200000A0:
       case 0x050A0020:
 //      case 0x200000A0:
-//      case gecko_cmd_gatt_server_send_characteristic_notification_id:
+//      case gecko_cmd_gatt_server_send_characteristic_notification_id: */
       /* Dummy catchall */
         /* Don't handle this event again */
         ble.evt = NULL;
         break;
+      case gecko_rsp_gatt_read_characteristic_value_by_uuid_id:
+      case 0x020800A0:
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<rsp_read_ch_value_by_uuid_id>");
+        ble.evt = NULL;
+        break;
+      case gecko_evt_endpoint_status_id:
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<evt_endpoint_status_id>");
+        ble.evt = NULL;
+        break;
       /* Dummy catchall */
       default:
+        sprintf( (char *)tempBffr2, "<UNKN:%08x>", temp1);
+        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
         /* Don't handle this event again */
         ble.evt = NULL;
         break;

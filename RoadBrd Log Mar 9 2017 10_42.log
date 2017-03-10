@@ -1,0 +1,279 @@
+Expression	Value	Location	Type	
+ble	<struct>	0x20002DC0	struct <Unnamed 34>	
+tx_buf	<array>"8a006600Rw 
+ÿ]"	0x20002DC0	uint8_t[200]	
+tx_wr	'¢' (0xA2)	0x20002E88	uint8_t	
+tx_rd	'¢' (0xA2)	0x20002E89	uint8_t	
+rx_buf	<array>"
+"	0x20002E8A	uint8_t[200]	
+rx_wr	'½' (0xBD)	0x20002F52	uint8_t	
+rx_rd	'½' (0xBD)	0x20002F53	uint8_t	
+rx_state	BGRX_SYNC	0x20002F54	enum BgRxState	
+req_exec	0	0x20002F55	bool	
+booted	1	0x20002F56	bool	
+connection	0	0x20002F57	bool	
+evt	0x00000000	0x20002F58	struct gecko_cmd_packet *	
+blemsgs	<struct>	0x200020C8	struct <Unnamed 33>	
+msgBuff	<array>	0x200020C8	uint32_t[200]	
+
+
+[0]	0x020B00A0	0x200020C8	uint32_t	RX>	gecko_evt_endpoint_status_id	
+[1]	0x020B00A0	0x200020CC	uint32_t	RX>	gecko_evt_endpoint_status_id
+[2]	0x020B00A0	0x200020D0	uint32_t	RX>	gecko_evt_endpoint_status_id
+[3]	0x020B00A0	0x200020D4	uint32_t	RX>	gecko_evt_endpoint_status_id
+[4]	0x020B00A0	0x200020D8	uint32_t	RX>	gecko_evt_endpoint_status_id
+[5]	0x000100A0	0x200020DC	uint32_t	RX>	gecko_evt_system_boot_id
+
+[6]	0xFF000006	0x200020E0	uint32_t	<CMD	0x01030 > gecko_cmd_le_gap_set_mode_id
+[7]	0x20020301	0x200020E4	uint32_t	
+[8]	0x02020000	0x200020E8	uint32_t	
+	handle: 0x20
+		gecko_cmd_msg->header=gecko_cmd_le_gap_set_mode_id+((2+0)<<8); 
+					0x01030000 + ((2+0)<<8) = 0x01030000 + ((2+0)<<8) + 200 = 0x01030200
+					20 02 03 01(Reverse Order)
+		gecko_cmd_msg->header	0x01030220	0x20002FE8	uint32	
+		gecko_cmd_msg->data.cmd_le_gap_set_mode
+			discover	'.' (0x02)	0x20002FEC	uint8	
+			connect	'.' (0x02)	0x20002FED	uint8	
+
+
+[9]	0xFF00000F	0x200020EC	uint32_t	<CMD	0x020A0B > gecko_cmd_gatt_server_write_attribute_value_id
+[10]	0x200B0A02	0x200020F0	uint32_t	
+[11]	0x08000000	0x200020F4	uint32_t	
+	handle: 0x20
+
+[12]	0xFF00000E	0x200020F8	uint32_t	<CMD	0x050A0A > gecko_cmd_gatt_server_send_characteristic_notification_id
+[13]	0x200A0A05	0x200020FC	uint32_t	
+[14]	0xFF080006	0x20002100	uint32_t	
+	handle: 0x20
+
+[15]	0xFF000010	0x20002104	uint32_t	<CMD	0x020A0C > gecko_cmd_gatt_server_write_attribute_value_id
+[16]	0x200C0A02	0x20002108	uint32_t	
+[17]	0x0C000000	0x2000210C	uint32_t	
+	handle: 0x20
+
+[18]	0xFF00000F	0x20002110	uint32_t	<CMD	0x050A0B > gecko_cmd_gatt_server_send_characteristic_notification_id
+[19]	0x200B0A05	0x20002114	uint32_t	
+[20]	0xFF0C0007	0x20002118	uint32_t	
+	handle: 0x20
+
+[21]	0xFF00000F	0x2000211C	uint32_t	<CMD	0x020A0B > gecko_cmd_gatt_server_write_attribute_value_id
+[22]	0x200B0A02	0x20002120	uint32_t	
+[23]	0x10000000	0x20002124	uint32_t	
+	handle: 0x20
+
+[24]	0xFF00000E	0x20002128	uint32_t	<CMD	0x050A0A > gecko_cmd_gatt_server_send_characteristic_notification_id
+[25]	0x200A0A05	0x2000212C	uint32_t	
+[26]	0xFF100006	0x20002130	uint32_t	
+	handle: 0x20
+
+[27]	0xFF00000F	0x20002134	uint32_t	<CMD	0x020A0B > gecko_cmd_gatt_server_write_attribute_value_id
+[28]	0x200B0A02	0x20002138	uint32_t	
+[29]	0x14000000	0x2000213C	uint32_t	
+	handle: 0x20
+
+[30]	0xFF00000E	0x20002140	uint32_t	<CMD	0x050A0A > gecko_cmd_gatt_server_send_characteristic_notification_id
+[31]	0x200A0A05	0x20002144	uint32_t	
+[32]	0xFF140006	0x20002148	uint32_t	
+	handle: 0x20
+
+[33]	0xFF00000F	0x2000214C	uint32_t	<CMD	0x020A0B > gecko_cmd_gatt_server_write_attribute_value_id
+[34]	0x200B0A02	0x20002150	uint32_t	
+[35]	0x18000000	0x20002154	uint32_t	
+	handle: 0x20
+
+[36]	0xFF00000E	0x20002158	uint32_t	<CMD	0x050A0A > gecko_cmd_gatt_server_send_characteristic_notification_id
+[37]	0x200A0A05	0x2000215C	uint32_t	
+[38]	0xFF180006	0x20002160	uint32_t	
+
+[39]	0xFF000010	0x20002164	uint32_t	<CMD	0x020A0C > gecko_cmd_gatt_server_write_attribute_value_id
+[40]	0x200C0A02	0x20002168	uint32_t	
+[41]	0x1C000000	0x2000216C	uint32_t	
+
+[42]	0xFF00000F	0x20002170	uint32_t	<CMD	0x050A0B > gecko_cmd_gatt_server_send_characteristic_notification_id
+[43]	0x200B0A05	0x20002174	uint32_t	
+[44]	0xFF1C0007	0x20002178	uint32_t	
+
+[45]	0xFF00000F	0x2000217C	uint32_t	<CMD	0x020A0B > gecko_cmd_gatt_server_write_attribute_value_id
+[46]	0x200B0A02	0x20002180	uint32_t	
+[47]	0x20000000	0x20002184	uint32_t	
+
+[48]	0xFF00000E	0x20002188	uint32_t	<CMD	0x050A0A > gecko_cmd_gatt_server_send_characteristic_notification_id
+[49]	0x200A0A05	0x2000218C	uint32_t	
+[50]	0xFF200006	0x20002190	uint32_t	
+
+[51]	0xFF00000E	0x20002194	uint32_t	<CMD	0x020A0A > gecko_cmd_gatt_server_write_attribute_value_id
+[52]	0x200A0A02	0x20002198	uint32_t	
+[53]	0x24000000	0x2000219C	uint32_t	
+
+[54]	0xFF00000D	0x200021A0	uint32_t	<CMD	0x050A09 > gecko_cmd_gatt_server_send_characteristic_notification_id
+[55]	0x20090A05	0x200021A4	uint32_t	
+[56]	0xFF240005	0x200021A8	uint32_t	
+
+[57]	0xFF000014	0x200021AC	uint32_t	<CMD	0x020A10 > gecko_cmd_gatt_server_write_attribute_value_id
+[58]	0x20100A02	0x200021B0	uint32_t	
+[59]	0xFC000000	0x200021B4	uint32_t	
+
+[60]	0xFF000013	0x200021B8	uint32_t	<CMD	0x050A0F > gecko_cmd_gatt_server_send_characteristic_notification_id
+[61]	0x200F0A05	0x200021BC	uint32_t	
+[62]	0xFFFC000B	0x200021C0	uint32_t	
+
+[63]	0x080000A0	0x200021C4	uint32_t	RX>	gecko_rsp_gatt_read_characteristic_value_by_uuid_id
+
+[64]	0xFF00000F	0x200021C8	uint32_t	<CMD	0x020A0B > gecko_cmd_gatt_server_write_attribute_value_id
+[65]	0x200B0A02	0x200021CC	uint32_t	
+[66]	0x28000000	0x200021D0	uint32_t	
+
+[67]	0xFF00000E	0x200021D4	uint32_t	<CMD	0x050A0A > gecko_cmd_gatt_server_send_characteristic_notification_id
+[68]	0x200A0A05	0x200021D8	uint32_t	
+[69]	0xFF280006	0x200021DC	uint32_t	
+
+[70]	0xFF00000E	0x200021E0	uint32_t	<CMD	0x020A0A > gecko_cmd_gatt_server_write_attribute_value_id
+[71]	0x200A0A02	0x200021E4	uint32_t	
+[72]	0x2C000000	0x200021E8	uint32_t	
+
+[73]	0xFF00000D	0x200021EC	uint32_t	<CMD	0x050A09 > gecko_cmd_gatt_server_send_characteristic_notification_id
+[74]	0x20090A05	0x200021F0	uint32_t	
+[75]	0xFF2C0005	0x200021F4	uint32_t	
+
+[76]	0xFF00000E	0x200021F8	uint32_t	<CMD	0x020A0A > gecko_cmd_gatt_server_write_attribute_value_id
+[77]	0x200A0A02	0x200021FC	uint32_t	
+[78]	0x30000000	0x20002200	uint32_t	
+
+[79]	0xFF00000D	0x20002204	uint32_t	<CMD	0x050A09 > gecko_cmd_gatt_server_send_characteristic_notification_id
+[80]	0x20090A05	0x20002208	uint32_t	
+[81]	0xFF300005	0x2000220C	uint32_t	
+
+[82]	0xFF00000D	0x20002210	uint32_t	<CMD	0x020A09 > gecko_cmd_gatt_server_write_attribute_value_id
+[83]	0x20090A02	0x20002214	uint32_t	
+[84]	0xC8000000	0x20002218	uint32_t	
+
+[85]	0xFF00000C	0x2000221C	uint32_t	<CMD	0x050A08 > gecko_cmd_gatt_server_send_characteristic_notification_id
+[86]	0x20080A05	0x20002220	uint32_t	
+[87]	0xFFC80004	0x20002224	uint32_t	
+
+[88]	0x080000A0	0x20002228	uint32_t	RX>	gecko_rsp_gatt_read_characteristic_value_by_uuid_id
+
+[89]	0xFF000017	0x2000222C	uint32_t	<CMD	0x020A13 > gecko_cmd_gatt_server_write_attribute_value_id
+[90]	0x20130A02	0x20002230	uint32_t	
+[91]	0x5D000000	0x20002234	uint32_t	
+
+[92]	0xFF000016	0x20002238	uint32_t	<CMD	0x050A12 > gecko_cmd_gatt_server_send_characteristic_notification_id
+[93]	0x20120A05	0x2000223C	uint32_t	
+[94]	0xFF5D000E	0x20002240	uint32_t	
+
+[95]	0xFF000010	0x20002244	uint32_t	<CMD	0x020A0C > gecko_cmd_gatt_server_write_attribute_value_id
+[96]	0x200C0A02	0x20002248	uint32_t	
+[97]	0x61000000	0x2000224C	uint32_t	
+
+[98]	0xFF00000F	0x20002250	uint32_t	<CMD	0x050A0B > gecko_cmd_gatt_server_send_characteristic_notification_id
+[99]	0x200B0A05	0x20002254	uint32_t	
+[100]	0xFF610007	0x20002258	uint32_t	
+
+[101]	0xFF000010	0x2000225C	uint32_t	<CMD	0x020A0C > gecko_cmd_gatt_server_write_attribute_value_id
+[102]	0x200C0A02	0x20002260	uint32_t	
+[103]	0x65000000	0x20002264	uint32_t	
+
+[104]	0xFF00000F	0x20002268	uint32_t	<CMD	0x050A0B > gecko_cmd_gatt_server_send_characteristic_notification_id
+[105]	0x200B0A05	0x2000226C	uint32_t	
+[106]	0xFF650007	0x20002270	uint32_t	
+
+[107]	0xFF000010	0x20002274	uint32_t	<CMD	0x020A0C > gecko_cmd_gatt_server_write_attribute_value_id
+[108]	0x200C0A02	0x20002278	uint32_t	
+[109]	0x69000000	0x2000227C	uint32_t	
+
+[110]	0xFF00000F	0x20002280	uint32_t	<CMD	0x050A0B > gecko_cmd_gatt_server_send_characteristic_notification_id
+[111]	0x200B0A05	0x20002284	uint32_t	
+[112]	0xFF690007	0x20002288	uint32_t	
+
+[113]	0x080000A0	0x2000228C	uint32_t	RX>	gecko_rsp_gatt_read_characteristic_value_by_uuid_id
+
+[114]	0xFF000013	0x20002290	uint32_t	<CMD	0x020A0F > gecko_cmd_gatt_server_write_attribute_value_id
+[115]	0x200F0A02	0x20002294	uint32_t	
+[116]	0x34000000	0x20002298	uint32_t	
+
+[117]	0xFF000012	0x2000229C	uint32_t	<CMD	0x050A0E > gecko_cmd_gatt_server_send_characteristic_notification_id
+[118]	0x200E0A05	0x200022A0	uint32_t	
+[119]	0xFF34000A	0x200022A4	uint32_t	
+
+[120]	0x00000000	0x200022A8	uint32_t	
+[121]	0x00000000	0x200022AC	uint32_t	
+[122]	0x00000000	0x200022B0	uint32_t	
+[123]	0x00000000	0x200022B4	uint32_t	
+[124]	0x00000000	0x200022B8	uint32_t	
+[125]	0x00000000	0x200022BC	uint32_t	
+[126]	0x00000000	0x200022C0	uint32_t	
+[127]	0x00000000	0x200022C4	uint32_t	
+[128]	0x00000000	0x200022C8	uint32_t	
+[129]	0x00000000	0x200022CC	uint32_t	
+[130]	0x00000000	0x200022D0	uint32_t	
+[131]	0x00000000	0x200022D4	uint32_t	
+[132]	0x00000000	0x200022D8	uint32_t	
+[133]	0x00000000	0x200022DC	uint32_t	
+[134]	0x00000000	0x200022E0	uint32_t	
+[135]	0x00000000	0x200022E4	uint32_t	
+[136]	0x00000000	0x200022E8	uint32_t	
+[137]	0x00000000	0x200022EC	uint32_t	
+[138]	0x00000000	0x200022F0	uint32_t	
+[139]	0x00000000	0x200022F4	uint32_t	
+[140]	0x00000000	0x200022F8	uint32_t	
+[141]	0x00000000	0x200022FC	uint32_t	
+[142]	0x00000000	0x20002300	uint32_t	
+[143]	0x00000000	0x20002304	uint32_t	
+[144]	0x00000000	0x20002308	uint32_t	
+[145]	0x00000000	0x2000230C	uint32_t	
+[146]	0x00000000	0x20002310	uint32_t	
+[147]	0x00000000	0x20002314	uint32_t	
+[148]	0x00000000	0x20002318	uint32_t	
+[149]	0x00000000	0x2000231C	uint32_t	
+[150]	0x00000000	0x20002320	uint32_t	
+[151]	0x00000000	0x20002324	uint32_t	
+[152]	0x00000000	0x20002328	uint32_t	
+[153]	0x00000000	0x2000232C	uint32_t	
+[154]	0x00000000	0x20002330	uint32_t	
+[155]	0x00000000	0x20002334	uint32_t	
+[156]	0x00000000	0x20002338	uint32_t	
+[157]	0x00000000	0x2000233C	uint32_t	
+[158]	0x00000000	0x20002340	uint32_t	
+[159]	0x00000000	0x20002344	uint32_t	
+[160]	0x00000000	0x20002348	uint32_t	
+[161]	0x00000000	0x2000234C	uint32_t	
+[162]	0x00000000	0x20002350	uint32_t	
+[163]	0x00000000	0x20002354	uint32_t	
+[164]	0x00000000	0x20002358	uint32_t	
+[165]	0x00000000	0x2000235C	uint32_t	
+[166]	0x00000000	0x20002360	uint32_t	
+[167]	0x00000000	0x20002364	uint32_t	
+[168]	0x00000000	0x20002368	uint32_t	
+[169]	0x00000000	0x2000236C	uint32_t	
+[170]	0x00000000	0x20002370	uint32_t	
+[171]	0x00000000	0x20002374	uint32_t	
+[172]	0x00000000	0x20002378	uint32_t	
+[173]	0x00000000	0x2000237C	uint32_t	
+[174]	0x00000000	0x20002380	uint32_t	
+[175]	0x00000000	0x20002384	uint32_t	
+[176]	0x00000000	0x20002388	uint32_t	
+[177]	0x00000000	0x2000238C	uint32_t	
+[178]	0x00000000	0x20002390	uint32_t	
+[179]	0x00000000	0x20002394	uint32_t	
+[180]	0x00000000	0x20002398	uint32_t	
+[181]	0x00000000	0x2000239C	uint32_t	
+[182]	0x00000000	0x200023A0	uint32_t	
+[183]	0x00000000	0x200023A4	uint32_t	
+[184]	0x00000000	0x200023A8	uint32_t	
+[185]	0x00000000	0x200023AC	uint32_t	
+[186]	0x00000000	0x200023B0	uint32_t	
+[187]	0x00000000	0x200023B4	uint32_t	
+[188]	0x00000000	0x200023B8	uint32_t	
+[189]	0x00000000	0x200023BC	uint32_t	
+[190]	0x00000000	0x200023C0	uint32_t	
+[191]	0x00000000	0x200023C4	uint32_t	
+[192]	0x00000000	0x200023C8	uint32_t	
+[193]	0x00000000	0x200023CC	uint32_t	
+[194]	0x00000000	0x200023D0	uint32_t	
+[195]	0x00000000	0x200023D4	uint32_t	
+[196]	0x00000000	0x200023D8	uint32_t	
+[197]	0x00000000	0x200023DC	uint32_t	
+[198]	0x00000000	0x200023E0	uint32_t	
+[199]	0x00000000	0x200023E4	uint32_t	
+tx_wr	120	0x200023E8	uint16_t	

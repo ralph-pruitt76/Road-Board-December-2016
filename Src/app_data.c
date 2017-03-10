@@ -35,76 +35,57 @@
 #define gattdb_xgatt_fft3                      72
 #define gattdb_xgatt_fft4                      76
 #else
-#define gattdb_ShntVltgRw                       8
-#define gattdb_ShntVltg                        12
-#define gattdb_CurrentRw                       16
-#define gattdb_Current                         20
-#define gattdb_PowerRw                         24
-#define gattdb_Power                           28
-#define gattdb_VoltageRw                       32
-#define gattdb_Voltage                         36
-#define gattdb_TemperatureRw                   40
-#define gattdb_TemperatureC                    44
-#define gattdb_TemperatureF                    48
-#define gattdb_PressureRw                      52
-#define gattdb_Pressure                        56
-#define gattdb_PrTemperatureRw                 60
-#define gattdb_PrTemperatureC                  64
-#define gattdb_PrTemperatureF                  68
-#define gattdb_HumidityRw                      72
-#define gattdb_Humidity                        76
-#define gattdb_HmdtyTempRw                     80
-#define gattdb_HmdtyTempC                      84
-#define gattdb_HmdtyTempF                      88
-#define gattdb_RGBLightRw                      93
-#define gattdb_RGBLightRd                      97
-#define gattdb_RGBLightGrn                    101
-#define gattdb_RGBLightBlu                    105
-#define gattdb_RdSound0                       110
-#define gattdb_RdSound16                      114
-#define gattdb_RdSound32                      118
-#define gattdb_RdSound48                      122
-#define gattdb_ThermistorRw                   127
-#define gattdb_ThermistorC                    131
-#define gattdb_Thermal_1Rw                    135
-#define gattdb_Thermal_1RwC                   139
-#define gattdb_Thermal_2Rw                    143
-#define gattdb_Thermal_2RwC                   147
-#define gattdb_Thermal_3Rw                    151
-#define gattdb_Thermal_3RwC                   155
-#define gattdb_Thermal_4Rw                    159
-#define gattdb_Thermal_4RwC                   163
-#define gattdb_Thermal_5Rw                    167
-#define gattdb_Thermal_5RwC                   171
-#define gattdb_Thermal_6Rw                    175
-#define gattdb_Thermal_6RwC                   179
-#define gattdb_Thermal_7Rw                    183
-#define gattdb_Thermal_7RwC                   187
-#define gattdb_Thermal_8Rw                    191
-#define gattdb_Thermal_8RwC                   195
-#define gattdb_xgatt_temp0                    200
-#define gattdb_xgatt_temp1                    204
-#define gattdb_xgatt_temp2                    208
-#define gattdb_xgatt_temp3                    212
-#define gattdb_xgatt_temp4                    216
-#define gattdb_xgatt_temp5                    220
-#define gattdb_xgatt_temp6                    224
-#define gattdb_xgatt_temp7                    228
-#define gattdb_xgatt_temp8                    232
-#define gattdb_xgatt_fuel                     236
-#define gattdb_xgatt_humidity                 240
-#define gattdb_xgatt_barometer                244
-#define gattdb_xgatt_lightning                248
-#define gattdb_xgatt_rev                      252
-#define gattdb_xgatt_fft1                     256
-#define gattdb_xgatt_fft2                     260
-#define gattdb_xgatt_fft3                     264
-#define gattdb_xgatt_fft4                     268
-#define gattdb_AnlErrCnt                      273
-#define gattdb_AnlErrCd                       277
-#define gattdb_AnlDevCd                       281
-#define gattdb_AnlTickCnt                     285
-#define gattdb_AnlHrtBt                       289
+#define gattdb_ShntVltg                         8
+#define gattdb_Current                         12
+#define gattdb_Power                           16
+#define gattdb_Voltage                         20
+#define gattdb_TemperatureC                    24
+#define gattdb_TemperatureF                    28
+#define gattdb_Pressure                        32
+#define gattdb_PrTemperatureC                  36
+#define gattdb_PrTemperatureF                  40
+#define gattdb_Humidity                        44
+#define gattdb_HmdtyTempC                      48
+#define gattdb_HmdtyTempF                      52
+#define gattdb_RGBLightRd                      57
+#define gattdb_RGBLightGrn                     61
+#define gattdb_RGBLightBlu                     65
+#define gattdb_RdSound0                        70
+#define gattdb_RdSound16                       74
+#define gattdb_RdSound32                       78
+#define gattdb_RdSound48                       82
+#define gattdb_ThermistorC                     87
+#define gattdb_Thermal_1RwC                    91
+#define gattdb_Thermal_2RwC                    95
+#define gattdb_Thermal_3RwC                    99
+#define gattdb_Thermal_4RwC                   103
+#define gattdb_Thermal_5RwC                   107
+#define gattdb_Thermal_6RwC                   111
+#define gattdb_Thermal_7RwC                   115
+#define gattdb_Thermal_8RwC                   119
+#define gattdb_xgatt_temp0                    124
+#define gattdb_xgatt_temp1                    128
+#define gattdb_xgatt_temp2                    132
+#define gattdb_xgatt_temp3                    136
+#define gattdb_xgatt_temp4                    140
+#define gattdb_xgatt_temp5                    144
+#define gattdb_xgatt_temp6                    148
+#define gattdb_xgatt_temp7                    152
+#define gattdb_xgatt_temp8                    156
+#define gattdb_xgatt_fuel                     160
+#define gattdb_xgatt_humidity                 164
+#define gattdb_xgatt_barometer                168
+#define gattdb_xgatt_lightning                172
+#define gattdb_xgatt_rev                      176
+#define gattdb_xgatt_fft1                     180
+#define gattdb_xgatt_fft2                     184
+#define gattdb_xgatt_fft3                     188
+#define gattdb_xgatt_fft4                     192
+#define gattdb_AnlErrCnt                      197
+#define gattdb_AnlErrCd                       201
+#define gattdb_AnlDevCd                       205
+#define gattdb_AnlTickCnt                     209
+#define gattdb_AnlHrtBt                       213
 #endif
 
 // Driver list Structure
@@ -343,8 +324,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.ShntVltg.Voltage, (char *)TmpData.ShntVltg.Voltage );
       // Update BLE Characteristics
       /* Send the ShntVltgRw to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_ShntVltgRw,
-                                 strlen((char *)data.ShntVltg.Raw), (uint8_t *)data.ShntVltg.Raw);
+//      BGM111_WriteCharacteristic(gattdb_ShntVltgRw,
+//                                 strlen((char *)data.ShntVltg.Raw), (uint8_t *)data.ShntVltg.Raw);
       /* Send the ShntVltg to the BLE module */
       BGM111_WriteCharacteristic(gattdb_ShntVltg,
                                  strlen((char *)data.ShntVltg.Voltage), (uint8_t *)data.ShntVltg.Voltage);
@@ -358,8 +339,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.Current.Current, (char *)TmpData.Current.Current );
       // Update BLE Characteristics
       /* Send the CurrentRw to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_CurrentRw,
-                                 strlen((char *)data.Current.Raw), (uint8_t *)data.Current.Raw);
+//      BGM111_WriteCharacteristic(gattdb_CurrentRw,
+//                                 strlen((char *)data.Current.Raw), (uint8_t *)data.Current.Raw);
       /* Send the Current to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Current,
                                  strlen((char *)data.Current.Current), (uint8_t *)data.Current.Current);
@@ -373,8 +354,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.Power.Power, (char *)TmpData.Power.Power );
       // Update BLE Characteristics
       /* Send the PowerRw to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_PowerRw,
-                                 strlen((char *)data.Power.Raw), (uint8_t *)data.Power.Raw);
+//      BGM111_WriteCharacteristic(gattdb_PowerRw,
+//                                 strlen((char *)data.Power.Raw), (uint8_t *)data.Power.Raw);
       /* Send the Power to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Power,
                                  strlen((char *)data.Power.Power), (uint8_t *)data.Power.Power);
@@ -388,8 +369,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.Voltage.Voltage, (char *)TmpData.Voltage.Voltage );
       // Update BLE Characteristics
       /* Send the VoltageRw to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_VoltageRw,
-                                 strlen((char *)data.Voltage.Raw), (uint8_t *)data.Voltage.Raw);
+//      BGM111_WriteCharacteristic(gattdb_VoltageRw,
+//                                 strlen((char *)data.Voltage.Raw), (uint8_t *)data.Voltage.Raw);
       /* Send the Voltage to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Voltage,
                                  strlen((char *)data.Voltage.Voltage), (uint8_t *)data.Voltage.Voltage);
@@ -407,8 +388,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the TemperatureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_TemperatureRw,
-                                 strlen((char *)data.Temp.Raw), (uint8_t *)data.Temp.Raw);
+//      BGM111_WriteCharacteristic(gattdb_TemperatureRw,
+//                                 strlen((char *)data.Temp.Raw), (uint8_t *)data.Temp.Raw);
       /* Send the TemperatureC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_TemperatureC,
                                  strlen((char *)data.Temp.TempC), (uint8_t *)data.Temp.TempC);
@@ -438,8 +419,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.RGBValues.Blue, (char *)TmpData.RGBValues.Blue );
       // Update BLE Characteristics
       /* Send the RGBLightRw to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_RGBLightRw,
-                                 strlen((char *)data.RGBValues.Raw), (uint8_t *)data.RGBValues.Raw);
+//      BGM111_WriteCharacteristic(gattdb_RGBLightRw,
+//                                 strlen((char *)data.RGBValues.Raw), (uint8_t *)data.RGBValues.Raw);
       /* Send the RGBLightRd to the BLE module */
       BGM111_WriteCharacteristic(gattdb_RGBLightRd,
                                  strlen((char *)data.RGBValues.Red), (uint8_t *)data.RGBValues.Red);
@@ -460,8 +441,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.Pressure.RawC = TmpData.Pressure.RawC;
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_PressureRw,
-                                 strlen((char *)data.Pressure.Raw), (uint8_t *)data.Pressure.Raw);
+//      BGM111_WriteCharacteristic(gattdb_PressureRw,
+//                                 strlen((char *)data.Pressure.Raw), (uint8_t *)data.Pressure.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Pressure,
                                  strlen((char *)data.Pressure.Pressure), (uint8_t *)data.Pressure.Pressure);
@@ -483,8 +464,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.PrTemp.TempF, (char *)TmpData.PrTemp.TempF );
       // Update BLE Characteristics
       /* Send the PrTemp to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_PrTemperatureRw,
-                                 strlen((char *)data.PrTemp.Raw), (uint8_t *)data.PrTemp.Raw);
+//      BGM111_WriteCharacteristic(gattdb_PrTemperatureRw,
+//                                 strlen((char *)data.PrTemp.Raw), (uint8_t *)data.PrTemp.Raw);
       /* Send the PrTemp to the BLE module */
       BGM111_WriteCharacteristic(gattdb_PrTemperatureC,
                                  strlen((char *)data.PrTemp.TempC), (uint8_t *)data.PrTemp.TempC);
@@ -502,8 +483,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.Humidity.HRawC = TmpData.Humidity.HRawC;
       // Update BLE Characteristics
       /* Send the data to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_HumidityRw,
-                                 strlen((char *)data.Humidity.HRaw), (uint8_t *)data.Humidity.HRaw);
+//      BGM111_WriteCharacteristic(gattdb_HumidityRw,
+//                                 strlen((char *)data.Humidity.HRaw), (uint8_t *)data.Humidity.HRaw);
       /* Send the data to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Humidity,
                                  strlen((char *)data.Humidity.Humidity), (uint8_t *)data.Humidity.Humidity);
@@ -526,8 +507,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.HmTemp.RawC = TmpData.HmTemp.RawC;
       // Update BLE Characteristics
       /* Send the HmTemp to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_HmdtyTempRw,
-                                 strlen((char *)data.HmTemp.Raw), (uint8_t *)data.HmTemp.Raw);
+//      BGM111_WriteCharacteristic(gattdb_HmdtyTempRw,
+//                                 strlen((char *)data.HmTemp.Raw), (uint8_t *)data.HmTemp.Raw);
       /* Send the HmTemp to the BLE module */
       BGM111_WriteCharacteristic(gattdb_HmdtyTempC,
                                  strlen((char *)data.HmTemp.TempC), (uint8_t *)data.HmTemp.TempC);
@@ -544,8 +525,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.GridValues.Thermistor.TempC, (char *)TmpData.GridValues.Thermistor.TempC );
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
-      BGM111_WriteCharacteristic(gattdb_ThermistorRw,
-                                 strlen((char *)data.GridValues.Thermistor.Raw), (uint8_t *)data.GridValues.Thermistor.Raw);
+//      BGM111_WriteCharacteristic(gattdb_ThermistorRw,
+//                                 strlen((char *)data.GridValues.Thermistor.Raw), (uint8_t *)data.GridValues.Thermistor.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_ThermistorC,
                                  strlen((char *)data.GridValues.Thermistor.TempC), (uint8_t *)data.GridValues.Thermistor.TempC);
@@ -562,8 +543,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_1Rw,
-                                 strlen((char *)data.GridValues.GridEye1.Raw), (uint8_t *)data.GridValues.GridEye1.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_1Rw,
+//                                 strlen((char *)data.GridValues.GridEye1.Raw), (uint8_t *)data.GridValues.GridEye1.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_1RwC,
                                  strlen((char *)data.GridValues.GridEye1.TempC), (uint8_t *)data.GridValues.GridEye1.TempC);
@@ -588,8 +569,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_2Rw,
-                                 strlen((char *)data.GridValues.GridEye2.Raw), (uint8_t *)data.GridValues.GridEye2.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_2Rw,
+//                                 strlen((char *)data.GridValues.GridEye2.Raw), (uint8_t *)data.GridValues.GridEye2.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_2RwC,
                                  strlen((char *)data.GridValues.GridEye2.TempC), (uint8_t *)data.GridValues.GridEye2.TempC);
@@ -614,8 +595,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_3Rw,
-                                 strlen((char *)data.GridValues.GridEye3.Raw), (uint8_t *)data.GridValues.GridEye3.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_3Rw,
+//                                 strlen((char *)data.GridValues.GridEye3.Raw), (uint8_t *)data.GridValues.GridEye3.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_3RwC,
                                  strlen((char *)data.GridValues.GridEye3.TempC), (uint8_t *)data.GridValues.GridEye3.TempC);
@@ -640,8 +621,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_4Rw,
-                                 strlen((char *)data.GridValues.GridEye4.Raw), (uint8_t *)data.GridValues.GridEye4.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_4Rw,
+//                                 strlen((char *)data.GridValues.GridEye4.Raw), (uint8_t *)data.GridValues.GridEye4.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_4RwC,
                                  strlen((char *)data.GridValues.GridEye4.TempC), (uint8_t *)data.GridValues.GridEye4.TempC);
@@ -666,8 +647,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_5Rw,
-                                 strlen((char *)data.GridValues.GridEye5.Raw), (uint8_t *)data.GridValues.GridEye5.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_5Rw,
+//                                 strlen((char *)data.GridValues.GridEye5.Raw), (uint8_t *)data.GridValues.GridEye5.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_5RwC,
                                  strlen((char *)data.GridValues.GridEye5.TempC), (uint8_t *)data.GridValues.GridEye5.TempC);
@@ -692,8 +673,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_6Rw,
-                                 strlen((char *)data.GridValues.GridEye6.Raw), (uint8_t *)data.GridValues.GridEye6.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_6Rw,
+//                                 strlen((char *)data.GridValues.GridEye6.Raw), (uint8_t *)data.GridValues.GridEye6.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_6RwC,
                                  strlen((char *)data.GridValues.GridEye6.TempC), (uint8_t *)data.GridValues.GridEye6.TempC);
@@ -718,8 +699,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_7Rw,
-                                 strlen((char *)data.GridValues.GridEye7.Raw), (uint8_t *)data.GridValues.GridEye7.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_7Rw,
+//                                 strlen((char *)data.GridValues.GridEye7.Raw), (uint8_t *)data.GridValues.GridEye7.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_7RwC,
                                  strlen((char *)data.GridValues.GridEye7.TempC), (uint8_t *)data.GridValues.GridEye7.TempC);
@@ -744,8 +725,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
-      BGM111_WriteCharacteristic(gattdb_Thermal_8Rw,
-                                 strlen((char *)data.GridValues.GridEye8.Raw), (uint8_t *)data.GridValues.GridEye8.Raw);
+//      BGM111_WriteCharacteristic(gattdb_Thermal_8Rw,
+//                                 strlen((char *)data.GridValues.GridEye8.Raw), (uint8_t *)data.GridValues.GridEye8.Raw);
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Thermal_8RwC,
                                  strlen((char *)data.GridValues.GridEye8.TempC), (uint8_t *)data.GridValues.GridEye8.TempC);
