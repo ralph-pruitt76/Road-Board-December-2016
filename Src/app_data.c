@@ -88,6 +88,10 @@
 #define gattdb_AnlHrtBt                       213
 #endif
 
+// Global Vars to app_data.
+static uint16_t connection_cnt = 0;
+static uint16_t HeartBeat_Cnt = 0;
+
 // Driver list Structure
 struct
 {
@@ -762,6 +766,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 void Process_RdSound( void )
 {
   uint8_t tempStr[13];
+  uint8_t tempBffr2[40];
   
   RoadBrd_gpio_On( MICRO_LED );
   // 1. Build and Process Road Sound
@@ -806,6 +811,9 @@ void Process_RdSound( void )
                              strlen((char *)tempStr), (uint8_t *)tempStr);
   }
   RoadBrd_gpio_Off( MICRO_LED );
+  // Last....Report Perioic Status of time/Hrtbt_Cnt/Cnct_Cnt
+  sprintf( (char *)tempBffr2, " \r\n<TICK:%08x/%04x/%04x> ", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
+  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
  }
 
 
@@ -816,8 +824,6 @@ void Process_RdSound( void )
   */
 void Test_Connection( void )
 {
-  static uint16_t connection_cnt = 0;
-  static uint16_t HeartBeat_Cnt = 0;
   uint8_t tempBffr2[40];
   
   // Test Connection
