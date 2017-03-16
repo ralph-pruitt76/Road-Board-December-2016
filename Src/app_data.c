@@ -818,6 +818,7 @@ void Test_Connection( void )
 {
   static uint16_t connection_cnt = 0;
   static uint16_t HeartBeat_Cnt = 0;
+  uint8_t tempBffr2[40];
   
   // Test Connection
   if ( BGM111_Connected() )
@@ -830,6 +831,12 @@ void Test_Connection( void )
       // No We need to watch this closely.
       // Test Heart Beat Count and determine if time to reset.
       HeartBeat_Cnt++;
+      // Time to Build Status?
+      if ( (HeartBeat_Cnt % 5) == 0 )
+      {
+        sprintf( (char *)tempBffr2, " \r\n<HB:%04x/%08x> ", HeartBeat_Cnt, HAL_GetTick());
+        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      }
       // Test Heart Beat Count. If expired, reset.
       if (HeartBeat_Cnt > HEARTBEAT_CNT)
       {
@@ -854,6 +861,11 @@ void Test_Connection( void )
     // No..
     connection_cnt++;
     // Test Connection Count. If expired, reset.
+    if ( (connection_cnt % 5) == 0 )
+    {
+      sprintf( (char *)tempBffr2, " \r\n<CNCT:%04x/%08x> ", connection_cnt, HAL_GetTick());
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+    }
     if (connection_cnt > CONNECTION_CNT)
     {
       // Has been 90 Seconds....Time to reset Code.

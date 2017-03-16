@@ -1,4 +1,4 @@
-"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\Src\barometer.c"
+"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\Src\RGBLight.c"
 -std=c99
 -ferror-limit=100
 -I
@@ -62,6 +62,7 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\CMSIS\Include
 -DUSE_STM32L1XX_NUCLEO=1
 -DASCII=1
 -DREV_L=1
+-DLONG_DELAY=1
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
