@@ -1165,6 +1165,7 @@
           <state>ASCII</state>
           <state>REV_L</state>
           <state>LONG_DELAY</state>
+          <state>ALWAYS_SEND</state>
         </option>
         <option>
           <name>CCPreprocFile</name>
