@@ -86,6 +86,7 @@
 #define gattdb_AnlDevCd                       205
 #define gattdb_AnlTickCnt                     209
 #define gattdb_AnlHrtBt                       213
+#define gattdb_AnlHrtBt2                      217
 #endif
 
 // Global Vars to app_data.
@@ -765,7 +766,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
   */
 void Process_RdSound( void )
 {
-  uint8_t tempStr[13];
+//  uint8_t tempStr[13];
   uint8_t tempBffr2[40];
   
   RoadBrd_gpio_On( MICRO_LED );
@@ -806,18 +807,44 @@ void Process_RdSound( void )
   // Test Analytics flag and determine if we need to update that characteristic
   if (!(Tst_HeartBeat()))
   {
-    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
-    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
-                             strlen((char *)tempStr), (uint8_t *)tempStr);
+//    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
+//    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
+//                             strlen((char *)tempStr), (uint8_t *)tempStr);
   }
   RoadBrd_gpio_Off( MICRO_LED );
   // Last....Report Perioic Status of time/Hrtbt_Cnt/Cnct_Cnt
   sprintf( (char *)tempBffr2, " \r\n<TICK:%08x/%04x/%04x> ", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
- }
+  SendApp_String( tempBffr2 );
+}
 
 
-  /**
+/**
+  * @brief  This function streams the passed string to the App via characteristics..
+  * @param  uint8_t *pData
+  * @retval None
+  */
+void SendApp_String( uint8_t *pData )
+{
+  uint8_t tempBffr3[25];
+  uint8_t *tempPtr;
+
+  if (BGM111_Ready())
+  {
+    strncpy( (char *)tempBffr3, (char *)pData, 20);
+    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
+                              strlen((char *)tempBffr3), (uint8_t *)tempBffr3);
+    if (strlen((char *)*pData) > 20)
+      tempPtr = &pData[20];
+    else
+      tempPtr = &pData[0];
+    strncpy( (char *)tempBffr3, (char *)tempPtr, 20);
+    BGM111_WriteCharacteristic(gattdb_AnlHrtBt2,
+                              strlen((char *)tempBffr3), (uint8_t *)tempBffr3);
+  }
+}
+
+/**
   * @brief  This function Tests for an active connection.
   * @param  None
   * @retval None
@@ -842,6 +869,7 @@ void Test_Connection( void )
       {
         sprintf( (char *)tempBffr2, " \r\n<HB:%04x/%08x> ", HeartBeat_Cnt, HAL_GetTick());
         RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        SendApp_String( tempBffr2 );
       }
       // Test Heart Beat Count. If expired, reset.
       if (HeartBeat_Cnt > HEARTBEAT_CNT)

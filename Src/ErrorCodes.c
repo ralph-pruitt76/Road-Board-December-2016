@@ -187,6 +187,8 @@ HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd 
   //strcpy( (char *)tempBffr2, "ERROR: ERROR_I2CBUSY\r\n\r\n");
   //strcpy( (char *)tempBffr2, CodesArray[ErrorCd]);
   sprintf( (char *)tempBffr2, "%s ERROR: %s\r\n\r\n", ModuleArray[DeviceCd], CodesArray[ErrorCd]);
+  // Send msg to App via Characteristics.
+  SendApp_String( tempBffr2 );
   // Send string to UART..
 /*#ifdef REV_L
   Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
