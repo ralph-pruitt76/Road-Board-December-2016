@@ -215,6 +215,7 @@ void BGM111_ProcessInput(void)
             RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTCLOSE>");
             RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
             Clr_HrtBeat_Cnt();
+            RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
             //RoadBrd_Delay( 1000 );
             HAL_NVIC_SystemReset();
           }
@@ -461,6 +462,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
     {
       RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
       Clr_HrtBeat_Cnt();
+      RdBrd_BlinkErrCd( ERROR_BGMBUF_FULL );
       //RoadBrd_Delay( 1000 );
       HAL_NVIC_SystemReset();
       return HAL_ERROR;
@@ -488,6 +490,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
           // We have detected a SYNC error on BGM111...Log it!
           RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
           Clr_HrtBeat_Cnt();
+          RdBrd_BlinkErrCd( ERROR_BGMSYNC );
           //RoadBrd_Delay( 1000 );
           HAL_NVIC_SystemReset();
           break;

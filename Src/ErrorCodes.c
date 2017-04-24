@@ -35,6 +35,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "ErrorCodes.h"
 #include "usart.h"
+#include "gpio.h"
+#include "i2c.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -205,5 +207,27 @@ HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd 
   return Status;
 }
 
+void RdBrd_BlinkErrCd( ErrorCodes ErrorCd )
+{
+  int x;
+  // Pull the BGM111 reset pin low 
+  RoadBrd_gpio_Off( gRESET_BGM111 );
+
+  for (x=0; x<ErrorCd; x++)
+  {
+    //SetLED(true);
+    RoadBrd_gpio_On(BLUE_LED);
+    RoadBrd_Delay( 100 );
+    //SetLED(false);
+    RoadBrd_gpio_On(BLUE_LED);
+    RoadBrd_Delay( 100 );
+  }
+  //SetLED(true);
+  RoadBrd_gpio_On(BLUE_LED);
+  RoadBrd_Delay( 1000 );
+  //SetLED(false
+  RoadBrd_gpio_On(BLUE_LED);
+  RoadBrd_Delay( 1000 );
+}
 
 /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/

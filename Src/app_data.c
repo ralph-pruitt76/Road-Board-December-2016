@@ -828,13 +828,16 @@ void SendApp_String( uint8_t *pData )
 {
   uint8_t tempBffr3[25];
   uint8_t *tempPtr;
+  //int tempval;
 
   if (BGM111_Ready())
   {
     strncpy( (char *)tempBffr3, (char *)pData, 20);
     BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
                               strlen((char *)tempBffr3), (uint8_t *)tempBffr3);
-    if (strlen((char *)*pData) > 20)
+    //tempval = strlen((char *)pData);
+    //if (tempval > 20)
+    if (strlen((char *)pData) > 20)
       tempPtr = &pData[20];
     else
       tempPtr = &pData[0];
@@ -879,6 +882,7 @@ void Test_Connection( void )
         HeartBeat_Cnt = 0;
         Clr_HrtBeat_Cnt();
         //RoadBrd_Delay( 1000 );
+        RdBrd_BlinkErrCd( ERROR_BGM_HRTBT );
         HAL_NVIC_SystemReset();
       }
     } // EndIf (Tst_HeartBeat())
@@ -905,6 +909,7 @@ void Test_Connection( void )
       // Has been 90 Seconds....Time to reset Code.
       RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
       Clr_HrtBeat_Cnt();
+      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
       //RoadBrd_Delay( 1000 );
       HAL_NVIC_SystemReset();
     }
@@ -1072,4 +1077,6 @@ void Clr_HeartBeat( void )
 {
   analytics.HrtBeat_Flg = false;
 }
+
+
 
