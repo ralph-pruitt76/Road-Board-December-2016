@@ -321,10 +321,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
     //************ NOW Compare the data strings and determine if characteristics need to be sent.
     //..ShntVltg
 #ifndef LEGACY_PATCH
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.ShntVltg.Raw, (char *)data.ShntVltg.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.ShntVltg.Raw, (char *)TmpData.ShntVltg.Raw );
@@ -336,14 +334,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the ShntVltg to the BLE module */
       BGM111_WriteCharacteristic(gattdb_ShntVltg,
                                  strlen((char *)data.ShntVltg.Voltage), (uint8_t *)data.ShntVltg.Voltage);
-#ifndef ALWAYS_SEND
     }
-#endif
     //..Current
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.Current.Raw, (char *)data.Current.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.Current.Raw, (char *)TmpData.Current.Raw );
@@ -355,14 +349,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Current to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Current,
                                  strlen((char *)data.Current.Current), (uint8_t *)data.Current.Current);
-#ifndef ALWAYS_SEND
     }
-#endif
     //..Power
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.Power.Raw, (char *)data.Power.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.Power.Raw, (char *)TmpData.Power.Raw );
@@ -374,14 +364,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Power to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Power,
                                  strlen((char *)data.Power.Power), (uint8_t *)data.Power.Power);
-#ifndef ALWAYS_SEND
     }
-#endif
     //..Voltage
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.Voltage.Raw, (char *)data.Voltage.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.Voltage.Raw, (char *)TmpData.Voltage.Raw );
@@ -393,15 +379,11 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Voltage to the BLE module */
       BGM111_WriteCharacteristic(gattdb_Voltage,
                                  strlen((char *)data.Voltage.Voltage), (uint8_t *)data.Voltage.Voltage);
-#ifndef ALWAYS_SEND
     }
 #endif
-#endif
     //..Temperature
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.Temp.Raw, (char *)data.Temp.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.Temp.Raw, (char *)TmpData.Temp.Raw );
@@ -428,16 +410,12 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp0,
                                  0x04, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
-#endif
 
     //..Irradiance
 #ifndef LEGACY_PATCH
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.RGBValues.Raw, (char *)data.RGBValues.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.RGBValues.Raw, (char *)TmpData.RGBValues.Raw );
@@ -457,14 +435,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the RGBLightBlu to the BLE module */
       BGM111_WriteCharacteristic(gattdb_RGBLightBlu,
                                  strlen((char *)data.RGBValues.Blue), (uint8_t *)data.RGBValues.Blue);
-#ifndef ALWAYS_SEND
     }
-#endif
     //..Pressure
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.Pressure.Raw, (char *)data.Pressure.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information inPressure data structure
       strcpy( (char *)data.Pressure.Raw, (char *)TmpData.Pressure.Raw );
@@ -485,13 +459,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Pressure RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_barometer,
                                  0x04, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
-#endif
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.PrTemp.Raw, (char *)data.PrTemp.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.PrTemp.Raw, (char *)TmpData.PrTemp.Raw );
@@ -507,14 +477,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the PrTemp to the BLE module */
       BGM111_WriteCharacteristic(gattdb_PrTemperatureF,
                                  strlen((char *)data.PrTemp.TempF), (uint8_t *)data.PrTemp.TempF);
-#ifndef ALWAYS_SEND
     } 
-#endif
     //..Humidity
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.Humidity.HRaw, (char *)data.Humidity.HRaw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in Humidity data structure
       strcpy( (char *)data.Humidity.HRaw, (char *)TmpData.Humidity.HRaw );
@@ -535,13 +501,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_humidity,
                                  0x03, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
-#endif
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.HmTemp.Raw, (char *)data.HmTemp.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.HmTemp.Raw, (char *)TmpData.HmTemp.Raw );
@@ -558,9 +520,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the HmTemp to the BLE module */
       BGM111_WriteCharacteristic(gattdb_HmdtyTempF,
                                  strlen((char *)data.HmTemp.TempF), (uint8_t *)data.HmTemp.TempF);
-#ifndef ALWAYS_SEND
     } 
-#endif
     //..GridEye...Thermistor
 #ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.Thermistor.Raw, (char *)data.GridValues.Thermistor.Raw) != 0 )
@@ -612,10 +572,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
     }
 #endif
     //.GridEye..Grid 2
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye2.Raw, (char *)data.GridValues.GridEye2.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye2.Raw, (char *)TmpData.GridValues.GridEye2.Raw );
@@ -638,14 +596,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp2,
                                  0x04, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
     //.GridEye..Grid 3
-#endif
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye3.Raw, (char *)data.GridValues.GridEye3.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye3.Raw, (char *)TmpData.GridValues.GridEye3.Raw );
@@ -668,10 +622,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp3,
                                  0x04, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
     //.GridEye..Grid 4
-#endif
 #ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye4.Raw, (char *)data.GridValues.GridEye4.Raw) != 0 )
     {
@@ -702,10 +654,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
     }
     //.GridEye..Grid 5
 #endif
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye5.Raw, (char *)data.GridValues.GridEye5.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye5.Raw, (char *)TmpData.GridValues.GridEye5.Raw );
@@ -728,14 +678,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp5,
                                  0x04, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
     //.GridEye..Grid 6
-#endif
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye6.Raw, (char *)data.GridValues.GridEye6.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye6.Raw, (char *)TmpData.GridValues.GridEye6.Raw );
@@ -758,10 +704,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp6,
                                  0x04, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
     //.GridEye..Grid 7
-#endif
 #ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye7.Raw, (char *)data.GridValues.GridEye7.Raw) != 0 )
     {
@@ -792,10 +736,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
     }
     //.GridEye..Grid 8
 #endif
-#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye8.Raw, (char *)data.GridValues.GridEye8.Raw) != 0 )
     {
-#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye8.Raw, (char *)TmpData.GridValues.GridEye8.Raw );
@@ -818,9 +760,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp8,
                                  0x04, (uint8_t *)tmpBuffer);
-#ifndef ALWAYS_SEND
     }
-#endif
     // Test Legacy flag to perform one time operations
     if( data.Legacy_OneTime )
     {

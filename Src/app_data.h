@@ -20,8 +20,10 @@
 #define PROCESS_RD_SND_TIME     53      // Process all Road Sound every Second(53 * 100ms tick)...5.3 Seconds
 #define PROCESS_LEDOFF_TIME     1       // Process and turn off all active LEDs. Controls the Blink rate of the LEDs(1 * 50ms tick)
 #ifdef LONG_DELAY
-  #define CONNECTION_CNT          180      // 15 Minutes.
-  #define HEARTBEAT_CNT           60       // 5 Minutes
+//  #define CONNECTION_CNT          180      // 15 Minutes.
+//  #define HEARTBEAT_CNT           60       // 5 Minutes
+  #define CONNECTION_CNT          36       // 3 Minutes.
+  #define HEARTBEAT_CNT           36       // 3 Minutes
 #else
   #define CONNECTION_CNT          18      // 90 Seconds.
   #define HEARTBEAT_CNT           6       // 30 Seconds
