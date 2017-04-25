@@ -35,6 +35,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "parser.h"
+#include "ErrorCodes.h"
 
 /* Parser function */
 
@@ -1864,6 +1865,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //++++++++++++++++++++++++++++++++++++++++++  RESET Micro.
                   case 'R':
                     // Read Driver Status
+                    RdBrd_BlinkErrCd( ERROR_I2CBUSY );
                     HAL_NVIC_SystemReset();
                     sprintf( (char *)tempBffr2, "RESET CALLED BUT NO RESPONSE!!\r\n" );
                     break;

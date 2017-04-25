@@ -89,6 +89,7 @@ uint16_t  RdBrd_ErrCdGetErrCnt( void );
 ErrorElmntPtr  RdBrd_ErrCdGetCrntErrCd( void );
 ErrorElmntPtr  RdBrd_ErrCdGetNxtErrCd( void );
 HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd );
+void RdBrd_BlinkErrCd( ErrorCodes ErrorCd );
 
 #ifdef __cplusplus
 }

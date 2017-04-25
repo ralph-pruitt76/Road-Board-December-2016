@@ -35,6 +35,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "ErrorCodes.h"
 #include "usart.h"
+#include "gpio.h"
+#include "i2c.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -187,6 +189,8 @@ HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd 
   //strcpy( (char *)tempBffr2, "ERROR: ERROR_I2CBUSY\r\n\r\n");
   //strcpy( (char *)tempBffr2, CodesArray[ErrorCd]);
   sprintf( (char *)tempBffr2, "%s ERROR: %s\r\n\r\n", ModuleArray[DeviceCd], CodesArray[ErrorCd]);
+  // Send msg to App via Characteristics.
+  SendApp_String( tempBffr2 );
   // Send string to UART..
 /*#ifdef REV_L
   Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
@@ -203,5 +207,27 @@ HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd 
   return Status;
 }
 
+void RdBrd_BlinkErrCd( ErrorCodes ErrorCd )
+{
+  int x;
+  // Pull the BGM111 reset pin low 
+  RoadBrd_gpio_Off( gRESET_BGM111 );
+
+  for (x=0; x<ErrorCd; x++)
+  {
+    //SetLED(true);
+    RoadBrd_gpio_On(BLUE_LED);
+    RoadBrd_Delay( 100 );
+    //SetLED(false);
+    RoadBrd_gpio_On(BLUE_LED);
+    RoadBrd_Delay( 100 );
+  }
+  //SetLED(true);
+  RoadBrd_gpio_On(BLUE_LED);
+  RoadBrd_Delay( 1000 );
+  //SetLED(false
+  RoadBrd_gpio_On(BLUE_LED);
+  RoadBrd_Delay( 1000 );
+}
 
 /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/

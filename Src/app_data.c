@@ -86,6 +86,7 @@
 #define gattdb_AnlDevCd                       205
 #define gattdb_AnlTickCnt                     209
 #define gattdb_AnlHrtBt                       213
+#define gattdb_AnlHrtBt2                      217
 #endif
 
 // Global Vars to app_data.
@@ -521,8 +522,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
                                  strlen((char *)data.HmTemp.TempF), (uint8_t *)data.HmTemp.TempF);
     } 
     //..GridEye...Thermistor
+#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.Thermistor.Raw, (char *)data.GridValues.Thermistor.Raw) != 0 )
     {
+#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.Thermistor.Raw, (char *)TmpData.GridValues.Thermistor.Raw );
@@ -534,11 +537,15 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Pressure to the BLE module */
       BGM111_WriteCharacteristic(gattdb_ThermistorC,
                                  strlen((char *)data.GridValues.Thermistor.TempC), (uint8_t *)data.GridValues.Thermistor.TempC);
+#ifndef ALWAYS_SEND
     }
 #endif
+#endif
     //..GridEye...Grid 1
+#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye1.Raw, (char *)data.GridValues.GridEye1.Raw) != 0 )
     {
+#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye1.Raw, (char *)TmpData.GridValues.GridEye1.Raw );
@@ -561,7 +568,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp1,
                                  0x04, (uint8_t *)tmpBuffer);
+#ifndef ALWAYS_SEND
     }
+#endif
     //.GridEye..Grid 2
     if(strcmp( (char *)TmpData.GridValues.GridEye2.Raw, (char *)data.GridValues.GridEye2.Raw) != 0 )
     {
@@ -615,8 +624,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
                                  0x04, (uint8_t *)tmpBuffer);
     }
     //.GridEye..Grid 4
+#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye4.Raw, (char *)data.GridValues.GridEye4.Raw) != 0 )
     {
+#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye4.Raw, (char *)TmpData.GridValues.GridEye4.Raw );
@@ -639,8 +650,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp4,
                                  0x04, (uint8_t *)tmpBuffer);
+#ifndef ALWAYS_SEND
     }
     //.GridEye..Grid 5
+#endif
     if(strcmp( (char *)TmpData.GridValues.GridEye5.Raw, (char *)data.GridValues.GridEye5.Raw) != 0 )
     {
       RoadBrd_gpio_On( BGM_LED );
@@ -693,8 +706,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
                                  0x04, (uint8_t *)tmpBuffer);
     }
     //.GridEye..Grid 7
+#ifndef ALWAYS_SEND
     if(strcmp( (char *)TmpData.GridValues.GridEye7.Raw, (char *)data.GridValues.GridEye7.Raw) != 0 )
     {
+#endif
       RoadBrd_gpio_On( BGM_LED );
       // Update Information in data structure
       strcpy( (char *)data.GridValues.GridEye7.Raw, (char *)TmpData.GridValues.GridEye7.Raw );
@@ -717,8 +732,10 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       /* Send the Temperature RawC to the BLE module */
       BGM111_WriteCharacteristic(gattdb_xgatt_temp7,
                                  0x04, (uint8_t *)tmpBuffer);
+#ifndef ALWAYS_SEND
     }
     //.GridEye..Grid 8
+#endif
     if(strcmp( (char *)TmpData.GridValues.GridEye8.Raw, (char *)data.GridValues.GridEye8.Raw) != 0 )
     {
       RoadBrd_gpio_On( BGM_LED );
@@ -765,7 +782,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
   */
 void Process_RdSound( void )
 {
-  uint8_t tempStr[13];
+//  uint8_t tempStr[13];
   uint8_t tempBffr2[40];
   
   RoadBrd_gpio_On( MICRO_LED );
@@ -806,18 +823,47 @@ void Process_RdSound( void )
   // Test Analytics flag and determine if we need to update that characteristic
   if (!(Tst_HeartBeat()))
   {
-    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
-    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
-                             strlen((char *)tempStr), (uint8_t *)tempStr);
+//    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
+//    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
+//                             strlen((char *)tempStr), (uint8_t *)tempStr);
   }
   RoadBrd_gpio_Off( MICRO_LED );
   // Last....Report Perioic Status of time/Hrtbt_Cnt/Cnct_Cnt
   sprintf( (char *)tempBffr2, " \r\n<TICK:%08x/%04x/%04x> ", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
- }
+  SendApp_String( tempBffr2 );
+}
 
 
-  /**
+/**
+  * @brief  This function streams the passed string to the App via characteristics..
+  * @param  uint8_t *pData
+  * @retval None
+  */
+void SendApp_String( uint8_t *pData )
+{
+  uint8_t tempBffr3[25];
+  uint8_t *tempPtr;
+  //int tempval;
+
+  if (BGM111_Ready())
+  {
+    strncpy( (char *)tempBffr3, (char *)pData, 20);
+    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
+                              strlen((char *)tempBffr3), (uint8_t *)tempBffr3);
+    //tempval = strlen((char *)pData);
+    //if (tempval > 20)
+    if (strlen((char *)pData) > 20)
+      tempPtr = &pData[20];
+    else
+      tempPtr = &pData[0];
+    strncpy( (char *)tempBffr3, (char *)tempPtr, 20);
+    BGM111_WriteCharacteristic(gattdb_AnlHrtBt2,
+                              strlen((char *)tempBffr3), (uint8_t *)tempBffr3);
+  }
+}
+
+/**
   * @brief  This function Tests for an active connection.
   * @param  None
   * @retval None
@@ -842,6 +888,7 @@ void Test_Connection( void )
       {
         sprintf( (char *)tempBffr2, " \r\n<HB:%04x/%08x> ", HeartBeat_Cnt, HAL_GetTick());
         RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        SendApp_String( tempBffr2 );
       }
       // Test Heart Beat Count. If expired, reset.
       if (HeartBeat_Cnt > HEARTBEAT_CNT)
@@ -851,6 +898,7 @@ void Test_Connection( void )
         HeartBeat_Cnt = 0;
         Clr_HrtBeat_Cnt();
         //RoadBrd_Delay( 1000 );
+        RdBrd_BlinkErrCd( ERROR_BGM_HRTBT );
         HAL_NVIC_SystemReset();
       }
     } // EndIf (Tst_HeartBeat())
@@ -877,6 +925,7 @@ void Test_Connection( void )
       // Has been 90 Seconds....Time to reset Code.
       RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
       Clr_HrtBeat_Cnt();
+      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
       //RoadBrd_Delay( 1000 );
       HAL_NVIC_SystemReset();
     }
@@ -1044,4 +1093,6 @@ void Clr_HeartBeat( void )
 {
   analytics.HrtBeat_Flg = false;
 }
+
+
 

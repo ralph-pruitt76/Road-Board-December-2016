@@ -19,51 +19,51 @@
 	<service uuid="57656174-1010-4016-y001-5A5A5A000001" advertise="true">
         <description>Sensors</description>
 		
-		<characteristic uuid="57656174-1010-4016-y001-000000000001" id="ShntVltgRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000001" id="ShntVltgRw">
             <description>Shunt Voltage Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000002" id="ShntVltg">
             <description>Shunt Voltage</description>
             <properties read="true" notify="true" />
             <value length="8" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000003" id="CurrentRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000003" id="CurrentRw">
             <description>Current Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000004" id="Current">
             <description>Current</description>
             <properties read="true" notify="true" />
             <value length="8" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000005" id="PowerRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000005" id="PowerRw">
             <description>Power Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000006" id="Power">
             <description>Power</description>
             <properties read="true" notify="true" />
             <value length="8" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000007" id="VoltageRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000007" id="VoltageRw">
             <description>Voltage Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000008" id="Voltage">
             <description>Voltage</description>
             <properties read="true" notify="true" />
             <value length="7" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000009" id="TemperatureRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000009" id="TemperatureRw">
             <description>Temperature Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-00000000000A" id="TemperatureC">
             <description>Temperature C</description>
             <properties read="true" notify="true" />
@@ -74,21 +74,21 @@
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000010" id="PressureRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000010" id="PressureRw">
             <description>Pressure Raw</description>
             <properties read="true" notify="true" />
             <value length="11" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000011" id="Pressure">
             <description>Pressure</description>
             <properties read="true" notify="true" />
             <value length="13" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-00000000002C" id="PrTemperatureRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-00000000002C" id="PrTemperatureRw">
             <description>Pressure Temperature Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-00000000002D" id="PrTemperatureC">
             <description>Pressure Temperature C</description>
             <properties read="true" notify="true" />
@@ -99,21 +99,21 @@
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-00000000002F" id="HumidityRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-00000000002F" id="HumidityRw">
             <description>Humidity Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000030" id="Humidity">
             <description>Humidity</description>
             <properties read="true" notify="true" />
             <value length="8" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000031" id="HmdtyTempRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000031" id="HmdtyTempRw">
             <description>Hmdty Temperature Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000032" id="HmdtyTempC">
             <description>Hmdty Temperature C</description>
             <properties read="true" notify="true" />
@@ -129,11 +129,11 @@
 
 	<service uuid="57656174-1010-4016-y001-5A5A5A000002" advertise="true">
         <description>RGB Sensor</description>
-		<characteristic uuid="57656174-1010-4016-y001-00000000000C" id="RGBLightRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-00000000000C" id="RGBLightRw">
             <description>RGBLight Raw</description>
             <properties read="true" notify="true" />
             <value length="14" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-00000000000D" id="RGBLightRd">
             <description>RGBLight Red</description>
             <properties read="true" notify="true" />
@@ -177,91 +177,91 @@
 
 	<service uuid="57656174-1010-4016-y001-5A5A5A000004" advertise="true">
         <description>Thermal Sensor</description>
-		<characteristic uuid="57656174-1010-4016-y001-000000000016" id="ThermistorRw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000016" id="ThermistorRw">
             <description>Thermistor Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000017" id="ThermistorC">
             <description>Thermistor C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000018" id="Thermal_1Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000018" id="Thermal_1Rw">
             <description>Thermal 1 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000019" id="Thermal_1RwC">
             <description>Thermal 1 C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-00000000001A" id="Thermal_2Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-00000000001A" id="Thermal_2Rw">
             <description>Thermal 2 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-00000000001B" id="Thermal_2RwC">
             <description>Thermal 2 C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-00000000001C" id="Thermal_3Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-00000000001C" id="Thermal_3Rw">
             <description>Thermal 3 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-00000000001D" id="Thermal_3RwC">
             <description>Thermal 3 C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-00000000001E" id="Thermal_4Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-00000000001E" id="Thermal_4Rw">
             <description>Thermal 4 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-00000000001F" id="Thermal_4RwC">
             <description>Thermal 4 C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000020" id="Thermal_5Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000020" id="Thermal_5Rw">
             <description>Thermal 5 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000021" id="Thermal_5RwC">
             <description>Thermal 5 C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000022" id="Thermal_6Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000022" id="Thermal_6Rw">
             <description>Thermal 6 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000023" id="Thermal_6RwC">
             <description>Thermal 6 C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000024" id="Thermal_7Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000024" id="Thermal_7Rw">
             <description>Thermal 7 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000025" id="Thermal_7RwC">
             <description>Thermal 7 C</description>
             <properties read="true" notify="true" />
             <value length="6" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-000000000026" id="Thermal_8Rw">
+		<!--<characteristic uuid="57656174-1010-4016-y001-000000000026" id="Thermal_8Rw">
             <description>Thermal 8 Raw</description>
             <properties read="true" notify="true" />
             <value length="6" />
-        </characteristic>
+        </characteristic>-->
 		<characteristic uuid="57656174-1010-4016-y001-000000000027" id="Thermal_8RwC">
             <description>Thermal 8 C</description>
             <properties read="true" notify="true" />
@@ -331,11 +331,11 @@
             <value length="3" />
         </characteristic>	
 		
-		<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="xgatt_humidity">
+		<!--<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="xgatt_humidity">
             <description>Humidity</description>
             <properties read="true" notify="true" />
             <value length="3" />
-        </characteristic>	
+        </characteristic>-->
 		
 		<characteristic uuid="acac0000-0000-0000-0000-1234567890ab" id="xgatt_barometer">
             <description>Barometric Pressure</description>
@@ -402,10 +402,16 @@
             <properties read="true" notify="true" />
             <value length="12" />
         </characteristic>
-		<characteristic uuid="57656174-1010-4016-y001-00000000002C" id="AnlHrtBt">
+		<!--<characteristic uuid="57656174-1010-4016-y001-00000000002C" id="AnlHrtBt">-->
+		<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="AnlHrtBt">
             <description>Heart Beat</description>
-            <properties read="true" indicate="true" />
-            <value length="12" />
+            <properties read="true" notify="true" />
+            <value length="20" />
+        </characteristic>
+		<characteristic uuid="57656174-1010-4016-y001-00000000002D" id="AnlHrtBt2">
+            <description>Heart Beat2</description>
+            <properties read="true" notify="true" />
+            <value length="20" />
         </characteristic>
  	</service>
 

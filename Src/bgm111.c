@@ -215,6 +215,7 @@ void BGM111_ProcessInput(void)
             RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTCLOSE>");
             RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
             Clr_HrtBeat_Cnt();
+            RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
             //RoadBrd_Delay( 1000 );
             HAL_NVIC_SystemReset();
           }
@@ -272,7 +273,14 @@ void BGM111_ProcessInput(void)
         ble.evt = NULL;
         break;
     };
-  }
+    // Test RX Buffer and Set req_exec flag.
+    if (BufUsed(ble.rx_wr, ble.rx_rd) != 0)
+    {
+      /* Indicate we need to execute the BLE stack to process 
+       * the received packet */
+      ble.req_exec = true;
+    }
+  } // EndIf (ble.evt)
 }
 
 /* BLE write characteristic */
@@ -454,6 +462,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
     {
       RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
       Clr_HrtBeat_Cnt();
+      RdBrd_BlinkErrCd( ERROR_BGMBUF_FULL );
       //RoadBrd_Delay( 1000 );
       HAL_NVIC_SystemReset();
       return HAL_ERROR;
@@ -481,6 +490,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
           // We have detected a SYNC error on BGM111...Log it!
           RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
           Clr_HrtBeat_Cnt();
+          RdBrd_BlinkErrCd( ERROR_BGMSYNC );
           //RoadBrd_Delay( 1000 );
           HAL_NVIC_SystemReset();
           break;
@@ -488,51 +498,66 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
         /* Fallthrough intentional */
       /* Receiving header */
       case BGRX_HDR:
-        /* Save the received byte */
-        ble.rx_buf[ble.rx_wr] = c;
-        /* Increment the index and header byte counter */
-        ble.rx_wr = NextBufIdx(ble.rx_wr);
-        header_cnt++;
-        /* If this is the second header byte, we can grab the payload
-         * length.  We ignore the first byte, since the spec says that
-         * due to memory limitations in the modules, the packet is
-         * never more than 64 bytes. */
-        if (header_cnt == 2)
+        if (IsBufFull(ble.rx_wr, ble.rx_rd))
         {
-          /* Get the payload length */
-          payload_len = c;
-          /* If we have a payload bigger than 60 bytes, something's wrong */
-          if (payload_len > 60)
-          {
-            // We have detected a SYNC error on BGM111...Log it!
-            RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
-            /* Reset receive state to synchronizing */
-            ble.rx_state = BGRX_SYNC;
-            /* Indicate we need to execute the BLE stack to free space */
-            ble.req_exec = true;
-            Status = HAL_ERROR;
-          }
-        } // EndIf (header_cnt == 2)
-        /* Are we done with the header? */
-        if (header_cnt >= BGLIB_MSG_HEADER_LEN)
+          // Oops...Detected a fatal error...RESET!!!
+          // We have detected a SYNC error on BGM111...Log it!
+          RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+          /* Indicate we need to execute the BLE stack, it's the
+           * only way to get more space in the buffer */
+          ble.req_exec = true;
+          /* We're back to synchronizing */
+          ble.rx_state = BGRX_SYNC;
+        }
+        else
         {
-          /* Is there no payload? */
-          if (payload_len == 0)
+          /* Save the received byte */
+          /* Save the received byte */
+          ble.rx_buf[ble.rx_wr] = c;
+          /* Increment the index and header byte counter */
+          ble.rx_wr = NextBufIdx(ble.rx_wr);
+          header_cnt++;
+          /* If this is the second header byte, we can grab the payload
+           * length.  We ignore the first byte, since the spec says that
+           * due to memory limitations in the modules, the packet is
+           * never more than 64 bytes. */
+          if (header_cnt == 2)
           {
-            /* Reset receive state to synchronizing */
-            ble.rx_state = BGRX_SYNC;
-            /* Indicate we need to execute the BLE stack to process 
-             * the received packet */
-            ble.req_exec = true;
-          }
-          else
+            /* Get the payload length */
+            payload_len = c;
+            /* If we have a payload bigger than 60 bytes, something's wrong */
+            if (payload_len > 60)
+            {
+              // We have detected a SYNC error on BGM111...Log it!
+              RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+              /* Reset receive state to synchronizing */
+              ble.rx_state = BGRX_SYNC;
+              /* Indicate we need to execute the BLE stack to free space */
+              ble.req_exec = true;
+              Status = HAL_ERROR;
+            }
+          } // EndIf (header_cnt == 2)
+          /* Are we done with the header? */
+          if (header_cnt >= BGLIB_MSG_HEADER_LEN)
           {
-            /* Start receiving payload data */
-            ble.rx_state = BGRX_DATA;
-            /* Initialize the payload counter */
-            payload_cnt = 0;
-          }
-        } // EndIf (header_cnt >= BGLIB_MSG_HEADER_LEN)
+            /* Is there no payload? */
+            if (payload_len == 0)
+            {
+              /* Reset receive state to synchronizing */
+              ble.rx_state = BGRX_SYNC;
+              /* Indicate we need to execute the BLE stack to process 
+               * the received packet */
+              ble.req_exec = true;
+            }
+            else
+            {
+              /* Start receiving payload data */
+              ble.rx_state = BGRX_DATA;
+              /* Initialize the payload counter */
+              payload_cnt = 0;
+            }
+          } // EndIf (header_cnt >= BGLIB_MSG_HEADER_LEN)
+        } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
         break;
       /* Receiving data */
       case BGRX_DATA:
