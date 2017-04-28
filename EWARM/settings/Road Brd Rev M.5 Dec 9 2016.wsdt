@@ -22,6 +22,12 @@
         <ColumnWidth2>372</ColumnWidth2>
         <ColumnWidth3>93</ColumnWidth3>
       </Build>
+      <TerminalIO/>
+      <Find-All-References>
+        <ColumnWidth0>664</ColumnWidth0>
+        <ColumnWidth1>94</ColumnWidth1>
+        <ColumnWidth2>1138</ColumnWidth2>
+      </Find-All-References>
     </Static>
     <Windows>
       <Wnd0>
@@ -50,6 +56,12 @@
             <Factory>Build</Factory>
             <Session/>
           </Tab>
+          <Tab>
+            <Identity>TabID-26658-31220</Identity>
+            <TabName>References</TabName>
+            <Factory>Find-All-References</Factory>
+            <Session/>
+          </Tab>
         </Tabs>
         <SelectedTab>0</SelectedTab>
       </Wnd1>
@@ -64,9 +76,9 @@
           <SelStart>0</SelStart>
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
-          <YPos2>15</YPos2>
-          <SelStart2>2384</SelStart2>
-          <SelEnd2>2384</SelEnd2>
+          <YPos2>58</YPos2>
+          <SelStart2>3078</SelStart2>
+          <SelEnd2>3078</SelEnd2>
         </Tab>
         <Tab>
           <Factory>TextEditor</Factory>
@@ -77,10 +89,34 @@
           <SelEnd>0</SelEnd>
           <XPos2>0</XPos2>
           <YPos2>0</YPos2>
-          <SelStart2>842</SelStart2>
-          <SelEnd2>842</SelEnd2>
+          <SelStart2>770</SelStart2>
+          <SelEnd2>770</SelEnd2>
         </Tab>
-        <ActiveTab>1</ActiveTab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\..\Src\app_data.h</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>0</YPos2>
+          <SelStart2>1207</SelStart2>
+          <SelEnd2>1207</SelEnd2>
+        </Tab>
+        <ActiveTab>2</ActiveTab>
+        <Tab>
+          <Factory>TextEditor</Factory>
+          <Filename>$WS_DIR$\..\Src\app_data.c</Filename>
+          <XPos>0</XPos>
+          <YPos>0</YPos>
+          <SelStart>0</SelStart>
+          <SelEnd>0</SelEnd>
+          <XPos2>0</XPos2>
+          <YPos2>865</YPos2>
+          <SelStart2>38762</SelStart2>
+          <SelEnd2>38762</SelEnd2>
+        </Tab>
       </Pane>
       <ActivePane>0</ActivePane>
       <Sizes>
@@ -100,6 +136,9 @@
             </Toolbar-05C99DE8>
           </Sizes>
         </Row0>
+        <Row1>
+          <Sizes/>
+        </Row1>
       </Top>
       <Left>
         <Row0>

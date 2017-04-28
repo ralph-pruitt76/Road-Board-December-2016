@@ -331,11 +331,11 @@
             <value length="3" />
         </characteristic>	
 		
-		<!--<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="xgatt_humidity">
+		<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="xgatt_humidity">
             <description>Humidity</description>
             <properties read="true" notify="true" />
             <value length="3" />
-        </characteristic>-->
+        </characteristic>
 		
 		<characteristic uuid="acac0000-0000-0000-0000-1234567890ab" id="xgatt_barometer">
             <description>Barometric Pressure</description>
@@ -402,8 +402,8 @@
             <properties read="true" notify="true" />
             <value length="12" />
         </characteristic>
-		<!--<characteristic uuid="57656174-1010-4016-y001-00000000002C" id="AnlHrtBt">-->
-		<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="AnlHrtBt">
+		<characteristic uuid="57656174-1010-4016-y001-00000000002C" id="AnlHrtBt">
+		<!--<characteristic uuid="abab0000-0000-0000-0000-1234567890ab" id="AnlHrtBt">-->
             <description>Heart Beat</description>
             <properties read="true" notify="true" />
             <value length="20" />

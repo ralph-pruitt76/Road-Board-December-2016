@@ -22,12 +22,17 @@
 #ifdef LONG_DELAY
 //  #define CONNECTION_CNT          180      // 15 Minutes.
 //  #define HEARTBEAT_CNT           60       // 5 Minutes
-  #define CONNECTION_CNT          36       // 3 Minutes.
-  #define HEARTBEAT_CNT           36       // 3 Minutes
+//  #define CONNECTION_CNT          36       // 3 Minutes.
+//  #define HEARTBEAT_CNT           36       // 3 Minutes
+  #define CONNECTION_CNT          3600       // 300 Minutes.
+  #define HEARTBEAT_CNT           3600       // 300 Minutes
 #else
   #define CONNECTION_CNT          18      // 90 Seconds.
   #define HEARTBEAT_CNT           6       // 30 Seconds
 #endif
+#define HAL_TIMEOUT_CNT           240000    // 4m Minutes in 10 ns Ticks/ 0003.A980
+                                            // 10 Seconds is 10000
+                                            // 4 Minutes = 240 Seconds = 240000ms
 
 typedef enum 
 {

@@ -960,7 +960,7 @@ GATT_DATA(const struct bg_gattdb_buffer_with_len	bg_gattdb_data_attribute_field_
 };
 GATT_DATA(const struct bg_gattdb_buffer_with_len	bg_gattdb_data_attribute_field_2 ) = {
 	.len=8,
-	.data={0x42,0x6d,0x70,0x65,0x72,0x20,0x47,0x31,}
+	.data={0x52,0x6f,0x61,0x64,0x50,0x63,0x6b,0x33,}
 };
 GATT_DATA(const struct bg_gattdb_buffer_with_len	bg_gattdb_data_attribute_field_1 ) = {
 	.len=5,
