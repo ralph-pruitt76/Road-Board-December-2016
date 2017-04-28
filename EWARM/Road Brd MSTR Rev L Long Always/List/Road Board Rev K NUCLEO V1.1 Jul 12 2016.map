@@ -1,0 +1,1421 @@
+###############################################################################
+#
+# IAR ELF Linker V7.60.2.11341/W32 for ARM                28/Apr/2017  12:03:06
+# Copyright 2007-2016 IAR Systems AB.
+#
+#    Output file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Exe\Road Board Rev K NUCLEO V1.1 Jul 12
+#        2016.out
+#    Map file     =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\List\Road Board Rev K NUCLEO V1.1 Jul 12
+#        2016.map
+#    Command line =  
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\adc.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\app_data.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\barometer.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\bgm111.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\cmsis_os.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\croutine.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\dma.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\ErrorCodes.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\event_groups.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\fix_fft.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\freertos.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\gecko_bglib.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\gpio.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\GridEye.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\heap_4.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\Humidity.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\i2c.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\list.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\lps25hb.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\main.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\parser.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\port.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\portasm.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\queue.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\Rd_Sound.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\RGBLight.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\startup_stm32l152xe.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_adc.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_adc_ex.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_cortex.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_dma.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_flash.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_flash_ex.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_flash_ramfunc.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_gpio.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_i2c.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_msp.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_pcd.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_pcd_ex.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_pwr.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_pwr_ex.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_rcc.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_rcc_ex.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_tim.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_tim_ex.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_timebase_TIM.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_uart.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_hal_wwdg.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_it.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\stm32l1xx_nucleo.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\system_stm32l1xx.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\tasks.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\Temperature.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\tim.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\timers.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usart.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usb_device.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usbd_cdc.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usbd_cdc_if.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usbd_conf.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usbd_core.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usbd_ctlreq.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usbd_desc.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\usbd_ioreq.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\VMonitor.o"
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\wwdg.o" --redirect _Printf=_PrintfFull
+#        --redirect _Scanf=_ScanfFull -o
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\Exe\Road Board Rev K NUCLEO V1.1 Jul 12
+#        2016.out" --map
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road
+#        Brd MSTR Rev L Long Always\List\Road Board Rev K NUCLEO V1.1 Jul 12
+#        2016.map" --config
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM/stm32l152xe_flash.icf
+#        --semihosting --entry __iar_program_start --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor                     = *
+__Heap_Handler                = Basic
+__SystemLibrary               = DLib
+__dlib_dynamic_initialization = normal
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at 0x08000000 { ro section .intvec };
+"P1":  place in [from 0x08000000 to 0x0807ffff] { ro };
+"P2":  place in [from 0x20000000 to 0x20013fff] { rw, block CSTACK, block HEAP };
+initialize by copy { rw };
+
+  Section             Kind        Address     Size  Object
+  -------             ----        -------     ----  ------
+"A1":                                        0x124
+  .intvec             ro code  0x08000000    0x124  startup_stm32l152xe.o [1]
+                             - 0x08000124    0x124
+
+"P1":                                      0x11bd4
+  .text               ro code  0x08000124   0x1e56  parser.o [1]
+  .text               ro code  0x08001f7a      0xa  xsprout.o [3]
+  .text               ro code  0x08001f84     0x36  strlen.o [5]
+  .text               ro code  0x08001fbc    0x230  Rd_Sound.o [1]
+  .text               ro code  0x080021ec     0x44  strcpy_unaligned.o [5]
+  .text               ro code  0x08002230    0x4bc  usart.o [1]
+  .text               ro code  0x080026ec     0x34  sprintf.o [3]
+  .text               ro code  0x08002720     0x1c  strcat.o [3]
+  .text               ro code  0x0800273c    0x1f8  barometer.o [1]
+  .text               ro code  0x08002934    0xf04  app_data.o [1]
+  .text               ro code  0x08003838    0xd98  GridEye.o [1]
+  .text               ro code  0x080045d0    0x4c0  VMonitor.o [1]
+  .text               ro code  0x08004a90    0x6c8  Humidity.o [1]
+  .text               ro code  0x08005158    0x16c  Temperature.o [1]
+  .text               ro code  0x080052c4    0x344  RGBLight.o [1]
+  .text               ro code  0x08005608    0x1c4  gpio.o [1]
+  .text               ro code  0x080057cc    0x4dc  i2c.o [1]
+  .text               ro code  0x08005ca8    0x11a  ErrorCodes.o [1]
+  .text               ro code  0x08005dc4    0x1b0  stm32l1xx_hal_cortex.o [1]
+  .text               ro code  0x08005f74    0x2bc  adc.o [1]
+  .text               ro code  0x08006230    0x240  fix_fft.o [1]
+  .text               ro code  0x08006470     0x30  I32ToDbl.o [4]
+  .text               ro code  0x080064a0     0xf0  sqrt.o [4]
+  .text               ro code  0x08006590     0x90  DblToFlt.o [4]
+  .text               ro code  0x08006620     0x44  FltToS32.o [4]
+  .text               ro code  0x08006664    0x8e8  stm32l1xx_hal_uart.o [1]
+  .text               ro code  0x08006f4c    0x49e  main.o [1]
+  .text               ro code  0x080073ec    0x378  stm32l1xx_hal_gpio.o [1]
+  .text               ro code  0x08007764    0x844  bgm111.o [1]
+  .text               ro code  0x08007fa8   0x119e  xprintffull.o [3]
+  .text               ro code  0x08009148    0x248  lps25hb.o [1]
+  .text               ro code  0x08009390     0x4e  FltToDbl.o [4]
+  .text               ro code  0x080093e0    0x1a2  DblMul.o [4]
+  .text               ro code  0x08009584     0x58  DblToI32.o [4]
+  .text               ro code  0x080095dc     0xb8  modf.o [4]
+  .text               ro code  0x08009694     0xd8  FltMul.o [4]
+  .text               ro code  0x0800976c     0xe8  DblAdd.o [4]
+  .text               ro code  0x08009854     0x42  strcmp_unaligned.o [5]
+  .text               ro code  0x08009898     0x48  stm32l1xx_hal.o [1]
+  .text               ro code  0x080098e0     0x6c  strncpy_unaligned.o [5]
+  .text               ro code  0x0800994c     0x32  I32ToFlt.o [4]
+  .text               ro code  0x08009980     0x44  round.o [4]
+  .text               ro code  0x080099c4     0x24  FltCmpGe.o [4]
+  .text               ro code  0x080099e8     0xfc  FltDiv.o [4]
+  .text               ro code  0x08009ae4     0x84  FltAdd.o [4]
+  .text               ro code  0x08009b68   0x1018  stm32l1xx_hal_i2c.o [1]
+  .text               ro code  0x0800ab80    0x82a  stm32l1xx_hal_adc.o [1]
+  .text               ro code  0x0800b3ac    0xefe  stm32l1xx_hal_dma.o [1]
+  .text               ro code  0x0800c2aa     0x1c  fix_fft.o [1]
+  .text               ro code  0x0800c2c8      0xc  iarEdom.o [5]
+  .text               ro code  0x0800c2d4    0xcd4  stm32l1xx_hal_rcc.o [1]
+  .text               ro code  0x0800cfa8     0x30  dma.o [1]
+  .text               ro code  0x0800cfd8    0x224  tim.o [1]
+  .text               ro code  0x0800d1fc    0x1ac  gecko_bglib.o [1]
+  .text               ro code  0x0800d3a8     0x76  ABImemcpy_unaligned.o [5]
+  .text               ro code  0x0800d41e     0x20  xmbtowc.o [3]
+  .text               ro code  0x0800d440     0x16  strchr.o [5]
+  .text               ro code  0x0800d458     0x58  memchr.o [5]
+  .text               ro code  0x0800d4b0      0xa  xmbcurmax.o [3]
+  .text               ro code  0x0800d4bc     0xb0  xxmemxmalloc.o [3]
+  .text               ro code  0x0800d56c     0x1a  xwctomb.o [3]
+  .text               ro code  0x0800d588     0x80  xxmemxfree.o [3]
+  .text               ro code  0x0800d608     0xee  I64DivMod.o [5]
+  .text               ro code  0x0800d6f6     0x44  xdnorm.o [4]
+  .text               ro code  0x0800d73c     0x2e  DblCmpLe.o [4]
+  .text               ro code  0x0800d76c     0x2e  DblCmpGe.o [4]
+  .text               ro code  0x0800d79c    0x10c  xdscale.o [4]
+  .text               ro code  0x0800d8a8    0x180  DblSub.o [4]
+  .text               ro code  0x0800da28    0x256  DblDiv.o [4]
+  .text               ro code  0x0800dc80     0x6c  localeconv.o [3]
+  .text               ro code  0x0800dcec      0xe  div.o [3]
+  .text               ro code  0x0800dcfc     0x90  stm32l1xx_hal_timebase_TIM.o [1]
+  .text               ro code  0x0800dd8c     0x98  stm32l1xx_hal_msp.o [1]
+  .text               ro code  0x0800de24     0x5e  ABImemset.o [5]
+  .text               ro code  0x0800de82     0x7a  xdint.o [4]
+  .text               ro code  0x0800defc     0xd6  FltSub.o [4]
+  .text               ro code  0x0800dfd4      0xc  errno.o [3]
+  .text               ro code  0x0800dfe0     0x10  stm32l1xx_hal_pwr_ex.o [1]
+  .text               ro code  0x0800dff0    0x3da  stm32l1xx_hal_tim.o [1]
+  .text               ro code  0x0800e3ca     0x5e  stm32l1xx_hal_tim_ex.o [1]
+  .text               ro code  0x0800e428     0x14  setlocale.o [3]
+  .text               ro code  0x0800e43c     0x60  xencoding_sb.o [3]
+  .text               ro code  0x0800e49c     0x2c  xgetmemchunk.o [3]
+  .text               ro code  0x0800e4c8      0x2  I64DivZer.o [5]
+  .text               ro code  0x0800e4ca      0x2  xtls.o [3]
+  .text               ro code  0x0800e4cc   0x1074  stm32l1xx_hal_pcd.o [1]
+  .text               ro code  0x0800f540    0x198  usbd_conf.o [1]
+  .text               ro code  0x0800f6d8    0x2c8  usbd_core.o [1]
+  .text               ro code  0x0800f9a0    0x608  usbd_ctlreq.o [1]
+  .text               ro code  0x0800ffa8     0x90  usbd_ioreq.o [1]
+  .text               ro code  0x08010038    0x224  tasks.o [1]
+  CODE                ro code  0x0801025c     0x94  portasm.o [1]
+  .text               ro code  0x080102f0     0x40  list.o [1]
+  .text               ro code  0x08010330     0x84  stm32l1xx_it.o [1]
+  .text               ro code  0x080103b4     0x10  cmsis_os.o [1]
+  .text               ro code  0x080103c4     0x24  port.o [1]
+  .rodata             const    0x080103e8     0x80  fix_fft.o [1]
+  .text               ro code  0x08010468     0x64  system_stm32l1xx.o [1]
+  .rodata             const    0x080104cc     0x48  parser.o [1]
+  .rodata             const    0x08010514     0x48  parser.o [1]
+  .rodata             const    0x0801055c     0x44  ErrorCodes.o [1]
+  .rodata             const    0x080105a0     0x44  parser.o [1]
+  .rodata             const    0x080105e4     0x44  parser.o [1]
+  .rodata             const    0x08010628     0x44  parser.o [1]
+  .rodata             const    0x0801066c     0x40  main.o [1]
+  .rodata             const    0x080106ac     0x40  main.o [1]
+  .rodata             const    0x080106ec     0x40  parser.o [1]
+  .rodata             const    0x0801072c     0x40  parser.o [1]
+  .rodata             const    0x0801076c     0x40  parser.o [1]
+  .rodata             const    0x080107ac     0x40  parser.o [1]
+  .rodata             const    0x080107ec     0x40  parser.o [1]
+  .rodata             const    0x0801082c     0x40  parser.o [1]
+  .text               ro code  0x0801086c     0x40  zero_init3.o [5]
+  .rodata             const    0x080108ac     0x3c  parser.o [1]
+  .rodata             const    0x080108e8     0x3c  parser.o [1]
+  .rodata             const    0x08010924     0x3c  parser.o [1]
+  .rodata             const    0x08010960     0x3c  parser.o [1]
+  .rodata             const    0x0801099c     0x38  parser.o [1]
+  .rodata             const    0x080109d4     0x38  parser.o [1]
+  .rodata             const    0x08010a0c     0x38  parser.o [1]
+  .rodata             const    0x08010a44     0x38  parser.o [1]
+  .text               ro code  0x08010a7c     0x38  packbits_init_single.o [5]
+  .rodata             const    0x08010ab4     0x34  main.o [1]
+  .rodata             const    0x08010ae8     0x34  parser.o [1]
+  .rodata             const    0x08010b1c     0x34  parser.o [1]
+  .rodata             const    0x08010b50     0x34  parser.o [1]
+  .rodata             const    0x08010b84     0x34  parser.o [1]
+  .rodata             const    0x08010bb8     0x30  parser.o [1]
+  .rodata             const    0x08010be8     0x30  parser.o [1]
+  .rodata             const    0x08010c18     0x30  parser.o [1]
+  .rodata             const    0x08010c48     0x30  parser.o [1]
+  .rodata             const    0x08010c78     0x30  parser.o [1]
+  .rodata             const    0x08010ca8     0x2c  main.o [1]
+  .rodata             const    0x08010cd4     0x2c  parser.o [1]
+  .rodata             const    0x08010d00     0x2c  parser.o [1]
+  .rodata             const    0x08010d2c     0x2c  parser.o [1]
+  .rodata             const    0x08010d58     0x2c  parser.o [1]
+  .rodata             const    0x08010d84     0x2c  parser.o [1]
+  .rodata             const    0x08010db0     0x2c  parser.o [1]
+  .rodata             const    0x08010ddc     0x2c  parser.o [1]
+  .rodata             const    0x08010e08     0x2c  parser.o [1]
+  .rodata             const    0x08010e34     0x28  parser.o [1]
+  .rodata             const    0x08010e5c     0x28  parser.o [1]
+  .rodata             const    0x08010e84     0x28  parser.o [1]
+  .rodata             const    0x08010eac     0x28  parser.o [1]
+  .rodata             const    0x08010ed4     0x28  parser.o [1]
+  .rodata             const    0x08010efc     0x28  parser.o [1]
+  .rodata             const    0x08010f24     0x28  parser.o [1]
+  .rodata             const    0x08010f4c     0x28  parser.o [1]
+  .rodata             const    0x08010f74     0x28  parser.o [1]
+  .rodata             const    0x08010f9c     0x28  parser.o [1]
+  .rodata             const    0x08010fc4     0x28  parser.o [1]
+  .rodata             const    0x08010fec     0x28  parser.o [1]
+  .rodata             const    0x08011014     0x28  parser.o [1]
+  .rodata             const    0x0801103c     0x28  parser.o [1]
+  .rodata             const    0x08011064     0x28  parser.o [1]
+  .rodata             const    0x0801108c     0x28  parser.o [1]
+  .rodata             const    0x080110b4     0x28  parser.o [1]
+  .rodata             const    0x080110dc     0x28  parser.o [1]
+  .rodata             const    0x08011104     0x28  parser.o [1]
+  .rodata             const    0x0801112c     0x28  parser.o [1]
+  .rodata             const    0x08011154     0x28  parser.o [1]
+  .rodata             const    0x0801117c     0x28  parser.o [1]
+  .rodata             const    0x080111a4     0x28  parser.o [1]
+  .rodata             const    0x080111cc     0x28  parser.o [1]
+  .rodata             const    0x080111f4     0x28  parser.o [1]
+  .rodata             const    0x0801121c     0x28  parser.o [1]
+  .rodata             const    0x08011244     0x28  parser.o [1]
+  .rodata             const    0x0801126c     0x28  parser.o [1]
+  .rodata             const    0x08011294     0x28  parser.o [1]
+  .rodata             const    0x080112bc     0x28  parser.o [1]
+  .rodata             const    0x080112e4     0x28  parser.o [1]
+  .rodata             const    0x0801130c     0x28  parser.o [1]
+  .rodata             const    0x08011334     0x28  parser.o [1]
+  .text               ro code  0x0801135c     0x28  data_init.o [5]
+  .rodata             const    0x08011384     0x24  parser.o [1]
+  .rodata             const    0x080113a8     0x24  parser.o [1]
+  .rodata             const    0x080113cc     0x24  parser.o [1]
+  .rodata             const    0x080113f0     0x24  parser.o [1]
+  .rodata             const    0x08011414     0x24  parser.o [1]
+  .rodata             const    0x08011438     0x24  parser.o [1]
+  .rodata             const    0x0801145c     0x24  parser.o [1]
+  .rodata             const    0x08011480     0x24  parser.o [1]
+  .iar.init_table     const    0x080114a4     0x20  - Linker created -
+  .rodata             const    0x080114c4     0x20  bgm111.o [1]
+  .rodata             const    0x080114e4     0x20  parser.o [1]
+  .rodata             const    0x08011504     0x20  parser.o [1]
+  .rodata             const    0x08011524     0x20  parser.o [1]
+  .rodata             const    0x08011544     0x20  parser.o [1]
+  .rodata             const    0x08011564     0x20  parser.o [1]
+  .rodata             const    0x08011584     0x20  parser.o [1]
+  .rodata             const    0x080115a4     0x20  parser.o [1]
+  .rodata             const    0x080115c4     0x20  parser.o [1]
+  .rodata             const    0x080115e4     0x20  parser.o [1]
+  .rodata             const    0x08011604     0x20  parser.o [1]
+  .rodata             const    0x08011624     0x20  parser.o [1]
+  .rodata             const    0x08011644     0x1c  app_data.o [1]
+  .rodata             const    0x08011660     0x1c  bgm111.o [1]
+  .rodata             const    0x0801167c     0x1c  ErrorCodes.o [1]
+  .rodata             const    0x08011698     0x1c  parser.o [1]
+  .text               ro code  0x080116b4     0x1a  cmain.o [5]
+  .text               ro code  0x080116ce      0x4  low_level_init.o [3]
+  .text               ro code  0x080116d2      0x4  exit.o [3]
+  .text               ro code  0x080116d8      0xa  cexit.o [5]
+  .text               ro code  0x080116e4     0x14  exit.o [6]
+  .rodata             const    0x080116f8     0x18  app_data.o [1]
+  .rodata             const    0x08011710     0x18  parser.o [1]
+  .rodata             const    0x08011728     0x18  parser.o [1]
+  .rodata             const    0x08011740     0x18  parser.o [1]
+  .rodata             const    0x08011758     0x18  parser.o [1]
+  .rodata             const    0x08011770     0x18  parser.o [1]
+  .rodata             const    0x08011788     0x18  parser.o [1]
+  .rodata             const    0x080117a0     0x18  parser.o [1]
+  .rodata             const    0x080117b8     0x18  parser.o [1]
+  .rodata             const    0x080117d0     0x18  parser.o [1]
+  .rodata             const    0x080117e8     0x18  parser.o [1]
+  .rodata             const    0x08011800     0x18  parser.o [1]
+  .rodata             const    0x08011818     0x14  app_data.o [1]
+  .rodata             const    0x0801182c     0x14  ErrorCodes.o [1]
+  .rodata             const    0x08011840     0x14  gpio.o [1]
+  .rodata             const    0x08011854     0x14  parser.o [1]
+  .rodata             const    0x08011868     0x14  parser.o [1]
+  .rodata             const    0x0801187c     0x14  parser.o [1]
+  .rodata             const    0x08011890     0x14  parser.o [1]
+  .rodata             const    0x080118a4     0x14  parser.o [1]
+  .rodata             const    0x080118b8     0x14  parser.o [1]
+  .rodata             const    0x080118cc     0x14  parser.o [1]
+  .rodata             const    0x080118e0     0x14  parser.o [1]
+  .rodata             const    0x080118f4     0x14  parser.o [1]
+  .rodata             const    0x08011908     0x10  app_data.o [1]
+  .rodata             const    0x08011918     0x10  bgm111.o [1]
+  .rodata             const    0x08011928     0x10  bgm111.o [1]
+  .rodata             const    0x08011938     0x10  main.o [1]
+  .rodata             const    0x08011948     0x10  parser.o [1]
+  .rodata             const    0x08011958     0x10  parser.o [1]
+  .rodata             const    0x08011968     0x10  parser.o [1]
+  .rodata             const    0x08011978     0x10  parser.o [1]
+  .rodata             const    0x08011988     0x10  parser.o [1]
+  .rodata             const    0x08011998     0x10  parser.o [1]
+  .rodata             const    0x080119a8     0x10  parser.o [1]
+  .rodata             const    0x080119b8     0x10  system_stm32l1xx.o [1]
+  .text               ro code  0x080119c8     0x10  startup_stm32l152xe.o [1]
+  .rodata             const    0x080119d8      0xc  bgm111.o [1]
+  .rodata             const    0x080119e4      0xc  bgm111.o [1]
+  .rodata             const    0x080119f0      0xc  parser.o [1]
+  .rodata             const    0x080119fc      0xc  parser.o [1]
+  .rodata             const    0x08011a08      0xc  parser.o [1]
+  .rodata             const    0x08011a14      0xc  parser.o [1]
+  .rodata             const    0x08011a20      0xc  parser.o [1]
+  .rodata             const    0x08011a2c      0xc  parser.o [1]
+  .rodata             const    0x08011a38      0xc  parser.o [1]
+  .rodata             const    0x08011a44      0xc  stm32l1xx_hal_rcc.o [1]
+  .text               ro code  0x08011a50      0xc  cstartup_M.o [5]
+  .rodata             const    0x08011a5c      0x8  barometer.o [1]
+  .rodata             const    0x08011a64      0x8  barometer.o [1]
+  .rodata             const    0x08011a6c      0x8  barometer.o [1]
+  .rodata             const    0x08011a74      0x8  barometer.o [1]
+  .rodata             const    0x08011a7c      0x8  barometer.o [1]
+  .rodata             const    0x08011a84      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011a8c      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011a94      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011a9c      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011aa4      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011aac      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011ab4      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011abc      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011ac4      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011acc      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011ad4      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011adc      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011ae4      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011aec      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011af4      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011afc      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011b04      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011b0c      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08011b14      0x8  GridEye.o [1]
+  .rodata             const    0x08011b1c      0x8  GridEye.o [1]
+  .rodata             const    0x08011b24      0x8  GridEye.o [1]
+  .rodata             const    0x08011b2c      0x8  Humidity.o [1]
+  .rodata             const    0x08011b34      0x8  Humidity.o [1]
+  .rodata             const    0x08011b3c      0x8  Humidity.o [1]
+  .rodata             const    0x08011b44      0x8  Humidity.o [1]
+  .rodata             const    0x08011b4c      0x8  main.o [1]
+  .rodata             const    0x08011b54      0x8  main.o [1]
+  .rodata             const    0x08011b5c      0x8  parser.o [1]
+  .rodata             const    0x08011b64      0x8  parser.o [1]
+  .rodata             const    0x08011b6c      0x8  parser.o [1]
+  .rodata             const    0x08011b74      0x8  Rd_Sound.o [1]
+  .rodata             const    0x08011b7c      0x8  RGBLight.o [1]
+  .rodata             const    0x08011b84      0x8  RGBLight.o [1]
+  .rodata             const    0x08011b8c      0x8  system_stm32l1xx.o [1]
+  .rodata             const    0x08011b94      0x8  Temperature.o [1]
+  .rodata             const    0x08011b9c      0x8  Temperature.o [1]
+  .rodata             const    0x08011ba4      0x8  Temperature.o [1]
+  .rodata             const    0x08011bac      0x8  VMonitor.o [1]
+  .rodata             const    0x08011bb4      0x8  VMonitor.o [1]
+  .rodata             const    0x08011bbc      0x8  VMonitor.o [1]
+  .rodata             const    0x08011bc4      0x8  VMonitor.o [1]
+  .rodata             const    0x08011bcc      0x8  VMonitor.o [1]
+  .rodata             const    0x08011bd4      0x4  stm32l1xx_hal_rcc.o [1]
+  .text               ro code  0x08011bd8      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011bdc      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011be0      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011be4      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011be8      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011bec      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011bf0      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011bf4      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011bf8      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011bfc      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c00      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c04      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c08      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c0c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c10      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c14      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c18      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c1c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c20      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c24      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c28      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c2c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c30      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c34      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c38      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c3c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c40      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c44      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c48      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c4c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c50      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c54      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c58      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c5c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c60      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c64      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c68      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c6c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c70      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c74      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c78      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c7c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c80      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c84      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c88      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c8c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c90      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c94      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c98      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011c9c      0x4  startup_stm32l152xe.o [1]
+  .text               ro code  0x08011ca0      0x4  startup_stm32l152xe.o [1]
+  .rodata             const    0x08011ca4      0x0  zero_init3.o [5]
+  .rodata             const    0x08011ca4      0x0  packbits_init_single.o [5]
+  Initializer bytes   const    0x08011ca4     0x54  <for P2-1>
+                             - 0x08011cf8  0x11bd4
+
+"P2", part 1 of 3:                           0x14c
+  P2-1                         0x20000000    0x14c  <Init block>
+    .data             inited   0x20000000      0xc  adc.o [1]
+    .data             inited   0x2000000c      0x4  bgm111.o [1]
+    .data             inited   0x20000010      0x4  bgm111.o [1]
+    .data             inited   0x20000014     0x24  gpio.o [1]
+    .data             inited   0x20000038      0x4  system_stm32l1xx.o [1]
+    .data             inited   0x2000003c      0x4  tim.o [1]
+    .data             inited   0x20000040      0x4  tim.o [1]
+    .data             inited   0x20000044      0x4  tim.o [1]
+    .data             inited   0x20000048      0x4  usart.o [1]
+    __DLIB_PERTHREAD  inited   0x2000004c     0x88  localeconv.o [3]
+    __DLIB_PERTHREAD  inited   0x200000d4      0x4  errno.o [3]
+    __DLIB_PERTHREAD  inited   0x200000d8     0x74  setlocale.o [3]
+                             - 0x2000014c    0x14c
+
+"P2", part 2 of 3:                          0x1000
+  CSTACK                       0x20000150   0x1000  <Block>
+    CSTACK            uninit   0x20000150   0x1000  <Block tail>
+  HEAP                         0x20001150      0x0  <Block>
+                             - 0x20001150   0x1000
+
+"P2", part 3 of 3:                          0x23b8
+  .bss                zero     0x20001150    0xf78  bgm111.o [1]
+  .bss                zero     0x200020c8    0x324  bgm111.o [1]
+  .bss                zero     0x200023ec    0x324  ErrorCodes.o [1]
+  .bss                zero     0x20002710    0x248  app_data.o [1]
+  .bss                zero     0x20002958    0x248  app_data.o [1]
+  .bss                zero     0x20002ba0    0x220  usbd_conf.o [1]
+  .bss                zero     0x20002dc0    0x19c  bgm111.o [1]
+  .bss                zero     0x20002f5c     0x8c  tasks.o [1]
+  .bss                zero     0x20002fe8     0x84  bgm111.o [1]
+  .bss                zero     0x2000306c     0x84  bgm111.o [1]
+  .bss                zero     0x200030f0     0x80  Rd_Sound.o [1]
+  .bss                zero     0x20003170     0x80  Rd_Sound.o [1]
+  .bss                zero     0x200031f0     0x80  Rd_Sound.o [1]
+  .bss                zero     0x20003270     0x54  adc.o [1]
+  .bss                zero     0x200032c4     0x40  usart.o [1]
+  .bss                zero     0x20003304     0x40  usart.o [1]
+  .bss                zero     0x20003344     0x3c  i2c.o [1]
+  .bss                zero     0x20003380     0x38  adc.o [1]
+  .bss                zero     0x200033b8     0x38  stm32l1xx_hal_timebase_TIM.o [1]
+  .bss                zero     0x200033f0     0x38  tim.o [1]
+  .bss                zero     0x20003428     0x38  tim.o [1]
+  .bss                zero     0x20003460     0x28  usart.o [1]
+  .bss                zero     0x20003488      0xc  adc.o [1]
+  .bss                zero     0x20003494      0x8  app_data.o [1]
+  .bss                zero     0x2000349c      0x8  xxmemxmalloc.o [3]
+  .bss                zero     0x200034a4      0x4  app_data.o [1]
+  .bss                zero     0x200034a8      0x4  bgm111.o [1]
+  .bss                zero     0x200034ac      0x4  bgm111.o [1]
+  .bss                zero     0x200034b0      0x4  bgm111.o [1]
+  .bss                zero     0x200034b4      0x4  bgm111.o [1]
+  .bss                zero     0x200034b8      0x4  bgm111.o [1]
+  .bss                zero     0x200034bc      0x4  stm32l1xx_hal.o [1]
+  .bss                zero     0x200034c0      0x4  tasks.o [1]
+  .bss                zero     0x200034c4      0x4  tasks.o [1]
+  .bss                zero     0x200034c8      0x4  tasks.o [1]
+  .bss                zero     0x200034cc      0x4  tasks.o [1]
+  .bss                zero     0x200034d0      0x4  tasks.o [1]
+  .bss                zero     0x200034d4      0x4  tasks.o [1]
+  .bss                zero     0x200034d8      0x4  tasks.o [1]
+  .bss                zero     0x200034dc      0x4  tasks.o [1]
+  .bss                zero     0x200034e0      0x4  tasks.o [1]
+  .bss                zero     0x200034e4      0x4  tasks.o [1]
+  .bss                zero     0x200034e8      0x4  tasks.o [1]
+  .bss                zero     0x200034ec      0x4  usart.o [1]
+  .bss                zero     0x200034f0      0x4  usart.o [1]
+  .bss                zero     0x200034f4      0x4  xgetmemchunk.o [3]
+  .bss                zero     0x200034f8      0x2  app_data.o [1]
+  .bss                zero     0x200034fa      0x2  app_data.o [1]
+  .bss                zero     0x200034fc      0x1  adc.o [1]
+  .bss                zero     0x200034fd      0x1  adc.o [1]
+  .bss                zero     0x200034fe      0x1  adc.o [1]
+  .bss                zero     0x200034ff      0x1  bgm111.o [1]
+  .bss                zero     0x20003500      0x1  bgm111.o [1]
+  .bss                zero     0x20003501      0x1  bgm111.o [1]
+  .bss                zero     0x20003502      0x1  tim.o [1]
+  .bss                zero     0x20003503      0x1  tim.o [1]
+  .bss                zero     0x20003504      0x1  usart.o [1]
+  .bss                zero     0x20003505      0x1  usart.o [1]
+  .bss                zero     0x20003506      0x1  usart.o [1]
+  .bss                zero     0x20003507      0x1  usbd_ctlreq.o [1]
+                             - 0x20003508   0x23b8
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address     Size
+          -------     ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x23b8:
+          0x20001150  0x23b8
+
+Copy/packbits (__iar_packbits_init_single3)
+    1 source range, total size 0x54 (25% of destination):
+          0x08011ca4    0x54
+    1 destination range, total size 0x14c:
+          0x20000000   0x14c
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                        ro code  ro data  rw data
+    ------                        -------  -------  -------
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road Brd MSTR Rev L Long Always\Obj: [1]
+    ErrorCodes.o                      282      260      804
+    GridEye.o                       3 480       24
+    Humidity.o                      1 736       32
+    RGBLight.o                        836       16
+    Rd_Sound.o                        560        8      384
+    Temperature.o                     364       24
+    VMonitor.o                      1 216       40
+    adc.o                             700        3      167
+    app_data.o                      3 844       88    1 184
+    barometer.o                       504       40
+    bgm111.o                        2 116      118    5 471
+    cmsis_os.o                         16
+    dma.o                              48
+    fix_fft.o                         604      128
+    gecko_bglib.o                     428
+    gpio.o                            452       29       36
+    i2c.o                           1 244                60
+    list.o                             64
+    lps25hb.o                         584
+    main.o                          1 182      256
+    parser.o                        7 766    4 648
+    port.o                             36
+    portasm.o                         148
+    startup_stm32l152xe.o             512
+    stm32l1xx_hal.o                    72                 4
+    stm32l1xx_hal_adc.o             2 090
+    stm32l1xx_hal_cortex.o            432
+    stm32l1xx_hal_dma.o             3 838
+    stm32l1xx_hal_gpio.o              888
+    stm32l1xx_hal_i2c.o             4 120
+    stm32l1xx_hal_msp.o               152
+    stm32l1xx_hal_pcd.o             4 212
+    stm32l1xx_hal_pwr_ex.o             16
+    stm32l1xx_hal_rcc.o             3 284       16
+    stm32l1xx_hal_tim.o               986
+    stm32l1xx_hal_tim_ex.o             94
+    stm32l1xx_hal_timebase_TIM.o      144                56
+    stm32l1xx_hal_uart.o            2 280
+    stm32l1xx_it.o                    132
+    system_stm32l1xx.o                100       25        4
+    tasks.o                           548               184
+    tim.o                             548        3      126
+    usart.o                         1 212        1      183
+    usbd_conf.o                       408               544
+    usbd_core.o                       712
+    usbd_ctlreq.o                   1 544                 1
+    usbd_ioreq.o                      144
+    -------------------------------------------------------
+    Total:                         56 678    5 759    9 208
+
+command line: [2]
+    -------------------------------------------------------
+    Total:
+
+dl7M_tlf.a: [3]
+    div.o                              14
+    errno.o                            12        1        4
+    exit.o                              4
+    localeconv.o                      108       34      136
+    low_level_init.o                    4
+    setlocale.o                        20       30      116
+    sprintf.o                          52
+    strcat.o                           28
+    xencoding_sb.o                     96
+    xgetmemchunk.o                     44                 4
+    xmbcurmax.o                        10
+    xmbtowc.o                          32
+    xprintffull.o                   4 510
+    xsprout.o                          10
+    xtls.o                              2
+    xwctomb.o                          26
+    xxmemxfree.o                      128
+    xxmemxmalloc.o                    176                 8
+    -------------------------------------------------------
+    Total:                          5 276       65      268
+
+m7M_tl.a: [4]
+    DblAdd.o                          232
+    DblCmpGe.o                         46
+    DblCmpLe.o                         46
+    DblDiv.o                          598
+    DblMul.o                          418
+    DblSub.o                          384
+    DblToFlt.o                        144
+    DblToI32.o                         88
+    FltAdd.o                          132
+    FltCmpGe.o                         36
+    FltDiv.o                          252
+    FltMul.o                          216
+    FltSub.o                          214
+    FltToDbl.o                         78
+    FltToS32.o                         68
+    I32ToDbl.o                         48
+    I32ToFlt.o                         50
+    modf.o                            184
+    round.o                            68
+    sqrt.o                            240
+    xdint.o                           122
+    xdnorm.o                           68
+    xdscale.o                         268
+    -------------------------------------------------------
+    Total:                          4 000
+
+rt7M_tl.a: [5]
+    ABImemcpy_unaligned.o             118
+    ABImemset.o                        94
+    I64DivMod.o                       238
+    I64DivZer.o                         2
+    cexit.o                            10
+    cmain.o                            26
+    cstartup_M.o                       12
+    data_init.o                        40
+    iarEdom.o                          12
+    memchr.o                           88
+    packbits_init_single.o             56
+    strchr.o                           22
+    strcmp_unaligned.o                 66
+    strcpy_unaligned.o                 68
+    strlen.o                           54
+    strncpy_unaligned.o               108
+    zero_init3.o                       64
+    -------------------------------------------------------
+    Total:                          1 078
+
+shb_l.a: [6]
+    exit.o                             20
+    -------------------------------------------------------
+    Total:                             20
+
+    Gaps                               44
+    Linker created                              32    4 096
+-----------------------------------------------------------
+    Grand Total:                   67 096    5 856   13 572
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                      Address    Size  Type      Object
+-----                      -------    ----  ----      ------
+.iar.init_table$$Base   0x080114a4           --   Gb  - Linker created -
+.iar.init_table$$Limit  0x080114c4           --   Gb  - Linker created -
+?main                   0x080116b5          Code  Gb  cmain.o [5]
+ADC_Channel             0x200034fe     0x1  Data  Lc  adc.o [1]
+ADC_Config              0x080060ab    0xbe  Code  Gb  adc.o [1]
+ADC_ConversionStop_Disable
+                        0x0800b2c1    0x4a  Code  Gb  stm32l1xx_hal_adc.o [1]
+ADC_DMAConvCplt         0x0800b30d    0x6e  Code  Lc  stm32l1xx_hal_adc.o [1]
+ADC_DMAError            0x0800b38d    0x1e  Code  Lc  stm32l1xx_hal_adc.o [1]
+ADC_DMAHalfConvCplt     0x0800b37d     0xe  Code  Lc  stm32l1xx_hal_adc.o [1]
+ADC_Enable              0x0800b223    0x72  Code  Gb  stm32l1xx_hal_adc.o [1]
+AHBPrescTable           0x080119b8    0x10  Data  Gb  system_stm32l1xx.o [1]
+APBPrescTable           0x08011b8c     0x8  Data  Gb  system_stm32l1xx.o [1]
+BGM111_Connected        0x08007bbd     0xa  Code  Gb  bgm111.o [1]
+BGM111_Init             0x0800795f    0x32  Code  Gb  bgm111.o [1]
+BGM111_LowLevel_Init    0x0800787f    0x20  Code  Gb  bgm111.o [1]
+BGM111_Peek             0x08007955     0xa  Code  Gb  bgm111.o [1]
+BGM111_ProcessInput     0x08007991   0x1f8  Code  Gb  bgm111.o [1]
+BGM111_Ready            0x08007bb3     0xa  Code  Gb  bgm111.o [1]
+BGM111_Receive          0x080078f7    0x5e  Code  Gb  bgm111.o [1]
+BGM111_Transmit         0x08007c59    0xea  Code  Gb  bgm111.o [1]
+BGM111_UART_IRQHandler  0x08007bc7    0x90  Code  Gb  bgm111.o [1]
+BGM111_WriteCharacteristic
+                        0x08007b89    0x2a  Code  Gb  bgm111.o [1]
+BufFree                 0x080078dd    0x1a  Code  Gb  bgm111.o [1]
+BufUsed                 0x080078cb    0x12  Code  Gb  bgm111.o [1]
+CSTACK$$Base            0x20000150           --   Gb  - Linker created -
+CSTACK$$Limit           0x20001150           --   Gb  - Linker created -
+Clear_Timer2_Flg        0x0800d141     0x8  Code  Gb  tim.o [1]
+Clr_HeartBeat           0x08003701     0x8  Code  Gb  app_data.o [1]
+Clr_HrtBeat_Cnt         0x080036e3     0x8  Code  Gb  app_data.o [1]
+CodesArray              0x0801055c    0x44  Data  Gb  ErrorCodes.o [1]
+DMA1_Channel1_IRQHandler
+                        0x08010339     0xa  Code  Gb  stm32l1xx_it.o [1]
+DMA_SetConfig           0x0800c289    0x22  Code  Lc  stm32l1xx_hal_dma.o [1]
+Error_Handler           0x080073bd    0x2e  Code  Gb  main.o [1]
+FIX_MPY                 0x0800c2ab    0x1c  Code  Gb  fix_fft.o [1]
+Get_DriverStates        0x0800360d    0x54  Code  Gb  app_data.o [1]
+Get_DriverStatus        0x08003679    0x6a  Code  Gb  app_data.o [1]
+HAL_ADC_ConfigChannel   0x0800b03d   0x1e6  Code  Gb  stm32l1xx_hal_adc.o [1]
+HAL_ADC_ConvCpltCallback
+                        0x080061e7     0xe  Code  Gb  adc.o [1]
+HAL_ADC_ConvHalfCpltCallback
+                        0x08006225     0x2  Code  Gb  adc.o [1]
+HAL_ADC_DeInit          0x0800ad47   0x134  Code  Gb  stm32l1xx_hal_adc.o [1]
+HAL_ADC_ErrorCallback   0x08006227     0xa  Code  Gb  adc.o [1]
+HAL_ADC_Init            0x0800ab81   0x1c6  Code  Gb  stm32l1xx_hal_adc.o [1]
+HAL_ADC_MspDeInit       0x08006083    0x28  Code  Gb  adc.o [1]
+HAL_ADC_MspInit         0x08005ffd    0x86  Code  Gb  adc.o [1]
+HAL_ADC_Start           0x0800ae7b    0x88  Code  Gb  stm32l1xx_hal_adc.o [1]
+HAL_ADC_Start_DMA       0x0800af03    0xcc  Code  Gb  stm32l1xx_hal_adc.o [1]
+HAL_ADC_Stop_DMA        0x0800afcf    0x6e  Code  Gb  stm32l1xx_hal_adc.o [1]
+HAL_DMA_Abort           0x0800b8e7    0x54  Code  Gb  stm32l1xx_hal_dma.o [1]
+HAL_DMA_DeInit          0x0800b405   0x43e  Code  Gb  stm32l1xx_hal_dma.o [1]
+HAL_DMA_IRQHandler      0x0800b941   0x906  Code  Gb  stm32l1xx_hal_dma.o [1]
+HAL_DMA_Init            0x0800b3ad    0x58  Code  Gb  stm32l1xx_hal_dma.o [1]
+HAL_DMA_Start_IT        0x0800b879    0x6e  Code  Gb  stm32l1xx_hal_dma.o [1]
+HAL_Delay               0x080098c1    0x1a  Code  Wk  stm32l1xx_hal.o [1]
+HAL_GPIO_DeInit         0x080075bf   0x13c  Code  Gb  stm32l1xx_hal_gpio.o [1]
+HAL_GPIO_Init           0x080073ed   0x1d2  Code  Gb  stm32l1xx_hal_gpio.o [1]
+HAL_GPIO_ReadPin        0x080076fb    0x18  Code  Gb  stm32l1xx_hal_gpio.o [1]
+HAL_GPIO_TogglePin      0x08007727     0xa  Code  Gb  stm32l1xx_hal_gpio.o [1]
+HAL_GPIO_WritePin       0x08007713    0x14  Code  Gb  stm32l1xx_hal_gpio.o [1]
+HAL_GetTick             0x080098bb     0x6  Code  Wk  stm32l1xx_hal.o [1]
+HAL_I2C_ER_IRQHandler   0x0800a3ed    0xce  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_EV_IRQHandler   0x0800a2b9   0x134  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_ErrorCallback   0x0800a4c7     0x2  Code  Wk  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_GetError        0x0800a4cf     0x4  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_GetState        0x0800a4c9     0x6  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_Init            0x08009b69   0x172  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_MasterRxCpltCallback
+                        0x0800a4bd     0x2  Code  Wk  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_MasterTxCpltCallback
+                        0x0800a4bb     0x2  Code  Wk  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_Master_Receive  0x08009e13   0x256  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_Master_Receive_IT
+                        0x0800a14f   0x14e  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_Master_Transmit
+                        0x08009cdb   0x138  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_Master_Transmit_IT
+                        0x0800a069    0xe6  Code  Gb  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_MemRxCpltCallback
+                        0x0800a4c5     0x2  Code  Wk  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_MemTxCpltCallback
+                        0x0800a4c3     0x2  Code  Wk  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_MspInit         0x0800582f    0x50  Code  Gb  i2c.o [1]
+HAL_I2C_SlaveRxCpltCallback
+                        0x0800a4c1     0x2  Code  Wk  stm32l1xx_hal_i2c.o [1]
+HAL_I2C_SlaveTxCpltCallback
+                        0x0800a4bf     0x2  Code  Wk  stm32l1xx_hal_i2c.o [1]
+HAL_IncTick             0x080098af     0xc  Code  Wk  stm32l1xx_hal.o [1]
+HAL_Init                0x08009899    0x16  Code  Gb  stm32l1xx_hal.o [1]
+HAL_InitTick            0x0800dcfd    0x80  Code  Gb  stm32l1xx_hal_timebase_TIM.o [1]
+HAL_MspInit             0x0800dd8d    0x98  Code  Gb  stm32l1xx_hal_msp.o [1]
+HAL_NVIC_DisableIRQ     0x08005f05     0xe  Code  Gb  stm32l1xx_hal_cortex.o [1]
+HAL_NVIC_EnableIRQ      0x08005ef7     0xe  Code  Gb  stm32l1xx_hal_cortex.o [1]
+HAL_NVIC_SetPriority    0x08005ed1    0x26  Code  Gb  stm32l1xx_hal_cortex.o [1]
+HAL_NVIC_SetPriorityGrouping
+                        0x08005ec5     0xc  Code  Gb  stm32l1xx_hal_cortex.o [1]
+HAL_NVIC_SystemReset    0x08005f13     0x8  Code  Gb  stm32l1xx_hal_cortex.o [1]
+HAL_PCD_DataInStageCallback
+                        0x0800f579    0x20  Code  Gb  usbd_conf.o [1]
+HAL_PCD_DataOutStageCallback
+                        0x0800f557    0x22  Code  Gb  usbd_conf.o [1]
+HAL_PCD_EP_ClrStall     0x0800f437   0x10a  Code  Gb  stm32l1xx_hal_pcd.o [1]
+HAL_PCD_EP_Open         0x0800eae9   0x476  Code  Gb  stm32l1xx_hal_pcd.o [1]
+HAL_PCD_EP_Receive      0x0800ef5f   0x1ac  Code  Gb  stm32l1xx_hal_pcd.o [1]
+HAL_PCD_EP_SetStall     0x0800f359    0xde  Code  Gb  stm32l1xx_hal_pcd.o [1]
+HAL_PCD_EP_Transmit     0x0800f10b   0x24e  Code  Gb  stm32l1xx_hal_pcd.o [1]
+HAL_PCD_IRQHandler      0x0800e973   0x144  Code  Gb  stm32l1xx_hal_pcd.o [1]
+HAL_PCD_ResetCallback   0x0800f5a7    0x2c  Code  Gb  usbd_conf.o [1]
+HAL_PCD_ResumeCallback  0x0800f5f3     0xe  Code  Gb  usbd_conf.o [1]
+HAL_PCD_SOFCallback     0x0800f599     0xe  Code  Gb  usbd_conf.o [1]
+HAL_PCD_SetAddress      0x0800eab7    0x32  Code  Gb  stm32l1xx_hal_pcd.o [1]
+HAL_PCD_SetupStageCallback
+                        0x0800f541    0x16  Code  Gb  usbd_conf.o [1]
+HAL_PCD_SuspendCallback
+                        0x0800f5d3    0x20  Code  Gb  usbd_conf.o [1]
+HAL_PWREx_GetVoltageRange
+                        0x0800dfe1     0xa  Code  Gb  stm32l1xx_hal_pwr_ex.o [1]
+HAL_RCC_ClockConfig     0x0800caff   0x2a0  Code  Gb  stm32l1xx_hal_rcc.o [1]
+HAL_RCC_GetClockConfig  0x0800cea5    0x3a  Code  Gb  stm32l1xx_hal_rcc.o [1]
+HAL_RCC_GetHCLKFreq     0x0800ce49     0x6  Code  Gb  stm32l1xx_hal_rcc.o [1]
+HAL_RCC_GetPCLK1Freq    0x0800ce4f    0x20  Code  Gb  stm32l1xx_hal_rcc.o [1]
+HAL_RCC_GetPCLK2Freq    0x0800ce6f    0x20  Code  Gb  stm32l1xx_hal_rcc.o [1]
+HAL_RCC_GetSysClockFreq
+                        0x0800cd9f    0xaa  Code  Gb  stm32l1xx_hal_rcc.o [1]
+HAL_RCC_OscConfig       0x0800c2d5   0x82a  Code  Gb  stm32l1xx_hal_rcc.o [1]
+HAL_SYSTICK_CLKSourceConfig
+                        0x08005f27    0x22  Code  Gb  stm32l1xx_hal_cortex.o [1]
+HAL_SYSTICK_Config      0x08005f1b     0xc  Code  Gb  stm32l1xx_hal_cortex.o [1]
+HAL_TIMEx_MasterConfigSynchronization
+                        0x0800e3cb    0x5e  Code  Gb  stm32l1xx_hal_tim_ex.o [1]
+HAL_TIM_Base_Init       0x0800dff1    0x38  Code  Gb  stm32l1xx_hal_tim.o [1]
+HAL_TIM_Base_MspInit    0x0800d0a3    0x48  Code  Gb  tim.o [1]
+HAL_TIM_Base_Start_IT   0x0800e029    0x1e  Code  Gb  stm32l1xx_hal_tim.o [1]
+HAL_TIM_ConfigClockSource
+                        0x0800e181   0x122  Code  Gb  stm32l1xx_hal_tim.o [1]
+HAL_TIM_IC_CaptureCallback
+                        0x0800e2a5     0x2  Code  Wk  stm32l1xx_hal_tim.o [1]
+HAL_TIM_IRQHandler      0x0800e047   0x13a  Code  Gb  stm32l1xx_hal_tim.o [1]
+HAL_TIM_OC_DelayElapsedCallback
+                        0x0800e2a3     0x2  Code  Wk  stm32l1xx_hal_tim.o [1]
+HAL_TIM_PWM_PulseFinishedCallback
+                        0x0800e2a7     0x2  Code  Wk  stm32l1xx_hal_tim.o [1]
+HAL_TIM_PeriodElapsedCallback
+                        0x0800d0eb    0x56  Code  Gb  tim.o [1]
+HAL_TIM_StartTimer2     0x0800d1ad    0x12  Code  Gb  tim.o [1]
+HAL_TIM_StartTimer3     0x0800d1bf    0x12  Code  Gb  tim.o [1]
+HAL_TIM_TriggerCallback
+                        0x0800e2a9     0x2  Code  Wk  stm32l1xx_hal_tim.o [1]
+HAL_UART_EnableBGM_RX   0x0800267f    0x32  Code  Gb  usart.o [1]
+HAL_UART_EnableBGM_TXE  0x0800266d    0x12  Code  Gb  usart.o [1]
+HAL_UART_ErrorCallback  0x0800266b     0x2  Code  Gb  usart.o [1]
+HAL_UART_IRQHandler     0x080068cb   0x11a  Code  Gb  stm32l1xx_hal_uart.o [1]
+HAL_UART_Init           0x08006665    0x72  Code  Gb  stm32l1xx_hal_uart.o [1]
+HAL_UART_MspInit        0x080022e3    0xba  Code  Gb  usart.o [1]
+HAL_UART_Receive_IT     0x08006843    0x88  Code  Gb  stm32l1xx_hal_uart.o [1]
+HAL_UART_RxCpltCallback
+                        0x080025bb    0xb0  Code  Gb  usart.o [1]
+HAL_UART_RxCpltCallback::len
+                        0x200034f0     0x4  Data  Lc  usart.o [1]
+HAL_UART_RxCpltCallback::temp_ptr
+                        0x200034ec     0x4  Data  Lc  usart.o [1]
+HAL_UART_Transmit       0x080066d7    0xfc  Code  Gb  stm32l1xx_hal_uart.o [1]
+HAL_UART_Transmit_IT    0x080067d3    0x70  Code  Gb  stm32l1xx_hal_uart.o [1]
+HAL_UART_TxCpltCallback
+                        0x0800257f    0x20  Code  Gb  usart.o [1]
+HEAP$$Base              0x20001150           --   Gb  - Linker created -
+HEAP$$Limit             0x20001150           --   Gb  - Linker created -
+HeartBeat_Cnt           0x200034fa     0x2  Data  Lc  app_data.o [1]
+I2C1_ER_IRQHandler      0x08010375     0xa  Code  Gb  stm32l1xx_it.o [1]
+I2C1_EV_IRQHandler      0x0801036b     0xa  Code  Gb  stm32l1xx_it.o [1]
+I2C_IsAcknowledgeFailed
+                        0x0800ab57    0x2a  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_MasterReceive_BTF   0x0800a5d7    0xa6  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_MasterReceive_RXNE  0x0800a55b    0x7c  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_MasterRequestRead   0x0800a819   0x106  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_MasterRequestWrite  0x0800a783    0x96  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_MasterTransmit_BTF  0x0800a4ff    0x5c  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_MasterTransmit_TXE  0x0800a4d3    0x2c  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_SlaveReceive_BTF    0x0800a6d7    0x1e  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_SlaveReceive_RXNE   0x0800a6b9    0x1e  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_SlaveTransmit_BTF   0x0800a69b    0x1e  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_SlaveTransmit_TXE   0x0800a67d    0x1e  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_Slave_ADDR          0x0800a6f5    0x18  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_Slave_AF            0x0800a74f    0x34  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_Slave_STOPF         0x0800a70d    0x42  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_WaitBusyFlag        0x08005b21    0x12  Code  Gb  i2c.o [1]
+I2C_WaitOnFlagUntilTimeout
+                        0x0800a929    0xda  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_WaitOnMasterAddressFlagUntilTimeout
+                        0x0800aa03    0x9e  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_WaitOnRXNEFlagUntilTimeout
+                        0x0800aaf3    0x64  Code  Lc  stm32l1xx_hal_i2c.o [1]
+I2C_WaitOnTXEFlagUntilTimeout
+                        0x0800aaa1    0x52  Code  Lc  stm32l1xx_hal_i2c.o [1]
+InitSensors             0x08002935    0x22  Code  Gb  app_data.o [1]
+IsBufFull               0x080078ad    0x1e  Code  Gb  bgm111.o [1]
+LPS25HB_GetPressure     0x080092a5    0x2c  Code  Gb  lps25hb.o [1]
+LPS25HB_GetTemperature  0x08009313    0x2e  Code  Gb  lps25hb.o [1]
+LPS25HB_I2C_GetRawTemperature
+                        0x080092d1     0xc  Code  Gb  lps25hb.o [1]
+LPS25HB_I2C_ReadRawPressure
+                        0x0800925b    0x4a  Code  Lc  lps25hb.o [1]
+LPS25HB_I2C_ReadRawTemperature
+                        0x080092dd    0x36  Code  Lc  lps25hb.o [1]
+LPS25HB_Init            0x08009149   0x112  Code  Gb  lps25hb.o [1]
+LPS25HB_PowerOn         0x08009341    0x48  Code  Lc  lps25hb.o [1]
+LoadInt                 0x08008617    0x70  Code  Lc  xprintffull.o [3]
+MX_ADC_Init             0x08005f75    0x88  Code  Gb  adc.o [1]
+MX_DMA_Init             0x0800cfa9    0x30  Code  Gb  dma.o [1]
+MX_GPIO_Init            0x08005609   0x13a  Code  Gb  gpio.o [1]
+MX_I2C1_Init            0x080057cd    0x62  Code  Gb  i2c.o [1]
+MX_I2C1_Reset           0x0800587f    0x50  Code  Gb  i2c.o [1]
+MX_TIM2_Init            0x0800cfd9    0x66  Code  Gb  tim.o [1]
+MX_TIM3_Init            0x0800d03f    0x64  Code  Gb  tim.o [1]
+MX_USART2_UART_Init     0x08002231    0x58  Code  Gb  usart.o [1]
+MX_USART3_UART_Init     0x08002289    0x5a  Code  Gb  usart.o [1]
+ModuleArray             0x0801167c    0x1c  Data  Gb  ErrorCodes.o [1]
+NVIC_DisableIRQ         0x08005e01    0x14  Code  Lc  stm32l1xx_hal_cortex.o [1]
+NVIC_EnableIRQ          0x08005ded    0x14  Code  Lc  stm32l1xx_hal_cortex.o [1]
+NVIC_EncodePriority     0x08005e3b    0x3e  Code  Lc  stm32l1xx_hal_cortex.o [1]
+NVIC_GetPriorityGrouping
+                        0x08005de3     0xa  Code  Lc  stm32l1xx_hal_cortex.o [1]
+NVIC_SetPriority        0x08005e15    0x26  Code  Lc  stm32l1xx_hal_cortex.o [1]
+NVIC_SetPriorityGrouping
+                        0x08005dc5    0x1e  Code  Lc  stm32l1xx_hal_cortex.o [1]
+NVIC_SystemReset        0x08005e79    0x1c  Code  Lc  stm32l1xx_hal_cortex.o [1]
+NextBufIdx              0x0800789f     0xe  Code  Gb  bgm111.o [1]
+PCD_EP_ISR_Handler      0x0800e4cd   0x43a  Code  Lc  stm32l1xx_hal_pcd.o [1]
+PCD_ReadPMA             0x0800e947    0x2c  Code  Lc  stm32l1xx_hal_pcd.o [1]
+PCD_WritePMA            0x0800e907    0x40  Code  Lc  stm32l1xx_hal_pcd.o [1]
+PendSV_Handler          0x0801025d          Code  Gb  portasm.o [1]
+Proc_Timer2             0x0800d159    0x54  Code  Gb  tim.o [1]
+ProcessSensorState      0x0800296b   0x9b4  Code  Gb  app_data.o [1]
+Process_RdSound         0x0800331f    0xd8  Code  Gb  app_data.o [1]
+RBIsBufFull             0x08005cb7    0x1e  Code  Gb  ErrorCodes.o [1]
+RBNextBufIdx            0x08005ca9     0xe  Code  Gb  ErrorCodes.o [1]
+RCC_SetFlashLatencyFromMSIRange
+                        0x0800cee5    0x90  Code  Lc  stm32l1xx_hal_rcc.o [1]
+RdBrdI2C_WaitOnFlagUntilTimeout
+                        0x08005b33    0xda  Code  Lc  i2c.o [1]
+RdBrd_BlinkErrCd        0x08005d75    0x4e  Code  Gb  ErrorCodes.o [1]
+RdBrd_ErrCdLogErrCd     0x08005cd5    0x8e  Code  Gb  ErrorCodes.o [1]
+RdSndTickCnt            0x20000040     0x4  Data  Lc  tim.o [1]
+Region$$Table$$Base     0x080114a4           --   Gb  - Linker created -
+Region$$Table$$Limit    0x080114c4           --   Gb  - Linker created -
+Reset_DriverStates      0x08003569    0x32  Code  Gb  app_data.o [1]
+RoadBrdSnd_ClearImgnryBffr
+                        0x08001fbd    0x14  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_ClrBffrs     0x080021b1    0x20  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_DumpBin0     0x080020a7    0x40  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_DumpBin16    0x080020e7    0x42  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_DumpBin32    0x08002129    0x44  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_DumpBin48    0x0800216d    0x44  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_ProcessSound
+                        0x08002021    0x86  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_SampleSound  0x08001fd5    0x4c  Code  Gb  Rd_Sound.o [1]
+RoadBrdSnd_getSaveBffr  0x08001fd1     0x4  Code  Gb  Rd_Sound.o [1]
+RoadBrd_ADC_PORT        0x20000000     0xc  Data  Gb  adc.o [1]
+RoadBrd_ADC_Start       0x08006169    0x6e  Code  Gb  adc.o [1]
+RoadBrd_ADC_Status      0x080061d7    0x10  Code  Gb  adc.o [1]
+RoadBrd_Baro_ReadPressure
+                        0x08002791    0x88  Code  Gb  barometer.o [1]
+RoadBrd_Baro_ReadTemp   0x08002819    0xa6  Code  Gb  barometer.o [1]
+RoadBrd_CoolEyeInit     0x08003839    0x6a  Code  Gb  GridEye.o [1]
+RoadBrd_CoolEye_ReadValues
+                        0x080038a5   0x5b8  Code  Gb  GridEye.o [1]
+RoadBrd_Delay           0x08005b17     0xa  Code  Gb  i2c.o [1]
+RoadBrd_GetBGPtr        0x080024b5     0x6  Code  Gb  usart.o [1]
+RoadBrd_GetBffrFlg      0x080024c5     0x6  Code  Gb  usart.o [1]
+RoadBrd_GridEyeInit     0x08003e61    0xd6  Code  Gb  GridEye.o [1]
+RoadBrd_GridEyeReset    0x08003f37    0x96  Code  Gb  GridEye.o [1]
+RoadBrd_GridEye_ReadValues
+                        0x08003fcd   0x5d0  Code  Gb  GridEye.o [1]
+RoadBrd_HumidityInit    0x08004a91    0xa6  Code  Gb  Humidity.o [1]
+RoadBrd_Humidity_ReadHumidity
+                        0x08004b37   0x2f8  Code  Gb  Humidity.o [1]
+RoadBrd_Humidity_ReadTemperature
+                        0x08004e35   0x2f0  Code  Gb  Humidity.o [1]
+RoadBrd_I2C_GetError    0x08005ac9     0xa  Code  Gb  i2c.o [1]
+RoadBrd_I2C_GetState    0x08005ad3     0xa  Code  Gb  i2c.o [1]
+RoadBrd_I2C_Master_CmdReceive
+                        0x08005a07    0x60  Code  Gb  i2c.o [1]
+RoadBrd_I2C_Master_Receive
+                        0x08005a67    0x36  Code  Gb  i2c.o [1]
+RoadBrd_I2C_Master_Receive_IT
+                        0x08005a9d    0x2c  Code  Gb  i2c.o [1]
+RoadBrd_I2C_Master_Transmit
+                        0x080059d1    0x36  Code  Gb  i2c.o [1]
+RoadBrd_I2C_Master_Transmit_CMDData
+                        0x08005937    0x6e  Code  Gb  i2c.o [1]
+RoadBrd_I2C_Master_Transmit_CMDData_IT
+                        0x080058cf    0x68  Code  Gb  i2c.o [1]
+RoadBrd_I2C_Master_Transmit_IT
+                        0x080059a5    0x2c  Code  Gb  i2c.o [1]
+RoadBrd_Init_Barometer  0x0800273d    0x54  Code  Gb  barometer.o [1]
+RoadBrd_Init_VMonitor   0x080045d1    0xb6  Code  Gb  VMonitor.o [1]
+RoadBrd_LED_On          0x08005743    0x1c  Code  Gb  gpio.o [1]
+RoadBrd_LED_PIN         0x08011840    0x14  Data  Gb  gpio.o [1]
+RoadBrd_LED_PORT        0x20000014    0x24  Data  Gb  gpio.o [1]
+RoadBrd_LED_Toggle      0x0800575f    0x1a  Code  Gb  gpio.o [1]
+RoadBrd_ParseString     0x08000125  0x1cb8  Code  Gb  parser.o [1]
+RoadBrd_ProcessBGMChar  0x08007d63   0x1c4  Code  Gb  bgm111.o [1]
+RoadBrd_ProcessBGMChar::header_cnt
+                        0x200034ff     0x1  Data  Lc  bgm111.o [1]
+RoadBrd_ProcessBGMChar::payload_cnt
+                        0x20003500     0x1  Data  Lc  bgm111.o [1]
+RoadBrd_ProcessBGMChar::payload_len
+                        0x20003501     0x1  Data  Lc  bgm111.o [1]
+RoadBrd_RGBFullInit     0x08005315    0x54  Code  Gb  RGBLight.o [1]
+RoadBrd_RGBInit         0x080052c5    0x50  Code  Gb  RGBLight.o [1]
+RoadBrd_RGBReadID       0x080053ad    0x96  Code  Gb  RGBLight.o [1]
+RoadBrd_RGBReadStatus   0x08005443    0x96  Code  Gb  RGBLight.o [1]
+RoadBrd_RGBReadValues   0x080054d9   0x120  Code  Gb  RGBLight.o [1]
+RoadBrd_RGBReset        0x08005369    0x44  Code  Gb  RGBLight.o [1]
+RoadBrd_ReadTemp        0x08005159   0x16c  Code  Gb  Temperature.o [1]
+RoadBrd_SetBffrFlg      0x080024bb     0xa  Code  Gb  usart.o [1]
+RoadBrd_TestI2C         0x08005c0d    0x8a  Code  Gb  i2c.o [1]
+RoadBrd_TestandRead_Barometer
+                        0x080028e9    0x4c  Code  Gb  barometer.o [1]
+RoadBrd_UART_Receive_IT
+                        0x080024cb    0x7a  Code  Gb  usart.o [1]
+RoadBrd_UART_Transmit   0x0800239d    0x90  Code  Gb  usart.o [1]
+RoadBrd_UART_Transmit_IT
+                        0x0800242d    0x88  Code  Gb  usart.o [1]
+RoadBrd_Uart_GetState   0x0800255d    0x22  Code  Gb  usart.o [1]
+RoadBrd_Uart_Status     0x08002545    0x18  Code  Gb  usart.o [1]
+RoadBrd_VMonitor_RdCurrent
+                        0x08004773    0xec  Code  Gb  VMonitor.o [1]
+RoadBrd_VMonitor_RdPower
+                        0x0800485f    0xf4  Code  Gb  VMonitor.o [1]
+RoadBrd_VMonitor_RdShntVltg
+                        0x08004687    0xec  Code  Gb  VMonitor.o [1]
+RoadBrd_VMonitor_RdVoltage
+                        0x08004959    0xf2  Code  Gb  VMonitor.o [1]
+RoadBrd_WaitForState    0x08005add    0x3a  Code  Gb  i2c.o [1]
+RoadBrd_gpio_Off        0x08005795    0x1c  Code  Gb  gpio.o [1]
+RoadBrd_gpio_On         0x08005779    0x1c  Code  Gb  gpio.o [1]
+SVC_Handler             0x080102af          Code  Gb  portasm.o [1]
+SendApp_String          0x08003415    0x5e  Code  Gb  app_data.o [1]
+SetDataReady            0x08002957     0xa  Code  Gb  app_data.o [1]
+Set_DriverStates        0x080035a9    0x50  Code  Gb  app_data.o [1]
+Set_HeartBeat           0x080036f1     0x8  Code  Gb  app_data.o [1]
+Sinewave                0x080103e8    0x80  Data  Gb  fix_fft.o [1]
+SnsrTickCnt             0x2000003c     0x4  Data  Lc  tim.o [1]
+SysTick_Config          0x08005e95    0x30  Code  Lc  stm32l1xx_hal_cortex.o [1]
+SysTick_Handler         0x08010331     0x8  Code  Gb  stm32l1xx_it.o [1]
+SystemClock_Config      0x080072eb    0xaa  Code  Gb  main.o [1]
+SystemCoreClock         0x20000038     0x4  Data  Gb  system_stm32l1xx.o [1]
+SystemInit              0x08010469    0x4c  Code  Gb  system_stm32l1xx.o [1]
+TIM2_IRQHandler         0x0801037f     0xa  Code  Gb  stm32l1xx_it.o [1]
+TIM3_IRQHandler         0x08010389     0xa  Code  Gb  stm32l1xx_it.o [1]
+TIM4_IRQHandler         0x0801034d     0xa  Code  Gb  stm32l1xx_it.o [1]
+TIM6_IRQHandler         0x08002961     0xa  Code  Gb  app_data.o [1]
+TIM_Base_SetConfig      0x0800e2ab    0x70  Code  Lc  stm32l1xx_hal_tim.o [1]
+TIM_ETR_SetConfig       0x0800e3af    0x1c  Code  Lc  stm32l1xx_hal_tim.o [1]
+TIM_ITRx_SetConfig      0x0800e397    0x18  Code  Lc  stm32l1xx_hal_tim.o [1]
+TIM_TI1_ConfigInputStage
+                        0x0800e335    0x30  Code  Lc  stm32l1xx_hal_tim.o [1]
+TIM_TI2_ConfigInputStage
+                        0x0800e365    0x32  Code  Lc  stm32l1xx_hal_tim.o [1]
+Test_Connection         0x08003473    0xee  Code  Gb  app_data.o [1]
+Test_Timer2             0x0800d149    0x10  Code  Gb  tim.o [1]
+Timr2Ready              0x20003502     0x1  Data  Gb  tim.o [1]
+Timr3Ready              0x20003503     0x1  Data  Gb  tim.o [1]
+TmpData                 0x20002710   0x248  Data  Gb  app_data.o [1]
+Tst_HeartBeat           0x080036eb     0x6  Code  Gb  app_data.o [1]
+UART_EndTransmit_IT     0x08006b4b    0x32  Code  Lc  stm32l1xx_hal_uart.o [1]
+UART_Receive_IT         0x08006b7d    0xc8  Code  Lc  stm32l1xx_hal_uart.o [1]
+UART_SetConfig          0x08006c45   0x2fe  Code  Lc  stm32l1xx_hal_uart.o [1]
+UART_Transmit_IT        0x08006acf    0x7c  Code  Lc  stm32l1xx_hal_uart.o [1]
+UART_WaitOnFlagUntilTimeout
+                        0x080069e5    0xea  Code  Lc  stm32l1xx_hal_uart.o [1]
+USART2_IRQHandler       0x08010361     0xa  Code  Gb  stm32l1xx_it.o [1]
+USART3_IRQHandler       0x08010357     0xa  Code  Gb  stm32l1xx_it.o [1]
+USART_ReceiveData       0x08007d59     0xa  Code  Gb  bgm111.o [1]
+USART_SendData          0x08007d4d     0xc  Code  Gb  bgm111.o [1]
+USBD_ClrClassConfig     0x0800f70b    0x18  Code  Gb  usbd_core.o [1]
+USBD_ClrFeature         0x0800ff2f    0x3a  Code  Lc  usbd_ctlreq.o [1]
+USBD_CtlContinueRx      0x0800ffeb    0x1a  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlContinueSendData
+                        0x0800ffd1    0x1a  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlError           0x0800ff91    0x18  Code  Gb  usbd_ctlreq.o [1]
+USBD_CtlReceiveStatus   0x0801001f    0x1a  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlSendData        0x0800ffa9    0x28  Code  Gb  usbd_ioreq.o [1]
+USBD_CtlSendStatus      0x08010005    0x1a  Code  Gb  usbd_ioreq.o [1]
+USBD_GetConfig          0x0800fe81    0x4c  Code  Lc  usbd_ctlreq.o [1]
+USBD_GetDescriptor      0x0800fbdd   0x164  Code  Lc  usbd_ctlreq.o [1]
+USBD_GetStatus          0x0800fecd    0x3c  Code  Lc  usbd_ctlreq.o [1]
+USBD_LL_ClearStallEP    0x0800f639    0x16  Code  Gb  usbd_conf.o [1]
+USBD_LL_DataInStage     0x0800f82b    0xe2  Code  Gb  usbd_core.o [1]
+USBD_LL_DataOutStage    0x0800f79b    0x90  Code  Gb  usbd_core.o [1]
+USBD_LL_IsStallEP       0x0800f64f    0x30  Code  Gb  usbd_conf.o [1]
+USBD_LL_OpenEP          0x0800f601    0x22  Code  Gb  usbd_conf.o [1]
+USBD_LL_PrepareReceive  0x0800f6b5    0x20  Code  Gb  usbd_conf.o [1]
+USBD_LL_Reset           0x0800f90d    0x46  Code  Gb  usbd_core.o [1]
+USBD_LL_Resume          0x0800f96f     0xe  Code  Gb  usbd_core.o [1]
+USBD_LL_SOF             0x0800f97d    0x24  Code  Gb  usbd_core.o [1]
+USBD_LL_SetSpeed        0x0800f953     0x8  Code  Gb  usbd_core.o [1]
+USBD_LL_SetUSBAddress   0x0800f67f    0x16  Code  Gb  usbd_conf.o [1]
+USBD_LL_SetupStage      0x0800f723    0x78  Code  Gb  usbd_core.o [1]
+USBD_LL_StallEP         0x0800f623    0x16  Code  Gb  usbd_conf.o [1]
+USBD_LL_Suspend         0x0800f95b    0x14  Code  Gb  usbd_core.o [1]
+USBD_LL_Transmit        0x0800f695    0x20  Code  Gb  usbd_conf.o [1]
+USBD_ParseSetupRequest  0x0800ff69    0x28  Code  Gb  usbd_ctlreq.o [1]
+USBD_RunTestMode        0x0800f6d9     0x6  Code  Gb  usbd_core.o [1]
+USBD_SetAddress         0x0800fd41    0x60  Code  Lc  usbd_ctlreq.o [1]
+USBD_SetClassConfig     0x0800f6df    0x2c  Code  Gb  usbd_core.o [1]
+USBD_SetConfig          0x0800fda1    0xda  Code  Lc  usbd_ctlreq.o [1]
+USBD_SetConfig::cfgidx  0x20003507     0x1  Data  Lc  usbd_ctlreq.o [1]
+USBD_SetFeature         0x0800ff09    0x26  Code  Lc  usbd_ctlreq.o [1]
+USBD_StdDevReq          0x0800f9a1    0x7c  Code  Gb  usbd_ctlreq.o [1]
+USBD_StdEPReq           0x0800fa69   0x174  Code  Gb  usbd_ctlreq.o [1]
+USBD_StdItfReq          0x0800fa1d    0x4c  Code  Gb  usbd_ctlreq.o [1]
+USB_LP_IRQHandler       0x08010343     0xa  Code  Gb  stm32l1xx_it.o [1]
+Uart2Ready              0x20003504     0x1  Data  Gb  usart.o [1]
+Uart3Ready              0x20003505     0x1  Data  Gb  usart.o [1]
+_EncodingSb_Mbtowc      0x0800e457    0x30  Code  Gb  xencoding_sb.o [3]
+_EncodingSb_Mbtowc::initial
+                        0x0800e494     0x8  Data  Lc  xencoding_sb.o [3]
+_EncodingSb_Wctomb      0x0800e43d    0x1a  Code  Gb  xencoding_sb.o [3]
+_EncodingSb_Wctomb::initial
+                        0x0800e48c     0x8  Data  Lc  xencoding_sb.o [3]
+_GenldFull              0x08008ea9   0x254  Code  Lc  xprintffull.o [3]
+_IsdstStr               0x200000dc     0x4  Data  Gb  setlocale.o [3]
+_LdtobFull              0x08008a9d   0x406  Code  Lc  xprintffull.o [3]
+_LitobFull              0x08008993   0x10a  Code  Lc  xprintffull.o [3]
+_LocaleEncoding         0x0800e429     0xe  Code  Gb  setlocale.o [3]
+_LocaleReturnString     0x200000fc    0x50  Data  Lc  setlocale.o [3]
+_Locale_Profile         0x200000e0    0x1c  Data  Gb  setlocale.o [3]
+_Locale_aeabi_lconv     0x2000009c    0x38  Data  Gb  localeconv.o [3]
+_Locale_lconv           0x2000004c    0x50  Data  Gb  localeconv.o [3]
+_Mbtowc                 0x0800d41f    0x20  Code  Gb  xmbtowc.o [3]
+_PrintfFull             0x08007fa9   0x658  Code  Gb  xprintffull.o [3]
+_PutcharsFull           0x080090fd    0x2e  Code  Lc  xprintffull.o [3]
+_PutstrFull             0x08008687   0x306  Code  Lc  xprintffull.o [3]
+_SProut                 0x08001f7b     0xa  Code  Gb  xsprout.o [3]
+_TzoneStr               0x200000d8     0x4  Data  Gb  setlocale.o [3]
+_Wctomb                 0x0800d56d    0x1a  Code  Gb  xwctomb.o [3]
+__aeabi_cdcmple         0x0800d73d          Code  Gb  DblCmpLe.o [4]
+__aeabi_cdrcmple        0x0800d76d          Code  Gb  DblCmpGe.o [4]
+__aeabi_cfrcmple        0x080099c5          Code  Gb  FltCmpGe.o [4]
+__aeabi_d2f             0x08006591          Code  Gb  DblToFlt.o [4]
+__aeabi_d2iz            0x08009585          Code  Gb  DblToI32.o [4]
+__aeabi_d2uiz           0x080095b1          Code  Gb  DblToI32.o [4]
+__aeabi_dadd            0x0800976d          Code  Gb  DblAdd.o [4]
+__aeabi_ddiv            0x0800da29          Code  Gb  DblDiv.o [4]
+__aeabi_dmul            0x080093e1          Code  Gb  DblMul.o [4]
+__aeabi_dsub            0x0800d8a9          Code  Gb  DblSub.o [4]
+__aeabi_errno_addr      0x0800dfd5     0x6  Code  Gb  errno.o [3]
+__aeabi_f2d             0x08009391          Code  Gb  FltToDbl.o [4]
+__aeabi_f2iz            0x08006621          Code  Gb  FltToS32.o [4]
+__aeabi_fadd            0x08009ae5          Code  Gb  FltAdd.o [4]
+__aeabi_fdiv            0x080099e9          Code  Gb  FltDiv.o [4]
+__aeabi_fmul            0x08009695          Code  Gb  FltMul.o [4]
+__aeabi_i2d             0x08006471          Code  Gb  I32ToDbl.o [4]
+__aeabi_i2f             0x0800994d          Code  Gb  I32ToFlt.o [4]
+__aeabi_ldiv0           0x0800e4c9          Code  Gb  I64DivZer.o [5]
+__aeabi_ui2d            0x08006485          Code  Gb  I32ToDbl.o [4]
+__aeabi_ui2f            0x08009961          Code  Gb  I32ToFlt.o [4]
+__aeabi_uldivmod        0x0800d609          Code  Gb  I64DivMod.o [5]
+__cmain                 0x080116b5          Code  Gb  cmain.o [5]
+__data_Aldata           0x2000349c     0x8  Data  Gb  xxmemxmalloc.o [3]
+__data_GetMemChunk      0x0800e49d    0x2c  Code  Gb  xgetmemchunk.o [3]
+__data_GetMemChunk::start
+                        0x200034f4     0x4  Data  Lc  xgetmemchunk.o [3]
+__exit                  0x080116e5    0x14  Code  Gb  exit.o [6]
+__iar_Dint              0x0800de83    0x7a  Code  Gb  xdint.o [4]
+__iar_Dnorm             0x0800d6f7    0x44  Code  Gb  xdnorm.o [4]
+__iar_Dscale            0x0800d79d   0x10c  Code  Gb  xdscale.o [4]
+__iar_Errno             0x200000d4     0x4  Data  Gb  errno.o [3]
+__iar_Locale_lconv_init
+                        0x0800dc81    0x3a  Code  Gb  localeconv.o [3]
+__iar_Mbcurmax          0x0800d4b1     0xa  Code  Gb  xmbcurmax.o [3]
+__iar_Memchr            0x0800d459          Code  Gb  memchr.o [5]
+__iar_Memset_word       0x0800de25          Code  Gb  ABImemset.o [5]
+__iar_Strchr            0x0800d441          Code  Gb  strchr.o [5]
+__iar_d2uiz             0x080095bd          Code  Gb  DblToI32.o [4]
+__iar_dadd              0x08009781          Code  Gb  DblAdd.o [4]
+__iar_data_init3        0x0801135d    0x28  Code  Gb  data_init.o [5]
+__iar_dlib_perthread_access
+                        0x0800e4cb     0x2  Code  Gb  xtls.o [3]
+__iar_dsub              0x0800d8bd          Code  Gb  DblSub.o [4]
+__iar_dsubStart         0x0800d8cf          Code  Gb  DblSub.o [4]
+__iar_edom              0x0800c2c9          Code  Gb  iarEdom.o [5]
+__iar_fadd              0x08009af5          Code  Gb  FltAdd.o [4]
+__iar_fsub              0x0800defd          Code  Gb  FltSub.o [4]
+__iar_fsubStart         0x0800df0d          Code  Gb  FltSub.o [4]
+__iar_modf              0x080095ed          Code  Gb  modf.o [4]
+__iar_modfl             0x080095ed          Code  Gb  modf.o [4]
+__iar_packbits_init_single3
+                        0x08010a7d    0x38  Code  Gb  packbits_init_single.o [5]
+__iar_program_start     0x08011a51          Code  Gb  cstartup_M.o [5]
+__iar_sqrt              0x080064a1          Code  Gb  sqrt.o [4]
+__iar_ui2d              0x08006489          Code  Gb  I32ToDbl.o [4]
+__iar_ui2f              0x08009965          Code  Gb  I32ToFlt.o [4]
+__iar_unaligned___aeabi_memcpy
+                        0x0800d3a9          Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned___aeabi_memcpy4
+                        0x0800d3c9          Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned___aeabi_memcpy8
+                        0x0800d3c9          Code  Gb  ABImemcpy_unaligned.o [5]
+__iar_unaligned_strcmp  0x08009855          Code  Gb  strcmp_unaligned.o [5]
+__iar_unaligned_strcpy  0x080021ed          Code  Gb  strcpy_unaligned.o [5]
+__iar_unaligned_strncpy
+                        0x080098e1          Code  Gb  strncpy_unaligned.o [5]
+__iar_zero_init3        0x0801086d    0x40  Code  Gb  zero_init3.o [5]
+__low_level_init        0x080116cf     0x4  Code  Gb  low_level_init.o [3]
+__vector_table          0x08000000          Data  Gb  startup_stm32l152xe.o [1]
+_call_main              0x080116c1          Code  Gb  cmain.o [5]
+_exit                   0x080116d9          Code  Gb  cexit.o [5]
+_gecko_cmd_msg          0x20002fe8    0x84  Data  Gb  bgm111.o [1]
+_gecko_rsp_msg          0x2000306c    0x84  Data  Gb  bgm111.o [1]
+_main                   0x080116cb          Code  Gb  cmain.o [5]
+aPLLDivisionFactorTable
+                        0x08011bd4     0x4  Data  Gb  stm32l1xx_hal_rcc.o [1]
+aPLLMULFactorTable      0x08011a44     0xc  Data  Gb  stm32l1xx_hal_rcc.o [1]
+adcActive               0x200034fd     0x1  Data  Gb  adc.o [1]
+analytics               0x200034a4     0x4  Data  Lc  app_data.o [1]
+bffr1Flag               0x20003506     0x1  Data  Lc  usart.o [1]
+bglib_input             0x200034ac     0x4  Data  Gb  bgm111.o [1]
+bglib_output            0x200034a8     0x4  Data  Gb  bgm111.o [1]
+bglib_peek              0x200034b0     0x4  Data  Gb  bgm111.o [1]
+bgm1data                0x20003460    0x28  Data  Lc  usart.o [1]
+ble                     0x20002dc0   0x19c  Data  Lc  bgm111.o [1]
+blemsgs                 0x200020c8   0x324  Data  Lc  bgm111.o [1]
+clrUsartState           0x0800259f    0x1c  Code  Gb  usart.o [1]
+connection_cnt          0x200034f8     0x2  Data  Lc  app_data.o [1]
+data                    0x20002958   0x248  Data  Gb  app_data.o [1]
+div                     0x0800dced     0xe  Code  Gb  div.o [3]
+driver_list             0x20003494     0x8  Data  Lc  app_data.o [1]
+errStruct               0x200023ec   0x324  Data  Lc  ErrorCodes.o [1]
+exit                    0x080116d3     0x4  Code  Gb  exit.o [3]
+fi                      0x20003170    0x80  Data  Lc  Rd_Sound.o [1]
+fix_fft                 0x08006231   0x23a  Code  Gb  fix_fft.o [1]
+fr                      0x200030f0    0x80  Data  Lc  Rd_Sound.o [1]
+free                    0x0800d589    0x7a  Code  Gb  xxmemxfree.o [3]
+fs                      0x200031f0    0x80  Data  Lc  Rd_Sound.o [1]
+gecko_cmd_gatt_server_send_characteristic_notification
+                        0x08007811    0x6e  Code  Lc  bgm111.o [1]
+gecko_cmd_gatt_server_write_attribute_value
+                        0x080077a5    0x6c  Code  Lc  bgm111.o [1]
+gecko_cmd_le_gap_set_mode
+                        0x08007765    0x40  Code  Lc  bgm111.o [1]
+gecko_cmd_msg           0x2000000c     0x4  Data  Gb  bgm111.o [1]
+gecko_get_event         0x0800d2d9    0x5e  Code  Gb  gecko_bglib.o [1]
+gecko_handle_command    0x0800d357    0x30  Code  Gb  gecko_bglib.o [1]
+gecko_peek_event        0x0800d337     0xa  Code  Gb  gecko_bglib.o [1]
+gecko_queue             0x20001150   0xf78  Data  Gb  bgm111.o [1]
+gecko_queue_r           0x200034b8     0x4  Data  Gb  bgm111.o [1]
+gecko_queue_w           0x200034b4     0x4  Data  Gb  bgm111.o [1]
+gecko_rsp_msg           0x20000010     0x4  Data  Gb  bgm111.o [1]
+gecko_wait_message      0x0800d1fd    0xdc  Code  Gb  gecko_bglib.o [1]
+gecko_wait_response     0x0800d341    0x16  Code  Gb  gecko_bglib.o [1]
+hadc                    0x20003270    0x54  Data  Gb  adc.o [1]
+hatoi                   0x08001f23    0x58  Code  Gb  parser.o [1]
+hdma_adc                0x20003380    0x38  Data  Gb  adc.o [1]
+hi2c1                   0x20003344    0x3c  Data  Gb  i2c.o [1]
+hpcd_USB_FS             0x20002ba0   0x220  Data  Gb  usbd_conf.o [1]
+htim2                   0x200033f0    0x38  Data  Gb  tim.o [1]
+htim3                   0x20003428    0x38  Data  Gb  tim.o [1]
+htim4                   0x200033b8    0x38  Data  Gb  stm32l1xx_hal_timebase_TIM.o [1]
+huart2                  0x200032c4    0x40  Data  Gb  usart.o [1]
+huart3                  0x20003304    0x40  Data  Gb  usart.o [1]
+isHexNum                0x08001ed9    0x4a  Code  Gb  parser.o [1]
+ledOffCnt               0x20000044     0x4  Data  Lc  tim.o [1]
+localeconv              0x0800dcbb    0x16  Code  Gb  localeconv.o [3]
+main                    0x08006f4d   0x39e  Code  Gb  main.o [1]
+malloc                  0x0800d4bd    0xac  Code  Gb  xxmemxmalloc.o [3]
+memchr                  0x0800d459          Code  Gb  memchr.o [5]
+modf                    0x080095dd          Code  Gb  modf.o [4]
+modfl                   0x080095dd          Code  Gb  modf.o [4]
+osSystickHandler        0x080103b5    0x10  Code  Gb  cmsis_os.o [1]
+prvResetNextTaskUnblockTime
+                        0x080101ed    0x28  Code  Lc  tasks.o [1]
+pxCurrentTCB            0x200034c0     0x4  Data  Gb  tasks.o [1]
+pxDelayedTaskList       0x200034c4     0x4  Data  Lc  tasks.o [1]
+pxOverflowDelayedTaskList
+                        0x200034c8     0x4  Data  Lc  tasks.o [1]
+pxReadyTasksLists       0x20002f5c    0x8c  Data  Lc  tasks.o [1]
+round                   0x08009981    0x44  Code  Gb  round.o [4]
+sConfig                 0x20003488     0xc  Data  Gb  adc.o [1]
+saveLen                 0x20000048     0x4  Data  Lc  usart.o [1]
+sprintf                 0x080026ed    0x34  Code  Gb  sprintf.o [3]
+sqrt                    0x080064a1          Code  Gb  sqrt.o [4]
+sqrtl                   0x080064a1          Code  Gb  sqrt.o [4]
+strcat                  0x08002721    0x1c  Code  Gb  strcat.o [3]
+strchr                  0x0800d441          Code  Gb  strchr.o [5]
+strlen                  0x08001f85          Code  Gb  strlen.o [5]
+ubSequenceCompleted     0x200034fc     0x1  Data  Gb  adc.o [1]
+ulPortSetInterruptMask  0x0801029b          Code  Gb  portasm.o [1]
+uwTick                  0x200034bc     0x4  Data  Lc  stm32l1xx_hal.o [1]
+uxListRemove            0x08010309    0x28  Code  Gb  list.o [1]
+uxPendedTicks           0x200034d8     0x4  Data  Lc  tasks.o [1]
+uxSchedulerSuspended    0x200034e8     0x4  Data  Lc  tasks.o [1]
+uxTopReadyPriority      0x200034d0     0x4  Data  Lc  tasks.o [1]
+vListInsertEnd          0x080102f1    0x18  Code  Gb  list.o [1]
+vPortClearInterruptMask
+                        0x080102a9          Code  Gb  portasm.o [1]
+vPortStartFirstTask     0x080102cf          Code  Gb  portasm.o [1]
+vTaskSwitchContext      0x0801016d    0x6c  Code  Gb  tasks.o [1]
+xNextTaskUnblockTime    0x200034e4     0x4  Data  Lc  tasks.o [1]
+xNumOfOverflows         0x200034e0     0x4  Data  Lc  tasks.o [1]
+xPortSysTickHandler     0x080103c5    0x1e  Code  Gb  port.o [1]
+xSchedulerRunning       0x200034d4     0x4  Data  Lc  tasks.o [1]
+xTaskGetSchedulerState  0x08010215    0x26  Code  Gb  tasks.o [1]
+xTaskIncrementTick      0x08010039   0x134  Code  Gb  tasks.o [1]
+xTickCount              0x200034cc     0x4  Data  Lc  tasks.o [1]
+xYieldPending           0x200034dc     0x4  Data  Lc  tasks.o [1]
+
+
+[1] = D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\Road Brd MSTR Rev L Long Always\Obj
+[2] = command line
+[3] = dl7M_tlf.a
+[4] = m7M_tl.a
+[5] = rt7M_tl.a
+[6] = shb_l.a
+
+  67 096 bytes of readonly  code memory
+   5 856 bytes of readonly  data memory
+  13 572 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
