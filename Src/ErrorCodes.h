@@ -62,6 +62,7 @@ typedef enum
   ERROR_I2C_SDAT        = 0x000C,               // I2C Bus Test Failed. SDAT held low.
   ERROR_BGM_CNNCT       = 0x000D,               // BGM111 processing code has detected a Connection Dropped Event.
   ERROR_BGM_HRTBT       = 0x000E,               // BGM111 processing code has detected a Heart Beat Timeout Event.
+  ERROR_TXBGMBUF_FULL   = 0x000F,               // BGM111 processing code has detected a Transmit Buffer Full error on traffic to BGM111.
 
   ERROR_MISC            = 0xffff,       	// End Of Error Code List
 }ErrorCodes;

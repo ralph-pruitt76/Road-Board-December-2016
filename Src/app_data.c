@@ -832,6 +832,9 @@ void Process_RdSound( void )
   sprintf( (char *)tempBffr2, " \r\n<TICK:%08x/%04x/%04x> ", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
   SendApp_String( tempBffr2 );
+  // ALSO Last....Report Perioic Status of Voltage/Current/Power
+  sprintf( (char *)tempBffr2, " <%s/%s/%s> ", data.Voltage.Voltage, data.Current.Current, data.Power.Power);
+  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
 }
 
 
