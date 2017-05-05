@@ -374,6 +374,7 @@ void BGM111_UART_IRQHandler(UART_HandleTypeDef *huart)
 void BGM111_Transmit(uint32_t len, uint8_t *data)
 {
   uint32_t tempmsg;
+  uint32_t timeout_Cnt;
   
   // Log MSG into buffer
   tempmsg = 0xff000000 | len;
@@ -387,6 +388,9 @@ void BGM111_Transmit(uint32_t len, uint8_t *data)
   blemsgs.tx_wr = NextBufIdx(blemsgs.tx_wr);
   
   /* Add bytes when there is space, wait if necessary */
+  // OK...But we Can't wait forever...Will place a timeout Count.
+  timeout_Cnt = TX_TIMEOUT_CNT;
+  
   while (len) {
     /* Get the next write index */
     uint8_t nextidx = NextBufIdx(ble.tx_wr);
@@ -411,6 +415,21 @@ void BGM111_Transmit(uint32_t len, uint8_t *data)
       /* Update the incoming data length and pointer */
       len--;
       data++;
+      //Found Space...Reset Count.
+      timeout_Cnt = TX_TIMEOUT_CNT;
+    }
+    else
+    {
+      //Decrement Count
+      if ( timeout_Cnt-- == 0)
+      {
+        // If this happens...NOT BOOTED..Clear ths flag or infinite loop.
+        ble.booted = false;
+        // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
+        RdBrd_ErrCdLogErrCd( ERROR_TXBGMBUF_FULL, MODULE_bgm111 );
+        RdBrd_BlinkErrCd( ERROR_TXBGMBUF_FULL );
+        HAL_NVIC_SystemReset();
+      }
     }
   }
 }

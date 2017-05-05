@@ -42,7 +42,7 @@
 #define BGM111_RESET_PIN                 GPIO_Pin_15
 #define BGM111_RESET_GPIO_CLK            RCC_AHBPeriph_GPIOB
 
-
+#define TX_TIMEOUT_CNT                   2000           // Loop 2000 Times for Timeout
 /* Initialize the BGM111 module and BGLib */
 void BGM111_Init(void);
 

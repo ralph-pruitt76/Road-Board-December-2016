@@ -832,6 +832,9 @@ void Process_RdSound( void )
   sprintf( (char *)tempBffr2, " \r\n<TICK:%08x/%04x/%04x> ", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
   SendApp_String( tempBffr2 );
+  // ALSO Last....Report Perioic Status of Voltage/Current/Power
+  sprintf( (char *)tempBffr2, " <%s/%s/%s> ", data.Voltage.Voltage, data.Current.Current, data.Power.Power);
+  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
 }
 
 
@@ -872,11 +875,22 @@ void Test_Connection( void )
 {
   uint8_t tempBffr2[40];
   
+  // Test HAL Count
+  if (HAL_GetTick() >= HAL_TIMEOUT_CNT)
+  {
+    // Has been 90 Seconds....Time to reset Code.
+    RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
+    Clr_HrtBeat_Cnt();
+    RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
+    //RoadBrd_Delay( 1000 );
+    HAL_NVIC_SystemReset();
+  }
+  
   // Test Connection
   if ( BGM111_Connected() )
   {
     // Yes...Clear count
-    connection_cnt = 0;
+   connection_cnt = 0;
     // Test Heart Beat. Has it been cleared?
     if (Tst_HeartBeat())
     {
@@ -898,8 +912,8 @@ void Test_Connection( void )
         HeartBeat_Cnt = 0;
         Clr_HrtBeat_Cnt();
         //RoadBrd_Delay( 1000 );
-        RdBrd_BlinkErrCd( ERROR_BGM_HRTBT );
-        HAL_NVIC_SystemReset();
+//        RdBrd_BlinkErrCd( ERROR_BGM_HRTBT );
+//        HAL_NVIC_SystemReset();
       }
     } // EndIf (Tst_HeartBeat())
     else
@@ -925,9 +939,9 @@ void Test_Connection( void )
       // Has been 90 Seconds....Time to reset Code.
       RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
       Clr_HrtBeat_Cnt();
-      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
+//      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
       //RoadBrd_Delay( 1000 );
-      HAL_NVIC_SystemReset();
+//      HAL_NVIC_SystemReset();
     }
   } // EndElse ( BGM111_Connected() )
 }
