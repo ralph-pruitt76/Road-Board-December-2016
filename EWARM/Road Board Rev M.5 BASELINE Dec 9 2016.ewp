@@ -12665,14 +12665,14 @@
     <group>
       <name>EWARM</name>
       <file>
+        <name>$PROJ_DIR$\..\Src\adc.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s</name>
       </file>
     </group>
     <group>
       <name>User</name>
-      <file>
-        <name>$PROJ_DIR$\..\Src\adc.c</name>
-      </file>
       <file>
         <name>$PROJ_DIR$\..\Src\app_data.c</name>
         <excluded>

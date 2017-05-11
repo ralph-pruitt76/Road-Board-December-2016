@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "ErrorCodes.h"
+#include "wwdg.h"
 
 /* Characteristic handles */
 #ifdef LEGACY_PATCH
@@ -318,6 +319,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       return Status;
 //************************NEW STYLE TASKING ENDS HERE************************
 #endif
+    // Service Watchdog
+    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
     //************ NOW Compare the data strings and determine if characteristics need to be sent.
     //..ShntVltg
 #ifndef LEGACY_PATCH

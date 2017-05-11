@@ -156,6 +156,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx_hal.h"
+#include "wwdg.h"
 
 /** @addtogroup STM32L1xx_HAL_Driver
   * @{
@@ -1671,6 +1672,8 @@ static HAL_StatusTypeDef UART_WaitOnFlagUntilTimeout(UART_HandleTypeDef *huart, 
   {
     while(__HAL_UART_GET_FLAG(huart, Flag) == RESET)
     {
+      // Need to Service Watch Dog or we die here....
+      //RoadBrd_WWDG_Refresh();     // Refresh WatchDog
       /* Check for the Timeout */
       if(Timeout != HAL_MAX_DELAY)
       {

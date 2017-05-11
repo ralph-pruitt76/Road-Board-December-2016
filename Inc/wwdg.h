@@ -53,9 +53,13 @@ extern WWDG_HandleTypeDef hwwdg;
      when the counter is below 80 (and greater than 64/0x40) otherwise a reset will 
      be generated. 
      WWDG Counter value = 100, WWDG timeout = ~1024 us * 64 = 65.57 ms */
-#define ROADBRD_TIMEOUT 64            // Set at 65.57 ms
-                                         // Min_Data = 0x40 and Max_Data = 0x7F
-#define ROADBRD_LOWLMIT 64            // Set at 65.57 ms
+#define ROADBRD_TIMEOUT 127             // Set at 130.048 ms
+                                        // Min_Data = 0x40 and Max_Data = 0x7F
+                                        // This means the valid window is less than 80 and
+                                        // greater than 64...OR
+                                        // 65.536ms < WINDOW < 102.4ms
+#define ROADBRD_HIGHLMIT 100             // Set at 102.4 ms
+#define ROADBRD_LOWLMIT  64              // Set at 65.5 ms
                                          // Max_Data = 0x80 */
 
 /* USER CODE END Private defines */
@@ -67,6 +71,7 @@ void MX_WWDG_Init(void);
 /* USER CODE BEGIN Prototypes */
 HAL_StatusTypeDef RoadBrd_WWDG_Start( void );
 HAL_StatusTypeDef RoadBrd_WWDG_Refresh( void );
+uint32_t RoadBrd_WWDG_GetRefreshCnt( void );
 
 /* USER CODE END Prototypes */
 

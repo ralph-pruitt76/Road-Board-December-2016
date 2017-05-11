@@ -34,12 +34,27 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "wwdg.h"
+#include "gpio.h"
+#include "stdbool.h"
+#include "usart.h"
 
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
 
 WWDG_HandleTypeDef hwwdg;
+
+// wwdg Save Frame
+struct
+{
+  bool  event;
+} static wwdg_Save;
+
+// wwdg Save Frame
+struct
+{
+  bool  event;
+} wwdg_Save2  @ 0x08070000;
 
 /* WWDG init function */
 void MX_WWDG_Init(void)
@@ -53,15 +68,15 @@ void MX_WWDG_Init(void)
      WWDG Counter value = 127, WWDG timeout = ~1024 us * 64 = 65.57 ms */
   hwwdg.Instance = WWDG;
   hwwdg.Init.Prescaler = WWDG_PRESCALER_8;
-  hwwdg.Init.Window = ROADBRD_LOWLMIT;             // Set lower end of 10 Seconds. 
+  hwwdg.Init.Window = ROADBRD_HIGHLMIT;               // Set High end of 102.4 ms. 
                                                       // Max_Data = 0x80
-  hwwdg.Init.Counter = ROADBRD_TIMEOUT;            // Set Upper end at 10 Seconds.
-                                                      // Min_Data = 0x40 and Max_Data = 0x7F 
+  hwwdg.Init.Counter = ROADBRD_TIMEOUT;               // Set Timer at 130.048 ms.
   if (HAL_WWDG_Init(&hwwdg) != HAL_OK)
   {
     Error_Handler();
   }
-
+  // Clear Save Frame.
+  wwdg_Save.event = false;
 }
 
 void HAL_WWDG_MspInit(WWDG_HandleTypeDef* wwdgHandle)
@@ -105,7 +120,8 @@ void HAL_WWDG_MspDeInit(WWDG_HandleTypeDef* wwdgHandle)
   */
 HAL_StatusTypeDef RoadBrd_WWDG_Start( void )
 {
-  return HAL_WWDG_Start(&hwwdg);
+  //return HAL_WWDG_Start(&hwwdg);
+  return HAL_WWDG_Start_IT(&hwwdg);
 }
 
 /**
@@ -116,10 +132,61 @@ HAL_StatusTypeDef RoadBrd_WWDG_Start( void )
   */
 HAL_StatusTypeDef RoadBrd_WWDG_Refresh( void )
 {
-  return HAL_WWDG_Refresh(&hwwdg, ROADBRD_TIMEOUT);
+  uint32_t rfrsh_cnt;
+  
+  // Let's Only Refresh in Window...
+  rfrsh_cnt = RoadBrd_WWDG_GetRefreshCnt();
+  if ( rfrsh_cnt < ROADBRD_HIGHLMIT)
+    return HAL_WWDG_Refresh(&hwwdg, ROADBRD_TIMEOUT);
+  else
+    return HAL_OK;
 }
 
+/**
+  * @brief  Refresh WWDG Timer
+  * @param  none
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
+  *                                HAL_ERROR:    Error Log full or Bad Code
+  */
+uint32_t RoadBrd_WWDG_GetRefreshCnt( void )
+{
+  // Return the 7-Bit Counter Value.
+  return(READ_REG(hwwdg.Instance->CR) & 0x7f);                 // hwwdg->Instance->CR
+}
+
+    
+void HAL_WWDG_WakeupCallback(WWDG_HandleTypeDef* hwwdg)
+{
+  //uint8_t tempBffr2[20];
+
+  static bool OnceFlg = false;
+  
+  if ( OnceFlg )
+  {
+    wwdg_Save.event = true;   // We have had a wwdg Event...Mark that it did occur.
+//    if (wwdg_Save2.event)
+//      OnceFlg = false;
+  }
+  else
+  {
+    OnceFlg = true;
+  }
+}
+
+/**
+* @brief This function handles wwdt global interrupt.
+*/
+void WWDG_IRQHandler(void)
+{
+  HAL_WWDG_IRQHandler(&hwwdg);
+}
+
+bool RoadBrd_WWDG_TstEvent( void )
+{
+  return wwdg_Save.event;
+}
 /* USER CODE END 1 */
+
 
 /**
   * @}

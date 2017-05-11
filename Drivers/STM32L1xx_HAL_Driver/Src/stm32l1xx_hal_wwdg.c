@@ -404,7 +404,7 @@ __weak void HAL_WWDG_WakeupCallback(WWDG_HandleTypeDef* hwwdg)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(hwwdg);
-
+  
   /* NOTE: This function Should not be modified, when the callback is needed,
            the HAL_WWDG_WakeupCallback could be implemented in the user file
    */
