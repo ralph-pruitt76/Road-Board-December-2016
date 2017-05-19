@@ -15062,6 +15062,9 @@
         <name>$PROJ_DIR$\..\Src\fix_fft.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Src\Flash.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Src\freertos.c</name>
       </file>
       <file>

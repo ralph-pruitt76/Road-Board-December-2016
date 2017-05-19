@@ -40,6 +40,7 @@
 #include "usart.h"
 #include "usb_device.h"
 #include "wwdg.h"
+#include "Flash.h"
 
 /* USER CODE BEGIN Includes */
 #include "stm32l1xx_nucleo.h"
@@ -279,6 +280,32 @@ int main(void)
   // Initialize key app vars.
   InitSensors();
   
+  // Before we set WWDG, Setup Flash Frame Track Structure.
+  // Initializ Option Bits on Flash...
+//  if (RoadBrd_FlashInitOption( (uint32_t)0x00000000) != HAL_OK)
+//  {
+//    RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
+//    Set_DriverStates( FRAME_TASK, DRIVER_OFF );
+//  }
+//  else
+//  {
+    if (RoadBrd_WWDG_VerifyFrame())
+    {
+      Set_DriverStates( FRAME_TASK, DRIVER_ON );
+    }
+    else
+    {
+      if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
+      {
+        RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
+        Set_DriverStates( FRAME_TASK, DRIVER_OFF );
+      }
+      else
+      {
+        Set_DriverStates( FRAME_TASK, DRIVER_ON );
+      }
+    }
+//  }
   // Time to start WWDG..
   HAL_NVIC_EnableIRQ(WWDG_IRQn);
   MX_WWDG_Init();

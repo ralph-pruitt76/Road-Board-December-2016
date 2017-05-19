@@ -24,7 +24,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 -I
 D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev L BASELINE Sept 26 2016\Middlewares\Third_Party\BgLib
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\EWARM\..\Middlewares\Third_Party\BgLib
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\CMSIS\Include
 -I
@@ -54,7 +54,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 -I
 D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\Drivers\CMSIS\Device\ST\STM32L1xx\Include
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev L BASELINE Sept 26 2016\Middlewares\Third_Party\BgLib
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016\Middlewares\Third_Party\BgLib
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\CMSIS\Include
 -DUSE_HAL_DRIVER=1

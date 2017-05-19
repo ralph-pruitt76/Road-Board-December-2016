@@ -105,6 +105,7 @@ struct
   bool  GridEye;
   bool  CoolEye;
   bool  I2CState;
+  bool  FrameState;
 } static driver_list;
 
 // Analytics Structure
@@ -999,6 +1000,9 @@ void Set_DriverStates( task_defs Task, bool State )
   case I2C_STATE:
     driver_list.I2CState = State;
     break;
+  case FRAME_TASK:
+    driver_list.FrameState = State;
+    break;
   default:
     break;
   }
@@ -1037,6 +1041,9 @@ bool Get_DriverStates( task_defs Task )
   case I2C_STATE:
     return driver_list.I2CState;
     break;
+  case FRAME_TASK:
+    return driver_list.FrameState;
+    break;
   default:
     return DRIVER_OFF;
     break;
@@ -1068,6 +1075,8 @@ uint16_t Get_DriverStatus( void )
     Status += 0x0040;
   if ( Get_DriverStates( I2C_STATE ) )
     Status += 0x0080;
+  if ( Get_DriverStates( FRAME_TASK ) )
+    Status += 0x0100;
   return Status;
 }
 

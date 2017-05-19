@@ -1,4 +1,5 @@
 #include "gecko_bglib.h"
+#include "wwdg.h"
 
 struct gecko_cmd_packet* gecko_wait_message(void)
 {//wait for event from system
@@ -110,6 +111,8 @@ struct gecko_cmd_packet* gecko_wait_response(void)
     struct gecko_cmd_packet* p;
     while (1)
     {
+        // Need to Service Watch Dog or we die here....
+        RoadBrd_WWDG_Refresh();     // Refresh WatchDog
         p = gecko_wait_message();
         if (p&&!(p->header&gecko_msg_type_evt))
             return p;
