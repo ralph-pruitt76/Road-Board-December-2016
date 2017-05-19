@@ -40,6 +40,7 @@
 #include "usart.h"
 #include "usb_device.h"
 #include "wwdg.h"
+#include "Flash.h"
 
 /* USER CODE BEGIN Includes */
 #include "stm32l1xx_nucleo.h"
@@ -129,7 +130,6 @@ int main(void)
   ADC_Config();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
-//  MX_WWDG_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
 
@@ -280,8 +280,36 @@ int main(void)
   // Initialize key app vars.
   InitSensors();
   
+  // Before we set WWDG, Setup Flash Frame Track Structure.
+  // Initializ Option Bits on Flash...
+//  if (RoadBrd_FlashInitOption( (uint32_t)0x00000000) != HAL_OK)
+//  {
+//    RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
+//    Set_DriverStates( FRAME_TASK, DRIVER_OFF );
+//  }
+//  else
+//  {
+    if (RoadBrd_WWDG_VerifyFrame())
+    {
+      Set_DriverStates( FRAME_TASK, DRIVER_ON );
+    }
+    else
+    {
+      if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
+      {
+        RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
+        Set_DriverStates( FRAME_TASK, DRIVER_OFF );
+      }
+      else
+      {
+        Set_DriverStates( FRAME_TASK, DRIVER_ON );
+      }
+    }
+//  }
   // Time to start WWDG..
-//  RoadBrd_WWDG_Start();
+  HAL_NVIC_EnableIRQ(WWDG_IRQn);
+  MX_WWDG_Init();
+  RoadBrd_WWDG_Start();
 
 #endif
 #ifdef TASKING
@@ -315,11 +343,13 @@ int main(void)
           // Wait for msg to be completed.
           while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
           {
+            RoadBrd_WWDG_Refresh();     // Refresh WatchDog
           }
           // Clear State for Next Transfer.
           clrUsartState( NUCLEO_USART );
 #else
           Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+          RoadBrd_WWDG_Refresh();     // Refresh WatchDog
 #endif
           if (Status != HAL_OK)
             Error_Handler();
@@ -363,11 +393,13 @@ int main(void)
           // Wait for msg to be completed.
           while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
           {
+            RoadBrd_WWDG_Refresh();     // Refresh WatchDog
           }
           // Clear State for Next Transfer.
           clrUsartState( MONITOR_UART );
 #else
           Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+          RoadBrd_WWDG_Refresh();     // Refresh WatchDog
 #endif
           if (Status != HAL_OK)
             Error_Handler();
@@ -379,11 +411,13 @@ int main(void)
           // Wait for msg to be completed.
           while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
           {
+            RoadBrd_WWDG_Refresh();     // Refresh WatchDog
           }
           // Clear State for Next Transfer.
           clrUsartState( MONITOR_UART );
 #else
           Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+          RoadBrd_WWDG_Refresh();     // Refresh WatchDog
 #endif
           if (Status != HAL_OK)
             Error_Handler();
@@ -395,11 +429,13 @@ int main(void)
           // Wait for msg to be completed.
           while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
           {
+            RoadBrd_WWDG_Refresh();     // Refresh WatchDog
           }
           // Clear State for Next Transfer.
           clrUsartState( MONITOR_UART );
 #else
           Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+          RoadBrd_WWDG_Refresh();     // Refresh WatchDog
 #endif
           if (Status != HAL_OK)
             Error_Handler();
@@ -849,6 +885,8 @@ int main(void)
             // Turn Off BGM_LED and MICRO_LED.
             RoadBrd_gpio_Off( MICRO_LED );
           }
+          // Service Watchdog
+          RoadBrd_WWDG_Refresh();     // Refresh WatchDog
           // Wait for msg to be completed.
           while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
           {
@@ -868,6 +906,8 @@ int main(void)
             /* Process the sensor state machine if the BLE module is ready */
             if (BGM111_Ready())
             {
+              // Service Watchdog
+              RoadBrd_WWDG_Refresh();     // Refresh WatchDog
               ProcessSensorState();
             }
             // Test to see if we have any BGM Traffic to process.

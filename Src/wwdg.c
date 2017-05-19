@@ -34,12 +34,22 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "wwdg.h"
+#include "gpio.h"
+#include "usart.h"
+#include "Flash.h"
 
 /* USER CODE BEGIN 0 */
+// Frame Structure Define
+wwdg_Frames wwdg_HardFrames  @ 0x08070000;
+
+static wwdg_Frames Save_Frames;
 
 /* USER CODE END 0 */
 
 WWDG_HandleTypeDef hwwdg;
+
+// wwdg Save Frame
+static wwdg_SaveFrame wwdg_Save;
 
 /* WWDG init function */
 void MX_WWDG_Init(void)
@@ -53,15 +63,15 @@ void MX_WWDG_Init(void)
      WWDG Counter value = 127, WWDG timeout = ~1024 us * 64 = 65.57 ms */
   hwwdg.Instance = WWDG;
   hwwdg.Init.Prescaler = WWDG_PRESCALER_8;
-  hwwdg.Init.Window = ROADBRD_LOWLMIT;             // Set lower end of 10 Seconds. 
+  hwwdg.Init.Window = ROADBRD_HIGHLMIT;               // Set High end of 102.4 ms. 
                                                       // Max_Data = 0x80
-  hwwdg.Init.Counter = ROADBRD_TIMEOUT;            // Set Upper end at 10 Seconds.
-                                                      // Min_Data = 0x40 and Max_Data = 0x7F 
+  hwwdg.Init.Counter = ROADBRD_TIMEOUT;               // Set Timer at 130.048 ms.
   if (HAL_WWDG_Init(&hwwdg) != HAL_OK)
   {
     Error_Handler();
   }
-
+  // Clear Save Frame.
+  wwdg_Save.event = false;
 }
 
 void HAL_WWDG_MspInit(WWDG_HandleTypeDef* wwdgHandle)
@@ -105,7 +115,8 @@ void HAL_WWDG_MspDeInit(WWDG_HandleTypeDef* wwdgHandle)
   */
 HAL_StatusTypeDef RoadBrd_WWDG_Start( void )
 {
-  return HAL_WWDG_Start(&hwwdg);
+  //return HAL_WWDG_Start(&hwwdg);
+  return HAL_WWDG_Start_IT(&hwwdg);
 }
 
 /**
@@ -116,10 +127,210 @@ HAL_StatusTypeDef RoadBrd_WWDG_Start( void )
   */
 HAL_StatusTypeDef RoadBrd_WWDG_Refresh( void )
 {
-  return HAL_WWDG_Refresh(&hwwdg, ROADBRD_TIMEOUT);
+  uint32_t rfrsh_cnt;
+  
+  // Let's Only Refresh in Window...
+  rfrsh_cnt = RoadBrd_WWDG_GetRefreshCnt();
+  if ( rfrsh_cnt < ROADBRD_HIGHLMIT)
+    return HAL_WWDG_Refresh(&hwwdg, ROADBRD_TIMEOUT);
+  else
+    return HAL_OK;
+}
+
+/**
+  * @brief  Refresh WWDG Timer
+  * @param  none
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
+  *                                HAL_ERROR:    Error Log full or Bad Code
+  */
+uint32_t RoadBrd_WWDG_GetRefreshCnt( void )
+{
+  // Return the 7-Bit Counter Value.
+  return(READ_REG(hwwdg.Instance->CR) & 0x7f);                 // hwwdg->Instance->CR
+}
+
+    
+void HAL_WWDG_WakeupCallback(WWDG_HandleTypeDef* hwwdg)
+{
+  //uint8_t tempBffr2[20];
+
+  static bool OnceFlg = false;
+  
+  if ( OnceFlg )
+  {
+    wwdg_Save.event = true;   // We have had a wwdg Event...Mark that it did occur.
+//    if (wwdg_Save2.event)
+//      OnceFlg = false;
+  }
+  else
+  {
+    OnceFlg = true;
+  }
+}
+
+/**
+* @brief This function handles wwdt global interrupt.
+*/
+void WWDG_IRQHandler(void)
+{
+  HAL_WWDG_IRQHandler(&hwwdg);
+}
+
+bool RoadBrd_WWDG_TstEvent( void )
+{
+  return wwdg_Save.event;
+}
+
+  /**
+  * @brief  This function verifies the WWDG Flash Frame Structure.
+  * @param  none
+  * @retval bool:     true:       Valid Frames
+  *                   false:      Frame Bad.
+  */
+bool RoadBrd_WWDG_VerifyFrame( void )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  // Read Frame from Flash.
+  Status = RoadBrd_FlashRead(  (uint32_t)&wwdg_HardFrames, (uint32_t *)&Save_Frames, sizeof(Save_Frames));
+  // Compare SYnc Workd and return status.
+  if (Status != HAL_OK)
+    return false;
+  else
+  {
+    if (Save_Frames.checksum == FRAME_CHKSUM)
+      return true;
+    else
+      return false;
+  }
+}
+
+  /**
+  * @brief  This function initializes the key frame structures needed to track wwdg Frames.
+  * @param  none
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  // Initialize Key Structures of Frame
+  Save_Frames.checksum = FRAME_CHKSUM;
+  Save_Frames.Frame_RdPtr = 0;
+  Save_Frames.Frame_WrtPtr = 0;
+  
+  // Write Structure to Flash Memory.
+  //Status = RoadBrd_FlashInitWrite( 0x00, 
+  Status = RoadBrd_FlashWrite( 0x00, 
+                               FLASH_TYPEERASE_PAGES, 
+                               (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+  /**
+  * @brief  This function Reads the key frame Information from Flash..
+  * @param  none
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_ReadFrmFlash( void )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  // Read Structure from Flash Memory.
+  Status = RoadBrd_FlashRead(  (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+  /**
+  * @brief  This function writes the key frame Information to Flash..
+  * @param  none
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_WriteFrmFlash( void )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  // Write Structure to Flash Memory.
+  Status = RoadBrd_FlashWrite( 0x00, 
+                               FLASH_TYPEERASE_PAGES, 
+                               (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+/**
+  * @brief  This function attempts to write the passed Flash frame to the Flash Memory and Save it.
+  * @param  wwdg_SaveFrame* Write_Frame: WWDG Frame to be written to flash.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_WriteFlash( wwdg_SaveFrame* Write_Frame )
+{
+  // Is Frame Initialized?
+  if (!(RoadBrd_WWDG_VerifyFrame()))
+    if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
+      return HAL_ERROR;
+  // First, Test to see if there is any room in Current Frame Structure.
+  if (Save_Frames.Frame_WrtPtr >= FRAME_SIZE)
+    return HAL_ERROR;
+  else
+  {
+    // OK, Increment Write Pointer and save data.
+    Save_Frames.Frame_WrtPtr++;
+    Save_Frames.Saved_Frames[Save_Frames.Frame_WrtPtr].event = Write_Frame->event;
+    //Write Contents to Flash Memory.
+    return(RoadBrd_WWDG_WriteFrmFlash());
+  }
+}
+
+/**
+  * @brief  This function attempts to read from the Flash Memory to the the passed Flash frame.
+  * @param  wwdg_SaveFrame* Write_Frame: WWDG Frame to be written to flash.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_ReadFlash( wwdg_SaveFrame* Read_Frame )
+{
+  // Is Frame Initialized?
+  if (Save_Frames.checksum != FRAME_CHKSUM)
+    // Read the Frame.
+    RoadBrd_WWDG_ReadFrmFlash();
+  // First, Test to see if there is any room in Current Frame Structure.
+  if (Save_Frames.Frame_RdPtr >= FRAME_SIZE)
+    return HAL_ERROR;
+  else
+  {
+    // OK, Increment Read Pointer and Read data.
+    Save_Frames.Frame_RdPtr++;
+    Read_Frame->event = Save_Frames.Saved_Frames[Save_Frames.Frame_RdPtr].event;
+  }
+  return HAL_OK;
 }
 
 /* USER CODE END 1 */
+
 
 /**
   * @}

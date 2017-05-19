@@ -40,9 +40,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx_hal.h"
+#include "stdbool.h"
 
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 extern WWDG_HandleTypeDef hwwdg;
@@ -53,10 +53,34 @@ extern WWDG_HandleTypeDef hwwdg;
      when the counter is below 80 (and greater than 64/0x40) otherwise a reset will 
      be generated. 
      WWDG Counter value = 100, WWDG timeout = ~1024 us * 64 = 65.57 ms */
-#define ROADBRD_TIMEOUT 64            // Set at 65.57 ms
-                                         // Min_Data = 0x40 and Max_Data = 0x7F
-#define ROADBRD_LOWLMIT 64            // Set at 65.57 ms
+#define ROADBRD_TIMEOUT 127             // Set at 130.048 ms
+                                        // Min_Data = 0x40 and Max_Data = 0x7F
+                                        // This means the valid window is less than 80 and
+                                        // greater than 64...OR
+                                        // 65.536ms < WINDOW < 102.4ms
+#define ROADBRD_HIGHLMIT 100             // Set at 102.4 ms
+#define ROADBRD_LOWLMIT  64              // Set at 65.5 ms
                                          // Max_Data = 0x80 */
+#define FRAME_SIZE       10              // Will Save 10 Frames
+#define FRAME_CHKSUM     0x5a5a5a5a      // Code to determine if frame ha been Initialized
+
+// Private Structure
+// wwdg Save Frame
+
+typedef struct wwdg_SaveFrm
+{
+  bool  event;
+} wwdg_SaveFrame;
+typedef struct wwdg_SaveFrm *wwdg_SaveFrmPtr;
+
+typedef struct wwdg_Frmes
+{
+  uint32_t checksum;
+  wwdg_SaveFrame Saved_Frames[FRAME_SIZE];
+  uint8_t Frame_WrtPtr;
+  uint8_t Frame_RdPtr;
+} wwdg_Frames;
+typedef struct wwdg_Frmes *wwdg_FrmesPtr;
 
 /* USER CODE END Private defines */
 
@@ -67,6 +91,13 @@ void MX_WWDG_Init(void);
 /* USER CODE BEGIN Prototypes */
 HAL_StatusTypeDef RoadBrd_WWDG_Start( void );
 HAL_StatusTypeDef RoadBrd_WWDG_Refresh( void );
+uint32_t RoadBrd_WWDG_GetRefreshCnt( void );
+bool RoadBrd_WWDG_VerifyFrame( void );
+HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void );
+HAL_StatusTypeDef RoadBrd_WWDG_ReadFrmFlash( void );
+HAL_StatusTypeDef RoadBrd_WWDG_WriteFrmFlash( void );
+HAL_StatusTypeDef RoadBrd_WWDG_WriteFlash( wwdg_SaveFrame* Write_Frame );
+HAL_StatusTypeDef RoadBrd_WWDG_ReadFlash( wwdg_SaveFrame* Read_Frame );
 
 /* USER CODE END Prototypes */
 

@@ -331,7 +331,7 @@
           <state>$PROJ_DIR$/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Include</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Device/ST/STM32L1xx/Include</state>
-          <state>D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev L BASELINE Sept 26 2016\Middlewares\Third_Party\BgLib</state>
+          <state>$PROJ_DIR$\..\Middlewares\Third_Party\BgLib</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -12665,14 +12665,14 @@
     <group>
       <name>EWARM</name>
       <file>
+        <name>$PROJ_DIR$\..\Src\adc.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s</name>
       </file>
     </group>
     <group>
       <name>User</name>
-      <file>
-        <name>$PROJ_DIR$\..\Src\adc.c</name>
-      </file>
       <file>
         <name>$PROJ_DIR$\..\Src\app_data.c</name>
         <excluded>
@@ -12703,6 +12703,9 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\fix_fft.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\Src\Flash.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\freertos.c</name>

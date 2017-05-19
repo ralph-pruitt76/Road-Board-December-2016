@@ -34,6 +34,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "i2c.h"
+#include "wwdg.h"
 
 #include "gpio.h"
     
@@ -443,6 +444,8 @@ HAL_StatusTypeDef RoadBrd_WaitForState( uint16_t WaitCnt )
   // Now wait for transaction to complete.
   for( x=0; x<=WaitCnt; x++)
   {
+    // Need to Service Watch Dog or we die here....
+    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
     // Test to see if event finished.
     if (RoadBrd_I2C_GetState() == HAL_I2C_STATE_READY)
       break;
