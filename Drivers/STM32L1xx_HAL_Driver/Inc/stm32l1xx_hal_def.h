@@ -73,7 +73,8 @@ typedef enum
 
 /* Exported macro ------------------------------------------------------------*/
 
-#define HAL_MAX_DELAY      0xFFFFFFFF
+//#define HAL_MAX_DELAY      0xFFFFFFFF
+#define HAL_MAX_DELAY      0x8000
 
 #define HAL_IS_BIT_SET(REG, BIT)         (((REG) & (BIT)) != RESET)
 #define HAL_IS_BIT_CLR(REG, BIT)         (((REG) & (BIT)) == RESET)

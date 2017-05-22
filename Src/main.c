@@ -312,6 +312,7 @@ int main(void)
   RoadBrd_WWDG_Start();
 
 #endif
+
 #ifdef TASKING
   /* USER CODE END 2 */
 
@@ -904,14 +905,16 @@ int main(void)
                 Error_Handler();
             }
             /* Process the sensor state machine if the BLE module is ready */
-            if (BGM111_Ready())
+            if ((BGM111_Ready()) &&
+                (BGM111_Connected()) &&
+                (BGM111_DataConnected()) )
             {
               // Service Watchdog
               RoadBrd_WWDG_Refresh();     // Refresh WatchDog
               ProcessSensorState();
             }
             // Test to see if we have any BGM Traffic to process.
-            BGM111_ProcessInput();
+            //BGM111_ProcessInput();
           }
           // Test if BGM or Monitor Character received.
           if (RoadBrd_Uart_Status(MONITOR_UART) == SET)
@@ -920,19 +923,11 @@ int main(void)
             clrUsartState( MONITOR_UART );
             if(Status == HAL_OK)
             {
-              // Watch for termination characters.
-              if((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+              // Test Bypass Flag...If Set, we ae in special monitor mode.
+              if (Tst_Bypass())
               {
-                *pData = 0x00;
-                // Yes..We are done.
-                // Process Buffer NOW.
-                // Send <CR><LF> to UART..
-                strcpy( (char *)tempBffr2, "\r\n");
-                Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-                // Wait for msg to be completed.
-                while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-                {
-                }
+                pData[0] = tmpData[0];
+                pData[1] = 0x00;
                 // Clear State for Next Transfer.
                 clrUsartState( MONITOR_UART );
                 if (Status != HAL_OK)
@@ -941,9 +936,9 @@ int main(void)
                 {
                   // We have a good Tasking String. Time to determine action.
                   // Turn On BGM_LED LED.
-#ifndef LED_OFF
+  #ifndef LED_OFF
                   RoadBrd_gpio_On( GREEN_LED );
-#endif
+  #endif
                   Status = RoadBrd_ParseString((char *)tempBffr);
                   // We have a good Tasking String. Time to determine action.
                   if (Status != HAL_OK)
@@ -953,14 +948,50 @@ int main(void)
                   Error_Handler();
                 tmpSize = RECEIVE_SZ;
                 pData = tempBffr;
-              } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
-              else
-              {
-                // Move new character into passed buffer.
-                *pData = tmpData[0];
-                tmpSize--;                          // Decrement Count
-                pData++;                            // Move pointer to next buffer location.
-              }
+              } // EndIf (Tst_Bypass())
+              else {
+                // Watch for termination characters.
+                if((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+                {
+                  *pData = 0x00;
+                  // Yes..We are done.
+                  // Process Buffer NOW.
+                  // Send <CR><LF> to UART..
+                  strcpy( (char *)tempBffr2, "\r\n");
+                  Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+                  // Wait for msg to be completed.
+                  while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+                  {
+                  }
+                  // Clear State for Next Transfer.
+                  clrUsartState( MONITOR_UART );
+                  if (Status != HAL_OK)
+                    Error_Handler();
+                  if(Status == HAL_OK)
+                  {
+                    // We have a good Tasking String. Time to determine action.
+                    // Turn On BGM_LED LED.
+  #ifndef LED_OFF
+                    RoadBrd_gpio_On( GREEN_LED );
+  #endif
+                    Status = RoadBrd_ParseString((char *)tempBffr);
+                    // We have a good Tasking String. Time to determine action.
+                    if (Status != HAL_OK)
+                      Error_Handler();
+                  }
+                  else
+                    Error_Handler();
+                  tmpSize = RECEIVE_SZ;
+                  pData = tempBffr;
+                } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+                else
+                {
+                  // Move new character into passed buffer.
+                  *pData = tmpData[0];
+                  tmpSize--;                          // Decrement Count
+                  pData++;                            // Move pointer to next buffer location.
+                }
+              } // EndElse (Tst_Bypass())
             }
             else
               Error_Handler();

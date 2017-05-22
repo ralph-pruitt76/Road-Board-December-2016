@@ -60,6 +60,7 @@
 
 /* Prototypes */
 HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr);
+bool Tst_Bypass( void);
 int isHexNum(char *ptr);
 int hatoi( char *ptr );
 //void sleep(void);

@@ -61,5 +61,6 @@ void BGM111_Transmit(uint32_t len, uint8_t *data);
 /* Report if the BLE is ready for a command */
 bool BGM111_Ready(void);
 bool BGM111_Connected(void);
+bool BGM111_DataConnected(void);
 
 #endif

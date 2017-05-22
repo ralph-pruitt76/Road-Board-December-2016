@@ -59,10 +59,11 @@ const char * const CodesArray[] = { "       ",                      // CODE 000:
                                     "BGMHRBT",                      // CODE 014: BGM111 processing code has detected a Heart Beat Timeout Event.
                                     "BGTXFUL",                      // CODE 015: BGM111 processing code has detected a Transmit Buffer Full error on traffic to BGM111.
                                     "FRMINIT",                      // CODE 016: Could not Initialize Flash Frame.
-                                    "       ",                      // CODE 017: NULL...
+                                    "BGMOVFL",                      // CODE 017: BGM111 processing code has detected Serial Stream Overflow.
                                     "       ",                      // CODE 018: NULL...
                                     "       ",                      // CODE 019: NULL...
-                                    "       " };                    // CODE 020: NULL...
+                                    "       ",                      // CODE 020: NULL...
+                                    "       " };                    // CODE 021: NULL...
 const char * const ModuleArray[] = { "       ",                     // CODE 000: NULL...NO Device Code
                                      "   main",                     // CODE 001: module: main.c
                                      " bgm111",                     // CODE 002: module: bgm111.c
@@ -221,17 +222,48 @@ void RdBrd_BlinkErrCd( ErrorCodes ErrorCd )
   {
     //SetLED(true);
     RoadBrd_gpio_On(BLUE_LED);
-    RoadBrd_Delay( 100 );
+    RoadBrd_Delay2( 100 );
     //SetLED(false);
-    RoadBrd_gpio_On(BLUE_LED);
-    RoadBrd_Delay( 100 );
+    RoadBrd_gpio_Off(BLUE_LED);
+    RoadBrd_Delay2( 100 );
   }
   //SetLED(true);
   RoadBrd_gpio_On(BLUE_LED);
-  RoadBrd_Delay( 1000 );
+  RoadBrd_Delay2( 1000 );
   //SetLED(false
-  RoadBrd_gpio_On(BLUE_LED);
-  RoadBrd_Delay( 1000 );
+  RoadBrd_gpio_Off(BLUE_LED);
+  RoadBrd_Delay2( 1000 );
+}
+
+/**
+  * @brief  void RoadBrd_Delay( __IO uint32_t Delay ): Implement Delay by calling looping.
+  *             NOTE: This avoids HAL_Delay since this could hang the processor in error handling.
+  * @param Delay: specifies the delay time length, in milliseconds.
+  * @retval None
+  */
+void RoadBrd_Delay2( __IO uint32_t Delay )
+{
+  while( Delay != 0)
+  {
+    delay_1ms();
+    Delay--;
+  }
+}
+
+/**
+  * @brief  This routine delays for 1 msec and returns
+  *         from the BGM111
+  * @param  none
+  * @retval none
+  */
+void delay_1ms( void )
+{
+  uint32_t count = 4400;      // Delay loop for 10msec
+  
+  while (count != 0)
+  {
+    count--;
+  }
 }
 
 /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/

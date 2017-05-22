@@ -64,6 +64,7 @@ typedef enum
   ERROR_BGM_HRTBT       = 0x000E,               // BGM111 processing code has detected a Heart Beat Timeout Event.
   ERROR_TXBGMBUF_FULL   = 0x000F,               // BGM111 processing code has detected a Transmit Buffer Full error on traffic to BGM111.
   ERROR_FRAME_INIT      = 0x0010,               // Could not Initialize Flash Frame.
+  ERROR_BGM_OVERFLOW    = 0x0011,               // BGM111 processing code has detected Serial Stream Overflow.
 
   ERROR_MISC            = 0xffff,       	// End Of Error Code List
 }ErrorCodes;
@@ -92,6 +93,8 @@ ErrorElmntPtr  RdBrd_ErrCdGetCrntErrCd( void );
 ErrorElmntPtr  RdBrd_ErrCdGetNxtErrCd( void );
 HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd );
 void RdBrd_BlinkErrCd( ErrorCodes ErrorCd );
+void delay_1ms( void );
+void RoadBrd_Delay2( __IO uint32_t Delay );
 
 #ifdef __cplusplus
 }

@@ -21,7 +21,7 @@ Freq=10000000
 MultiCoreRunAll=1
 [DebugChecksum]
 <<<<<<< HEAD
-Checksum=1626202755
+Checksum=-1819614763
 =======
 Checksum=390369166
 >>>>>>> M.9C
@@ -58,9 +58,8 @@ ITMportsTermIO=0
 ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
 [struct_types]
-Fmt0=struct <Unnamed 48>-PageAddress	4	0
-Fmt1=struct gecko_cmd_packet-header	4	0
-Fmt2=wwdg_Frames-checksum	4	0
+Fmt0=struct gecko_cmd_packet-header	4	0
+Fmt1=wwdg_Frames-checksum	4	0
 [array_types]
 Fmt0=uint32_t[200]	4	0
 [watch_formats]
@@ -122,6 +121,18 @@ ShowTimeLog=1
 SumEnabled=0
 ShowTimeSum=1
 SumSortOrder=0
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.174.1" 0 0 1 "" 0 "" 0
+Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.168.1" 0 0 1 "" 0 "" 0
+Bp2=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.180.1" 0 0 1 "" 0 "" 0
+Bp3=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.186.1" 0 0 1 "" 0 "" 0
+Bp4=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.192.1" 0 0 1 "" 0 "" 0
+Bp5=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\app_data.c}.865.3" 0 0 1 "" 0 "" 0
+Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\wwdg.c}.159.3" 0 0 1 "" 0 "" 0
+Bp7=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.559.7" 0 0 1 "" 0 "" 0
+Count=8
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -129,6 +140,9 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
+[Aliases]
+Count=0
+SuppressDialog=0
 [DriverProfiling]
 Enabled=0
 Mode=1
@@ -143,18 +157,3 @@ ShowTiming=1
 Frequency=10000
 Probe0=I0
 ProbeSetup0=2 1 1 2 0 0
-[Disassemble mode]
-mode=0
-[Breakpoints2]
-Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.174.1" 0 0 1 "" 0 "" 0
-Bp1=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.168.1" 0 0 1 "" 0 "" 0
-Bp2=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.180.1" 0 0 1 "" 0 "" 0
-Bp3=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.186.1" 0 0 1 "" 0 "" 0
-Bp4=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Templates\iar\startup_stm32l152xe.s}.192.1" 0 0 1 "" 0 "" 0
-Bp5=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\wwdg.c}.133.1" 0 0 1 "" 0 "" 0
-Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\main.c}.292.1" 0 0 1 "" 0 "" 0
-Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\wwdg.c}.133.1" 0 0 1 "" 0 "" 0
-Count=8
-[Aliases]
-Count=0
-SuppressDialog=0

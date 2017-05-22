@@ -36,6 +36,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "parser.h"
 #include "ErrorCodes.h"
+static bool Bypass = false;
 
 /* Parser function */
 
@@ -98,6 +99,31 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
 
     Size = strlen((char *)tempBffr);
+    
+    // Test Bypass. If set, then we are in streaming mode.
+    if ( Bypass )
+    {
+      if (tempBffr[0] == 0x1B)
+      {
+        Bypass = false;
+        strcpy( (char *)tempBffr2, "\r\n\r\n T........TERMINATING MONITOR MODE.........\r\n\r\n> ");
+#ifdef NUCLEO
+        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+        if (Status != HAL_OK)
+          return Status;
+      }
+      else
+      {
+        // Transmit Character to BGM111.
+        BGM111_Transmit(1, (uint8_t *)tempBffr);
+      }
+    }// EndIf ( Bypass )
+    else
+    {
+      // Normal Mode
     
             // We have a good Tasking String. Time to determine action.
             switch( tempBffr[0] )
@@ -1865,11 +1891,25 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //++++++++++++++++++++++++++++++++++++++++++  RESET Micro.
                   case 'R':
                     // Read Driver Status
-                    RdBrd_BlinkErrCd( ERROR_I2CBUSY );
                     HAL_NVIC_SystemReset();
                     sprintf( (char *)tempBffr2, "RESET CALLED BUT NO RESPONSE!!\r\n" );
                     break;
 //**************************************************************************************************
+//++++++++++++++++++++++++++++++++++++++++++  Special Monitor Mode to intercept traffic from UART and pass to BGM111
+                  case 'M':
+                    strcpy( (char *)tempBffr2, "BGM111 MONITOR MODE.\r\n\r\n");
+#ifdef NUCLEO
+                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                    if (Status != HAL_OK)
+                      return Status;
+                    strcpy( (char *)tempBffr2, "Use <ESC> to exit mode.\r\n\r\n");
+                    // Set Bypass Flag
+                    Bypass = true;
+                    break;
+
                   default:
                     // ERROR if we get here.. 
                     strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
@@ -1918,6 +1958,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
               break;
             } // EndSwitch
+            
 
             // Test last I2C Status to determine next msg.
             switch( Status )
@@ -1988,6 +2029,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
             if (Status != HAL_OK)
               return Status;
+    } // EndElse ( Bypass )
   return Status;
 }
 
@@ -2040,6 +2082,12 @@ int hatoi( char *ptr )
     FinalValue = FinalValue*16 + Value;
   }
   return FinalValue;
+}
+
+
+bool Tst_Bypass( void)
+{
+  return Bypass;
 }
 
 /*void sleep(void) {

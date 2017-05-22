@@ -53,6 +53,7 @@ struct
   volatile bool req_exec;
   bool booted;
   bool connection;
+  bool data_Connection;
   struct gecko_cmd_packet *evt;
 } static ble;
 
@@ -64,6 +65,7 @@ void BGM111_LowLevel_Init(void)
   blemsgs.tx_wr = 0;
   ble.booted =  false;
   ble.connection = false;
+  ble.data_Connection = false;
 }
 
 /* Next buffer index based on current index and buffer size */
@@ -165,6 +167,7 @@ void BGM111_Init(void)
 
 void BGM111_ProcessInput(void)
 {
+  /* Event structure */
   uint32_t temp1;
   uint8_t tempBffr2[20];
   bool Boot_evt = false;
@@ -258,7 +261,13 @@ void BGM111_ProcessInput(void)
         break;
       case gecko_rsp_gatt_read_characteristic_value_by_uuid_id:
       case 0x020800A0:
+      case 0x000900A0:
         RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<rsp_read_ch_value_by_uuid_id>");
+        if (ble.evt->data.evt_gatt_server_attribute_value.value.len != 0)
+        {
+          sprintf( (char *)tempBffr2, "<STR:%s>", ble.evt->data.evt_gatt_server_attribute_value.value.data);
+          RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        }
         ble.evt = NULL;
         break;
       case gecko_evt_endpoint_status_id:
@@ -274,12 +283,12 @@ void BGM111_ProcessInput(void)
         break;
     };
     // Test RX Buffer and Set req_exec flag.
-    if (BufUsed(ble.rx_wr, ble.rx_rd) != 0)
-    {
-      /* Indicate we need to execute the BLE stack to process 
-       * the received packet */
-      ble.req_exec = true;
-    }
+//    if (BufUsed(ble.rx_wr, ble.rx_rd) != 0)
+//    {
+//      /* Indicate we need to execute the BLE stack to process 
+//       * the received packet */
+//      ble.req_exec = true;
+//    }
   } // EndIf (ble.evt)
 }
 
@@ -312,6 +321,16 @@ bool BGM111_Ready(void)
 bool BGM111_Connected(void)
 {
   return ble.connection;
+}
+
+/**
+  * @brief  Check whether the BLE module is DATA connected.
+  * @retval bool:         true(1):        DATA Connection is Active.
+  *                       false(0):       NO DATA Connection.
+  */
+bool BGM111_DataConnected(void)
+{
+  return ble.data_Connection;
 }
 
 /**
@@ -472,9 +491,79 @@ uint16_t USART_ReceiveData(UART_HandleTypeDef *huart)
   */
 HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
 {
-  static uint8_t header_cnt, payload_cnt, payload_len;
+//  static uint8_t header_cnt, payload_cnt, payload_len;
   HAL_StatusTypeDef Status;
-    
+  static uint8_t tempBffr2[40];
+  uint8_t tempBffr3[60];
+  static uint8_t in_ptr = 0;
+  
+  // First pull new character into buffer.
+  tempBffr2[in_ptr++] = c;
+  // Now, Did we get a termination character?
+  if( c == 0x0a )
+  {
+    // Reset Ptr.
+    in_ptr = 0;
+
+    // Yes...We will now test contents of buffer. And then reset ptr back to 0.
+    sprintf( (char *)tempBffr3, "\r\n<<FULL STRING>>: %s \r\n", tempBffr2);
+    Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+    if (Status != HAL_OK)
+      return Status;
+    // Test Strings for Key items.
+    // Boot String?
+    if (strncmp((char *)tempBffr2,"Boot",4) == 0)
+    {
+      // Yes....Set Boot Flag.
+      ble.booted = true;
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.booted> ");
+
+    }
+    // Connection String?
+    else if (strncmp((char *)tempBffr2,"Connected",9) == 0)
+    {
+      // Yes....Set Boot Flag.
+      ble.connection = true;
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.connection> ");
+
+    }
+    // Disconnection String?
+    else if (strncmp((char *)tempBffr2,"Disconnected",12) == 0)
+    {
+      // Yes....Clear Flags.
+      ble.connection = false;
+      ble.data_Connection = false;
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
+    }
+    // Data String?
+    else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
+    {
+      // Yes....Set Boot Flag.
+      ble.data_Connection = true;
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
+    }
+    // NOW TEST FOR PARAMS!!!
+
+    // NOW TEST ERROR CONDITIONS!!!
+    // OVERFLOW?
+    else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)
+    {
+      // Yes....Report Error and Reset.
+      // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
+      RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
+      RdBrd_BlinkErrCd( ERROR_BGM_OVERFLOW );
+      HAL_NVIC_SystemReset();
+    }
+    else
+    {
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<UNKNOWN STATUS> ");
+    }
+  }
+  //tempBffr2[0] = c;
+  //tempBffr2[1] = 0x00;
+  //Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+  return Status;
+#if 0
     Status = HAL_OK;
     // Test Buffer. If we are full, An error has occured. Must at least log that.
     if (IsBufFull(ble.rx_wr, ble.rx_rd))
@@ -509,7 +598,8 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
           // We have detected a SYNC error on BGM111...Log it!
           RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
           Clr_HrtBeat_Cnt();
-          RdBrd_BlinkErrCd( ERROR_BGMSYNC );
+          if (ble.booted)
+            RdBrd_BlinkErrCd( ERROR_BGMSYNC );
           //RoadBrd_Delay( 1000 );
           HAL_NVIC_SystemReset();
           break;
@@ -616,6 +706,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
         break;
     } // EndSwitch (ble.rx_state)
     return Status;
+#endif
 }
 
 /**
