@@ -90,7 +90,7 @@
 #define gattdb_AnlHrtBt                       213
 #define gattdb_AnlHrtBt2                      217
 #endif */
-#define gattdb_xgatt_spp_data                   3
+#define gattdb_xgatt_spp_data                   13
 
 
 // Global Vars to app_data.

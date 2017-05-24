@@ -21,7 +21,7 @@ Freq=10000000
 MultiCoreRunAll=1
 [DebugChecksum]
 <<<<<<< HEAD
-Checksum=-2147053588
+Checksum=-386846298
 =======
 Checksum=390369166
 >>>>>>> M.9C
@@ -132,8 +132,7 @@ Bp4=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Drivers\CMSIS\Device\ST\STM32L1xx\Source\Tem
 Bp5=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\app_data.c}.873.3" 0 0 1 "" 0 "" 0
 Bp6=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\wwdg.c}.159.3" 0 0 1 "" 0 "" 0
 Bp7=_ 0 "EMUL_CODE" "{$PROJ_DIR$\..\Src\bgm111.c}.559.7" 0 0 1 "" 0 "" 0
-Bp8=_ 1 "EMUL_CODE" "{$PROJ_DIR$\..\Src\app_data.c}.869.5" 0 0 1 "" 0 "" 0
-Count=9
+Count=8
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
