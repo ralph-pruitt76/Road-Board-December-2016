@@ -858,7 +858,7 @@ void Process_RdSound( void )
   sprintf( (char *)tempBffr2, "\r\n\r\n" );
   //BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-  sprintf( (char *)tempBffr2, "<TICK:%08x/%04x/%04x>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
+  sprintf( (char *)tempBffr2, "<TICK:>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
   /* Process the sensor state machine if the BLE module is ready */
   if ((BGM111_Ready()) &&
@@ -870,8 +870,8 @@ void Process_RdSound( void )
     BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
   }
   // ALSO Last....Report Perioic Status of Voltage/Current/Power
-  sprintf( (char *)tempBffr2, " <%s/%s/%s> ", data.Voltage.Voltage, data.Current.Current, data.Power.Power);
-  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+  //sprintf( (char *)tempBffr2, " <%s/%s/%s> ", data.Voltage.Voltage, data.Current.Current, data.Power.Power);
+  //RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
 }
 
 
