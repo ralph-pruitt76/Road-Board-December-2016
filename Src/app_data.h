@@ -16,8 +16,8 @@
 #define SAMPLE_TIM_IRQn         TIM6_IRQn
 #define SAMPLE_TIM_IRQHandler   TIM6_IRQHandler
 
-#define PROCESS_SNSR_TIME       10      // Process all sensors every Second(10 * 100ms tick)
-#define PROCESS_RD_SND_TIME     53      // Process all Road Sound every Second(53 * 100ms tick)...5.3 Seconds
+#define PROCESS_SNSR_TIME       100      // Process all sensors every Second(100 * 100ms tick)...10.0 Seconds
+#define PROCESS_RD_SND_TIME     123      // Process all Road Sound every Second(123 * 100ms tick)...12.3 Seconds
 #define PROCESS_LEDOFF_TIME     1       // Process and turn off all active LEDs. Controls the Blink rate of the LEDs(1 * 50ms tick)
 #ifdef LONG_DELAY
 //  #define CONNECTION_CNT          180      // 15 Minutes.

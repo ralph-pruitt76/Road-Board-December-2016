@@ -867,7 +867,9 @@ int main(void)
               Error_Handler();
           }
           /* Process the sensor state machine if the BLE module is ready */
-          if (BGM111_Ready())
+            if ((BGM111_Ready()) &&
+                (BGM111_Connected()) &&
+                (BGM111_DataConnected()) )
           {
             ProcessSensorState();
           }

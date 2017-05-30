@@ -337,6 +337,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.ShntVltg.Voltage, (char *)TmpData.ShntVltg.Voltage );
       // Update BLE Characteristics
       /* Send the ShntVltgRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0002>%s</U0002>", (uint8_t *)data.ShntVltg.Voltage);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_ShntVltgRw,
 //                                 strlen((char *)data.ShntVltg.Raw), (uint8_t *)data.ShntVltg.Raw);
       /* Send the ShntVltg to the BLE module */
@@ -352,6 +355,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.Current.Current, (char *)TmpData.Current.Current );
       // Update BLE Characteristics
       /* Send the CurrentRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0004>%s</U0004>", (uint8_t *)data.Current.Current);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_CurrentRw,
 //                                 strlen((char *)data.Current.Raw), (uint8_t *)data.Current.Raw);
       /* Send the Current to the BLE module */
@@ -367,6 +373,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.Power.Power, (char *)TmpData.Power.Power );
       // Update BLE Characteristics
       /* Send the PowerRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0006>%s</U0006>", (uint8_t *)data.Power.Power);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_PowerRw,
 //                                 strlen((char *)data.Power.Raw), (uint8_t *)data.Power.Raw);
       /* Send the Power to the BLE module */
@@ -382,6 +391,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.Voltage.Voltage, (char *)TmpData.Voltage.Voltage );
       // Update BLE Characteristics
       /* Send the VoltageRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0008>%s</U0008>", (uint8_t *)data.Voltage.Voltage);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_VoltageRw,
 //                                 strlen((char *)data.Voltage.Raw), (uint8_t *)data.Voltage.Raw);
       /* Send the Voltage to the BLE module */
@@ -404,12 +416,15 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 //      BGM111_WriteCharacteristic(gattdb_TemperatureRw,
 //                                 strlen((char *)data.Temp.Raw), (uint8_t *)data.Temp.Raw);
       /* Send the TemperatureC to the BLE module */
-      sprintf( (char *)tmpBuffer, "<000A>%s</000A>", (uint8_t *)data.Temp.TempC);
+      sprintf( (char *)tmpBuffer, "<U000A>%s</U000A>", (uint8_t *)data.Temp.TempC);
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_TemperatureC,
 //                                 strlen((char *)data.Temp.TempC), (uint8_t *)data.Temp.TempC);
       /* Send the TemperatureF to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U000B>%s</U000B>", (uint8_t *)data.Temp.TempF);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_TemperatureF,
 //                                 strlen((char *)data.Temp.TempF), (uint8_t *)data.Temp.TempF);
 #endif
@@ -435,15 +450,27 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.RGBValues.Blue, (char *)TmpData.RGBValues.Blue );
       // Update BLE Characteristics
       /* Send the RGBLightRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U000C>%s</U000C>", (uint8_t *)data.RGBValues.Raw);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_RGBLightRw,
 //                                 strlen((char *)data.RGBValues.Raw), (uint8_t *)data.RGBValues.Raw);
       /* Send the RGBLightRd to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U000D>%s</U000D>", (uint8_t *)data.RGBValues.Red);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_RGBLightRd,
 //                                 strlen((char *)data.RGBValues.Red), (uint8_t *)data.RGBValues.Red);
       /* Send the RGBLightGrn to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U000E>%s</U000E>", (uint8_t *)data.RGBValues.Green);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_RGBLightGrn,
 //                                 strlen((char *)data.RGBValues.Green), (uint8_t *)data.RGBValues.Green);
       /* Send the RGBLightBlu to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U000F>%s</U000F>", (uint8_t *)data.RGBValues.Blue);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_RGBLightBlu,
 //                                 strlen((char *)data.RGBValues.Blue), (uint8_t *)data.RGBValues.Blue);
     }
@@ -457,7 +484,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.Pressure.RawC = TmpData.Pressure.RawC;
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
-      sprintf( (char *)tmpBuffer, "<acac>%s</acac>", (uint8_t *)data.Pressure.Pressure);
+      sprintf( (char *)tmpBuffer, "<UACAC>%s</UACAC>", (uint8_t *)data.Pressure.Pressure);
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_PressureRw,
@@ -483,6 +510,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.PrTemp.TempF, (char *)TmpData.PrTemp.TempF );
       // Update BLE Characteristics
       /* Send the PrTemp to the BLE module */
+      sprintf( (char *)tmpBuffer, "<UACAC>%s</UACAC>", (uint8_t *)data.Pressure.Pressure);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_PrTemperatureRw,
 //                                 strlen((char *)data.PrTemp.Raw), (uint8_t *)data.PrTemp.Raw);
       /* Send the PrTemp to the BLE module */
@@ -502,7 +532,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.Humidity.HRawC = TmpData.Humidity.HRawC;
       // Update BLE Characteristics
       /* Send the data to the BLE module */
-      sprintf( (char *)tmpBuffer, "<abab>%s</abab>", (uint8_t *)data.Humidity.Humidity);
+      sprintf( (char *)tmpBuffer, "<UABAB>%s</UABAB>", (uint8_t *)data.Humidity.Humidity);
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_HumidityRw,
@@ -532,9 +562,15 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 //      BGM111_WriteCharacteristic(gattdb_HmdtyTempRw,
 //                                 strlen((char *)data.HmTemp.Raw), (uint8_t *)data.HmTemp.Raw);
       /* Send the HmTemp to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0032>%s</U0032>", (uint8_t *)data.HmTemp.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_HmdtyTempC,
 //                                 strlen((char *)data.HmTemp.TempC), (uint8_t *)data.HmTemp.TempC);
       /* Send the HmTemp to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0033>%s</U0033>", (uint8_t *)data.HmTemp.TempF);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_HmdtyTempF,
 //                                 strlen((char *)data.HmTemp.TempF), (uint8_t *)data.HmTemp.TempF);
     } 
@@ -548,10 +584,12 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.GridValues.Thermistor.Raw, (char *)TmpData.GridValues.Thermistor.Raw );
       strcpy( (char *)data.GridValues.Thermistor.TempC, (char *)TmpData.GridValues.Thermistor.TempC );
       // Update BLE Characteristics
-      /* Send the PressureRw to the BLE module */
 //      BGM111_WriteCharacteristic(gattdb_ThermistorRw,
 //                                 strlen((char *)data.GridValues.Thermistor.Raw), (uint8_t *)data.GridValues.Thermistor.Raw);
       /* Send the Pressure to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0017>%s</U0017>", (uint8_t *)data.GridValues.Thermistor.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_ThermistorC,
 //                                 strlen((char *)data.GridValues.Thermistor.TempC), (uint8_t *)data.GridValues.Thermistor.TempC);
 #ifndef ALWAYS_SEND
@@ -571,6 +609,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
 #ifndef LEGACY_PATCH
+      sprintf( (char *)tmpBuffer, "<U0019>%s</U0019>", (uint8_t *)data.GridValues.GridEye1.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //      BGM111_WriteCharacteristic(gattdb_Thermal_1Rw,
 //                                 strlen((char *)data.GridValues.GridEye1.Raw), (uint8_t *)data.GridValues.GridEye1.Raw);
       /* Send the Pressure to the BLE module */
@@ -602,6 +643,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 //      BGM111_WriteCharacteristic(gattdb_Thermal_2Rw,
 //                                 strlen((char *)data.GridValues.GridEye2.Raw), (uint8_t *)data.GridValues.GridEye2.Raw);
       /* Send the Pressure to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U001B>%s</U001B>", (uint8_t *)data.GridValues.GridEye2.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_Thermal_2RwC,
 //                                 strlen((char *)data.GridValues.GridEye2.TempC), (uint8_t *)data.GridValues.GridEye2.TempC);
 #endif
@@ -637,6 +681,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 //      tmpBuffer[2] = (uint8_t)(data.GridValues.GridEye3.RawC & 0x00ff);
 //      tmpBuffer[3] = (uint8_t)((data.GridValues.GridEye3.RawC & 0xff00) >> 8);
       /* Send the Temperature RawC to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U001D>%s</U001D>", (uint8_t *)data.GridValues.GridEye3.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_xgatt_temp3,
 //                                 0x04, (uint8_t *)tmpBuffer);
     }
@@ -652,7 +699,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.GridValues.GridEye4.RawC = TmpData.GridValues.GridEye4.RawC;
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
-      sprintf( (char *)tmpBuffer, "<001F>%s</001F>", (uint8_t *)data.GridValues.GridEye4.TempC);
+      sprintf( (char *)tmpBuffer, "<U001F>%s</U001F>", (uint8_t *)data.GridValues.GridEye4.TempC);
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 #ifndef LEGACY_PATCH
@@ -682,7 +729,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       strcpy( (char *)data.GridValues.GridEye5.TempC, (char *)TmpData.GridValues.GridEye5.TempC );
       data.GridValues.GridEye5.RawC = TmpData.GridValues.GridEye5.RawC;
       // Update BLE Characteristics
-      /* Send the PressureRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0021>%s</U0021>", (uint8_t *)data.GridValues.GridEye5.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 #ifndef LEGACY_PATCH
 //      BGM111_WriteCharacteristic(gattdb_Thermal_5Rw,
 //                                 strlen((char *)data.GridValues.GridEye5.Raw), (uint8_t *)data.GridValues.GridEye5.Raw);
@@ -709,6 +758,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.GridValues.GridEye6.RawC = TmpData.GridValues.GridEye6.RawC;
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0023>%s</U0023>", (uint8_t *)data.GridValues.GridEye6.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 #ifndef LEGACY_PATCH
 //      BGM111_WriteCharacteristic(gattdb_Thermal_6Rw,
 //                                 strlen((char *)data.GridValues.GridEye6.Raw), (uint8_t *)data.GridValues.GridEye6.Raw);
@@ -737,6 +789,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.GridValues.GridEye7.RawC = TmpData.GridValues.GridEye7.RawC;
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0025>%s</U0025>", (uint8_t *)data.GridValues.GridEye7.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 #ifndef LEGACY_PATCH
 //      BGM111_WriteCharacteristic(gattdb_Thermal_7Rw,
 //                                 strlen((char *)data.GridValues.GridEye7.Raw), (uint8_t *)data.GridValues.GridEye7.Raw);
@@ -765,6 +820,9 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       data.GridValues.GridEye8.RawC = TmpData.GridValues.GridEye8.RawC;
       // Update BLE Characteristics
       /* Send the PressureRw to the BLE module */
+      sprintf( (char *)tmpBuffer, "<U0027>%s</U0027>", (uint8_t *)data.GridValues.GridEye8.TempC);
+      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 #ifndef LEGACY_PATCH
 //      BGM111_WriteCharacteristic(gattdb_Thermal_8Rw,
 //                                 strlen((char *)data.GridValues.GridEye8.Raw), (uint8_t *)data.GridValues.GridEye8.Raw);
@@ -787,7 +845,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       // Clear Flag...We are done.
       data.Legacy_OneTime = false;
       // Update BLE Characteristics
-      sprintf( (char *)tmpBuffer, "<aeae>%s</aeae>", (uint8_t *)LEGACY_BANNER);
+      sprintf( (char *)tmpBuffer, "<UAEAE>%s</UAEAE>", (uint8_t *)LEGACY_BANNER);
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_xgatt_rev,
@@ -807,44 +865,62 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 void Process_RdSound( void )
 {
 //  uint8_t tempStr[13];
-  uint8_t tempBffr2[40];
+  uint8_t tempBffr2[80];
   
-  RoadBrd_gpio_On( MICRO_LED );
-  // 1. Build and Process Road Sound
-  RoadBrdSnd_ProcessSound();
+  if ((BGM111_Ready()) &&
+      (BGM111_Connected()) &&
+      (BGM111_DataConnected()) )
+  {
+
   
-  // 2. Load FFT Data into local Data.
-  RoadBrdSnd_DumpBin0( &data.FFTBin0 );
-  RoadBrdSnd_DumpBin16( &data.FFTBin16 );
-  RoadBrdSnd_DumpBin32( &data.FFTBin32 );
-  RoadBrdSnd_DumpBin48( &data.FFTBin48 );
   
-  // 3. Update BLE Characteristics with new data.
-  /* Send the FFTBin0 to the BLE module */
-  RoadBrd_gpio_On( BGM_LED );
-#if 0
-#ifndef LEGACY_PATCH
-  BGM111_WriteCharacteristic(gattdb_RdSound0,
-                             strlen((char *)data.FFTBin0.dumpStr), (uint8_t *)data.FFTBin0.dumpStr);
-#endif
-  /* Send the FFTBin16 to the BLE module */
-  RoadBrd_gpio_On( BGM_LED );
-#ifndef LEGACY_PATCH
-  BGM111_WriteCharacteristic(gattdb_RdSound16,
-                             strlen((char *)data.FFTBin16.dumpStr), (uint8_t *)data.FFTBin16.dumpStr);
-#endif
-  /* Send the FFTBin32 to the BLE module */
-  RoadBrd_gpio_On( BGM_LED );
-#ifndef LEGACY_PATCH
-  BGM111_WriteCharacteristic(gattdb_RdSound32,
-                             strlen((char *)data.FFTBin32.dumpStr), (uint8_t *)data.FFTBin32.dumpStr);
-#endif
-  /* Send the FFTBin48 to the BLE module */
-  RoadBrd_gpio_On( BGM_LED );
-#ifndef LEGACY_PATCH
-  BGM111_WriteCharacteristic(gattdb_RdSound48,
-                             strlen((char *)data.FFTBin48.dumpStr), (uint8_t *)data.FFTBin48.dumpStr);
-#endif
+      RoadBrd_gpio_On( MICRO_LED );
+      // 1. Build and Process Road Sound
+      RoadBrdSnd_ProcessSound();
+      
+      // 2. Load FFT Data into local Data.
+      RoadBrdSnd_DumpBin0( &data.FFTBin0 );
+      RoadBrdSnd_DumpBin16( &data.FFTBin16 );
+      RoadBrdSnd_DumpBin32( &data.FFTBin32 );
+      RoadBrdSnd_DumpBin48( &data.FFTBin48 );
+      
+      // 3. Update BLE Characteristics with new data.
+      /* Send the FFTBin0 to the BLE module */
+      RoadBrd_gpio_On( BGM_LED );
+    #ifndef LEGACY_PATCH
+      sprintf( (char *)tempBffr2, "<U0012>%s</U0012>", (uint8_t *)data.FFTBin0.dumpStr);
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+    //  BGM111_WriteCharacteristic(gattdb_RdSound0,
+    //                             strlen((char *)data.FFTBin0.dumpStr), (uint8_t *)data.FFTBin0.dumpStr);
+    #endif
+      /* Send the FFTBin16 to the BLE module */
+      RoadBrd_gpio_On( BGM_LED );
+    #ifndef LEGACY_PATCH
+      sprintf( (char *)tempBffr2, "<U0013>%s</U0013>", (uint8_t *)data.FFTBin16.dumpStr);
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+    //  BGM111_WriteCharacteristic(gattdb_RdSound16,
+    //                             strlen((char *)data.FFTBin16.dumpStr), (uint8_t *)data.FFTBin16.dumpStr);
+    #endif
+      /* Send the FFTBin32 to the BLE module */
+      RoadBrd_gpio_On( BGM_LED );
+    #ifndef LEGACY_PATCH
+      sprintf( (char *)tempBffr2, "<U0014>%s</U0014>", (uint8_t *)data.FFTBin32.dumpStr);
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+    //  BGM111_WriteCharacteristic(gattdb_RdSound32,
+    //                             strlen((char *)data.FFTBin32.dumpStr), (uint8_t *)data.FFTBin32.dumpStr);
+    #endif
+      /* Send the FFTBin48 to the BLE module */
+      RoadBrd_gpio_On( BGM_LED );
+    #ifndef LEGACY_PATCH
+      sprintf( (char *)tempBffr2, "<U0015>%s</U0015>", (uint8_t *)data.FFTBin48.dumpStr);
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+    //  BGM111_WriteCharacteristic(gattdb_RdSound48,
+    //                             strlen((char *)data.FFTBin48.dumpStr), (uint8_t *)data.FFTBin48.dumpStr);
+  } // Endif (BGM111_Ready()
   // Test Analytics flag and determine if we need to update that characteristic
   if (!(Tst_HeartBeat()))
   {
@@ -858,7 +934,7 @@ void Process_RdSound( void )
   sprintf( (char *)tempBffr2, "\r\n\r\n" );
   //BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-  sprintf( (char *)tempBffr2, "<TICK:>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
+  sprintf( (char *)tempBffr2, "<TICK>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
   /* Process the sensor state machine if the BLE module is ready */
   if ((BGM111_Ready()) &&
