@@ -1001,7 +1001,7 @@ void SendApp_String( uint8_t *pData )
   */
 void Test_Connection( void )
 {
-  uint8_t tempBffr2[40];
+//  uint8_t tempBffr2[40];
   
   // Test HAL Count
 /*  if (HAL_GetTick() >= HAL_TIMEOUT_CNT)
@@ -1026,23 +1026,23 @@ void Test_Connection( void )
       // Test Heart Beat Count and determine if time to reset.
       HeartBeat_Cnt++;
       // Time to Build Status?
-      if ( (HeartBeat_Cnt % 5) == 0 )
-      {
-        sprintf( (char *)tempBffr2, " \r\n<HB:%04x/%08x> ", HeartBeat_Cnt, HAL_GetTick());
-        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-        SendApp_String( tempBffr2 );
-      }
+//      if ( (HeartBeat_Cnt % 5) == 0 )
+//      {
+//        sprintf( (char *)tempBffr2, " \r\n<HB:%04x/%08x> ", HeartBeat_Cnt, HAL_GetTick());
+//        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+//        SendApp_String( tempBffr2 );
+//      }
       // Test Heart Beat Count. If expired, reset.
-      if (HeartBeat_Cnt > HEARTBEAT_CNT)
-      {
+//      if (HeartBeat_Cnt > HEARTBEAT_CNT)
+//      {
         // Has been 30 Seconds....Time to reset Code.
-        RdBrd_ErrCdLogErrCd( ERROR_BGM_HRTBT, MODULE_bgm111 );
-        HeartBeat_Cnt = 0;
-        Clr_HrtBeat_Cnt();
+//        RdBrd_ErrCdLogErrCd( ERROR_BGM_HRTBT, MODULE_bgm111 );
+//        HeartBeat_Cnt = 0;
+//        Clr_HrtBeat_Cnt();
         //RoadBrd_Delay( 1000 );
 //        RdBrd_BlinkErrCd( ERROR_BGM_HRTBT );
 //        HAL_NVIC_SystemReset();
-      }
+//      }
     } // EndIf (Tst_HeartBeat())
     else
     {
@@ -1057,20 +1057,20 @@ void Test_Connection( void )
     // No..
     connection_cnt++;
     // Test Connection Count. If expired, reset.
-    if ( (connection_cnt % 5) == 0 )
-    {
-      sprintf( (char *)tempBffr2, " \r\n<CNCT:%04x/%08x> ", connection_cnt, HAL_GetTick());
-      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-    }
-    if (connection_cnt > CONNECTION_CNT)
-    {
+//    if ( (connection_cnt % 5) == 0 )
+//    {
+//      sprintf( (char *)tempBffr2, " \r\n<CNCT:%04x/%08x> ", connection_cnt, HAL_GetTick());
+//      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+//    }
+//    if (connection_cnt > CONNECTION_CNT)
+//    {
       // Has been 90 Seconds....Time to reset Code.
-      RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
-      Clr_HrtBeat_Cnt();
+//      RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
+//      Clr_HrtBeat_Cnt();
 //      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
       //RoadBrd_Delay( 1000 );
 //      HAL_NVIC_SystemReset();
-    }
+//    }
   } // EndElse ( BGM111_Connected() )
 }
 
