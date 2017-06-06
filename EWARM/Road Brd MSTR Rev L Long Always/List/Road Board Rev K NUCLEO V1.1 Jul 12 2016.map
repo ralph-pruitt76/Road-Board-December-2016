@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V7.60.2.11341/W32 for ARM                28/May/2017  20:46:28
+# IAR ELF Linker V7.60.2.11341/W32 for ARM                06/Jun/2017  14:32:18
 # Copyright 2007-2016 IAR Systems AB.
 #
 #    Output file  =  
@@ -185,7 +185,7 @@ initialize by copy { rw };
   .intvec             ro code  0x08000000    0x124  startup_stm32l152xe.o [1]
                              - 0x08000124    0x124
 
-"P1":                                      0x125f0
+"P1":                                      0x125ec
   .text               ro code  0x08000124   0x1ef4  parser.o [1]
   .text               ro code  0x08002018     0x36  strlen.o [5]
   .text               ro code  0x0800204e      0xa  xsprout.o [3]
@@ -462,84 +462,85 @@ initialize by copy { rw };
   .rodata             const    0x080122d0     0x10  bgm111.o [1]
   .rodata             const    0x080122e0     0x10  bgm111.o [1]
   .rodata             const    0x080122f0     0x10  bgm111.o [1]
-  .rodata             const    0x08012300     0x10  main.o [1]
+  .rodata             const    0x08012300     0x10  parser.o [1]
   .rodata             const    0x08012310     0x10  parser.o [1]
   .rodata             const    0x08012320     0x10  parser.o [1]
   .rodata             const    0x08012330     0x10  parser.o [1]
   .rodata             const    0x08012340     0x10  parser.o [1]
   .rodata             const    0x08012350     0x10  parser.o [1]
   .rodata             const    0x08012360     0x10  parser.o [1]
-  .rodata             const    0x08012370     0x10  parser.o [1]
-  .rodata             const    0x08012380     0x10  system_stm32l1xx.o [1]
-  .text               ro code  0x08012390     0x10  startup_stm32l152xe.o [1]
-  .rodata             const    0x080123a0      0xc  app_data.o [1]
-  .rodata             const    0x080123ac      0xc  bgm111.o [1]
-  .rodata             const    0x080123b8      0xc  bgm111.o [1]
-  .rodata             const    0x080123c4      0xc  bgm111.o [1]
-  .rodata             const    0x080123d0      0xc  bgm111.o [1]
-  .rodata             const    0x080123dc      0xc  bgm111.o [1]
-  .rodata             const    0x080123e8      0xc  parser.o [1]
-  .rodata             const    0x080123f4      0xc  parser.o [1]
-  .rodata             const    0x08012400      0xc  parser.o [1]
-  .rodata             const    0x0801240c      0xc  parser.o [1]
-  .rodata             const    0x08012418      0xc  parser.o [1]
-  .rodata             const    0x08012424      0xc  parser.o [1]
-  .rodata             const    0x08012430      0xc  parser.o [1]
-  .rodata             const    0x0801243c      0xc  stm32l1xx_hal_rcc.o [1]
-  .text               ro code  0x08012448      0xc  cstartup_M.o [5]
-  .rodata             const    0x08012454      0x8  app_data.o [1]
-  .rodata             const    0x0801245c      0x8  barometer.o [1]
-  .rodata             const    0x08012464      0x8  barometer.o [1]
-  .rodata             const    0x0801246c      0x8  barometer.o [1]
-  .rodata             const    0x08012474      0x8  barometer.o [1]
-  .rodata             const    0x0801247c      0x8  barometer.o [1]
-  .rodata             const    0x08012484      0x8  bgm111.o [1]
-  .rodata             const    0x0801248c      0x8  bgm111.o [1]
-  .rodata             const    0x08012494      0x8  ErrorCodes.o [1]
-  .rodata             const    0x0801249c      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124a4      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124ac      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124b4      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124bc      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124c4      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124cc      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124d4      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124dc      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124e4      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124ec      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124f4      0x8  ErrorCodes.o [1]
-  .rodata             const    0x080124fc      0x8  ErrorCodes.o [1]
-  .rodata             const    0x08012504      0x8  ErrorCodes.o [1]
-  .rodata             const    0x0801250c      0x8  ErrorCodes.o [1]
-  .rodata             const    0x08012514      0x8  ErrorCodes.o [1]
-  .rodata             const    0x0801251c      0x8  ErrorCodes.o [1]
-  .rodata             const    0x08012524      0x8  ErrorCodes.o [1]
-  .rodata             const    0x0801252c      0x8  ErrorCodes.o [1]
-  .rodata             const    0x08012534      0x8  ErrorCodes.o [1]
-  .rodata             const    0x0801253c      0x8  GridEye.o [1]
-  .rodata             const    0x08012544      0x8  GridEye.o [1]
-  .rodata             const    0x0801254c      0x8  GridEye.o [1]
-  .rodata             const    0x08012554      0x8  Humidity.o [1]
-  .rodata             const    0x0801255c      0x8  Humidity.o [1]
-  .rodata             const    0x08012564      0x8  Humidity.o [1]
-  .rodata             const    0x0801256c      0x8  Humidity.o [1]
-  .rodata             const    0x08012574      0x8  main.o [1]
-  .rodata             const    0x0801257c      0x8  parser.o [1]
-  .rodata             const    0x08012584      0x8  parser.o [1]
-  .rodata             const    0x0801258c      0x8  parser.o [1]
-  .rodata             const    0x08012594      0x8  Rd_Sound.o [1]
-  .rodata             const    0x0801259c      0x8  RGBLight.o [1]
-  .rodata             const    0x080125a4      0x8  RGBLight.o [1]
-  .rodata             const    0x080125ac      0x8  system_stm32l1xx.o [1]
-  .rodata             const    0x080125b4      0x8  Temperature.o [1]
-  .rodata             const    0x080125bc      0x8  Temperature.o [1]
-  .rodata             const    0x080125c4      0x8  Temperature.o [1]
-  .rodata             const    0x080125cc      0x8  VMonitor.o [1]
-  .rodata             const    0x080125d4      0x8  VMonitor.o [1]
-  .rodata             const    0x080125dc      0x8  VMonitor.o [1]
-  .rodata             const    0x080125e4      0x8  VMonitor.o [1]
-  .rodata             const    0x080125ec      0x8  VMonitor.o [1]
-  .rodata             const    0x080125f4      0x4  stm32l1xx_hal_rcc.o [1]
+  .rodata             const    0x08012370     0x10  system_stm32l1xx.o [1]
+  .text               ro code  0x08012380     0x10  startup_stm32l152xe.o [1]
+  .rodata             const    0x08012390      0xc  app_data.o [1]
+  .rodata             const    0x0801239c      0xc  bgm111.o [1]
+  .rodata             const    0x080123a8      0xc  bgm111.o [1]
+  .rodata             const    0x080123b4      0xc  bgm111.o [1]
+  .rodata             const    0x080123c0      0xc  bgm111.o [1]
+  .rodata             const    0x080123cc      0xc  bgm111.o [1]
+  .rodata             const    0x080123d8      0xc  main.o [1]
+  .rodata             const    0x080123e4      0xc  parser.o [1]
+  .rodata             const    0x080123f0      0xc  parser.o [1]
+  .rodata             const    0x080123fc      0xc  parser.o [1]
+  .rodata             const    0x08012408      0xc  parser.o [1]
+  .rodata             const    0x08012414      0xc  parser.o [1]
+  .rodata             const    0x08012420      0xc  parser.o [1]
+  .rodata             const    0x0801242c      0xc  parser.o [1]
+  .rodata             const    0x08012438      0xc  stm32l1xx_hal_rcc.o [1]
+  .text               ro code  0x08012444      0xc  cstartup_M.o [5]
+  .rodata             const    0x08012450      0x8  app_data.o [1]
+  .rodata             const    0x08012458      0x8  barometer.o [1]
+  .rodata             const    0x08012460      0x8  barometer.o [1]
+  .rodata             const    0x08012468      0x8  barometer.o [1]
+  .rodata             const    0x08012470      0x8  barometer.o [1]
+  .rodata             const    0x08012478      0x8  barometer.o [1]
+  .rodata             const    0x08012480      0x8  bgm111.o [1]
+  .rodata             const    0x08012488      0x8  bgm111.o [1]
+  .rodata             const    0x08012490      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012498      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124a0      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124a8      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124b0      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124b8      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124c0      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124c8      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124d0      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124d8      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124e0      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124e8      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124f0      0x8  ErrorCodes.o [1]
+  .rodata             const    0x080124f8      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012500      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012508      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012510      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012518      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012520      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012528      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012530      0x8  ErrorCodes.o [1]
+  .rodata             const    0x08012538      0x8  GridEye.o [1]
+  .rodata             const    0x08012540      0x8  GridEye.o [1]
+  .rodata             const    0x08012548      0x8  GridEye.o [1]
+  .rodata             const    0x08012550      0x8  Humidity.o [1]
+  .rodata             const    0x08012558      0x8  Humidity.o [1]
+  .rodata             const    0x08012560      0x8  Humidity.o [1]
+  .rodata             const    0x08012568      0x8  Humidity.o [1]
+  .rodata             const    0x08012570      0x8  main.o [1]
+  .rodata             const    0x08012578      0x8  parser.o [1]
+  .rodata             const    0x08012580      0x8  parser.o [1]
+  .rodata             const    0x08012588      0x8  parser.o [1]
+  .rodata             const    0x08012590      0x8  Rd_Sound.o [1]
+  .rodata             const    0x08012598      0x8  RGBLight.o [1]
+  .rodata             const    0x080125a0      0x8  RGBLight.o [1]
+  .rodata             const    0x080125a8      0x8  system_stm32l1xx.o [1]
+  .rodata             const    0x080125b0      0x8  Temperature.o [1]
+  .rodata             const    0x080125b8      0x8  Temperature.o [1]
+  .rodata             const    0x080125c0      0x8  Temperature.o [1]
+  .rodata             const    0x080125c8      0x8  VMonitor.o [1]
+  .rodata             const    0x080125d0      0x8  VMonitor.o [1]
+  .rodata             const    0x080125d8      0x8  VMonitor.o [1]
+  .rodata             const    0x080125e0      0x8  VMonitor.o [1]
+  .rodata             const    0x080125e8      0x8  VMonitor.o [1]
+  .rodata             const    0x080125f0      0x4  stm32l1xx_hal_rcc.o [1]
+  .text               ro code  0x080125f4      0x4  startup_stm32l152xe.o [1]
   .text               ro code  0x080125f8      0x4  startup_stm32l152xe.o [1]
   .text               ro code  0x080125fc      0x4  startup_stm32l152xe.o [1]
   .text               ro code  0x08012600      0x4  startup_stm32l152xe.o [1]
@@ -589,11 +590,10 @@ initialize by copy { rw };
   .text               ro code  0x080126b0      0x4  startup_stm32l152xe.o [1]
   .text               ro code  0x080126b4      0x4  startup_stm32l152xe.o [1]
   .text               ro code  0x080126b8      0x4  startup_stm32l152xe.o [1]
-  .text               ro code  0x080126bc      0x4  startup_stm32l152xe.o [1]
-  .rodata             const    0x080126c0      0x0  zero_init3.o [5]
-  .rodata             const    0x080126c0      0x0  packbits_init_single.o [5]
-  Initializer bytes   const    0x080126c0     0x54  <for P2-1>
-                             - 0x08012714  0x125f0
+  .rodata             const    0x080126bc      0x0  zero_init3.o [5]
+  .rodata             const    0x080126bc      0x0  packbits_init_single.o [5]
+  Initializer bytes   const    0x080126bc     0x54  <for P2-1>
+                             - 0x08012710  0x125ec
 
 Absolute sections:                            0x10
   .bss                zero     0x08070000     0x10  wwdg.o [1]
@@ -706,7 +706,7 @@ Zero (__iar_zero_init3)
 
 Copy/packbits (__iar_packbits_init_single3)
     1 source range, total size 0x54 (25% of destination):
-          0x080126c0    0x54
+          0x080126bc    0x54
     1 destination range, total size 0x14c:
           0x20000000   0x14c
 
@@ -740,7 +740,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     i2c.o                           1 248                60
     list.o                             64
     lps25hb.o                         584
-    main.o                          1 382      248
+    main.o                          1 382      244
     parser.o                        7 924    4 760        1
     port.o                             36
     portasm.o                         148
@@ -773,7 +773,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     usbd_ioreq.o                      144
     wwdg.o                            296                41       16
     ----------------------------------------------------------------
-    Total:                         58 214    6 667    9 364       16
+    Total:                         58 214    6 663    9 364       16
 
 command line: [2]
     ----------------------------------------------------------------
@@ -859,7 +859,7 @@ shb_l.a: [6]
     Gaps                               42
     Linker created                              40    4 096
 --------------------------------------------------------------------
-    Grand Total:                   68 768    6 772   13 728       16
+    Grand Total:                   68 768    6 768   13 728       16
 
 
 *******************************************************************************
@@ -879,8 +879,8 @@ ADC_DMAConvCplt         0x0800c57d    0x6e  Code  Lc  stm32l1xx_hal_adc.o [1]
 ADC_DMAError            0x0800c5fd    0x1e  Code  Lc  stm32l1xx_hal_adc.o [1]
 ADC_DMAHalfConvCplt     0x0800c5ed     0xe  Code  Lc  stm32l1xx_hal_adc.o [1]
 ADC_Enable              0x0800c493    0x72  Code  Gb  stm32l1xx_hal_adc.o [1]
-AHBPrescTable           0x08012380    0x10  Data  Gb  system_stm32l1xx.o [1]
-APBPrescTable           0x080125ac     0x8  Data  Gb  system_stm32l1xx.o [1]
+AHBPrescTable           0x08012370    0x10  Data  Gb  system_stm32l1xx.o [1]
+APBPrescTable           0x080125a8     0x8  Data  Gb  system_stm32l1xx.o [1]
 BGM111_Connected        0x0800287f     0x8  Code  Gb  bgm111.o [1]
 BGM111_DataConnected    0x08002887     0x8  Code  Gb  bgm111.o [1]
 BGM111_Init             0x08002639    0x32  Code  Gb  bgm111.o [1]
@@ -1397,7 +1397,7 @@ __iar_modf              0x0800980d          Code  Gb  modf.o [4]
 __iar_modfl             0x0800980d          Code  Gb  modf.o [4]
 __iar_packbits_init_single3
                         0x08011155    0x38  Code  Gb  packbits_init_single.o [5]
-__iar_program_start     0x08012449          Code  Gb  cstartup_M.o [5]
+__iar_program_start     0x08012445          Code  Gb  cstartup_M.o [5]
 __iar_sqrt              0x08008005          Code  Gb  sqrt.o [4]
 __iar_ui2d              0x08007fed          Code  Gb  I32ToDbl.o [4]
 __iar_ui2f              0x08009cad          Code  Gb  I32ToFlt.o [4]
@@ -1420,8 +1420,8 @@ _gecko_cmd_msg          0x20002fec    0x84  Data  Gb  bgm111.o [1]
 _gecko_rsp_msg          0x20003070    0x84  Data  Gb  bgm111.o [1]
 _main                   0x08011e03          Code  Gb  cmain.o [5]
 aPLLDivisionFactorTable
-                        0x080125f4     0x4  Data  Gb  stm32l1xx_hal_rcc.o [1]
-aPLLMULFactorTable      0x0801243c     0xc  Data  Gb  stm32l1xx_hal_rcc.o [1]
+                        0x080125f0     0x4  Data  Gb  stm32l1xx_hal_rcc.o [1]
+aPLLMULFactorTable      0x08012438     0xc  Data  Gb  stm32l1xx_hal_rcc.o [1]
 adcActive               0x20003599     0x1  Data  Gb  adc.o [1]
 analytics               0x20003538     0x4  Data  Lc  app_data.o [1]
 bffr1Flag               0x200035a1     0x1  Data  Lc  usart.o [1]
@@ -1528,7 +1528,7 @@ xYieldPending           0x20003574     0x4  Data  Lc  tasks.o [1]
 [6] = shb_l.a
 
   68 768 bytes of readonly  code memory
-   6 772 bytes of readonly  data memory
+   6 768 bytes of readonly  data memory
   13 728 bytes of readwrite data memory (+ 16 absolute)
 
 Errors: none
