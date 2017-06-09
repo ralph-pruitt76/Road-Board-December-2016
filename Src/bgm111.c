@@ -533,6 +533,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       // Yes....Clear Flags.
       ble.connection = false;
       ble.data_Connection = false;
+      ClrDataStructure();                           // Clear Backup data structure.
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
     }
     // Data String?

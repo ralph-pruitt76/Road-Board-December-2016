@@ -17,6 +17,7 @@
 #define SAMPLE_TIM_IRQHandler   TIM6_IRQHandler
 
 #define PROCESS_SNSR_TIME       100      // Process all sensors every Second(100 * 100ms tick)...10.0 Seconds
+#define ANALYTICS_MAXCNT        14        // 180 Seconds
 #define PROCESS_RD_SND_TIME     123      // Process all Road Sound every Second(123 * 100ms tick)...12.3 Seconds
 #define PROCESS_LEDOFF_TIME     1       // Process and turn off all active LEDs. Controls the Blink rate of the LEDs(1 * 50ms tick)
 #ifdef LONG_DELAY
@@ -74,5 +75,6 @@ void Set_HeartBeat( void );
 void Clr_HeartBeat( void );
 void Clr_HrtBeat_Cnt( void );
 void SendApp_String( uint8_t *pData );
+void ClrDataStructure(void);
 
 #endif

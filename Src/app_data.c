@@ -155,9 +155,34 @@ dataTmplate data;
 void InitSensors(void)
 {
   data.Legacy_OneTime = true;                   // Clear Legacy One time flag so that we can set key characteristics...once.
+  ClrDataStructure();                           // Clear Backup data structure.
   data.task_item = VOLTAGE_MNTR_TASK;           // Initialize the task_item to first item.
   analytics.HrtBeat_Flg = false;                // Set flasg to clear before using it.
   analytics.HrtBeat_Cnt = 0;                    // Clear count before using it.
+}
+
+void ClrDataStructure(void)
+{
+  data.Legacy_OneTime = true;                   // Clear Legacy One time flag so that we can set key characteristics...once.
+  strcpy( (char *)data.ShntVltg.Raw, "------" );
+  strcpy( (char *)data.Current.Raw, "------" );
+  strcpy( (char *)data.Power.Raw, "------" );
+  strcpy( (char *)data.Voltage.Raw, "------" );
+  strcpy( (char *)data.Temp.Raw, "------" );
+  strcpy( (char *)data.RGBValues.Raw, "--------------" );
+  strcpy( (char *)data.Pressure.Raw, "---------" );
+  strcpy( (char *)data.PrTemp.Raw, "------" );
+  strcpy( (char *)data.Humidity.HRaw, "------" );
+  strcpy( (char *)data.HmTemp.Raw, "------" );
+  strcpy( (char *)data.GridValues.Thermistor.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye1.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye2.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye3.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye4.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye5.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye6.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye7.Raw, "------" );
+  strcpy( (char *)data.GridValues.GridEye8.Raw, "------" );
 }
 
 /**
@@ -948,8 +973,11 @@ void Process_RdSound( void )
       BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
   } // Endif (BGM111_Ready()
   // Test Analytics flag and determine if we need to update that characteristic
-  if (!(Tst_HeartBeat()))
+//  if (!(Tst_HeartBeat()))
+  if (analytics.HrtBeat_Cnt++ >= ANALYTICS_MAXCNT)
   {
+    analytics.HrtBeat_Cnt = 0;
+    ClrDataStructure();                           // Clear Backup data structure.
 //    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
 //    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
 //                             strlen((char *)tempStr), (uint8_t *)tempStr);
