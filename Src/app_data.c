@@ -248,10 +248,6 @@ HAL_StatusTypeDef  ProcessSensorState(void)
     switch(data.task_item)
     {
       case VOLTAGE_MNTR_TASK:
-        // Send <FRM> String.
-        sprintf( (char *)tmpBuffer, "<FRM>");
-        RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
-        BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
         if ( Get_DriverStates( VOLTAGE_MNTR_TASK ))
         {
           /* Read the Voltage Monitor Data. */
@@ -856,16 +852,6 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 //                                 strlen((char *)LEGACY_BANNER), (uint8_t *)LEGACY_BANNER);
     }
 //#endif
-    if (data.task_item == VOLTAGE_MNTR_TASK)
-    {
-      // Send </FRM> String.
-      sprintf( (char *)tmpBuffer, "</FRM>");
-      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
-      BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
-      sprintf( (char *)tmpBuffer, "\r\n\r\n" );
-      RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
-    }
-    
  }
 
   return Status;
@@ -885,10 +871,8 @@ void Process_RdSound( void )
       (BGM111_Connected()) &&
       (BGM111_DataConnected()) )
   {
-      // Send <FRM> String.
-      sprintf( (char *)tempBffr2, "<FRM>");
-      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+
+  
   
       RoadBrd_gpio_On( MICRO_LED );
       // 1. Build and Process Road Sound
@@ -936,16 +920,6 @@ void Process_RdSound( void )
       BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
     //  BGM111_WriteCharacteristic(gattdb_RdSound48,
     //                             strlen((char *)data.FFTBin48.dumpStr), (uint8_t *)data.FFTBin48.dumpStr);
-      //sprintf( (char *)tempBffr2, "<TICK>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
-      sprintf( (char *)tempBffr2, "<TICK>RP/%08x</TICK>", HAL_GetTick());
-      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-      // Service Watchdog
-      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-      // Send </FRM> String.
-      sprintf( (char *)tempBffr2, "</FRM>");
-      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
   } // Endif (BGM111_Ready()
   // Test Analytics flag and determine if we need to update that characteristic
   if (!(Tst_HeartBeat()))
@@ -960,6 +934,17 @@ void Process_RdSound( void )
   sprintf( (char *)tempBffr2, "\r\n\r\n" );
   //BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
   RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+  sprintf( (char *)tempBffr2, "<TICK>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
+  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+  /* Process the sensor state machine if the BLE module is ready */
+  if ((BGM111_Ready()) &&
+      (BGM111_Connected()) &&
+      (BGM111_DataConnected()) )
+  {
+    // Service Watchdog
+    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+  }
   // ALSO Last....Report Perioic Status of Voltage/Current/Power
   //sprintf( (char *)tempBffr2, " <%s/%s/%s> ", data.Voltage.Voltage, data.Current.Current, data.Power.Power);
   //RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
@@ -1001,7 +986,7 @@ void SendApp_String( uint8_t *pData )
   */
 void Test_Connection( void )
 {
-//  uint8_t tempBffr2[40];
+  uint8_t tempBffr2[40];
   
   // Test HAL Count
 /*  if (HAL_GetTick() >= HAL_TIMEOUT_CNT)
@@ -1026,23 +1011,23 @@ void Test_Connection( void )
       // Test Heart Beat Count and determine if time to reset.
       HeartBeat_Cnt++;
       // Time to Build Status?
-//      if ( (HeartBeat_Cnt % 5) == 0 )
-//      {
-//        sprintf( (char *)tempBffr2, " \r\n<HB:%04x/%08x> ", HeartBeat_Cnt, HAL_GetTick());
-//        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-//        SendApp_String( tempBffr2 );
-//      }
+      if ( (HeartBeat_Cnt % 5) == 0 )
+      {
+        sprintf( (char *)tempBffr2, " \r\n<HB:%04x/%08x> ", HeartBeat_Cnt, HAL_GetTick());
+        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        SendApp_String( tempBffr2 );
+      }
       // Test Heart Beat Count. If expired, reset.
-//      if (HeartBeat_Cnt > HEARTBEAT_CNT)
-//      {
+      if (HeartBeat_Cnt > HEARTBEAT_CNT)
+      {
         // Has been 30 Seconds....Time to reset Code.
-//        RdBrd_ErrCdLogErrCd( ERROR_BGM_HRTBT, MODULE_bgm111 );
-//        HeartBeat_Cnt = 0;
-//        Clr_HrtBeat_Cnt();
+        RdBrd_ErrCdLogErrCd( ERROR_BGM_HRTBT, MODULE_bgm111 );
+        HeartBeat_Cnt = 0;
+        Clr_HrtBeat_Cnt();
         //RoadBrd_Delay( 1000 );
 //        RdBrd_BlinkErrCd( ERROR_BGM_HRTBT );
 //        HAL_NVIC_SystemReset();
-//      }
+      }
     } // EndIf (Tst_HeartBeat())
     else
     {
@@ -1057,20 +1042,20 @@ void Test_Connection( void )
     // No..
     connection_cnt++;
     // Test Connection Count. If expired, reset.
-//    if ( (connection_cnt % 5) == 0 )
-//    {
-//      sprintf( (char *)tempBffr2, " \r\n<CNCT:%04x/%08x> ", connection_cnt, HAL_GetTick());
-//      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-//    }
-//    if (connection_cnt > CONNECTION_CNT)
-//    {
+    if ( (connection_cnt % 5) == 0 )
+    {
+      sprintf( (char *)tempBffr2, " \r\n<CNCT:%04x/%08x> ", connection_cnt, HAL_GetTick());
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+    }
+    if (connection_cnt > CONNECTION_CNT)
+    {
       // Has been 90 Seconds....Time to reset Code.
-//      RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
-//      Clr_HrtBeat_Cnt();
+      RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
+      Clr_HrtBeat_Cnt();
 //      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
       //RoadBrd_Delay( 1000 );
 //      HAL_NVIC_SystemReset();
-//    }
+    }
   } // EndElse ( BGM111_Connected() )
 }
 
