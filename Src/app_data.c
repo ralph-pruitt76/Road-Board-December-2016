@@ -908,7 +908,8 @@ void Process_RdSound( void )
   
   if ((BGM111_Ready()) &&
       (BGM111_Connected()) &&
-      (BGM111_DataConnected()) )
+      (BGM111_DataConnected()) &&
+      (BGM111_SyncModeTestNoInc()) )
   {
       // Send <FRM> String.
       sprintf( (char *)tempBffr2, "<FRM>");
@@ -965,6 +966,18 @@ void Process_RdSound( void )
       sprintf( (char *)tempBffr2, "<TICK>RP/%08x</TICK>", HAL_GetTick());
       RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
       BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+      // Set Sync Flag for Frame.
+      BGM111_cntrlSetSyncFlg( SYNC_WAIT );
+      // Test TACK State
+      if (BGM111_GetTackState() == TACK_ARMED)
+      {
+        BGM111_SetTackState(TACK_ARMED2);
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED2>");
+      }
+      else if (BGM111_GetTackState() == TACK_ARMED2)
+      {
+        BGM111_SetTackState(TACK_ASYNC);
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ASYNC>");      }
       // Service Watchdog
       RoadBrd_WWDG_Refresh();     // Refresh WatchDog
       // Send </FRM> String.

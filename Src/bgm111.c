@@ -54,6 +54,9 @@ struct
   bool booted;
   bool connection;
   bool data_Connection;
+  uint8_t TackArmed;
+  uint8_t TackCnt;
+  uint8_t SyncFlag;
   struct gecko_cmd_packet *evt;
 } static ble;
 
@@ -66,6 +69,9 @@ void BGM111_LowLevel_Init(void)
   ble.booted =  false;
   ble.connection = false;
   ble.data_Connection = false;
+  ble.TackArmed = TACK_OFF;
+  ble.TackCnt = 0;
+  ble.SyncFlag = SYNC_PROC;
 }
 
 /* Next buffer index based on current index and buffer size */
@@ -334,6 +340,120 @@ bool BGM111_DataConnected(void)
 }
 
 /**
+  * @brief  Check whether the BLE module is in Sync Mode and Waiting for ACK.
+  * @retval bool:         true(1):        Sync Ready for Processing next Frame.
+  *                       false(0):       Sync needs to wait.
+  */
+bool BGM111_SyncModeTest(void)
+{
+  uint8_t tempBffr2[20];
+
+  // Is Sync Mode armed? Yes.. Then Need to test SyncFlag
+  if (ble.TackArmed == TACK_SYNC)
+  {
+    // If SyncFlag is SYNC_PROC, then allow Frame send.
+    if (ble.SyncFlag == SYNC_PROC)
+      return true;
+    // NO, then Incrment count, We are one step closer to Reset Code.
+    else
+    {
+      ble.TackCnt++;
+      sprintf( (char *)tempBffr2, "<TACK Strike:%d>", ble.TackCnt);
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+
+      if (ble.TackCnt > TACK_LIMIT)
+      {
+        // Time to process error and reset code....NO Choice.
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGMSYNC_CNCTCLOSE>");
+        RdBrd_ErrCdLogErrCd( ERROR_BGM_SYNCCNCT, MODULE_bgm111 );
+        Clr_HrtBeat_Cnt();
+        RdBrd_BlinkErrCd( ERROR_BGM_SYNCCNCT );
+        //RoadBrd_Delay( 1000 );
+        HAL_NVIC_SystemReset();
+      } // EndIf (ble.TackCnt >TACK_LIMIT)
+      return false;
+    } // EndElse (ble.SyncFlag == SYNC_PROC)
+  } // EndIf (ble.TackArmed == TACK_SYNC)
+  // No....Then we can continue process. Return true.
+  else
+    return true;
+}
+
+/**
+  * @brief  Check whether the BLE module is in Sync Mode and Waiting for ACK.
+  * @retval bool:         true(1):        Sync Ready for Processing next Frame.
+  *                       false(0):       Sync needs to wait.
+  */
+bool BGM111_SyncModeTestNoInc(void)
+{
+  // Is Sync Mode armed? Yes.. Then Need to test SyncFlag
+  if (ble.TackArmed == TACK_SYNC)
+  {
+    // If SyncFlag is SYNC_PROC, then allow Frame send.
+    if (ble.SyncFlag == SYNC_PROC)
+      return true;
+    else
+      return false;
+  } // EndIf (ble.TackArmed == TACK_SYNC)
+  // No....Then we can continue process. Return true.
+  else
+    return true;
+}
+
+/**
+  * @brief  Set new Value for Sync Flag.
+  * @param uint8_t:       SYNC_WAIT(0):       Force Wait on all tests to send additional data
+  *                       SYNC_PROC(1):       Allow sending of additional frame of data.
+  * @retval None
+  */
+void BGM111_SetSyncFlg(uint8_t NewFlag)
+{
+  ble.SyncFlag = NewFlag;
+}
+
+/**
+  * @brief  Set new Value for Sync Flag if in SYNC Mode.
+  * @param uint8_t:       SYNC_WAIT(0):       Force Wait on all tests to send additional data
+  *                       SYNC_PROC(1):       Allow sending of additional frame of data.
+  * @retval None
+  */
+void BGM111_cntrlSetSyncFlg(uint8_t NewFlag)
+{
+  // Is Sync Mode armed? Yes.. Then Need to test SyncFlag
+  if (ble.TackArmed == TACK_SYNC)
+  {
+    ble.SyncFlag = NewFlag;
+  }
+}
+
+/**
+  * @brief  Return Tack State.
+  * @retval uint8_t:      TACK_OFF      = 0        Power Up Initialized Value.
+  *                       TACK_ARMED    = 1        Set when Connection has been detected.
+  *                       TACK_ARMED2   = 2        Set when First Tick Generated assuming TACK_ARMED State detected.
+  *                       TACK_SYNC     = 3        Set when first TACK detected while a TACK_ARMED2 State detected.
+  *                       TACK_ASYNC    = 4        Set when next TICK detected while TACK_ARMED2 State active.
+  */
+uint8_t BGM111_GetTackState(void)
+{
+  return ble.TackArmed;
+}
+
+/**
+  * @brief  Set Tack State.
+  * @param uint8_t:       TACK_OFF      = 0        Power Up Initialized Value.
+  *                       TACK_ARMED    = 1        Set when Connection has been detected.
+  *                       TACK_ARMED2   = 2        Set when First Tick Generated assuming TACK_ARMED State detected.
+  *                       TACK_SYNC     = 3        Set when first TACK detected while a TACK_ARMED2 State detected.
+  *                       TACK_ASYNC    = 4        Set when next TICK detected while TACK_ARMED2 State active.
+  * @retval None
+  */
+void BGM111_SetTackState(uint8_t NewValue)
+{
+  ble.TackArmed = NewValue;
+}
+
+/**
   * @brief  This interrupt handler is called to handle the Usart3 interruptes.
   *         from the BGM111
   * @param  None
@@ -500,7 +620,8 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
   // First pull new character into buffer.
   tempBffr2[in_ptr++] = c;
   // Now, Did we get a termination character?
-  if( c == 0x0a )
+  if( (c == 0x0a)  ||
+      (c == '?') )
   {
     // Reset Ptr.
     in_ptr = 0;
@@ -516,14 +637,18 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
     {
       // Yes....Set Boot Flag.
       ble.booted = true;
+      // If we are booted....Then lets arm TACK Test Code.
+      ble.data_Connection = false;
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.booted> ");
-
     }
     // Connection String?
     else if (strncmp((char *)tempBffr2,"Connected",9) == 0)
     {
       // Yes....Set Boot Flag.
       ble.connection = true;
+      ble.TackArmed = TACK_ARMED;
+      ble.TackCnt = 0;
+      RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.connection> ");
 
     }
@@ -533,6 +658,9 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       // Yes....Clear Flags.
       ble.connection = false;
       ble.data_Connection = false;
+      ble.TackArmed = TACK_ARMED;
+      ble.TackCnt = 0;
+      RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
       ClrDataStructure();                           // Clear Backup data structure.
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
     }
@@ -542,6 +670,23 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       // Yes....Set Boot Flag.
       ble.data_Connection = true;
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
+    }
+    // TACK String?
+    else if (strncmp((char *)tempBffr2,"<TACK",5) == 0)
+    {
+      if (ble.TackArmed == TACK_ARMED2)
+      {
+        ble.TackArmed = TACK_SYNC;
+        ble.TackCnt = 0;
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
+      }
+      else if (ble.TackArmed == TACK_SYNC)
+      {
+        ble.TackCnt = 0;
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
+       // Set Sync Flag for Frame.
+        BGM111_SetSyncFlg( SYNC_PROC );
+      }
     }
     // NOW TEST FOR PARAMS!!!
 

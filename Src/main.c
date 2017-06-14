@@ -869,7 +869,8 @@ int main(void)
           /* Process the sensor state machine if the BLE module is ready */
             if ((BGM111_Ready()) &&
                 (BGM111_Connected()) &&
-                (BGM111_DataConnected()) )
+                (BGM111_DataConnected()) &&
+                (BGM111_SyncModeTest()) )
           {
             ProcessSensorState();
           }
@@ -909,7 +910,8 @@ int main(void)
             /* Process the sensor state machine if the BLE module is ready */
             if ((BGM111_Ready()) &&
                 (BGM111_Connected()) &&
-                (BGM111_DataConnected()) )
+                (BGM111_DataConnected()) &&
+                (BGM111_SyncModeTest()) )
             {
               // Service Watchdog
               RoadBrd_WWDG_Refresh();     // Refresh WatchDog

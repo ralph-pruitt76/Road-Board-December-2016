@@ -1,30 +1,28 @@
-"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Src\bgm111.c"
+"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Drivers\STM32L1xx_HAL_Driver\Src\stm32l1xx_hal_pwr.c"
 -std=c99
 -ferror-limit=100
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Drivers/BSP/STM32L1xx_Nucleo
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Drivers/BSP/STM32L1xx_Nucleo
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Drivers/CMSIS/Include
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Drivers/CMSIS/Include
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include
--I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\EWARM\..\Middlewares\Third_Party\BgLib
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\CMSIS\Include
 -I
@@ -32,37 +30,33 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\inc\c
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Drivers\STM32L1xx_HAL_Driver\Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Drivers\STM32L1xx_HAL_Driver\Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Drivers\STM32L1xx_HAL_Driver\Inc\Legacy
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Drivers\STM32L1xx_HAL_Driver\Inc\Legacy
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Drivers\BSP\STM32L1xx_Nucleo
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Drivers\BSP\STM32L1xx_Nucleo
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM3
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM3
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Middlewares\ST\STM32_USB_Device_Library\Core\Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Middlewares\ST\STM32_USB_Device_Library\Core\Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Middlewares\Third_Party\FreeRTOS\Source\include
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Middlewares\Third_Party\FreeRTOS\Source\include
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Drivers\CMSIS\Include
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Drivers\CMSIS\Include
 -I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Drivers\CMSIS\Device\ST\STM32L1xx\Include
--I
-D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N7\Middlewares\Third_Party\BgLib
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road Board Rev K NUCLEO BASELINE Jul 14 2016\Drivers\CMSIS\Device\ST\STM32L1xx\Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\CMSIS\Include
 -DUSE_HAL_DRIVER=1
 -DSTM32L152xE=1
 -DUSE_STM32L1XX_NUCLEO=1
--DASCII=1
--DREV_L=1
--DLONG_DELAY=1
+-DNUCLEO=1
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
