@@ -76,9 +76,14 @@ typedef struct wwdg_SaveFrm *wwdg_SaveFrmPtr;
 typedef struct wwdg_Frmes
 {
   uint32_t checksum;
-  wwdg_SaveFrame Saved_Frames[FRAME_SIZE];
+  // Key Misc Variables
+  uint32_t RdSndTickCnt;
+  uint32_t SnsrTickCnt;
+  // Key Frame Tracking Variables
   uint8_t Frame_WrtPtr;
   uint8_t Frame_RdPtr;
+  // Definition of Frames.
+  wwdg_SaveFrame Saved_Frames[FRAME_SIZE];
 } wwdg_Frames;
 typedef struct wwdg_Frmes *wwdg_FrmesPtr;
 
@@ -98,6 +103,11 @@ HAL_StatusTypeDef RoadBrd_WWDG_ReadFrmFlash( void );
 HAL_StatusTypeDef RoadBrd_WWDG_WriteFrmFlash( void );
 HAL_StatusTypeDef RoadBrd_WWDG_WriteFlash( wwdg_SaveFrame* Write_Frame );
 HAL_StatusTypeDef RoadBrd_WWDG_ReadFlash( wwdg_SaveFrame* Read_Frame );
+HAL_StatusTypeDef RoadBrd_Set_TickCounts( uint32_t PassedRdSndTickCnt, uint32_t PassedSnsrTickCnt );
+HAL_StatusTypeDef  RoadBrd_Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt );
+HAL_StatusTypeDef RoadBrd_Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt );
+uint32_t RoadBrd_Get_RdSndTickCnt( void );
+uint32_t RoadBrd_Get_SnsrTickCnt( void );
 
 /* USER CODE END Prototypes */
 

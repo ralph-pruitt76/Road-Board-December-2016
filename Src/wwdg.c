@@ -37,6 +37,7 @@
 #include "gpio.h"
 #include "usart.h"
 #include "Flash.h"
+#include "tim.h"
 
 /* USER CODE BEGIN 0 */
 // Frame Structure Define
@@ -221,6 +222,9 @@ HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
   Status = HAL_OK;
   // Initialize Key Structures of Frame
   Save_Frames.checksum = FRAME_CHKSUM;
+  Save_Frames.RdSndTickCnt = PROCESS_RD_SND_TIME;
+  Save_Frames.SnsrTickCnt = PROCESS_SNSR_TIME;
+  
   Save_Frames.Frame_RdPtr = 0;
   Save_Frames.Frame_WrtPtr = 0;
   
@@ -233,6 +237,105 @@ HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
                                sizeof(Save_Frames));
   return Status;
 }
+
+/**
+  * @brief  Update Key Tick Counts.
+  * @param  uint32_t PassedRdSndTickCnt
+  * @param  uint32_t PassedSnsrTickCnt
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_Set_TickCounts( uint32_t PassedRdSndTickCnt, uint32_t PassedSnsrTickCnt )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
+  Save_Frames.SnsrTickCnt = PassedSnsrTickCnt;
+  Set_TickCounts( PassedRdSndTickCnt, PassedSnsrTickCnt );
+  // Write Structure to Flash Memory.
+  //Status = RoadBrd_FlashInitWrite( 0x00, 
+  Status = RoadBrd_FlashWrite( 0x00, 
+                               FLASH_TYPEERASE_PAGES, 
+                               (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+/**
+  * @brief  Update RdSndTickCnt.
+  * @param  uint32_t PassedRdSndTickCnt
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
+  Set_RdSndTickCnt( PassedRdSndTickCnt );
+  // Write Structure to Flash Memory.
+  //Status = RoadBrd_FlashInitWrite( 0x00, 
+  Status = RoadBrd_FlashWrite( 0x00, 
+                               FLASH_TYPEERASE_PAGES, 
+                               (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+/**
+  * @brief  Update SnsrTickCnt.
+  * @param  uint32_t PassedSnsrTickCnt
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  Save_Frames.SnsrTickCnt = PassedSnsrTickCnt;
+  Set_SnsrTickCnt( PassedSnsrTickCnt );
+  // Write Structure to Flash Memory.
+  //Status = RoadBrd_FlashInitWrite( 0x00, 
+  Status = RoadBrd_FlashWrite( 0x00, 
+                               FLASH_TYPEERASE_PAGES, 
+                               (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+/**
+  * @brief  Retrieve RdSndTickCnt.
+  * @param  None
+  * @retval uint32_t Save_Frames.RdSndTickCnt
+  */
+uint32_t RoadBrd_Get_RdSndTickCnt( void )
+{
+  return Save_Frames.RdSndTickCnt;
+}
+
+/**
+  * @brief  Retrieve SnsrTickCnt.
+  * @param  None
+  * @retval uint32_t Save_Frames.SnsrTickCnt
+  */
+uint32_t RoadBrd_Get_SnsrTickCnt( void )
+{
+  return Save_Frames.SnsrTickCnt;
+}
+
+
 
   /**
   * @brief  This function Reads the key frame Information from Flash..

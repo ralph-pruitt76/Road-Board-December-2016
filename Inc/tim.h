@@ -68,6 +68,9 @@ void Clear_Timer3_Flg( void );
 bool Test_Timer2( void );
 bool Test_Timer3( void );
 HAL_StatusTypeDef Proc_Timer2( void );
+void Set_TickCounts( uint32_t PassedRdSndTickCnt, uint32_t PassedSnsrTickCnt );
+void Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt );
+void Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt );
 
 /* USER CODE END Prototypes */
 

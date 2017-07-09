@@ -306,6 +306,10 @@ int main(void)
       }
     }
 //  }
+// Initialize Key Vars once Flash has been validated.
+  // Initialize Key Timer Sampling Vars.
+  Set_TickCounts( RoadBrd_Get_RdSndTickCnt(), RoadBrd_Get_SnsrTickCnt() );
+    
   // Time to start WWDG..
   HAL_NVIC_EnableIRQ(WWDG_IRQn);
   MX_WWDG_Init();
@@ -370,9 +374,38 @@ int main(void)
 #endif
           if (Status != HAL_OK)
             Error_Handler();
-          sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n\r\n> ", REL_DATE);
+          sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n", REL_DATE);
           //strcpy( (char *)tempBffr2, "                  Copyright August 9, 2016. \r\n\r\n\r\n> ");
           // Send string to UART..
+          // *******Time to Build Extra Information...
+#ifdef REV_L
+          Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+          // Wait for msg to be completed.
+          while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+          {
+          }
+          // Clear State for Next Transfer.
+          clrUsartState( NUCLEO_USART );
+#else
+          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+#endif
+          if (Status != HAL_OK)
+            Error_Handler();
+          sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
+#ifdef REV_L
+          Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+          // Wait for msg to be completed.
+          while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+          {
+          }
+          // Clear State for Next Transfer.
+          clrUsartState( NUCLEO_USART );
+#else
+          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+#endif
+          if (Status != HAL_OK)
+            Error_Handler();
+          sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
 #ifdef REV_L
           Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
           // Wait for msg to be completed.
@@ -422,7 +455,7 @@ int main(void)
 #endif
           if (Status != HAL_OK)
             Error_Handler();
-          sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n\r\n> ", REL_DATE);
+          sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n", REL_DATE);
           //strcpy( (char *)tempBffr2, "                  Copyright August 9, 2016. \r\n\r\n\r\n> ");
           // Send string to UART..
 #ifdef REV_L
@@ -437,6 +470,35 @@ int main(void)
 #else
           Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
           RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+#endif
+          if (Status != HAL_OK)
+            Error_Handler();
+          // *******Time to Build Extra Information...
+          sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
+#ifdef REV_L
+          Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+          // Wait for msg to be completed.
+          while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+          {
+          }
+          // Clear State for Next Transfer.
+          clrUsartState( NUCLEO_USART );
+#else
+          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+#endif
+          if (Status != HAL_OK)
+            Error_Handler();
+          sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+#ifdef REV_L
+          Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+          // Wait for msg to be completed.
+          while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+          {
+          }
+          // Clear State for Next Transfer.
+          clrUsartState( NUCLEO_USART );
+#else
+          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
 #endif
           if (Status != HAL_OK)
             Error_Handler();

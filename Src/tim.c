@@ -34,6 +34,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "tim.h"
+#include "wwdg.h"
 
 /* USER CODE BEGIN 0 */
 __IO ITStatus Timr2Ready = RESET;
@@ -265,7 +266,8 @@ HAL_StatusTypeDef Proc_Timer2( void )
     if ( RdSndTickCnt == 0 )
     {
       // Reset Timer;
-      RdSndTickCnt = PROCESS_RD_SND_TIME;
+      //RdSndTickCnt = PROCESS_RD_SND_TIME;
+      RdSndTickCnt = RoadBrd_Get_RdSndTickCnt();
       // TBD...Processing code for Road Sound goes here.
       // This will be a tasks start here in the future. For now, Will execute the FFT here(Set Time window at least 300msec out of sync to 1 sec timer and at least 5 Seconds.
       Process_RdSound();
@@ -277,7 +279,8 @@ HAL_StatusTypeDef Proc_Timer2( void )
     if ( SnsrTickCnt == 0 )
     {
       // Reset Timer;
-      SnsrTickCnt = PROCESS_SNSR_TIME;
+      //SnsrTickCnt = PROCESS_SNSR_TIME;
+      SnsrTickCnt = RoadBrd_Get_SnsrTickCnt();
       // Enable processing sensors here....
       SetDataReady();
     }
@@ -294,6 +297,8 @@ HAL_StatusTypeDef Proc_Timer2( void )
   */
 void HAL_TIM_StartTimer2( void )
 {
+  SnsrTickCnt = RoadBrd_Get_SnsrTickCnt();
+  RdSndTickCnt = RoadBrd_Get_RdSndTickCnt();
   if (HAL_TIM_Base_Start_IT( &htim2 ) != HAL_OK)
   {
     Error_Handler();
@@ -313,6 +318,38 @@ void HAL_TIM_StartTimer3( void )
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief  Update Key Tick Counts.
+  * @param  uint32_t PassedRdSndTickCnt
+  * @param  uint32_t PassedSnsrTickCnt
+  * @retval None
+  */
+void Set_TickCounts( uint32_t PassedRdSndTickCnt, uint32_t PassedSnsrTickCnt )
+{
+  RdSndTickCnt = PassedRdSndTickCnt;
+  SnsrTickCnt = PassedSnsrTickCnt;
+}
+
+/**
+  * @brief  Update RdSndTickCnt.
+  * @param  uint32_t PassedRdSndTickCnt
+  * @retval None
+  */
+void Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt )
+{
+  RdSndTickCnt = PassedRdSndTickCnt;
+}
+
+/**
+  * @brief  Update SnsrTickCnt.
+  * @param  uint32_t PassedSnsrTickCnt
+  * @retval None
+  */
+void Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt )
+{
+  SnsrTickCnt = PassedSnsrTickCnt;
 }
 
 /* USER CODE END 1 */

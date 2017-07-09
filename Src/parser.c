@@ -36,6 +36,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "parser.h"
 #include "ErrorCodes.h"
+#include <ctype.h>
+#include <stdlib.h>
+#include "wwdg.h"
+
 static bool Bypass = false;
 
 /* Parser function */
@@ -62,6 +66,9 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
   int num_bytes;
   int num_bytes_received;
   int Error, x;
+  char tempstr[10];
+  char* tempPstr;
+  int new_value, flag;
   float Temp_C, Temp_F, Shunt_V, Bus_V, Crrnt, Power;
   uint32_t Err_code;
 #else
@@ -95,6 +102,9 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
     GridEye     GridMeasure;
     uint32_t Err_code;
     uint8_t op_mode, ds_range, adc_rsl, sync, cmp_adjst, cmp_offst, int_assgn, int_persist, cnvrsn_int;
+    int new_value, flag;
+    char* tempPstr;
+    char tempstr[10];
   #endif
 #endif
 
@@ -1893,6 +1903,158 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     // Read Driver Status
                     HAL_NVIC_SystemReset();
                     sprintf( (char *)tempBffr2, "RESET CALLED BUT NO RESPONSE!!\r\n" );
+                    break;
+//++++++++++++++++++++++++++++++++++++++++++  Key Flash Variable Commands.
+                  case 'K':
+                    // Key Flash Variable Commands.
+                    // Test Size to make sure we have enough Characters for this operation
+                    Status = HAL_OK;
+                    if (Size < 4)
+                      strcpy( (char *)tempBffr2, "TK SYNTAX ERROR: Not correct format.\r\n");
+                    else
+                    {
+                      switch( tempBffr[2] )
+                      {
+//------------------
+                        case 'S':
+                          //Key Flash Variable Set Command.
+                          switch( tempBffr[3] )
+                          {
+//------------------
+                            case 'R':
+                              //Key Flash Variable Set Road Sound Sample Rate Command.
+                              // Step 1. Validate format.
+                              if(tempBffr[4]!=':')
+                              {
+                                strcpy( (char *)tempBffr2, "TKSR SYNTAX ERROR: Not correct format.\r\n");
+                              } // Endif (tempBffr[4]!=':')
+                              else
+                              {
+                                // 2. Verify if remaining string is digits
+                                if (Size > 5)
+                                {
+                                  flag = 1;
+                                  for (x=5; x< Size; x++)
+                                  {
+                                    if (isdigit(tempBffr[x]) == 0)
+                                      flag = 0;
+                                  }
+                                } // EndIf (Size > 5)
+                                else
+                                  flag = 0;
+                                if (flag == 0)
+                                {
+                                  strcpy( (char *)tempBffr2, "TKSR SYNTAX ERROR: Bad Parameter.\r\n");
+                                }
+                                else
+                                {
+                                  // 3. Grab remaining string and convert to integer.
+                                  tempPstr = &tempBffr[5];
+                                  strcpy(tempstr, tempPstr);
+                                  new_value = atoi( tempstr );
+                                  if((new_value > 9999) ||
+                                     (new_value < 0))
+                                  {
+                                    strcpy( (char *)tempBffr2, "TKSR SYNTAX ERROR: Bad Parameter.\r\n");
+                                  }
+                                  else
+                                  {
+                                    // Time to set new Road Sound Sample Rate.
+                                    RoadBrd_Set_RdSndTickCnt( new_value );
+                                    // NOW, Build Data String..
+                                    sprintf( (char *)tempBffr2, "COMPLETE" );
+                                  } // EndElse ((new_value > 9999) || (new_value < 0))
+                                } // EndElse (flag == 0)
+                              } // EndElse (tempBffr[4]!=':')
+                              break;
+//------------------
+                            case 'S':
+                              //Key Flash Variable Set Sensor Sample Rate Command.
+                              // Step 1. Validate format.
+                              if(tempBffr[4]!=':')
+                              {
+                                strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Not correct format.\r\n");
+                              } // Endif (tempBffr[4]!=':')
+                              else
+                              {
+                                // 2. Verify if remaining string is digits
+                                if (Size > 5)
+                                {
+                                  flag = 1;
+                                  for (x=5; x< Size; x++)
+                                  {
+                                    if (isdigit(tempBffr[x]) == 0)
+                                      flag = 0;
+                                  }
+                                } // EndIf (Size > 5)
+                                else
+                                  flag = 0;
+                                if (flag == 0)
+                                {
+                                  strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Bad Parameter.\r\n");
+                                }
+                                else
+                                {
+                                  // 3. Grab remaining string and convert to integer.
+                                  tempPstr = &tempBffr[5];
+                                  strcpy(tempstr, tempPstr);
+                                  new_value = atoi( tempstr );
+                                  if((new_value > 9999) ||
+                                     (new_value < 0))
+                                  {
+                                    strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Bad Parameter.\r\n");
+                                  }
+                                  else
+                                  {
+                                    // Time to set new Road Sound Sample Rate.
+                                    RoadBrd_Set_SnsrTickCnt( new_value );
+                                    // NOW, Build Data String..
+                                    sprintf( (char *)tempBffr2, "COMPLETE" );
+                                  } // EndElse ((new_value > 9999) || (new_value < 0))
+                                } // EndElse (flag == 0)
+                              } // EndElse (tempBffr[4]!=':')
+                              break;
+                            default:
+                              strcpy( (char *)tempBffr2, "TKS ERROR: Not a legal command.\r\n");
+                              break;
+                          } // EndSwitch ( tempBffr[3] )
+                          break;
+//------------------
+                        case 'R':
+                          //Key Flash Variable Read Command
+                          //Key Flash Variable Set Command.
+                          switch( tempBffr[3] )
+                          {
+//------------------
+                            case 'R':
+                              //Key Flash Variable Read Road Sound Sample Rate Command.
+                              sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
+                              break;
+//------------------
+                            case 'S':
+                              //Key Flash Variable Read Sensor Sample Rate Command.
+                              sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+                              break;
+                            default:
+                              strcpy( (char *)tempBffr2, "TKS ERROR: Not a legal command.\r\n");
+                              break;
+                          } // EndSwitch ( tempBffr[3] )
+                     
+ 
+                          
+                          
+                          break;
+                        default:
+                          strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
+                          break;
+                      } //EndSwitch ( tempBffr[2] )
+                    } //EndElse (Size < 3)
+
+
+
+
+
+
                     break;
 //**************************************************************************************************
 //++++++++++++++++++++++++++++++++++++++++++  Special Monitor Mode to intercept traffic from UART and pass to BGM111

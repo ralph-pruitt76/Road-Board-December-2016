@@ -984,6 +984,9 @@ void Process_RdSound( void )
       sprintf( (char *)tempBffr2, "</FRM>");
       RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
       BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+      sprintf( (char *)tempBffr2, "\r\n\r\n" );
+      //BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
   } // Endif (BGM111_Ready()
   // Test Analytics flag and determine if we need to update that characteristic
 //  if (!(Tst_HeartBeat()))
@@ -998,9 +1001,6 @@ void Process_RdSound( void )
 #endif
   RoadBrd_gpio_Off( MICRO_LED );
   // Last....Report Perioic Status of time/Hrtbt_Cnt/Cnct_Cnt
-  sprintf( (char *)tempBffr2, "\r\n\r\n" );
-  //BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
   // ALSO Last....Report Perioic Status of Voltage/Current/Power
   //sprintf( (char *)tempBffr2, " <%s/%s/%s> ", data.Voltage.Voltage, data.Current.Current, data.Power.Power);
   //RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
