@@ -77,9 +77,9 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
   #else
     #define RECEIVE_SZ      30
     uint16_t DriverStatus;
-    uint8_t tempBffr2[120];
-    uint8_t tempBffr3[10];
-    uint8_t* BufferPntr;
+    int8_t tempBffr2[120];
+    int8_t tempBffr3[10];
+    int8_t* BufferPntr;
     HAL_StatusTypeDef Status, Save_Status;
     uint8_t Size;
     int Address;
@@ -233,7 +233,8 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               sprintf( (char *)tempBffr2, "" );
               for (x=0; x<FFT_BUFFER_SIZE; x++)
               {
-                sprintf( (char *)tempBffr3, "%02x ", BufferPntr[x]);
+//                sprintf( (char *)tempBffr3, "%02x ", BufferPntr[x]);
+                sprintf( (char *)tempBffr3, "%04d ", BufferPntr[x]);
                 strcat( (char *)tempBffr2, (char *)tempBffr3 );
                 y++;
                 if (y>=16)

@@ -37,9 +37,9 @@
 
 
 /* Variables and buffer definitions */
-static uint8_t fr[FFT_BUFFER_SIZE];
-static uint8_t fi[FFT_BUFFER_SIZE];
-static uint8_t fs[FFT_BUFFER_SIZE];
+static int8_t fr[FFT_BUFFER_SIZE];
+static int8_t fi[FFT_BUFFER_SIZE];
+static int8_t fs[FFT_BUFFER_SIZE];
 
   /**
   * @brief  This function clears both real and imaginary buffers.
@@ -92,7 +92,7 @@ void RoadBrdSnd_ClearImgnryBffr( void )
   * @param  none.
   * @retval none.
   */
-uint8_t* RoadBrdSnd_getImgnryBffr( void )
+int8_t* RoadBrdSnd_getImgnryBffr( void )
 {
   return fi;
 }
@@ -102,7 +102,7 @@ uint8_t* RoadBrdSnd_getImgnryBffr( void )
   * @param  none.
   * @retval none.
   */
-uint8_t* RoadBrdSnd_getRealBffr( void )
+int8_t* RoadBrdSnd_getRealBffr( void )
 {
   return fr;
 }
@@ -112,7 +112,7 @@ uint8_t* RoadBrdSnd_getRealBffr( void )
   * @param  none.
   * @retval none.
   */
-uint8_t* RoadBrdSnd_getSaveBffr( void )
+int8_t* RoadBrdSnd_getSaveBffr( void )
 {
   return fs;
 }
@@ -125,10 +125,11 @@ uint8_t* RoadBrdSnd_getSaveBffr( void )
   *                                HAL_BUSY:     ADC is busy.
   *                                HAL_TIMEOUT:  ADC timed out.
   */
-HAL_StatusTypeDef RoadBrdSnd_SampleSound( uint8_t* pData )
+HAL_StatusTypeDef RoadBrdSnd_SampleSound( int8_t* pData )
 {
   HAL_StatusTypeDef Status;
   int x;
+  uint8_t* tempPtr;
 
   // Start ADC to sample Sound Data and fill buffer pointed to bt pData.
   Status = RoadBrd_ADC_Start((uint32_t*)pData, (uint32_t)FFT_BUFFER_SIZE);
@@ -150,7 +151,16 @@ HAL_StatusTypeDef RoadBrdSnd_SampleSound( uint8_t* pData )
   if(x >= MAX_TIMEOUT)
     return HAL_TIMEOUT;
   else
+  {
+    // OK...Adjust the Data for FFT Calculaztion
+    tempPtr = (uint8_t *)pData;
+    for( x=0; x<FFT_BUFFER_SIZE; x++)
+    {
+      *tempPtr = *tempPtr-128;
+      tempPtr++;
+    }
     return Status;
+  }
 }
 
  /**
@@ -172,7 +182,7 @@ HAL_StatusTypeDef RoadBrdSnd_ProcessSound( void )
   if (Status != HAL_OK)
     return Status;
   //TEST CODE....3.704Khz Waveform.
-/*  uint8_t fTst[FFT_BUFFER_SIZE] = {  0x34, 0x00, 0x00, 0x00, 0x00, 0x72, 0xe2, 0xe1, 0xe0, 0xdf, 0x6d, 0x00, 0x00, 0x00, 0x00, 0x3b,
+  /*uint8_t fTst[FFT_BUFFER_SIZE] = {  0x34, 0x00, 0x00, 0x00, 0x00, 0x72, 0xe2, 0xe1, 0xe0, 0xdf, 0x6d, 0x00, 0x00, 0x00, 0x00, 0x3b,
                                      0xe2, 0xe1, 0xe1, 0xe0, 0xa3, 0x00, 0x00, 0x00, 0x00, 0x07, 0xb8, 0xe2, 0xe0, 0xe0, 0xd2, 0x26,
                                      0x00, 0x00, 0x00, 0x00, 0x7f, 0xe1, 0xe1, 0xe0, 0xe0, 0x61, 0x00, 0x00, 0x00, 0x00, 0x48, 0xe2,
                                      0xe2, 0xe0, 0xe0, 0x96, 0x00, 0x00, 0x00, 0x00, 0x14, 0xc6, 0xe1, 0xe1, 0xe0, 0xc7, 0x17, 0x00,
@@ -182,7 +192,7 @@ HAL_StatusTypeDef RoadBrdSnd_ProcessSound( void )
                                      0xdf, 0x7d, 0x00, 0x00, 0x00, 0x00, 0x2c, 0xde, 0xe1, 0xe1, 0xe0, 0xb0, 0x00, 0x00, 0x00, 0x00 };
   
   for (x=0; x<FFT_BUFFER_SIZE; x++)
-    fr[x] = fTst[x]; */
+    fr[x] = fTst[x];*/
   // Save results for possible recall.
   for (x=0; x<FFT_BUFFER_SIZE; x++)
     fs[x] = fr[x];
