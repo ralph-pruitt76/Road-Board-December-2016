@@ -12695,6 +12695,9 @@
         </excluded>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Src\Calibration.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Src\dma.c</name>
       </file>
       <file>
