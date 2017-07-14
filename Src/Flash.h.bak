@@ -41,15 +41,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l1xx_hal.h"
 #include "wwdg.h"
-#include "Calibration.h"
 
 /* Defines */
 
 // Structure
 typedef struct FrameStruct {
-  Calibration_Frames   Calibration_Frame;
-  wwdg_Frames          wwdg_Save;
-} FrameStructure;
+   wwdg_Frames wwdg_Save;
+ } FrameStructure;
 typedef struct FrameStruct *FrameStructPtr;
   
 
