@@ -1,0 +1,2714 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       18/Jul/2017  05:20:06
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\bgm111.c
+#    Command line =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\bgm111.c
+#        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
+#        REV_L -D LONG_DELAY -lCN
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\Road
+#        Brd MSTR Rev L Long Always\List" -o
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug
+#        --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.4\arm\INC\c\DLib_Config_Full.h" -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/BSP/STM32L1xx_Nucleo\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\..\Middlewares\Third_Party\BgLib\
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.4\arm\CMSIS\Include\"
+#    Locale       =  English_United States.1252
+#    List file    =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\Road
+#        Brd MSTR Rev L Long Always\List\bgm111.lst
+#    Object file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\Road
+#        Brd MSTR Rev L Long Always\Obj\bgm111.o
+#
+###############################################################################
+
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\bgm111.c
+      1          /* SiLabs BGM111 module access implementation using BGLib */
+      2          
+      3          #include "bgm111.h"
+      4          #include <string.h>
+      5          #include "gecko_bglib.h"
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp struct gecko_msg_le_gap_set_mode_rsp_t *gecko_cmd_le_gap_set_mode(uint8, uint8)
+   \                     gecko_cmd_le_gap_set_mode: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+   \   00000006   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   0000000A   0x6800             LDR      R0,[R0, #+0]
+   \   0000000C   0x7104             STRB     R4,[R0, #+4]
+   \   0000000E   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000012   0x6800             LDR      R0,[R0, #+0]
+   \   00000014   0x7145             STRB     R5,[R0, #+5]
+   \   00000016   0x.... 0x....      LDR.W    R0,??DataTable20_1  ;; 0x1030220
+   \   0000001A   0x.... 0x....      LDR.W    R1,??DataTable20
+   \   0000001E   0x6809             LDR      R1,[R1, #+0]
+   \   00000020   0x6008             STR      R0,[R1, #+0]
+   \   00000022   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000026   0x6800             LDR      R0,[R0, #+0]
+   \   00000028   0x1D01             ADDS     R1,R0,#+4
+   \   0000002A   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   0000002E   0x6800             LDR      R0,[R0, #+0]
+   \   00000030   0x6800             LDR      R0,[R0, #+0]
+   \   00000032   0x.... 0x....      BL       gecko_handle_command
+   \   00000036   0x.... 0x....      LDR.W    R0,??DataTable20_2
+   \   0000003A   0x6800             LDR      R0,[R0, #+0]
+   \   0000003C   0x1D00             ADDS     R0,R0,#+4
+   \   0000003E   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp struct gecko_msg_gatt_server_write_attribute_value_rsp_t *gecko_cmd_gatt_server_write_attribute_value(uint16, uint16, uint8, uint8 const *)
+   \                     gecko_cmd_gatt_server_write_attribute_value: (+1)
+   \   00000000   0xE92D 0x41F0      PUSH     {R4-R8,LR}
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+   \   00000008   0x0016             MOVS     R6,R2
+   \   0000000A   0x001F             MOVS     R7,R3
+   \   0000000C   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000010   0x6800             LDR      R0,[R0, #+0]
+   \   00000012   0x8084             STRH     R4,[R0, #+4]
+   \   00000014   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000018   0x6800             LDR      R0,[R0, #+0]
+   \   0000001A   0x80C5             STRH     R5,[R0, #+6]
+   \   0000001C   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000020   0x6800             LDR      R0,[R0, #+0]
+   \   00000022   0x7206             STRB     R6,[R0, #+8]
+   \   00000024   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000026   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   0000002A   0x6800             LDR      R0,[R0, #+0]
+   \   0000002C   0xF110 0x0809      ADDS     R8,R0,#+9
+   \   00000030   0x0032             MOVS     R2,R6
+   \   00000032   0x0039             MOVS     R1,R7
+   \   00000034   0x4640             MOV      R0,R8
+   \   00000036   0x.... 0x....      BL       __aeabi_memcpy
+   \   0000003A   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000003C   0x.... 0x....      LDR.W    R0,??DataTable20_3  ;; 0x20a0520
+   \   00000040   0xEB10 0x2006      ADDS     R0,R0,R6, LSL #+8
+   \   00000044   0x.... 0x....      LDR.W    R1,??DataTable20
+   \   00000048   0x6809             LDR      R1,[R1, #+0]
+   \   0000004A   0x6008             STR      R0,[R1, #+0]
+   \   0000004C   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000050   0x6800             LDR      R0,[R0, #+0]
+   \   00000052   0x1D01             ADDS     R1,R0,#+4
+   \   00000054   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000058   0x6800             LDR      R0,[R0, #+0]
+   \   0000005A   0x6800             LDR      R0,[R0, #+0]
+   \   0000005C   0x.... 0x....      BL       gecko_handle_command
+   \   00000060   0x.... 0x....      LDR.W    R0,??DataTable20_2
+   \   00000064   0x6800             LDR      R0,[R0, #+0]
+   \   00000066   0x1D00             ADDS     R0,R0,#+4
+   \   00000068   0xE8BD 0x81F0      POP      {R4-R8,PC}       ;; return
+
+   \                                 In section .text, align 2, keep-with-next
+   \   static __interwork __softfp struct gecko_msg_gatt_server_send_characteristic_notification_rsp_t *gecko_cmd_gatt_server_send_characteristic_notification(uint8, uint16, uint8, uint8 const *)
+   \                     gecko_cmd_gatt_server_send_characteristic_notification: (+1)
+   \   00000000   0xE92D 0x41F0      PUSH     {R4-R8,LR}
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+   \   00000008   0x0016             MOVS     R6,R2
+   \   0000000A   0x001F             MOVS     R7,R3
+   \   0000000C   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000010   0x6800             LDR      R0,[R0, #+0]
+   \   00000012   0x7104             STRB     R4,[R0, #+4]
+   \   00000014   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000018   0x6800             LDR      R0,[R0, #+0]
+   \   0000001A   0xF8A0 0x5005      STRH     R5,[R0, #+5]
+   \   0000001E   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000022   0x6800             LDR      R0,[R0, #+0]
+   \   00000024   0x71C6             STRB     R6,[R0, #+7]
+   \   00000026   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000028   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   0000002C   0x6800             LDR      R0,[R0, #+0]
+   \   0000002E   0xF110 0x0808      ADDS     R8,R0,#+8
+   \   00000032   0x0032             MOVS     R2,R6
+   \   00000034   0x0039             MOVS     R1,R7
+   \   00000036   0x4640             MOV      R0,R8
+   \   00000038   0x.... 0x....      BL       __aeabi_memcpy
+   \   0000003C   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000003E   0x.... 0x....      LDR.W    R0,??DataTable20_4  ;; 0x50a0420
+   \   00000042   0xEB10 0x2006      ADDS     R0,R0,R6, LSL #+8
+   \   00000046   0x.... 0x....      LDR.W    R1,??DataTable20
+   \   0000004A   0x6809             LDR      R1,[R1, #+0]
+   \   0000004C   0x6008             STR      R0,[R1, #+0]
+   \   0000004E   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   00000052   0x6800             LDR      R0,[R0, #+0]
+   \   00000054   0x1D01             ADDS     R1,R0,#+4
+   \   00000056   0x.... 0x....      LDR.W    R0,??DataTable20
+   \   0000005A   0x6800             LDR      R0,[R0, #+0]
+   \   0000005C   0x6800             LDR      R0,[R0, #+0]
+   \   0000005E   0x.... 0x....      BL       gecko_handle_command
+   \   00000062   0x.... 0x....      LDR.W    R0,??DataTable20_2
+   \   00000066   0x6800             LDR      R0,[R0, #+0]
+   \   00000068   0x1D00             ADDS     R0,R0,#+4
+   \   0000006A   0xE8BD 0x81F0      POP      {R4-R8,PC}       ;; return
+      6          #include "stm32l1xx_hal.h"
+      7          #include "usart.h"
+      8          #include "gpio.h"
+      9          #include "ErrorCodes.h"
+     10          #include "i2c.h"
+     11          
+     12          /* BGLib instantiation */
+     13          
+
+   \                                 In section .bss, align 4
+     14          BGLIB_DEFINE();
+   \                     _gecko_cmd_msg:
+   \   00000000                      DS8 132
+
+   \                                 In section .bss, align 4
+   \   __absolute struct gecko_cmd_packet _gecko_rsp_msg
+   \                     _gecko_rsp_msg:
+   \   00000000                      DS8 132
+
+   \                                 In section .data, align 4
+   \   __absolute struct gecko_cmd_packet *gecko_cmd_msg
+   \                     gecko_cmd_msg:
+   \   00000000   0x........         DC32 _gecko_cmd_msg
+
+   \                                 In section .bss, align 4
+   \   __absolute struct gecko_cmd_packet *gecko_evt_msg
+   \                     gecko_evt_msg:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+   \   __absolute void (*bglib_output)(uint32_t, uint8_t *)
+   \                     bglib_output:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+   \   __absolute int32_t (*bglib_input)(uint32_t, uint8_t *)
+   \                     bglib_input:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+   \   __absolute int32_t (*bglib_peek)(void)
+   \                     bglib_peek:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+   \   __absolute struct gecko_cmd_packet gecko_queue[30]
+   \                     gecko_queue:
+   \   00000000                      DS8 3960
+
+   \                                 In section .bss, align 4
+   \   __absolute int gecko_queue_w
+   \                     gecko_queue_w:
+   \   00000000                      DS8 4
+
+   \                                 In section .bss, align 4
+   \   __absolute int gecko_queue_r
+   \                     gecko_queue_r:
+   \   00000000                      DS8 4
+
+   \                                 In section .data, align 4
+   \   __absolute struct gecko_cmd_packet *gecko_rsp_msg
+   \                     gecko_rsp_msg:
+   \   00000000   0x........         DC32 _gecko_rsp_msg
+     15          
+     16          /* Define buffer size for BLE communication */
+     17          
+     18          // #define BG_DATA_LENGTH          70   // Code fills this buffer size full on the RX side...11/18/16 RP
+     19          #define BG_DATA_LENGTH          200   
+     20          
+     21          /* Define number of free bytes in buffer when we need to process a packet
+     22           * even if that means we need to wait in a loop */
+     23          
+     24          #define BG_DATA_LOW_WATERMARK   5
+     25          
+     26          /* BG reception states */
+     27          
+     28          enum BgRxState
+     29          {
+     30            BGRX_SYNC,
+     31            BGRX_HDR,
+     32            BGRX_DATA
+     33          };
+     34          
+     35          
+     36          /* MSG LOGGER */
+     37          struct
+     38          {
+     39            uint32_t msgBuff[BG_DATA_LENGTH];
+     40            uint16_t tx_wr;
+
+   \                                 In section .bss, align 4
+     41          } static blemsgs;
+   \                     blemsgs:
+   \   00000000                      DS8 804
+     42          
+     43          /* BLE communication structure */
+     44          struct
+     45          {
+     46            uint8_t tx_buf[BG_DATA_LENGTH];
+     47            uint8_t tx_wr;
+     48            volatile uint8_t tx_rd;
+     49            uint8_t rx_buf[BG_DATA_LENGTH];
+     50            volatile uint8_t rx_wr;
+     51            uint8_t rx_rd;
+     52            volatile enum BgRxState rx_state;
+     53            volatile bool req_exec;
+     54            bool booted;
+     55            bool connection;
+     56            bool data_Connection;
+     57            uint8_t TackArmed;
+     58            uint8_t TackCnt;
+     59            uint8_t SyncFlag;
+     60            struct gecko_cmd_packet *evt;
+
+   \                                 In section .bss, align 4
+     61          } static ble;
+   \                     `ble`:
+   \   00000000                      DS8 416
+     62          
+     63          
+     64          /* BGM111 module low level init */
+     65          
+
+   \                                 In section .text, align 2, keep-with-next
+     66          void BGM111_LowLevel_Init(void)
+     67          {
+     68            blemsgs.tx_wr = 0;
+   \                     BGM111_LowLevel_Init: (+1)
+   \   00000000   0x2000             MOVS     R0,#+0
+   \   00000002   0x.... 0x....      LDR.W    R1,??DataTable20_5
+   \   00000006   0xF8A1 0x0320      STRH     R0,[R1, #+800]
+     69            ble.booted =  false;
+   \   0000000A   0x2000             MOVS     R0,#+0
+   \   0000000C   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000010   0xF881 0x0196      STRB     R0,[R1, #+406]
+     70            ble.connection = false;
+   \   00000014   0x2000             MOVS     R0,#+0
+   \   00000016   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   0000001A   0xF881 0x0197      STRB     R0,[R1, #+407]
+     71            ble.data_Connection = false;
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \   00000020   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000024   0xF881 0x0198      STRB     R0,[R1, #+408]
+     72            ble.TackArmed = TACK_OFF;
+   \   00000028   0x2000             MOVS     R0,#+0
+   \   0000002A   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   0000002E   0xF881 0x0199      STRB     R0,[R1, #+409]
+     73            ble.TackCnt = 0;
+   \   00000032   0x2000             MOVS     R0,#+0
+   \   00000034   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000038   0xF881 0x019A      STRB     R0,[R1, #+410]
+     74            ble.SyncFlag = SYNC_PROC;
+   \   0000003C   0x2001             MOVS     R0,#+1
+   \   0000003E   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000042   0xF881 0x019B      STRB     R0,[R1, #+411]
+     75          }
+   \   00000046   0x4770             BX       LR               ;; return
+     76          
+     77          /* Next buffer index based on current index and buffer size */
+     78          
+     79          //#pragma inline=forced
+
+   \                                 In section .text, align 2, keep-with-next
+     80          uint8_t NextBufIdx(uint8_t idx)
+     81          {
+     82            idx++;
+   \                     NextBufIdx: (+1)
+   \   00000000   0x1C40             ADDS     R0,R0,#+1
+     83            return idx < BG_DATA_LENGTH ? idx : 0;
+   \   00000002   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000004   0x28C8             CMP      R0,#+200
+   \   00000006   0xDB00             BLT.N    ??NextBufIdx_0
+   \                     ??NextBufIdx_1: (+1)
+   \   00000008   0x2000             MOVS     R0,#+0
+   \                     ??NextBufIdx_0: (+1)
+   \   0000000A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000000C   0x4770             BX       LR               ;; return
+     84          }
+     85          
+     86          /* Report if the buffer is full based on its indexes */
+     87          
+     88          //#pragma inline=forced
+
+   \                                 In section .text, align 2, keep-with-next
+     89          bool IsBufFull(uint8_t wr_idx, uint8_t rd_idx)
+     90          {
+   \                     IsBufFull: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+     91            return NextBufIdx(wr_idx) == rd_idx;
+   \   00000006   0x0020             MOVS     R0,R4
+   \   00000008   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000000A   0x.... 0x....      BL       NextBufIdx
+   \   0000000E   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   00000010   0x42A8             CMP      R0,R5
+   \   00000012   0xD101             BNE.N    ??IsBufFull_0
+   \   00000014   0x2001             MOVS     R0,#+1
+   \   00000016   0xE000             B.N      ??IsBufFull_1
+   \                     ??IsBufFull_0: (+1)
+   \   00000018   0x2000             MOVS     R0,#+0
+   \                     ??IsBufFull_1: (+1)
+   \   0000001A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000001C   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+     92          }
+     93          
+     94          /* Get the used space in the buffer based on its indexes */
+     95          
+     96          //#pragma inline=forced
+
+   \                                 In section .text, align 2, keep-with-next
+     97          uint8_t BufUsed(uint8_t wr_idx, uint8_t rd_idx)
+     98          {
+   \                     BufUsed: (+1)
+   \   00000000   0x0002             MOVS     R2,R0
+     99            int size = (int)wr_idx - (int)rd_idx;
+   \   00000002   0xB2D2             UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+   \   00000004   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   00000006   0x1A50             SUBS     R0,R2,R1
+    100            if (size < 0)
+   \   00000008   0x2800             CMP      R0,#+0
+   \   0000000A   0xD500             BPL.N    ??BufUsed_0
+    101            {
+    102              size = BG_DATA_LENGTH + size;
+   \   0000000C   0x30C8             ADDS     R0,R0,#+200
+    103            }
+    104            return size;
+   \                     ??BufUsed_0: (+1)
+   \   0000000E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000010   0x4770             BX       LR               ;; return
+    105          }
+    106          
+    107          /* Get the free space in the buffer based on its indexes */
+    108          
+    109          //#pragma inline=forced
+
+   \                                 In section .text, align 2, keep-with-next
+    110          uint8_t BufFree(uint8_t wr_idx, uint8_t rd_idx)
+    111          {
+   \                     BufFree: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    112            return (BG_DATA_LENGTH - 1) - BufUsed(wr_idx, rd_idx);
+   \   00000006   0x0029             MOVS     R1,R5
+   \   00000008   0xB2C9             UXTB     R1,R1            ;; ZeroExt  R1,R1,#+24,#+24
+   \   0000000A   0x0020             MOVS     R0,R4
+   \   0000000C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000000E   0x.... 0x....      BL       BufUsed
+   \   00000012   0xF1D0 0x00C7      RSBS     R0,R0,#+199
+   \   00000016   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000018   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    113          }
+    114          
+    115          /* Receive data from the BGM111 module */
+    116          
+
+   \                                 In section .text, align 2, keep-with-next
+    117          int BGM111_Receive(uint32_t len, uint8_t *data)
+    118          {
+   \                     BGM111_Receive: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    119            
+    120            /* Wait until we received the requested number of data bytes */
+    121            while (len)
+   \                     ??BGM111_Receive_0: (+1)
+   \   00000006   0x2C00             CMP      R4,#+0
+   \   00000008   0xD027             BEQ.N    ??BGM111_Receive_1
+    122            {
+    123              /* Is there a byte in the receive buffer? */
+    124              if (ble.rx_rd != ble.rx_wr)
+   \   0000000A   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   0000000E   0xF890 0x0193      LDRB     R0,[R0, #+403]
+   \   00000012   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000016   0xF891 0x1192      LDRB     R1,[R1, #+402]
+   \   0000001A   0x4288             CMP      R0,R1
+   \   0000001C   0xD01B             BEQ.N    ??BGM111_Receive_2
+    125              {
+    126                /* Disable interrupt */
+    127          //      NVIC_DisableIRQ(BGM111_UART_IRQn);
+    128                /* Clear the request to execute the BLE stack now we're doing it */
+    129                ble.req_exec = false;
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \   00000020   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000024   0xF881 0x0195      STRB     R0,[R1, #+405]
+    130                /* Write to the output buffer */
+    131                *data++ = ble.rx_buf[ble.rx_rd];
+   \   00000028   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   0000002C   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000030   0xF891 0x1193      LDRB     R1,[R1, #+403]
+   \   00000034   0x4408             ADD      R0,R0,R1
+   \   00000036   0xF890 0x00CA      LDRB     R0,[R0, #+202]
+   \   0000003A   0x7028             STRB     R0,[R5, #+0]
+   \   0000003C   0x1C6D             ADDS     R5,R5,#+1
+    132                /* Next byte in the receive buffer */
+    133                ble.rx_rd = NextBufIdx(ble.rx_rd);
+   \   0000003E   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000042   0xF890 0x0193      LDRB     R0,[R0, #+403]
+   \   00000046   0x.... 0x....      BL       NextBufIdx
+   \   0000004A   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   0000004E   0xF881 0x0193      STRB     R0,[R1, #+403]
+    134                /* Enable interrupt */
+    135          //      NVIC_EnableIRQ(BGM111_UART_IRQn);
+    136          
+    137                /* One byte less to wait for */
+    138                len--;
+   \   00000052   0x1E64             SUBS     R4,R4,#+1
+   \   00000054   0xE7D7             B.N      ??BGM111_Receive_0
+    139              }
+    140              else
+    141              {
+    142                // Time to prime the pump again....
+    143                HAL_UART_EnableBGM_RX();
+   \                     ??BGM111_Receive_2: (+1)
+   \   00000056   0x.... 0x....      BL       HAL_UART_EnableBGM_RX
+    144                break;
+    145              }
+    146            }
+    147            return 0;
+   \                     ??BGM111_Receive_1: (+1)
+   \   0000005A   0x2000             MOVS     R0,#+0
+   \   0000005C   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    148          }
+    149          
+    150          /* Check whether there is input data from the BGM111 module */
+    151          
+
+   \                                 In section .text, align 2, keep-with-next
+    152          int BGM111_Peek(void)
+    153          {
+    154            return ble.req_exec;
+   \                     BGM111_Peek: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000004   0xF890 0x0195      LDRB     R0,[R0, #+405]
+   \   00000008   0x4770             BX       LR               ;; return
+    155          }
+    156          
+    157          /* Initialize the BGM111 module and BGLib */
+    158          
+
+   \                                 In section .text, align 2, keep-with-next
+    159          void BGM111_Init(void)
+    160          {
+   \                     BGM111_Init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+    161            /* Perform low level init to initialize the UART for use with the 
+    162             * BGM111 module */
+    163            BGM111_LowLevel_Init();
+   \   00000002   0x.... 0x....      BL       BGM111_LowLevel_Init
+    164            /* Pull the BGM111 reset pin low */
+    165            RoadBrd_gpio_Off( gRESET_BGM111 );
+   \   00000006   0x2006             MOVS     R0,#+6
+   \   00000008   0x.... 0x....      BL       RoadBrd_gpio_Off
+    166            /* Initialize BGLib with our transmit, receive and peek routines */
+    167            BGLIB_INITIALIZE_NONBLOCK(BGM111_Transmit, BGM111_Receive, BGM111_Peek);
+   \   0000000C   0x.... 0x....      ADR.W    R0,BGM111_Transmit
+   \   00000010   0x.... 0x....      LDR.W    R1,??DataTable20_7
+   \   00000014   0x6008             STR      R0,[R1, #+0]
+   \   00000016   0x.... 0x....      LDR.W    R0,??DataTable20_8
+   \   0000001A   0x.... 0x....      LDR.W    R1,??DataTable20_9
+   \   0000001E   0x6008             STR      R0,[R1, #+0]
+   \   00000020   0x.... 0x....      LDR.W    R0,??DataTable20_10
+   \   00000024   0x.... 0x....      LDR.W    R1,??DataTable20_11
+   \   00000028   0x6008             STR      R0,[R1, #+0]
+    168            /* Release the BGM111 reset pin */
+    169            RoadBrd_gpio_On( gRESET_BGM111 );
+   \   0000002A   0x2006             MOVS     R0,#+6
+   \   0000002C   0x.... 0x....      BL       RoadBrd_gpio_On
+    170          }
+   \   00000030   0xBD01             POP      {R0,PC}          ;; return
+    171          
+    172          /* Process any input from the BLE module */
+    173          
+
+   \                                 In section .text, align 2, keep-with-next
+    174          void BGM111_ProcessInput(void)
+    175          {
+   \                     BGM111_ProcessInput: (+1)
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0xB086             SUB      SP,SP,#+24
+    176            /* Event structure */
+    177            uint32_t temp1;
+    178            uint8_t tempBffr2[20];
+    179            bool Boot_evt = false;
+   \   00000004   0x2500             MOVS     R5,#+0
+    180            struct gecko_msg_le_gap_set_mode_rsp_t *Result_Ptr;
+    181            /* Check whether there is an event to service */
+    182            if (!ble.evt)
+   \   00000006   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   0000000A   0xF8D0 0x019C      LDR      R0,[R0, #+412]
+   \   0000000E   0x2800             CMP      R0,#+0
+   \   00000010   0xD105             BNE.N    ??BGM111_ProcessInput_0
+    183            {
+    184              ble.evt = gecko_peek_event();
+   \   00000012   0x.... 0x....      BL       gecko_peek_event
+   \   00000016   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   0000001A   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    185            }
+    186            if (ble.evt)
+   \                     ??BGM111_ProcessInput_0: (+1)
+   \   0000001E   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000022   0xF8D0 0x019C      LDR      R0,[R0, #+412]
+   \   00000026   0x2800             CMP      R0,#+0
+   \   00000028   0xF000 0x80EF      BEQ.W    ??BGM111_ProcessInput_1
+    187            {
+    188              // Log Event
+    189              blemsgs.msgBuff[blemsgs.tx_wr] = BGLIB_MSG_ID(ble.evt->header);
+   \   0000002C   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000030   0xF8D0 0x019C      LDR      R0,[R0, #+412]
+   \   00000034   0x6800             LDR      R0,[R0, #+0]
+   \   00000036   0x.... 0x....      LDR.W    R1,??DataTable20_12  ;; 0xffff00f8
+   \   0000003A   0x4008             ANDS     R0,R1,R0
+   \   0000003C   0x.... 0x....      LDR.W    R1,??DataTable20_5
+   \   00000040   0x.... 0x....      LDR.W    R2,??DataTable20_5
+   \   00000044   0xF8B2 0x2320      LDRH     R2,[R2, #+800]
+   \   00000048   0xF841 0x0022      STR      R0,[R1, R2, LSL #+2]
+    190              blemsgs.tx_wr = NextBufIdx(blemsgs.tx_wr);
+   \   0000004C   0x.... 0x....      LDR.W    R0,??DataTable20_5
+   \   00000050   0xF8B0 0x0320      LDRH     R0,[R0, #+800]
+   \   00000054   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000056   0x.... 0x....      BL       NextBufIdx
+   \   0000005A   0x.... 0x....      LDR.W    R1,??DataTable20_5
+   \   0000005E   0xF8A1 0x0320      STRH     R0,[R1, #+800]
+    191              
+    192              /* Service based on event header message ID */
+    193              temp1 = BGLIB_MSG_ID(ble.evt->header);
+   \   00000062   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000066   0xF8D0 0x019C      LDR      R0,[R0, #+412]
+   \   0000006A   0x6800             LDR      R0,[R0, #+0]
+   \   0000006C   0x.... 0x....      LDR.W    R1,??DataTable20_12  ;; 0xffff00f8
+   \   00000070   0x4008             ANDS     R0,R1,R0
+   \   00000072   0x0004             MOVS     R4,R0
+    194              switch(temp1)
+   \   00000074   0x0020             MOVS     R0,R4
+   \   00000076   0x.... 0x....      LDR.W    R1,??DataTable20_13  ;; 0x100a0
+   \   0000007A   0x4288             CMP      R0,R1
+   \   0000007C   0xD02A             BEQ.N    ??BGM111_ProcessInput_2
+   \   0000007E   0x.... 0x....      LDR.W    R1,??DataTable20_14  ;; 0x800a0
+   \   00000082   0x4288             CMP      R0,R1
+   \   00000084   0xD058             BEQ.N    ??BGM111_ProcessInput_3
+   \   00000086   0x.... 0x....      LDR.W    R1,??DataTable20_15  ;; 0x900a0
+   \   0000008A   0x4288             CMP      R0,R1
+   \   0000008C   0xF000 0x8082      BEQ.W    ??BGM111_ProcessInput_4
+   \   00000090   0x.... 0x....      LDR.W    R1,??DataTable20_16  ;; 0x10800a0
+   \   00000094   0x4288             CMP      R0,R1
+   \   00000096   0xD029             BEQ.N    ??BGM111_ProcessInput_5
+   \   00000098   0x.... 0x....      LDR.W    R1,??DataTable20_17  ;; 0x20800a0
+   \   0000009C   0x4288             CMP      R0,R1
+   \   0000009E   0xD079             BEQ.N    ??BGM111_ProcessInput_4
+   \   000000A0   0x.... 0x....      LDR.W    R1,??DataTable20_18  ;; 0x20a0020
+   \   000000A4   0x4288             CMP      R0,R1
+   \   000000A6   0xD057             BEQ.N    ??BGM111_ProcessInput_6
+   \   000000A8   0x.... 0x....      LDR.W    R1,??DataTable20_19  ;; 0x20b00a0
+   \   000000AC   0x4288             CMP      R0,R1
+   \   000000AE   0xF000 0x8092      BEQ.W    ??BGM111_ProcessInput_7
+   \   000000B2   0x.... 0x....      LDR.W    R1,??DataTable20_20  ;; 0x30a00a0
+   \   000000B6   0x4288             CMP      R0,R1
+   \   000000B8   0xD05A             BEQ.N    ??BGM111_ProcessInput_8
+   \   000000BA   0x.... 0x....      LDR.W    R1,??DataTable20_21  ;; 0x50a0020
+   \   000000BE   0x4288             CMP      R0,R1
+   \   000000C0   0xD062             BEQ.N    ??BGM111_ProcessInput_9
+   \   000000C2   0x.... 0x....      LDR.W    R1,??DataTable20_22  ;; 0x8090020
+   \   000000C6   0x4288             CMP      R0,R1
+   \   000000C8   0xD064             BEQ.N    ??BGM111_ProcessInput_4
+   \   000000CA   0x.... 0x....      LDR.W    R1,??DataTable20_23  ;; 0x200000a0
+   \   000000CE   0x4288             CMP      R0,R1
+   \   000000D0   0xD05A             BEQ.N    ??BGM111_ProcessInput_9
+   \   000000D2   0xE08B             B.N      ??BGM111_ProcessInput_10
+    195              //switch (BGLIB_MSG_ID(ble.evt->header))
+    196              {
+    197                /* System boot handler */
+    198                case gecko_evt_system_boot_id:
+    199                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_BOOT>");
+   \                     ??BGM111_ProcessInput_2: (+1)
+   \   000000D4   0x.... 0x....      LDR.W    R1,??DataTable20_24
+   \   000000D8   0x2000             MOVS     R0,#+0
+   \   000000DA   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    200                  Boot_evt = true;
+   \   000000DE   0x2001             MOVS     R0,#+1
+   \   000000E0   0x0005             MOVS     R5,R0
+    201                  /* Flag that the BLE module has booted */
+    202                  ble.booted = true;
+   \   000000E2   0x2001             MOVS     R0,#+1
+   \   000000E4   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   000000E8   0xF881 0x0196      STRB     R0,[R1, #+406]
+    203                  /* Fallthrough intentional */
+    204                /* Connection closed handler */
+    205                case gecko_evt_le_connection_closed_id:
+    206                  // Wait for power to stabilize...200msec
+    207          //        RoadBrd_Delay( 100 );
+    208          //        gecko_cmd_le_gap_set_mode(le_gap_general_discoverable, le_gap_undirected_connectable);
+    209          //        RoadBrd_Delay( 100 );
+    210          //        gecko_cmd_le_gap_set_mode(le_gap_non_discoverable, le_gap_non_connectable);
+    211          //        RoadBrd_Delay( 100 );
+    212                  /* Set GAP mode: discoverable and connectable */
+    213                  ble.connection = false;
+   \                     ??BGM111_ProcessInput_5: (+1)
+   \   000000EC   0x2000             MOVS     R0,#+0
+   \   000000EE   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   000000F2   0xF881 0x0197      STRB     R0,[R1, #+407]
+    214          //        Result_Ptr = gecko_cmd_le_gap_set_mode(le_gap_limited_discoverable, le_gap_undirected_connectable);
+    215                  Result_Ptr = gecko_cmd_le_gap_set_mode(le_gap_general_discoverable, le_gap_undirected_connectable);
+   \   000000F6   0x2102             MOVS     R1,#+2
+   \   000000F8   0x2002             MOVS     R0,#+2
+   \   000000FA   0x.... 0x....      BL       gecko_cmd_le_gap_set_mode
+   \   000000FE   0x0006             MOVS     R6,R0
+    216                  if ( Result_Ptr->result == 0)
+   \   00000100   0x8830             LDRH     R0,[R6, #+0]
+   \   00000102   0x2800             CMP      R0,#+0
+   \   00000104   0xD117             BNE.N    ??BGM111_ProcessInput_11
+    217          //        if (gecko_cmd_le_gap_set_mode(le_gap_general_discoverable, le_gap_undirected_connectable)->result == 0)
+    218          //        if (gecko_cmd_le_gap_set_mode(le_gap_limited_discoverable, le_gap_undirected_connectable)->result < bg_errspc_bg)
+    219                  {
+    220                    // Don't reset first time. This is legitimate
+    221                    // The following is a simple patch...Best way right now to recover is to force HARD Reset....
+    222                    if (Boot_evt == false)
+   \   00000106   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   00000108   0x2D00             CMP      R5,#+0
+   \   0000010A   0xD10F             BNE.N    ??BGM111_ProcessInput_12
+    223                    {
+    224                      RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTCLOSE>");
+   \   0000010C   0x.... 0x....      LDR.W    R1,??DataTable20_25
+   \   00000110   0x2000             MOVS     R0,#+0
+   \   00000112   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    225                      RdBrd_ErrCdLogErrCd( ERROR_BGM_CNNCT, MODULE_bgm111 );
+   \   00000116   0x2102             MOVS     R1,#+2
+   \   00000118   0x200D             MOVS     R0,#+13
+   \   0000011A   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    226                      Clr_HrtBeat_Cnt();
+   \   0000011E   0x.... 0x....      BL       Clr_HrtBeat_Cnt
+    227                      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
+   \   00000122   0x200D             MOVS     R0,#+13
+   \   00000124   0x.... 0x....      BL       RdBrd_BlinkErrCd
+    228                      //RoadBrd_Delay( 1000 );
+    229                      HAL_NVIC_SystemReset();
+   \   00000128   0x.... 0x....      BL       HAL_NVIC_SystemReset
+    230                    }
+    231                    /* We succeeded, don't handle this event again */
+    232                    ble.evt = NULL;
+   \                     ??BGM111_ProcessInput_12: (+1)
+   \   0000012C   0x2000             MOVS     R0,#+0
+   \   0000012E   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000132   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    233                  }
+    234                  break;
+   \                     ??BGM111_ProcessInput_11: (+1)
+   \   00000136   0xE068             B.N      ??BGM111_ProcessInput_1
+    235                //case 0x000800A0:
+    236                case gecko_evt_le_connection_opened_id:
+    237                  /* Open Event...Set Active Connection Flag */
+    238                  /* Don't handle this event again */
+    239                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM_CNCTOPEN>");
+   \                     ??BGM111_ProcessInput_3: (+1)
+   \   00000138   0x.... 0x....      LDR.W    R1,??DataTable20_26
+   \   0000013C   0x2000             MOVS     R0,#+0
+   \   0000013E   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    240                  ble.connection = true;
+   \   00000142   0x2001             MOVS     R0,#+1
+   \   00000144   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000148   0xF881 0x0197      STRB     R0,[R1, #+407]
+    241                  ble.evt = NULL;
+   \   0000014C   0x2000             MOVS     R0,#+0
+   \   0000014E   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000152   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    242                  break;
+   \   00000156   0xE058             B.N      ??BGM111_ProcessInput_1
+    243                // gecko_evt_gatt_server_user_write_request_id
+    244                case 0x020A0020:
+    245                  // Clear Heart Beat... We have detected it.
+    246                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"-*-");
+   \                     ??BGM111_ProcessInput_6: (+1)
+   \   00000158   0x....             ADR.N    R1,??DataTable17  ;; "-*-"
+   \   0000015A   0x2000             MOVS     R0,#+0
+   \   0000015C   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    247                  Clr_HeartBeat();
+   \   00000160   0x.... 0x....      BL       Clr_HeartBeat
+    248                  ble.evt = NULL;
+   \   00000164   0x2000             MOVS     R0,#+0
+   \   00000166   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   0000016A   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    249                  break;
+   \   0000016E   0xE04C             B.N      ??BGM111_ProcessInput_1
+    250                //case 0x030A0000:
+    251                case gecko_evt_gatt_server_characteristic_status_id:
+    252                  // Clear Heart Beat... We have detected it.
+    253                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"-O-");
+   \                     ??BGM111_ProcessInput_8: (+1)
+   \   00000170   0x....             ADR.N    R1,??DataTable17_1  ;; "-O-"
+   \   00000172   0x2000             MOVS     R0,#+0
+   \   00000174   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    254                  Clr_HeartBeat();
+   \   00000178   0x.... 0x....      BL       Clr_HeartBeat
+    255                  ble.evt = NULL;
+   \   0000017C   0x2000             MOVS     R0,#+0
+   \   0000017E   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000182   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    256                  break;
+   \   00000186   0xE040             B.N      ??BGM111_ProcessInput_1
+    257          //      case 0x080000A0:
+    258          //      case 0x020B00A0:
+    259          //      case 0x000000A0:
+    260                case 0x200000A0:
+    261                case 0x050A0020:
+    262          //      case 0x200000A0:
+    263          //      case gecko_cmd_gatt_server_send_characteristic_notification_id: */
+    264                /* Dummy catchall */
+    265                  /* Don't handle this event again */
+    266                  ble.evt = NULL;
+   \                     ??BGM111_ProcessInput_9: (+1)
+   \   00000188   0x2000             MOVS     R0,#+0
+   \   0000018A   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   0000018E   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    267                  break;
+   \   00000192   0xE03A             B.N      ??BGM111_ProcessInput_1
+    268                case gecko_rsp_gatt_read_characteristic_value_by_uuid_id:
+    269                case 0x020800A0:
+    270                case 0x000900A0:
+    271                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<rsp_read_ch_value_by_uuid_id>");
+   \                     ??BGM111_ProcessInput_4: (+1)
+   \   00000194   0x.... 0x....      LDR.W    R1,??DataTable20_27
+   \   00000198   0x2000             MOVS     R0,#+0
+   \   0000019A   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    272                  if (ble.evt->data.evt_gatt_server_attribute_value.value.len != 0)
+   \   0000019E   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   000001A2   0xF8D0 0x019C      LDR      R0,[R0, #+412]
+   \   000001A6   0x7A80             LDRB     R0,[R0, #+10]
+   \   000001A8   0x2800             CMP      R0,#+0
+   \   000001AA   0xD00E             BEQ.N    ??BGM111_ProcessInput_13
+    273                  {
+    274                    sprintf( (char *)tempBffr2, "<STR:%s>", ble.evt->data.evt_gatt_server_attribute_value.value.data);
+   \   000001AC   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   000001B0   0xF8D0 0x019C      LDR      R0,[R0, #+412]
+   \   000001B4   0xF110 0x020B      ADDS     R2,R0,#+11
+   \   000001B8   0x.... 0x....      LDR.W    R1,??DataTable20_28
+   \   000001BC   0x4668             MOV      R0,SP
+   \   000001BE   0x.... 0x....      BL       sprintf
+    275                    RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+   \   000001C2   0x4669             MOV      R1,SP
+   \   000001C4   0x2000             MOVS     R0,#+0
+   \   000001C6   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    276                  }
+    277                  ble.evt = NULL;
+   \                     ??BGM111_ProcessInput_13: (+1)
+   \   000001CA   0x2000             MOVS     R0,#+0
+   \   000001CC   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   000001D0   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    278                  break;
+   \   000001D4   0xE019             B.N      ??BGM111_ProcessInput_1
+    279                case gecko_evt_endpoint_status_id:
+    280                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<evt_endpoint_status_id>");
+   \                     ??BGM111_ProcessInput_7: (+1)
+   \   000001D6   0x.... 0x....      LDR.W    R1,??DataTable20_29
+   \   000001DA   0x2000             MOVS     R0,#+0
+   \   000001DC   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    281                  ble.evt = NULL;
+   \   000001E0   0x2000             MOVS     R0,#+0
+   \   000001E2   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   000001E6   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    282                  break;
+   \   000001EA   0xE00E             B.N      ??BGM111_ProcessInput_1
+    283                /* Dummy catchall */
+    284                default:
+    285                  sprintf( (char *)tempBffr2, "<UNKN:%08x>", temp1);
+   \                     ??BGM111_ProcessInput_10: (+1)
+   \   000001EC   0x0022             MOVS     R2,R4
+   \   000001EE   0x.... 0x....      LDR.W    R1,??DataTable20_30
+   \   000001F2   0x4668             MOV      R0,SP
+   \   000001F4   0x.... 0x....      BL       sprintf
+    286                  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+   \   000001F8   0x4669             MOV      R1,SP
+   \   000001FA   0x2000             MOVS     R0,#+0
+   \   000001FC   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    287                  /* Don't handle this event again */
+    288                  ble.evt = NULL;
+   \   00000200   0x2000             MOVS     R0,#+0
+   \   00000202   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000206   0xF8C1 0x019C      STR      R0,[R1, #+412]
+    289                  break;
+    290              };
+    291              // Test RX Buffer and Set req_exec flag.
+    292          //    if (BufUsed(ble.rx_wr, ble.rx_rd) != 0)
+    293          //    {
+    294          //      /* Indicate we need to execute the BLE stack to process 
+    295          //       * the received packet */
+    296          //      ble.req_exec = true;
+    297          //    }
+    298            } // EndIf (ble.evt)
+    299          }
+   \                     ??BGM111_ProcessInput_1: (+1)
+   \   0000020A   0xB006             ADD      SP,SP,#+24
+   \   0000020C   0xBD70             POP      {R4-R6,PC}       ;; return
+    300          
+    301          /* BLE write characteristic */
+    302          
+
+   \                                 In section .text, align 2, keep-with-next
+    303          void BGM111_WriteCharacteristic(uint16_t handle, uint8_t len, uint8_t *data)
+    304          {
+   \                     BGM111_WriteCharacteristic: (+1)
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+   \   00000006   0x0016             MOVS     R6,R2
+    305            /* Write the attribute */
+    306            gecko_cmd_gatt_server_write_attribute_value(handle, 0, len, data);
+   \   00000008   0x0033             MOVS     R3,R6
+   \   0000000A   0x002A             MOVS     R2,R5
+   \   0000000C   0xB2D2             UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x0020             MOVS     R0,R4
+   \   00000012   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
+   \   00000014   0x.... 0x....      BL       gecko_cmd_gatt_server_write_attribute_value
+    307            /* Also trigger notify if enabled */
+    308            gecko_cmd_gatt_server_send_characteristic_notification(0xFF,
+    309                      handle, len, data);
+   \   00000018   0x0033             MOVS     R3,R6
+   \   0000001A   0x002A             MOVS     R2,R5
+   \   0000001C   0xB2D2             UXTB     R2,R2            ;; ZeroExt  R2,R2,#+24,#+24
+   \   0000001E   0x0021             MOVS     R1,R4
+   \   00000020   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000022   0x20FF             MOVS     R0,#+255
+   \   00000024   0x.... 0x....      BL       gecko_cmd_gatt_server_send_characteristic_notification
+    310          }
+   \   00000028   0xBD70             POP      {R4-R6,PC}       ;; return
+    311          
+    312          /**
+    313            * @brief  Check whether the BLE module has booted and is ready for a command.
+    314            * @retval bool:         true(1):        BGAPI IS ready.
+    315            *                       false(0):         BGAPI NOT ready.
+    316            */
+
+   \                                 In section .text, align 2, keep-with-next
+    317          bool BGM111_Ready(void)
+    318          {
+    319            return ble.booted;
+   \                     BGM111_Ready: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000004   0xF890 0x0196      LDRB     R0,[R0, #+406]
+   \   00000008   0x4770             BX       LR               ;; return
+    320          }
+    321          
+    322          /**
+    323            * @brief  Check whether the BLE module is connected.
+    324            * @retval bool:         true(1):        Connection is Active.
+    325            *                       false(0):       NO Connection.
+    326            */
+
+   \                                 In section .text, align 2, keep-with-next
+    327          bool BGM111_Connected(void)
+    328          {
+    329            return ble.connection;
+   \                     BGM111_Connected: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000004   0xF890 0x0197      LDRB     R0,[R0, #+407]
+   \   00000008   0x4770             BX       LR               ;; return
+    330          }
+    331          
+    332          /**
+    333            * @brief  Check whether the BLE module is DATA connected.
+    334            * @retval bool:         true(1):        DATA Connection is Active.
+    335            *                       false(0):       NO DATA Connection.
+    336            */
+
+   \                                 In section .text, align 2, keep-with-next
+    337          bool BGM111_DataConnected(void)
+    338          {
+    339            return ble.data_Connection;
+   \                     BGM111_DataConnected: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000004   0xF890 0x0198      LDRB     R0,[R0, #+408]
+   \   00000008   0x4770             BX       LR               ;; return
+    340          }
+    341          
+    342          /**
+    343            * @brief  Check whether the BLE module is in Sync Mode and Waiting for ACK.
+    344            * @retval bool:         true(1):        Sync Ready for Processing next Frame.
+    345            *                       false(0):       Sync needs to wait.
+    346            */
+
+   \                                 In section .text, align 2, keep-with-next
+    347          bool BGM111_SyncModeTest(void)
+    348          {
+   \                     BGM111_SyncModeTest: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB085             SUB      SP,SP,#+20
+    349            uint8_t tempBffr2[20];
+    350          
+    351            // Is Sync Mode armed? Yes.. Then Need to test SyncFlag
+    352            if (ble.TackArmed == TACK_SYNC)
+   \   00000004   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000008   0xF890 0x0199      LDRB     R0,[R0, #+409]
+   \   0000000C   0x2803             CMP      R0,#+3
+   \   0000000E   0xD135             BNE.N    ??BGM111_SyncModeTest_0
+    353            {
+    354              // If SyncFlag is SYNC_PROC, then allow Frame send.
+    355              if (ble.SyncFlag == SYNC_PROC)
+   \   00000010   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000014   0xF890 0x019B      LDRB     R0,[R0, #+411]
+   \   00000018   0x2801             CMP      R0,#+1
+   \   0000001A   0xD101             BNE.N    ??BGM111_SyncModeTest_1
+    356                return true;
+   \   0000001C   0x2001             MOVS     R0,#+1
+   \   0000001E   0xE02E             B.N      ??BGM111_SyncModeTest_2
+    357              // NO, then Incrment count, We are one step closer to Reset Code.
+    358              else
+    359              {
+    360                ble.TackCnt++;
+   \                     ??BGM111_SyncModeTest_1: (+1)
+   \   00000020   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000024   0xF890 0x019A      LDRB     R0,[R0, #+410]
+   \   00000028   0x1C40             ADDS     R0,R0,#+1
+   \   0000002A   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   0000002E   0xF881 0x019A      STRB     R0,[R1, #+410]
+    361                sprintf( (char *)tempBffr2, "<TACK Strike:%d>", ble.TackCnt);
+   \   00000032   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000036   0xF890 0x219A      LDRB     R2,[R0, #+410]
+   \   0000003A   0x.... 0x....      LDR.W    R1,??DataTable20_31
+   \   0000003E   0x4668             MOV      R0,SP
+   \   00000040   0x.... 0x....      BL       sprintf
+    362                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+   \   00000044   0x4669             MOV      R1,SP
+   \   00000046   0x2000             MOVS     R0,#+0
+   \   00000048   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    363          
+    364                if (ble.TackCnt > TACK_LIMIT)
+   \   0000004C   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000050   0xF890 0x019A      LDRB     R0,[R0, #+410]
+   \   00000054   0x2805             CMP      R0,#+5
+   \   00000056   0xDB0F             BLT.N    ??BGM111_SyncModeTest_3
+    365                {
+    366                  // Time to process error and reset code....NO Choice.
+    367                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGMSYNC_CNCTCLOSE>");
+   \   00000058   0x.... 0x....      LDR.W    R1,??DataTable20_32
+   \   0000005C   0x2000             MOVS     R0,#+0
+   \   0000005E   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    368                  RdBrd_ErrCdLogErrCd( ERROR_BGM_SYNCCNCT, MODULE_bgm111 );
+   \   00000062   0x2102             MOVS     R1,#+2
+   \   00000064   0x2012             MOVS     R0,#+18
+   \   00000066   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    369                  Clr_HrtBeat_Cnt();
+   \   0000006A   0x.... 0x....      BL       Clr_HrtBeat_Cnt
+    370                  RdBrd_BlinkErrCd( ERROR_BGM_SYNCCNCT );
+   \   0000006E   0x2012             MOVS     R0,#+18
+   \   00000070   0x.... 0x....      BL       RdBrd_BlinkErrCd
+    371                  //RoadBrd_Delay( 1000 );
+    372                  HAL_NVIC_SystemReset();
+   \   00000074   0x.... 0x....      BL       HAL_NVIC_SystemReset
+    373                } // EndIf (ble.TackCnt >TACK_LIMIT)
+    374                return false;
+   \                     ??BGM111_SyncModeTest_3: (+1)
+   \   00000078   0x2000             MOVS     R0,#+0
+   \   0000007A   0xE000             B.N      ??BGM111_SyncModeTest_2
+    375              } // EndElse (ble.SyncFlag == SYNC_PROC)
+    376            } // EndIf (ble.TackArmed == TACK_SYNC)
+    377            // No....Then we can continue process. Return true.
+    378            else
+    379              return true;
+   \                     ??BGM111_SyncModeTest_0: (+1)
+   \   0000007C   0x2001             MOVS     R0,#+1
+   \                     ??BGM111_SyncModeTest_2: (+1)
+   \   0000007E   0xB005             ADD      SP,SP,#+20
+   \   00000080   0xBD00             POP      {PC}             ;; return
+    380          }
+    381          
+    382          /**
+    383            * @brief  Check whether the BLE module is in Sync Mode and Waiting for ACK.
+    384            * @retval bool:         true(1):        Sync Ready for Processing next Frame.
+    385            *                       false(0):       Sync needs to wait.
+    386            */
+
+   \                                 In section .text, align 2, keep-with-next
+    387          bool BGM111_SyncModeTestNoInc(void)
+    388          {
+    389            // Is Sync Mode armed? Yes.. Then Need to test SyncFlag
+    390            if (ble.TackArmed == TACK_SYNC)
+   \                     BGM111_SyncModeTestNoInc: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000004   0xF890 0x0199      LDRB     R0,[R0, #+409]
+   \   00000008   0x2803             CMP      R0,#+3
+   \   0000000A   0xD109             BNE.N    ??BGM111_SyncModeTestNoInc_0
+    391            {
+    392              // If SyncFlag is SYNC_PROC, then allow Frame send.
+    393              if (ble.SyncFlag == SYNC_PROC)
+   \   0000000C   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000010   0xF890 0x019B      LDRB     R0,[R0, #+411]
+   \   00000014   0x2801             CMP      R0,#+1
+   \   00000016   0xD101             BNE.N    ??BGM111_SyncModeTestNoInc_1
+    394                return true;
+   \   00000018   0x2001             MOVS     R0,#+1
+   \   0000001A   0xE002             B.N      ??BGM111_SyncModeTestNoInc_2
+    395              else
+    396                return false;
+   \                     ??BGM111_SyncModeTestNoInc_1: (+1)
+   \   0000001C   0x2000             MOVS     R0,#+0
+   \   0000001E   0xE000             B.N      ??BGM111_SyncModeTestNoInc_2
+    397            } // EndIf (ble.TackArmed == TACK_SYNC)
+    398            // No....Then we can continue process. Return true.
+    399            else
+    400              return true;
+   \                     ??BGM111_SyncModeTestNoInc_0: (+1)
+   \   00000020   0x2001             MOVS     R0,#+1
+   \                     ??BGM111_SyncModeTestNoInc_2: (+1)
+   \   00000022   0x4770             BX       LR               ;; return
+    401          }
+    402          
+    403          /**
+    404            * @brief  Set new Value for Sync Flag.
+    405            * @param uint8_t:       SYNC_WAIT(0):       Force Wait on all tests to send additional data
+    406            *                       SYNC_PROC(1):       Allow sending of additional frame of data.
+    407            * @retval None
+    408            */
+
+   \                                 In section .text, align 2, keep-with-next
+    409          void BGM111_SetSyncFlg(uint8_t NewFlag)
+    410          {
+    411            ble.SyncFlag = NewFlag;
+   \                     BGM111_SetSyncFlg: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000004   0xF881 0x019B      STRB     R0,[R1, #+411]
+    412          }
+   \   00000008   0x4770             BX       LR               ;; return
+    413          
+    414          /**
+    415            * @brief  Set new Value for Sync Flag if in SYNC Mode.
+    416            * @param uint8_t:       SYNC_WAIT(0):       Force Wait on all tests to send additional data
+    417            *                       SYNC_PROC(1):       Allow sending of additional frame of data.
+    418            * @retval None
+    419            */
+
+   \                                 In section .text, align 2, keep-with-next
+    420          void BGM111_cntrlSetSyncFlg(uint8_t NewFlag)
+    421          {
+    422            // Is Sync Mode armed? Yes.. Then Need to test SyncFlag
+    423            if (ble.TackArmed == TACK_SYNC)
+   \                     BGM111_cntrlSetSyncFlg: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000004   0xF891 0x1199      LDRB     R1,[R1, #+409]
+   \   00000008   0x2903             CMP      R1,#+3
+   \   0000000A   0xD103             BNE.N    ??BGM111_cntrlSetSyncFlg_0
+    424            {
+    425              ble.SyncFlag = NewFlag;
+   \   0000000C   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000010   0xF881 0x019B      STRB     R0,[R1, #+411]
+    426            }
+    427          }
+   \                     ??BGM111_cntrlSetSyncFlg_0: (+1)
+   \   00000014   0x4770             BX       LR               ;; return
+    428          
+    429          /**
+    430            * @brief  Return Tack State.
+    431            * @retval uint8_t:      TACK_OFF      = 0        Power Up Initialized Value.
+    432            *                       TACK_ARMED    = 1        Set when Connection has been detected.
+    433            *                       TACK_ARMED2   = 2        Set when First Tick Generated assuming TACK_ARMED State detected.
+    434            *                       TACK_SYNC     = 3        Set when first TACK detected while a TACK_ARMED2 State detected.
+    435            *                       TACK_ASYNC    = 4        Set when next TICK detected while TACK_ARMED2 State active.
+    436            */
+
+   \                                 In section .text, align 2, keep-with-next
+    437          uint8_t BGM111_GetTackState(void)
+    438          {
+    439            return ble.TackArmed;
+   \                     BGM111_GetTackState: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000004   0xF890 0x0199      LDRB     R0,[R0, #+409]
+   \   00000008   0x4770             BX       LR               ;; return
+    440          }
+    441          
+    442          /**
+    443            * @brief  Set Tack State.
+    444            * @param uint8_t:       TACK_OFF      = 0        Power Up Initialized Value.
+    445            *                       TACK_ARMED    = 1        Set when Connection has been detected.
+    446            *                       TACK_ARMED2   = 2        Set when First Tick Generated assuming TACK_ARMED State detected.
+    447            *                       TACK_SYNC     = 3        Set when first TACK detected while a TACK_ARMED2 State detected.
+    448            *                       TACK_ASYNC    = 4        Set when next TICK detected while TACK_ARMED2 State active.
+    449            * @retval None
+    450            */
+
+   \                                 In section .text, align 2, keep-with-next
+    451          void BGM111_SetTackState(uint8_t NewValue)
+    452          {
+    453            ble.TackArmed = NewValue;
+   \                     BGM111_SetTackState: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000004   0xF881 0x0199      STRB     R0,[R1, #+409]
+    454          }
+   \   00000008   0x4770             BX       LR               ;; return
+    455          
+    456          /**
+    457            * @brief  This interrupt handler is called to handle the Usart3 interruptes.
+    458            *         from the BGM111
+    459            * @param  None
+    460            * @retval None
+    461            */
+
+   \                                 In section .text, align 2, keep-with-next
+    462          void BGM111_UART_IRQHandler(UART_HandleTypeDef *huart)
+    463          {
+   \                     BGM111_UART_IRQHandler: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    464            /* Transmit register empty? */
+    465            //if (USART_GetITStatus(BGM111_UART, USART_IT_TXE) == SET)
+    466            if (__HAL_UART_GET_FLAG(huart, UART_FLAG_TXE) == SET)
+   \   00000004   0x6820             LDR      R0,[R4, #+0]
+   \   00000006   0x6800             LDR      R0,[R0, #+0]
+   \   00000008   0x0600             LSLS     R0,R0,#+24
+   \   0000000A   0xD526             BPL.N    ??BGM111_UART_IRQHandler_0
+    467            {
+    468              /* Are we still sending data? */
+    469              if (ble.tx_rd != ble.tx_wr)
+   \   0000000C   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000010   0xF890 0x00C9      LDRB     R0,[R0, #+201]
+   \   00000014   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000018   0xF891 0x10C8      LDRB     R1,[R1, #+200]
+   \   0000001C   0x4288             CMP      R0,R1
+   \   0000001E   0xD015             BEQ.N    ??BGM111_UART_IRQHandler_1
+    470              {
+    471                /* Send a byte */
+    472                USART_SendData(huart, ble.tx_buf[ble.tx_rd]);
+   \   00000020   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   00000024   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000028   0xF891 0x10C9      LDRB     R1,[R1, #+201]
+   \   0000002C   0x5C41             LDRB     R1,[R0, R1]
+   \   0000002E   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000030   0x0020             MOVS     R0,R4
+   \   00000032   0x.... 0x....      BL       USART_SendData
+    473                /* Bump the index */
+    474                ble.tx_rd = NextBufIdx(ble.tx_rd);
+   \   00000036   0x.... 0x....      LDR.W    R0,??DataTable20_6
+   \   0000003A   0xF890 0x00C9      LDRB     R0,[R0, #+201]
+   \   0000003E   0x.... 0x....      BL       NextBufIdx
+   \   00000042   0x.... 0x....      LDR.W    R1,??DataTable20_6
+   \   00000046   0xF881 0x00C9      STRB     R0,[R1, #+201]
+   \   0000004A   0xE006             B.N      ??BGM111_UART_IRQHandler_0
+    475              }
+    476              else
+    477              {
+    478                /* Turn off the transmit interrupt */
+    479                __HAL_UART_DISABLE_IT(huart, UART_IT_TXE);
+   \                     ??BGM111_UART_IRQHandler_1: (+1)
+   \   0000004C   0x6820             LDR      R0,[R4, #+0]
+   \   0000004E   0x68C0             LDR      R0,[R0, #+12]
+   \   00000050   0xF07F 0x0180      MVNS     R1,#+128
+   \   00000054   0x4008             ANDS     R0,R1,R0
+   \   00000056   0x6821             LDR      R1,[R4, #+0]
+   \   00000058   0x60C8             STR      R0,[R1, #+12]
+    480              }
+    481            }
+    482            
+    483            /* Was there an error? */
+    484            if (__HAL_UART_GET_FLAG(huart, UART_FLAG_ORE | 
+    485                HAL_UART_ERROR_PE | UART_FLAG_NE | UART_FLAG_FE) == SET)
+   \                     ??BGM111_UART_IRQHandler_0: (+1)
+   \   0000005A   0x6820             LDR      R0,[R4, #+0]
+   \   0000005C   0x6800             LDR      R0,[R0, #+0]
+   \   0000005E   0xF010 0x000F      ANDS     R0,R0,#0xF
+   \   00000062   0x280F             CMP      R0,#+15
+   \   00000064   0xD107             BNE.N    ??BGM111_UART_IRQHandler_2
+    486            {
+    487              /* Reset the receive state */
+    488              ble.rx_state = BGRX_SYNC;
+   \   00000066   0x2000             MOVS     R0,#+0
+   \   00000068   0x....             LDR.N    R1,??DataTable20_6
+   \   0000006A   0xF881 0x0194      STRB     R0,[R1, #+404]
+    489              /* Clear the error by reading the data register */
+    490              USART_ReceiveData(huart);
+   \   0000006E   0x0020             MOVS     R0,R4
+   \   00000070   0x.... 0x....      BL       USART_ReceiveData
+    491              /* We're done */
+    492              return;
+   \   00000074   0xE00B             B.N      ??BGM111_UART_IRQHandler_3
+    493            }
+    494          
+    495            /* Was a new byte received? */
+    496            if (__HAL_UART_GET_FLAG(huart, UART_FLAG_RXNE) == SET)
+   \                     ??BGM111_UART_IRQHandler_2: (+1)
+   \   00000076   0x6820             LDR      R0,[R4, #+0]
+   \   00000078   0x6800             LDR      R0,[R0, #+0]
+   \   0000007A   0x0680             LSLS     R0,R0,#+26
+   \   0000007C   0xD507             BPL.N    ??BGM111_UART_IRQHandler_4
+    497            {
+    498              /* Get the byte (this also clears the flag) */
+    499              uint8_t c = USART_ReceiveData(huart);
+   \   0000007E   0x0020             MOVS     R0,R4
+   \   00000080   0x.... 0x....      BL       USART_ReceiveData
+   \   00000084   0x0005             MOVS     R5,R0
+    500              /* Process the received character... */
+    501              RoadBrd_ProcessBGMChar(c);
+   \   00000086   0x0028             MOVS     R0,R5
+   \   00000088   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000008A   0x.... 0x....      BL       RoadBrd_ProcessBGMChar
+    502            }
+    503          }
+   \                     ??BGM111_UART_IRQHandler_4: (+1)
+   \                     ??BGM111_UART_IRQHandler_3: (+1)
+   \   0000008E   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    504          
+    505          /* Transmit data to the BGM111 module */
+    506          /**
+    507            * @brief  Returns the most recent received data by the USARTx peripheral.
+    508            * @param  USARTx: Select the USART peripheral. 
+    509            *   This parameter can be one of the following values:
+    510            *   USART1, USART2, USART3, UART4 or UART5.
+    511            * @retval The received data.
+    512            */
+
+   \                                 In section .text, align 4, keep-with-next
+    513          void BGM111_Transmit(uint32_t len, uint8_t *data)
+    514          {
+   \                     BGM111_Transmit: (+1)
+   \   00000000   0xE92D 0x41F0      PUSH     {R4-R8,LR}
+   \   00000004   0x0004             MOVS     R4,R0
+   \   00000006   0x000D             MOVS     R5,R1
+    515            uint32_t tempmsg;
+    516            uint32_t timeout_Cnt;
+    517            
+    518            // Log MSG into buffer
+    519            tempmsg = 0xff000000 | len;
+   \   00000008   0xF054 0x407F      ORRS     R0,R4,#0xFF000000
+   \   0000000C   0x0006             MOVS     R6,R0
+    520            blemsgs.msgBuff[blemsgs.tx_wr] = tempmsg;
+   \   0000000E   0x....             LDR.N    R0,??DataTable20_5
+   \   00000010   0x....             LDR.N    R1,??DataTable20_5
+   \   00000012   0xF8B1 0x1320      LDRH     R1,[R1, #+800]
+   \   00000016   0xF840 0x6021      STR      R6,[R0, R1, LSL #+2]
+    521            blemsgs.tx_wr = NextBufIdx(blemsgs.tx_wr);
+   \   0000001A   0x....             LDR.N    R0,??DataTable20_5
+   \   0000001C   0xF8B0 0x0320      LDRH     R0,[R0, #+800]
+   \   00000020   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000022   0x.... 0x....      BL       NextBufIdx
+   \   00000026   0x....             LDR.N    R1,??DataTable20_5
+   \   00000028   0xF8A1 0x0320      STRH     R0,[R1, #+800]
+    522            tempmsg = (uint32_t)(data[0]<<24) + (uint32_t)(data[1]<<16) + (uint32_t)(data[2]<<8) + (uint32_t)(data[3]);
+   \   0000002C   0x7828             LDRB     R0,[R5, #+0]
+   \   0000002E   0x7869             LDRB     R1,[R5, #+1]
+   \   00000030   0x0409             LSLS     R1,R1,#+16
+   \   00000032   0xEB11 0x6000      ADDS     R0,R1,R0, LSL #+24
+   \   00000036   0x78A9             LDRB     R1,[R5, #+2]
+   \   00000038   0xEB10 0x2001      ADDS     R0,R0,R1, LSL #+8
+   \   0000003C   0x78E9             LDRB     R1,[R5, #+3]
+   \   0000003E   0x1808             ADDS     R0,R1,R0
+   \   00000040   0x0006             MOVS     R6,R0
+    523            blemsgs.msgBuff[blemsgs.tx_wr] = tempmsg;
+   \   00000042   0x....             LDR.N    R0,??DataTable20_5
+   \   00000044   0x....             LDR.N    R1,??DataTable20_5
+   \   00000046   0xF8B1 0x1320      LDRH     R1,[R1, #+800]
+   \   0000004A   0xF840 0x6021      STR      R6,[R0, R1, LSL #+2]
+    524            blemsgs.tx_wr = NextBufIdx(blemsgs.tx_wr);
+   \   0000004E   0x....             LDR.N    R0,??DataTable20_5
+   \   00000050   0xF8B0 0x0320      LDRH     R0,[R0, #+800]
+   \   00000054   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000056   0x.... 0x....      BL       NextBufIdx
+   \   0000005A   0x....             LDR.N    R1,??DataTable20_5
+   \   0000005C   0xF8A1 0x0320      STRH     R0,[R1, #+800]
+    525            tempmsg = (uint32_t)(data[4]<<24) + (uint32_t)(data[5]<<16) + (uint32_t)(data[6]<<8) + (uint32_t)(data[7]);
+   \   00000060   0x7928             LDRB     R0,[R5, #+4]
+   \   00000062   0x7969             LDRB     R1,[R5, #+5]
+   \   00000064   0x0409             LSLS     R1,R1,#+16
+   \   00000066   0xEB11 0x6000      ADDS     R0,R1,R0, LSL #+24
+   \   0000006A   0x79A9             LDRB     R1,[R5, #+6]
+   \   0000006C   0xEB10 0x2001      ADDS     R0,R0,R1, LSL #+8
+   \   00000070   0x79E9             LDRB     R1,[R5, #+7]
+   \   00000072   0x1808             ADDS     R0,R1,R0
+   \   00000074   0x0006             MOVS     R6,R0
+    526            blemsgs.msgBuff[blemsgs.tx_wr] = tempmsg;
+   \   00000076   0x....             LDR.N    R0,??DataTable20_5
+   \   00000078   0x....             LDR.N    R1,??DataTable20_5
+   \   0000007A   0xF8B1 0x1320      LDRH     R1,[R1, #+800]
+   \   0000007E   0xF840 0x6021      STR      R6,[R0, R1, LSL #+2]
+    527            blemsgs.tx_wr = NextBufIdx(blemsgs.tx_wr);
+   \   00000082   0x....             LDR.N    R0,??DataTable20_5
+   \   00000084   0xF8B0 0x0320      LDRH     R0,[R0, #+800]
+   \   00000088   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000008A   0x.... 0x....      BL       NextBufIdx
+   \   0000008E   0x....             LDR.N    R1,??DataTable20_5
+   \   00000090   0xF8A1 0x0320      STRH     R0,[R1, #+800]
+    528            
+    529            /* Add bytes when there is space, wait if necessary */
+    530            // OK...But we Can't wait forever...Will place a timeout Count.
+    531            timeout_Cnt = TX_TIMEOUT_CNT;
+   \   00000094   0xF44F 0x60FA      MOV      R0,#+2000
+   \   00000098   0x0007             MOVS     R7,R0
+    532            
+    533            while (len) {
+   \                     ??BGM111_Transmit_0: (+1)
+   \   0000009A   0x2C00             CMP      R4,#+0
+   \   0000009C   0xD03D             BEQ.N    ??BGM111_Transmit_1
+    534              /* Get the next write index */
+    535              uint8_t nextidx = NextBufIdx(ble.tx_wr);
+   \   0000009E   0x....             LDR.N    R0,??DataTable20_6
+   \   000000A0   0xF890 0x00C8      LDRB     R0,[R0, #+200]
+   \   000000A4   0x.... 0x....      BL       NextBufIdx
+   \   000000A8   0x4680             MOV      R8,R0
+    536              /* We're not hitting the read index? (There is space?) */
+    537              if (nextidx != ble.tx_rd)
+   \   000000AA   0x4640             MOV      R0,R8
+   \   000000AC   0x....             LDR.N    R1,??DataTable20_6
+   \   000000AE   0xF891 0x10C9      LDRB     R1,[R1, #+201]
+   \   000000B2   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   000000B4   0x4288             CMP      R0,R1
+   \   000000B6   0xD01E             BEQ.N    ??BGM111_Transmit_2
+    538              {
+    539                /* Put the data in the buffer */
+    540                ble.tx_buf[ble.tx_wr] = *data;
+   \   000000B8   0x7828             LDRB     R0,[R5, #+0]
+   \   000000BA   0x....             LDR.N    R1,??DataTable20_6
+   \   000000BC   0x....             LDR.N    R2,??DataTable20_6
+   \   000000BE   0xF892 0x20C8      LDRB     R2,[R2, #+200]
+   \   000000C2   0x5488             STRB     R0,[R1, R2]
+    541          
+    542                /* Disable interrupt */
+    543                HAL_NVIC_DisableIRQ(USART3_IRQn);
+   \   000000C4   0x2027             MOVS     R0,#+39
+   \   000000C6   0x.... 0x....      BL       HAL_NVIC_DisableIRQ
+    544                /* Trigger an interrupt if we're starting with an empty buffer */
+    545                if (ble.tx_wr == ble.tx_rd)
+   \   000000CA   0x....             LDR.N    R0,??DataTable20_6
+   \   000000CC   0xF890 0x00C8      LDRB     R0,[R0, #+200]
+   \   000000D0   0x....             LDR.N    R1,??DataTable20_6
+   \   000000D2   0xF891 0x10C9      LDRB     R1,[R1, #+201]
+   \   000000D6   0x4288             CMP      R0,R1
+   \   000000D8   0xD101             BNE.N    ??BGM111_Transmit_3
+    546                {
+    547                  HAL_UART_EnableBGM_TXE();
+   \   000000DA   0x.... 0x....      BL       HAL_UART_EnableBGM_TXE
+    548                }
+    549                /* Increment the write index */
+    550                ble.tx_wr = nextidx;
+   \                     ??BGM111_Transmit_3: (+1)
+   \   000000DE   0x....             LDR.N    R0,??DataTable20_6
+   \   000000E0   0xF880 0x80C8      STRB     R8,[R0, #+200]
+    551                /* Enable interrupt */
+    552                HAL_NVIC_EnableIRQ(USART3_IRQn);
+   \   000000E4   0x2027             MOVS     R0,#+39
+   \   000000E6   0x.... 0x....      BL       HAL_NVIC_EnableIRQ
+    553          
+    554                /* Update the incoming data length and pointer */
+    555                len--;
+   \   000000EA   0x1E64             SUBS     R4,R4,#+1
+    556                data++;
+   \   000000EC   0x1C6D             ADDS     R5,R5,#+1
+    557                //Found Space...Reset Count.
+    558                timeout_Cnt = TX_TIMEOUT_CNT;
+   \   000000EE   0xF44F 0x60FA      MOV      R0,#+2000
+   \   000000F2   0x0007             MOVS     R7,R0
+   \   000000F4   0xE7D1             B.N      ??BGM111_Transmit_0
+    559              }
+    560              else
+    561              {
+    562                //Decrement Count
+    563                if ( timeout_Cnt-- == 0)
+   \                     ??BGM111_Transmit_2: (+1)
+   \   000000F6   0x0038             MOVS     R0,R7
+   \   000000F8   0x1E47             SUBS     R7,R0,#+1
+   \   000000FA   0x2800             CMP      R0,#+0
+   \   000000FC   0xD1CD             BNE.N    ??BGM111_Transmit_0
+    564                {
+    565                  // If this happens...NOT BOOTED..Clear ths flag or infinite loop.
+    566                  ble.booted = false;
+   \   000000FE   0x2000             MOVS     R0,#+0
+   \   00000100   0x....             LDR.N    R1,??DataTable20_6
+   \   00000102   0xF881 0x0196      STRB     R0,[R1, #+406]
+    567                  // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
+    568                  RdBrd_ErrCdLogErrCd( ERROR_TXBGMBUF_FULL, MODULE_bgm111 );
+   \   00000106   0x2102             MOVS     R1,#+2
+   \   00000108   0x200F             MOVS     R0,#+15
+   \   0000010A   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    569                  RdBrd_BlinkErrCd( ERROR_TXBGMBUF_FULL );
+   \   0000010E   0x200F             MOVS     R0,#+15
+   \   00000110   0x.... 0x....      BL       RdBrd_BlinkErrCd
+    570                  HAL_NVIC_SystemReset();
+   \   00000114   0x.... 0x....      BL       HAL_NVIC_SystemReset
+   \   00000118   0xE7BF             B.N      ??BGM111_Transmit_0
+    571                }
+    572              }
+    573            }
+    574          }
+   \                     ??BGM111_Transmit_1: (+1)
+   \   0000011A   0xE8BD 0x81F0      POP      {R4-R8,PC}       ;; return
+    575          
+    576          /**
+    577            * @brief  Transmits single data through the USARTx peripheral.
+    578            * @param  USARTx: Select the USART peripheral. 
+    579            *   This parameter can be one of the following values:
+    580            *   USART1, USART2, USART3, UART4 or UART5.
+    581            * @param  Data: the data to transmit.
+    582            * @retval None.
+    583            */
+
+   \                                 In section .text, align 2, keep-with-next
+    584          void USART_SendData(UART_HandleTypeDef *huart, uint16_t Data)
+    585          {
+    586            /* Transmit Data */
+    587            huart->Instance->DR = (Data & (uint16_t)0x01FF);
+   \                     USART_SendData: (+1)
+   \   00000000   0xB289             UXTH     R1,R1            ;; ZeroExt  R1,R1,#+16,#+16
+   \   00000002   0x05CA             LSLS     R2,R1,#+23       ;; ZeroExtS R2,R1,#+23,#+23
+   \   00000004   0x0DD2             LSRS     R2,R2,#+23
+   \   00000006   0x6803             LDR      R3,[R0, #+0]
+   \   00000008   0x605A             STR      R2,[R3, #+4]
+    588          }
+   \   0000000A   0x4770             BX       LR               ;; return
+    589          
+    590          /**
+    591            * @brief  Returns the most recent received data by the USARTx peripheral.
+    592            * @param  USARTx: Select the USART peripheral. 
+    593            *   This parameter can be one of the following values:
+    594            *   USART1, USART2, USART3, UART4 or UART5.
+    595            * @retval The received data.
+    596            */
+
+   \                                 In section .text, align 2, keep-with-next
+    597          uint16_t USART_ReceiveData(UART_HandleTypeDef *huart)
+    598          {
+    599            /* Receive Data */
+    600            return (uint16_t)(huart->Instance->DR & (uint16_t)0x01FF);
+   \                     USART_ReceiveData: (+1)
+   \   00000000   0x6800             LDR      R0,[R0, #+0]
+   \   00000002   0x6840             LDR      R0,[R0, #+4]
+   \   00000004   0x05C0             LSLS     R0,R0,#+23       ;; ZeroExtS R0,R0,#+23,#+23
+   \   00000006   0x0DC0             LSRS     R0,R0,#+23
+   \   00000008   0x4770             BX       LR               ;; return
+    601          }
+    602          
+    603          /**
+    604            * @brief  This routine Process the passed character as part of the process of building status
+    605            *         from the BGM111
+    606            * @param  uint8_t c: Character to process.
+    607            * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+    608            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    609            *                                HAL_BUSY:     UART is busy.
+    610            *                                HAL_TIMEOUT:  UART timed out.
+    611            */
+
+   \                                 In section .text, align 2, keep-with-next
+    612          HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
+    613          {
+   \                     RoadBrd_ProcessBGMChar: (+1)
+   \   00000000   0xB530             PUSH     {R4,R5,LR}
+   \   00000002   0xB08F             SUB      SP,SP,#+60
+   \   00000004   0x0004             MOVS     R4,R0
+    614          //  static uint8_t header_cnt, payload_cnt, payload_len;
+    615            HAL_StatusTypeDef Status;
+    616            static uint8_t tempBffr2[40];
+    617            uint8_t tempBffr3[60];
+    618            static uint8_t in_ptr = 0;
+    619            
+    620            // First pull new character into buffer.
+    621            tempBffr2[in_ptr++] = c;
+   \   00000006   0x....             LDR.N    R0,??DataTable20_33
+   \   00000008   0x....             LDR.N    R1,??DataTable20_34
+   \   0000000A   0x7809             LDRB     R1,[R1, #+0]
+   \   0000000C   0x5444             STRB     R4,[R0, R1]
+   \   0000000E   0x....             LDR.N    R0,??DataTable20_34
+   \   00000010   0x7800             LDRB     R0,[R0, #+0]
+   \   00000012   0x1C40             ADDS     R0,R0,#+1
+   \   00000014   0x....             LDR.N    R1,??DataTable20_34
+   \   00000016   0x7008             STRB     R0,[R1, #+0]
+    622            // Now, Did we get a termination character?
+    623            if( (c == 0x0a)  ||
+    624                (c == '?') )
+   \   00000018   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000001A   0x2C0A             CMP      R4,#+10
+   \   0000001C   0xD003             BEQ.N    ??RoadBrd_ProcessBGMChar_0
+   \   0000001E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000020   0x2C3F             CMP      R4,#+63
+   \   00000022   0xF040 0x80BB      BNE.W    ??RoadBrd_ProcessBGMChar_1
+    625            {
+    626              // Reset Ptr.
+    627              in_ptr = 0;
+   \                     ??RoadBrd_ProcessBGMChar_0: (+1)
+   \   00000026   0x2000             MOVS     R0,#+0
+   \   00000028   0x....             LDR.N    R1,??DataTable20_34
+   \   0000002A   0x7008             STRB     R0,[R1, #+0]
+    628          
+    629              // Yes...We will now test contents of buffer. And then reset ptr back to 0.
+    630              sprintf( (char *)tempBffr3, "\r\n<<FULL STRING>>: %s \r\n", tempBffr2);
+   \   0000002C   0x....             LDR.N    R2,??DataTable20_33
+   \   0000002E   0x....             LDR.N    R1,??DataTable20_35
+   \   00000030   0x4668             MOV      R0,SP
+   \   00000032   0x.... 0x....      BL       sprintf
+    631              Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+   \   00000036   0x4669             MOV      R1,SP
+   \   00000038   0x2000             MOVS     R0,#+0
+   \   0000003A   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000003E   0x0005             MOVS     R5,R0
+    632              if (Status != HAL_OK)
+   \   00000040   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   00000042   0x2D00             CMP      R5,#+0
+   \   00000044   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_2
+    633                return Status;
+   \   00000046   0x0028             MOVS     R0,R5
+   \   00000048   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000004A   0xE0A9             B.N      ??RoadBrd_ProcessBGMChar_3
+    634              // Test Strings for Key items.
+    635              // Boot String?
+    636              if (strncmp((char *)tempBffr2,"Boot",4) == 0)
+   \                     ??RoadBrd_ProcessBGMChar_2: (+1)
+   \   0000004C   0x2204             MOVS     R2,#+4
+   \   0000004E   0x....             LDR.N    R1,??DataTable20_36
+   \   00000050   0x....             LDR.N    R0,??DataTable20_33
+   \   00000052   0x.... 0x....      BL       strncmp
+   \   00000056   0x2800             CMP      R0,#+0
+   \   00000058   0xD10D             BNE.N    ??RoadBrd_ProcessBGMChar_4
+    637              {
+    638                // Yes....Set Boot Flag.
+    639                ble.booted = true;
+   \   0000005A   0x2001             MOVS     R0,#+1
+   \   0000005C   0x....             LDR.N    R1,??DataTable20_6
+   \   0000005E   0xF881 0x0196      STRB     R0,[R1, #+406]
+    640                // If we are booted....Then lets arm TACK Test Code.
+    641                ble.data_Connection = false;
+   \   00000062   0x2000             MOVS     R0,#+0
+   \   00000064   0x....             LDR.N    R1,??DataTable20_6
+   \   00000066   0xF881 0x0198      STRB     R0,[R1, #+408]
+    642                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.booted> ");
+   \   0000006A   0x....             LDR.N    R1,??DataTable20_37
+   \   0000006C   0x2000             MOVS     R0,#+0
+   \   0000006E   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000072   0x0005             MOVS     R5,R0
+   \   00000074   0xE092             B.N      ??RoadBrd_ProcessBGMChar_1
+    643              }
+    644              // Connection String?
+    645              else if (strncmp((char *)tempBffr2,"Connected",9) == 0)
+   \                     ??RoadBrd_ProcessBGMChar_4: (+1)
+   \   00000076   0x2209             MOVS     R2,#+9
+   \   00000078   0x....             LDR.N    R1,??DataTable20_38
+   \   0000007A   0x....             LDR.N    R0,??DataTable20_33
+   \   0000007C   0x.... 0x....      BL       strncmp
+   \   00000080   0x2800             CMP      R0,#+0
+   \   00000082   0xD115             BNE.N    ??RoadBrd_ProcessBGMChar_5
+    646              {
+    647                // Yes....Set Boot Flag.
+    648                ble.connection = true;
+   \   00000084   0x2001             MOVS     R0,#+1
+   \   00000086   0x....             LDR.N    R1,??DataTable20_6
+   \   00000088   0xF881 0x0197      STRB     R0,[R1, #+407]
+    649                ble.TackArmed = TACK_ARMED;
+   \   0000008C   0x2001             MOVS     R0,#+1
+   \   0000008E   0x....             LDR.N    R1,??DataTable20_6
+   \   00000090   0xF881 0x0199      STRB     R0,[R1, #+409]
+    650                ble.TackCnt = 0;
+   \   00000094   0x2000             MOVS     R0,#+0
+   \   00000096   0x....             LDR.N    R1,??DataTable20_6
+   \   00000098   0xF881 0x019A      STRB     R0,[R1, #+410]
+    651                RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
+   \   0000009C   0x....             LDR.N    R1,??DataTable20_39
+   \   0000009E   0x2000             MOVS     R0,#+0
+   \   000000A0   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    652                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.connection> ");
+   \   000000A4   0x....             LDR.N    R1,??DataTable20_40
+   \   000000A6   0x2000             MOVS     R0,#+0
+   \   000000A8   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000000AC   0x0005             MOVS     R5,R0
+   \   000000AE   0xE075             B.N      ??RoadBrd_ProcessBGMChar_1
+    653          
+    654              }
+    655              // Disconnection String?
+    656              else if (strncmp((char *)tempBffr2,"Disconnected",12) == 0)
+   \                     ??RoadBrd_ProcessBGMChar_5: (+1)
+   \   000000B0   0x220C             MOVS     R2,#+12
+   \   000000B2   0x....             LDR.N    R1,??DataTable20_41
+   \   000000B4   0x....             LDR.N    R0,??DataTable20_33
+   \   000000B6   0x.... 0x....      BL       strncmp
+   \   000000BA   0x2800             CMP      R0,#+0
+   \   000000BC   0xD11B             BNE.N    ??RoadBrd_ProcessBGMChar_6
+    657              {
+    658                // Yes....Clear Flags.
+    659                ble.connection = false;
+   \   000000BE   0x2000             MOVS     R0,#+0
+   \   000000C0   0x....             LDR.N    R1,??DataTable20_6
+   \   000000C2   0xF881 0x0197      STRB     R0,[R1, #+407]
+    660                ble.data_Connection = false;
+   \   000000C6   0x2000             MOVS     R0,#+0
+   \   000000C8   0x....             LDR.N    R1,??DataTable20_6
+   \   000000CA   0xF881 0x0198      STRB     R0,[R1, #+408]
+    661                ble.TackArmed = TACK_ARMED;
+   \   000000CE   0x2001             MOVS     R0,#+1
+   \   000000D0   0x....             LDR.N    R1,??DataTable20_6
+   \   000000D2   0xF881 0x0199      STRB     R0,[R1, #+409]
+    662                ble.TackCnt = 0;
+   \   000000D6   0x2000             MOVS     R0,#+0
+   \   000000D8   0x....             LDR.N    R1,??DataTable20_6
+   \   000000DA   0xF881 0x019A      STRB     R0,[R1, #+410]
+    663                RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
+   \   000000DE   0x....             LDR.N    R1,??DataTable20_39
+   \   000000E0   0x2000             MOVS     R0,#+0
+   \   000000E2   0x.... 0x....      BL       RoadBrd_UART_Transmit
+    664                ClrDataStructure();                           // Clear Backup data structure.
+   \   000000E6   0x.... 0x....      BL       ClrDataStructure
+    665                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
+   \   000000EA   0x....             LDR.N    R1,??DataTable20_42
+   \   000000EC   0x2000             MOVS     R0,#+0
+   \   000000EE   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000000F2   0x0005             MOVS     R5,R0
+   \   000000F4   0xE052             B.N      ??RoadBrd_ProcessBGMChar_1
+    666              }
+    667              // Data String?
+    668              else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
+   \                     ??RoadBrd_ProcessBGMChar_6: (+1)
+   \   000000F6   0x2204             MOVS     R2,#+4
+   \   000000F8   0x....             LDR.N    R1,??DataTable20_43
+   \   000000FA   0x....             LDR.N    R0,??DataTable20_33
+   \   000000FC   0x.... 0x....      BL       strncmp
+   \   00000100   0x2800             CMP      R0,#+0
+   \   00000102   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_7
+    669              {
+    670                // Yes....Set Boot Flag.
+    671                ble.data_Connection = true;
+   \   00000104   0x2001             MOVS     R0,#+1
+   \   00000106   0x....             LDR.N    R1,??DataTable20_6
+   \   00000108   0xF881 0x0198      STRB     R0,[R1, #+408]
+    672                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
+   \   0000010C   0x....             LDR.N    R1,??DataTable20_44
+   \   0000010E   0x2000             MOVS     R0,#+0
+   \   00000110   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000114   0x0005             MOVS     R5,R0
+   \   00000116   0xE041             B.N      ??RoadBrd_ProcessBGMChar_1
+    673              }
+    674              // TACK String?
+    675              else if (strncmp((char *)tempBffr2,"<TACK",5) == 0)
+   \                     ??RoadBrd_ProcessBGMChar_7: (+1)
+   \   00000118   0x2205             MOVS     R2,#+5
+   \   0000011A   0x....             LDR.N    R1,??DataTable20_45
+   \   0000011C   0x....             LDR.N    R0,??DataTable20_33
+   \   0000011E   0x.... 0x....      BL       strncmp
+   \   00000122   0x2800             CMP      R0,#+0
+   \   00000124   0xD124             BNE.N    ??RoadBrd_ProcessBGMChar_8
+    676              {
+    677                if (ble.TackArmed == TACK_ARMED2)
+   \   00000126   0x....             LDR.N    R0,??DataTable20_6
+   \   00000128   0xF890 0x0199      LDRB     R0,[R0, #+409]
+   \   0000012C   0x2802             CMP      R0,#+2
+   \   0000012E   0xD10D             BNE.N    ??RoadBrd_ProcessBGMChar_9
+    678                {
+    679                  ble.TackArmed = TACK_SYNC;
+   \   00000130   0x2003             MOVS     R0,#+3
+   \   00000132   0x....             LDR.N    R1,??DataTable20_6
+   \   00000134   0xF881 0x0199      STRB     R0,[R1, #+409]
+    680                  ble.TackCnt = 0;
+   \   00000138   0x2000             MOVS     R0,#+0
+   \   0000013A   0x....             LDR.N    R1,??DataTable20_6
+   \   0000013C   0xF881 0x019A      STRB     R0,[R1, #+410]
+    681                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
+   \   00000140   0x....             LDR.N    R1,??DataTable20_46
+   \   00000142   0x2000             MOVS     R0,#+0
+   \   00000144   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000148   0x0005             MOVS     R5,R0
+   \   0000014A   0xE027             B.N      ??RoadBrd_ProcessBGMChar_1
+    682                }
+    683                else if (ble.TackArmed == TACK_SYNC)
+   \                     ??RoadBrd_ProcessBGMChar_9: (+1)
+   \   0000014C   0x....             LDR.N    R0,??DataTable20_6
+   \   0000014E   0xF890 0x0199      LDRB     R0,[R0, #+409]
+   \   00000152   0x2803             CMP      R0,#+3
+   \   00000154   0xD122             BNE.N    ??RoadBrd_ProcessBGMChar_1
+    684                {
+    685                  ble.TackCnt = 0;
+   \   00000156   0x2000             MOVS     R0,#+0
+   \   00000158   0x....             LDR.N    R1,??DataTable20_6
+   \   0000015A   0xF881 0x019A      STRB     R0,[R1, #+410]
+    686                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
+   \   0000015E   0x....             LDR.N    R1,??DataTable20_47
+   \   00000160   0x2000             MOVS     R0,#+0
+   \   00000162   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000166   0x0005             MOVS     R5,R0
+    687                 // Set Sync Flag for Frame.
+    688                  BGM111_SetSyncFlg( SYNC_PROC );
+   \   00000168   0x2001             MOVS     R0,#+1
+   \   0000016A   0x.... 0x....      BL       BGM111_SetSyncFlg
+   \   0000016E   0xE015             B.N      ??RoadBrd_ProcessBGMChar_1
+    689                }
+    690              }
+    691              // NOW TEST FOR PARAMS!!!
+    692          
+    693              // NOW TEST ERROR CONDITIONS!!!
+    694              // OVERFLOW?
+    695              else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)
+   \                     ??RoadBrd_ProcessBGMChar_8: (+1)
+   \   00000170   0x2208             MOVS     R2,#+8
+   \   00000172   0x....             LDR.N    R1,??DataTable20_48
+   \   00000174   0x....             LDR.N    R0,??DataTable20_33
+   \   00000176   0x.... 0x....      BL       strncmp
+   \   0000017A   0x2800             CMP      R0,#+0
+   \   0000017C   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_10
+    696              {
+    697                // Yes....Report Error and Reset.
+    698                // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
+    699                RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
+   \   0000017E   0x2102             MOVS     R1,#+2
+   \   00000180   0x2011             MOVS     R0,#+17
+   \   00000182   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    700                RdBrd_BlinkErrCd( ERROR_BGM_OVERFLOW );
+   \   00000186   0x2011             MOVS     R0,#+17
+   \   00000188   0x.... 0x....      BL       RdBrd_BlinkErrCd
+    701                HAL_NVIC_SystemReset();
+   \   0000018C   0x.... 0x....      BL       HAL_NVIC_SystemReset
+   \   00000190   0xE004             B.N      ??RoadBrd_ProcessBGMChar_1
+    702              }
+    703              else
+    704              {
+    705                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<UNKNOWN STATUS> ");
+   \                     ??RoadBrd_ProcessBGMChar_10: (+1)
+   \   00000192   0x....             LDR.N    R1,??DataTable20_49
+   \   00000194   0x2000             MOVS     R0,#+0
+   \   00000196   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000019A   0x0005             MOVS     R5,R0
+    706              }
+    707            }
+    708            //tempBffr2[0] = c;
+    709            //tempBffr2[1] = 0x00;
+    710            //Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    711            return Status;
+   \                     ??RoadBrd_ProcessBGMChar_1: (+1)
+   \   0000019C   0x0028             MOVS     R0,R5
+   \   0000019E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \                     ??RoadBrd_ProcessBGMChar_3: (+1)
+   \   000001A0   0xB00F             ADD      SP,SP,#+60
+   \   000001A2   0xBD30             POP      {R4,R5,PC}       ;; return
+    712          #if 0
+    713              Status = HAL_OK;
+    714              // Test Buffer. If we are full, An error has occured. Must at least log that.
+    715              if (IsBufFull(ble.rx_wr, ble.rx_rd))
+    716              {
+    717                RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
+    718                Clr_HrtBeat_Cnt();
+    719                RdBrd_BlinkErrCd( ERROR_BGMBUF_FULL );
+    720                //RoadBrd_Delay( 1000 );
+    721                HAL_NVIC_SystemReset();
+    722                return HAL_ERROR;
+    723              }
+    724              /* Execution based on state */
+    725              switch (ble.rx_state)
+    726              {
+    727                /* Waiting for a valid start of header */
+    728                default:
+    729                case BGRX_SYNC:
+    730                  /* Valid start of header? (response or event) */
+    731                  if ((c & 0xF8) ==
+    732                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_rsp) ||
+    733                      (c & 0xF8) ==
+    734                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_evt))
+    735                  {
+    736                    /* Receiving header */
+    737                    ble.rx_state = BGRX_HDR;
+    738                    /* Initialize header byte counter */
+    739                    header_cnt = 0;
+    740                  }
+    741                  else
+    742                  {
+    743                    /* Stay in sync state until we receive a valid start of header */
+    744                    // We have detected a SYNC error on BGM111...Log it!
+    745                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+    746                    Clr_HrtBeat_Cnt();
+    747                    if (ble.booted)
+    748                      RdBrd_BlinkErrCd( ERROR_BGMSYNC );
+    749                    //RoadBrd_Delay( 1000 );
+    750                    HAL_NVIC_SystemReset();
+    751                    break;
+    752                  }
+    753                  /* Fallthrough intentional */
+    754                /* Receiving header */
+    755                case BGRX_HDR:
+    756                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
+    757                  {
+    758                    // Oops...Detected a fatal error...RESET!!!
+    759                    // We have detected a SYNC error on BGM111...Log it!
+    760                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+    761                    /* Indicate we need to execute the BLE stack, it's the
+    762                     * only way to get more space in the buffer */
+    763                    ble.req_exec = true;
+    764                    /* We're back to synchronizing */
+    765                    ble.rx_state = BGRX_SYNC;
+    766                  }
+    767                  else
+    768                  {
+    769                    /* Save the received byte */
+    770                    /* Save the received byte */
+    771                    ble.rx_buf[ble.rx_wr] = c;
+    772                    /* Increment the index and header byte counter */
+    773                    ble.rx_wr = NextBufIdx(ble.rx_wr);
+    774                    header_cnt++;
+    775                    /* If this is the second header byte, we can grab the payload
+    776                     * length.  We ignore the first byte, since the spec says that
+    777                     * due to memory limitations in the modules, the packet is
+    778                     * never more than 64 bytes. */
+    779                    if (header_cnt == 2)
+    780                    {
+    781                      /* Get the payload length */
+    782                      payload_len = c;
+    783                      /* If we have a payload bigger than 60 bytes, something's wrong */
+    784                      if (payload_len > 60)
+    785                      {
+    786                        // We have detected a SYNC error on BGM111...Log it!
+    787                        RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+    788                        /* Reset receive state to synchronizing */
+    789                        ble.rx_state = BGRX_SYNC;
+    790                        /* Indicate we need to execute the BLE stack to free space */
+    791                        ble.req_exec = true;
+    792                        Status = HAL_ERROR;
+    793                      }
+    794                    } // EndIf (header_cnt == 2)
+    795                    /* Are we done with the header? */
+    796                    if (header_cnt >= BGLIB_MSG_HEADER_LEN)
+    797                    {
+    798                      /* Is there no payload? */
+    799                      if (payload_len == 0)
+    800                      {
+    801                        /* Reset receive state to synchronizing */
+    802                        ble.rx_state = BGRX_SYNC;
+    803                        /* Indicate we need to execute the BLE stack to process 
+    804                         * the received packet */
+    805                        ble.req_exec = true;
+    806                      }
+    807                      else
+    808                      {
+    809                        /* Start receiving payload data */
+    810                        ble.rx_state = BGRX_DATA;
+    811                        /* Initialize the payload counter */
+    812                        payload_cnt = 0;
+    813                      }
+    814                    } // EndIf (header_cnt >= BGLIB_MSG_HEADER_LEN)
+    815                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
+    816                  break;
+    817                /* Receiving data */
+    818                case BGRX_DATA:
+    819                  /* Did we receive a byte, but the buffer is full? */
+    820                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
+    821                  {
+    822                    /* Indicate we need to execute the BLE stack, it's the
+    823                     * only way to get more space in the buffer */
+    824                    ble.req_exec = true;
+    825                    /* We're back to synchronizing */
+    826                    ble.rx_state = BGRX_SYNC;
+    827                  }
+    828                  else
+    829                  {
+    830                    /* Store the byte */
+    831                    ble.rx_buf[ble.rx_wr] = c;
+    832                    /* Increment the index and payload byte counter */
+    833                    ble.rx_wr = NextBufIdx(ble.rx_wr);
+    834                    payload_cnt++;
+    835                    /* Is this the end of the packet? */
+    836                    if (payload_cnt >= payload_len)
+    837                    {
+    838                      /* Reset receive state to synchronizing */
+    839                      ble.rx_state = BGRX_SYNC;
+    840                      /* Indicate we need to execute the BLE stack to process 
+    841                       * the received packet */
+    842                      ble.req_exec = true;
+    843                    }
+    844                    /* Is the buffer almost full? */
+    845                    if (BufFree(ble.rx_wr, ble.rx_rd) <= BG_DATA_LOW_WATERMARK)
+    846                    {
+    847                      /* Indicate we need to execute the BLE stack so it can
+    848                       * start reading data from the buffer */
+    849                      ble.req_exec = true;
+    850                    }
+    851                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
+    852                  break;
+    853              } // EndSwitch (ble.rx_state)
+    854              return Status;
+    855          #endif
+    856          }
+
+   \                                 In section .bss, align 4
+   \                     `RoadBrd_ProcessBGMChar::tempBffr2`:
+   \   00000000                      DS8 40
+
+   \                                 In section .bss, align 1
+   \                     `RoadBrd_ProcessBGMChar::in_ptr`:
+   \   00000000                      DS8 1
+    857          
+    858          /**
+    859            * @brief  This routine returns the status of the ble.req_exec flag
+    860            *         from the BGM111
+    861            * @param  None
+    862            * @retval bool:     true(1):     Processing of packet about to start
+    863            *                   false(0):      No processing pending.
+    864            */
+
+   \                                 In section .text, align 2, keep-with-next
+    865          bool RoadBrd_tstReqexec( void )
+    866          {
+    867            return ble.req_exec;
+   \                     RoadBrd_tstReqexec: (+1)
+   \   00000000   0x....             LDR.N    R0,??DataTable20_6
+   \   00000002   0xF890 0x0195      LDRB     R0,[R0, #+405]
+   \   00000006   0x4770             BX       LR               ;; return
+    868          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17:
+   \   00000000   0x2D 0x2A          DC8      "-*-"
+   \              0x2D 0x00    
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable17_1:
+   \   00000000   0x2D 0x4F          DC8      "-O-"
+   \              0x2D 0x00    
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20:
+   \   00000000   0x........         DC32     gecko_cmd_msg
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_1:
+   \   00000000   0x01030220         DC32     0x1030220
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_2:
+   \   00000000   0x........         DC32     gecko_rsp_msg
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_3:
+   \   00000000   0x020A0520         DC32     0x20a0520
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_4:
+   \   00000000   0x050A0420         DC32     0x50a0420
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_5:
+   \   00000000   0x........         DC32     blemsgs
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_6:
+   \   00000000   0x........         DC32     `ble`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_7:
+   \   00000000   0x........         DC32     bglib_output
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_8:
+   \   00000000   0x........         DC32     BGM111_Receive
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_9:
+   \   00000000   0x........         DC32     bglib_input
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_10:
+   \   00000000   0x........         DC32     BGM111_Peek
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_11:
+   \   00000000   0x........         DC32     bglib_peek
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_12:
+   \   00000000   0xFFFF00F8         DC32     0xffff00f8
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_13:
+   \   00000000   0x000100A0         DC32     0x100a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_14:
+   \   00000000   0x000800A0         DC32     0x800a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_15:
+   \   00000000   0x000900A0         DC32     0x900a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_16:
+   \   00000000   0x010800A0         DC32     0x10800a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_17:
+   \   00000000   0x020800A0         DC32     0x20800a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_18:
+   \   00000000   0x020A0020         DC32     0x20a0020
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_19:
+   \   00000000   0x020B00A0         DC32     0x20b00a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_20:
+   \   00000000   0x030A00A0         DC32     0x30a00a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_21:
+   \   00000000   0x050A0020         DC32     0x50a0020
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_22:
+   \   00000000   0x08090020         DC32     0x8090020
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_23:
+   \   00000000   0x200000A0         DC32     0x200000a0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_24:
+   \   00000000   0x........         DC32     ?_0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_25:
+   \   00000000   0x........         DC32     ?_1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_26:
+   \   00000000   0x........         DC32     ?_2
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_27:
+   \   00000000   0x........         DC32     ?_5
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_28:
+   \   00000000   0x........         DC32     ?_6
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_29:
+   \   00000000   0x........         DC32     ?_7
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_30:
+   \   00000000   0x........         DC32     ?_8
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_31:
+   \   00000000   0x........         DC32     ?_9
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_32:
+   \   00000000   0x........         DC32     ?_10
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_33:
+   \   00000000   0x........         DC32     `RoadBrd_ProcessBGMChar::tempBffr2`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_34:
+   \   00000000   0x........         DC32     `RoadBrd_ProcessBGMChar::in_ptr`
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_35:
+   \   00000000   0x........         DC32     ?_11
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_36:
+   \   00000000   0x........         DC32     ?_12
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_37:
+   \   00000000   0x........         DC32     ?_13
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_38:
+   \   00000000   0x........         DC32     ?_14
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_39:
+   \   00000000   0x........         DC32     ?_15
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_40:
+   \   00000000   0x........         DC32     ?_16
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_41:
+   \   00000000   0x........         DC32     ?_17
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_42:
+   \   00000000   0x........         DC32     ?_18
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_43:
+   \   00000000   0x........         DC32     ?_19
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_44:
+   \   00000000   0x........         DC32     ?_20
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_45:
+   \   00000000   0x........         DC32     ?_21
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_46:
+   \   00000000   0x........         DC32     ?_22
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_47:
+   \   00000000   0x........         DC32     ?_23
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_48:
+   \   00000000   0x........         DC32     ?_24
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable20_49:
+   \   00000000   0x........         DC32     ?_25
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x3C 0x42          DC8 "<BGM_BOOT>"
+   \              0x47 0x4D    
+   \              0x5F 0x42    
+   \              0x4F 0x4F    
+   \              0x54 0x3E    
+   \              0x00         
+   \   0000000B   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_1:
+   \   00000000   0x3C 0x42          DC8 "<BGM_CNCTCLOSE>"
+   \              0x47 0x4D    
+   \              0x5F 0x43    
+   \              0x4E 0x43    
+   \              0x54 0x43    
+   \              0x4C 0x4F    
+   \              0x53 0x45    
+   \              0x3E 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_2:
+   \   00000000   0x3C 0x42          DC8 "<BGM_CNCTOPEN>"
+   \              0x47 0x4D    
+   \              0x5F 0x43    
+   \              0x4E 0x43    
+   \              0x54 0x4F    
+   \              0x50 0x45    
+   \              0x4E 0x3E    
+   \              0x00         
+   \   0000000F   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \   00000000   0x2D 0x2A          DC8 "-*-"
+   \              0x2D 0x00    
+
+   \                                 In section .rodata, align 4
+   \   00000000   0x2D 0x4F          DC8 "-O-"
+   \              0x2D 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_5:
+   \   00000000   0x3C 0x72          DC8 "<rsp_read_ch_value_by_uuid_id>"
+   \              0x73 0x70    
+   \              0x5F 0x72    
+   \              0x65 0x61    
+   \              0x64 0x5F    
+   \              0x63 0x68    
+   \              0x5F 0x76    
+   \              0x61 0x6C    
+   \              0x75 0x65    
+   \              0x5F 0x62    
+   \              0x79 0x5F    
+   \              0x75 0x75    
+   \              0x69 0x64    
+   \              0x5F 0x69    
+   \              0x64 0x3E    
+   \              0x00         
+   \   0000001F   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_6:
+   \   00000000   0x3C 0x53          DC8 "<STR:%s>"
+   \              0x54 0x52    
+   \              0x3A 0x25    
+   \              0x73 0x3E    
+   \              0x00         
+   \   00000009   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_7:
+   \   00000000   0x3C 0x65          DC8 "<evt_endpoint_status_id>"
+   \              0x76 0x74    
+   \              0x5F 0x65    
+   \              0x6E 0x64    
+   \              0x70 0x6F    
+   \              0x69 0x6E    
+   \              0x74 0x5F    
+   \              0x73 0x74    
+   \              0x61 0x74    
+   \              0x75 0x73    
+   \              0x5F 0x69    
+   \              0x64 0x3E    
+   \              0x00         
+   \   00000019   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_8:
+   \   00000000   0x3C 0x55          DC8 "<UNKN:%08x>"
+   \              0x4E 0x4B    
+   \              0x4E 0x3A    
+   \              0x25 0x30    
+   \              0x38 0x78    
+   \              0x3E 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_9:
+   \   00000000   0x3C 0x54          DC8 "<TACK Strike:%d>"
+   \              0x41 0x43    
+   \              0x4B 0x20    
+   \              0x53 0x74    
+   \              0x72 0x69    
+   \              0x6B 0x65    
+   \              0x3A 0x25    
+   \              0x64 0x3E    
+   \              0x00         
+   \   00000011   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_10:
+   \   00000000   0x3C 0x42          DC8 "<BGMSYNC_CNCTCLOSE>"
+   \              0x47 0x4D    
+   \              0x53 0x59    
+   \              0x4E 0x43    
+   \              0x5F 0x43    
+   \              0x4E 0x43    
+   \              0x54 0x43    
+   \              0x4C 0x4F    
+   \              0x53 0x45    
+   \              0x3E 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_11:
+   \   00000000   0x0D 0x0A          DC8 "\015\012<<FULL STRING>>: %s \015\012"
+   \              0x3C 0x3C    
+   \              0x46 0x55    
+   \              0x4C 0x4C    
+   \              0x20 0x53    
+   \              0x54 0x52    
+   \              0x49 0x4E    
+   \              0x47 0x3E    
+   \              0x3E 0x3A    
+   \              0x20 0x25    
+   \              0x73 0x20    
+   \              0x0D 0x0A    
+   \              0x00         
+   \   00000019   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_12:
+   \   00000000   0x42 0x6F          DC8 "Boot"
+   \              0x6F 0x74    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_13:
+   \   00000000   0x3C 0x62          DC8 "<ble.booted> "
+   \              0x6C 0x65    
+   \              0x2E 0x62    
+   \              0x6F 0x6F    
+   \              0x74 0x65    
+   \              0x64 0x3E    
+   \              0x20 0x00    
+   \   0000000E   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_14:
+   \   00000000   0x43 0x6F          DC8 "Connected"
+   \              0x6E 0x6E    
+   \              0x65 0x63    
+   \              0x74 0x65    
+   \              0x64 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_15:
+   \   00000000   0x3C 0x62          DC8 "<ble.TackArmed = TACK_ARMED>"
+   \              0x6C 0x65    
+   \              0x2E 0x54    
+   \              0x61 0x63    
+   \              0x6B 0x41    
+   \              0x72 0x6D    
+   \              0x65 0x64    
+   \              0x20 0x3D    
+   \              0x20 0x54    
+   \              0x41 0x43    
+   \              0x4B 0x5F    
+   \              0x41 0x52    
+   \              0x4D 0x45    
+   \              0x44 0x3E    
+   \              0x00         
+   \   0000001D   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_16:
+   \   00000000   0x3C 0x62          DC8 "<ble.connection> "
+   \              0x6C 0x65    
+   \              0x2E 0x63    
+   \              0x6F 0x6E    
+   \              0x6E 0x65    
+   \              0x63 0x74    
+   \              0x69 0x6F    
+   \              0x6E 0x3E    
+   \              0x20 0x00    
+   \   00000012   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_17:
+   \   00000000   0x44 0x69          DC8 "Disconnected"
+   \              0x73 0x63    
+   \              0x6F 0x6E    
+   \              0x6E 0x65    
+   \              0x63 0x74    
+   \              0x65 0x64    
+   \              0x00         
+   \   0000000D   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_18:
+   \   00000000   0x3C 0x44          DC8 "<DISCONNECTED> "
+   \              0x49 0x53    
+   \              0x43 0x4F    
+   \              0x4E 0x4E    
+   \              0x45 0x43    
+   \              0x54 0x45    
+   \              0x44 0x3E    
+   \              0x20 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_19:
+   \   00000000   0x44 0x41          DC8 "DATA"
+   \              0x54 0x41    
+   \              0x00         
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_20:
+   \   00000000   0x3C 0x62          DC8 "<ble.data_Connection> "
+   \              0x6C 0x65    
+   \              0x2E 0x64    
+   \              0x61 0x74    
+   \              0x61 0x5F    
+   \              0x43 0x6F    
+   \              0x6E 0x6E    
+   \              0x65 0x63    
+   \              0x74 0x69    
+   \              0x6F 0x6E    
+   \              0x3E 0x20    
+   \              0x00         
+   \   00000017   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_21:
+   \   00000000   0x3C 0x54          DC8 "<TACK"
+   \              0x41 0x43    
+   \              0x4B 0x00    
+   \   00000006   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_22:
+   \   00000000   0x3C 0x62          DC8 "<ble.TackArmed=TACK_SYNC>"
+   \              0x6C 0x65    
+   \              0x2E 0x54    
+   \              0x61 0x63    
+   \              0x6B 0x41    
+   \              0x72 0x6D    
+   \              0x65 0x64    
+   \              0x3D 0x54    
+   \              0x41 0x43    
+   \              0x4B 0x5F    
+   \              0x53 0x59    
+   \              0x4E 0x43    
+   \              0x3E 0x00    
+   \   0000001A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_23:
+   \   00000000   0x3C 0x54          DC8 "<TACK Received.>"
+   \              0x41 0x43    
+   \              0x4B 0x20    
+   \              0x52 0x65    
+   \              0x63 0x65    
+   \              0x69 0x76    
+   \              0x65 0x64    
+   \              0x2E 0x3E    
+   \              0x00         
+   \   00000011   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_24:
+   \   00000000   0x4F 0x56          DC8 "OVERFLOW"
+   \              0x45 0x52    
+   \              0x46 0x4C    
+   \              0x4F 0x57    
+   \              0x00         
+   \   00000009   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_25:
+   \   00000000   0x3C 0x55          DC8 "<UNKNOWN STATUS> "
+   \              0x4E 0x4B    
+   \              0x4E 0x4F    
+   \              0x57 0x4E    
+   \              0x20 0x53    
+   \              0x54 0x41    
+   \              0x54 0x55    
+   \              0x53 0x3E    
+   \              0x20 0x00    
+   \   00000012   0x00 0x00          DC8 0, 0
+    869          
+    870          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   BGM111_Connected
+       0   BGM111_DataConnected
+       0   BGM111_GetTackState
+       8   BGM111_Init
+         8   -> BGM111_LowLevel_Init
+         8   -> RoadBrd_gpio_Off
+         8   -> RoadBrd_gpio_On
+       0   BGM111_LowLevel_Init
+       0   BGM111_Peek
+      40   BGM111_ProcessInput
+        40   -> Clr_HeartBeat
+        40   -> Clr_HrtBeat_Cnt
+        40   -> HAL_NVIC_SystemReset
+        40   -> NextBufIdx
+        40   -> RdBrd_BlinkErrCd
+        40   -> RdBrd_ErrCdLogErrCd
+        40   -> RoadBrd_UART_Transmit
+        40   -> gecko_cmd_le_gap_set_mode
+        40   -> gecko_peek_event
+        40   -> sprintf
+       0   BGM111_Ready
+      16   BGM111_Receive
+        16   -> HAL_UART_EnableBGM_RX
+        16   -> NextBufIdx
+       0   BGM111_SetSyncFlg
+       0   BGM111_SetTackState
+      24   BGM111_SyncModeTest
+        24   -> Clr_HrtBeat_Cnt
+        24   -> HAL_NVIC_SystemReset
+        24   -> RdBrd_BlinkErrCd
+        24   -> RdBrd_ErrCdLogErrCd
+        24   -> RoadBrd_UART_Transmit
+        24   -> sprintf
+       0   BGM111_SyncModeTestNoInc
+      24   BGM111_Transmit
+        24   -> HAL_NVIC_DisableIRQ
+        24   -> HAL_NVIC_EnableIRQ
+        24   -> HAL_NVIC_SystemReset
+        24   -> HAL_UART_EnableBGM_TXE
+        24   -> NextBufIdx
+        24   -> RdBrd_BlinkErrCd
+        24   -> RdBrd_ErrCdLogErrCd
+      16   BGM111_UART_IRQHandler
+        16   -> NextBufIdx
+        16   -> RoadBrd_ProcessBGMChar
+        16   -> USART_ReceiveData
+        16   -> USART_SendData
+      16   BGM111_WriteCharacteristic
+        16   -> gecko_cmd_gatt_server_send_characteristic_notification
+        16   -> gecko_cmd_gatt_server_write_attribute_value
+       0   BGM111_cntrlSetSyncFlg
+      16   BufFree
+        16   -> BufUsed
+       0   BufUsed
+      16   IsBufFull
+        16   -> NextBufIdx
+       0   NextBufIdx
+      72   RoadBrd_ProcessBGMChar
+        72   -> BGM111_SetSyncFlg
+        72   -> ClrDataStructure
+        72   -> HAL_NVIC_SystemReset
+        72   -> RdBrd_BlinkErrCd
+        72   -> RdBrd_ErrCdLogErrCd
+        72   -> RoadBrd_UART_Transmit
+        72   -> sprintf
+        72   -> strncmp
+       0   RoadBrd_tstReqexec
+       0   USART_ReceiveData
+       0   USART_SendData
+      24   gecko_cmd_gatt_server_send_characteristic_notification
+        24   -> __aeabi_memcpy
+        24   -> gecko_handle_command
+      24   gecko_cmd_gatt_server_write_attribute_value
+        24   -> __aeabi_memcpy
+        24   -> gecko_handle_command
+      16   gecko_cmd_le_gap_set_mode
+        16   -> gecko_handle_command
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable17
+       4  ??DataTable17_1
+       4  ??DataTable20
+       4  ??DataTable20_1
+       4  ??DataTable20_10
+       4  ??DataTable20_11
+       4  ??DataTable20_12
+       4  ??DataTable20_13
+       4  ??DataTable20_14
+       4  ??DataTable20_15
+       4  ??DataTable20_16
+       4  ??DataTable20_17
+       4  ??DataTable20_18
+       4  ??DataTable20_19
+       4  ??DataTable20_2
+       4  ??DataTable20_20
+       4  ??DataTable20_21
+       4  ??DataTable20_22
+       4  ??DataTable20_23
+       4  ??DataTable20_24
+       4  ??DataTable20_25
+       4  ??DataTable20_26
+       4  ??DataTable20_27
+       4  ??DataTable20_28
+       4  ??DataTable20_29
+       4  ??DataTable20_3
+       4  ??DataTable20_30
+       4  ??DataTable20_31
+       4  ??DataTable20_32
+       4  ??DataTable20_33
+       4  ??DataTable20_34
+       4  ??DataTable20_35
+       4  ??DataTable20_36
+       4  ??DataTable20_37
+       4  ??DataTable20_38
+       4  ??DataTable20_39
+       4  ??DataTable20_4
+       4  ??DataTable20_40
+       4  ??DataTable20_41
+       4  ??DataTable20_42
+       4  ??DataTable20_43
+       4  ??DataTable20_44
+       4  ??DataTable20_45
+       4  ??DataTable20_46
+       4  ??DataTable20_47
+       4  ??DataTable20_48
+       4  ??DataTable20_49
+       4  ??DataTable20_5
+       4  ??DataTable20_6
+       4  ??DataTable20_7
+       4  ??DataTable20_8
+       4  ??DataTable20_9
+      12  ?_0
+      16  ?_1
+      20  ?_10
+      28  ?_11
+       8  ?_12
+      16  ?_13
+      12  ?_14
+      32  ?_15
+      20  ?_16
+      16  ?_17
+      16  ?_18
+       8  ?_19
+      16  ?_2
+      24  ?_20
+       8  ?_21
+      28  ?_22
+      20  ?_23
+      12  ?_24
+      20  ?_25
+       4  ?_3
+       4  ?_4
+      32  ?_5
+      12  ?_6
+      28  ?_7
+      12  ?_8
+      20  ?_9
+      10  BGM111_Connected
+      10  BGM111_DataConnected
+      10  BGM111_GetTackState
+      50  BGM111_Init
+      72  BGM111_LowLevel_Init
+      10  BGM111_Peek
+     526  BGM111_ProcessInput
+      10  BGM111_Ready
+      94  BGM111_Receive
+      10  BGM111_SetSyncFlg
+      10  BGM111_SetTackState
+     130  BGM111_SyncModeTest
+      36  BGM111_SyncModeTestNoInc
+     286  BGM111_Transmit
+     144  BGM111_UART_IRQHandler
+      42  BGM111_WriteCharacteristic
+      22  BGM111_cntrlSetSyncFlg
+      26  BufFree
+      18  BufUsed
+      30  IsBufFull
+      14  NextBufIdx
+     420  RoadBrd_ProcessBGMChar
+       8  RoadBrd_tstReqexec
+      10  USART_ReceiveData
+      12  USART_SendData
+     132  _gecko_cmd_msg
+     132  _gecko_rsp_msg
+       4  bglib_input
+       4  bglib_output
+       4  bglib_peek
+     416  ble
+     804  blemsgs
+     110  gecko_cmd_gatt_server_send_characteristic_notification
+     108  gecko_cmd_gatt_server_write_attribute_value
+      64  gecko_cmd_le_gap_set_mode
+       4  gecko_cmd_msg
+       4  gecko_evt_msg
+    3960  gecko_queue
+       4  gecko_queue_r
+       4  gecko_queue_w
+       4  gecko_rsp_msg
+       1  in_ptr
+      40  tempBffr2
+
+ 
+ 5 509 bytes in section .bss
+     8 bytes in section .data
+   444 bytes in section .rodata
+ 2 500 bytes in section .text
+ 
+ 2 500 bytes of CODE  memory
+   444 bytes of CONST memory
+ 5 517 bytes of DATA  memory
+
+Errors: none
+Warnings: none

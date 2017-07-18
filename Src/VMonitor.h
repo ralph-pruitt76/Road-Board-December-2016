@@ -87,9 +87,13 @@ typedef struct Pwr *PowerPtr;
 /* Prototypes */
 HAL_StatusTypeDef RoadBrd_Init_VMonitor( void );
 HAL_StatusTypeDef RoadBrd_VMonitor_RdShntVltg( VoltagePtr VPtr );
+HAL_StatusTypeDef RoadBrd_VMonitor_RdShntVltg_Scaled( VoltagePtr VPtr );
 HAL_StatusTypeDef RoadBrd_VMonitor_RdCurrent( CurrentPtr CPtr );
+HAL_StatusTypeDef RoadBrd_VMonitor_RdCurrent_Scaled( CurrentPtr CPtr );
 HAL_StatusTypeDef RoadBrd_VMonitor_RdPower( PowerPtr PPtr );
+HAL_StatusTypeDef RoadBrd_VMonitor_RdPower_Scaled( PowerPtr PPtr );
 HAL_StatusTypeDef RoadBrd_VMonitor_RdVoltage( VoltagePtr VPtr );
+HAL_StatusTypeDef RoadBrd_VMonitor_RdVoltage_Scaled( VoltagePtr VPtr );
    
 #ifdef __cplusplus
 }

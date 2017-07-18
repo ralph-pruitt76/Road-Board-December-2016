@@ -35,55 +35,49 @@
 /* Includes ------------------------------------------------------------------*/
 #include "Calibration.h"
 #include "Flash.h"
+#include "wwdg.h"
 
 /* Variables and buffer definitions */
+
 // Frame Structure Define
-//wwdg_Frames wwdg_HardFrames  @ 0x08070000;
-Calibration_Frames Calibration_HardFrames  @ 0x08071000;
+// Will base new Flash Structure to be a modulo 256 to align to a second Flash Page to ensure it works with the previous structure.
+// The previous structure is wwdg_Frames and must be an even Page length.
+Calibration_Frames Calibration_HardFrames  @ (BASE_FLASH_ADDRESS + ((sizeof(wwdg_Frames) - (sizeof(wwdg_Frames)%256)) + 256));
 static Calibration_Frames Cal_Save_Frames;
 
+// Constant Strings Definition
+const char * const SensorStrings[] = { "Shnt_Vltg	",          // CODE 000: CAL_SHNT_VLTG/ Calibration Shunt Voltage String
+                                    "Current	",                  // CODE 001: CAL_CURRENT/ Calibration Current String
+                                    "Power		",          // CODE 002: CAL_POWER/ Calibration Power String
+                                    "Voltage	",                  // CODE 003: CAL_VOLTAGE/ Calibration Voltage String
+                                    "TempC		",          // CODE 004: CAL_TEMPC/ Calibration Temperature C String
+                                    "TempF		",          // CODE 005: CAL_TEMPF/ Calibration Temperature F String
+                                    "Pressure	",                  // CODE 006: CAL_PRESSURE/ Calibration Pressure String
+                                    "Humidity	",                  // CODE 007: CAL_HUMIDITY/ Calibration Humidity String
+                                    "Hum_TempC	",                  // CODE 008: CAL_HUM_TEMPC/ Calibration Humidity Temperature C String
+                                    "Hum_TempF	",                  // CODE 009: CAL_HUM_TEMPF/ Calibration Humidity Temperature F String
+                                    "RGB_Red	",                  // CODE 010: CAL_RGB_RED/ Calibration RGB Sensor Red String
+                                    "RGB_Green	",                  // CODE 011: CAL_RGB_GREEN/ Calibration RGB Sensor Green String
+                                    "RGB_Blue	",                  // CODE 012: CAL_RGB_BLUE/ Calibration RGB Sensor Blue String
+                                    "Therm_C	",                  // CODE 013: CAL_THERM_C/ Calibration Thermistor String
+                                    "RoadT_1C	",                  // CODE 014: CAL_ROADT_1C/ Calibration Road Temperature Sensor 1 String
+                                    "RoadT_2C	",                  // CODE 015: CAL_ROADT_1C/ Calibration Road Temperature Sensor 2 String
+                                    "RoadT_3C	",                  // CODE 016: CAL_ROADT_1C/ Calibration Road Temperature Sensor 3 String
+                                    "RoadT_4C	",                  // CODE 017: CAL_ROADT_1C/ Calibration Road Temperature Sensor 4 String
+                                    "RoadT_5C	",                  // CODE 018: CAL_ROADT_1C/ Calibration Road Temperature Sensor 5 String
+                                    "RoadT_6C	",                  // CODE 019: CAL_ROADT_1C/ Calibration Road Temperature Sensor 6 String
+                                    "RoadT_7C	",                  // CODE 020: CAL_ROADT_1C/ Calibration Road Temperature Sensor 7 String
+                                    "RoadT_8C	",                  // CODE 021: CAL_ROADT_1C/ Calibration Road Temperature Sensor 8 String
+                                    "       ",                      // CODE 022: NULL...
+                                    "       ",                      // CODE 023: NULL...
+                                    "       " };                    // CODE 024: NULL...
 
-
-//static uint8_t fr[FFT_BUFFER_SIZE];
-//static uint8_t fi[FFT_BUFFER_SIZE];
-//static uint8_t fs[FFT_BUFFER_SIZE];
-
-  /**
-  * @brief  This function clears both real and imaginary buffers.
-  * @param  none.
-  * @retval none.
-  */
-/*void RoadBrdSnd_ClearBffrs( void )
-{
-  int x;
-  
-  for (x=0; x<FFT_BUFFER_SIZE; x++)
-  {
-    fr[x] = 0;
-    fi[x] = 0;
-  }
-}*/
-
-  /**
-  * @brief  This function clears the real buffer.
-  * @param  none.
-  * @retval none.
-  */
-/*void RoadBrdSnd_ClearRealBffr( void )
-{
-  int x;
-  
-  for (x=0; x<FFT_BUFFER_SIZE; x++)
-  {
-    fr[x] = 0;
-  }
-}*/
-  /**
-  * @brief  This function verifies the WWDG Flash Frame Structure.
-  * @param  none
-  * @retval bool:     true:       Valid Frames
-  *                   false:      Frame Bad.
-  */
+/**
+* @brief  This function verifies the WWDG Flash Frame Structure.
+* @param  none
+* @retval bool:     true:       Valid Frames
+*                   false:      Frame Bad.
+*/
 bool RoadBrd_CAL_VerifyFrame( void )
 {
   HAL_StatusTypeDef Status;
@@ -103,14 +97,14 @@ bool RoadBrd_CAL_VerifyFrame( void )
   }
 }
 
-  /**
-  * @brief  This function initializes the Calibration Structure.
-  * @param  none
-  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-  *                                HAL_ERROR:    Error found in Tasking or data passed.
-  *                                HAL_BUSY:     Flash is busy.
-  *                                HAL_TIMEOUT:  Flash timed out.
-  */
+/**
+* @brief  This function initializes the Calibration Structure.
+* @param  none
+* @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+*                                HAL_ERROR:    Error found in Tasking or data passed.
+*                                HAL_BUSY:     Flash is busy.
+*                                HAL_TIMEOUT:  Flash timed out.
+*/
 HAL_StatusTypeDef RoadBrd_CAL_InitializeFrmFlash( void )
 {
   HAL_StatusTypeDef Status;
@@ -176,7 +170,21 @@ HAL_StatusTypeDef RoadBrd_CAL_WriteFrmFlash( void )
   return Status;
 }
 
-  /**
+/**
+  * @brief  This function initializes the Calibration Structure.
+  * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+  * @param  float Offset:                Offset to be set into indexed Cal Item.
+  * @param  float Slope:                 Slope to be set into indexed Cal Item.
+  * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Operation success.
+  *                                HAL_ERROR:    found in Tasking or data passed.
+  */
+float RoadBrd_CAL_ScaleValue( Cal_Characteristic Cal_Item, float Old_value)
+{
+  return ( (RoadBrd_CAL_GetSlope(Cal_Item) * Old_value) + RoadBrd_CAL_GetOffset(Cal_Item));
+}
+
+/**
   * @brief  This function initializes the Calibration Structure.
   * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
   * @param  float Offset:                Offset to be set into indexed Cal Item.
@@ -197,7 +205,8 @@ HAL_StatusTypeDef RoadBrd_CAL_Set_CalItem( Cal_Characteristic Cal_Item,
   }
   return HAL_ERROR;
 }
-  /**
+
+/**
   * @brief  This function returns the indexed Calibration Item Offset.
   * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
   * @retval float:     Indexed Item Stored Offset.
@@ -207,15 +216,26 @@ float RoadBrd_CAL_GetOffset( Cal_Characteristic Cal_Item )
   return ( Cal_Save_Frames.Cal_Entry[Cal_Item].offset );
 }
 
-  /**
-  * @brief  This function returns the indexed Calibration Item slope.
-  * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
-  * @retval float:     Indexed Item Stored slope.
-  */
+/**
+* @brief  This function returns the indexed Calibration Item slope.
+* @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+* @retval float:     Indexed Item Stored slope.
+*/
 float RoadBrd_CAL_GetSlope( Cal_Characteristic Cal_Item )
 {
   return ( Cal_Save_Frames.Cal_Entry[Cal_Item].slope );
 }
+
+/**
+* @brief  This function returns a Pointer to a String for the indicated Characteristic.
+* @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+* @retval char *:     Points to a constant string for the indicated characteristic.
+*/
+char *RdBrd_CAL_GetErrStr( Cal_Characteristic StringCds )
+{
+  return ((char *)SensorStrings[StringCds]);
+}
+
 
 /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/
 

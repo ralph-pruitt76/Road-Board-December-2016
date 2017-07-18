@@ -34,6 +34,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "barometer.h"
+#include "Calibration.h"
 
 /* barometer init function */
 /**
@@ -322,6 +323,51 @@ HAL_StatusTypeDef RoadBrd_WaitForPressure( uint16_t WaitCnt )
     return HAL_ERROR;
   else
     return HAL_OK;
+}
+
+/**
+  * @brief  RoadBrd_Baro_ReadPressure_Scaled( uint8_t *pData  ): This routine reads the Pressure and returns as a string of 3 bytes 
+  * as follows.....PRESS_OUT_XL...PRESS_OUT_L...PRESS_OUT_H
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     UART is busy.
+  *                                HAL_TIMEOUT:  UART timed out.
+  */
+HAL_StatusTypeDef RoadBrd_Baro_ReadPressure_Scaled( PRPrsPtr PRPtr )
+//HAL_StatusTypeDef RoadBrd_Baro_ReadPressure( uint8_t *pData )
+{
+  HAL_StatusTypeDef Status;
+  int32_t legacyValue;
+  float PressureResult, value, fracvalue;
+  double temp2;
+  int temp3;
+  
+  Status = HAL_OK;
+  
+  if (LPS25HB_GetPressure(&value) == PRESSURE_OK)
+  {
+    PressureResult = value;
+    PressureResult = RoadBrd_CAL_ScaleValue( CAL_PRESSURE, PressureResult);
+
+    // Now Build Legacy Format.
+    legacyValue = (uint32_t)(value * 2.5);
+    legacyValue = (legacyValue << 8);
+    fracvalue = modf(value, &temp2);
+    temp3 = (int)(fracvalue * 256);
+    temp3 = temp3 & 0xF0;
+    legacyValue = legacyValue + temp3;
+  }
+  else
+    return HAL_ERROR;
+
+  // NOW Build Result
+  // Build Raw Result.
+  sprintf( (char *)PRPtr->Raw, "%08xRw", legacyValue);
+  PRPtr->RawC = legacyValue;
+  // Build Clean Result.
+  sprintf( (char *)PRPtr->Pressure,"%6.3fPa",PressureResult);
+
+  return Status;
 }
 
 /**

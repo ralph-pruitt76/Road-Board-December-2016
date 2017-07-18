@@ -140,7 +140,9 @@ typedef struct Humidty *HumidtyPtr;
 /* Prototypes */
 HAL_StatusTypeDef RoadBrd_HumidityInit( void );
 HAL_StatusTypeDef RoadBrd_Humidity_ReadHumidity( HumidtyPtr HPtr );
+HAL_StatusTypeDef RoadBrd_Humidity_ReadHumidity_Scaled( HumidtyPtr HPtr );
 HAL_StatusTypeDef RoadBrd_Humidity_ReadTemperature( TempPtr TPtr );
+HAL_StatusTypeDef RoadBrd_Humidity_ReadTemperature_Scaled( TempPtr TPtr );
 
 #ifdef __cplusplus
 }

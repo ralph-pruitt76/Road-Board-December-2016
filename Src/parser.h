@@ -57,6 +57,7 @@
 
 /* Defines */
 #define I2C_TIMEOUT     500            // Set as 500msec
+#define SCALE_DELAY     10            // Scale Delay.
 
 /* Prototypes */
 HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr);

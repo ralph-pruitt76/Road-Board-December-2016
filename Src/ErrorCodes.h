@@ -66,6 +66,7 @@ typedef enum
   ERROR_FRAME_INIT      = 0x0010,               // Could not Initialize Flash Frame.
   ERROR_BGM_OVERFLOW    = 0x0011,               // BGM111 processing code has detected Serial Stream Overflow.
   ERROR_BGM_SYNCCNCT    = 0x0012,               // BGM111 processing code has detected a SYNC Connection Dropped Event.
+  ERROR_CAL_INIT        = 0x0013,               // Could not Initialize Calibration Flash Structure.
 
   ERROR_MISC            = 0xffff,       	// End Of Error Code List
 }ErrorCodes;

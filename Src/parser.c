@@ -39,6 +39,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include "wwdg.h"
+#include "Calibration.h"
 
 static bool Bypass = false;
 
@@ -66,7 +67,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
   int num_bytes;
   int num_bytes_received;
   int Error, x;
-  char tempstr[10];
+  char tempstr[20];
   char* tempPstr;
   int new_value, flag;
   float Temp_C, Temp_F, Shunt_V, Bus_V, Crrnt, Power;
@@ -87,24 +88,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
     int num_bytes_received;
     uint8_t i2cData[80];
     int Error, x, y;
-    Voltage VMeasure;
-    Current CMeasure;
-    Power PMeasure;
-    Temperature TMeasure;
-    Humidity HMeasure;
+    Voltage VMeasure, VMeasureScaled;
+    Current CMeasure, CMeasureScaled;
+    Power PMeasure, PMeasureScaled;
+    Temperature TMeasure, TMeasureScaled;
+    Humidity HMeasure, HMeasureScaled;
     RGBInitialize RGBMeasure;
     RGBIdent IDMeasure;
     RGBStatus RGBSMeasure;
     RGBLight RGBValues;
+    char uuid[10];
+    float Scale, Offset;
 //    PRStatus PRMeasure;
-    PRPressure PRPMeasure;
+    PRPressure PRPMeasure, PRPMeasureScaled;
     BinString RSFFTBins;
-    GridEye     GridMeasure;
+    GridEye     GridMeasure, GridMeasureScaled;
     uint32_t Err_code;
     uint8_t op_mode, ds_range, adc_rsl, sync, cmp_adjst, cmp_offst, int_assgn, int_persist, cnvrsn_int;
     int new_value, flag;
     char* tempPstr;
-    char tempstr[10];
+    char tempstr[20];
   #endif
 #endif
 
@@ -417,6 +420,8 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     //Status = RoadBrd_Barometer_Status( &PRMeasure );
                     Status = RoadBrd_Baro_ReadPressure( &PRPMeasure );
                     if (Status == HAL_OK)
+                      Status = RoadBrd_Baro_ReadPressure_Scaled( &PRPMeasureScaled );
+                    if (Status == HAL_OK)
                     {
                       strcpy( (char *)tempBffr2, "A6 Command...Read Pressure Passed.\r\n");;
 #ifdef NUCLEO
@@ -437,9 +442,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                         return Status;
                      
                       // Now show Decimal value of items.
-                      sprintf( (char *)tempBffr2, " PRESSURE: " );
-                      strcat( (char *)tempBffr2, (char *)PRPMeasure.Pressure );
-                      strcat( (char *)tempBffr2, "\r\n" );
+                      sprintf( (char *)tempBffr2, " PRESSURE: %s/%s\r\n", (char *)PRPMeasure.Pressure, (char *)PRPMeasureScaled.Pressure );
 #ifdef NUCLEO
                       Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
 #else
@@ -578,10 +581,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                 if ( Get_DriverStates( GRIDEYE_MNTR_TASK ))
                 {
                   Status = RoadBrd_GridEye_ReadValues( &GridMeasure );
+                  if (Status == HAL_OK)
+                    Status = RoadBrd_GridEye_ReadValues_Scaled( &GridMeasureScaled );
                 }
                 else if ( Get_DriverStates( COOLEYE_MNTR_TASK ))
                 {
                   Status = RoadBrd_CoolEye_ReadValues( &GridMeasure );
+                  if (Status == HAL_OK)
+                    Status = RoadBrd_CoolEye_ReadValues_Scaled( &GridMeasureScaled );
                 }
                 else
                   Status = HAL_ERROR;
@@ -604,58 +611,94 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     switch(x)
                     {
                       case 0: //Thermistor Values
-                        sprintf( (char *)tempBffr2, "     Thermistor DATA: %s   %s   %s   %d\r\n", GridMeasure.Thermistor.Raw,
-                                                                                               GridMeasure.Thermistor.TempC,
-                                                                                               GridMeasure.Thermistor.TempF,
+                        sprintf( (char *)tempBffr2, "     Thermistor DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.Thermistor.Raw,
+                                                                                               GridMeasure.Thermistor.TempC,GridMeasureScaled.Thermistor.TempC,
+                                                                                               GridMeasure.Thermistor.TempF,GridMeasureScaled.Thermistor.TempF,
                                                                                                GridMeasure.Thermistor.RawC );
+//                        sprintf( (char *)tempBffr2, "     Thermistor DATA: %s   %s   %s   %d\r\n", GridMeasure.Thermistor.Raw,
+//                                                                                               GridMeasure.Thermistor.TempC,
+//                                                                                               GridMeasure.Thermistor.TempF,
+//                                                                                               GridMeasure.Thermistor.RawC );
                         break;
                       case 1: //GridEye1 Values
-                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye1.Raw,
-                                                                                               GridMeasure.GridEye1.TempC,
-                                                                                               GridMeasure.GridEye1.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye1.Raw,
+                                                                                               GridMeasure.GridEye1.TempC,GridMeasureScaled.GridEye1.TempC,
+                                                                                               GridMeasure.GridEye1.TempF,GridMeasureScaled.GridEye1.TempF,
                                                                                                GridMeasure.GridEye1.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye1.Raw,
+//                                                                                               GridMeasure.GridEye1.TempC,
+//                                                                                               GridMeasure.GridEye1.TempF,
+//                                                                                               GridMeasure.GridEye1.RawC );
                         break;
                       case 2: //GridEye2 Values
-                        sprintf( (char *)tempBffr2, "     Grid 34 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye2.Raw,
-                                                                                               GridMeasure.GridEye2.TempC,
-                                                                                               GridMeasure.GridEye2.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye2.Raw,
+                                                                                               GridMeasure.GridEye2.TempC,GridMeasureScaled.GridEye2.TempC,
+                                                                                               GridMeasure.GridEye2.TempF,GridMeasureScaled.GridEye2.TempF,
                                                                                                GridMeasure.GridEye2.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 34 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye2.Raw,
+//                                                                                               GridMeasure.GridEye2.TempC,
+//                                                                                               GridMeasure.GridEye2.TempF,
+//                                                                                               GridMeasure.GridEye2.RawC );
                         break;
                       case 3: //GridEye3 Values
-                        sprintf( (char *)tempBffr2, "     Grid 35 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye3.Raw,
-                                                                                               GridMeasure.GridEye3.TempC,
-                                                                                               GridMeasure.GridEye3.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye3.Raw,
+                                                                                               GridMeasure.GridEye3.TempC,GridMeasureScaled.GridEye3.TempC,
+                                                                                               GridMeasure.GridEye3.TempF,GridMeasureScaled.GridEye3.TempF,
                                                                                                GridMeasure.GridEye3.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 35 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye3.Raw,
+//                                                                                               GridMeasure.GridEye3.TempC,
+//                                                                                               GridMeasure.GridEye3.TempF,
+//                                                                                               GridMeasure.GridEye3.RawC );
                         break;
                       case 4: //GridEye4 Values
-                        sprintf( (char *)tempBffr2, "     Grid 36 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye4.Raw,
-                                                                                               GridMeasure.GridEye4.TempC,
-                                                                                               GridMeasure.GridEye4.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye4.Raw,
+                                                                                               GridMeasure.GridEye4.TempC,GridMeasureScaled.GridEye4.TempC,
+                                                                                               GridMeasure.GridEye4.TempF,GridMeasureScaled.GridEye4.TempF,
                                                                                                GridMeasure.GridEye4.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 36 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye4.Raw,
+//                                                                                               GridMeasure.GridEye4.TempC,
+//                                                                                               GridMeasure.GridEye4.TempF,
+//                                                                                               GridMeasure.GridEye4.RawC );
                         break;
                       case 5: //GridEye5 Values
-                        sprintf( (char *)tempBffr2, "     Grid 37 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye5.Raw,
-                                                                                               GridMeasure.GridEye5.TempC,
-                                                                                               GridMeasure.GridEye5.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye5.Raw,
+                                                                                               GridMeasure.GridEye5.TempC,GridMeasureScaled.GridEye5.TempC,
+                                                                                               GridMeasure.GridEye5.TempF,GridMeasureScaled.GridEye5.TempF,
                                                                                                GridMeasure.GridEye5.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 37 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye5.Raw,
+//                                                                                               GridMeasure.GridEye5.TempC,
+//                                                                                               GridMeasure.GridEye5.TempF,
+//                                                                                               GridMeasure.GridEye5.RawC );
                         break;
                       case 6: //GridEye6 Values
-                        sprintf( (char *)tempBffr2, "     Grid 38 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye6.Raw,
-                                                                                               GridMeasure.GridEye6.TempC,
-                                                                                               GridMeasure.GridEye6.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye6.Raw,
+                                                                                               GridMeasure.GridEye6.TempC,GridMeasureScaled.GridEye6.TempC,
+                                                                                               GridMeasure.GridEye6.TempF,GridMeasureScaled.GridEye6.TempF,
                                                                                                GridMeasure.GridEye6.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 38 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye6.Raw,
+//                                                                                               GridMeasure.GridEye6.TempC,
+//                                                                                               GridMeasure.GridEye6.TempF,
+//                                                                                               GridMeasure.GridEye6.RawC );
                         break;
                       case 7: //GridEye7 Values
-                        sprintf( (char *)tempBffr2, "     Grid 39 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye7.Raw,
-                                                                                               GridMeasure.GridEye7.TempC,
-                                                                                               GridMeasure.GridEye7.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye7.Raw,
+                                                                                               GridMeasure.GridEye7.TempC,GridMeasureScaled.GridEye7.TempC,
+                                                                                               GridMeasure.GridEye7.TempF,GridMeasureScaled.GridEye7.TempF,
                                                                                                GridMeasure.GridEye7.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 39 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye7.Raw,
+//                                                                                               GridMeasure.GridEye7.TempC,
+//                                                                                               GridMeasure.GridEye7.TempF,
+//                                                                                               GridMeasure.GridEye7.RawC );
                         break;
                       case 8: //GridEye8 Values
-                        sprintf( (char *)tempBffr2, "     Grid 40 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye8.Raw,
-                                                                                               GridMeasure.GridEye8.TempC,
-                                                                                               GridMeasure.GridEye8.TempF,
+                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye8.Raw,
+                                                                                               GridMeasure.GridEye8.TempC,GridMeasureScaled.GridEye8.TempC,
+                                                                                               GridMeasure.GridEye8.TempF,GridMeasureScaled.GridEye8.TempF,
                                                                                                GridMeasure.GridEye8.RawC );
+//                        sprintf( (char *)tempBffr2, "     Grid 40 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye8.Raw,
+//                                                                                               GridMeasure.GridEye8.TempC,
+//                                                                                               GridMeasure.GridEye8.TempF,
+//                                                                                               GridMeasure.GridEye8.RawC );
                         break;
                     } // EndSwitch(x)
                     // Now Print String.
@@ -694,10 +737,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     if ( Get_DriverStates( GRIDEYE_MNTR_TASK ))
                     {
                       Status = RoadBrd_GridEye_ReadValues( &GridMeasure );
+                      if (Status == HAL_OK)
+                        Status = RoadBrd_GridEye_ReadValues_Scaled( &GridMeasureScaled );
                     }
                     else if ( Get_DriverStates( COOLEYE_MNTR_TASK ))
                     {
                       Status = RoadBrd_CoolEye_ReadValues( &GridMeasure );
+                      if (Status == HAL_OK)
+                        Status = RoadBrd_CoolEye_ReadValues_Scaled( &GridMeasureScaled );
                     }
                     else
                       Status = HAL_ERROR;
@@ -719,60 +766,96 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                         // Build String
                         switch(x)
                         {
-                          case 0: //Thermistor Value
-                            sprintf( (char *)tempBffr2, "     Thermistor DATA: %s   %s   %s   %d\r\n", GridMeasure.Thermistor.Raw,
-                                                                                                   GridMeasure.Thermistor.TempC,
-                                                                                                   GridMeasure.Thermistor.TempF,
-                                                                                                   GridMeasure.Thermistor.RawC );
-                            break;
-                          case 1: //GridEye1 Values
-                            sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye1.Raw,
-                                                                                               GridMeasure.GridEye1.TempC,
-                                                                                               GridMeasure.GridEye1.TempF,
-                                                                                               GridMeasure.GridEye1.RawC );
-                            break;
-                          case 2: //GridEye2 Values
-                            sprintf( (char *)tempBffr2, "     Grid 34 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye2.Raw,
-                                                                                               GridMeasure.GridEye2.TempC,
-                                                                                               GridMeasure.GridEye2.TempF,
-                                                                                               GridMeasure.GridEye2.RawC );
-                            break;
-                          case 3: //GridEye3 Values
-                            sprintf( (char *)tempBffr2, "     Grid 35 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye3.Raw,
-                                                                                               GridMeasure.GridEye3.TempC,
-                                                                                               GridMeasure.GridEye3.TempF,
-                                                                                               GridMeasure.GridEye3.RawC );
-                            break;
-                          case 4: //GridEye4 Values
-                            sprintf( (char *)tempBffr2, "     Grid 36 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye4.Raw,
-                                                                                               GridMeasure.GridEye4.TempC,
-                                                                                               GridMeasure.GridEye4.TempF,
-                                                                                               GridMeasure.GridEye4.RawC );
-                            break;
-                          case 5: //GridEye5 Values
-                            sprintf( (char *)tempBffr2, "     Grid 37 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye5.Raw,
-                                                                                               GridMeasure.GridEye5.TempC,
-                                                                                               GridMeasure.GridEye5.TempF,
-                                                                                               GridMeasure.GridEye5.RawC );
-                            break;
-                          case 6: //GridEye6 Values
-                            sprintf( (char *)tempBffr2, "     Grid 38 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye6.Raw,
-                                                                                               GridMeasure.GridEye6.TempC,
-                                                                                               GridMeasure.GridEye6.TempF,
-                                                                                               GridMeasure.GridEye6.RawC );
-                            break;
-                          case 7: //GridEye7 Values
-                            sprintf( (char *)tempBffr2, "     Grid 39 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye7.Raw,
-                                                                                               GridMeasure.GridEye7.TempC,
-                                                                                               GridMeasure.GridEye7.TempF,
-                                                                                               GridMeasure.GridEye7.RawC );
-                            break;
-                          case 8: //GridEye8 Values
-                            sprintf( (char *)tempBffr2, "     Grid 40 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye8.Raw,
-                                                                                               GridMeasure.GridEye8.TempC,
-                                                                                               GridMeasure.GridEye8.TempF,
-                                                                                               GridMeasure.GridEye8.RawC );
-                            break;
+                        case 0: //Thermistor Values
+                          sprintf( (char *)tempBffr2, "     Thermistor DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.Thermistor.Raw,
+                                  GridMeasure.Thermistor.TempC,GridMeasureScaled.Thermistor.TempC,
+                                  GridMeasure.Thermistor.TempF,GridMeasureScaled.Thermistor.TempF,
+                                  GridMeasure.Thermistor.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Thermistor DATA: %s   %s   %s   %d\r\n", GridMeasure.Thermistor.Raw,
+                          //                                                                                               GridMeasure.Thermistor.TempC,
+                          //                                                                                               GridMeasure.Thermistor.TempF,
+                          //                                                                                               GridMeasure.Thermistor.RawC );
+                          break;
+                        case 1: //GridEye1 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye1.Raw,
+                                  GridMeasure.GridEye1.TempC,GridMeasureScaled.GridEye1.TempC,
+                                  GridMeasure.GridEye1.TempF,GridMeasureScaled.GridEye1.TempF,
+                                  GridMeasure.GridEye1.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye1.Raw,
+                          //                                                                                               GridMeasure.GridEye1.TempC,
+                          //                                                                                               GridMeasure.GridEye1.TempF,
+                          //                                                                                               GridMeasure.GridEye1.RawC );
+                          break;
+                        case 2: //GridEye2 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye2.Raw,
+                                  GridMeasure.GridEye2.TempC,GridMeasureScaled.GridEye2.TempC,
+                                  GridMeasure.GridEye2.TempF,GridMeasureScaled.GridEye2.TempF,
+                                  GridMeasure.GridEye2.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 34 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye2.Raw,
+                          //                                                                                               GridMeasure.GridEye2.TempC,
+                          //                                                                                               GridMeasure.GridEye2.TempF,
+                          //                                                                                               GridMeasure.GridEye2.RawC );
+                          break;
+                        case 3: //GridEye3 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye3.Raw,
+                                  GridMeasure.GridEye3.TempC,GridMeasureScaled.GridEye3.TempC,
+                                  GridMeasure.GridEye3.TempF,GridMeasureScaled.GridEye3.TempF,
+                                  GridMeasure.GridEye3.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 35 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye3.Raw,
+                          //                                                                                               GridMeasure.GridEye3.TempC,
+                          //                                                                                               GridMeasure.GridEye3.TempF,
+                          //                                                                                               GridMeasure.GridEye3.RawC );
+                          break;
+                        case 4: //GridEye4 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye4.Raw,
+                                  GridMeasure.GridEye4.TempC,GridMeasureScaled.GridEye4.TempC,
+                                  GridMeasure.GridEye4.TempF,GridMeasureScaled.GridEye4.TempF,
+                                  GridMeasure.GridEye4.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 36 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye4.Raw,
+                          //                                                                                               GridMeasure.GridEye4.TempC,
+                          //                                                                                               GridMeasure.GridEye4.TempF,
+                          //                                                                                               GridMeasure.GridEye4.RawC );
+                          break;
+                        case 5: //GridEye5 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye5.Raw,
+                                  GridMeasure.GridEye5.TempC,GridMeasureScaled.GridEye5.TempC,
+                                  GridMeasure.GridEye5.TempF,GridMeasureScaled.GridEye5.TempF,
+                                  GridMeasure.GridEye5.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 37 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye5.Raw,
+                          //                                                                                               GridMeasure.GridEye5.TempC,
+                          //                                                                                               GridMeasure.GridEye5.TempF,
+                          //                                                                                               GridMeasure.GridEye5.RawC );
+                          break;
+                        case 6: //GridEye6 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye6.Raw,
+                                  GridMeasure.GridEye6.TempC,GridMeasureScaled.GridEye6.TempC,
+                                  GridMeasure.GridEye6.TempF,GridMeasureScaled.GridEye6.TempF,
+                                  GridMeasure.GridEye6.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 38 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye6.Raw,
+                          //                                                                                               GridMeasure.GridEye6.TempC,
+                          //                                                                                               GridMeasure.GridEye6.TempF,
+                          //                                                                                               GridMeasure.GridEye6.RawC );
+                          break;
+                        case 7: //GridEye7 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye7.Raw,
+                                  GridMeasure.GridEye7.TempC,GridMeasureScaled.GridEye7.TempC,
+                                  GridMeasure.GridEye7.TempF,GridMeasureScaled.GridEye7.TempF,
+                                  GridMeasure.GridEye7.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 39 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye7.Raw,
+                          //                                                                                               GridMeasure.GridEye7.TempC,
+                          //                                                                                               GridMeasure.GridEye7.TempF,
+                          //                                                                                               GridMeasure.GridEye7.RawC );
+                          break;
+                        case 8: //GridEye8 Values
+                          sprintf( (char *)tempBffr2, "     Grid 33 DATA: %s   %s/%s   %s/%s   %d\r\n", GridMeasure.GridEye8.Raw,
+                                  GridMeasure.GridEye8.TempC,GridMeasureScaled.GridEye8.TempC,
+                                  GridMeasure.GridEye8.TempF,GridMeasureScaled.GridEye8.TempF,
+                                  GridMeasure.GridEye8.RawC );
+                          //                        sprintf( (char *)tempBffr2, "     Grid 40 DATA: %s   %s   %s   %d\r\n", GridMeasure.GridEye8.Raw,
+                          //                                                                                               GridMeasure.GridEye8.TempC,
+                          //                                                                                               GridMeasure.GridEye8.TempF,
+                          //                                                                                               GridMeasure.GridEye8.RawC );
+                          break;
                         } // EndSwitch(x)
                         // Now Print String.
  #ifdef NUCLEO
@@ -812,7 +895,8 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ C Command       
                 // Read Bus Voltage and return as 2 Byte Field.
                 Status = RoadBrd_VMonitor_RdVoltage( &VMeasure );
-                      
+                if (Status == HAL_OK)
+                  Status = RoadBrd_VMonitor_RdVoltage_Scaled( &VMeasureScaled );
                 if (Status == HAL_OK)
                 {
                   // Send string to UART..
@@ -839,9 +923,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                 if (Status != HAL_OK)
                   return Status;
                 // Now calculate Bus Voltage.
-                sprintf( (char *)tempBffr2, "     Bus Voltage: " );
-                strcat( (char *)tempBffr2, (char *)VMeasure.Voltage );
-                strcat( (char *)tempBffr2, "\r\n" );
+                sprintf( (char *)tempBffr2, "     Bus Voltage: %s/%s\r\n", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
               }
               else
               {
@@ -861,6 +943,8 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case '0':
                     // Read Shunt Voltage and return results.....
                     Status = RoadBrd_VMonitor_RdShntVltg( &VMeasure );
+                    if (Status == HAL_OK)
+                      Status = RoadBrd_VMonitor_RdShntVltg_Scaled( &VMeasureScaled );
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -887,14 +971,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Shunt Voltage.
-                    sprintf( (char *)tempBffr2, "     Shunt Voltage: " );
-                    strcat( (char *)tempBffr2, (char *)VMeasure.Voltage );
-                    strcat( (char *)tempBffr2, "\r\n" );
+                    sprintf( (char *)tempBffr2, "     Shunt Voltage: %s/%s\r\n", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
                     break;
 //------------------ C1 Command...Read Current and return results..... 
                   case '1':
                     // Read Current and return results.....
                     Status = RoadBrd_VMonitor_RdCurrent( &CMeasure );
+                    if (Status == HAL_OK)
+                      Status = RoadBrd_VMonitor_RdCurrent_Scaled( &CMeasureScaled );
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -921,14 +1005,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Current.
-                    sprintf( (char *)tempBffr2, "     Current: " );
-                    strcat( (char *)tempBffr2, (char *)CMeasure.Current );
-                    strcat( (char *)tempBffr2, "\r\n" );
+                    sprintf( (char *)tempBffr2, "     Current: %s/%s\r\n", (char *)CMeasure.Current, (char *)CMeasureScaled.Current );
                     break;
 //------------------ C2 Command...Read Power and return results.....     
                   case '2':
                     // Read Power and return results.....
                     Status = RoadBrd_VMonitor_RdPower( &PMeasure );
+                    if (Status == HAL_OK)
+                      Status = RoadBrd_VMonitor_RdPower_Scaled( &PMeasureScaled );
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -955,14 +1039,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Power.
-                    sprintf( (char *)tempBffr2, "     Power: " );
-                    strcat( (char *)tempBffr2, (char *)PMeasure.Power );
-                    strcat( (char *)tempBffr2, "\r\n" );
+                    sprintf( (char *)tempBffr2, "     Power: %s/%s\r\n", (char *)PMeasure.Power, (char *)PMeasureScaled.Power );
                     break;
 //------------------ C3 Command...Read Bus Voltage and return results.....
                   case '3':
                     // Read Bus Voltage and return results.....
                     Status = RoadBrd_VMonitor_RdVoltage( &VMeasure );
+                    if (Status == HAL_OK)
+                      Status = RoadBrd_VMonitor_RdVoltage_Scaled( &VMeasureScaled );
                       
                     if (Status == HAL_OK)
                     {
@@ -990,9 +1074,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Bus Voltage.
-                    sprintf( (char *)tempBffr2, "     Bus Voltage: " );
-                    strcat( (char *)tempBffr2, (char *)VMeasure.Voltage );
-                    strcat( (char *)tempBffr2, "\r\n" );
+                    sprintf( (char *)tempBffr2, "     Bus Voltage: %s/%s\r\n", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
                     break;
                   default:
                     strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
@@ -1008,6 +1090,8 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ D Command: Read Humidity Values      
                 // Read Humidity Sensor sensor and return Humidity results....
                 Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
+                if (Status == HAL_OK)
+                  Status = RoadBrd_Humidity_ReadHumidity_Scaled( &HMeasureScaled );
                 if (Status == HAL_OK)
                 {
                   // Send string to UART..
@@ -1043,9 +1127,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                 if (Status != HAL_OK)
                   return Status;
                 // Now calculate Celcius and Farenheit Temp.
-                sprintf( (char *)tempBffr2, "     Humidity: " );
-                strcat( (char *)tempBffr2, (char *)HMeasure.Humidity );
-                strcat( (char *)tempBffr2, "\r\n" );
+                sprintf( (char *)tempBffr2, "     Humidity: %s/%s\r\n", (char *)HMeasure.Humidity, (char *)HMeasureScaled.Humidity );
               }
               else
               {
@@ -1166,6 +1248,8 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
               Status = RoadBrd_ReadTemp( &TMeasure );
               if (Status == HAL_OK)
+                Status = RoadBrd_ReadTemp_Scaled( &TMeasureScaled );
+              if (Status == HAL_OK)
               {
                 // Send string to UART..
                 strcpy( (char *)tempBffr2, "TEMP SENSOR...\r\n");
@@ -1200,11 +1284,11 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               if (Status != HAL_OK)
                 return Status;
               // Now calculate Celcius and Farenheit Temp.
-              sprintf( (char *)tempBffr2, "     TempC: " );
-              strcat( (char *)tempBffr2, (char *)TMeasure.TempC );
-              strcat( (char *)tempBffr2, "     TempF: " );
-              strcat( (char *)tempBffr2, (char *)TMeasure.TempF );
-              strcat( (char *)tempBffr2, "\r\n" );
+              sprintf( (char *)tempBffr2, "     TempC: %s/%s     TempF: %s/%s\r\n", 
+                      (char *)TMeasure.TempC, 
+                      (char *)TMeasureScaled.TempC,
+                      (char *)TMeasure.TempF, 
+                      (char *)TMeasureScaled.TempF);
               break;
 //**************************************************************************************************
             case 'H':
@@ -1817,81 +1901,394 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                       } //EndSwitch ( tempBffr[2] )
                     } //EndElse (Size < 9)
                     break;
-//++++++++++++++++++++++++++++++++++++++++++  Dump Calibration Settings.
+//++++++++++++++++++++++++++++++++++++++++++  Calibration Commands.
                   case 'C':
-                    // Read Cool Eye/Grid Eye Values.....
-                    if ( Get_DriverStates( GRIDEYE_MNTR_TASK ))
+                    Status = HAL_OK;
+                    if (Size == 2)
                     {
-                      Status = RoadBrd_GridEye_ReadValues( &GridMeasure );
-                    }
-                    else if ( Get_DriverStates( COOLEYE_MNTR_TASK ))
-                    {
-                      Status = RoadBrd_CoolEye_ReadValues( &GridMeasure );
-                    }
-                    else
-                      Status = HAL_ERROR;
-                
-                    if (Status == HAL_OK)
-                    {
-                      // OK Next Sensor.
-                      // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
-                      Status = RoadBrd_ReadTemp( &TMeasure );
+                      //------------------ TC Command: Dump Calibration Settings.      
+                      // Read Cool Eye/Grid Eye Values.....
+                      if ( Get_DriverStates( GRIDEYE_MNTR_TASK ))
+                      {
+                        Status = RoadBrd_GridEye_ReadValues( &GridMeasure );
+                      }
+                      else if ( Get_DriverStates( COOLEYE_MNTR_TASK ))
+                      {
+                        Status = RoadBrd_CoolEye_ReadValues( &GridMeasure );
+                      }
+                      else
+                        Status = HAL_ERROR;
+                      
                       if (Status == HAL_OK)
                       {
                         // OK Next Sensor.
+                        // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
+                        Status = RoadBrd_ReadTemp( &TMeasure );
+                        if (Status == HAL_OK)
+                        {
+                          // OK Next Sensor.
+                          // Read Humidity Sensor sensor and return Humidity results....
+                          Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
+                          if (Status == HAL_OK)
+                          {
+                            // OK Next Sensor.
+                            //Status = RoadBrd_Barometer_Status( &PRMeasure );
+                            Status = RoadBrd_Baro_ReadPressure( &PRPMeasure );
+                            if (Status == HAL_OK)
+                            {
+                              //sprintf( (char *)tempBffr2, "Driver Status: %04x\r\n", DriverStatus );
+                              sprintf( (char *)tempBffr2, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n", (char *)GridMeasure.GridEye1.TempC,
+                                      (char *)GridMeasure.GridEye2.TempC,
+                                      (char *)GridMeasure.GridEye3.TempC,
+                                      (char *)GridMeasure.GridEye4.TempC,
+                                      (char *)GridMeasure.GridEye5.TempC,
+                                      (char *)GridMeasure.GridEye6.TempC,
+                                      (char *)GridMeasure.GridEye7.TempC,
+                                      (char *)GridMeasure.GridEye8.TempC,
+                                      (char *)GridMeasure.Thermistor.TempC,
+                                      (char *)TMeasure.TempC,
+                                      (char *)HMeasure.Humidity,
+                                      (char *)PRPMeasure.Pressure);
+                              // Send string to UART..
+#ifdef NUCLEO
+                              Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                              Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                              if (Status != HAL_OK)
+                                return Status;
+                              // NOW, Build Data String..
+                              sprintf( (char *)tempBffr2, "COMPLETE" );
+                            } // Endif (Status == HAL_OK) RoadBrd_Baro_ReadPressure
+                            else
+                            {
+                              sprintf( (char *)tempBffr2, "Pressure TASKING ERROR!" );
+                            } // EndElse (Status == HAL_OK) RoadBrd_Baro_ReadPressure
+                          } // Endif (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
+                          else
+                          {
+                            sprintf( (char *)tempBffr2, "Humidity TASKING ERROR!" );
+                          } // EndElse (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
+                        } // Endif (Status == HAL_OK) RoadBrd_ReadTemp
+                        else
+                        {
+                          sprintf( (char *)tempBffr2, "AMBIENT TEMPERATURE TASKING ERROR!" );
+                        } // EndElse (Status == HAL_OK) RoadBrd_ReadTemp
+                      } // Endif (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
+                      else
+                      {
+                        sprintf( (char *)tempBffr2, "GRID EYE/COOL EYE TASKING ERROR!" );
+                      } // EndElse (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
+                    }
+                    else
+                    {
+                      switch( tempBffr[2] )
+                      {
+                        //------------------ TCS Command: Calibration Set Command
+                      case 'S':
+                        // Step 1. Validate format.
+                        if(tempBffr[3]!=':')
+                        {
+                          strcpy( (char *)tempBffr2, "TCS SYNTAX ERROR: Not correct format.\r\n");
+                        } // Endif (tempBffr[3]!=':')
+                        else
+                        {
+                          // 2. Verify if remaining string is digits
+                          if (Size <= 4)
+                          {
+                            strcpy( (char *)tempBffr2, "TCS SYNTAX ERROR: Bad Parameter.\r\n");
+                          } // EndIf (Size > 4)
+                          else
+                          {
+                            // 3. Grab remaining string and convert to integer.
+                            tempPstr = &tempBffr[4];
+                            strcpy(tempstr, tempPstr);
+                            // Time to parse and test remaining string
+                            Scale = 0.0;
+                            Offset = 0.0;
+                            if (sscanf (tempstr, "%s %f %f", uuid, &Scale, &Offset) == 3)
+                            {
+                              sprintf( (char *)tempBffr2, "Parms: %s, %f, %f.\r\n", uuid, Scale, Offset );
+                              // OK, We have 3 good parameters... NOW Need to determine if UUID is good.
+                              if (strncmp((char *)uuid,"0002",4) == 0) // Shnt_Vltg
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_SHNT_VLTG, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Shnt_Vltg Set COMPLETE.\r\n" );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0004",4) == 0) // Current
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_CURRENT, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Current Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0006",4) == 0) // Power
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_POWER, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Power Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0008",4) == 0) // Voltage
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_VOLTAGE, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Voltage Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"000A",4) == 0) // TempC
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_TEMPC, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "TempC Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"000B",4) == 0) // TempF
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_TEMPF, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "TempF Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0011",4) == 0) // Pressure
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_PRESSURE, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Pressure Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0030",4) == 0) // Humidity
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_HUMIDITY, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Humidity Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0032",4) == 0) // Hum_TempC
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_HUM_TEMPC, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Hum_TempC Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0033",4) == 0) // Hum_TempF
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_HUM_TEMPF, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Hum_TempF Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"000D",4) == 0) // RGB_Red
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_RGB_RED, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RGB_Red Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"000E",4) == 0) // RGB_Green
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_RGB_GREEN, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RGB_Green Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"000F",4) == 0) // RGB_Blue
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_RGB_BLUE, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RGB_Blue Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0017",4) == 0) // Therm_C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_THERM_C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "Therm_C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0019",4) == 0) // RoadT_1C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_1C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_1C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"001B",4) == 0) // RoadT_2C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_2C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_2C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"001D",4) == 0) // RoadT_3C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_3C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_3C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"001F",4) == 0) // RoadT_4C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_4C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_4C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0021",4) == 0) // RoadT_5C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_5C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_5C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0023",4) == 0) // RoadT_6C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_6C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_6C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0025",4) == 0) // RoadT_7C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_7C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_7C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else if (strncmp((char *)uuid,"0027",4) == 0) // RoadT_8C
+                              {
+                                Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_8C, Offset, Scale);
+                                if (Status == HAL_OK)
+                                  sprintf( (char *)tempBffr2, "RoadT_8C Set COMPLETE." );
+                                else
+                                  sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                              }
+                              else
+                              {
+                                sprintf( (char *)tempBffr2, "TCS SYNTAX ERROR: Bad UUID.\r\n" );
+                              }
+                              Status = HAL_OK;
+                            }
+                            else
+                            {
+                              strcpy( (char *)tempBffr2, "TCS SYNTAX ERROR: Wrong Number of Parameters.\r\n");
+                            }
+                          } // EndElse (flag == 0)
+                        } // EndElse (tempBffr[3]!=':')
+                        break;
+                        //------------------ TCR Command: Calibration Read Command
+                      case 'R':
                         // Read Humidity Sensor sensor and return Humidity results....
                         Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
                         if (Status == HAL_OK)
                         {
-                          // OK Next Sensor.
-                          //Status = RoadBrd_Barometer_Status( &PRMeasure );
-                          Status = RoadBrd_Baro_ReadPressure( &PRPMeasure );
-                          if (Status == HAL_OK)
-                          {
-                            //sprintf( (char *)tempBffr2, "Driver Status: %04x\r\n", DriverStatus );
-                            sprintf( (char *)tempBffr2, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n", (char *)GridMeasure.GridEye1.TempC,
-                                                                                        (char *)GridMeasure.GridEye2.TempC,
-                                                                                        (char *)GridMeasure.GridEye3.TempC,
-                                                                                        (char *)GridMeasure.GridEye4.TempC,
-                                                                                        (char *)GridMeasure.GridEye5.TempC,
-                                                                                        (char *)GridMeasure.GridEye6.TempC,
-                                                                                        (char *)GridMeasure.GridEye7.TempC,
-                                                                                        (char *)GridMeasure.GridEye8.TempC,
-                                                                                        (char *)GridMeasure.Thermistor.TempC,
-                                                                                        (char *)TMeasure.TempC,
-                                                                                        (char *)HMeasure.Humidity,
-                                                                                        (char *)PRPMeasure.Pressure);
-                            // Send string to UART..
+                          // Send string to UART..
+                          strcpy( (char *)tempBffr2, "Humidity SENSOR...\r\n");
 #ifdef NUCLEO
-                            Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+                          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
 #else
-                            Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+                          Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
 #endif
-                            if (Status != HAL_OK)
-                              return Status;
-                            // NOW, Build Data String..
-                            sprintf( (char *)tempBffr2, "COMPLETE" );
-                          } // Endif (Status == HAL_OK) RoadBrd_Baro_ReadPressure
-                          else
-                          {
-                            sprintf( (char *)tempBffr2, "Pressure TASKING ERROR!" );
-                          } // EndElse (Status == HAL_OK) RoadBrd_Baro_ReadPressure
-                        } // Endif (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
+                          if (Status != HAL_OK)
+                            return Status;
+                          // NOW, Build Data String..
+                          sprintf( (char *)tempBffr2, "     Humidity DATA: " );
+                          strcat( (char *)tempBffr2, (char *)HMeasure.HRaw );
+                          strcat( (char *)tempBffr2, "\r\n" );
+                        }
                         else
+                          break;
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                          return Status;
+                        // NOW, Build Data String..
+                        sprintf( (char *)tempBffr2, "     Humidity DATA(Decimal): %d\r\n", HMeasure.HRawC );
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                          return Status;
+                        // Now calculate Humidity.
+                        sprintf( (char *)tempBffr2, "     Humidity: " );
+                        strcat( (char *)tempBffr2, (char *)HMeasure.Humidity );
+                        strcat( (char *)tempBffr2, "\r\n" );
+                        break;
+                        //------------------ TCT Command: Calibration Set Time Command
+                      case 'T':
+                        // Read Humidity Sensor sensor and return Temperature results....
+                        Status = RoadBrd_Humidity_ReadTemperature( &TMeasure );
+                        if (Status == HAL_OK)
                         {
-                          sprintf( (char *)tempBffr2, "Humidity TASKING ERROR!" );
-                        } // EndElse (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
-                      } // Endif (Status == HAL_OK) RoadBrd_ReadTemp
-                      else
-                      {
-                        sprintf( (char *)tempBffr2, "AMBIENT TEMPERATURE TASKING ERROR!" );
-                      } // EndElse (Status == HAL_OK) RoadBrd_ReadTemp
-                    } // Endif (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
-                    else
-                    {
-                       sprintf( (char *)tempBffr2, "GRID EYE/COOL EYE TASKING ERROR!" );
-                    } // EndElse (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
-
+                          // Send string to UART..
+                          strcpy( (char *)tempBffr2, "Humidity SENSOR...\r\n");
+#ifdef NUCLEO
+                          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                          Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                          if (Status != HAL_OK)
+                            return Status;
+                          // NOW, Build Data String..
+                          sprintf( (char *)tempBffr2, "     TEMP DATA: " );
+                          strcat( (char *)tempBffr2, (char *)TMeasure.Raw );
+                          strcat( (char *)tempBffr2, "\r\n" );
+                        }
+                        else
+                          break;
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                          return Status;
+                        // NOW, Build Data String..
+                        sprintf( (char *)tempBffr2, "     TEMP DATA(Decimal): %d\r\n", TMeasure.RawC );
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                          return Status;
+                        // Now calculate Celcius and Farenheit Temp.
+                        sprintf( (char *)tempBffr2, "     TempC: " );
+                        strcat( (char *)tempBffr2, (char *)TMeasure.TempC );
+                        strcat( (char *)tempBffr2, "     TempF: " );
+                        strcat( (char *)tempBffr2, (char *)TMeasure.TempF );
+                        strcat( (char *)tempBffr2, "\r\n" );
+                        break;
+                      } //EndSwitch
+                    } //EndElse (Size == 2)
                     break;
 //++++++++++++++++++++++++++++++++++++++++++  Dump Driver State.
                   case 'D':

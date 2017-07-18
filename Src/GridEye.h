@@ -248,8 +248,10 @@ typedef struct GridE *GridEPtr;
 HAL_StatusTypeDef RoadBrd_GridEyeInit( void );
 HAL_StatusTypeDef RoadBrd_GridEyeReset( void );
 HAL_StatusTypeDef RoadBrd_GridEye_ReadValues( GridEPtr GPtr );
+HAL_StatusTypeDef RoadBrd_GridEye_ReadValues_Scaled( GridEPtr GPtr );
 HAL_StatusTypeDef RoadBrd_CoolEyeInit( void );
 HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues( GridEPtr GPtr );
+HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues_Scaled( GridEPtr GPtr );
 
 #ifdef __cplusplus
 }

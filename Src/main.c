@@ -280,32 +280,58 @@ int main(void)
   // Initialize key app vars.
   InitSensors();
   
-  // Before we set WWDG, Setup Flash Frame Track Structure.
-  // Initializ Option Bits on Flash...
-//  if (RoadBrd_FlashInitOption( (uint32_t)0x00000000) != HAL_OK)
-//  {
-//    RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
-//    Set_DriverStates( FRAME_TASK, DRIVER_OFF );
-//  }
-//  else
-//  {
-    if (RoadBrd_WWDG_VerifyFrame())
+  //**
+  //**
+  //** Initialize all Flash Structures.
+  //**
+  //**
+  //*******1. Initializ WWDG Flash Structure
+  // 1a. Is WWDG Flash Frame Initialized?
+  if (RoadBrd_WWDG_VerifyFrame())
+  {
+    //Yes....Set FRAME_TASK Bit in Driver State Variable.
+    Set_DriverStates( FRAME_TASK, DRIVER_ON );
+  } // EndIf (RoadBrd_WWDG_VerifyFrame())
+  else
+  {
+    //No....1b. Attempt to Initialize WWDG Flash Frame.
+    if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
     {
-      Set_DriverStates( FRAME_TASK, DRIVER_ON );
+      //FAILED....Indicate Error Code and Fail Driver State.
+      RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
+      Set_DriverStates( FRAME_TASK, DRIVER_OFF );
     }
     else
     {
-      if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
-      {
-        RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
-        Set_DriverStates( FRAME_TASK, DRIVER_OFF );
-      }
-      else
-      {
-        Set_DriverStates( FRAME_TASK, DRIVER_ON );
-      }
+      //SUCCESS....Set FRAME_TASK Bit in Driver State Variable.
+      Set_DriverStates( FRAME_TASK, DRIVER_ON );
     }
-//  }
+  } // EndElse (RoadBrd_WWDG_VerifyFrame())
+  
+  //*******2. Initializ Calibration Flash Structure
+  // 2a. Is Calibration Flash Frame Initialized?
+  if (RoadBrd_CAL_VerifyFrame())
+  {
+    //Yes....Set CAL_TASK Bit in Driver State Variable.
+    Set_DriverStates( CAL_TASK, DRIVER_ON );
+  } // EndIf (RoadBrd_WWDG_VerifyFrame())
+  else
+  {
+    //No....2b. Attempt to Initialize Structure Flash Structure.
+    if (RoadBrd_CAL_InitializeFrmFlash() != HAL_OK)
+    {
+      //FAILED....Indicate Error Code and Fail Driver State.
+      RdBrd_ErrCdLogErrCd( ERROR_CAL_INIT, MODULE_main );
+      Set_DriverStates( CAL_TASK, DRIVER_OFF );
+    }
+    else
+    {
+      //SUCCESS....Set FRAME_TASK Bit in Driver State Variable.
+      Set_DriverStates( CAL_TASK, DRIVER_ON );
+    }
+  } // EndElse (RoadBrd_WWDG_VerifyFrame())
+  
+  
 // Initialize Key Vars once Flash has been validated.
   // Initialize Key Timer Sampling Vars.
   Set_TickCounts( RoadBrd_Get_RdSndTickCnt(), RoadBrd_Get_SnsrTickCnt() );

@@ -109,6 +109,7 @@ struct
   bool  CoolEye;
   bool  I2CState;
   bool  FrameState;
+  bool  CalibrationState;
 } static driver_list;
 
 // Analytics Structure
@@ -225,20 +226,20 @@ HAL_StatusTypeDef  ProcessSensorState(void)
     data.reading_scheduled = false;
     
     /* Read the Voltage Monitor Data. */
-    Status = RoadBrd_VMonitor_RdShntVltg( &TmpData.ShntVltg );
+    Status = RoadBrd_VMonitor_RdShntVltg_Scaled( &TmpData.ShntVltg );
     if (Status != HAL_OK)
       return Status;
-    Status = RoadBrd_VMonitor_RdCurrent( &TmpData.Current );
+    Status = RoadBrd_VMonitor_RdCurrent_Scaled( &TmpData.Current );
     if (Status != HAL_OK)
       return Status;
-    Status = RoadBrd_VMonitor_RdPower( &TmpData.Power );
+    Status = RoadBrd_VMonitor_RdPower_Scaled( &TmpData.Power );
     if (Status != HAL_OK)
       return Status;
-    Status = RoadBrd_VMonitor_RdVoltage( &TmpData.Voltage );
+    Status = RoadBrd_VMonitor_RdVoltage_Scaled( &TmpData.Voltage );
    if (Status != HAL_OK)
       return Status;
     /* Read the Temperature Data. */
-    Status = RoadBrd_ReadTemp( &TmpData.Temp );
+    Status = RoadBrd_ReadTemp_Scaled( &TmpData.Temp );
     if (Status != HAL_OK)
       return Status;
 
@@ -248,7 +249,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       return Status;
 
     /* Read the pressure and temperature */
-    Status = RoadBrd_Baro_ReadPressure( &TmpData.Pressure );
+    Status = RoadBrd_Baro_ReadPressure_Scaled( &TmpData.Pressure );
     if (Status != HAL_OK)
       return Status;
     Status = RoadBrd_Baro_ReadTemp( &TmpData.PrTemp );
@@ -256,15 +257,15 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       return Status;
     
     /* Read the Humidity and temperature */
-    Status = RoadBrd_Humidity_ReadHumidity( &TmpData.Humidity );
+    Status = RoadBrd_Humidity_ReadHumidity_Scaled( &TmpData.Humidity );
     if (Status != HAL_OK)
       return Status;
-    Status = RoadBrd_Humidity_ReadTemperature( &TmpData.HmTemp );
+    Status = RoadBrd_Humidity_ReadTemperature_Scaled( &TmpData.HmTemp );
     if (Status != HAL_OK)
       return Status;
     
     /* Read Grid Eye Values */
-    Status = RoadBrd_GridEye_ReadValues( &TmpData.GridValues );
+    Status = RoadBrd_GridEye_ReadValues_Scaled( &TmpData.GridValues );
     if (Status != HAL_OK)
       return Status;
 //************************OLD STYLE TASKING ENDS HERE************************
@@ -280,16 +281,16 @@ HAL_StatusTypeDef  ProcessSensorState(void)
         if ( Get_DriverStates( VOLTAGE_MNTR_TASK ))
         {
           /* Read the Voltage Monitor Data. */
-          Status = RoadBrd_VMonitor_RdShntVltg( &TmpData.ShntVltg );
+          Status = RoadBrd_VMonitor_RdShntVltg_Scaled( &TmpData.ShntVltg );
           if (Status != HAL_OK)
             break;
-          Status = RoadBrd_VMonitor_RdCurrent( &TmpData.Current );
+          Status = RoadBrd_VMonitor_RdCurrent_Scaled( &TmpData.Current );
           if (Status != HAL_OK)
             break;
-          Status = RoadBrd_VMonitor_RdPower( &TmpData.Power );
+          Status = RoadBrd_VMonitor_RdPower_Scaled( &TmpData.Power );
           if (Status != HAL_OK)
             break;
-          Status = RoadBrd_VMonitor_RdVoltage( &TmpData.Voltage );
+          Status = RoadBrd_VMonitor_RdVoltage_Scaled( &TmpData.Voltage );
           if (Status != HAL_OK)
             break;
         }
@@ -298,7 +299,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
         if ( Get_DriverStates( TEMPERATURE_MNTR_TASK ))
         {
           /* Read the Temperature Data. */
-          Status = RoadBrd_ReadTemp( &TmpData.Temp );
+          Status = RoadBrd_ReadTemp_Scaled( &TmpData.Temp );
         }
         break;
       case IRRADIANCE_MNTR_TASK:
@@ -312,7 +313,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
         if ( Get_DriverStates( PRESSURE_MNTR_TASK ))
         {
           /* Read the pressure and temperature */
-          Status = RoadBrd_Baro_ReadPressure( &TmpData.Pressure );
+          Status = RoadBrd_Baro_ReadPressure_Scaled( &TmpData.Pressure );
           if (Status != HAL_OK)
             break;
           Status = RoadBrd_Baro_ReadTemp( &TmpData.PrTemp );
@@ -322,20 +323,20 @@ HAL_StatusTypeDef  ProcessSensorState(void)
         if ( Get_DriverStates( HUMIDITY_MNTR_TASK ))
         {
           /* Read the Humidity and temperature */
-          Status = RoadBrd_Humidity_ReadHumidity( &TmpData.Humidity );
+          Status = RoadBrd_Humidity_ReadHumidity_Scaled( &TmpData.Humidity );
           if (Status != HAL_OK)
             break;
-          Status = RoadBrd_Humidity_ReadTemperature( &TmpData.HmTemp );
+          Status = RoadBrd_Humidity_ReadTemperature_Scaled( &TmpData.HmTemp );
         }
         break;
       case GRIDEYE_MNTR_TASK:
         if ( Get_DriverStates( GRIDEYE_MNTR_TASK ))
         {
-          Status = RoadBrd_GridEye_ReadValues( &TmpData.GridValues );
+          Status = RoadBrd_GridEye_ReadValues_Scaled( &TmpData.GridValues );
         }
         else if ( Get_DriverStates( COOLEYE_MNTR_TASK ))
         {
-          Status = RoadBrd_CoolEye_ReadValues( &TmpData.GridValues );
+          Status = RoadBrd_CoolEye_ReadValues_Scaled( &TmpData.GridValues );
         }
         break;
     }
@@ -1168,6 +1169,9 @@ void Set_DriverStates( task_defs Task, bool State )
   case FRAME_TASK:
     driver_list.FrameState = State;
     break;
+  case CAL_TASK:
+    driver_list.CalibrationState = State;
+    break;
   default:
     break;
   }
@@ -1209,6 +1213,9 @@ bool Get_DriverStates( task_defs Task )
   case FRAME_TASK:
     return driver_list.FrameState;
     break;
+  case CAL_TASK:
+    return driver_list.CalibrationState;
+    break;
   default:
     return DRIVER_OFF;
     break;
@@ -1242,6 +1249,8 @@ uint16_t Get_DriverStatus( void )
     Status += 0x0080;
   if ( Get_DriverStates( FRAME_TASK ) )
     Status += 0x0100;
+  if ( Get_DriverStates( CAL_TASK ) )
+    Status += 0x0200;
   return Status;
 }
 

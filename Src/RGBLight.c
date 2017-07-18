@@ -34,6 +34,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "RGBLight.h"
+#include "Calibration.h"
 
   /**
   * @brief  This function initializes the RGB sensor Hardware. This is the 

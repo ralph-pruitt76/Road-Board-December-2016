@@ -63,6 +63,7 @@ extern WWDG_HandleTypeDef hwwdg;
                                          // Max_Data = 0x80 */
 #define FRAME_SIZE       10              // Will Save 10 Frames
 #define FRAME_CHKSUM     0x5a5a5a5a      // Code to determine if frame ha been Initialized
+#define BASE_FLASH_ADDRESS      0x08070000      // Base Address to place all key Flash Structures.
 
 // Private Structure
 // wwdg Save Frame

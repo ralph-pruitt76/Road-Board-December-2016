@@ -46,7 +46,8 @@ typedef enum
   COOLEYE_MNTR_TASK = 6,
   I2C_STATE = 7,
   FRAME_TASK = 8,
-  TASK_LENGTH = 9
+  CAL_TASK = 9,
+  TASK_LENGTH = 10
 } task_defs;
 
 typedef enum 

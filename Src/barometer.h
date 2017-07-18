@@ -144,6 +144,7 @@ HAL_StatusTypeDef RoadBrd_StartSample_Barometer( void );
 HAL_StatusTypeDef RoadBrd_StartSample_BarometerWait( void );
 HAL_StatusTypeDef RoadBrd_Barometer_Status( PRStatPtr SPtr );
 HAL_StatusTypeDef RoadBrd_Baro_ReadPressure( PRPrsPtr PRPtr );
+HAL_StatusTypeDef RoadBrd_Baro_ReadPressure_Scaled( PRPrsPtr PRPtr );
 HAL_StatusTypeDef RoadBrd_Baro_ReadTemp( TempPtr TmpPtr );
 HAL_StatusTypeDef RoadBrd_WaitForPressure( uint16_t WaitCnt );
 HAL_StatusTypeDef RoadBrd_TestandRead_Barometer( void );

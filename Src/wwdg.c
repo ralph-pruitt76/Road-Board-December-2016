@@ -41,7 +41,8 @@
 
 /* USER CODE BEGIN 0 */
 // Frame Structure Define
-wwdg_Frames wwdg_HardFrames  @ 0x08070000;
+//wwdg_Frames wwdg_HardFrames  @ 0x08070000;
+wwdg_Frames wwdg_HardFrames  @ BASE_FLASH_ADDRESS;
 
 static wwdg_Frames Save_Frames;
 

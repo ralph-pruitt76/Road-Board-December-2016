@@ -62,6 +62,7 @@ typedef struct Temp *TempPtr;
 
 /* Prototypes */
 HAL_StatusTypeDef RoadBrd_ReadTemp( TempPtr TPtr );
+HAL_StatusTypeDef RoadBrd_ReadTemp_Scaled( TempPtr TPtr );
    
 #ifdef __cplusplus
 }
