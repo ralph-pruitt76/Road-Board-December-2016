@@ -20,6 +20,8 @@
 #define ANALYTICS_MAXCNT        14        // 180 Seconds
 #define PROCESS_RD_SND_TIME     123      // Process all Road Sound every Second(123 * 100ms tick)...12.3 Seconds
 #define PROCESS_LEDOFF_TIME     1       // Process and turn off all active LEDs. Controls the Blink rate of the LEDs(1 * 50ms tick)
+#define FRM_REPEAT_CNT          5       // Repeat the full set of data at least this many times.
+
 #ifdef LONG_DELAY
 //  #define CONNECTION_CNT          180      // 15 Minutes.
 //  #define HEARTBEAT_CNT           60       // 5 Minutes
@@ -77,5 +79,6 @@ void Clr_HeartBeat( void );
 void Clr_HrtBeat_Cnt( void );
 void SendApp_String( uint8_t *pData );
 void ClrDataStructure(void);
+void ClrAnalyticsRepeat( void );
 
 #endif

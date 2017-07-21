@@ -117,6 +117,7 @@ struct
 {
   bool  HrtBeat_Flg;
   uint16_t HrtBeat_Cnt;
+  uint16_t FrmRpt_Cnt;
 } static analytics;
 
 /* App data measurment structure */
@@ -160,6 +161,7 @@ void InitSensors(void)
   data.task_item = VOLTAGE_MNTR_TASK;           // Initialize the task_item to first item.
   analytics.HrtBeat_Flg = false;                // Set flasg to clear before using it.
   analytics.HrtBeat_Cnt = 0;                    // Clear count before using it.
+  analytics.FrmRpt_Cnt = 0;                     // Clear Frame Repeat Count.
 }
 
 void ClrDataStructure(void)
@@ -344,6 +346,13 @@ HAL_StatusTypeDef  ProcessSensorState(void)
     data.task_item++;
     if (data.task_item >= TASK_LENGTH)
     {
+      //This is to ensure the repeat of the full frame ofr data at least FRM_REPEAT_CNT Times.
+      // Test Whether we need to reload all settings.
+      if (analytics.FrmRpt_Cnt < FRM_REPEAT_CNT)
+      {
+        analytics.FrmRpt_Cnt++;
+        ClrDataStructure();                           // Clear Backup data structure.
+      } //EndIf (analytics.FrmRpt_Cnt < FRM_REPEAT_CNT)
       // Reset Count
       data.task_item = VOLTAGE_MNTR_TASK;
       /* Clear the scheduling flag */
@@ -990,9 +999,14 @@ void Process_RdSound( void )
       RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
   } // Endif (BGM111_Ready()
   // Test Analytics flag and determine if we need to update that characteristic
-//  if (!(Tst_HeartBeat()))
+  //  if (!(Tst_HeartBeat()))
+  if (analytics.HrtBeat_Cnt < FRM_REPEAT_CNT)
+  {
+    ClrDataStructure();                           // Clear Backup data structure.
+  }
   if (analytics.HrtBeat_Cnt++ >= ANALYTICS_MAXCNT)
   {
+    analytics.FrmRpt_Cnt = 0;                     // Clear Frame Repeat Count.
     analytics.HrtBeat_Cnt = 0;
     ClrDataStructure();                           // Clear Backup data structure.
 //    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
@@ -1294,5 +1308,14 @@ void Clr_HeartBeat( void )
   analytics.HrtBeat_Flg = false;
 }
 
+  /**
+  * @brief  This function clears Frame Repeat Count.
+  * @param  None
+  * @retval None
+  */
+void ClrAnalyticsRepeat( void )
+{
+      analytics.FrmRpt_Cnt = 0;                     // Clear Frame Repeat Count.
+}
 
 

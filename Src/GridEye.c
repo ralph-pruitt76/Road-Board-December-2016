@@ -151,7 +151,15 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues_Scaled( GridEPtr GPtr )
 #endif
     // NOW, Build Data String..
     smallInt = ((i2cData[1]*256) + i2cData[0]);
-    nativeInt = smallInt;
+    //**Need to first Convert 2s Compliment 11 bit to int.
+    // Is this negative?
+    if (smallInt & (1 << 15))
+      // Yes...Extend Sign Bit
+      nativeInt = (int)(smallInt | ~((1 << 15) - 1));
+    else
+    // No...Nothing to Do.
+      nativeInt = smallInt;
+
     Temp_C = nativeInt/10;
     Temp_C = RoadBrd_CAL_ScaleValue( CAL_THERM_C, Temp_C);
     tempC = (uint16_t)(round(Temp_C * 10));
@@ -215,8 +223,16 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues_Scaled( GridEPtr GPtr )
       i2cData[0] = 0x80;
       i2cData[1] = 0xff;
 #endif
-     smallInt = ((i2cData[1]*256) + i2cData[0]);
-      nativeInt = smallInt;
+      smallInt = ((i2cData[1]*256) + i2cData[0]);
+      //**Need to first Convert 2s Compliment 11 bit to int.
+      // Is this negative?
+      if (smallInt & (1 << 15))
+        // Yes...Extend Sign Bit
+        nativeInt = (int)(smallInt | ~((1 << 15) - 1));
+      else
+        // No...Nothing to Do.
+        nativeInt = smallInt;
+      
       Temp_C = nativeInt/10;
       tempC = (uint16_t)(round(Temp_C * 10));
 //      Temp_F = (Temp_C * 1.8) + 32;
@@ -393,7 +409,15 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues( GridEPtr GPtr )
 #endif
     // NOW, Build Data String..
     smallInt = ((i2cData[1]*256) + i2cData[0]);
-    nativeInt = smallInt;
+    //**Need to first Convert 2s Compliment 11 bit to int.
+    // Is this negative?
+    if (smallInt & (1 << 15))
+      // Yes...Extend Sign Bit
+      nativeInt = (int)(smallInt | ~((1 << 15) - 1));
+    else
+    // No...Nothing to Do.
+      nativeInt = smallInt;
+
     Temp_C = nativeInt/10;
     tempC = (uint16_t)(round(Temp_C * 10));
     Temp_F = (Temp_C * 1.8) + 32;
@@ -456,8 +480,16 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues( GridEPtr GPtr )
       i2cData[0] = 0x80;
       i2cData[1] = 0xff;
 #endif
-     smallInt = ((i2cData[1]*256) + i2cData[0]);
-      nativeInt = smallInt;
+      smallInt = ((i2cData[1]*256) + i2cData[0]);
+      //**Need to first Convert 2s Compliment 11 bit to int.
+      // Is this negative?
+      if (smallInt & (1 << 15))
+        // Yes...Extend Sign Bit
+        nativeInt = (int)(smallInt | ~((1 << 15) - 1));
+      else
+      // No...Nothing to Do.
+        nativeInt = smallInt;
+
       Temp_C = nativeInt/10;
       tempC = (uint16_t)(round(Temp_C * 10));
       Temp_F = (Temp_C * 1.8) + 32;

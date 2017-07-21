@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       19/Jul/2017  08:08:55
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       21/Jul/2017  13:50:57
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -1542,7 +1542,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000001C   0xD003             BEQ.N    ??RoadBrd_ProcessBGMChar_0
    \   0000001E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   00000020   0x2C3F             CMP      R4,#+63
-   \   00000022   0xF040 0x80BB      BNE.W    ??RoadBrd_ProcessBGMChar_1
+   \   00000022   0xF040 0x80BD      BNE.W    ??RoadBrd_ProcessBGMChar_1
     625            {
     626              // Reset Ptr.
     627              in_ptr = 0;
@@ -1569,7 +1569,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     633                return Status;
    \   00000046   0x0028             MOVS     R0,R5
    \   00000048   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   0000004A   0xE0A9             B.N      ??RoadBrd_ProcessBGMChar_3
+   \   0000004A   0xE0AB             B.N      ??RoadBrd_ProcessBGMChar_3
     634              // Test Strings for Key items.
     635              // Boot String?
     636              if (strncmp((char *)tempBffr2,"Boot",4) == 0)
@@ -1596,7 +1596,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000006C   0x2000             MOVS     R0,#+0
    \   0000006E   0x.... 0x....      BL       RoadBrd_UART_Transmit
    \   00000072   0x0005             MOVS     R5,R0
-   \   00000074   0xE092             B.N      ??RoadBrd_ProcessBGMChar_1
+   \   00000074   0xE094             B.N      ??RoadBrd_ProcessBGMChar_1
     643              }
     644              // Connection String?
     645              else if (strncmp((char *)tempBffr2,"Connected",9) == 0)
@@ -1630,7 +1630,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000A6   0x2000             MOVS     R0,#+0
    \   000000A8   0x.... 0x....      BL       RoadBrd_UART_Transmit
    \   000000AC   0x0005             MOVS     R5,R0
-   \   000000AE   0xE075             B.N      ??RoadBrd_ProcessBGMChar_1
+   \   000000AE   0xE077             B.N      ??RoadBrd_ProcessBGMChar_1
     653          
     654              }
     655              // Disconnection String?
@@ -1641,7 +1641,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000B4   0x....             LDR.N    R0,??DataTable20_33
    \   000000B6   0x.... 0x....      BL       strncmp
    \   000000BA   0x2800             CMP      R0,#+0
-   \   000000BC   0xD11B             BNE.N    ??RoadBrd_ProcessBGMChar_6
+   \   000000BC   0xD11D             BNE.N    ??RoadBrd_ProcessBGMChar_6
     657              {
     658                // Yes....Clear Flags.
     659                ble.connection = false;
@@ -1666,280 +1666,282 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000E2   0x.... 0x....      BL       RoadBrd_UART_Transmit
     664                ClrDataStructure();                           // Clear Backup data structure.
    \   000000E6   0x.... 0x....      BL       ClrDataStructure
-    665                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
-   \   000000EA   0x....             LDR.N    R1,??DataTable20_42
-   \   000000EC   0x2000             MOVS     R0,#+0
-   \   000000EE   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   000000F2   0x0005             MOVS     R5,R0
-   \   000000F4   0xE052             B.N      ??RoadBrd_ProcessBGMChar_1
-    666              }
-    667              // Data String?
-    668              else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
+    665                ClrAnalyticsRepeat();                          // Clear Frame Repeat Count.
+   \   000000EA   0x.... 0x....      BL       ClrAnalyticsRepeat
+    666                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
+   \   000000EE   0x....             LDR.N    R1,??DataTable20_42
+   \   000000F0   0x2000             MOVS     R0,#+0
+   \   000000F2   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000000F6   0x0005             MOVS     R5,R0
+   \   000000F8   0xE052             B.N      ??RoadBrd_ProcessBGMChar_1
+    667              }
+    668              // Data String?
+    669              else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
    \                     ??RoadBrd_ProcessBGMChar_6: (+1)
-   \   000000F6   0x2204             MOVS     R2,#+4
-   \   000000F8   0x....             LDR.N    R1,??DataTable20_43
-   \   000000FA   0x....             LDR.N    R0,??DataTable20_33
-   \   000000FC   0x.... 0x....      BL       strncmp
-   \   00000100   0x2800             CMP      R0,#+0
-   \   00000102   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_7
-    669              {
-    670                // Yes....Set Boot Flag.
-    671                ble.data_Connection = true;
-   \   00000104   0x2001             MOVS     R0,#+1
-   \   00000106   0x....             LDR.N    R1,??DataTable20_6
-   \   00000108   0xF881 0x0198      STRB     R0,[R1, #+408]
-    672                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
-   \   0000010C   0x....             LDR.N    R1,??DataTable20_44
-   \   0000010E   0x2000             MOVS     R0,#+0
-   \   00000110   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   00000114   0x0005             MOVS     R5,R0
-   \   00000116   0xE041             B.N      ??RoadBrd_ProcessBGMChar_1
-    673              }
-    674              // TACK String?
-    675              else if (strncmp((char *)tempBffr2,"<TACK",5) == 0)
+   \   000000FA   0x2204             MOVS     R2,#+4
+   \   000000FC   0x....             LDR.N    R1,??DataTable20_43
+   \   000000FE   0x....             LDR.N    R0,??DataTable20_33
+   \   00000100   0x.... 0x....      BL       strncmp
+   \   00000104   0x2800             CMP      R0,#+0
+   \   00000106   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_7
+    670              {
+    671                // Yes....Set Boot Flag.
+    672                ble.data_Connection = true;
+   \   00000108   0x2001             MOVS     R0,#+1
+   \   0000010A   0x....             LDR.N    R1,??DataTable20_6
+   \   0000010C   0xF881 0x0198      STRB     R0,[R1, #+408]
+    673                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
+   \   00000110   0x....             LDR.N    R1,??DataTable20_44
+   \   00000112   0x2000             MOVS     R0,#+0
+   \   00000114   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000118   0x0005             MOVS     R5,R0
+   \   0000011A   0xE041             B.N      ??RoadBrd_ProcessBGMChar_1
+    674              }
+    675              // TACK String?
+    676              else if (strncmp((char *)tempBffr2,"<TACK",5) == 0)
    \                     ??RoadBrd_ProcessBGMChar_7: (+1)
-   \   00000118   0x2205             MOVS     R2,#+5
-   \   0000011A   0x....             LDR.N    R1,??DataTable20_45
-   \   0000011C   0x....             LDR.N    R0,??DataTable20_33
-   \   0000011E   0x.... 0x....      BL       strncmp
-   \   00000122   0x2800             CMP      R0,#+0
-   \   00000124   0xD124             BNE.N    ??RoadBrd_ProcessBGMChar_8
-    676              {
-    677                if (ble.TackArmed == TACK_ARMED2)
-   \   00000126   0x....             LDR.N    R0,??DataTable20_6
-   \   00000128   0xF890 0x0199      LDRB     R0,[R0, #+409]
-   \   0000012C   0x2802             CMP      R0,#+2
-   \   0000012E   0xD10D             BNE.N    ??RoadBrd_ProcessBGMChar_9
-    678                {
-    679                  ble.TackArmed = TACK_SYNC;
-   \   00000130   0x2003             MOVS     R0,#+3
-   \   00000132   0x....             LDR.N    R1,??DataTable20_6
-   \   00000134   0xF881 0x0199      STRB     R0,[R1, #+409]
-    680                  ble.TackCnt = 0;
-   \   00000138   0x2000             MOVS     R0,#+0
-   \   0000013A   0x....             LDR.N    R1,??DataTable20_6
-   \   0000013C   0xF881 0x019A      STRB     R0,[R1, #+410]
-    681                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
-   \   00000140   0x....             LDR.N    R1,??DataTable20_46
-   \   00000142   0x2000             MOVS     R0,#+0
-   \   00000144   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   00000148   0x0005             MOVS     R5,R0
-   \   0000014A   0xE027             B.N      ??RoadBrd_ProcessBGMChar_1
-    682                }
-    683                else if (ble.TackArmed == TACK_SYNC)
+   \   0000011C   0x2205             MOVS     R2,#+5
+   \   0000011E   0x....             LDR.N    R1,??DataTable20_45
+   \   00000120   0x....             LDR.N    R0,??DataTable20_33
+   \   00000122   0x.... 0x....      BL       strncmp
+   \   00000126   0x2800             CMP      R0,#+0
+   \   00000128   0xD124             BNE.N    ??RoadBrd_ProcessBGMChar_8
+    677              {
+    678                if (ble.TackArmed == TACK_ARMED2)
+   \   0000012A   0x....             LDR.N    R0,??DataTable20_6
+   \   0000012C   0xF890 0x0199      LDRB     R0,[R0, #+409]
+   \   00000130   0x2802             CMP      R0,#+2
+   \   00000132   0xD10D             BNE.N    ??RoadBrd_ProcessBGMChar_9
+    679                {
+    680                  ble.TackArmed = TACK_SYNC;
+   \   00000134   0x2003             MOVS     R0,#+3
+   \   00000136   0x....             LDR.N    R1,??DataTable20_6
+   \   00000138   0xF881 0x0199      STRB     R0,[R1, #+409]
+    681                  ble.TackCnt = 0;
+   \   0000013C   0x2000             MOVS     R0,#+0
+   \   0000013E   0x....             LDR.N    R1,??DataTable20_6
+   \   00000140   0xF881 0x019A      STRB     R0,[R1, #+410]
+    682                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
+   \   00000144   0x....             LDR.N    R1,??DataTable20_46
+   \   00000146   0x2000             MOVS     R0,#+0
+   \   00000148   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000014C   0x0005             MOVS     R5,R0
+   \   0000014E   0xE027             B.N      ??RoadBrd_ProcessBGMChar_1
+    683                }
+    684                else if (ble.TackArmed == TACK_SYNC)
    \                     ??RoadBrd_ProcessBGMChar_9: (+1)
-   \   0000014C   0x....             LDR.N    R0,??DataTable20_6
-   \   0000014E   0xF890 0x0199      LDRB     R0,[R0, #+409]
-   \   00000152   0x2803             CMP      R0,#+3
-   \   00000154   0xD122             BNE.N    ??RoadBrd_ProcessBGMChar_1
-    684                {
-    685                  ble.TackCnt = 0;
-   \   00000156   0x2000             MOVS     R0,#+0
-   \   00000158   0x....             LDR.N    R1,??DataTable20_6
-   \   0000015A   0xF881 0x019A      STRB     R0,[R1, #+410]
-    686                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
-   \   0000015E   0x....             LDR.N    R1,??DataTable20_47
-   \   00000160   0x2000             MOVS     R0,#+0
-   \   00000162   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   00000166   0x0005             MOVS     R5,R0
-    687                 // Set Sync Flag for Frame.
-    688                  BGM111_SetSyncFlg( SYNC_PROC );
-   \   00000168   0x2001             MOVS     R0,#+1
-   \   0000016A   0x.... 0x....      BL       BGM111_SetSyncFlg
-   \   0000016E   0xE015             B.N      ??RoadBrd_ProcessBGMChar_1
-    689                }
-    690              }
-    691              // NOW TEST FOR PARAMS!!!
-    692          
-    693              // NOW TEST ERROR CONDITIONS!!!
-    694              // OVERFLOW?
-    695              else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)
+   \   00000150   0x....             LDR.N    R0,??DataTable20_6
+   \   00000152   0xF890 0x0199      LDRB     R0,[R0, #+409]
+   \   00000156   0x2803             CMP      R0,#+3
+   \   00000158   0xD122             BNE.N    ??RoadBrd_ProcessBGMChar_1
+    685                {
+    686                  ble.TackCnt = 0;
+   \   0000015A   0x2000             MOVS     R0,#+0
+   \   0000015C   0x....             LDR.N    R1,??DataTable20_6
+   \   0000015E   0xF881 0x019A      STRB     R0,[R1, #+410]
+    687                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
+   \   00000162   0x....             LDR.N    R1,??DataTable20_47
+   \   00000164   0x2000             MOVS     R0,#+0
+   \   00000166   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000016A   0x0005             MOVS     R5,R0
+    688                 // Set Sync Flag for Frame.
+    689                  BGM111_SetSyncFlg( SYNC_PROC );
+   \   0000016C   0x2001             MOVS     R0,#+1
+   \   0000016E   0x.... 0x....      BL       BGM111_SetSyncFlg
+   \   00000172   0xE015             B.N      ??RoadBrd_ProcessBGMChar_1
+    690                }
+    691              }
+    692              // NOW TEST FOR PARAMS!!!
+    693          
+    694              // NOW TEST ERROR CONDITIONS!!!
+    695              // OVERFLOW?
+    696              else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)
    \                     ??RoadBrd_ProcessBGMChar_8: (+1)
-   \   00000170   0x2208             MOVS     R2,#+8
-   \   00000172   0x....             LDR.N    R1,??DataTable20_48
-   \   00000174   0x....             LDR.N    R0,??DataTable20_33
-   \   00000176   0x.... 0x....      BL       strncmp
-   \   0000017A   0x2800             CMP      R0,#+0
-   \   0000017C   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_10
-    696              {
-    697                // Yes....Report Error and Reset.
-    698                // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
-    699                RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
-   \   0000017E   0x2102             MOVS     R1,#+2
-   \   00000180   0x2011             MOVS     R0,#+17
-   \   00000182   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
-    700                RdBrd_BlinkErrCd( ERROR_BGM_OVERFLOW );
-   \   00000186   0x2011             MOVS     R0,#+17
-   \   00000188   0x.... 0x....      BL       RdBrd_BlinkErrCd
-    701                HAL_NVIC_SystemReset();
-   \   0000018C   0x.... 0x....      BL       HAL_NVIC_SystemReset
-   \   00000190   0xE004             B.N      ??RoadBrd_ProcessBGMChar_1
-    702              }
-    703              else
-    704              {
-    705                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<UNKNOWN STATUS> ");
+   \   00000174   0x2208             MOVS     R2,#+8
+   \   00000176   0x....             LDR.N    R1,??DataTable20_48
+   \   00000178   0x....             LDR.N    R0,??DataTable20_33
+   \   0000017A   0x.... 0x....      BL       strncmp
+   \   0000017E   0x2800             CMP      R0,#+0
+   \   00000180   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_10
+    697              {
+    698                // Yes....Report Error and Reset.
+    699                // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
+    700                RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
+   \   00000182   0x2102             MOVS     R1,#+2
+   \   00000184   0x2011             MOVS     R0,#+17
+   \   00000186   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    701                RdBrd_BlinkErrCd( ERROR_BGM_OVERFLOW );
+   \   0000018A   0x2011             MOVS     R0,#+17
+   \   0000018C   0x.... 0x....      BL       RdBrd_BlinkErrCd
+    702                HAL_NVIC_SystemReset();
+   \   00000190   0x.... 0x....      BL       HAL_NVIC_SystemReset
+   \   00000194   0xE004             B.N      ??RoadBrd_ProcessBGMChar_1
+    703              }
+    704              else
+    705              {
+    706                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<UNKNOWN STATUS> ");
    \                     ??RoadBrd_ProcessBGMChar_10: (+1)
-   \   00000192   0x....             LDR.N    R1,??DataTable20_49
-   \   00000194   0x2000             MOVS     R0,#+0
-   \   00000196   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000019A   0x0005             MOVS     R5,R0
-    706              }
-    707            }
-    708            //tempBffr2[0] = c;
-    709            //tempBffr2[1] = 0x00;
-    710            //Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    711            return Status;
+   \   00000196   0x....             LDR.N    R1,??DataTable20_49
+   \   00000198   0x2000             MOVS     R0,#+0
+   \   0000019A   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000019E   0x0005             MOVS     R5,R0
+    707              }
+    708            }
+    709            //tempBffr2[0] = c;
+    710            //tempBffr2[1] = 0x00;
+    711            //Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    712            return Status;
    \                     ??RoadBrd_ProcessBGMChar_1: (+1)
-   \   0000019C   0x0028             MOVS     R0,R5
-   \   0000019E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   000001A0   0x0028             MOVS     R0,R5
+   \   000001A2   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \                     ??RoadBrd_ProcessBGMChar_3: (+1)
-   \   000001A0   0xB00F             ADD      SP,SP,#+60
-   \   000001A2   0xBD30             POP      {R4,R5,PC}       ;; return
-    712          #if 0
-    713              Status = HAL_OK;
-    714              // Test Buffer. If we are full, An error has occured. Must at least log that.
-    715              if (IsBufFull(ble.rx_wr, ble.rx_rd))
-    716              {
-    717                RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
-    718                Clr_HrtBeat_Cnt();
-    719                RdBrd_BlinkErrCd( ERROR_BGMBUF_FULL );
-    720                //RoadBrd_Delay( 1000 );
-    721                HAL_NVIC_SystemReset();
-    722                return HAL_ERROR;
-    723              }
-    724              /* Execution based on state */
-    725              switch (ble.rx_state)
-    726              {
-    727                /* Waiting for a valid start of header */
-    728                default:
-    729                case BGRX_SYNC:
-    730                  /* Valid start of header? (response or event) */
-    731                  if ((c & 0xF8) ==
-    732                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_rsp) ||
-    733                      (c & 0xF8) ==
-    734                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_evt))
-    735                  {
-    736                    /* Receiving header */
-    737                    ble.rx_state = BGRX_HDR;
-    738                    /* Initialize header byte counter */
-    739                    header_cnt = 0;
-    740                  }
-    741                  else
-    742                  {
-    743                    /* Stay in sync state until we receive a valid start of header */
-    744                    // We have detected a SYNC error on BGM111...Log it!
-    745                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
-    746                    Clr_HrtBeat_Cnt();
-    747                    if (ble.booted)
-    748                      RdBrd_BlinkErrCd( ERROR_BGMSYNC );
-    749                    //RoadBrd_Delay( 1000 );
-    750                    HAL_NVIC_SystemReset();
-    751                    break;
-    752                  }
-    753                  /* Fallthrough intentional */
-    754                /* Receiving header */
-    755                case BGRX_HDR:
-    756                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
-    757                  {
-    758                    // Oops...Detected a fatal error...RESET!!!
-    759                    // We have detected a SYNC error on BGM111...Log it!
-    760                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
-    761                    /* Indicate we need to execute the BLE stack, it's the
-    762                     * only way to get more space in the buffer */
-    763                    ble.req_exec = true;
-    764                    /* We're back to synchronizing */
-    765                    ble.rx_state = BGRX_SYNC;
-    766                  }
-    767                  else
-    768                  {
-    769                    /* Save the received byte */
+   \   000001A4   0xB00F             ADD      SP,SP,#+60
+   \   000001A6   0xBD30             POP      {R4,R5,PC}       ;; return
+    713          #if 0
+    714              Status = HAL_OK;
+    715              // Test Buffer. If we are full, An error has occured. Must at least log that.
+    716              if (IsBufFull(ble.rx_wr, ble.rx_rd))
+    717              {
+    718                RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
+    719                Clr_HrtBeat_Cnt();
+    720                RdBrd_BlinkErrCd( ERROR_BGMBUF_FULL );
+    721                //RoadBrd_Delay( 1000 );
+    722                HAL_NVIC_SystemReset();
+    723                return HAL_ERROR;
+    724              }
+    725              /* Execution based on state */
+    726              switch (ble.rx_state)
+    727              {
+    728                /* Waiting for a valid start of header */
+    729                default:
+    730                case BGRX_SYNC:
+    731                  /* Valid start of header? (response or event) */
+    732                  if ((c & 0xF8) ==
+    733                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_rsp) ||
+    734                      (c & 0xF8) ==
+    735                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_evt))
+    736                  {
+    737                    /* Receiving header */
+    738                    ble.rx_state = BGRX_HDR;
+    739                    /* Initialize header byte counter */
+    740                    header_cnt = 0;
+    741                  }
+    742                  else
+    743                  {
+    744                    /* Stay in sync state until we receive a valid start of header */
+    745                    // We have detected a SYNC error on BGM111...Log it!
+    746                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+    747                    Clr_HrtBeat_Cnt();
+    748                    if (ble.booted)
+    749                      RdBrd_BlinkErrCd( ERROR_BGMSYNC );
+    750                    //RoadBrd_Delay( 1000 );
+    751                    HAL_NVIC_SystemReset();
+    752                    break;
+    753                  }
+    754                  /* Fallthrough intentional */
+    755                /* Receiving header */
+    756                case BGRX_HDR:
+    757                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
+    758                  {
+    759                    // Oops...Detected a fatal error...RESET!!!
+    760                    // We have detected a SYNC error on BGM111...Log it!
+    761                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+    762                    /* Indicate we need to execute the BLE stack, it's the
+    763                     * only way to get more space in the buffer */
+    764                    ble.req_exec = true;
+    765                    /* We're back to synchronizing */
+    766                    ble.rx_state = BGRX_SYNC;
+    767                  }
+    768                  else
+    769                  {
     770                    /* Save the received byte */
-    771                    ble.rx_buf[ble.rx_wr] = c;
-    772                    /* Increment the index and header byte counter */
-    773                    ble.rx_wr = NextBufIdx(ble.rx_wr);
-    774                    header_cnt++;
-    775                    /* If this is the second header byte, we can grab the payload
-    776                     * length.  We ignore the first byte, since the spec says that
-    777                     * due to memory limitations in the modules, the packet is
-    778                     * never more than 64 bytes. */
-    779                    if (header_cnt == 2)
-    780                    {
-    781                      /* Get the payload length */
-    782                      payload_len = c;
-    783                      /* If we have a payload bigger than 60 bytes, something's wrong */
-    784                      if (payload_len > 60)
-    785                      {
-    786                        // We have detected a SYNC error on BGM111...Log it!
-    787                        RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
-    788                        /* Reset receive state to synchronizing */
-    789                        ble.rx_state = BGRX_SYNC;
-    790                        /* Indicate we need to execute the BLE stack to free space */
-    791                        ble.req_exec = true;
-    792                        Status = HAL_ERROR;
-    793                      }
-    794                    } // EndIf (header_cnt == 2)
-    795                    /* Are we done with the header? */
-    796                    if (header_cnt >= BGLIB_MSG_HEADER_LEN)
-    797                    {
-    798                      /* Is there no payload? */
-    799                      if (payload_len == 0)
-    800                      {
-    801                        /* Reset receive state to synchronizing */
-    802                        ble.rx_state = BGRX_SYNC;
-    803                        /* Indicate we need to execute the BLE stack to process 
-    804                         * the received packet */
-    805                        ble.req_exec = true;
-    806                      }
-    807                      else
-    808                      {
-    809                        /* Start receiving payload data */
-    810                        ble.rx_state = BGRX_DATA;
-    811                        /* Initialize the payload counter */
-    812                        payload_cnt = 0;
-    813                      }
-    814                    } // EndIf (header_cnt >= BGLIB_MSG_HEADER_LEN)
-    815                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
-    816                  break;
-    817                /* Receiving data */
-    818                case BGRX_DATA:
-    819                  /* Did we receive a byte, but the buffer is full? */
-    820                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
-    821                  {
-    822                    /* Indicate we need to execute the BLE stack, it's the
-    823                     * only way to get more space in the buffer */
-    824                    ble.req_exec = true;
-    825                    /* We're back to synchronizing */
-    826                    ble.rx_state = BGRX_SYNC;
-    827                  }
-    828                  else
-    829                  {
-    830                    /* Store the byte */
-    831                    ble.rx_buf[ble.rx_wr] = c;
-    832                    /* Increment the index and payload byte counter */
-    833                    ble.rx_wr = NextBufIdx(ble.rx_wr);
-    834                    payload_cnt++;
-    835                    /* Is this the end of the packet? */
-    836                    if (payload_cnt >= payload_len)
-    837                    {
-    838                      /* Reset receive state to synchronizing */
-    839                      ble.rx_state = BGRX_SYNC;
-    840                      /* Indicate we need to execute the BLE stack to process 
-    841                       * the received packet */
-    842                      ble.req_exec = true;
-    843                    }
-    844                    /* Is the buffer almost full? */
-    845                    if (BufFree(ble.rx_wr, ble.rx_rd) <= BG_DATA_LOW_WATERMARK)
-    846                    {
-    847                      /* Indicate we need to execute the BLE stack so it can
-    848                       * start reading data from the buffer */
-    849                      ble.req_exec = true;
-    850                    }
-    851                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
-    852                  break;
-    853              } // EndSwitch (ble.rx_state)
-    854              return Status;
-    855          #endif
-    856          }
+    771                    /* Save the received byte */
+    772                    ble.rx_buf[ble.rx_wr] = c;
+    773                    /* Increment the index and header byte counter */
+    774                    ble.rx_wr = NextBufIdx(ble.rx_wr);
+    775                    header_cnt++;
+    776                    /* If this is the second header byte, we can grab the payload
+    777                     * length.  We ignore the first byte, since the spec says that
+    778                     * due to memory limitations in the modules, the packet is
+    779                     * never more than 64 bytes. */
+    780                    if (header_cnt == 2)
+    781                    {
+    782                      /* Get the payload length */
+    783                      payload_len = c;
+    784                      /* If we have a payload bigger than 60 bytes, something's wrong */
+    785                      if (payload_len > 60)
+    786                      {
+    787                        // We have detected a SYNC error on BGM111...Log it!
+    788                        RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+    789                        /* Reset receive state to synchronizing */
+    790                        ble.rx_state = BGRX_SYNC;
+    791                        /* Indicate we need to execute the BLE stack to free space */
+    792                        ble.req_exec = true;
+    793                        Status = HAL_ERROR;
+    794                      }
+    795                    } // EndIf (header_cnt == 2)
+    796                    /* Are we done with the header? */
+    797                    if (header_cnt >= BGLIB_MSG_HEADER_LEN)
+    798                    {
+    799                      /* Is there no payload? */
+    800                      if (payload_len == 0)
+    801                      {
+    802                        /* Reset receive state to synchronizing */
+    803                        ble.rx_state = BGRX_SYNC;
+    804                        /* Indicate we need to execute the BLE stack to process 
+    805                         * the received packet */
+    806                        ble.req_exec = true;
+    807                      }
+    808                      else
+    809                      {
+    810                        /* Start receiving payload data */
+    811                        ble.rx_state = BGRX_DATA;
+    812                        /* Initialize the payload counter */
+    813                        payload_cnt = 0;
+    814                      }
+    815                    } // EndIf (header_cnt >= BGLIB_MSG_HEADER_LEN)
+    816                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
+    817                  break;
+    818                /* Receiving data */
+    819                case BGRX_DATA:
+    820                  /* Did we receive a byte, but the buffer is full? */
+    821                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
+    822                  {
+    823                    /* Indicate we need to execute the BLE stack, it's the
+    824                     * only way to get more space in the buffer */
+    825                    ble.req_exec = true;
+    826                    /* We're back to synchronizing */
+    827                    ble.rx_state = BGRX_SYNC;
+    828                  }
+    829                  else
+    830                  {
+    831                    /* Store the byte */
+    832                    ble.rx_buf[ble.rx_wr] = c;
+    833                    /* Increment the index and payload byte counter */
+    834                    ble.rx_wr = NextBufIdx(ble.rx_wr);
+    835                    payload_cnt++;
+    836                    /* Is this the end of the packet? */
+    837                    if (payload_cnt >= payload_len)
+    838                    {
+    839                      /* Reset receive state to synchronizing */
+    840                      ble.rx_state = BGRX_SYNC;
+    841                      /* Indicate we need to execute the BLE stack to process 
+    842                       * the received packet */
+    843                      ble.req_exec = true;
+    844                    }
+    845                    /* Is the buffer almost full? */
+    846                    if (BufFree(ble.rx_wr, ble.rx_rd) <= BG_DATA_LOW_WATERMARK)
+    847                    {
+    848                      /* Indicate we need to execute the BLE stack so it can
+    849                       * start reading data from the buffer */
+    850                      ble.req_exec = true;
+    851                    }
+    852                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
+    853                  break;
+    854              } // EndSwitch (ble.rx_state)
+    855              return Status;
+    856          #endif
+    857          }
 
    \                                 In section .bss, align 4
    \                     `RoadBrd_ProcessBGMChar::tempBffr2`:
@@ -1948,24 +1950,24 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \                                 In section .bss, align 1
    \                     `RoadBrd_ProcessBGMChar::in_ptr`:
    \   00000000                      DS8 1
-    857          
-    858          /**
-    859            * @brief  This routine returns the status of the ble.req_exec flag
-    860            *         from the BGM111
-    861            * @param  None
-    862            * @retval bool:     true(1):     Processing of packet about to start
-    863            *                   false(0):      No processing pending.
-    864            */
+    858          
+    859          /**
+    860            * @brief  This routine returns the status of the ble.req_exec flag
+    861            *         from the BGM111
+    862            * @param  None
+    863            * @retval bool:     true(1):     Processing of packet about to start
+    864            *                   false(0):      No processing pending.
+    865            */
 
    \                                 In section .text, align 2, keep-with-next
-    865          bool RoadBrd_tstReqexec( void )
-    866          {
-    867            return ble.req_exec;
+    866          bool RoadBrd_tstReqexec( void )
+    867          {
+    868            return ble.req_exec;
    \                     RoadBrd_tstReqexec: (+1)
    \   00000000   0x....             LDR.N    R0,??DataTable20_6
    \   00000002   0xF890 0x0195      LDRB     R0,[R0, #+405]
    \   00000006   0x4770             BX       LR               ;; return
-    868          }
+    869          }
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable17:
@@ -2488,8 +2490,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \              0x53 0x3E    
    \              0x20 0x00    
    \   00000012   0x00 0x00          DC8 0, 0
-    869          
     870          
+    871          
 
    Maximum stack usage in bytes:
 
@@ -2554,6 +2556,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        0   NextBufIdx
       72   RoadBrd_ProcessBGMChar
         72   -> BGM111_SetSyncFlg
+        72   -> ClrAnalyticsRepeat
         72   -> ClrDataStructure
         72   -> HAL_NVIC_SystemReset
         72   -> RdBrd_BlinkErrCd
@@ -2677,7 +2680,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
       18  BufUsed
       30  IsBufFull
       14  NextBufIdx
-     420  RoadBrd_ProcessBGMChar
+     424  RoadBrd_ProcessBGMChar
        8  RoadBrd_tstReqexec
       10  USART_ReceiveData
       12  USART_SendData
@@ -2704,9 +2707,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
  5 509 bytes in section .bss
      8 bytes in section .data
    444 bytes in section .rodata
- 2 500 bytes in section .text
+ 2 504 bytes in section .text
  
- 2 500 bytes of CODE  memory
+ 2 504 bytes of CODE  memory
    444 bytes of CONST memory
  5 517 bytes of DATA  memory
 

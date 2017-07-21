@@ -662,6 +662,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       ble.TackCnt = 0;
       RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
       ClrDataStructure();                           // Clear Backup data structure.
+      ClrAnalyticsRepeat();                          // Clear Frame Repeat Count.
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
     }
     // Data String?
