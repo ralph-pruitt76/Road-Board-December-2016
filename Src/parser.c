@@ -2201,12 +2201,166 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                         break;
                         //------------------ TCR Command: Calibration Read Command
                       case 'R':
-                        // Read Humidity Sensor sensor and return Humidity results....
-                        Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
-                        if (Status == HAL_OK)
+                        // Build Read Calibration Dump Part I....
+                        // Send string to UART..
+                        sprintf( (char *)tempBffr2, "CALIBRATION DATA\r\nDate: %s\r\n",  RoadBrd_CAL_GetTimeString());
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                            return Status;
+                        // Build Read Calibration Dump Part II....
+                        // Send string to UART..
+                        sprintf( (char *)tempBffr2, "Name		        UUID		Slope		Offset\r\n" );
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                            return Status;
+                        // NOW, Build Data String..
+                        for (x=0; x<CAL_LAST_VALUE; x++)
                         {
-                          // Send string to UART..
-                          strcpy( (char *)tempBffr2, "Humidity SENSOR...\r\n");
+                          // Build String
+                          switch(x)
+                          {
+                            case CAL_SHNT_VLTG: //CAL_SHNT_VLTG Values
+                              sprintf( (char *)tempBffr2, "%s	0002		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_CURRENT: //CAL_CURRENT Values
+                              sprintf( (char *)tempBffr2, "%s	        0004		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_POWER: //CAL_POWER Values
+                              sprintf( (char *)tempBffr2, "%s	0006		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_VOLTAGE: //CAL_VOLTAGE Values
+                              sprintf( (char *)tempBffr2, "%s	        0008		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_TEMPC: //CAL_TEMPC Values
+                              sprintf( (char *)tempBffr2, "%s	000A		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_TEMPF: //CAL_TEMPF Values
+                              sprintf( (char *)tempBffr2, "%s	000B		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_PRESSURE: //CAL_PRESSURE Values
+                              sprintf( (char *)tempBffr2, "%s	0011		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_HUMIDITY: //CAL_HUMIDITY Values
+                              sprintf( (char *)tempBffr2, "%s	0030		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_HUM_TEMPC: //CAL_HUM_TEMPC Values
+                              sprintf( (char *)tempBffr2, "%s	0032		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_HUM_TEMPF: //CAL_HUM_TEMPF Values
+                              sprintf( (char *)tempBffr2, "%s	0033		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_RGB_RED: //CAL_RGB_RED Values
+                              sprintf( (char *)tempBffr2, "%s	        000D		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_RGB_GREEN: //CAL_RGB_GREEN Values
+                              sprintf( (char *)tempBffr2, "%s	000E		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_RGB_BLUE: //CAL_RGB_BLUE Values
+                              sprintf( (char *)tempBffr2, "%s	000F		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_THERM_C: //CAL_THERM_C Values
+                              sprintf( (char *)tempBffr2, "%s	        0017		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_1C: //CAL_ROADT_1C Values
+                              sprintf( (char *)tempBffr2, "%s	0019		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_2C: //CAL_ROADT_2C Values
+                              sprintf( (char *)tempBffr2, "%s	001B		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_3C: //CAL_ROADT_3C Values
+                              sprintf( (char *)tempBffr2, "%s	001D		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_4C: //CAL_ROADT_4C Values
+                              sprintf( (char *)tempBffr2, "%s	001F		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_5C: //CAL_ROADT_5C Values
+                              sprintf( (char *)tempBffr2, "%s	0021		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_6C: //CAL_ROADT_6C Values
+                              sprintf( (char *)tempBffr2, "%s	0023		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_7C: //CAL_ROADT_7C Values
+                              sprintf( (char *)tempBffr2, "%s	0025		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                            case CAL_ROADT_8C: //CAL_ROADT_8C Values
+                              sprintf( (char *)tempBffr2, "%s	0027		%1.4f		%2.3f\r\n", 
+                                      (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                      RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                              break;
+                          } // EndSwitch(x)
+                          // Now Print String.
 #ifdef NUCLEO
                           Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
 #else
@@ -2214,78 +2368,42 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
                           if (Status != HAL_OK)
                             return Status;
-                          // NOW, Build Data String..
-                          sprintf( (char *)tempBffr2, "     Humidity DATA: " );
-                          strcat( (char *)tempBffr2, (char *)HMeasure.HRaw );
-                          strcat( (char *)tempBffr2, "\r\n" );
-                        }
-                        else
-                          break;
-#ifdef NUCLEO
-                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
-#else
-                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
-#endif
-                        if (Status != HAL_OK)
-                          return Status;
-                        // NOW, Build Data String..
-                        sprintf( (char *)tempBffr2, "     Humidity DATA(Decimal): %d\r\n", HMeasure.HRawC );
-#ifdef NUCLEO
-                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
-#else
-                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
-#endif
-                        if (Status != HAL_OK)
-                          return Status;
-                        // Now calculate Humidity.
-                        sprintf( (char *)tempBffr2, "     Humidity: " );
-                        strcat( (char *)tempBffr2, (char *)HMeasure.Humidity );
-                        strcat( (char *)tempBffr2, "\r\n" );
+                        } // EndFor(x=0; x<CAL_LAST_VALUE; x++)
+                        sprintf( (char *)tempBffr2, "\r\n     COMPLETE.\r\n" );
                         break;
                         //------------------ TCT Command: Calibration Set Time Command
                       case 'T':
-                        // Read Humidity Sensor sensor and return Temperature results....
-                        Status = RoadBrd_Humidity_ReadTemperature( &TMeasure );
-                        if (Status == HAL_OK)
+                        // Step 1. Validate format.
+                        if(tempBffr[3]!=':')
                         {
-                          // Send string to UART..
-                          strcpy( (char *)tempBffr2, "Humidity SENSOR...\r\n");
-#ifdef NUCLEO
-                          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
-#else
-                          Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
-#endif
-                          if (Status != HAL_OK)
-                            return Status;
-                          // NOW, Build Data String..
-                          sprintf( (char *)tempBffr2, "     TEMP DATA: " );
-                          strcat( (char *)tempBffr2, (char *)TMeasure.Raw );
-                          strcat( (char *)tempBffr2, "\r\n" );
-                        }
+                          strcpy( (char *)tempBffr2, "TCT SYNTAX ERROR: Not correct format.\r\n");
+                        } // Endif (tempBffr[3]!=':')
                         else
-                          break;
-#ifdef NUCLEO
-                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
-#else
-                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
-#endif
+                        {
+                          // 2. Verify if remaining string is digits
+                          if (Size <= 4)
+                          {
+                            strcpy( (char *)tempBffr2, "TCT SYNTAX ERROR: Bad Parameter.\r\n");
+                          } // EndIf (Size > 4)
+                          else
+                          {
+                            // 3. Grab remaining string and Save it.
+                            tempPstr = &tempBffr[4];
+                            strcpy(tempstr, tempPstr);
+                            // NOW...Save it.
+                            Status = RoadBrd_CAL_Set_TimeString( (uint8_t *)tempPstr );
+                            if (Status != HAL_OK)
+                              return Status;
+                            sprintf( (char *)tempBffr2, "\r\n     COMPLETE.\r\n" );
+                          } // EndElse (Size > 4)
+                        } // EndElse (tempBffr[3]!=':')
+                        break;
+                        //------------------ TCI Command: Calibration Initialize Cal Table(Reset)
+                      case 'I':
+                        Status = RoadBrd_CAL_InitializeFrmFlash();
                         if (Status != HAL_OK)
                           return Status;
-                        // NOW, Build Data String..
-                        sprintf( (char *)tempBffr2, "     TEMP DATA(Decimal): %d\r\n", TMeasure.RawC );
-#ifdef NUCLEO
-                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
-#else
-                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
-#endif
-                        if (Status != HAL_OK)
-                          return Status;
-                        // Now calculate Celcius and Farenheit Temp.
-                        sprintf( (char *)tempBffr2, "     TempC: " );
-                        strcat( (char *)tempBffr2, (char *)TMeasure.TempC );
-                        strcat( (char *)tempBffr2, "     TempF: " );
-                        strcat( (char *)tempBffr2, (char *)TMeasure.TempF );
-                        strcat( (char *)tempBffr2, "\r\n" );
+                        sprintf( (char *)tempBffr2, "\r\n     COMPLETE.\r\n" );
                         break;
                       } //EndSwitch
                     } //EndElse (Size == 2)

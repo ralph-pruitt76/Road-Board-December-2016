@@ -103,8 +103,10 @@ float RoadBrd_CAL_GetSlope( Cal_Characteristic Cal_Item );
 HAL_StatusTypeDef RoadBrd_CAL_Set_CalItem( Cal_Characteristic Cal_Item,
                                            float Offset, 
                                            float Slope);
-char *RdBrd_CAL_GetErrStr( Cal_Characteristic StringCds );
+HAL_StatusTypeDef RoadBrd_CAL_Set_TimeString( uint8_t *time_stringP );
+char *RdBrd_CAL_GetStr( Cal_Characteristic StringCds );
 float RoadBrd_CAL_ScaleValue( Cal_Characteristic Cal_Item, float Old_value);
+uint8_t *RoadBrd_CAL_GetTimeString( void );
 
 #ifdef __cplusplus
 }

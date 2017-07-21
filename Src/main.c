@@ -88,6 +88,7 @@ int main(void)
   #ifdef TEST
     #define RECEIVE_SZ      5
   #else
+//HERE
     #define RECEIVE_SZ      30
     uint8_t tempBffr[RECEIVE_SZ];
     uint8_t tempBffr2[80];
@@ -98,6 +99,7 @@ int main(void)
 #ifdef REV_L
   uint16_t tmpSize = RECEIVE_SZ;
   uint8_t tmpData[2];
+//  uint8_t tmpData[RECEIVE_SZ];
   Temperature   Temp;
 #ifndef PATCH_UART
   bool firstTime = true;
@@ -1078,7 +1080,6 @@ int main(void)
                 } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
                 else
                 {
-                  // Move new character into passed buffer.
                   *pData = tmpData[0];
                   tmpSize--;                          // Decrement Count
                   pData++;                            // Move pointer to next buffer location.

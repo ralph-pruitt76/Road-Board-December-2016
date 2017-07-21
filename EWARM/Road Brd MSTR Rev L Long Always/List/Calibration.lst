@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       17/Jul/2017  15:20:27
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       19/Jul/2017  10:02:52
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -185,8 +185,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      86            // Read Frame from Flash.
      87            Status = RoadBrd_FlashRead(  (uint32_t)&Calibration_HardFrames, (uint32_t *)&Cal_Save_Frames, sizeof(Cal_Save_Frames));
    \   00000006   0x22C8             MOVS     R2,#+200
-   \   00000008   0x....             LDR.N    R1,??DataTable7
-   \   0000000A   0x....             LDR.N    R0,??DataTable7_1  ;; 0x8070100
+   \   00000008   0x....             LDR.N    R1,??DataTable9
+   \   0000000A   0x....             LDR.N    R0,??DataTable9_1  ;; 0x8070100
    \   0000000C   0x.... 0x....      BL       RoadBrd_FlashRead
    \   00000010   0x0004             MOVS     R4,R0
      88            // Compare SYnc Workd and return status.
@@ -201,7 +201,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      92            {
      93              if (Cal_Save_Frames.checksum == CALIBRATION_CHKSUM)
    \                     ??RoadBrd_CAL_VerifyFrame_0: (+1)
-   \   0000001C   0x....             LDR.N    R0,??DataTable7
+   \   0000001C   0x....             LDR.N    R0,??DataTable9
    \   0000001E   0x6800             LDR      R0,[R0, #+0]
    \   00000020   0xF1B0 0x3F5A      CMP      R0,#+1515870810
    \   00000024   0xD101             BNE.N    ??RoadBrd_CAL_VerifyFrame_2
@@ -241,11 +241,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     114            // Initialize Key Structures of Frame
     115            Cal_Save_Frames.checksum = CALIBRATION_CHKSUM;
    \   00000006   0xF05F 0x305A      MOVS     R0,#+1515870810
-   \   0000000A   0x....             LDR.N    R1,??DataTable7
+   \   0000000A   0x....             LDR.N    R1,??DataTable9
    \   0000000C   0x6008             STR      R0,[R1, #+0]
     116            strcpy( (char *)Cal_Save_Frames.TimeString, "-------EMPTY-------");
-   \   0000000E   0x....             LDR.N    R1,??DataTable7_2
-   \   00000010   0x....             LDR.N    R0,??DataTable7_3
+   \   0000000E   0x....             LDR.N    R1,??DataTable9_2
+   \   00000010   0x....             LDR.N    R0,??DataTable9_3
    \   00000012   0x.... 0x....      BL       strcpy
     117            for (x=0; x<CALIBRATION_DATA_SIZE; x++)
    \   00000016   0x2000             MOVS     R0,#+0
@@ -256,12 +256,12 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     118            {
     119              Cal_Save_Frames.Cal_Entry[x].offset = 0.0;
    \   0000001E   0x2000             MOVS     R0,#+0
-   \   00000020   0x....             LDR.N    R1,??DataTable7
+   \   00000020   0x....             LDR.N    R1,??DataTable9
    \   00000022   0xEB01 0x01C5      ADD      R1,R1,R5, LSL #+3
    \   00000026   0x6088             STR      R0,[R1, #+8]
     120              Cal_Save_Frames.Cal_Entry[x].slope = 1.0;
    \   00000028   0xF05F 0x507E      MOVS     R0,#+1065353216
-   \   0000002C   0x....             LDR.N    R1,??DataTable7
+   \   0000002C   0x....             LDR.N    R1,??DataTable9
    \   0000002E   0xEB01 0x01C5      ADD      R1,R1,R5, LSL #+3
    \   00000032   0x6048             STR      R0,[R1, #+4]
     121            }
@@ -276,8 +276,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \                     ??RoadBrd_CAL_InitializeFrmFlash_1: (+1)
    \   00000038   0x20C8             MOVS     R0,#+200
    \   0000003A   0x9000             STR      R0,[SP, #+0]
-   \   0000003C   0x....             LDR.N    R3,??DataTable7
-   \   0000003E   0x....             LDR.N    R2,??DataTable7_1  ;; 0x8070100
+   \   0000003C   0x....             LDR.N    R3,??DataTable9
+   \   0000003E   0x....             LDR.N    R2,??DataTable9_1  ;; 0x8070100
    \   00000040   0x2100             MOVS     R1,#+0
    \   00000042   0x2000             MOVS     R0,#+0
    \   00000044   0x.... 0x....      BL       RoadBrd_FlashWrite
@@ -313,8 +313,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     146                                         (uint32_t *)&Cal_Save_Frames, 
     147                                         sizeof(Cal_Save_Frames));
    \   00000006   0x22C8             MOVS     R2,#+200
-   \   00000008   0x....             LDR.N    R1,??DataTable7
-   \   0000000A   0x....             LDR.N    R0,??DataTable7_1  ;; 0x8070100
+   \   00000008   0x....             LDR.N    R1,??DataTable9
+   \   0000000A   0x....             LDR.N    R0,??DataTable9_1  ;; 0x8070100
    \   0000000C   0x.... 0x....      BL       RoadBrd_FlashRead
    \   00000010   0x0004             MOVS     R4,R0
     148            return Status;
@@ -352,8 +352,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     169                                         sizeof(Cal_Save_Frames));
    \   00000008   0x20C8             MOVS     R0,#+200
    \   0000000A   0x9000             STR      R0,[SP, #+0]
-   \   0000000C   0x....             LDR.N    R3,??DataTable7
-   \   0000000E   0x....             LDR.N    R2,??DataTable7_1  ;; 0x8070100
+   \   0000000C   0x....             LDR.N    R3,??DataTable9
+   \   0000000E   0x....             LDR.N    R2,??DataTable9_1  ;; 0x8070100
    \   00000010   0x2100             MOVS     R1,#+0
    \   00000012   0x2000             MOVS     R0,#+0
    \   00000014   0x.... 0x....      BL       RoadBrd_FlashWrite
@@ -413,104 +413,151 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     198                                                     float Slope)
     199          {
    \                     RoadBrd_CAL_Set_CalItem: (+1)
-   \   00000000   0x0003             MOVS     R3,R0
+   \   00000000   0xB5F8             PUSH     {R3-R7,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+   \   00000006   0x0016             MOVS     R6,R2
     200            if (Cal_Item < CAL_LAST_VALUE)
-   \   00000002   0xB2DB             UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
-   \   00000004   0x2B16             CMP      R3,#+22
-   \   00000006   0xDA0B             BGE.N    ??RoadBrd_CAL_Set_CalItem_0
+   \   00000008   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000000A   0x2C16             CMP      R4,#+22
+   \   0000000C   0xDA0F             BGE.N    ??RoadBrd_CAL_Set_CalItem_0
     201            {
-    202              Cal_Save_Frames.Cal_Entry[Cal_Item].offset = Offset;
-   \   00000008   0x....             LDR.N    R0,??DataTable7
-   \   0000000A   0xB2DB             UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
-   \   0000000C   0xEB00 0x00C3      ADD      R0,R0,R3, LSL #+3
-   \   00000010   0x6081             STR      R1,[R0, #+8]
-    203              Cal_Save_Frames.Cal_Entry[Cal_Item].slope = Slope;
-   \   00000012   0x....             LDR.N    R0,??DataTable7
-   \   00000014   0xB2DB             UXTB     R3,R3            ;; ZeroExt  R3,R3,#+24,#+24
-   \   00000016   0xEB00 0x00C3      ADD      R0,R0,R3, LSL #+3
-   \   0000001A   0x6042             STR      R2,[R0, #+4]
-    204              return HAL_OK;
-   \   0000001C   0x2000             MOVS     R0,#+0
-   \   0000001E   0xE000             B.N      ??RoadBrd_CAL_Set_CalItem_1
-    205            }
-    206            return HAL_ERROR;
+    202              HAL_StatusTypeDef Status;
+    203          
+    204              Cal_Save_Frames.Cal_Entry[Cal_Item].offset = Offset;
+   \   0000000E   0x....             LDR.N    R0,??DataTable9
+   \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000012   0xEB00 0x00C4      ADD      R0,R0,R4, LSL #+3
+   \   00000016   0x6085             STR      R5,[R0, #+8]
+    205              Cal_Save_Frames.Cal_Entry[Cal_Item].slope = Slope;
+   \   00000018   0x....             LDR.N    R0,??DataTable9
+   \   0000001A   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000001C   0xEB00 0x00C4      ADD      R0,R0,R4, LSL #+3
+   \   00000020   0x6046             STR      R6,[R0, #+4]
+    206              // OK...Time to update Flash.
+    207              Status = RoadBrd_CAL_WriteFrmFlash();
+   \   00000022   0x.... 0x....      BL       RoadBrd_CAL_WriteFrmFlash
+   \   00000026   0x0007             MOVS     R7,R0
+    208              return Status;
+   \   00000028   0x0038             MOVS     R0,R7
+   \   0000002A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000002C   0xE000             B.N      ??RoadBrd_CAL_Set_CalItem_1
+    209            }
+    210            return HAL_ERROR;
    \                     ??RoadBrd_CAL_Set_CalItem_0: (+1)
-   \   00000020   0x2001             MOVS     R0,#+1
+   \   0000002E   0x2001             MOVS     R0,#+1
    \                     ??RoadBrd_CAL_Set_CalItem_1: (+1)
-   \   00000022   0x4770             BX       LR               ;; return
-    207          }
-    208          
-    209          /**
-    210            * @brief  This function returns the indexed Calibration Item Offset.
-    211            * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
-    212            * @retval float:     Indexed Item Stored Offset.
-    213            */
+   \   00000030   0xBDF2             POP      {R1,R4-R7,PC}    ;; return
+    211          }
+    212          
+    213          /**
+    214            * @brief  This function Sets the Time string.
+    215            * @param  uint8_t *time_stringP: Pointer to Time string to set.
+    216            * @retval HAL_StatusTypeDef:     HAL_OK:       Operation success.
+    217            *                                HAL_ERROR:    found in Tasking or data passed.
+    218            */
 
    \                                 In section .text, align 2, keep-with-next
-    214          float RoadBrd_CAL_GetOffset( Cal_Characteristic Cal_Item )
-    215          {
-    216            return ( Cal_Save_Frames.Cal_Entry[Cal_Item].offset );
+    219          HAL_StatusTypeDef RoadBrd_CAL_Set_TimeString( uint8_t *time_stringP )
+    220          {
+   \                     RoadBrd_CAL_Set_TimeString: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    221            strcpy( (char *)Cal_Save_Frames.TimeString, (char *)time_stringP);
+   \   00000004   0x0021             MOVS     R1,R4
+   \   00000006   0x....             LDR.N    R0,??DataTable9_3
+   \   00000008   0x.... 0x....      BL       strcpy
+    222            return HAL_OK;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0xBD10             POP      {R4,PC}          ;; return
+    223          }
+    224          
+    225          /**
+    226            * @brief  This function returns the indexed Calibration Item Offset.
+    227            * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    228            * @retval float:     Indexed Item Stored Offset.
+    229            */
+
+   \                                 In section .text, align 2, keep-with-next
+    230          float RoadBrd_CAL_GetOffset( Cal_Characteristic Cal_Item )
+    231          {
+    232            return ( Cal_Save_Frames.Cal_Entry[Cal_Item].offset );
    \                     RoadBrd_CAL_GetOffset: (+1)
-   \   00000000   0x....             LDR.N    R1,??DataTable7
+   \   00000000   0x....             LDR.N    R1,??DataTable9
    \   00000002   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000004   0xEB01 0x00C0      ADD      R0,R1,R0, LSL #+3
    \   00000008   0x6880             LDR      R0,[R0, #+8]
    \   0000000A   0x4770             BX       LR               ;; return
-    217          }
-    218          
-    219          /**
-    220          * @brief  This function returns the indexed Calibration Item slope.
-    221          * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
-    222          * @retval float:     Indexed Item Stored slope.
-    223          */
+    233          }
+    234          
+    235          /**
+    236          * @brief  This function returns the indexed Calibration Item slope.
+    237          * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    238          * @retval float:     Indexed Item Stored slope.
+    239          */
 
    \                                 In section .text, align 2, keep-with-next
-    224          float RoadBrd_CAL_GetSlope( Cal_Characteristic Cal_Item )
-    225          {
-    226            return ( Cal_Save_Frames.Cal_Entry[Cal_Item].slope );
+    240          float RoadBrd_CAL_GetSlope( Cal_Characteristic Cal_Item )
+    241          {
+    242            return ( Cal_Save_Frames.Cal_Entry[Cal_Item].slope );
    \                     RoadBrd_CAL_GetSlope: (+1)
-   \   00000000   0x....             LDR.N    R1,??DataTable7
+   \   00000000   0x....             LDR.N    R1,??DataTable9
    \   00000002   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000004   0xEB01 0x00C0      ADD      R0,R1,R0, LSL #+3
    \   00000008   0x6840             LDR      R0,[R0, #+4]
    \   0000000A   0x4770             BX       LR               ;; return
-    227          }
-    228          
-    229          /**
-    230          * @brief  This function returns a Pointer to a String for the indicated Characteristic.
-    231          * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
-    232          * @retval char *:     Points to a constant string for the indicated characteristic.
-    233          */
+    243          }
+    244          
+    245          /**
+    246          * @brief  This function returns a Pointer to a String for the indicated Characteristic.
+    247          * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    248          * @retval char *:     Points to a constant string for the indicated characteristic.
+    249          */
 
    \                                 In section .text, align 2, keep-with-next
-    234          char *RdBrd_CAL_GetErrStr( Cal_Characteristic StringCds )
-    235          {
-    236            return ((char *)SensorStrings[StringCds]);
-   \                     RdBrd_CAL_GetErrStr: (+1)
-   \   00000000   0x....             LDR.N    R1,??DataTable7_4
+    250          char *RdBrd_CAL_GetStr( Cal_Characteristic StringCds )
+    251          {
+    252            return ((char *)SensorStrings[StringCds]);
+   \                     RdBrd_CAL_GetStr: (+1)
+   \   00000000   0x....             LDR.N    R1,??DataTable9_4
    \   00000002   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000004   0xF851 0x0020      LDR      R0,[R1, R0, LSL #+2]
    \   00000008   0x4770             BX       LR               ;; return
-    237          }
+    253          }
+    254          
+    255          /**
+    256            * @brief  This function Sets the Time string.
+    257            * @param  None
+    258            * @retval uint8_t *time_stringP: Pointer to returned Time String.
+    259            */
+
+   \                                 In section .text, align 2, keep-with-next
+    260          uint8_t *RoadBrd_CAL_GetTimeString( void )
+    261          {
+    262            return Cal_Save_Frames.TimeString;
+   \                     RoadBrd_CAL_GetTimeString: (+1)
+   \   00000000   0x....             LDR.N    R0,??DataTable9_3
+   \   00000002   0x4770             BX       LR               ;; return
+    263          }
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable7:
+   \                     ??DataTable9:
    \   00000000   0x........         DC32     Cal_Save_Frames
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable7_1:
+   \                     ??DataTable9_1:
    \   00000000   0x08070100         DC32     0x8070100
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable7_2:
+   \                     ??DataTable9_2:
    \   00000000   0x........         DC32     ?_23
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable7_3:
+   \                     ??DataTable9_3:
    \   00000000   0x........         DC32     Cal_Save_Frames+0xB4
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable7_4:
+   \                     ??DataTable9_4:
    \   00000000   0x........         DC32     SensorStrings
 
    \                                 In section .rodata, align 4
@@ -732,18 +779,20 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \              0x2D 0x2D    
    \              0x2D 0x2D    
    \              0x2D 0x00    
-    238          
-    239          
-    240          /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/
-    241          
+    264          
+    265          
+    266          
+    267          /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/
+    268          
 
    Maximum stack usage in bytes:
 
    .cstack Function
    ------- --------
-       0   RdBrd_CAL_GetErrStr
+       0   RdBrd_CAL_GetStr
        0   RoadBrd_CAL_GetOffset
        0   RoadBrd_CAL_GetSlope
+       0   RoadBrd_CAL_GetTimeString
       16   RoadBrd_CAL_InitializeFrmFlash
         16   -> RoadBrd_FlashWrite
         16   -> strcpy
@@ -754,7 +803,10 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
         16   -> RoadBrd_CAL_GetSlope
         16   -> __aeabi_fadd
         16   -> __aeabi_fmul
-       0   RoadBrd_CAL_Set_CalItem
+      24   RoadBrd_CAL_Set_CalItem
+        24   -> RoadBrd_CAL_WriteFrmFlash
+       8   RoadBrd_CAL_Set_TimeString
+         8   -> strcpy
        8   RoadBrd_CAL_VerifyFrame
          8   -> RoadBrd_FlashRead
       16   RoadBrd_CAL_WriteFrmFlash
@@ -765,11 +817,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    Bytes  Function/Label
    -----  --------------
-       4  ??DataTable7
-       4  ??DataTable7_1
-       4  ??DataTable7_2
-       4  ??DataTable7_3
-       4  ??DataTable7_4
+       4  ??DataTable9
+       4  ??DataTable9_1
+       4  ??DataTable9_2
+       4  ??DataTable9_3
+       4  ??DataTable9_4
       12  ?_0
       12  ?_1
       12  ?_10
@@ -796,13 +848,15 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
       12  ?_9
      200  Cal_Save_Frames
      200  Calibration_HardFrames
-      10  RdBrd_CAL_GetErrStr
+      10  RdBrd_CAL_GetStr
       12  RoadBrd_CAL_GetOffset
       12  RoadBrd_CAL_GetSlope
+       4  RoadBrd_CAL_GetTimeString
       80  RoadBrd_CAL_InitializeFrmFlash
       24  RoadBrd_CAL_ReadFrmFlash
       38  RoadBrd_CAL_ScaleValue
-      36  RoadBrd_CAL_Set_CalItem
+      50  RoadBrd_CAL_Set_CalItem
+      16  RoadBrd_CAL_Set_TimeString
       46  RoadBrd_CAL_VerifyFrame
       32  RoadBrd_CAL_WriteFrmFlash
      100  SensorStrings
@@ -811,9 +865,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
  200 bytes in section .bss
  200 bytes in section .bss    (abs)
  380 bytes in section .rodata
- 310 bytes in section .text
+ 344 bytes in section .text
  
- 310 bytes of CODE  memory
+ 344 bytes of CODE  memory
  380 bytes of CONST memory
  400 bytes of DATA  memory
 

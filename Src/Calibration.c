@@ -199,11 +199,27 @@ HAL_StatusTypeDef RoadBrd_CAL_Set_CalItem( Cal_Characteristic Cal_Item,
 {
   if (Cal_Item < CAL_LAST_VALUE)
   {
+    HAL_StatusTypeDef Status;
+
     Cal_Save_Frames.Cal_Entry[Cal_Item].offset = Offset;
     Cal_Save_Frames.Cal_Entry[Cal_Item].slope = Slope;
-    return HAL_OK;
+    // OK...Time to update Flash.
+    Status = RoadBrd_CAL_WriteFrmFlash();
+    return Status;
   }
   return HAL_ERROR;
+}
+
+/**
+  * @brief  This function Sets the Time string.
+  * @param  uint8_t *time_stringP: Pointer to Time string to set.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Operation success.
+  *                                HAL_ERROR:    found in Tasking or data passed.
+  */
+HAL_StatusTypeDef RoadBrd_CAL_Set_TimeString( uint8_t *time_stringP )
+{
+  strcpy( (char *)Cal_Save_Frames.TimeString, (char *)time_stringP);
+  return HAL_OK;
 }
 
 /**
@@ -231,10 +247,21 @@ float RoadBrd_CAL_GetSlope( Cal_Characteristic Cal_Item )
 * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
 * @retval char *:     Points to a constant string for the indicated characteristic.
 */
-char *RdBrd_CAL_GetErrStr( Cal_Characteristic StringCds )
+char *RdBrd_CAL_GetStr( Cal_Characteristic StringCds )
 {
   return ((char *)SensorStrings[StringCds]);
 }
+
+/**
+  * @brief  This function Sets the Time string.
+  * @param  None
+  * @retval uint8_t *time_stringP: Pointer to returned Time String.
+  */
+uint8_t *RoadBrd_CAL_GetTimeString( void )
+{
+  return Cal_Save_Frames.TimeString;
+}
+
 
 
 /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/
