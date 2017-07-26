@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       21/Jul/2017  13:51:01
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       26/Jul/2017  13:58:57
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -4805,9 +4805,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00001AC4   0x2800             CMP      R0,#+0
    \   00001AC6   0xD004             BEQ.N    ??RoadBrd_ParseString_310
    1912                                {
-   1913                                  Status = RoadBrd_GridEye_ReadValues( &GridMeasure );
+   1913                                  Status = RoadBrd_GridEye_ReadValues_Scaled( &GridMeasure );
    \   00001AC8   0xA855             ADD      R0,SP,#+340
-   \   00001ACA   0x.... 0x....      BL       RoadBrd_GridEye_ReadValues
+   \   00001ACA   0x.... 0x....      BL       RoadBrd_GridEye_ReadValues_Scaled
    \   00001ACE   0x0005             MOVS     R5,R0
    \   00001AD0   0xE00B             B.N      ??RoadBrd_ParseString_311
    1914                                }
@@ -4818,9 +4818,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00001AD8   0x2800             CMP      R0,#+0
    \   00001ADA   0xD004             BEQ.N    ??RoadBrd_ParseString_312
    1916                                {
-   1917                                  Status = RoadBrd_CoolEye_ReadValues( &GridMeasure );
+   1917                                  Status = RoadBrd_CoolEye_ReadValues_Scaled( &GridMeasure );
    \   00001ADC   0xA855             ADD      R0,SP,#+340
-   \   00001ADE   0x.... 0x....      BL       RoadBrd_CoolEye_ReadValues
+   \   00001ADE   0x.... 0x....      BL       RoadBrd_CoolEye_ReadValues_Scaled
    \   00001AE2   0x0005             MOVS     R5,R0
    \   00001AE4   0xE001             B.N      ??RoadBrd_ParseString_311
    1918                                }
@@ -4838,9 +4838,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1923                                {
    1924                                  // OK Next Sensor.
    1925                                  // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
-   1926                                  Status = RoadBrd_ReadTemp( &TMeasure );
+   1926                                  Status = RoadBrd_ReadTemp_Scaled( &TMeasure );
    \   00001AF0   0xA83C             ADD      R0,SP,#+240
-   \   00001AF2   0x.... 0x....      BL       RoadBrd_ReadTemp
+   \   00001AF2   0x.... 0x....      BL       RoadBrd_ReadTemp_Scaled
    \   00001AF6   0x0005             MOVS     R5,R0
    1927                                  if (Status == HAL_OK)
    \   00001AF8   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
@@ -4849,9 +4849,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1928                                  {
    1929                                    // OK Next Sensor.
    1930                                    // Read Humidity Sensor sensor and return Humidity results....
-   1931                                    Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
+   1931                                    Status = RoadBrd_Humidity_ReadHumidity_Scaled( &HMeasure );
    \   00001AFE   0xA84B             ADD      R0,SP,#+300
-   \   00001B00   0x.... 0x....      BL       RoadBrd_Humidity_ReadHumidity
+   \   00001B00   0x.... 0x....      BL       RoadBrd_Humidity_ReadHumidity_Scaled
    \   00001B04   0x0005             MOVS     R5,R0
    1932                                    if (Status == HAL_OK)
    \   00001B06   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
@@ -4860,9 +4860,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1933                                    {
    1934                                      // OK Next Sensor.
    1935                                      //Status = RoadBrd_Barometer_Status( &PRMeasure );
-   1936                                      Status = RoadBrd_Baro_ReadPressure( &PRPMeasure );
+   1936                                      Status = RoadBrd_Baro_ReadPressure_Scaled( &PRPMeasure );
    \   00001B0C   0xA8AC             ADD      R0,SP,#+688
-   \   00001B0E   0x.... 0x....      BL       RoadBrd_Baro_ReadPressure
+   \   00001B0E   0x.... 0x....      BL       RoadBrd_Baro_ReadPressure_Scaled
    \   00001B12   0x0005             MOVS     R5,R0
    1937                                      if (Status == HAL_OK)
    \   00001B14   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       21/Jul/2017  13:50:57
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       26/Jul/2017  13:52:29
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -3757,11 +3757,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_28:
-   \   00000000   0x4E 0x38          DC8 "N8.1 7/21/17"
-   \              0x2E 0x31    
+   \   00000000   0x4E 0x38          DC8 "N8.2 7/26/17"
+   \              0x2E 0x32    
    \              0x20 0x37    
    \              0x2F 0x32    
-   \              0x31 0x2F    
+   \              0x36 0x2F    
    \              0x31 0x37    
    \              0x00         
    \   0000000D   0x00 0x00          DC8 0, 0, 0

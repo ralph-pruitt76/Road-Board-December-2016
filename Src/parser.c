@@ -1910,11 +1910,11 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                       // Read Cool Eye/Grid Eye Values.....
                       if ( Get_DriverStates( GRIDEYE_MNTR_TASK ))
                       {
-                        Status = RoadBrd_GridEye_ReadValues( &GridMeasure );
+                        Status = RoadBrd_GridEye_ReadValues_Scaled( &GridMeasure );
                       }
                       else if ( Get_DriverStates( COOLEYE_MNTR_TASK ))
                       {
-                        Status = RoadBrd_CoolEye_ReadValues( &GridMeasure );
+                        Status = RoadBrd_CoolEye_ReadValues_Scaled( &GridMeasure );
                       }
                       else
                         Status = HAL_ERROR;
@@ -1923,17 +1923,17 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                       {
                         // OK Next Sensor.
                         // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
-                        Status = RoadBrd_ReadTemp( &TMeasure );
+                        Status = RoadBrd_ReadTemp_Scaled( &TMeasure );
                         if (Status == HAL_OK)
                         {
                           // OK Next Sensor.
                           // Read Humidity Sensor sensor and return Humidity results....
-                          Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
+                          Status = RoadBrd_Humidity_ReadHumidity_Scaled( &HMeasure );
                           if (Status == HAL_OK)
                           {
                             // OK Next Sensor.
                             //Status = RoadBrd_Barometer_Status( &PRMeasure );
-                            Status = RoadBrd_Baro_ReadPressure( &PRPMeasure );
+                            Status = RoadBrd_Baro_ReadPressure_Scaled( &PRPMeasure );
                             if (Status == HAL_OK)
                             {
                               //sprintf( (char *)tempBffr2, "Driver Status: %04x\r\n", DriverStatus );
