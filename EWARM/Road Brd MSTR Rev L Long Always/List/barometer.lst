@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       31/Jul/2017  08:12:32
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       31/Jul/2017  12:08:30
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -498,7 +498,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     245            if (Status == HAL_OK)
    \   0000001E   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000020   0x2D00             CMP      R5,#+0
-   \   00000022   0xD12F             BNE.N    ??RoadBrd_Barometer_Status_0
+   \   00000022   0xD12B             BNE.N    ??RoadBrd_Barometer_Status_0
     246            {
     247              // Now wait for completion of XMIT.
     248              Status = RoadBrd_WaitForState( (uint16_t)( I2C_TIMEOUT/5 ));
@@ -512,7 +512,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     250                return Status;
    \   00000032   0x0028             MOVS     R0,R5
    \   00000034   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000036   0xE027             B.N      ??RoadBrd_Barometer_Status_2
+   \   00000036   0xE023             B.N      ??RoadBrd_Barometer_Status_2
     251              else
     252              {
     253                Status =  RoadBrd_I2C_Master_Receive_IT((uint16_t)BARO_ADDR, tempBuffer, (uint16_t)1);
@@ -525,7 +525,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     254                if (Status == HAL_OK)
    \   00000044   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
    \   00000046   0x2D00             CMP      R5,#+0
-   \   00000048   0xD119             BNE.N    ??RoadBrd_Barometer_Status_3
+   \   00000048   0xD115             BNE.N    ??RoadBrd_Barometer_Status_3
     255                {
     256                  // Now wait for completion of Receive.
     257                  Status = RoadBrd_WaitForState( (uint16_t)( I2C_TIMEOUT/5 ));
@@ -539,7 +539,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     259                    return Status;
    \   00000058   0x0028             MOVS     R0,R5
    \   0000005A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   0000005C   0xE014             B.N      ??RoadBrd_Barometer_Status_2
+   \   0000005C   0xE010             B.N      ??RoadBrd_Barometer_Status_2
     260                } // EndIf (Status == HAL_OK) RoadBrd_I2C_Master_Receive_IT
     261                else
     262                  return Status;
@@ -562,32 +562,29 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     279            sprintf( (char *)SPtr->Raw, "%02x", tempBuffer[0]);
    \                     ??RoadBrd_Barometer_Status_4: (+1)
    \   0000005E   0xF89D 0x2000      LDRB     R2,[SP, #+0]
-   \   00000062   0x....             LDR.N    R1,??DataTable3_1
+   \   00000062   0x....             LDR.N    R1,??DataTable3
    \   00000064   0x1C60             ADDS     R0,R4,#+1
    \   00000066   0x.... 0x....      BL       sprintf
-    280            strcat( (char *)SPtr->Raw, "Rw" );
-   \   0000006A   0x....             ADR.N    R1,??DataTable3  ;; 0x52, 0x77, 0x00, 0x00
-   \   0000006C   0x1C60             ADDS     R0,R4,#+1
-   \   0000006E   0x.... 0x....      BL       strcat
+    280            //strcat( (char *)SPtr->Raw, "Rw" );
     281            
     282            // Pass Status Response.
     283            SPtr->Status = tempBuffer[0];
-   \   00000072   0xF89D 0x0000      LDRB     R0,[SP, #+0]
-   \   00000076   0x7020             STRB     R0,[R4, #+0]
+   \   0000006A   0xF89D 0x0000      LDRB     R0,[SP, #+0]
+   \   0000006E   0x7020             STRB     R0,[R4, #+0]
     284          
     285            return Status;
-   \   00000078   0x0028             MOVS     R0,R5
-   \   0000007A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   0000007C   0xE004             B.N      ??RoadBrd_Barometer_Status_2
+   \   00000070   0x0028             MOVS     R0,R5
+   \   00000072   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000074   0xE004             B.N      ??RoadBrd_Barometer_Status_2
    \                     ??RoadBrd_Barometer_Status_3: (+1)
-   \   0000007E   0x0028             MOVS     R0,R5
-   \   00000080   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000082   0xE001             B.N      ??RoadBrd_Barometer_Status_2
+   \   00000076   0x0028             MOVS     R0,R5
+   \   00000078   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000007A   0xE001             B.N      ??RoadBrd_Barometer_Status_2
    \                     ??RoadBrd_Barometer_Status_0: (+1)
-   \   00000084   0x0028             MOVS     R0,R5
-   \   00000086   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000007C   0x0028             MOVS     R0,R5
+   \   0000007E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \                     ??RoadBrd_Barometer_Status_2: (+1)
-   \   00000088   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+   \   00000080   0xBD32             POP      {R1,R4,R5,PC}    ;; return
     286          }
     287          
     288          /**
@@ -738,7 +735,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000022   0x9800             LDR      R0,[SP, #+0]
    \   00000024   0x.... 0x....      BL       __aeabi_f2d
    \   00000028   0x2200             MOVS     R2,#+0
-   \   0000002A   0x....             LDR.N    R3,??DataTable3_2  ;; 0x40040000
+   \   0000002A   0x....             LDR.N    R3,??DataTable3_1  ;; 0x40040000
    \   0000002C   0x.... 0x....      BL       __aeabi_dmul
    \   00000030   0x.... 0x....      BL       __aeabi_d2uiz
    \   00000034   0x0005             MOVS     R5,R0
@@ -769,20 +766,20 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     362          
     363            // NOW Build Result
     364            // Build Raw Result.
-    365            sprintf( (char *)PRPtr->Raw, "%08xRw", legacyValue);
+    365            sprintf( (char *)PRPtr->Raw, "%08x", legacyValue);
    \   00000064   0x002A             MOVS     R2,R5
-   \   00000066   0x....             LDR.N    R1,??DataTable3_3
+   \   00000066   0x....             LDR.N    R1,??DataTable3_2
    \   00000068   0xF114 0x000C      ADDS     R0,R4,#+12
    \   0000006C   0x.... 0x....      BL       sprintf
     366            PRPtr->RawC = legacyValue;
    \   00000070   0x61A5             STR      R5,[R4, #+24]
     367            // Build Clean Result.
-    368            sprintf( (char *)PRPtr->Pressure,"%6.3fPa",PressureResult);
+    368            sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
    \   00000072   0x0030             MOVS     R0,R6
    \   00000074   0x.... 0x....      BL       __aeabi_f2d
    \   00000078   0x0002             MOVS     R2,R0
    \   0000007A   0x000B             MOVS     R3,R1
-   \   0000007C   0x....             LDR.N    R1,??DataTable3_4
+   \   0000007C   0x....             LDR.N    R1,??DataTable3_3
    \   0000007E   0x0020             MOVS     R0,R4
    \   00000080   0x.... 0x....      BL       sprintf
     369          
@@ -838,7 +835,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000018   0x9800             LDR      R0,[SP, #+0]
    \   0000001A   0x.... 0x....      BL       __aeabi_f2d
    \   0000001E   0x2200             MOVS     R2,#+0
-   \   00000020   0x....             LDR.N    R3,??DataTable3_2  ;; 0x40040000
+   \   00000020   0x....             LDR.N    R3,??DataTable3_1  ;; 0x40040000
    \   00000022   0x.... 0x....      BL       __aeabi_dmul
    \   00000026   0x.... 0x....      BL       __aeabi_d2uiz
    \   0000002A   0x0006             MOVS     R6,R0
@@ -869,20 +866,20 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     406          
     407            // NOW Build Result
     408            // Build Raw Result.
-    409            sprintf( (char *)PRPtr->Raw, "%08xRw", legacyValue);
+    409            sprintf( (char *)PRPtr->Raw, "%08x", legacyValue);
    \   0000005A   0x0032             MOVS     R2,R6
-   \   0000005C   0x....             LDR.N    R1,??DataTable3_3
+   \   0000005C   0x....             LDR.N    R1,??DataTable3_2
    \   0000005E   0xF114 0x000C      ADDS     R0,R4,#+12
    \   00000062   0x.... 0x....      BL       sprintf
     410            PRPtr->RawC = legacyValue;
    \   00000066   0x61A6             STR      R6,[R4, #+24]
     411            // Build Clean Result.
-    412            sprintf( (char *)PRPtr->Pressure,"%6.3fPa",PressureResult);
+    412            sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
    \   00000068   0x4648             MOV      R0,R9
    \   0000006A   0x.... 0x....      BL       __aeabi_f2d
    \   0000006E   0x0002             MOVS     R2,R0
    \   00000070   0x000B             MOVS     R3,R1
-   \   00000072   0x....             LDR.N    R1,??DataTable3_4
+   \   00000072   0x....             LDR.N    R1,??DataTable3_3
    \   00000074   0x0020             MOVS     R0,R4
    \   00000076   0x.... 0x....      BL       sprintf
     413          
@@ -1010,44 +1007,44 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000000E   0xD001             BEQ.N    ??RoadBrd_Baro_ReadTemp_0
     518              return HAL_ERROR;
    \   00000010   0x2001             MOVS     R0,#+1
-   \   00000012   0xE046             B.N      ??RoadBrd_Baro_ReadTemp_1
+   \   00000012   0xE041             B.N      ??RoadBrd_Baro_ReadTemp_1
     519            
     520            if (LPS25HB_GetTemperature(&Temp_C) == PRESSURE_OK)
    \                     ??RoadBrd_Baro_ReadTemp_0: (+1)
    \   00000014   0xA801             ADD      R0,SP,#+4
    \   00000016   0x.... 0x....      BL       LPS25HB_GetTemperature
    \   0000001A   0x2800             CMP      R0,#+0
-   \   0000001C   0xD140             BNE.N    ??RoadBrd_Baro_ReadTemp_2
+   \   0000001C   0xD13B             BNE.N    ??RoadBrd_Baro_ReadTemp_2
     521            {
     522              // TIme to build all needed outputs.
     523              Temp_F = (Temp_C * 1.8) + 32;
    \   0000001E   0x9801             LDR      R0,[SP, #+4]
    \   00000020   0x.... 0x....      BL       __aeabi_f2d
-   \   00000024   0x....             LDR.N    R2,??DataTable3_5  ;; 0xcccccccd
-   \   00000026   0x....             LDR.N    R3,??DataTable3_6  ;; 0x3ffccccc
+   \   00000024   0x....             LDR.N    R2,??DataTable3_4  ;; 0xcccccccd
+   \   00000026   0x....             LDR.N    R3,??DataTable3_5  ;; 0x3ffccccc
    \   00000028   0x.... 0x....      BL       __aeabi_dmul
    \   0000002C   0x2200             MOVS     R2,#+0
-   \   0000002E   0x....             LDR.N    R3,??DataTable3_7  ;; 0x40400000
+   \   0000002E   0x....             LDR.N    R3,??DataTable3_6  ;; 0x40400000
    \   00000030   0x.... 0x....      BL       __aeabi_dadd
    \   00000034   0x.... 0x....      BL       __aeabi_d2f
    \   00000038   0x0005             MOVS     R5,R0
     524              TmpPtr->RawC = calcValue;
    \   0000003A   0xF8BD 0x0000      LDRH     R0,[SP, #+0]
    \   0000003E   0x82E0             STRH     R0,[R4, #+22]
-    525              sprintf( (char *)TmpPtr->TempC, "%3.1fC", Temp_C );
+    525              sprintf( (char *)TmpPtr->TempC, "%3.1f", Temp_C );
    \   00000040   0x9801             LDR      R0,[SP, #+4]
    \   00000042   0x.... 0x....      BL       __aeabi_f2d
    \   00000046   0x0002             MOVS     R2,R0
    \   00000048   0x000B             MOVS     R3,R1
-   \   0000004A   0x....             LDR.N    R1,??DataTable3_8
+   \   0000004A   0x....             LDR.N    R1,??DataTable3_7
    \   0000004C   0x0020             MOVS     R0,R4
    \   0000004E   0x.... 0x....      BL       sprintf
-    526              sprintf( (char *)TmpPtr->TempF, "%3.1fF", Temp_F );
+    526              sprintf( (char *)TmpPtr->TempF, "%3.1f", Temp_F );
    \   00000052   0x0028             MOVS     R0,R5
    \   00000054   0x.... 0x....      BL       __aeabi_f2d
    \   00000058   0x0002             MOVS     R2,R0
    \   0000005A   0x000B             MOVS     R3,R1
-   \   0000005C   0x....             LDR.N    R1,??DataTable3_9
+   \   0000005C   0x....             LDR.N    R1,??DataTable3_7
    \   0000005E   0x1DE0             ADDS     R0,R4,#+7
    \   00000060   0x.... 0x....      BL       sprintf
     527              // NOW, Build Raw Data String..
@@ -1055,36 +1052,33 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000064   0xF9BD 0x0000      LDRSH    R0,[SP, #+0]
    \   00000068   0xF3C0 0x2207      UBFX     R2,R0,#+8,#+8
    \   0000006C   0xB212             SXTH     R2,R2            ;; SignExt  R2,R2,#+16,#+16
-   \   0000006E   0x....             LDR.N    R1,??DataTable3_1
+   \   0000006E   0x....             LDR.N    R1,??DataTable3
    \   00000070   0xF114 0x000E      ADDS     R0,R4,#+14
    \   00000074   0x.... 0x....      BL       sprintf
     529              sprintf( (char *)tempBffr2, "%02x", (calcValue & 0x00ff));
    \   00000078   0xF9BD 0x0000      LDRSH    R0,[SP, #+0]
    \   0000007C   0xF000 0x02FF      AND      R2,R0,#0xFF
-   \   00000080   0x....             LDR.N    R1,??DataTable3_1
+   \   00000080   0x....             LDR.N    R1,??DataTable3
    \   00000082   0xA802             ADD      R0,SP,#+8
    \   00000084   0x.... 0x....      BL       sprintf
     530              strcat( (char *)TmpPtr->Raw, (char *)tempBffr2 );
    \   00000088   0xA902             ADD      R1,SP,#+8
    \   0000008A   0xF114 0x000E      ADDS     R0,R4,#+14
    \   0000008E   0x.... 0x....      BL       strcat
-    531              strcat( (char *)TmpPtr->Raw, "Rw" );
-   \   00000092   0x....             ADR.N    R1,??DataTable3  ;; 0x52, 0x77, 0x00, 0x00
-   \   00000094   0xF114 0x000E      ADDS     R0,R4,#+14
-   \   00000098   0x.... 0x....      BL       strcat
+    531              //strcat( (char *)TmpPtr->Raw, "Rw" );
     532          
     533            }
     534            else
     535              return HAL_ERROR;
     536          
     537            return HAL_OK;
-   \   0000009C   0x2000             MOVS     R0,#+0
-   \   0000009E   0xE000             B.N      ??RoadBrd_Baro_ReadTemp_1
+   \   00000092   0x2000             MOVS     R0,#+0
+   \   00000094   0xE000             B.N      ??RoadBrd_Baro_ReadTemp_1
    \                     ??RoadBrd_Baro_ReadTemp_2: (+1)
-   \   000000A0   0x2001             MOVS     R0,#+1
+   \   00000096   0x2001             MOVS     R0,#+1
    \                     ??RoadBrd_Baro_ReadTemp_1: (+1)
-   \   000000A2   0xB005             ADD      SP,SP,#+20
-   \   000000A4   0xBD30             POP      {R4,R5,PC}       ;; return
+   \   00000098   0xB005             ADD      SP,SP,#+20
+   \   0000009A   0xBD30             POP      {R4,R5,PC}       ;; return
     538          }
     539          
     540          /**
@@ -1156,16 +1150,15 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable3:
-   \   00000000   0x52 0x77          DC8      0x52, 0x77, 0x00, 0x00
-   \              0x00 0x00    
-
-   \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable3_1:
    \   00000000   0x........         DC32     ?_0
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable3_2:
+   \                     ??DataTable3_1:
    \   00000000   0x40040000         DC32     0x40040000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable3_2:
+   \   00000000   0x........         DC32     ?_1
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable3_3:
@@ -1173,27 +1166,19 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable3_4:
-   \   00000000   0x........         DC32     ?_3
-
-   \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable3_5:
    \   00000000   0xCCCCCCCD         DC32     0xcccccccd
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable3_6:
+   \                     ??DataTable3_5:
    \   00000000   0x3FFCCCCC         DC32     0x3ffccccc
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable3_7:
+   \                     ??DataTable3_6:
    \   00000000   0x40400000         DC32     0x40400000
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable3_8:
-   \   00000000   0x........         DC32     ?_4
-
-   \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable3_9:
-   \   00000000   0x........         DC32     ?_5
+   \                     ??DataTable3_7:
+   \   00000000   0x........         DC32     ?_3
 
    \                                 In section .rodata, align 4
    \                     ?_0:
@@ -1204,40 +1189,26 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \              0x00         
 
    \                                 In section .rodata, align 4
-   \   00000000   0x52 0x77          DC8 "Rw"
+   \                     ?_1:
+   \   00000000   0x25 0x30          DC8 "%08x"
+   \              0x38 0x78    
    \              0x00         
-   \   00000003   0x00               DC8 0
+   \   00000005   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
 
    \                                 In section .rodata, align 4
    \                     ?_2:
-   \   00000000   0x25 0x30          DC8 "%08xRw"
-   \              0x38 0x78    
-   \              0x52 0x77    
-   \              0x00         
-   \   00000007   0x00               DC8 0
+   \   00000000   0x25 0x36          DC8 "%6.3f"
+   \              0x2E 0x33    
+   \              0x66 0x00    
+   \   00000006   0x00 0x00          DC8 0, 0
 
    \                                 In section .rodata, align 4
    \                     ?_3:
-   \   00000000   0x25 0x36          DC8 "%6.3fPa"
-   \              0x2E 0x33    
-   \              0x66 0x50    
-   \              0x61 0x00    
-
-   \                                 In section .rodata, align 4
-   \                     ?_4:
-   \   00000000   0x25 0x33          DC8 "%3.1fC"
+   \   00000000   0x25 0x33          DC8 "%3.1f"
    \              0x2E 0x31    
-   \              0x66 0x43    
-   \              0x00         
-   \   00000007   0x00               DC8 0
-
-   \                                 In section .rodata, align 4
-   \                     ?_5:
-   \   00000000   0x25 0x33          DC8 "%3.1fF"
-   \              0x2E 0x31    
-   \              0x66 0x46    
-   \              0x00         
-   \   00000007   0x00               DC8 0
+   \              0x66 0x00    
+   \   00000006   0x00 0x00          DC8 0, 0
     569          /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/
 
    Maximum stack usage in bytes:
@@ -1279,7 +1250,6 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
         16   -> RoadBrd_I2C_Master_Transmit_CMDData_IT
         16   -> RoadBrd_WaitForState
         16   -> sprintf
-        16   -> strcat
       16   RoadBrd_Disable_Barometer
         16   -> RoadBrd_I2C_Master_Transmit_CMDData_IT
         16   -> RoadBrd_WaitForState
@@ -1316,18 +1286,14 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        4  ??DataTable3_5
        4  ??DataTable3_6
        4  ??DataTable3_7
-       4  ??DataTable3_8
-       4  ??DataTable3_9
        8  ?_0
-       4  ?_1
+       8  ?_1
        8  ?_2
        8  ?_3
-       8  ?_4
-       8  ?_5
      136  RoadBrd_Baro_ReadPressure
      146  RoadBrd_Baro_ReadPressure_Scaled
-     166  RoadBrd_Baro_ReadTemp
-     138  RoadBrd_Barometer_Status
+     156  RoadBrd_Baro_ReadTemp
+     130  RoadBrd_Barometer_Status
       62  RoadBrd_Disable_Barometer
       62  RoadBrd_Enable_Barometer
       84  RoadBrd_Init_Barometer
@@ -1337,11 +1303,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      122  RoadBrd_WaitForPressure
 
  
-    44 bytes in section .rodata
- 1 180 bytes in section .text
+    32 bytes in section .rodata
+ 1 154 bytes in section .text
  
- 1 180 bytes of CODE  memory
-    44 bytes of CONST memory
+ 1 154 bytes of CODE  memory
+    32 bytes of CONST memory
 
 Errors: none
 Warnings: none

@@ -277,7 +277,7 @@ HAL_StatusTypeDef RoadBrd_Barometer_Status( PRStatPtr SPtr )
   // Build Status NOW
   // Build Raw Response
   sprintf( (char *)SPtr->Raw, "%02x", tempBuffer[0]);
-  strcat( (char *)SPtr->Raw, "Rw" );
+  //strcat( (char *)SPtr->Raw, "Rw" );
   
   // Pass Status Response.
   SPtr->Status = tempBuffer[0];
@@ -362,10 +362,10 @@ HAL_StatusTypeDef RoadBrd_Baro_ReadPressure_Scaled( PRPrsPtr PRPtr )
 
   // NOW Build Result
   // Build Raw Result.
-  sprintf( (char *)PRPtr->Raw, "%08xRw", legacyValue);
+  sprintf( (char *)PRPtr->Raw, "%08x", legacyValue);
   PRPtr->RawC = legacyValue;
   // Build Clean Result.
-  sprintf( (char *)PRPtr->Pressure,"%6.3fPa",PressureResult);
+  sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
 
   return Status;
 }
@@ -406,10 +406,10 @@ HAL_StatusTypeDef RoadBrd_Baro_ReadPressure( PRPrsPtr PRPtr )
 
   // NOW Build Result
   // Build Raw Result.
-  sprintf( (char *)PRPtr->Raw, "%08xRw", legacyValue);
+  sprintf( (char *)PRPtr->Raw, "%08x", legacyValue);
   PRPtr->RawC = legacyValue;
   // Build Clean Result.
-  sprintf( (char *)PRPtr->Pressure,"%6.3fPa",PressureResult);
+  sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
 
   return Status;
 }
@@ -522,13 +522,13 @@ HAL_StatusTypeDef RoadBrd_Baro_ReadTemp( TempPtr TmpPtr )
     // TIme to build all needed outputs.
     Temp_F = (Temp_C * 1.8) + 32;
     TmpPtr->RawC = calcValue;
-    sprintf( (char *)TmpPtr->TempC, "%3.1fC", Temp_C );
-    sprintf( (char *)TmpPtr->TempF, "%3.1fF", Temp_F );
+    sprintf( (char *)TmpPtr->TempC, "%3.1f", Temp_C );
+    sprintf( (char *)TmpPtr->TempF, "%3.1f", Temp_F );
     // NOW, Build Raw Data String..
     sprintf( (char *)TmpPtr->Raw, "%02x", ((calcValue & 0xff00)>>8));
     sprintf( (char *)tempBffr2, "%02x", (calcValue & 0x00ff));
     strcat( (char *)TmpPtr->Raw, (char *)tempBffr2 );
-    strcat( (char *)TmpPtr->Raw, "Rw" );
+    //strcat( (char *)TmpPtr->Raw, "Rw" );
 
   }
   else

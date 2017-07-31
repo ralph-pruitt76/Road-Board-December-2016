@@ -119,13 +119,13 @@ HAL_StatusTypeDef RoadBrd_ReadTemp_Scaled( TempPtr TPtr )
     Temp_F = RoadBrd_CAL_ScaleValue( CAL_TEMPF, Temp_F);
 
     TPtr->RawC = tempC;
-    sprintf( (char *)TPtr->TempC, "%3.1fC", Temp_C );
-    sprintf( (char *)TPtr->TempF, "%3.1fF", Temp_F );
+    sprintf( (char *)TPtr->TempC, "%3.1f", Temp_C );
+    sprintf( (char *)TPtr->TempF, "%3.1f", Temp_F );
     // NOW, Build Raw Data String..
     sprintf( (char *)TPtr->Raw, "%02x", ((tempC & 0xff00)>>8));
     sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
     strcat( (char *)TPtr->Raw, (char *)tempBffr2 );
-    strcat( (char *)TPtr->Raw, "Rw" );
+    //strcat( (char *)TPtr->Raw, "Rw" );
    }
   return Status;
 }
@@ -209,13 +209,13 @@ HAL_StatusTypeDef RoadBrd_ReadTemp( TempPtr TPtr )
     tempC = (uint16_t)(round(Temp_C * 10));
     Temp_F = (Temp_C * 1.8) + 32;
     TPtr->RawC = tempC;
-    sprintf( (char *)TPtr->TempC, "%3.1fC", Temp_C );
-    sprintf( (char *)TPtr->TempF, "%3.1fF", Temp_F );
+    sprintf( (char *)TPtr->TempC, "%3.1f", Temp_C );
+    sprintf( (char *)TPtr->TempF, "%3.1f", Temp_F );
     // NOW, Build Raw Data String..
     sprintf( (char *)TPtr->Raw, "%02x", ((tempC & 0xff00)>>8));
     sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
     strcat( (char *)TPtr->Raw, (char *)tempBffr2 );
-    strcat( (char *)TPtr->Raw, "Rw" );
+    //strcat( (char *)TPtr->Raw, "Rw" );
    }
   return Status;
 }

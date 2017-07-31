@@ -205,7 +205,7 @@ HAL_StatusTypeDef RoadBrd_RGBReadID( RGBIdentPtr id )
     // Build Status
     id->id = i2cData[0];
     sprintf( (char *)id->Raw, "%02x", i2cData[0]);
-    strcat( (char *)id->Raw, "Rw" );
+    //strcat( (char *)id->Raw, "Rw" );
   }
   return Status;
 }
@@ -267,7 +267,7 @@ HAL_StatusTypeDef RoadBrd_RGBReadStatus( RGBStatusPtr Stat )
     // Build Status
     Stat->status = i2cData[0];
     sprintf( (char *)Stat->Raw, "%02x", i2cData[0]);
-    strcat( (char *)Stat->Raw, "Rw" );
+    //strcat( (char *)Stat->Raw, "Rw" );
   }
   return Status;
 }
@@ -335,17 +335,17 @@ HAL_StatusTypeDef RoadBrd_RGBReadValues( RGBLghtPtr LPtr )
       sprintf( (char *)tempBffr2, "%02x", i2cData[x]);
       strcat( (char *)LPtr->Raw, (char *)tempBffr2 );
     }
-    strcat( (char *)LPtr->Raw, "Rw" );
+    //strcat( (char *)LPtr->Raw, "Rw" );
     strcat( (char *)tempBffr2, "\r\n" );
   }
   
   // Now calculate Each RGB Value.
   CalcValue = i2cData[0] + (i2cData[1] * 256);
-  sprintf( (char *)LPtr->Red, "%5dlx", CalcValue);
+  sprintf( (char *)LPtr->Red, "%5d", CalcValue);
   CalcValue = i2cData[2] + (i2cData[3] * 256);
-  sprintf( (char *)LPtr->Green, "%5dlx", CalcValue);
+  sprintf( (char *)LPtr->Green, "%5d", CalcValue);
   CalcValue = i2cData[4] + (i2cData[5] * 256);
-  sprintf( (char *)LPtr->Blue, "%5dlx", CalcValue);
+  sprintf( (char *)LPtr->Blue, "%5d", CalcValue);
   return Status;
 }
 

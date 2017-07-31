@@ -165,13 +165,13 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues_Scaled( GridEPtr GPtr )
     tempC = (uint16_t)(round(Temp_C * 10));
     Temp_F = (Temp_C * 1.8) + 32;
     GPtr->Thermistor.RawC = tempC;
-    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1fC", Temp_C );
-    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1fF", Temp_F );
+    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1f", Temp_C );
+    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1f", Temp_F );
     // NOW, Build Raw Data String..
     sprintf( (char *)GPtr->Thermistor.Raw, "%02x", ((tempC & 0xff00)>>8));
     sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
     strcat( (char *)GPtr->Thermistor.Raw, (char *)tempBffr2 );
-    strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
+    //strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
   }
   else
     return Status;
@@ -242,97 +242,97 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues_Scaled( GridEPtr GPtr )
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_1C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye1.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye1.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye1.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
           break;
         case 1:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_2C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye2.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye2.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye2.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
           break;
         case 2:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_3C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye3.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye3.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye3.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
           break;
         case 3:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_4C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye4.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye4.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye4.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
           break;
         case 4:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_5C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye5.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye5.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye5.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
           break;
         case 5:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_6C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye6.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye6.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye6.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
           break;
         case 6:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_7C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye7.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye7.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye7.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
           break;
         case 7:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_8C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye8.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye8.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye8.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
           break;
       } // EndSwitch(x)
     } // Endif(Status == HAL_OK)
@@ -422,13 +422,13 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues( GridEPtr GPtr )
     tempC = (uint16_t)(round(Temp_C * 10));
     Temp_F = (Temp_C * 1.8) + 32;
     GPtr->Thermistor.RawC = tempC;
-    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1fC", Temp_C );
-    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1fF", Temp_F );
+    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1f", Temp_C );
+    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1f", Temp_F );
     // NOW, Build Raw Data String..
     sprintf( (char *)GPtr->Thermistor.Raw, "%02x", ((tempC & 0xff00)>>8));
     sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
     strcat( (char *)GPtr->Thermistor.Raw, (char *)tempBffr2 );
-    strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
+    //strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
   }
   else
     return Status;
@@ -497,83 +497,83 @@ HAL_StatusTypeDef RoadBrd_CoolEye_ReadValues( GridEPtr GPtr )
       {
         case 0:
           GPtr->GridEye1.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye1.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye1.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
           break;
         case 1:
           GPtr->GridEye2.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye2.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye2.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
           break;
         case 2:
           GPtr->GridEye3.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye3.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye3.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
           break;
         case 3:
           GPtr->GridEye4.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye4.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye4.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
           break;
         case 4:
           GPtr->GridEye5.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye5.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye5.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
           break;
         case 5:
           GPtr->GridEye6.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye6.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye6.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
           break;
         case 6:
           GPtr->GridEye7.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye7.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye7.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
           break;
         case 7:
           GPtr->GridEye8.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye8.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye8.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
           break;
       } // EndSwitch(x)
     } // Endif(Status == HAL_OK)
@@ -808,13 +808,13 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues_Scaled( GridEPtr GPtr )
     Temp_F = (Temp_C * 1.8) + 32;
     GPtr->Thermistor.RawC = tempC;
     
-    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1fC", Temp_C );
-    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1fF", Temp_F );
+    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1f", Temp_C );
+    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1f", Temp_F );
     // NOW, Build Raw Data String..
     sprintf( (char *)GPtr->Thermistor.Raw, "%02x", ((tempC & 0xff00)>>8));
     sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
     strcat( (char *)GPtr->Thermistor.Raw, (char *)tempBffr2 );
-    strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
+    //strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
   }
   
   //***** 2. Read all 16 Values of temperature data for Cells 33-40. 
@@ -904,97 +904,97 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues_Scaled( GridEPtr GPtr )
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_1C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye1.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye1.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye1.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
           break;
         case 1:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_2C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye2.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye2.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye2.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
           break;
         case 2:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_3C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye3.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye3.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye3.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
           break;
         case 3:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_4C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye4.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye4.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye4.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
           break;
         case 4:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_5C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye5.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye5.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye5.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
           break;
         case 5:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_6C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye6.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye6.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye6.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
           break;
         case 6:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_7C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye7.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye7.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye7.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
           break;
         case 7:
           Temp_C = RoadBrd_CAL_ScaleValue( CAL_ROADT_8C, Temp_C);
           Temp_F = (Temp_C * 1.8) + 32;
           GPtr->GridEye8.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye8.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye8.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
           break;
       } // EndSwitch(x)
     } // EdnFor( x=0; x<8; x++)
@@ -1085,13 +1085,13 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues( GridEPtr GPtr )
     Temp_F = (Temp_C * 1.8) + 32;
     GPtr->Thermistor.RawC = tempC;
     
-    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1fC", Temp_C );
-    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1fF", Temp_F );
+    sprintf( (char *)GPtr->Thermistor.TempC, "%3.1f", Temp_C );
+    sprintf( (char *)GPtr->Thermistor.TempF, "%3.1f", Temp_F );
     // NOW, Build Raw Data String..
     sprintf( (char *)GPtr->Thermistor.Raw, "%02x", ((tempC & 0xff00)>>8));
     sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
     strcat( (char *)GPtr->Thermistor.Raw, (char *)tempBffr2 );
-    strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
+    //strcat( (char *)GPtr->Thermistor.Raw, "Rw" );
   }
   
   //***** 2. Read all 16 Values of temperature data for Cells 33-40. 
@@ -1179,83 +1179,83 @@ HAL_StatusTypeDef RoadBrd_GridEye_ReadValues( GridEPtr GPtr )
       {
         case 0:
           GPtr->GridEye1.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye1.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye1.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye1.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye1.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye1.Raw, "Rw" );
           break;
         case 1:
           GPtr->GridEye2.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye2.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye2.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye2.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye2.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye2.Raw, "Rw" );
           break;
         case 2:
           GPtr->GridEye3.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye3.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye3.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye3.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye3.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye3.Raw, "Rw" );
           break;
         case 3:
           GPtr->GridEye4.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye4.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye4.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye4.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye4.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye4.Raw, "Rw" );
           break;
         case 4:
           GPtr->GridEye5.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye5.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye5.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye5.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye5.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye5.Raw, "Rw" );
           break;
         case 5:
           GPtr->GridEye6.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye6.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye6.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye6.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye6.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye6.Raw, "Rw" );
           break;
         case 6:
           GPtr->GridEye7.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye7.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye7.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye7.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye7.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye7.Raw, "Rw" );
           break;
         case 7:
           GPtr->GridEye8.RawC = tempC;
-          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1fC", Temp_C );
-          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1fF", Temp_F );
+          sprintf( (char *)GPtr->GridEye8.TempC, "%3.1f", Temp_C );
+          sprintf( (char *)GPtr->GridEye8.TempF, "%3.1f", Temp_F );
           // NOW, Build Raw Data String..
           sprintf( (char *)GPtr->GridEye8.Raw, "%02x", ((tempC & 0xff00)>>8));
           sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
           strcat( (char *)GPtr->GridEye8.Raw, (char *)tempBffr2 );
-          strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
+          //strcat( (char *)GPtr->GridEye8.Raw, "Rw" );
           break;
       } // EndSwitch(x)
     } // EdnFor( x=0; x<8; x++)

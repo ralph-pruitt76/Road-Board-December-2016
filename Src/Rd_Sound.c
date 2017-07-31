@@ -243,7 +243,7 @@ HAL_StatusTypeDef RoadBrdSnd_DumpBin0( BinSPtr BinPtr )
     sprintf( (char *)tempstr, "%02x", fr[x]);
     strcat ((char *)BinPtr->dumpStr, (char *)tempstr);
   }
-  strcat((char *)BinPtr->dumpStr, "Bn");
+  //strcat((char *)BinPtr->dumpStr, "Bn");
   
   return Status;
 }
@@ -272,7 +272,7 @@ HAL_StatusTypeDef RoadBrdSnd_DumpBin16( BinSPtr BinPtr )
     sprintf( (char *)tempstr, "%02x", fr[x+16]);
     strcat ((char *)BinPtr->dumpStr, (char *)tempstr);
   }
-  strcat((char *)BinPtr->dumpStr, "Bn");
+  //strcat((char *)BinPtr->dumpStr, "Bn");
   
   return Status;
 }
@@ -301,7 +301,7 @@ HAL_StatusTypeDef RoadBrdSnd_DumpBin32( BinSPtr BinPtr )
     sprintf( (char *)tempstr, "%02x", fr[x+32]);
     strcat ((char *)BinPtr->dumpStr, (char *)tempstr);
   }
-  strcat((char *)BinPtr->dumpStr, "Bn");
+  //strcat((char *)BinPtr->dumpStr, "Bn");
   
   return Status;
 }
@@ -330,7 +330,7 @@ HAL_StatusTypeDef RoadBrdSnd_DumpBin48( BinSPtr BinPtr )
     sprintf( (char *)tempstr, "%02x", fr[x+48]);
     strcat ((char *)BinPtr->dumpStr, (char *)tempstr);
   }
-  strcat((char *)BinPtr->dumpStr, "Bn");
+  //strcat((char *)BinPtr->dumpStr, "Bn");
   
   return Status;
 }

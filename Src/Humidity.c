@@ -298,12 +298,12 @@ HAL_StatusTypeDef RoadBrd_Humidity_ReadHumidity_Scaled( HumidtyPtr HPtr )
   
   // Now Build results.
   HPtr->HRawC = (uint16_t)(tmp);
-  sprintf( (char *)HPtr->Humidity, "%2.1fPr", (float)(tmp/10) );
+  sprintf( (char *)HPtr->Humidity, "%2.1f", (float)(tmp/10) );
   // NOW, Build Raw Data String..
   sprintf( (char *)HPtr->HRaw, "%02x", ((HPtr->HRawC & 0xff00)>>8));
   sprintf( (char *)tempBffr2, "%02x", (HPtr->HRawC & 0x00ff));
   strcat( (char *)HPtr->HRaw, (char *)tempBffr2 );
-  strcat( (char *)HPtr->HRaw, "Rw" );
+  //strcat( (char *)HPtr->HRaw, "Rw" );
   // Calculate Legacy Value.
   tmp2 = (tmp/10) + HUMIDITY_SCALE2;
   tmp2 = tmp2 * HUMIDITY_SCALE1;
@@ -515,12 +515,12 @@ HAL_StatusTypeDef RoadBrd_Humidity_ReadHumidity( HumidtyPtr HPtr )
   
   // Now Build results.
   HPtr->HRawC = (uint16_t)(tmp);
-  sprintf( (char *)HPtr->Humidity, "%2.1fPr", (float)(tmp/10) );
+  sprintf( (char *)HPtr->Humidity, "%2.1f", (float)(tmp/10) );
   // NOW, Build Raw Data String..
   sprintf( (char *)HPtr->HRaw, "%02x", ((HPtr->HRawC & 0xff00)>>8));
   sprintf( (char *)tempBffr2, "%02x", (HPtr->HRawC & 0x00ff));
   strcat( (char *)HPtr->HRaw, (char *)tempBffr2 );
-  strcat( (char *)HPtr->HRaw, "Rw" );
+  //strcat( (char *)HPtr->HRaw, "Rw" );
   // Calculate Legacy Value.
   tmp2 = (tmp/10) + HUMIDITY_SCALE2;
   tmp2 = tmp2 * HUMIDITY_SCALE1;
@@ -741,13 +741,13 @@ HAL_StatusTypeDef RoadBrd_Humidity_ReadTemperature_Scaled( TempPtr TPtr )
   Temp_F = RoadBrd_CAL_ScaleValue( CAL_HUM_TEMPF, Temp_F);
   
   TPtr->RawC = tempC;
-  sprintf( (char *)TPtr->TempC, "%3.1fC", Temp_C );
-  sprintf( (char *)TPtr->TempF, "%3.1fF", Temp_F );
+  sprintf( (char *)TPtr->TempC, "%3.1f", Temp_C );
+  sprintf( (char *)TPtr->TempF, "%3.1f", Temp_F );
   // NOW, Build Raw Data String..
   sprintf( (char *)TPtr->Raw, "%02x", ((tempC & 0xff00)>>8));
   sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
   strcat( (char *)TPtr->Raw, (char *)tempBffr2 );
-  strcat( (char *)TPtr->Raw, "Rw" );
+  //strcat( (char *)TPtr->Raw, "Rw" );
 
   return Status;
 }
@@ -960,13 +960,13 @@ HAL_StatusTypeDef RoadBrd_Humidity_ReadTemperature( TempPtr TPtr )
   Temp_F = (Temp_C * 1.8) + 32;
   
   TPtr->RawC = tempC;
-  sprintf( (char *)TPtr->TempC, "%3.1fC", Temp_C );
-  sprintf( (char *)TPtr->TempF, "%3.1fF", Temp_F );
+  sprintf( (char *)TPtr->TempC, "%3.1f", Temp_C );
+  sprintf( (char *)TPtr->TempF, "%3.1f", Temp_F );
   // NOW, Build Raw Data String..
   sprintf( (char *)TPtr->Raw, "%02x", ((tempC & 0xff00)>>8));
   sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
   strcat( (char *)TPtr->Raw, (char *)tempBffr2 );
-  strcat( (char *)TPtr->Raw, "Rw" );
+  //strcat( (char *)TPtr->Raw, "Rw" );
 
   return Status;
 }
