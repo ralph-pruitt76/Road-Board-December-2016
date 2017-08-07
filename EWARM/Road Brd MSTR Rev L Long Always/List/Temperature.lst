@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       31/Jul/2017  12:08:39
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       07/Aug/2017  13:11:07
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -391,7 +391,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     163                return Status;
    \   00000036   0x0038             MOVS     R0,R7
    \   00000038   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   0000003A   0xE07D             B.N      ??RoadBrd_ReadTemp_2
+   \   0000003A   0xE07F             B.N      ??RoadBrd_ReadTemp_2
     164              else
     165              {
     166                Status =  RoadBrd_I2C_Master_Receive_IT((uint16_t)TEMP_SNSR, i2cData, (uint16_t)2);
@@ -418,7 +418,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     172                    return Status;
    \   0000005C   0x0038             MOVS     R0,R7
    \   0000005E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000060   0xE06A             B.N      ??RoadBrd_ReadTemp_2
+   \   00000060   0xE06C             B.N      ??RoadBrd_ReadTemp_2
     173                } // EndIf (Status == HAL_OK) RoadBrd_I2C_Master_Receive_IT
     174                else
     175                  return Status;
@@ -441,16 +441,16 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \                     ??RoadBrd_ReadTemp_4: (+1)
    \   00000062   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
    \   00000064   0x2F00             CMP      R7,#+0
-   \   00000066   0xD165             BNE.N    ??RoadBrd_ReadTemp_5
+   \   00000066   0xD167             BNE.N    ??RoadBrd_ReadTemp_5
    \   00000068   0xE005             B.N      ??RoadBrd_ReadTemp_6
    \                     ??RoadBrd_ReadTemp_3: (+1)
    \   0000006A   0x0038             MOVS     R0,R7
    \   0000006C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   0000006E   0xE063             B.N      ??RoadBrd_ReadTemp_2
+   \   0000006E   0xE065             B.N      ??RoadBrd_ReadTemp_2
    \                     ??RoadBrd_ReadTemp_0: (+1)
    \   00000070   0x0038             MOVS     R0,R7
    \   00000072   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000074   0xE060             B.N      ??RoadBrd_ReadTemp_2
+   \   00000074   0xE062             B.N      ??RoadBrd_ReadTemp_2
     192            {
     193              // Now calculate Celcius and Farenheit Temp.
     194          #ifdef TESTTEMP
@@ -484,79 +484,80 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000098   0xB2B6             UXTH     R6,R6            ;; ZeroExt  R6,R6,#+16,#+16
    \   0000009A   0x46B1             MOV      R9,R6
     207              
-    208              Temp_C = nativeInt * 0.125;
+    208              Temp_C = (float)nativeInt * 0.125;
    \                     ??RoadBrd_ReadTemp_8: (+1)
    \   0000009C   0x4648             MOV      R0,R9
-   \   0000009E   0x.... 0x....      BL       __aeabi_i2d
-   \   000000A2   0x2200             MOVS     R2,#+0
-   \   000000A4   0xF05F 0x537F      MOVS     R3,#+1069547520
-   \   000000A8   0x.... 0x....      BL       __aeabi_dmul
-   \   000000AC   0x.... 0x....      BL       __aeabi_d2f
-   \   000000B0   0x4680             MOV      R8,R0
+   \   0000009E   0x.... 0x....      BL       __aeabi_i2f
+   \   000000A2   0x.... 0x....      BL       __aeabi_f2d
+   \   000000A6   0x2200             MOVS     R2,#+0
+   \   000000A8   0xF05F 0x537F      MOVS     R3,#+1069547520
+   \   000000AC   0x.... 0x....      BL       __aeabi_dmul
+   \   000000B0   0x.... 0x....      BL       __aeabi_d2f
+   \   000000B4   0x4680             MOV      R8,R0
     209              tempC = (uint16_t)(round(Temp_C * 10));
-   \   000000B2   0x....             LDR.N    R0,??DataTable1_1  ;; 0x41200000
-   \   000000B4   0x4641             MOV      R1,R8
-   \   000000B6   0x.... 0x....      BL       __aeabi_fmul
-   \   000000BA   0x.... 0x....      BL       __aeabi_f2d
-   \   000000BE   0x.... 0x....      BL       round
-   \   000000C2   0x.... 0x....      BL       __aeabi_d2iz
-   \   000000C6   0x0005             MOVS     R5,R0
+   \   000000B6   0x....             LDR.N    R0,??DataTable1_1  ;; 0x41200000
+   \   000000B8   0x4641             MOV      R1,R8
+   \   000000BA   0x.... 0x....      BL       __aeabi_fmul
+   \   000000BE   0x.... 0x....      BL       __aeabi_f2d
+   \   000000C2   0x.... 0x....      BL       round
+   \   000000C6   0x.... 0x....      BL       __aeabi_d2iz
+   \   000000CA   0x0005             MOVS     R5,R0
     210              Temp_F = (Temp_C * 1.8) + 32;
-   \   000000C8   0x4640             MOV      R0,R8
-   \   000000CA   0x.... 0x....      BL       __aeabi_f2d
-   \   000000CE   0x....             LDR.N    R2,??DataTable1_2  ;; 0xcccccccd
-   \   000000D0   0x....             LDR.N    R3,??DataTable1_3  ;; 0x3ffccccc
-   \   000000D2   0x.... 0x....      BL       __aeabi_dmul
-   \   000000D6   0x2200             MOVS     R2,#+0
-   \   000000D8   0x....             LDR.N    R3,??DataTable1_4  ;; 0x40400000
-   \   000000DA   0x.... 0x....      BL       __aeabi_dadd
-   \   000000DE   0x.... 0x....      BL       __aeabi_d2f
-   \   000000E2   0x4682             MOV      R10,R0
+   \   000000CC   0x4640             MOV      R0,R8
+   \   000000CE   0x.... 0x....      BL       __aeabi_f2d
+   \   000000D2   0x....             LDR.N    R2,??DataTable1_2  ;; 0xcccccccd
+   \   000000D4   0x....             LDR.N    R3,??DataTable1_3  ;; 0x3ffccccc
+   \   000000D6   0x.... 0x....      BL       __aeabi_dmul
+   \   000000DA   0x2200             MOVS     R2,#+0
+   \   000000DC   0x....             LDR.N    R3,??DataTable1_4  ;; 0x40400000
+   \   000000DE   0x.... 0x....      BL       __aeabi_dadd
+   \   000000E2   0x.... 0x....      BL       __aeabi_d2f
+   \   000000E6   0x4682             MOV      R10,R0
     211              TPtr->RawC = tempC;
-   \   000000E4   0x82E5             STRH     R5,[R4, #+22]
+   \   000000E8   0x82E5             STRH     R5,[R4, #+22]
     212              sprintf( (char *)TPtr->TempC, "%3.1f", Temp_C );
-   \   000000E6   0x4640             MOV      R0,R8
-   \   000000E8   0x.... 0x....      BL       __aeabi_f2d
-   \   000000EC   0x0002             MOVS     R2,R0
-   \   000000EE   0x000B             MOVS     R3,R1
-   \   000000F0   0x....             LDR.N    R1,??DataTable1_5
-   \   000000F2   0x0020             MOVS     R0,R4
-   \   000000F4   0x.... 0x....      BL       sprintf
+   \   000000EA   0x4640             MOV      R0,R8
+   \   000000EC   0x.... 0x....      BL       __aeabi_f2d
+   \   000000F0   0x0002             MOVS     R2,R0
+   \   000000F2   0x000B             MOVS     R3,R1
+   \   000000F4   0x....             LDR.N    R1,??DataTable1_5
+   \   000000F6   0x0020             MOVS     R0,R4
+   \   000000F8   0x.... 0x....      BL       sprintf
     213              sprintf( (char *)TPtr->TempF, "%3.1f", Temp_F );
-   \   000000F8   0x4650             MOV      R0,R10
-   \   000000FA   0x.... 0x....      BL       __aeabi_f2d
-   \   000000FE   0x0002             MOVS     R2,R0
-   \   00000100   0x000B             MOVS     R3,R1
-   \   00000102   0x....             LDR.N    R1,??DataTable1_5
-   \   00000104   0x1DE0             ADDS     R0,R4,#+7
-   \   00000106   0x.... 0x....      BL       sprintf
+   \   000000FC   0x4650             MOV      R0,R10
+   \   000000FE   0x.... 0x....      BL       __aeabi_f2d
+   \   00000102   0x0002             MOVS     R2,R0
+   \   00000104   0x000B             MOVS     R3,R1
+   \   00000106   0x....             LDR.N    R1,??DataTable1_5
+   \   00000108   0x1DE0             ADDS     R0,R4,#+7
+   \   0000010A   0x.... 0x....      BL       sprintf
     214              // NOW, Build Raw Data String..
     215              sprintf( (char *)TPtr->Raw, "%02x", ((tempC & 0xff00)>>8));
-   \   0000010A   0x0028             MOVS     R0,R5
-   \   0000010C   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
-   \   0000010E   0x0A02             LSRS     R2,R0,#+8
-   \   00000110   0xB292             UXTH     R2,R2            ;; ZeroExt  R2,R2,#+16,#+16
-   \   00000112   0x....             LDR.N    R1,??DataTable1_6
-   \   00000114   0xF114 0x000E      ADDS     R0,R4,#+14
-   \   00000118   0x.... 0x....      BL       sprintf
+   \   0000010E   0x0028             MOVS     R0,R5
+   \   00000110   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
+   \   00000112   0x0A02             LSRS     R2,R0,#+8
+   \   00000114   0xB292             UXTH     R2,R2            ;; ZeroExt  R2,R2,#+16,#+16
+   \   00000116   0x....             LDR.N    R1,??DataTable1_6
+   \   00000118   0xF114 0x000E      ADDS     R0,R4,#+14
+   \   0000011C   0x.... 0x....      BL       sprintf
     216              sprintf( (char *)tempBffr2, "%02x", (tempC & 0x00ff));
-   \   0000011C   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
-   \   0000011E   0xF005 0x02FF      AND      R2,R5,#0xFF
-   \   00000122   0x....             LDR.N    R1,??DataTable1_6
-   \   00000124   0xA801             ADD      R0,SP,#+4
-   \   00000126   0x.... 0x....      BL       sprintf
+   \   00000120   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
+   \   00000122   0xF005 0x02FF      AND      R2,R5,#0xFF
+   \   00000126   0x....             LDR.N    R1,??DataTable1_6
+   \   00000128   0xA801             ADD      R0,SP,#+4
+   \   0000012A   0x.... 0x....      BL       sprintf
     217              strcat( (char *)TPtr->Raw, (char *)tempBffr2 );
-   \   0000012A   0xA901             ADD      R1,SP,#+4
-   \   0000012C   0xF114 0x000E      ADDS     R0,R4,#+14
-   \   00000130   0x.... 0x....      BL       strcat
+   \   0000012E   0xA901             ADD      R1,SP,#+4
+   \   00000130   0xF114 0x000E      ADDS     R0,R4,#+14
+   \   00000134   0x.... 0x....      BL       strcat
     218              //strcat( (char *)TPtr->Raw, "Rw" );
     219             }
     220            return Status;
    \                     ??RoadBrd_ReadTemp_5: (+1)
-   \   00000134   0x0038             MOVS     R0,R7
-   \   00000136   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000138   0x0038             MOVS     R0,R7
+   \   0000013A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \                     ??RoadBrd_ReadTemp_2: (+1)
-   \   00000138   0xE8BD 0x8FFE      POP      {R1-R11,PC}      ;; return
+   \   0000013C   0xE8BD 0x8FFE      POP      {R1-R11,PC}      ;; return
     221          }
 
    \                                 In section .text, align 4, keep-with-next
@@ -618,7 +619,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
         48   -> __aeabi_dmul
         48   -> __aeabi_f2d
         48   -> __aeabi_fmul
-        48   -> __aeabi_i2d
+        48   -> __aeabi_i2f
         48   -> round
         48   -> sprintf
         48   -> strcat
@@ -652,14 +653,14 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        4  ??DataTable1_6
        8  ?_0
        8  ?_1
-     316  RoadBrd_ReadTemp
+     320  RoadBrd_ReadTemp
      344  RoadBrd_ReadTemp_Scaled
 
  
   16 bytes in section .rodata
- 688 bytes in section .text
+ 692 bytes in section .text
  
- 688 bytes of CODE  memory
+ 692 bytes of CODE  memory
   16 bytes of CONST memory
 
 Errors: none

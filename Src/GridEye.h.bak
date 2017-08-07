@@ -229,12 +229,6 @@
 #define GRIDEYE_RST_FLAG        0x30            // Clears all Flags...Status, Ints, and Table
 #define GRIDEYE_RST_INIT        0x3F            // Performs flag reset and sets initial values.
 #define GRIDEYE_RST_NONE        0x00            // No Action
-
-#define TESTTEMP1               340             // LSB Thermister TEST 10X C
-#define TESTTEMP2               0x00            // MSB Thermister TEST 10X C
-#define TESTTEMP3               341             // LSB Road Termp TEST 10X C
-#define TESTTEMP4               0x00            // MSB Road Termp TEST 10X C
-
 // Structure
 
 typedef struct GridE {

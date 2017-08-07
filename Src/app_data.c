@@ -607,7 +607,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 //**HERE      BGM111_WriteCharacteristic(gattdb_HmdtyTempC,
 //                                 strlen((char *)data.HmTemp.TempC), (uint8_t *)data.HmTemp.TempC);
       /* Send the HmTemp to the BLE module */
-      sprintf( (char *)tmpBuffer, "<U0033 Units=”F”>%s</U0033>", (uint8_t *)data.HmTemp.TempF);
+      //sprintf( (char *)tmpBuffer, "<U0033 Units="F">%s</U0033>", (uint8_t *)data.HmTemp.TempF);
+      sprintf( (char *)tmpBuffer, "<U0033>%s</U0033>", (uint8_t *)data.HmTemp.TempF);
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
 //**HERE      BGM111_WriteCharacteristic(gattdb_HmdtyTempF,
