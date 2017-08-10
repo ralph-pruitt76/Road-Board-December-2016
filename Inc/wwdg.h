@@ -78,8 +78,9 @@ typedef struct wwdg_Frmes
 {
   uint32_t checksum;
   // Key Misc Variables
-  uint32_t RdSndTickCnt;
-  uint32_t SnsrTickCnt;
+  uint32_t      RdSndTickCnt;
+  uint32_t      SnsrTickCnt;
+  bool          Units_flg;
   // Key Frame Tracking Variables
   uint8_t Frame_WrtPtr;
   uint8_t Frame_RdPtr;
@@ -109,6 +110,8 @@ HAL_StatusTypeDef  RoadBrd_Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt );
 HAL_StatusTypeDef RoadBrd_Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt );
 uint32_t RoadBrd_Get_RdSndTickCnt( void );
 uint32_t RoadBrd_Get_SnsrTickCnt( void );
+HAL_StatusTypeDef RoadBrd_Set_UnitsFlag( bool PassedUnitsFlag );
+bool RoadBrd_Get_UnitsFlag( void );
 
 /* USER CODE END Prototypes */
 

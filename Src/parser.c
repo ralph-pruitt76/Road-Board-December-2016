@@ -2565,12 +2565,35 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                           break;
                       } //EndSwitch ( tempBffr[2] )
                     } //EndElse (Size < 3)
-
-
-
-
-
-
+                    break;
+//++++++++++++++++++++++++++++++++++++++++++  Units Enable/Disable Commands.
+                  case 'U':
+                    // Key Flash Variable Commands.
+                    // Test Size to make sure we have enough Characters for this operation
+                    Status = HAL_OK;
+                    if (Size < 3)
+                      strcpy( (char *)tempBffr2, "TU SYNTAX ERROR: Not correct format.\r\n");
+                    else
+                    {
+                      switch( tempBffr[2] )
+                      {
+//------------------
+                        case 'E':
+                          //Units Enable Command.
+                          sprintf( (char *)tempBffr2, "Units XML State CHANGED: ENABLED\r\n\r\n> ");
+                          Status = RoadBrd_Set_UnitsFlag( true );
+                          break;
+//------------------
+                        case 'D':
+                          //Units Disable Command
+                          sprintf( (char *)tempBffr2, "Units XML State CHANGED: DISABLED\r\n\r\n> ");
+                          Status = RoadBrd_Set_UnitsFlag( false );
+                          break;
+                        default:
+                          strcpy( (char *)tempBffr2, "TU SYNTAX ERROR: Not a legal command.\r\n");
+                          break;
+                      } //EndSwitch ( tempBffr[2] )
+                    } //EndElse (Size < 3)
                     break;
 //**************************************************************************************************
 //++++++++++++++++++++++++++++++++++++++++++  Special Monitor Mode to intercept traffic from UART and pass to BGM111

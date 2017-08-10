@@ -516,7 +516,29 @@ int main(void)
 #endif
           if (Status != HAL_OK)
             Error_Handler();
-          sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+          sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+#ifdef REV_L
+          Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+          // Wait for msg to be completed.
+          while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+          {
+          }
+          // Clear State for Next Transfer.
+          clrUsartState( NUCLEO_USART );
+#else
+          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+#endif
+          if (Status != HAL_OK)
+            Error_Handler();
+          // Now Display the Units Enabled State.
+          if (RoadBrd_Get_UnitsFlag())
+          {
+            sprintf( (char *)tempBffr2, "Units XML State: ENABLED\r\n\r\n> ");
+          }
+          else
+          {
+            sprintf( (char *)tempBffr2, "Units XML State: DISABLED\r\n\r\n> ");
+          }
 #ifdef REV_L
           Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
           // Wait for msg to be completed.
