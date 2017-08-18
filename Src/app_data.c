@@ -1071,7 +1071,8 @@ void Process_RdSound( void )
       else if (BGM111_GetTackState() == TACK_ARMED2)
       {
         BGM111_SetTackState(TACK_ASYNC);
-        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ASYNC>");      }
+        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ASYNC>");
+      }
       // Service Watchdog
       RoadBrd_WWDG_Refresh();     // Refresh WatchDog
       // Send </FRM> String.
