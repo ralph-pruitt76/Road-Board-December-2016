@@ -80,5 +80,6 @@ void Clr_HrtBeat_Cnt( void );
 void SendApp_String( uint8_t *pData );
 void ClrDataStructure(void);
 void ClrAnalyticsRepeat( void );
-
+bool TstDataReady( void );
+void ClrDataReady( void );
 #endif

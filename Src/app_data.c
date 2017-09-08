@@ -199,6 +199,28 @@ void SetDataReady( void )
   data.reading_scheduled = true;
 }
 
+/**
+  * @brief  Clear the reading_scheduled flag to enable Sensor processing.
+  * @param  None
+  * @retval None
+  */
+void ClrDataReady( void )
+{
+  /* Schedule a sensor reading */
+  data.reading_scheduled = false;
+}
+
+/**
+  * @brief  Return the state of the Data Ready Flag..
+  * @param  None
+  * @retval bool data.reading_scheduled
+  */
+bool TstDataReady( void )
+{
+  /* Schedule a sensor reading */
+  return data.reading_scheduled;
+}
+
 /* Sample timer interrupt handler */
 
 void SAMPLE_TIM_IRQHandler(void)

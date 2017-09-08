@@ -2530,6 +2530,53 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                 } // EndElse (flag == 0)
                               } // EndElse (tempBffr[4]!=':')
                               break;
+//------------------
+                            case 'T':
+                              //Key Flash Variable Set TACK Limit(Multiple of Road Sound Throttles).
+                              // Step 1. Validate format.
+                              if(tempBffr[4]!=':')
+                              {
+                                strcpy( (char *)tempBffr2, "TKST SYNTAX ERROR: Not correct format.\r\n");
+                              } // Endif (tempBffr[4]!=':')
+                              else
+                              {
+                                // 2. Verify if remaining string is digits
+                                if (Size > 5)
+                                {
+                                  flag = 1;
+                                  for (x=5; x< Size; x++)
+                                  {
+                                    if (isdigit(tempBffr[x]) == 0)
+                                      flag = 0;
+                                  }
+                                } // EndIf (Size > 5)
+                                else
+                                  flag = 0;
+                                if (flag == 0)
+                                {
+                                  strcpy( (char *)tempBffr2, "TKST SYNTAX ERROR: Bad Parameter.\r\n");
+                                }
+                                else
+                                {
+                                  // 3. Grab remaining string and convert to integer.
+                                  tempPstr = &tempBffr[5];
+                                  strcpy(tempstr, tempPstr);
+                                  new_value = atoi( tempstr );
+                                  if((new_value > 9999) ||
+                                     (new_value < 0))
+                                  {
+                                    strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Bad Parameter.\r\n");
+                                  }
+                                  else
+                                  {
+                                    // Time to set new TACK Limit.
+                                    RoadBrd_Set_TackLimit( new_value );
+                                    // NOW, Build Data String..
+                                    sprintf( (char *)tempBffr2, "COMPLETE" );
+                                  } // EndElse ((new_value > 9999) || (new_value < 0))
+                                } // EndElse (flag == 0)
+                              } // EndElse (tempBffr[4]!=':')
+                              break;
                             default:
                               strcpy( (char *)tempBffr2, "TKS ERROR: Not a legal command.\r\n");
                               break;
@@ -2538,7 +2585,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------
                         case 'R':
                           //Key Flash Variable Read Command
-                          //Key Flash Variable Set Command.
                           switch( tempBffr[3] )
                           {
 //------------------
@@ -2551,14 +2597,15 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                               //Key Flash Variable Read Sensor Sample Rate Command.
                               sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
                               break;
+//------------------
+                            case 'T':
+                              //Key Flash Variable Read TACK Limit(Multiple of Road Sound Throttles).
+                              sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n\r\n> ", RoadBrd_Get_TackLimit());
+                              break;
                             default:
-                              strcpy( (char *)tempBffr2, "TKS ERROR: Not a legal command.\r\n");
+                              strcpy( (char *)tempBffr2, "TKR ERROR: Not a legal command.\r\n");
                               break;
                           } // EndSwitch ( tempBffr[3] )
-                     
- 
-                          
-                          
                           break;
                         default:
                           strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");

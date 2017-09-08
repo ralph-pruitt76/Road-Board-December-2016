@@ -225,6 +225,7 @@ HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
   Save_Frames.checksum = FRAME_CHKSUM;
   Save_Frames.RdSndTickCnt = PROCESS_RD_SND_TIME;
   Save_Frames.SnsrTickCnt = PROCESS_SNSR_TIME;
+  Save_Frames.TackLimit = TACK_LIMIT;
   Save_Frames.Units_flg = true;
   Save_Frames.Frame_RdPtr = 0;
   Save_Frames.Frame_WrtPtr = 0;
@@ -341,6 +342,30 @@ HAL_StatusTypeDef RoadBrd_Set_UnitsFlag( bool PassedUnitsFlag )
 }
 
 /**
+  * @brief  Update TackLimit.
+  * @param  uint32_t PassedTackLimit
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_Set_TackLimit( uint32_t PassedTackLimit )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  Save_Frames.TackLimit = PassedTackLimit;
+  // Write Structure to Flash Memory.
+  //Status = RoadBrd_FlashInitWrite( 0x00, 
+  Status = RoadBrd_FlashWrite( 0x00, 
+                               FLASH_TYPEERASE_PAGES, 
+                               (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+/**
   * @brief  Retrieve RdSndTickCnt.
   * @param  None
   * @retval uint32_t Save_Frames.RdSndTickCnt
@@ -370,7 +395,17 @@ bool RoadBrd_Get_UnitsFlag( void )
   return Save_Frames.Units_flg;
 }
 
- /**
+/**
+  * @brief  Retrieve TackLimit.
+  * @param  None
+  * @retval uint32_t Save_Frames.TackLimit
+  */
+uint32_t RoadBrd_Get_TackLimit( void )
+{
+  return Save_Frames.TackLimit;
+}
+
+/**
   * @brief  This function Reads the key frame Information from Flash..
   * @param  none
   * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.

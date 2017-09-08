@@ -8,6 +8,7 @@
 #include "gpio.h"
 #include "ErrorCodes.h"
 #include "i2c.h"
+#include "wwdg.h"
 
 /* BGLib instantiation */
 
@@ -357,20 +358,27 @@ bool BGM111_SyncModeTest(void)
     // NO, then Incrment count, We are one step closer to Reset Code.
     else
     {
-      ble.TackCnt++;
-      sprintf( (char *)tempBffr2, "<TACK Strike:%d>", ble.TackCnt);
-      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-
-      if (ble.TackCnt > TACK_LIMIT)
+      // Test to see if we have had a timing tick yet...
+      if ( TstDataReady() )
       {
-        // Time to process error and reset code....NO Choice.
-        RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGMSYNC_CNCTCLOSE>");
-        RdBrd_ErrCdLogErrCd( ERROR_BGM_SYNCCNCT, MODULE_bgm111 );
-        Clr_HrtBeat_Cnt();
-        RdBrd_BlinkErrCd( ERROR_BGM_SYNCCNCT );
-        //RoadBrd_Delay( 1000 );
-        HAL_NVIC_SystemReset();
-      } // EndIf (ble.TackCnt >TACK_LIMIT)
+        // Clear Flag for next Tick Event.
+        ClrDataReady();
+        // Increment Cnt and Report...
+        ble.TackCnt++;
+        sprintf( (char *)tempBffr2, "<TACK Strike:%d/%d>", ble.TackCnt, RoadBrd_Get_TackLimit() );
+        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+
+        if (ble.TackCnt > RoadBrd_Get_TackLimit())
+        {
+          // Time to process error and reset code....NO Choice.
+          RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGMSYNC_CNCTCLOSE>");
+          RdBrd_ErrCdLogErrCd( ERROR_BGM_SYNCCNCT, MODULE_bgm111 );
+          Clr_HrtBeat_Cnt();
+          RdBrd_BlinkErrCd( ERROR_BGM_SYNCCNCT );
+          //RoadBrd_Delay( 1000 );
+          HAL_NVIC_SystemReset();
+        } // EndIf (ble.TackCnt >TACK_LIMIT)
+      } // EndIf ( TstDataReady() )
       return false;
     } // EndElse (ble.SyncFlag == SYNC_PROC)
   } // EndIf (ble.TackArmed == TACK_SYNC)

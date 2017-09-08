@@ -530,6 +530,20 @@ int main(void)
 #endif
           if (Status != HAL_OK)
             Error_Handler();
+          sprintf( (char *)tempBffr2, "TACK Limit: %d. \r\n", RoadBrd_Get_TackLimit() );
+#ifdef REV_L
+          Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+          // Wait for msg to be completed.
+          while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+          {
+          }
+          // Clear State for Next Transfer.
+          clrUsartState( NUCLEO_USART );
+#else
+          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+#endif
+          if (Status != HAL_OK)
+            Error_Handler();
           // Now Display the Units Enabled State.
           if (RoadBrd_Get_UnitsFlag())
           {
