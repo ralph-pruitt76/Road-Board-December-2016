@@ -16,9 +16,9 @@
 #define USARTx_IRQn        USART3_IRQn
 #define BRD_REV         "Rev M"               // PCB Revision          
 #define VERSION_NUM     "N.8.6"                 // Monitor Revision
-#define REL_DATE        "Sep 7, 2017"
+#define REL_DATE        "Sep 8, 2017"
 //#define LEGACY_BANNER   "Rev G+ REV C"        // OLD.....Needed to allow Legacy Design to work
-#define LEGACY_BANNER   "N8.6 9/7/17"        // Needed to allow Legacy Design to work
+#define LEGACY_BANNER   "N8.6 9/8/17"        // Needed to allow Legacy Design to work
 
 /* Prototypes */
 //int isHexNum(char *ptr);

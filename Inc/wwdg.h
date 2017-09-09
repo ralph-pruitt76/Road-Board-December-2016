@@ -108,6 +108,7 @@ HAL_StatusTypeDef RoadBrd_WWDG_WriteFlash( wwdg_SaveFrame* Write_Frame );
 HAL_StatusTypeDef RoadBrd_WWDG_ReadFlash( wwdg_SaveFrame* Read_Frame );
 HAL_StatusTypeDef RoadBrd_Set_TickCounts( uint32_t PassedRdSndTickCnt, uint32_t PassedSnsrTickCnt );
 HAL_StatusTypeDef  RoadBrd_Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt );
+HAL_StatusTypeDef RoadBrd_Set_TmpRdSndTickCnt( uint32_t PassedRdSndTickCnt );
 HAL_StatusTypeDef RoadBrd_Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt );
 HAL_StatusTypeDef RoadBrd_Set_TackLimit( uint32_t PassedTackLimit );
 uint32_t RoadBrd_Get_RdSndTickCnt( void );

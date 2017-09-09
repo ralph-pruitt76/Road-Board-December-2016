@@ -9,6 +9,7 @@
 #include "ErrorCodes.h"
 #include "i2c.h"
 #include "wwdg.h"
+#include "tim.h"
 
 /* BGLib instantiation */
 
@@ -55,6 +56,7 @@ struct
   bool booted;
   bool connection;
   bool data_Connection;
+  bool CMD_Mode;
   uint8_t TackArmed;
   uint8_t TackCnt;
   uint8_t SyncFlag;
@@ -70,6 +72,7 @@ void BGM111_LowLevel_Init(void)
   ble.booted =  false;
   ble.connection = false;
   ble.data_Connection = false;
+  ble.CMD_Mode = false;
   ble.TackArmed = TACK_OFF;
   ble.TackCnt = 0;
   ble.SyncFlag = SYNC_PROC;
@@ -338,6 +341,36 @@ bool BGM111_Connected(void)
 bool BGM111_DataConnected(void)
 {
   return ble.data_Connection;
+}
+
+/**
+  * @brief  Check whether the BLE module is in CMD Mode.
+  * @retval bool:         true(1):        CMD Mode is Active.
+  *                       false(0):       CMD Mode is  not Active.
+  */
+bool BGM111_CMD_Mode(void)
+{
+  return ble.CMD_Mode;
+}
+
+/**
+  * @brief  Set the BLE module is DATA connected.
+  * @param bool:         true(1):        DATA Connection is Active.
+  *                      false(0):       NO DATA Connection.
+  */
+void BGM111_SetDataConnected(bool NewMode)
+{
+  ble.data_Connection = NewMode;
+}
+
+/**
+  * @brief  Set new BLE CMD Mode.
+  * @param bool:         true(1):        CMD Mode is Active.
+  *                      false(0):       CMD Mode is  not Active.
+  */
+void BGM111_SetCMD_Mode(bool NewMode)
+{
+  ble.CMD_Mode = NewMode;
 }
 
 /**
@@ -647,6 +680,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       ble.booted = true;
       // If we are booted....Then lets arm TACK Test Code.
       ble.data_Connection = false;
+      ble.CMD_Mode = false;
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.booted> ");
     }
     // Connection String?
@@ -666,6 +700,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       // Yes....Clear Flags.
       ble.connection = false;
       ble.data_Connection = false;
+      ble.CMD_Mode = false;
       ble.TackArmed = TACK_ARMED;
       ble.TackCnt = 0;
       RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
@@ -676,17 +711,58 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
     // Data String?
     else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
     {
-      // Yes....Set Boot Flag.
-      ble.data_Connection = true;
+      // 1. Send String to Server to indicate new CMD Mode.
+      sprintf( (char *)tempBffr2, "<STATUS>CMD</STATUS>" );
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      if (Status != HAL_OK)
+        return Status;
+      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+      
+      // 2. Set the Timer to the RD_Sound at 1 Second Increments.
+      RoadBrd_Set_TmpRdSndTickCnt( CMD_TIME );                  // One Second Ticks.
+      
+      // 3. Set CMD_Mode Active.
+      BGM111_SetCMD_Mode( true );
+      
+      // Final Status.
+      //ble.data_Connection = true;
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
     }
     // TACK String?
     else if (strncmp((char *)tempBffr2,"<TACK",5) == 0)
     {
-      if (ble.TackArmed == TACK_ARMED2)
+      // CMD_Mode active?
+      if ( BGM111_CMD_Mode() )
+      {
+        // Send String to Server.
+        sprintf( (char *)tempBffr2, "<STATUS>DATA_SYNC</STATUS>" );
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        if (Status != HAL_OK)
+          return Status;
+        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+        // Clear CMD_Mode.
+        BGM111_SetCMD_Mode( false );
+        // Set Data_Connection Mode.
+        BGM111_SetDataConnected( true );
+        // Change RD_Sound Timer to correct value for Data Mode.
+        // First Reload FLASH Frames
+        RoadBrd_WWDG_VerifyFrame();
+        // NOW...Reload Active Timer.
+        Set_RdSndTickCnt( RoadBrd_Get_RdSndTickCnt() );
+        // Now Set Correct SYNC Mode.
+        ble.TackArmed = TACK_SYNC;
+        ble.TackCnt = 0;
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
+      }
+      else if (ble.TackArmed == TACK_ARMED2)
       {
         ble.TackArmed = TACK_SYNC;
         ble.TackCnt = 0;
+        sprintf( (char *)tempBffr2, "<STATUS>DATA_SYNC</STATUS>" );
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        if (Status != HAL_OK)
+          return Status;
+        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
         Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
       }
       else if (ble.TackArmed == TACK_SYNC)

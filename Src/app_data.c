@@ -14,6 +14,7 @@
 #include <string.h>
 #include "ErrorCodes.h"
 #include "wwdg.h"
+#include "tim.h"
 
 /* Characteristic handles */
 /*
@@ -1009,11 +1010,44 @@ void Process_RdSound( void )
 {
 //  uint8_t tempStr[13];
   uint8_t tempBffr2[80];
-  
+  static uint8_t CMD_Md_Cnt = 0;
+
+  // Is CMD_Mode active?
   if ((BGM111_Ready()) &&
       (BGM111_Connected()) &&
-      (BGM111_DataConnected()) &&
-      (BGM111_SyncModeTestNoInc()) )
+      (BGM111_CMD_Mode()) )
+  {
+    // 1. Increment CMD_Mode Count
+    CMD_Md_Cnt++;
+    sprintf( (char *)tempBffr2, "<<%d", CMD_Md_Cnt );
+    RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+    
+    // Test Cnt against Limit.
+    if ( CMD_Md_Cnt >= CMD_MODE_LMT)
+    {
+      RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)">>\r\n");
+      // Clear Count for Next Event.
+      CMD_Md_Cnt = 0;
+      // Send String to Server to indicate new CMD Mode.
+      sprintf( (char *)tempBffr2, "<STATUS>DATA_ASYNC</STATUS>" );
+      RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+      // Clear CMD_Mode.
+      BGM111_SetCMD_Mode( false );
+      // Set Data_Connection Mode.
+      BGM111_SetDataConnected( true );
+      // Change RD_Sound Timer to correct value for Data Mode.
+      // First Reload FLASH Frames
+      RoadBrd_WWDG_VerifyFrame();
+      // NOW...Reload Active Timer.
+      Set_RdSndTickCnt( RoadBrd_Get_RdSndTickCnt() );
+    } // EndIf ( CMD_Md_Cnt >= CMD_MODE_LMT)
+  } // EndIf ((BGM111_Ready()) && (BGM111_Connected()) && (BGM111_CMD_Mode()) )
+
+  if ((BGM111_Ready()) &&
+      (BGM111_Connected()) &&
+        (BGM111_DataConnected()) &&
+          (BGM111_SyncModeTestNoInc()) )
   {
       // Send <FRM> String.
       sprintf( (char *)tempBffr2, "<FRM>");
@@ -1094,6 +1128,9 @@ void Process_RdSound( void )
       {
         BGM111_SetTackState(TACK_ASYNC);
         RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ASYNC>");
+        sprintf( (char *)tempBffr2, "<STATUS>DATA_ASYNC</STATUS>" );
+        RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
       }
       // Service Watchdog
       RoadBrd_WWDG_Refresh();     // Refresh WatchDog

@@ -293,6 +293,21 @@ HAL_StatusTypeDef RoadBrd_Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt )
 }
 
 /**
+  * @brief  Update RdSndTickCnt.
+  * @param  uint32_t PassedRdSndTickCnt
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_Set_TmpRdSndTickCnt( uint32_t PassedRdSndTickCnt )
+{
+  Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
+  Set_RdSndTickCnt( PassedRdSndTickCnt );
+  return HAL_OK;
+}
+
+/**
   * @brief  Update SnsrTickCnt.
   * @param  uint32_t PassedSnsrTickCnt
   * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
