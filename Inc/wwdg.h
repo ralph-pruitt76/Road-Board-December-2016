@@ -64,6 +64,7 @@ extern WWDG_HandleTypeDef hwwdg;
 #define FRAME_SIZE       10              // Will Save 10 Frames
 #define FRAME_CHKSUM     0x5a5a5a5a      // Code to determine if frame ha been Initialized
 #define BASE_FLASH_ADDRESS      0x08070000      // Base Address to place all key Flash Structures.
+#define BOOT_WAIT               15      // Default Wait time for Boot Sequence...15 Seconds.
 
 // Private Structure
 // wwdg Save Frame
@@ -81,6 +82,7 @@ typedef struct wwdg_Frmes
   uint32_t      RdSndTickCnt;
   uint32_t      SnsrTickCnt;
   uint32_t      TackLimit;
+  uint32_t      BootDelay;
   bool          Units_flg;
   // Key Frame Tracking Variables
   uint8_t Frame_WrtPtr;
@@ -116,6 +118,8 @@ uint32_t RoadBrd_Get_SnsrTickCnt( void );
 HAL_StatusTypeDef RoadBrd_Set_UnitsFlag( bool PassedUnitsFlag );
 bool RoadBrd_Get_UnitsFlag( void );
 uint32_t RoadBrd_Get_TackLimit( void );
+HAL_StatusTypeDef RoadBrd_Set_BootDelay( uint32_t PassedBootDelay );
+uint32_t RoadBrd_Get_BootDelay( void );
 
 /* USER CODE END Prototypes */
 

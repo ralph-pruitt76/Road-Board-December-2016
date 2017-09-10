@@ -21,7 +21,6 @@
 #define PROCESS_RD_SND_TIME     123      // Process all Road Sound every Second(123 * 100ms tick)...12.3 Seconds
 #define PROCESS_LEDOFF_TIME     1       // Process and turn off all active LEDs. Controls the Blink rate of the LEDs(1 * 50ms tick)
 #define FRM_REPEAT_CNT          5       // Repeat the full set of data at least this many times.
-#define CMD_MODE_LMT            15      // 15 Second Timeout.
 
 #ifdef LONG_DELAY
 //  #define CONNECTION_CNT          180      // 15 Minutes.

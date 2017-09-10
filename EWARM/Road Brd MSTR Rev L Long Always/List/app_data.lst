@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       08/Sep/2017  10:41:32
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       09/Sep/2017  15:28:07
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -2302,13 +2302,13 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1018                (BGM111_CMD_Mode()) )
    \   00000004   0x.... 0x....      BL       BGM111_Ready
    \   00000008   0x2800             CMP      R0,#+0
-   \   0000000A   0xD043             BEQ.N    ??Process_RdSound_0
+   \   0000000A   0xD045             BEQ.N    ??Process_RdSound_0
    \   0000000C   0x.... 0x....      BL       BGM111_Connected
    \   00000010   0x2800             CMP      R0,#+0
-   \   00000012   0xD03F             BEQ.N    ??Process_RdSound_0
+   \   00000012   0xD041             BEQ.N    ??Process_RdSound_0
    \   00000014   0x.... 0x....      BL       BGM111_CMD_Mode
    \   00000018   0x2800             CMP      R0,#+0
-   \   0000001A   0xD03B             BEQ.N    ??Process_RdSound_0
+   \   0000001A   0xD03D             BEQ.N    ??Process_RdSound_0
    1019            {
    1020              // 1. Increment CMD_Mode Count
    1021              CMD_Md_Cnt++;
@@ -2329,51 +2329,52 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000003E   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1024              
    1025              // Test Cnt against Limit.
-   1026              if ( CMD_Md_Cnt >= CMD_MODE_LMT)
-   \   00000042   0x.... 0x....      LDR.W    R0,??DataTable16_56
-   \   00000046   0x7800             LDRB     R0,[R0, #+0]
-   \   00000048   0x280F             CMP      R0,#+15
-   \   0000004A   0xDB23             BLT.N    ??Process_RdSound_0
+   1026              if ( CMD_Md_Cnt >= RoadBrd_Get_BootDelay())
+   \   00000042   0x.... 0x....      BL       RoadBrd_Get_BootDelay
+   \   00000046   0x.... 0x....      LDR.W    R1,??DataTable16_56
+   \   0000004A   0x7809             LDRB     R1,[R1, #+0]
+   \   0000004C   0x4281             CMP      R1,R0
+   \   0000004E   0xD323             BCC.N    ??Process_RdSound_0
    1027              {
    1028                RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)">>\r\n");
-   \   0000004C   0x.... 0x....      LDR.W    R1,??DataTable16_58
-   \   00000050   0x2000             MOVS     R0,#+0
-   \   00000052   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000050   0x.... 0x....      LDR.W    R1,??DataTable16_58
+   \   00000054   0x2000             MOVS     R0,#+0
+   \   00000056   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1029                // Clear Count for Next Event.
    1030                CMD_Md_Cnt = 0;
-   \   00000056   0x2000             MOVS     R0,#+0
-   \   00000058   0x.... 0x....      LDR.W    R1,??DataTable16_56
-   \   0000005C   0x7008             STRB     R0,[R1, #+0]
+   \   0000005A   0x2000             MOVS     R0,#+0
+   \   0000005C   0x.... 0x....      LDR.W    R1,??DataTable16_56
+   \   00000060   0x7008             STRB     R0,[R1, #+0]
    1031                // Send String to Server to indicate new CMD Mode.
    1032                sprintf( (char *)tempBffr2, "<STATUS>DATA_ASYNC</STATUS>" );
-   \   0000005E   0x.... 0x....      LDR.W    R1,??DataTable16_59
-   \   00000062   0xA801             ADD      R0,SP,#+4
-   \   00000064   0x.... 0x....      BL       sprintf
+   \   00000062   0x.... 0x....      LDR.W    R1,??DataTable16_59
+   \   00000066   0xA801             ADD      R0,SP,#+4
+   \   00000068   0x.... 0x....      BL       sprintf
    1033                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-   \   00000068   0xA901             ADD      R1,SP,#+4
-   \   0000006A   0x2000             MOVS     R0,#+0
-   \   0000006C   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000006C   0xA901             ADD      R1,SP,#+4
+   \   0000006E   0x2000             MOVS     R0,#+0
+   \   00000070   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1034                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   00000070   0xA801             ADD      R0,SP,#+4
-   \   00000072   0x.... 0x....      BL       strlen
-   \   00000076   0xA901             ADD      R1,SP,#+4
-   \   00000078   0x.... 0x....      BL       BGM111_Transmit
+   \   00000074   0xA801             ADD      R0,SP,#+4
+   \   00000076   0x.... 0x....      BL       strlen
+   \   0000007A   0xA901             ADD      R1,SP,#+4
+   \   0000007C   0x.... 0x....      BL       BGM111_Transmit
    1035                // Clear CMD_Mode.
    1036                BGM111_SetCMD_Mode( false );
-   \   0000007C   0x2000             MOVS     R0,#+0
-   \   0000007E   0x.... 0x....      BL       BGM111_SetCMD_Mode
+   \   00000080   0x2000             MOVS     R0,#+0
+   \   00000082   0x.... 0x....      BL       BGM111_SetCMD_Mode
    1037                // Set Data_Connection Mode.
    1038                BGM111_SetDataConnected( true );
-   \   00000082   0x2001             MOVS     R0,#+1
-   \   00000084   0x.... 0x....      BL       BGM111_SetDataConnected
+   \   00000086   0x2001             MOVS     R0,#+1
+   \   00000088   0x.... 0x....      BL       BGM111_SetDataConnected
    1039                // Change RD_Sound Timer to correct value for Data Mode.
    1040                // First Reload FLASH Frames
    1041                RoadBrd_WWDG_VerifyFrame();
-   \   00000088   0x.... 0x....      BL       RoadBrd_WWDG_VerifyFrame
+   \   0000008C   0x.... 0x....      BL       RoadBrd_WWDG_VerifyFrame
    1042                // NOW...Reload Active Timer.
    1043                Set_RdSndTickCnt( RoadBrd_Get_RdSndTickCnt() );
-   \   0000008C   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
-   \   00000090   0x.... 0x....      BL       Set_RdSndTickCnt
+   \   00000090   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
+   \   00000094   0x.... 0x....      BL       Set_RdSndTickCnt
    1044              } // EndIf ( CMD_Md_Cnt >= CMD_MODE_LMT)
    1045            } // EndIf ((BGM111_Ready()) && (BGM111_Connected()) && (BGM111_CMD_Mode()) )
    1046          
@@ -2382,330 +2383,330 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1049                  (BGM111_DataConnected()) &&
    1050                    (BGM111_SyncModeTestNoInc()) )
    \                     ??Process_RdSound_0: (+1)
-   \   00000094   0x.... 0x....      BL       BGM111_Ready
-   \   00000098   0x2800             CMP      R0,#+0
-   \   0000009A   0xF000 0x8116      BEQ.W    ??Process_RdSound_1
-   \   0000009E   0x.... 0x....      BL       BGM111_Connected
-   \   000000A2   0x2800             CMP      R0,#+0
-   \   000000A4   0xF000 0x8111      BEQ.W    ??Process_RdSound_1
-   \   000000A8   0x.... 0x....      BL       BGM111_DataConnected
-   \   000000AC   0x2800             CMP      R0,#+0
-   \   000000AE   0xF000 0x810C      BEQ.W    ??Process_RdSound_1
-   \   000000B2   0x.... 0x....      BL       BGM111_SyncModeTestNoInc
-   \   000000B6   0x2800             CMP      R0,#+0
-   \   000000B8   0xF000 0x8107      BEQ.W    ??Process_RdSound_1
+   \   00000098   0x.... 0x....      BL       BGM111_Ready
+   \   0000009C   0x2800             CMP      R0,#+0
+   \   0000009E   0xF000 0x8116      BEQ.W    ??Process_RdSound_1
+   \   000000A2   0x.... 0x....      BL       BGM111_Connected
+   \   000000A6   0x2800             CMP      R0,#+0
+   \   000000A8   0xF000 0x8111      BEQ.W    ??Process_RdSound_1
+   \   000000AC   0x.... 0x....      BL       BGM111_DataConnected
+   \   000000B0   0x2800             CMP      R0,#+0
+   \   000000B2   0xF000 0x810C      BEQ.W    ??Process_RdSound_1
+   \   000000B6   0x.... 0x....      BL       BGM111_SyncModeTestNoInc
+   \   000000BA   0x2800             CMP      R0,#+0
+   \   000000BC   0xF000 0x8107      BEQ.W    ??Process_RdSound_1
    1051            {
    1052                // Send <FRM> String.
    1053                sprintf( (char *)tempBffr2, "<FRM>");
-   \   000000BC   0x.... 0x....      LDR.W    R1,??DataTable16_60
-   \   000000C0   0xA801             ADD      R0,SP,#+4
-   \   000000C2   0x.... 0x....      BL       sprintf
+   \   000000C0   0x.... 0x....      LDR.W    R1,??DataTable16_60
+   \   000000C4   0xA801             ADD      R0,SP,#+4
+   \   000000C6   0x.... 0x....      BL       sprintf
    1054                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-   \   000000C6   0xA901             ADD      R1,SP,#+4
-   \   000000C8   0x2000             MOVS     R0,#+0
-   \   000000CA   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000000CA   0xA901             ADD      R1,SP,#+4
+   \   000000CC   0x2000             MOVS     R0,#+0
+   \   000000CE   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1055                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   000000CE   0xA801             ADD      R0,SP,#+4
-   \   000000D0   0x.... 0x....      BL       strlen
-   \   000000D4   0xA901             ADD      R1,SP,#+4
-   \   000000D6   0x.... 0x....      BL       BGM111_Transmit
+   \   000000D2   0xA801             ADD      R0,SP,#+4
+   \   000000D4   0x.... 0x....      BL       strlen
+   \   000000D8   0xA901             ADD      R1,SP,#+4
+   \   000000DA   0x.... 0x....      BL       BGM111_Transmit
    1056            
    1057                RoadBrd_gpio_On( MICRO_LED );
-   \   000000DA   0x2002             MOVS     R0,#+2
-   \   000000DC   0x.... 0x....      BL       RoadBrd_gpio_On
+   \   000000DE   0x2002             MOVS     R0,#+2
+   \   000000E0   0x.... 0x....      BL       RoadBrd_gpio_On
    1058                // 1. Build and Process Road Sound
    1059                RoadBrdSnd_ProcessSound();
-   \   000000E0   0x.... 0x....      BL       RoadBrdSnd_ProcessSound
+   \   000000E4   0x.... 0x....      BL       RoadBrdSnd_ProcessSound
    1060                
    1061                // 2. Load FFT Data into local Data.
    1062                RoadBrdSnd_DumpBin0( &data.FFTBin0 );
-   \   000000E4   0x.... 0x....      LDR.W    R0,??DataTable16_61
-   \   000000E8   0x.... 0x....      BL       RoadBrdSnd_DumpBin0
+   \   000000E8   0x.... 0x....      LDR.W    R0,??DataTable16_61
+   \   000000EC   0x.... 0x....      BL       RoadBrdSnd_DumpBin0
    1063                RoadBrdSnd_DumpBin16( &data.FFTBin16 );
-   \   000000EC   0x.... 0x....      LDR.W    R0,??DataTable16_62
-   \   000000F0   0x.... 0x....      BL       RoadBrdSnd_DumpBin16
+   \   000000F0   0x.... 0x....      LDR.W    R0,??DataTable16_62
+   \   000000F4   0x.... 0x....      BL       RoadBrdSnd_DumpBin16
    1064                RoadBrdSnd_DumpBin32( &data.FFTBin32 );
-   \   000000F4   0x.... 0x....      LDR.W    R0,??DataTable16_63
-   \   000000F8   0x.... 0x....      BL       RoadBrdSnd_DumpBin32
+   \   000000F8   0x.... 0x....      LDR.W    R0,??DataTable16_63
+   \   000000FC   0x.... 0x....      BL       RoadBrdSnd_DumpBin32
    1065                RoadBrdSnd_DumpBin48( &data.FFTBin48 );
-   \   000000FC   0x.... 0x....      LDR.W    R0,??DataTable16_64
-   \   00000100   0x.... 0x....      BL       RoadBrdSnd_DumpBin48
+   \   00000100   0x.... 0x....      LDR.W    R0,??DataTable16_64
+   \   00000104   0x.... 0x....      BL       RoadBrdSnd_DumpBin48
    1066                
    1067                // 3. Update BLE Characteristics with new data.
    1068                /* Send the FFTBin0 to the BLE module */
    1069                RoadBrd_gpio_On( BGM_LED );
-   \   00000104   0x2001             MOVS     R0,#+1
-   \   00000106   0x.... 0x....      BL       RoadBrd_gpio_On
+   \   00000108   0x2001             MOVS     R0,#+1
+   \   0000010A   0x.... 0x....      BL       RoadBrd_gpio_On
    1070              #ifndef LEGACY_PATCH
    1071                if (RoadBrd_Get_UnitsFlag())
-   \   0000010A   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
-   \   0000010E   0x2800             CMP      R0,#+0
-   \   00000110   0xD00A             BEQ.N    ??Process_RdSound_2
+   \   0000010E   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
+   \   00000112   0x2800             CMP      R0,#+0
+   \   00000114   0xD00A             BEQ.N    ??Process_RdSound_2
    1072                  sprintf( (char *)tempBffr2, "<U0012 Units=%cBn%c>%s</U0012>", '"', '"', (uint8_t *)data.FFTBin0.dumpStr);
-   \   00000112   0x.... 0x....      LDR.W    R0,??DataTable16_61
-   \   00000116   0x9000             STR      R0,[SP, #+0]
-   \   00000118   0x2322             MOVS     R3,#+34
-   \   0000011A   0x2222             MOVS     R2,#+34
-   \   0000011C   0x.... 0x....      LDR.W    R1,??DataTable16_65
-   \   00000120   0xA801             ADD      R0,SP,#+4
-   \   00000122   0x.... 0x....      BL       sprintf
-   \   00000126   0xE006             B.N      ??Process_RdSound_3
+   \   00000116   0x.... 0x....      LDR.W    R0,??DataTable16_61
+   \   0000011A   0x9000             STR      R0,[SP, #+0]
+   \   0000011C   0x2322             MOVS     R3,#+34
+   \   0000011E   0x2222             MOVS     R2,#+34
+   \   00000120   0x.... 0x....      LDR.W    R1,??DataTable16_65
+   \   00000124   0xA801             ADD      R0,SP,#+4
+   \   00000126   0x.... 0x....      BL       sprintf
+   \   0000012A   0xE006             B.N      ??Process_RdSound_3
    1073                else
    1074                  sprintf( (char *)tempBffr2, "<U0012>%s</U0012>", (uint8_t *)data.FFTBin0.dumpStr);
    \                     ??Process_RdSound_2: (+1)
-   \   00000128   0x.... 0x....      LDR.W    R2,??DataTable16_61
-   \   0000012C   0x.... 0x....      LDR.W    R1,??DataTable16_66
-   \   00000130   0xA801             ADD      R0,SP,#+4
-   \   00000132   0x.... 0x....      BL       sprintf
+   \   0000012C   0x.... 0x....      LDR.W    R2,??DataTable16_61
+   \   00000130   0x.... 0x....      LDR.W    R1,??DataTable16_66
+   \   00000134   0xA801             ADD      R0,SP,#+4
+   \   00000136   0x.... 0x....      BL       sprintf
    1075                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
    \                     ??Process_RdSound_3: (+1)
-   \   00000136   0xA901             ADD      R1,SP,#+4
-   \   00000138   0x2000             MOVS     R0,#+0
-   \   0000013A   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000013A   0xA901             ADD      R1,SP,#+4
+   \   0000013C   0x2000             MOVS     R0,#+0
+   \   0000013E   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1076                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   0000013E   0xA801             ADD      R0,SP,#+4
-   \   00000140   0x.... 0x....      BL       strlen
-   \   00000144   0xA901             ADD      R1,SP,#+4
-   \   00000146   0x.... 0x....      BL       BGM111_Transmit
+   \   00000142   0xA801             ADD      R0,SP,#+4
+   \   00000144   0x.... 0x....      BL       strlen
+   \   00000148   0xA901             ADD      R1,SP,#+4
+   \   0000014A   0x.... 0x....      BL       BGM111_Transmit
    1077              //  BGM111_WriteCharacteristic(gattdb_RdSound0,
    1078              //                             strlen((char *)data.FFTBin0.dumpStr), (uint8_t *)data.FFTBin0.dumpStr);
    1079              #endif
    1080                /* Send the FFTBin16 to the BLE module */
    1081                RoadBrd_gpio_On( BGM_LED );
-   \   0000014A   0x2001             MOVS     R0,#+1
-   \   0000014C   0x.... 0x....      BL       RoadBrd_gpio_On
+   \   0000014E   0x2001             MOVS     R0,#+1
+   \   00000150   0x.... 0x....      BL       RoadBrd_gpio_On
    1082              #ifndef LEGACY_PATCH
    1083                if (RoadBrd_Get_UnitsFlag())
-   \   00000150   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
-   \   00000154   0x2800             CMP      R0,#+0
-   \   00000156   0xD00A             BEQ.N    ??Process_RdSound_4
+   \   00000154   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
+   \   00000158   0x2800             CMP      R0,#+0
+   \   0000015A   0xD00A             BEQ.N    ??Process_RdSound_4
    1084                  sprintf( (char *)tempBffr2, "<U0013 Units=%cBn%c>%s</U0013>", '"', '"', (uint8_t *)data.FFTBin16.dumpStr);
-   \   00000158   0x.... 0x....      LDR.W    R0,??DataTable16_62
-   \   0000015C   0x9000             STR      R0,[SP, #+0]
-   \   0000015E   0x2322             MOVS     R3,#+34
-   \   00000160   0x2222             MOVS     R2,#+34
-   \   00000162   0x.... 0x....      LDR.W    R1,??DataTable16_67
-   \   00000166   0xA801             ADD      R0,SP,#+4
-   \   00000168   0x.... 0x....      BL       sprintf
-   \   0000016C   0xE006             B.N      ??Process_RdSound_5
+   \   0000015C   0x.... 0x....      LDR.W    R0,??DataTable16_62
+   \   00000160   0x9000             STR      R0,[SP, #+0]
+   \   00000162   0x2322             MOVS     R3,#+34
+   \   00000164   0x2222             MOVS     R2,#+34
+   \   00000166   0x.... 0x....      LDR.W    R1,??DataTable16_67
+   \   0000016A   0xA801             ADD      R0,SP,#+4
+   \   0000016C   0x.... 0x....      BL       sprintf
+   \   00000170   0xE006             B.N      ??Process_RdSound_5
    1085                else
    1086                  sprintf( (char *)tempBffr2, "<U0013>%s</U0013>", (uint8_t *)data.FFTBin16.dumpStr);
    \                     ??Process_RdSound_4: (+1)
-   \   0000016E   0x.... 0x....      LDR.W    R2,??DataTable16_62
-   \   00000172   0x.... 0x....      LDR.W    R1,??DataTable16_68
-   \   00000176   0xA801             ADD      R0,SP,#+4
-   \   00000178   0x.... 0x....      BL       sprintf
+   \   00000172   0x.... 0x....      LDR.W    R2,??DataTable16_62
+   \   00000176   0x.... 0x....      LDR.W    R1,??DataTable16_68
+   \   0000017A   0xA801             ADD      R0,SP,#+4
+   \   0000017C   0x.... 0x....      BL       sprintf
    1087                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
    \                     ??Process_RdSound_5: (+1)
-   \   0000017C   0xA901             ADD      R1,SP,#+4
-   \   0000017E   0x2000             MOVS     R0,#+0
-   \   00000180   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000180   0xA901             ADD      R1,SP,#+4
+   \   00000182   0x2000             MOVS     R0,#+0
+   \   00000184   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1088                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   00000184   0xA801             ADD      R0,SP,#+4
-   \   00000186   0x.... 0x....      BL       strlen
-   \   0000018A   0xA901             ADD      R1,SP,#+4
-   \   0000018C   0x.... 0x....      BL       BGM111_Transmit
+   \   00000188   0xA801             ADD      R0,SP,#+4
+   \   0000018A   0x.... 0x....      BL       strlen
+   \   0000018E   0xA901             ADD      R1,SP,#+4
+   \   00000190   0x.... 0x....      BL       BGM111_Transmit
    1089              //  BGM111_WriteCharacteristic(gattdb_RdSound16,
    1090              //                             strlen((char *)data.FFTBin16.dumpStr), (uint8_t *)data.FFTBin16.dumpStr);
    1091              #endif
    1092                /* Send the FFTBin32 to the BLE module */
    1093                RoadBrd_gpio_On( BGM_LED );
-   \   00000190   0x2001             MOVS     R0,#+1
-   \   00000192   0x.... 0x....      BL       RoadBrd_gpio_On
+   \   00000194   0x2001             MOVS     R0,#+1
+   \   00000196   0x.... 0x....      BL       RoadBrd_gpio_On
    1094              #ifndef LEGACY_PATCH
    1095                if (RoadBrd_Get_UnitsFlag())
-   \   00000196   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
-   \   0000019A   0x2800             CMP      R0,#+0
-   \   0000019C   0xD00A             BEQ.N    ??Process_RdSound_6
+   \   0000019A   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
+   \   0000019E   0x2800             CMP      R0,#+0
+   \   000001A0   0xD00A             BEQ.N    ??Process_RdSound_6
    1096                  sprintf( (char *)tempBffr2, "<U0014 Units=%cB%c”>%s</U0014>", '"', '"', (uint8_t *)data.FFTBin32.dumpStr);
-   \   0000019E   0x.... 0x....      LDR.W    R0,??DataTable16_63
-   \   000001A2   0x9000             STR      R0,[SP, #+0]
-   \   000001A4   0x2322             MOVS     R3,#+34
-   \   000001A6   0x2222             MOVS     R2,#+34
-   \   000001A8   0x.... 0x....      LDR.W    R1,??DataTable16_69
-   \   000001AC   0xA801             ADD      R0,SP,#+4
-   \   000001AE   0x.... 0x....      BL       sprintf
-   \   000001B2   0xE006             B.N      ??Process_RdSound_7
+   \   000001A2   0x.... 0x....      LDR.W    R0,??DataTable16_63
+   \   000001A6   0x9000             STR      R0,[SP, #+0]
+   \   000001A8   0x2322             MOVS     R3,#+34
+   \   000001AA   0x2222             MOVS     R2,#+34
+   \   000001AC   0x.... 0x....      LDR.W    R1,??DataTable16_69
+   \   000001B0   0xA801             ADD      R0,SP,#+4
+   \   000001B2   0x.... 0x....      BL       sprintf
+   \   000001B6   0xE006             B.N      ??Process_RdSound_7
    1097                else
    1098                  sprintf( (char *)tempBffr2, "<U0014>%s</U0014>", (uint8_t *)data.FFTBin32.dumpStr);
    \                     ??Process_RdSound_6: (+1)
-   \   000001B4   0x.... 0x....      LDR.W    R2,??DataTable16_63
-   \   000001B8   0x.... 0x....      LDR.W    R1,??DataTable16_70
-   \   000001BC   0xA801             ADD      R0,SP,#+4
-   \   000001BE   0x.... 0x....      BL       sprintf
+   \   000001B8   0x.... 0x....      LDR.W    R2,??DataTable16_63
+   \   000001BC   0x.... 0x....      LDR.W    R1,??DataTable16_70
+   \   000001C0   0xA801             ADD      R0,SP,#+4
+   \   000001C2   0x.... 0x....      BL       sprintf
    1099                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
    \                     ??Process_RdSound_7: (+1)
-   \   000001C2   0xA901             ADD      R1,SP,#+4
-   \   000001C4   0x2000             MOVS     R0,#+0
-   \   000001C6   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000001C6   0xA901             ADD      R1,SP,#+4
+   \   000001C8   0x2000             MOVS     R0,#+0
+   \   000001CA   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1100                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   000001CA   0xA801             ADD      R0,SP,#+4
-   \   000001CC   0x.... 0x....      BL       strlen
-   \   000001D0   0xA901             ADD      R1,SP,#+4
-   \   000001D2   0x.... 0x....      BL       BGM111_Transmit
+   \   000001CE   0xA801             ADD      R0,SP,#+4
+   \   000001D0   0x.... 0x....      BL       strlen
+   \   000001D4   0xA901             ADD      R1,SP,#+4
+   \   000001D6   0x.... 0x....      BL       BGM111_Transmit
    1101              //  BGM111_WriteCharacteristic(gattdb_RdSound32,
    1102              //                             strlen((char *)data.FFTBin32.dumpStr), (uint8_t *)data.FFTBin32.dumpStr);
    1103              #endif
    1104                /* Send the FFTBin48 to the BLE module */
    1105                RoadBrd_gpio_On( BGM_LED );
-   \   000001D6   0x2001             MOVS     R0,#+1
-   \   000001D8   0x.... 0x....      BL       RoadBrd_gpio_On
+   \   000001DA   0x2001             MOVS     R0,#+1
+   \   000001DC   0x.... 0x....      BL       RoadBrd_gpio_On
    1106              #ifndef LEGACY_PATCH
    1107                if (RoadBrd_Get_UnitsFlag())
-   \   000001DC   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
-   \   000001E0   0x2800             CMP      R0,#+0
-   \   000001E2   0xD00A             BEQ.N    ??Process_RdSound_8
+   \   000001E0   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
+   \   000001E4   0x2800             CMP      R0,#+0
+   \   000001E6   0xD00A             BEQ.N    ??Process_RdSound_8
    1108                  sprintf( (char *)tempBffr2, "<U0015 Units=%cBn%c>%s</U0015>", '"', '"', (uint8_t *)data.FFTBin48.dumpStr);
-   \   000001E4   0x.... 0x....      LDR.W    R0,??DataTable16_64
-   \   000001E8   0x9000             STR      R0,[SP, #+0]
-   \   000001EA   0x2322             MOVS     R3,#+34
-   \   000001EC   0x2222             MOVS     R2,#+34
-   \   000001EE   0x.... 0x....      LDR.W    R1,??DataTable16_71
-   \   000001F2   0xA801             ADD      R0,SP,#+4
-   \   000001F4   0x.... 0x....      BL       sprintf
-   \   000001F8   0xE006             B.N      ??Process_RdSound_9
+   \   000001E8   0x.... 0x....      LDR.W    R0,??DataTable16_64
+   \   000001EC   0x9000             STR      R0,[SP, #+0]
+   \   000001EE   0x2322             MOVS     R3,#+34
+   \   000001F0   0x2222             MOVS     R2,#+34
+   \   000001F2   0x.... 0x....      LDR.W    R1,??DataTable16_71
+   \   000001F6   0xA801             ADD      R0,SP,#+4
+   \   000001F8   0x.... 0x....      BL       sprintf
+   \   000001FC   0xE006             B.N      ??Process_RdSound_9
    1109                else
    1110                  sprintf( (char *)tempBffr2, "<U0015>%s</U0015>", (uint8_t *)data.FFTBin48.dumpStr);
    \                     ??Process_RdSound_8: (+1)
-   \   000001FA   0x.... 0x....      LDR.W    R2,??DataTable16_64
-   \   000001FE   0x.... 0x....      LDR.W    R1,??DataTable16_72
-   \   00000202   0xA801             ADD      R0,SP,#+4
-   \   00000204   0x.... 0x....      BL       sprintf
+   \   000001FE   0x.... 0x....      LDR.W    R2,??DataTable16_64
+   \   00000202   0x.... 0x....      LDR.W    R1,??DataTable16_72
+   \   00000206   0xA801             ADD      R0,SP,#+4
+   \   00000208   0x.... 0x....      BL       sprintf
    1111                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
    \                     ??Process_RdSound_9: (+1)
-   \   00000208   0xA901             ADD      R1,SP,#+4
-   \   0000020A   0x2000             MOVS     R0,#+0
-   \   0000020C   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000020C   0xA901             ADD      R1,SP,#+4
+   \   0000020E   0x2000             MOVS     R0,#+0
+   \   00000210   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1112                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   00000210   0xA801             ADD      R0,SP,#+4
-   \   00000212   0x.... 0x....      BL       strlen
-   \   00000216   0xA901             ADD      R1,SP,#+4
-   \   00000218   0x.... 0x....      BL       BGM111_Transmit
+   \   00000214   0xA801             ADD      R0,SP,#+4
+   \   00000216   0x.... 0x....      BL       strlen
+   \   0000021A   0xA901             ADD      R1,SP,#+4
+   \   0000021C   0x.... 0x....      BL       BGM111_Transmit
    1113              //  BGM111_WriteCharacteristic(gattdb_RdSound48,
    1114              //                             strlen((char *)data.FFTBin48.dumpStr), (uint8_t *)data.FFTBin48.dumpStr);
    1115                //sprintf( (char *)tempBffr2, "<TICK>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
    1116                sprintf( (char *)tempBffr2, "<TICK>RP/%08x</TICK>", HAL_GetTick());
-   \   0000021C   0x.... 0x....      BL       HAL_GetTick
-   \   00000220   0x0002             MOVS     R2,R0
-   \   00000222   0x.... 0x....      LDR.W    R1,??DataTable16_73
-   \   00000226   0xA801             ADD      R0,SP,#+4
-   \   00000228   0x.... 0x....      BL       sprintf
+   \   00000220   0x.... 0x....      BL       HAL_GetTick
+   \   00000224   0x0002             MOVS     R2,R0
+   \   00000226   0x.... 0x....      LDR.W    R1,??DataTable16_73
+   \   0000022A   0xA801             ADD      R0,SP,#+4
+   \   0000022C   0x.... 0x....      BL       sprintf
    1117                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-   \   0000022C   0xA901             ADD      R1,SP,#+4
-   \   0000022E   0x2000             MOVS     R0,#+0
-   \   00000230   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000230   0xA901             ADD      R1,SP,#+4
+   \   00000232   0x2000             MOVS     R0,#+0
+   \   00000234   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1118                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   00000234   0xA801             ADD      R0,SP,#+4
-   \   00000236   0x.... 0x....      BL       strlen
-   \   0000023A   0xA901             ADD      R1,SP,#+4
-   \   0000023C   0x.... 0x....      BL       BGM111_Transmit
+   \   00000238   0xA801             ADD      R0,SP,#+4
+   \   0000023A   0x.... 0x....      BL       strlen
+   \   0000023E   0xA901             ADD      R1,SP,#+4
+   \   00000240   0x.... 0x....      BL       BGM111_Transmit
    1119                // Set Sync Flag for Frame.
    1120                BGM111_cntrlSetSyncFlg( SYNC_WAIT );
-   \   00000240   0x2000             MOVS     R0,#+0
-   \   00000242   0x.... 0x....      BL       BGM111_cntrlSetSyncFlg
+   \   00000244   0x2000             MOVS     R0,#+0
+   \   00000246   0x.... 0x....      BL       BGM111_cntrlSetSyncFlg
    1121                // Test TACK State
    1122                if (BGM111_GetTackState() == TACK_ARMED)
-   \   00000246   0x.... 0x....      BL       BGM111_GetTackState
-   \   0000024A   0x2801             CMP      R0,#+1
-   \   0000024C   0xD108             BNE.N    ??Process_RdSound_10
+   \   0000024A   0x.... 0x....      BL       BGM111_GetTackState
+   \   0000024E   0x2801             CMP      R0,#+1
+   \   00000250   0xD108             BNE.N    ??Process_RdSound_10
    1123                {
    1124                  BGM111_SetTackState(TACK_ARMED2);
-   \   0000024E   0x2002             MOVS     R0,#+2
-   \   00000250   0x.... 0x....      BL       BGM111_SetTackState
+   \   00000252   0x2002             MOVS     R0,#+2
+   \   00000254   0x.... 0x....      BL       BGM111_SetTackState
    1125                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED2>");
-   \   00000254   0x.... 0x....      LDR.W    R1,??DataTable16_74
-   \   00000258   0x2000             MOVS     R0,#+0
-   \   0000025A   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000025E   0xE01A             B.N      ??Process_RdSound_11
+   \   00000258   0x.... 0x....      LDR.W    R1,??DataTable16_74
+   \   0000025C   0x2000             MOVS     R0,#+0
+   \   0000025E   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000262   0xE01A             B.N      ??Process_RdSound_11
    1126                }
    1127                else if (BGM111_GetTackState() == TACK_ARMED2)
    \                     ??Process_RdSound_10: (+1)
-   \   00000260   0x.... 0x....      BL       BGM111_GetTackState
-   \   00000264   0x2802             CMP      R0,#+2
-   \   00000266   0xD116             BNE.N    ??Process_RdSound_11
+   \   00000264   0x.... 0x....      BL       BGM111_GetTackState
+   \   00000268   0x2802             CMP      R0,#+2
+   \   0000026A   0xD116             BNE.N    ??Process_RdSound_11
    1128                {
    1129                  BGM111_SetTackState(TACK_ASYNC);
-   \   00000268   0x2004             MOVS     R0,#+4
-   \   0000026A   0x.... 0x....      BL       BGM111_SetTackState
+   \   0000026C   0x2004             MOVS     R0,#+4
+   \   0000026E   0x.... 0x....      BL       BGM111_SetTackState
    1130                  RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ASYNC>");
-   \   0000026E   0x.... 0x....      LDR.W    R1,??DataTable16_75
-   \   00000272   0x2000             MOVS     R0,#+0
-   \   00000274   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000272   0x.... 0x....      LDR.W    R1,??DataTable16_75
+   \   00000276   0x2000             MOVS     R0,#+0
+   \   00000278   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1131                  sprintf( (char *)tempBffr2, "<STATUS>DATA_ASYNC</STATUS>" );
-   \   00000278   0x.... 0x....      LDR.W    R1,??DataTable16_59
-   \   0000027C   0xA801             ADD      R0,SP,#+4
-   \   0000027E   0x.... 0x....      BL       sprintf
+   \   0000027C   0x.... 0x....      LDR.W    R1,??DataTable16_59
+   \   00000280   0xA801             ADD      R0,SP,#+4
+   \   00000282   0x.... 0x....      BL       sprintf
    1132                  RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-   \   00000282   0xA901             ADD      R1,SP,#+4
-   \   00000284   0x2000             MOVS     R0,#+0
-   \   00000286   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000286   0xA901             ADD      R1,SP,#+4
+   \   00000288   0x2000             MOVS     R0,#+0
+   \   0000028A   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1133                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   0000028A   0xA801             ADD      R0,SP,#+4
-   \   0000028C   0x.... 0x....      BL       strlen
-   \   00000290   0xA901             ADD      R1,SP,#+4
-   \   00000292   0x.... 0x....      BL       BGM111_Transmit
+   \   0000028E   0xA801             ADD      R0,SP,#+4
+   \   00000290   0x.... 0x....      BL       strlen
+   \   00000294   0xA901             ADD      R1,SP,#+4
+   \   00000296   0x.... 0x....      BL       BGM111_Transmit
    1134                }
    1135                // Service Watchdog
    1136                RoadBrd_WWDG_Refresh();     // Refresh WatchDog
    \                     ??Process_RdSound_11: (+1)
-   \   00000296   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
+   \   0000029A   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
    1137                // Send </FRM> String.
    1138                sprintf( (char *)tempBffr2, "</FRM>");
-   \   0000029A   0x.... 0x....      LDR.W    R1,??DataTable16_54
-   \   0000029E   0xA801             ADD      R0,SP,#+4
-   \   000002A0   0x.... 0x....      BL       sprintf
+   \   0000029E   0x.... 0x....      LDR.W    R1,??DataTable16_54
+   \   000002A2   0xA801             ADD      R0,SP,#+4
+   \   000002A4   0x.... 0x....      BL       sprintf
    1139                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-   \   000002A4   0xA901             ADD      R1,SP,#+4
-   \   000002A6   0x2000             MOVS     R0,#+0
-   \   000002A8   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000002A8   0xA901             ADD      R1,SP,#+4
+   \   000002AA   0x2000             MOVS     R0,#+0
+   \   000002AC   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1140                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   000002AC   0xA801             ADD      R0,SP,#+4
-   \   000002AE   0x.... 0x....      BL       strlen
-   \   000002B2   0xA901             ADD      R1,SP,#+4
-   \   000002B4   0x.... 0x....      BL       BGM111_Transmit
+   \   000002B0   0xA801             ADD      R0,SP,#+4
+   \   000002B2   0x.... 0x....      BL       strlen
+   \   000002B6   0xA901             ADD      R1,SP,#+4
+   \   000002B8   0x.... 0x....      BL       BGM111_Transmit
    1141                sprintf( (char *)tempBffr2, "\r\n\r\n" );
-   \   000002B8   0x.... 0x....      LDR.W    R1,??DataTable16_55
-   \   000002BC   0xA801             ADD      R0,SP,#+4
-   \   000002BE   0x.... 0x....      BL       sprintf
+   \   000002BC   0x.... 0x....      LDR.W    R1,??DataTable16_55
+   \   000002C0   0xA801             ADD      R0,SP,#+4
+   \   000002C2   0x.... 0x....      BL       sprintf
    1142                //BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
    1143                RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-   \   000002C2   0xA901             ADD      R1,SP,#+4
-   \   000002C4   0x2000             MOVS     R0,#+0
-   \   000002C6   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000002C6   0xA901             ADD      R1,SP,#+4
+   \   000002C8   0x2000             MOVS     R0,#+0
+   \   000002CA   0x.... 0x....      BL       RoadBrd_UART_Transmit
    1144            } // Endif (BGM111_Ready()
    1145            // Test Analytics flag and determine if we need to update that characteristic
    1146            //  if (!(Tst_HeartBeat()))
    1147            if (analytics.HrtBeat_Cnt < FRM_REPEAT_CNT)
    \                     ??Process_RdSound_1: (+1)
-   \   000002CA   0x.... 0x....      LDR.W    R0,??DataTable16_76
-   \   000002CE   0x8840             LDRH     R0,[R0, #+2]
-   \   000002D0   0x2805             CMP      R0,#+5
-   \   000002D2   0xDA01             BGE.N    ??Process_RdSound_12
+   \   000002CE   0x.... 0x....      LDR.W    R0,??DataTable16_76
+   \   000002D2   0x8840             LDRH     R0,[R0, #+2]
+   \   000002D4   0x2805             CMP      R0,#+5
+   \   000002D6   0xDA01             BGE.N    ??Process_RdSound_12
    1148            {
    1149              ClrDataStructure();                           // Clear Backup data structure.
-   \   000002D4   0x.... 0x....      BL       ClrDataStructure
+   \   000002D8   0x.... 0x....      BL       ClrDataStructure
    1150            }
    1151            if (analytics.HrtBeat_Cnt++ >= ANALYTICS_MAXCNT)
    \                     ??Process_RdSound_12: (+1)
-   \   000002D8   0x.... 0x....      LDR.W    R0,??DataTable16_76
-   \   000002DC   0x8840             LDRH     R0,[R0, #+2]
-   \   000002DE   0x1C41             ADDS     R1,R0,#+1
-   \   000002E0   0x.... 0x....      LDR.W    R2,??DataTable16_76
-   \   000002E4   0x8051             STRH     R1,[R2, #+2]
-   \   000002E6   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
-   \   000002E8   0x280E             CMP      R0,#+14
-   \   000002EA   0xDB09             BLT.N    ??Process_RdSound_13
+   \   000002DC   0x.... 0x....      LDR.W    R0,??DataTable16_76
+   \   000002E0   0x8840             LDRH     R0,[R0, #+2]
+   \   000002E2   0x1C41             ADDS     R1,R0,#+1
+   \   000002E4   0x.... 0x....      LDR.W    R2,??DataTable16_76
+   \   000002E8   0x8051             STRH     R1,[R2, #+2]
+   \   000002EA   0xB280             UXTH     R0,R0            ;; ZeroExt  R0,R0,#+16,#+16
+   \   000002EC   0x280E             CMP      R0,#+14
+   \   000002EE   0xDB09             BLT.N    ??Process_RdSound_13
    1152            {
    1153              analytics.FrmRpt_Cnt = 0;                     // Clear Frame Repeat Count.
-   \   000002EC   0x2000             MOVS     R0,#+0
-   \   000002EE   0x.... 0x....      LDR.W    R1,??DataTable16_76
-   \   000002F2   0x8088             STRH     R0,[R1, #+4]
+   \   000002F0   0x2000             MOVS     R0,#+0
+   \   000002F2   0x.... 0x....      LDR.W    R1,??DataTable16_76
+   \   000002F6   0x8088             STRH     R0,[R1, #+4]
    1154              analytics.HrtBeat_Cnt = 0;
-   \   000002F4   0x2000             MOVS     R0,#+0
-   \   000002F6   0x.... 0x....      LDR.W    R1,??DataTable16_76
-   \   000002FA   0x8048             STRH     R0,[R1, #+2]
+   \   000002F8   0x2000             MOVS     R0,#+0
+   \   000002FA   0x.... 0x....      LDR.W    R1,??DataTable16_76
+   \   000002FE   0x8048             STRH     R0,[R1, #+2]
    1155              ClrDataStructure();                           // Clear Backup data structure.
-   \   000002FC   0x.... 0x....      BL       ClrDataStructure
+   \   00000300   0x.... 0x....      BL       ClrDataStructure
    1156          //    sprintf( (char *)tempStr, "%010dHB", analytics.HrtBeat_Cnt++);
    1157          //    BGM111_WriteCharacteristic(gattdb_AnlHrtBt,
    1158          //                             strlen((char *)tempStr), (uint8_t *)tempStr);
@@ -2713,15 +2714,15 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1160          #endif
    1161            RoadBrd_gpio_Off( MICRO_LED );
    \                     ??Process_RdSound_13: (+1)
-   \   00000300   0x2002             MOVS     R0,#+2
-   \   00000302   0x.... 0x....      BL       RoadBrd_gpio_Off
+   \   00000304   0x2002             MOVS     R0,#+2
+   \   00000306   0x.... 0x....      BL       RoadBrd_gpio_Off
    1162            // Last....Report Perioic Status of time/Hrtbt_Cnt/Cnct_Cnt
    1163            // ALSO Last....Report Perioic Status of Voltage/Current/Power
    1164            //sprintf( (char *)tempBffr2, " <%s/%s/%s> ", data.Voltage.Voltage, data.Current.Current, data.Power.Power);
    1165            //RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
    1166          }
-   \   00000306   0xB015             ADD      SP,SP,#+84
-   \   00000308   0xBD00             POP      {PC}             ;; return
+   \   0000030A   0xB015             ADD      SP,SP,#+84
+   \   0000030C   0xBD00             POP      {PC}             ;; return
 
    \                                 In section .bss, align 1
    \                     `Process_RdSound::CMD_Md_Cnt`:
@@ -4866,10 +4867,10 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_51:
-   \   00000000   0x4E 0x38          DC8 "N8.6 9/8/17"
-   \              0x2E 0x36    
+   \   00000000   0x4E 0x38          DC8 "N8.7 9/9/17"
+   \              0x2E 0x37    
    \              0x20 0x39    
-   \              0x2F 0x38    
+   \              0x2F 0x39    
    \              0x2F 0x31    
    \              0x37 0x00    
 
@@ -5169,6 +5170,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
         88   -> RoadBrdSnd_DumpBin32
         88   -> RoadBrdSnd_DumpBin48
         88   -> RoadBrdSnd_ProcessSound
+        88   -> RoadBrd_Get_BootDelay
         88   -> RoadBrd_Get_RdSndTickCnt
         88   -> RoadBrd_Get_UnitsFlag
         88   -> RoadBrd_UART_Transmit
@@ -5460,7 +5462,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        2  HeartBeat_Cnt
       44  InitSensors
     3038  ProcessSensorState
-     778  Process_RdSound
+     782  Process_RdSound
       50  Reset_DriverStates
       58  SendApp_String
       10  SetDataReady
@@ -5479,9 +5481,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
  
  1 193 bytes in section .bss
  1 628 bytes in section .rodata
- 5 336 bytes in section .text
+ 5 340 bytes in section .text
  
- 5 336 bytes of CODE  memory
+ 5 340 bytes of CODE  memory
  1 628 bytes of CONST memory
  1 193 bytes of DATA  memory
 

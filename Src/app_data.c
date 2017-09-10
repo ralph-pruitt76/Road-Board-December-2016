@@ -1023,7 +1023,7 @@ void Process_RdSound( void )
     RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
     
     // Test Cnt against Limit.
-    if ( CMD_Md_Cnt >= CMD_MODE_LMT)
+    if ( CMD_Md_Cnt >= RoadBrd_Get_BootDelay())
     {
       RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)">>\r\n");
       // Clear Count for Next Event.

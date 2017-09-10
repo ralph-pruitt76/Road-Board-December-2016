@@ -2577,6 +2577,52 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                 } // EndElse (flag == 0)
                               } // EndElse (tempBffr[4]!=':')
                               break;
+                            case 'B':
+                              //Key Flash Variable Set Set Boot Delay(Seconds).
+                              // Step 1. Validate format.
+                              if(tempBffr[4]!=':')
+                              {
+                                strcpy( (char *)tempBffr2, "TKSB SYNTAX ERROR: Not correct format.\r\n");
+                              } // Endif (tempBffr[4]!=':')
+                              else
+                              {
+                                // 2. Verify if remaining string is digits
+                                if (Size > 5)
+                                {
+                                  flag = 1;
+                                  for (x=5; x< Size; x++)
+                                  {
+                                    if (isdigit(tempBffr[x]) == 0)
+                                      flag = 0;
+                                  }
+                                } // EndIf (Size > 5)
+                                else
+                                  flag = 0;
+                                if (flag == 0)
+                                {
+                                  strcpy( (char *)tempBffr2, "TKSB SYNTAX ERROR: Bad Parameter.\r\n");
+                                }
+                                else
+                                {
+                                  // 3. Grab remaining string and convert to integer.
+                                  tempPstr = &tempBffr[5];
+                                  strcpy(tempstr, tempPstr);
+                                  new_value = atoi( tempstr );
+                                  if((new_value > 999) ||
+                                     (new_value < 0))
+                                  {
+                                    strcpy( (char *)tempBffr2, "TKSB SYNTAX ERROR: Bad Parameter.\r\n");
+                                  }
+                                  else
+                                  {
+                                    // Time to set new Boot Delay.
+                                    RoadBrd_Set_BootDelay( new_value );
+                                    // NOW, Build Data String..
+                                    sprintf( (char *)tempBffr2, "COMPLETE" );
+                                  } // EndElse ((new_value > 999) || (new_value < 0))
+                                } // EndElse (flag == 0)
+                              } // EndElse (tempBffr[4]!=':')
+                              break;
                             default:
                               strcpy( (char *)tempBffr2, "TKS ERROR: Not a legal command.\r\n");
                               break;
@@ -2601,6 +2647,11 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                             case 'T':
                               //Key Flash Variable Read TACK Limit(Multiple of Road Sound Throttles).
                               sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n\r\n> ", RoadBrd_Get_TackLimit());
+                              break;
+//------------------
+                            case 'B':
+                              //Key Flash Variable Read Boot Delay.(Seconds).
+                              sprintf( (char *)tempBffr2, "Boot Delay: %d Seconds.\r\n\r\n> ", RoadBrd_Get_BootDelay());
                               break;
                             default:
                               strcpy( (char *)tempBffr2, "TKR ERROR: Not a legal command.\r\n");
