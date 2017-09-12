@@ -65,6 +65,7 @@ extern WWDG_HandleTypeDef hwwdg;
 #define FRAME_CHKSUM     0x5a5a5a5a      // Code to determine if frame ha been Initialized
 #define BASE_FLASH_ADDRESS      0x08070000      // Base Address to place all key Flash Structures.
 #define BOOT_WAIT               15      // Default Wait time for Boot Sequence...15 Seconds.
+#define DATE_STRING_LENGTH      30      // Length of Saved Date String.
 
 // Private Structure
 // wwdg Save Frame
@@ -99,6 +100,9 @@ extern void Error_Handler(void);
 void MX_WWDG_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+HAL_StatusTypeDef RoadBrd_WWDG_InitializeDateString( void );
+char *RoadBrd_WWDG_GetDateString( void );
+HAL_StatusTypeDef RoadBrd_WWDG_SetDateString( char* parmString );
 HAL_StatusTypeDef RoadBrd_WWDG_Start( void );
 HAL_StatusTypeDef RoadBrd_WWDG_Refresh( void );
 uint32_t RoadBrd_WWDG_GetRefreshCnt( void );

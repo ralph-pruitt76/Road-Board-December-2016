@@ -10,6 +10,7 @@
 #include "i2c.h"
 #include "wwdg.h"
 #include "tim.h"
+#include "Parser.h"
 
 /* BGLib instantiation */
 
@@ -654,7 +655,12 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
 {
 //  static uint8_t header_cnt, payload_cnt, payload_len;
   HAL_StatusTypeDef Status;
-  static uint8_t tempBffr2[40];
+  static uint8_t tempBffr2[60];
+  char* tempPstr;
+  char tempstr[60];
+  char tempstr2[60];
+//  int x;
+
   uint8_t tempBffr3[60];
   static uint8_t in_ptr = 0;
   
@@ -729,17 +735,17 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
     }
     // TACK String?
-    else if (strncmp((char *)tempBffr2,"<TACK",5) == 0)
+    else if (strncmp((char *)tempBffr2,"<TACK>",6) == 0)
     {
       // CMD_Mode active?
       if ( BGM111_CMD_Mode() )
       {
         // Send String to Server.
-        sprintf( (char *)tempBffr2, "<STATUS>DATA_SYNC</STATUS>" );
-        Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        sprintf( (char *)tempBffr3, "<STATUS>DATA_SYNC</STATUS>" );
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
         if (Status != HAL_OK)
           return Status;
-        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr3)), tempBffr3);
         // Clear CMD_Mode.
         BGM111_SetCMD_Mode( false );
         // Set Data_Connection Mode.
@@ -758,23 +764,85 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       {
         ble.TackArmed = TACK_SYNC;
         ble.TackCnt = 0;
-        sprintf( (char *)tempBffr2, "<STATUS>DATA_SYNC</STATUS>" );
-        Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        sprintf( (char *)tempBffr3, "<STATUS>DATA_SYNC</STATUS>" );
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
         if (Status != HAL_OK)
           return Status;
-        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr3)), tempBffr3);
         Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
       }
       else if (ble.TackArmed == TACK_SYNC)
       {
         ble.TackCnt = 0;
         Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
-       // Set Sync Flag for Frame.
-        BGM111_SetSyncFlg( SYNC_PROC );
+        // Set Sync Flag for Frame.
+          BGM111_SetSyncFlg( SYNC_PROC );
+      }
+      // OK...Now we need to process what is in the TACK Section.
+      // A. Strip off Opening <TACK>.
+      tempPstr = (char *)&tempBffr2[6];
+      strcpy(tempstr, tempPstr);
+      // A1. Find if we have a <DATE> Tag.
+      tempPstr = strstr( tempstr, "<DATE>" );
+      if (tempPstr != NULL)
+      {
+        // Found DATE TAG....Set Focus to DATE Tag.
+        strcpy(tempstr, tempPstr);
+        // Now Strip out DATE Tag and Get Date.
+        tempPstr = (char *)&tempstr[6];
+        strcpy(tempstr2, tempPstr);
+        strcpy(tempstr, tempPstr);
+        // Find </DATE>
+        tempPstr = strstr( tempstr2, "</DATE>" );
+        if (tempPstr != NULL)
+        {
+          // Found Second String.....NULL It so that we can get Date
+          //x = (int)tempPstr;
+          //tempstr[x] = NULL;
+          *tempPstr = NULL;
+          //Now save Date String.
+          RoadBrd_WWDG_SetDateString(tempstr2);
+        }
+        // Let's Advance past this date string.
+        tempPstr = strstr( tempstr, "</DATE>" );
+        strcpy(tempstr, tempPstr);
+        // Now Strip out /DATE Tag and Get Date.
+        tempPstr = (char *)&tempstr[7];
+        strcpy(tempstr, tempPstr);
+      }
+      //************************ SEQUENCE OF TEST TO TYPE OF OPERATION
+      // B. Time to Test String
+      // Is this a <CMD>/Monitor Command
+      tempPstr = strstr( tempstr, "<CMD>" );
+      if (tempPstr  != NULL)
+      {
+        // Yes This is a Monitor CMD... Parse out Key CMD and pass to parser.
+        strcpy((char *)tempBffr2, tempPstr);
+        tempPstr = (char *)&tempBffr2[5];
+        strcpy(tempstr, tempPstr);
+        // Finally, Send string to Parser.
+        Status = RoadBrd_ParserTsk(tempstr);
+        if (Status == HAL_BUSY)
+        {
+          sprintf( (char *)tempBffr3, "<STATUS>CMD_BUSY</STATUS>" );
+          Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+        }
+        else if (Status != HAL_OK)
+        {
+          sprintf( (char *)tempBffr3, "<STATUS>CMD_ERROR</STATUS>" );
+          Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+        }
+      }
+      else
+      {
+        // Generate an ACK Report.
+        sprintf( (char *)tempBffr2, "<STATUS>ST_ACK:%s</STATUS>", RoadBrd_WWDG_GetDateString() );
+        Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+        if (Status != HAL_OK)
+          return Status;
+        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
       }
     }
-    // NOW TEST FOR PARAMS!!!
-
     // NOW TEST ERROR CONDITIONS!!!
     // OVERFLOW?
     else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)

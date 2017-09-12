@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       09/Sep/2017  15:28:09
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       11/Sep/2017  16:47:13
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -520,1392 +520,1406 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     283            InitSensors();
    \                     ??main_2: (+1)
    \   000001BE   0x.... 0x....      BL       InitSensors
-    284            
-    285            //**
-    286            //**
-    287            //** Initialize all Flash Structures.
+    284            RoadBrd_ParserInit();                         // This initializes the Parse Tasking Structure.
+   \   000001C2   0x.... 0x....      BL       RoadBrd_ParserInit
+    285            RoadBrd_WWDG_InitializeDateString();          // Initialize Date Tag From Server as NULL.
+   \   000001C6   0x.... 0x....      BL       RoadBrd_WWDG_InitializeDateString
+    286          
+    287            //**
     288            //**
-    289            //**
-    290            //*******1. Initializ WWDG Flash Structure
-    291            // 1a. Is WWDG Flash Frame Initialized?
-    292            if (RoadBrd_WWDG_VerifyFrame())
-   \   000001C2   0x.... 0x....      BL       RoadBrd_WWDG_VerifyFrame
-   \   000001C6   0x2800             CMP      R0,#+0
-   \   000001C8   0xD004             BEQ.N    ??main_15
-    293            {
-    294              //Yes....Set FRAME_TASK Bit in Driver State Variable.
-    295              Set_DriverStates( FRAME_TASK, DRIVER_ON );
-   \   000001CA   0x2101             MOVS     R1,#+1
-   \   000001CC   0x2008             MOVS     R0,#+8
-   \   000001CE   0x.... 0x....      BL       Set_DriverStates
-   \   000001D2   0xE010             B.N      ??main_16
-    296            } // EndIf (RoadBrd_WWDG_VerifyFrame())
-    297            else
-    298            {
-    299              //No....1b. Attempt to Initialize WWDG Flash Frame.
-    300              if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
+    289            //** Initialize all Flash Structures.
+    290            //**
+    291            //**
+    292            //*******1. Initializ WWDG Flash Structure
+    293            // 1a. Is WWDG Flash Frame Initialized?
+    294            if (RoadBrd_WWDG_VerifyFrame())
+   \   000001CA   0x.... 0x....      BL       RoadBrd_WWDG_VerifyFrame
+   \   000001CE   0x2800             CMP      R0,#+0
+   \   000001D0   0xD004             BEQ.N    ??main_15
+    295            {
+    296              //Yes....Set FRAME_TASK Bit in Driver State Variable.
+    297              Set_DriverStates( FRAME_TASK, DRIVER_ON );
+   \   000001D2   0x2101             MOVS     R1,#+1
+   \   000001D4   0x2008             MOVS     R0,#+8
+   \   000001D6   0x.... 0x....      BL       Set_DriverStates
+   \   000001DA   0xE010             B.N      ??main_16
+    298            } // EndIf (RoadBrd_WWDG_VerifyFrame())
+    299            else
+    300            {
+    301              //No....1b. Attempt to Initialize WWDG Flash Frame.
+    302              if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
    \                     ??main_15: (+1)
-   \   000001D4   0x.... 0x....      BL       RoadBrd_WWDG_InitializeFrmFlash
-   \   000001D8   0x2800             CMP      R0,#+0
-   \   000001DA   0xD008             BEQ.N    ??main_17
-    301              {
-    302                //FAILED....Indicate Error Code and Fail Driver State.
-    303                RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
-   \   000001DC   0x2101             MOVS     R1,#+1
-   \   000001DE   0x2010             MOVS     R0,#+16
-   \   000001E0   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
-    304                Set_DriverStates( FRAME_TASK, DRIVER_OFF );
-   \   000001E4   0x2100             MOVS     R1,#+0
-   \   000001E6   0x2008             MOVS     R0,#+8
-   \   000001E8   0x.... 0x....      BL       Set_DriverStates
-   \   000001EC   0xE003             B.N      ??main_16
-    305              }
-    306              else
-    307              {
-    308                //SUCCESS....Set FRAME_TASK Bit in Driver State Variable.
-    309                Set_DriverStates( FRAME_TASK, DRIVER_ON );
+   \   000001DC   0x.... 0x....      BL       RoadBrd_WWDG_InitializeFrmFlash
+   \   000001E0   0x2800             CMP      R0,#+0
+   \   000001E2   0xD008             BEQ.N    ??main_17
+    303              {
+    304                //FAILED....Indicate Error Code and Fail Driver State.
+    305                RdBrd_ErrCdLogErrCd( ERROR_FRAME_INIT, MODULE_main );
+   \   000001E4   0x2101             MOVS     R1,#+1
+   \   000001E6   0x2010             MOVS     R0,#+16
+   \   000001E8   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    306                Set_DriverStates( FRAME_TASK, DRIVER_OFF );
+   \   000001EC   0x2100             MOVS     R1,#+0
+   \   000001EE   0x2008             MOVS     R0,#+8
+   \   000001F0   0x.... 0x....      BL       Set_DriverStates
+   \   000001F4   0xE003             B.N      ??main_16
+    307              }
+    308              else
+    309              {
+    310                //SUCCESS....Set FRAME_TASK Bit in Driver State Variable.
+    311                Set_DriverStates( FRAME_TASK, DRIVER_ON );
    \                     ??main_17: (+1)
-   \   000001EE   0x2101             MOVS     R1,#+1
-   \   000001F0   0x2008             MOVS     R0,#+8
-   \   000001F2   0x.... 0x....      BL       Set_DriverStates
-    310              }
-    311            } // EndElse (RoadBrd_WWDG_VerifyFrame())
-    312            
-    313            //*******2. Initializ Calibration Flash Structure
-    314            // 2a. Is Calibration Flash Frame Initialized?
-    315            if (RoadBrd_CAL_VerifyFrame())
+   \   000001F6   0x2101             MOVS     R1,#+1
+   \   000001F8   0x2008             MOVS     R0,#+8
+   \   000001FA   0x.... 0x....      BL       Set_DriverStates
+    312              }
+    313            } // EndElse (RoadBrd_WWDG_VerifyFrame())
+    314            
+    315            //*******2. Initializ Calibration Flash Structure
+    316            // 2a. Is Calibration Flash Frame Initialized?
+    317            if (RoadBrd_CAL_VerifyFrame())
    \                     ??main_16: (+1)
-   \   000001F6   0x.... 0x....      BL       RoadBrd_CAL_VerifyFrame
-   \   000001FA   0x2800             CMP      R0,#+0
-   \   000001FC   0xD004             BEQ.N    ??main_18
-    316            {
-    317              //Yes....Set CAL_TASK Bit in Driver State Variable.
-    318              Set_DriverStates( CAL_TASK, DRIVER_ON );
-   \   000001FE   0x2101             MOVS     R1,#+1
-   \   00000200   0x2009             MOVS     R0,#+9
-   \   00000202   0x.... 0x....      BL       Set_DriverStates
-   \   00000206   0xE010             B.N      ??main_19
-    319            } // EndIf (RoadBrd_WWDG_VerifyFrame())
-    320            else
-    321            {
-    322              //No....2b. Attempt to Initialize Structure Flash Structure.
-    323              if (RoadBrd_CAL_InitializeFrmFlash() != HAL_OK)
+   \   000001FE   0x.... 0x....      BL       RoadBrd_CAL_VerifyFrame
+   \   00000202   0x2800             CMP      R0,#+0
+   \   00000204   0xD004             BEQ.N    ??main_18
+    318            {
+    319              //Yes....Set CAL_TASK Bit in Driver State Variable.
+    320              Set_DriverStates( CAL_TASK, DRIVER_ON );
+   \   00000206   0x2101             MOVS     R1,#+1
+   \   00000208   0x2009             MOVS     R0,#+9
+   \   0000020A   0x.... 0x....      BL       Set_DriverStates
+   \   0000020E   0xE010             B.N      ??main_19
+    321            } // EndIf (RoadBrd_WWDG_VerifyFrame())
+    322            else
+    323            {
+    324              //No....2b. Attempt to Initialize Structure Flash Structure.
+    325              if (RoadBrd_CAL_InitializeFrmFlash() != HAL_OK)
    \                     ??main_18: (+1)
-   \   00000208   0x.... 0x....      BL       RoadBrd_CAL_InitializeFrmFlash
-   \   0000020C   0x2800             CMP      R0,#+0
-   \   0000020E   0xD008             BEQ.N    ??main_20
-    324              {
-    325                //FAILED....Indicate Error Code and Fail Driver State.
-    326                RdBrd_ErrCdLogErrCd( ERROR_CAL_INIT, MODULE_main );
-   \   00000210   0x2101             MOVS     R1,#+1
-   \   00000212   0x2013             MOVS     R0,#+19
-   \   00000214   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
-    327                Set_DriverStates( CAL_TASK, DRIVER_OFF );
-   \   00000218   0x2100             MOVS     R1,#+0
-   \   0000021A   0x2009             MOVS     R0,#+9
-   \   0000021C   0x.... 0x....      BL       Set_DriverStates
-   \   00000220   0xE003             B.N      ??main_19
-    328              }
-    329              else
-    330              {
-    331                //SUCCESS....Set FRAME_TASK Bit in Driver State Variable.
-    332                Set_DriverStates( CAL_TASK, DRIVER_ON );
+   \   00000210   0x.... 0x....      BL       RoadBrd_CAL_InitializeFrmFlash
+   \   00000214   0x2800             CMP      R0,#+0
+   \   00000216   0xD008             BEQ.N    ??main_20
+    326              {
+    327                //FAILED....Indicate Error Code and Fail Driver State.
+    328                RdBrd_ErrCdLogErrCd( ERROR_CAL_INIT, MODULE_main );
+   \   00000218   0x2101             MOVS     R1,#+1
+   \   0000021A   0x2013             MOVS     R0,#+19
+   \   0000021C   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    329                Set_DriverStates( CAL_TASK, DRIVER_OFF );
+   \   00000220   0x2100             MOVS     R1,#+0
+   \   00000222   0x2009             MOVS     R0,#+9
+   \   00000224   0x.... 0x....      BL       Set_DriverStates
+   \   00000228   0xE003             B.N      ??main_19
+    330              }
+    331              else
+    332              {
+    333                //SUCCESS....Set FRAME_TASK Bit in Driver State Variable.
+    334                Set_DriverStates( CAL_TASK, DRIVER_ON );
    \                     ??main_20: (+1)
-   \   00000222   0x2101             MOVS     R1,#+1
-   \   00000224   0x2009             MOVS     R0,#+9
-   \   00000226   0x.... 0x....      BL       Set_DriverStates
-    333              }
-    334            } // EndElse (RoadBrd_WWDG_VerifyFrame())
-    335            
-    336            
-    337          // Initialize Key Vars once Flash has been validated.
-    338            // Initialize Key Timer Sampling Vars.
-    339            Set_TickCounts( RoadBrd_Get_RdSndTickCnt(), RoadBrd_Get_SnsrTickCnt() );
+   \   0000022A   0x2101             MOVS     R1,#+1
+   \   0000022C   0x2009             MOVS     R0,#+9
+   \   0000022E   0x.... 0x....      BL       Set_DriverStates
+    335              }
+    336            } // EndElse (RoadBrd_WWDG_VerifyFrame())
+    337            
+    338            
+    339          // Initialize Key Vars once Flash has been validated.
+    340            // Initialize Key Timer Sampling Vars.
+    341            Set_TickCounts( RoadBrd_Get_RdSndTickCnt(), RoadBrd_Get_SnsrTickCnt() );
    \                     ??main_19: (+1)
-   \   0000022A   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
-   \   0000022E   0x4680             MOV      R8,R0
-   \   00000230   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
-   \   00000234   0x4641             MOV      R1,R8
-   \   00000236   0x.... 0x....      BL       Set_TickCounts
-    340              
-    341            // Time to start WWDG..
-    342            HAL_NVIC_EnableIRQ(WWDG_IRQn);
-   \   0000023A   0x2000             MOVS     R0,#+0
-   \   0000023C   0x.... 0x....      BL       HAL_NVIC_EnableIRQ
-    343            MX_WWDG_Init();
-   \   00000240   0x.... 0x....      BL       MX_WWDG_Init
-    344            RoadBrd_WWDG_Start();
-   \   00000244   0x.... 0x....      BL       RoadBrd_WWDG_Start
-    345          
-    346          #endif
+   \   00000232   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
+   \   00000236   0x4680             MOV      R8,R0
+   \   00000238   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
+   \   0000023C   0x4641             MOV      R1,R8
+   \   0000023E   0x.... 0x....      BL       Set_TickCounts
+    342              
+    343            // Time to start WWDG..
+    344            HAL_NVIC_EnableIRQ(WWDG_IRQn);
+   \   00000242   0x2000             MOVS     R0,#+0
+   \   00000244   0x.... 0x....      BL       HAL_NVIC_EnableIRQ
+    345            MX_WWDG_Init();
+   \   00000248   0x.... 0x....      BL       MX_WWDG_Init
+    346            RoadBrd_WWDG_Start();
+   \   0000024C   0x.... 0x....      BL       RoadBrd_WWDG_Start
     347          
-    348          #ifdef TASKING
-    349            /* USER CODE END 2 */
-    350          
-    351            /* Call init function for freertos objects (in freertos.c) */
-    352            MX_FREERTOS_Init();
-    353          
-    354            /* Start scheduler */
-    355            osKernelStart();
-    356            
-    357            /* We should never get here as control is now taken by the scheduler */
-    358          
-    359            /* Infinite loop */
-    360            /* USER CODE BEGIN WHILE */
-    361          #else
-    362            
-    363            #ifdef TEST
-    364                // Turn On Bluetooth Interface for Debug.
-    365                RoadBrd_gpio_On( gRESET_BGM111 );
-    366            #else
-    367          //    #ifndef TEST2
-    368                #ifdef ASCII
-    369                  // Send Opening Banner for Monitor Code.
-    370                  #ifdef NUCLEO
-    371          //        strcpy( (char *)tempBffr2, "*********************  WEATHERCLOUD *********************\r\n\r\n");
-    372                    strcpy( (char *)tempBffr2, "\r\n\r\n");
-    373                    // Send string to UART..
-    374          #ifdef REV_L
-    375                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    376                    // Wait for msg to be completed.
-    377                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    378                    {
-    379                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-    380                    }
-    381                    // Clear State for Next Transfer.
-    382                    clrUsartState( NUCLEO_USART );
-    383          #else
-    384                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    385                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-    386          #endif
-    387                    if (Status != HAL_OK)
-    388                      Error_Handler();
-    389                    sprintf( (char *)tempBffr2, "     Road Board Monitor %s Hardware Version %s \r\n", VERSION_NUM, BRD_REV);
-    390                    //strcpy( (char *)tempBffr2, "     Road Board Monitor Rev K Hardware Version 1.0 \r\n");
-    391                    // Send string to UART..
-    392          #ifdef REV_L
-    393                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    394                    // Wait for msg to be completed.
-    395                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    396                    {
-    397                    }
-    398                    // Clear State for Next Transfer.
-    399                    clrUsartState( NUCLEO_USART );
-    400          #else
-    401                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    402          #endif
-    403                    if (Status != HAL_OK)
-    404                      Error_Handler();
-    405                    sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n", REL_DATE);
-    406                    //strcpy( (char *)tempBffr2, "                  Copyright August 9, 2016. \r\n\r\n\r\n> ");
-    407                    // Send string to UART..
-    408                    // *******Time to Build Extra Information...
-    409          #ifdef REV_L
-    410                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    411                    // Wait for msg to be completed.
-    412                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    413                    {
-    414                    }
-    415                    // Clear State for Next Transfer.
-    416                    clrUsartState( NUCLEO_USART );
-    417          #else
-    418                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    419          #endif
-    420                    if (Status != HAL_OK)
-    421                      Error_Handler();
-    422                    sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
-    423          #ifdef REV_L
-    424                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    425                    // Wait for msg to be completed.
-    426                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    427                    {
-    428                    }
-    429                    // Clear State for Next Transfer.
-    430                    clrUsartState( NUCLEO_USART );
-    431          #else
-    432                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    433          #endif
-    434                    if (Status != HAL_OK)
-    435                      Error_Handler();
-    436                    sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
-    437          #ifdef REV_L
-    438                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    439                    // Wait for msg to be completed.
-    440                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    441                    {
-    442                    }
-    443                    // Clear State for Next Transfer.
-    444                    clrUsartState( NUCLEO_USART );
-    445          #else
-    446                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    447          #endif
-    448                    if (Status != HAL_OK)
-    449                      Error_Handler();
-    450                  #else
-    451                    strcpy( (char *)tempBffr2, "*********************  WEATHERCLOUD *********************\r\n\r\n");
-   \   00000248   0x.... 0x....      LDR.W    R1,??DataTable1_1
-   \   0000024C   0xA801             ADD      R0,SP,#+4
-   \   0000024E   0x.... 0x....      BL       strcpy
-    452                    // Send string to UART..
-    453          #ifdef REV_L
-    454                    Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-   \   00000252   0xA901             ADD      R1,SP,#+4
-   \   00000254   0x2000             MOVS     R0,#+0
-   \   00000256   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   0000025A   0x0004             MOVS     R4,R0
-    455                    // Wait for msg to be completed.
-    456                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-   \                     ??main_21: (+1)
+    348          #endif
+    349          
+    350          #ifdef TASKING
+    351            /* USER CODE END 2 */
+    352          
+    353            /* Call init function for freertos objects (in freertos.c) */
+    354            MX_FREERTOS_Init();
+    355          
+    356            /* Start scheduler */
+    357            osKernelStart();
+    358            
+    359            /* We should never get here as control is now taken by the scheduler */
+    360          
+    361            /* Infinite loop */
+    362            /* USER CODE BEGIN WHILE */
+    363          #else
+    364            
+    365            #ifdef TEST
+    366                // Turn On Bluetooth Interface for Debug.
+    367                RoadBrd_gpio_On( gRESET_BGM111 );
+    368            #else
+    369          //    #ifndef TEST2
+    370                #ifdef ASCII
+    371                  // Send Opening Banner for Monitor Code.
+    372                  #ifdef NUCLEO
+    373          //        strcpy( (char *)tempBffr2, "*********************  WEATHERCLOUD *********************\r\n\r\n");
+    374                    strcpy( (char *)tempBffr2, "\r\n\r\n");
+    375                    // Send string to UART..
+    376          #ifdef REV_L
+    377                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    378                    // Wait for msg to be completed.
+    379                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    380                    {
+    381                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+    382                    }
+    383                    // Clear State for Next Transfer.
+    384                    clrUsartState( NUCLEO_USART );
+    385          #else
+    386                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    387                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+    388          #endif
+    389                    if (Status != HAL_OK)
+    390                      Error_Handler();
+    391                    sprintf( (char *)tempBffr2, "     Road Board Monitor %s Hardware Version %s \r\n", VERSION_NUM, BRD_REV);
+    392                    //strcpy( (char *)tempBffr2, "     Road Board Monitor Rev K Hardware Version 1.0 \r\n");
+    393                    // Send string to UART..
+    394          #ifdef REV_L
+    395                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    396                    // Wait for msg to be completed.
+    397                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    398                    {
+    399                    }
+    400                    // Clear State for Next Transfer.
+    401                    clrUsartState( NUCLEO_USART );
+    402          #else
+    403                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    404          #endif
+    405                    if (Status != HAL_OK)
+    406                      Error_Handler();
+    407                    sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n", REL_DATE);
+    408                    //strcpy( (char *)tempBffr2, "                  Copyright August 9, 2016. \r\n\r\n\r\n> ");
+    409                    // Send string to UART..
+    410                    // *******Time to Build Extra Information...
+    411          #ifdef REV_L
+    412                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    413                    // Wait for msg to be completed.
+    414                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    415                    {
+    416                    }
+    417                    // Clear State for Next Transfer.
+    418                    clrUsartState( NUCLEO_USART );
+    419          #else
+    420                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    421          #endif
+    422                    if (Status != HAL_OK)
+    423                      Error_Handler();
+    424                    sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
+    425          #ifdef REV_L
+    426                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    427                    // Wait for msg to be completed.
+    428                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    429                    {
+    430                    }
+    431                    // Clear State for Next Transfer.
+    432                    clrUsartState( NUCLEO_USART );
+    433          #else
+    434                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    435          #endif
+    436                    if (Status != HAL_OK)
+    437                      Error_Handler();
+    438                    sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+    439          #ifdef REV_L
+    440                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    441                    // Wait for msg to be completed.
+    442                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    443                    {
+    444                    }
+    445                    // Clear State for Next Transfer.
+    446                    clrUsartState( NUCLEO_USART );
+    447          #else
+    448                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    449          #endif
+    450                    if (Status != HAL_OK)
+    451                      Error_Handler();
+    452                  #else
+    453                    strcpy( (char *)tempBffr2, "*********************  WEATHERCLOUD *********************\r\n\r\n");
+   \   00000250   0x.... 0x....      LDR.W    R1,??DataTable1_1
+   \   00000254   0xA801             ADD      R0,SP,#+4
+   \   00000256   0x.... 0x....      BL       strcpy
+    454                    // Send string to UART..
+    455          #ifdef REV_L
+    456                    Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+   \   0000025A   0xA901             ADD      R1,SP,#+4
    \   0000025C   0x2000             MOVS     R0,#+0
-   \   0000025E   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   00000262   0x2801             CMP      R0,#+1
-   \   00000264   0xD002             BEQ.N    ??main_22
-    457                    {
-    458                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-   \   00000266   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
-   \   0000026A   0xE7F7             B.N      ??main_21
-    459                    }
-    460                    // Clear State for Next Transfer.
-    461                    clrUsartState( MONITOR_UART );
+   \   0000025E   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   00000262   0x0004             MOVS     R4,R0
+    457                    // Wait for msg to be completed.
+    458                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+   \                     ??main_21: (+1)
+   \   00000264   0x2000             MOVS     R0,#+0
+   \   00000266   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   0000026A   0x2801             CMP      R0,#+1
+   \   0000026C   0xD002             BEQ.N    ??main_22
+    459                    {
+    460                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+   \   0000026E   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
+   \   00000272   0xE7F7             B.N      ??main_21
+    461                    }
+    462                    // Clear State for Next Transfer.
+    463                    clrUsartState( MONITOR_UART );
    \                     ??main_22: (+1)
-   \   0000026C   0x2000             MOVS     R0,#+0
-   \   0000026E   0x.... 0x....      BL       clrUsartState
-    462          #else
-    463                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    464                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-    465          #endif
-    466                    if (Status != HAL_OK)
-   \   00000272   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000274   0x2C00             CMP      R4,#+0
-   \   00000276   0xD001             BEQ.N    ??main_23
-    467                      Error_Handler();
-   \   00000278   0x.... 0x....      BL       Error_Handler
-    468                    sprintf( (char *)tempBffr2, "     Road Board Monitor %s Hardware Version %s \r\n", VERSION_NUM, BRD_REV);
+   \   00000274   0x2000             MOVS     R0,#+0
+   \   00000276   0x.... 0x....      BL       clrUsartState
+    464          #else
+    465                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    466                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+    467          #endif
+    468                    if (Status != HAL_OK)
+   \   0000027A   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000027C   0x2C00             CMP      R4,#+0
+   \   0000027E   0xD001             BEQ.N    ??main_23
+    469                      Error_Handler();
+   \   00000280   0x.... 0x....      BL       Error_Handler
+    470                    sprintf( (char *)tempBffr2, "     Road Board Monitor %s Hardware Version %s \r\n", VERSION_NUM, BRD_REV);
    \                     ??main_23: (+1)
-   \   0000027C   0x.... 0x....      LDR.W    R3,??DataTable1_2
-   \   00000280   0x.... 0x....      LDR.W    R2,??DataTable1_3
-   \   00000284   0x.... 0x....      LDR.W    R1,??DataTable1_4
-   \   00000288   0xA801             ADD      R0,SP,#+4
-   \   0000028A   0x.... 0x....      BL       sprintf
-    469                    //strcpy( (char *)tempBffr2, "     Road Board Monitor Rev K Hardware Version 1.0 \r\n");
-    470                    // Send string to UART..
-    471          #ifdef REV_L
-    472                    Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-   \   0000028E   0xA901             ADD      R1,SP,#+4
-   \   00000290   0x2000             MOVS     R0,#+0
-   \   00000292   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   00000296   0x0004             MOVS     R4,R0
-    473                    // Wait for msg to be completed.
-    474                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-   \                     ??main_24: (+1)
+   \   00000284   0x.... 0x....      LDR.W    R3,??DataTable1_2
+   \   00000288   0x.... 0x....      LDR.W    R2,??DataTable1_3
+   \   0000028C   0x.... 0x....      LDR.W    R1,??DataTable1_4
+   \   00000290   0xA801             ADD      R0,SP,#+4
+   \   00000292   0x.... 0x....      BL       sprintf
+    471                    //strcpy( (char *)tempBffr2, "     Road Board Monitor Rev K Hardware Version 1.0 \r\n");
+    472                    // Send string to UART..
+    473          #ifdef REV_L
+    474                    Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+   \   00000296   0xA901             ADD      R1,SP,#+4
    \   00000298   0x2000             MOVS     R0,#+0
-   \   0000029A   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   0000029E   0x2801             CMP      R0,#+1
-   \   000002A0   0xD002             BEQ.N    ??main_25
-    475                    {
-    476                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-   \   000002A2   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
-   \   000002A6   0xE7F7             B.N      ??main_24
-    477                    }
-    478                    // Clear State for Next Transfer.
-    479                    clrUsartState( MONITOR_UART );
+   \   0000029A   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   0000029E   0x0004             MOVS     R4,R0
+    475                    // Wait for msg to be completed.
+    476                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+   \                     ??main_24: (+1)
+   \   000002A0   0x2000             MOVS     R0,#+0
+   \   000002A2   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   000002A6   0x2801             CMP      R0,#+1
+   \   000002A8   0xD002             BEQ.N    ??main_25
+    477                    {
+    478                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+   \   000002AA   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
+   \   000002AE   0xE7F7             B.N      ??main_24
+    479                    }
+    480                    // Clear State for Next Transfer.
+    481                    clrUsartState( MONITOR_UART );
    \                     ??main_25: (+1)
-   \   000002A8   0x2000             MOVS     R0,#+0
-   \   000002AA   0x.... 0x....      BL       clrUsartState
-    480          #else
-    481                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    482                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-    483          #endif
-    484                    if (Status != HAL_OK)
-   \   000002AE   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   000002B0   0x2C00             CMP      R4,#+0
-   \   000002B2   0xD001             BEQ.N    ??main_26
-    485                      Error_Handler();
-   \   000002B4   0x.... 0x....      BL       Error_Handler
-    486                    sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n", REL_DATE);
+   \   000002B0   0x2000             MOVS     R0,#+0
+   \   000002B2   0x.... 0x....      BL       clrUsartState
+    482          #else
+    483                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    484                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+    485          #endif
+    486                    if (Status != HAL_OK)
+   \   000002B6   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000002B8   0x2C00             CMP      R4,#+0
+   \   000002BA   0xD001             BEQ.N    ??main_26
+    487                      Error_Handler();
+   \   000002BC   0x.... 0x....      BL       Error_Handler
+    488                    sprintf( (char *)tempBffr2, "                  Copyright %s. \r\n\r\n", REL_DATE);
    \                     ??main_26: (+1)
-   \   000002B8   0x.... 0x....      LDR.W    R2,??DataTable1_5
-   \   000002BC   0x.... 0x....      LDR.W    R1,??DataTable1_6
-   \   000002C0   0xA801             ADD      R0,SP,#+4
-   \   000002C2   0x.... 0x....      BL       sprintf
-    487                    //strcpy( (char *)tempBffr2, "                  Copyright August 9, 2016. \r\n\r\n\r\n> ");
-    488                    // Send string to UART..
-    489          #ifdef REV_L
-    490                    Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-   \   000002C6   0xA901             ADD      R1,SP,#+4
-   \   000002C8   0x2000             MOVS     R0,#+0
-   \   000002CA   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   000002CE   0x0004             MOVS     R4,R0
-    491                    // Wait for msg to be completed.
-    492                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-   \                     ??main_27: (+1)
+   \   000002C0   0x.... 0x....      LDR.W    R2,??DataTable1_5
+   \   000002C4   0x.... 0x....      LDR.W    R1,??DataTable1_6
+   \   000002C8   0xA801             ADD      R0,SP,#+4
+   \   000002CA   0x.... 0x....      BL       sprintf
+    489                    //strcpy( (char *)tempBffr2, "                  Copyright August 9, 2016. \r\n\r\n\r\n> ");
+    490                    // Send string to UART..
+    491          #ifdef REV_L
+    492                    Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+   \   000002CE   0xA901             ADD      R1,SP,#+4
    \   000002D0   0x2000             MOVS     R0,#+0
-   \   000002D2   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   000002D6   0x2801             CMP      R0,#+1
-   \   000002D8   0xD002             BEQ.N    ??main_28
-    493                    {
-    494                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-   \   000002DA   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
-   \   000002DE   0xE7F7             B.N      ??main_27
-    495                    }
-    496                    // Clear State for Next Transfer.
-    497                    clrUsartState( MONITOR_UART );
+   \   000002D2   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   000002D6   0x0004             MOVS     R4,R0
+    493                    // Wait for msg to be completed.
+    494                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+   \                     ??main_27: (+1)
+   \   000002D8   0x2000             MOVS     R0,#+0
+   \   000002DA   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   000002DE   0x2801             CMP      R0,#+1
+   \   000002E0   0xD002             BEQ.N    ??main_28
+    495                    {
+    496                      RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+   \   000002E2   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
+   \   000002E6   0xE7F7             B.N      ??main_27
+    497                    }
+    498                    // Clear State for Next Transfer.
+    499                    clrUsartState( MONITOR_UART );
    \                     ??main_28: (+1)
-   \   000002E0   0x2000             MOVS     R0,#+0
-   \   000002E2   0x.... 0x....      BL       clrUsartState
-    498          #else
-    499                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    500                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-    501          #endif
-    502                    if (Status != HAL_OK)
-   \   000002E6   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   000002E8   0x2C00             CMP      R4,#+0
-   \   000002EA   0xD001             BEQ.N    ??main_29
-    503                      Error_Handler();
-   \   000002EC   0x.... 0x....      BL       Error_Handler
-    504                    // *******Time to Build Extra Information...
-    505                    sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
+   \   000002E8   0x2000             MOVS     R0,#+0
+   \   000002EA   0x.... 0x....      BL       clrUsartState
+    500          #else
+    501                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    502                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+    503          #endif
+    504                    if (Status != HAL_OK)
+   \   000002EE   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000002F0   0x2C00             CMP      R4,#+0
+   \   000002F2   0xD001             BEQ.N    ??main_29
+    505                      Error_Handler();
+   \   000002F4   0x.... 0x....      BL       Error_Handler
+    506                    // *******Time to Build Extra Information...
+    507                    sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
    \                     ??main_29: (+1)
-   \   000002F0   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
-   \   000002F4   0x.... 0x....      BL       __aeabi_ui2f
-   \   000002F8   0x.... 0x....      LDR.W    R1,??DataTable1_7  ;; 0x41200000
-   \   000002FC   0x.... 0x....      BL       __aeabi_fdiv
-   \   00000300   0x.... 0x....      BL       __aeabi_f2d
-   \   00000304   0x0002             MOVS     R2,R0
-   \   00000306   0x000B             MOVS     R3,R1
-   \   00000308   0x.... 0x....      LDR.W    R1,??DataTable1_8
-   \   0000030C   0xA801             ADD      R0,SP,#+4
-   \   0000030E   0x.... 0x....      BL       sprintf
-    506          #ifdef REV_L
-    507                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-   \   00000312   0xA901             ADD      R1,SP,#+4
-   \   00000314   0x2000             MOVS     R0,#+0
-   \   00000316   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   0000031A   0x0004             MOVS     R4,R0
-    508                    // Wait for msg to be completed.
-    509                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-   \                     ??main_30: (+1)
+   \   000002F8   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
+   \   000002FC   0x.... 0x....      BL       __aeabi_ui2f
+   \   00000300   0x.... 0x....      LDR.W    R1,??DataTable1_7  ;; 0x41200000
+   \   00000304   0x.... 0x....      BL       __aeabi_fdiv
+   \   00000308   0x.... 0x....      BL       __aeabi_f2d
+   \   0000030C   0x0002             MOVS     R2,R0
+   \   0000030E   0x000B             MOVS     R3,R1
+   \   00000310   0x.... 0x....      LDR.W    R1,??DataTable1_8
+   \   00000314   0xA801             ADD      R0,SP,#+4
+   \   00000316   0x.... 0x....      BL       sprintf
+    508          #ifdef REV_L
+    509                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+   \   0000031A   0xA901             ADD      R1,SP,#+4
    \   0000031C   0x2000             MOVS     R0,#+0
-   \   0000031E   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   00000322   0x2801             CMP      R0,#+1
-   \   00000324   0xD1FA             BNE.N    ??main_30
-    510                    {
-    511                    }
-    512                    // Clear State for Next Transfer.
-    513                    clrUsartState( NUCLEO_USART );
-   \   00000326   0x2000             MOVS     R0,#+0
-   \   00000328   0x.... 0x....      BL       clrUsartState
-    514          #else
-    515                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    516          #endif
-    517                    if (Status != HAL_OK)
-   \   0000032C   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000032E   0x2C00             CMP      R4,#+0
-   \   00000330   0xD001             BEQ.N    ??main_31
-    518                      Error_Handler();
-   \   00000332   0x.... 0x....      BL       Error_Handler
-    519                    sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+   \   0000031E   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   00000322   0x0004             MOVS     R4,R0
+    510                    // Wait for msg to be completed.
+    511                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+   \                     ??main_30: (+1)
+   \   00000324   0x2000             MOVS     R0,#+0
+   \   00000326   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   0000032A   0x2801             CMP      R0,#+1
+   \   0000032C   0xD1FA             BNE.N    ??main_30
+    512                    {
+    513                    }
+    514                    // Clear State for Next Transfer.
+    515                    clrUsartState( NUCLEO_USART );
+   \   0000032E   0x2000             MOVS     R0,#+0
+   \   00000330   0x.... 0x....      BL       clrUsartState
+    516          #else
+    517                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    518          #endif
+    519                    if (Status != HAL_OK)
+   \   00000334   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000336   0x2C00             CMP      R4,#+0
+   \   00000338   0xD001             BEQ.N    ??main_31
+    520                      Error_Handler();
+   \   0000033A   0x.... 0x....      BL       Error_Handler
+    521                    sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n", ((float)RoadBrd_Get_SnsrTickCnt()/10));
    \                     ??main_31: (+1)
-   \   00000336   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
-   \   0000033A   0x.... 0x....      BL       __aeabi_ui2f
-   \   0000033E   0x.... 0x....      LDR.W    R1,??DataTable1_7  ;; 0x41200000
-   \   00000342   0x.... 0x....      BL       __aeabi_fdiv
-   \   00000346   0x.... 0x....      BL       __aeabi_f2d
-   \   0000034A   0x0002             MOVS     R2,R0
-   \   0000034C   0x000B             MOVS     R3,R1
-   \   0000034E   0x....             LDR.N    R1,??DataTable1_9
-   \   00000350   0xA801             ADD      R0,SP,#+4
-   \   00000352   0x.... 0x....      BL       sprintf
-    520          #ifdef REV_L
-    521                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-   \   00000356   0xA901             ADD      R1,SP,#+4
-   \   00000358   0x2000             MOVS     R0,#+0
-   \   0000035A   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   0000035E   0x0004             MOVS     R4,R0
-    522                    // Wait for msg to be completed.
-    523                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+   \   0000033E   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
+   \   00000342   0x.... 0x....      BL       __aeabi_ui2f
+   \   00000346   0x.... 0x....      LDR.W    R1,??DataTable1_7  ;; 0x41200000
+   \   0000034A   0x.... 0x....      BL       __aeabi_fdiv
+   \   0000034E   0x.... 0x....      BL       __aeabi_f2d
+   \   00000352   0x0002             MOVS     R2,R0
+   \   00000354   0x000B             MOVS     R3,R1
+   \   00000356   0x.... 0x....      LDR.W    R1,??DataTable1_9
+   \   0000035A   0xA801             ADD      R0,SP,#+4
+   \   0000035C   0x.... 0x....      BL       sprintf
+    522          #ifdef REV_L
+    523                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+   \   00000360   0xA901             ADD      R1,SP,#+4
+   \   00000362   0x2000             MOVS     R0,#+0
+   \   00000364   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   00000368   0x0004             MOVS     R4,R0
+    524                    // Wait for msg to be completed.
+    525                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
    \                     ??main_32: (+1)
-   \   00000360   0x2000             MOVS     R0,#+0
-   \   00000362   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   00000366   0x2801             CMP      R0,#+1
-   \   00000368   0xD1FA             BNE.N    ??main_32
-    524                    {
-    525                    }
-    526                    // Clear State for Next Transfer.
-    527                    clrUsartState( NUCLEO_USART );
    \   0000036A   0x2000             MOVS     R0,#+0
-   \   0000036C   0x.... 0x....      BL       clrUsartState
-    528          #else
-    529                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    530          #endif
-    531                    if (Status != HAL_OK)
-   \   00000370   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000372   0x2C00             CMP      R4,#+0
-   \   00000374   0xD001             BEQ.N    ??main_33
-    532                      Error_Handler();
-   \   00000376   0x.... 0x....      BL       Error_Handler
-    533                    sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n", RoadBrd_Get_TackLimit() );
+   \   0000036C   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   00000370   0x2801             CMP      R0,#+1
+   \   00000372   0xD1FA             BNE.N    ??main_32
+    526                    {
+    527                    }
+    528                    // Clear State for Next Transfer.
+    529                    clrUsartState( NUCLEO_USART );
+   \   00000374   0x2000             MOVS     R0,#+0
+   \   00000376   0x.... 0x....      BL       clrUsartState
+    530          #else
+    531                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    532          #endif
+    533                    if (Status != HAL_OK)
+   \   0000037A   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000037C   0x2C00             CMP      R4,#+0
+   \   0000037E   0xD001             BEQ.N    ??main_33
+    534                      Error_Handler();
+   \   00000380   0x.... 0x....      BL       Error_Handler
+    535                    sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n", RoadBrd_Get_TackLimit() );
    \                     ??main_33: (+1)
-   \   0000037A   0x.... 0x....      BL       RoadBrd_Get_TackLimit
-   \   0000037E   0x0002             MOVS     R2,R0
-   \   00000380   0x....             LDR.N    R1,??DataTable1_10
-   \   00000382   0xA801             ADD      R0,SP,#+4
-   \   00000384   0x.... 0x....      BL       sprintf
-    534          #ifdef REV_L
-    535                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-   \   00000388   0xA901             ADD      R1,SP,#+4
-   \   0000038A   0x2000             MOVS     R0,#+0
-   \   0000038C   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   00000390   0x0004             MOVS     R4,R0
-    536                    // Wait for msg to be completed.
-    537                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+   \   00000384   0x.... 0x....      BL       RoadBrd_Get_TackLimit
+   \   00000388   0x0002             MOVS     R2,R0
+   \   0000038A   0x....             LDR.N    R1,??DataTable1_10
+   \   0000038C   0xA801             ADD      R0,SP,#+4
+   \   0000038E   0x.... 0x....      BL       sprintf
+    536          #ifdef REV_L
+    537                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+   \   00000392   0xA901             ADD      R1,SP,#+4
+   \   00000394   0x2000             MOVS     R0,#+0
+   \   00000396   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   0000039A   0x0004             MOVS     R4,R0
+    538                    // Wait for msg to be completed.
+    539                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
    \                     ??main_34: (+1)
-   \   00000392   0x2000             MOVS     R0,#+0
-   \   00000394   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   00000398   0x2801             CMP      R0,#+1
-   \   0000039A   0xD1FA             BNE.N    ??main_34
-    538                    {
-    539                    }
-    540                    // Clear State for Next Transfer.
-    541                    clrUsartState( NUCLEO_USART );
    \   0000039C   0x2000             MOVS     R0,#+0
-   \   0000039E   0x.... 0x....      BL       clrUsartState
-    542          #else
-    543                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    544          #endif
-    545                    if (Status != HAL_OK)
-   \   000003A2   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   000003A4   0x2C00             CMP      R4,#+0
-   \   000003A6   0xD001             BEQ.N    ??main_35
-    546                      Error_Handler();
-   \   000003A8   0x.... 0x....      BL       Error_Handler
-    547                    sprintf( (char *)tempBffr2, "Boot Delay: %d Seconds.\r\n", RoadBrd_Get_BootDelay() );
+   \   0000039E   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   000003A2   0x2801             CMP      R0,#+1
+   \   000003A4   0xD1FA             BNE.N    ??main_34
+    540                    {
+    541                    }
+    542                    // Clear State for Next Transfer.
+    543                    clrUsartState( NUCLEO_USART );
+   \   000003A6   0x2000             MOVS     R0,#+0
+   \   000003A8   0x.... 0x....      BL       clrUsartState
+    544          #else
+    545                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    546          #endif
+    547                    if (Status != HAL_OK)
+   \   000003AC   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000003AE   0x2C00             CMP      R4,#+0
+   \   000003B0   0xD001             BEQ.N    ??main_35
+    548                      Error_Handler();
+   \   000003B2   0x.... 0x....      BL       Error_Handler
+    549                    sprintf( (char *)tempBffr2, "Boot Delay: %d Seconds.\r\n", RoadBrd_Get_BootDelay() );
    \                     ??main_35: (+1)
-   \   000003AC   0x.... 0x....      BL       RoadBrd_Get_BootDelay
-   \   000003B0   0x0002             MOVS     R2,R0
-   \   000003B2   0x....             LDR.N    R1,??DataTable1_11
-   \   000003B4   0xA801             ADD      R0,SP,#+4
-   \   000003B6   0x.... 0x....      BL       sprintf
-    548          #ifdef REV_L
-    549                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-   \   000003BA   0xA901             ADD      R1,SP,#+4
-   \   000003BC   0x2000             MOVS     R0,#+0
-   \   000003BE   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   000003C2   0x0004             MOVS     R4,R0
-    550                    // Wait for msg to be completed.
-    551                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+   \   000003B6   0x.... 0x....      BL       RoadBrd_Get_BootDelay
+   \   000003BA   0x0002             MOVS     R2,R0
+   \   000003BC   0x....             LDR.N    R1,??DataTable1_11
+   \   000003BE   0xA801             ADD      R0,SP,#+4
+   \   000003C0   0x.... 0x....      BL       sprintf
+    550          #ifdef REV_L
+    551                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+   \   000003C4   0xA901             ADD      R1,SP,#+4
+   \   000003C6   0x2000             MOVS     R0,#+0
+   \   000003C8   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   000003CC   0x0004             MOVS     R4,R0
+    552                    // Wait for msg to be completed.
+    553                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
    \                     ??main_36: (+1)
-   \   000003C4   0x2000             MOVS     R0,#+0
-   \   000003C6   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   000003CA   0x2801             CMP      R0,#+1
-   \   000003CC   0xD1FA             BNE.N    ??main_36
-    552                    {
-    553                    }
-    554                    // Clear State for Next Transfer.
-    555                    clrUsartState( NUCLEO_USART );
    \   000003CE   0x2000             MOVS     R0,#+0
-   \   000003D0   0x.... 0x....      BL       clrUsartState
-    556          #else
-    557                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    558          #endif
-    559                    if (Status != HAL_OK)
-   \   000003D4   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   000003D6   0x2C00             CMP      R4,#+0
-   \   000003D8   0xD001             BEQ.N    ??main_37
-    560                      Error_Handler();
-   \   000003DA   0x.... 0x....      BL       Error_Handler
-    561                    // Now Display the Units Enabled State.
-    562                    if (RoadBrd_Get_UnitsFlag())
+   \   000003D0   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   000003D4   0x2801             CMP      R0,#+1
+   \   000003D6   0xD1FA             BNE.N    ??main_36
+    554                    {
+    555                    }
+    556                    // Clear State for Next Transfer.
+    557                    clrUsartState( NUCLEO_USART );
+   \   000003D8   0x2000             MOVS     R0,#+0
+   \   000003DA   0x.... 0x....      BL       clrUsartState
+    558          #else
+    559                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    560          #endif
+    561                    if (Status != HAL_OK)
+   \   000003DE   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000003E0   0x2C00             CMP      R4,#+0
+   \   000003E2   0xD001             BEQ.N    ??main_37
+    562                      Error_Handler();
+   \   000003E4   0x.... 0x....      BL       Error_Handler
+    563                    // Now Display the Units Enabled State.
+    564                    if (RoadBrd_Get_UnitsFlag())
    \                     ??main_37: (+1)
-   \   000003DE   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
-   \   000003E2   0x2800             CMP      R0,#+0
-   \   000003E4   0xD004             BEQ.N    ??main_38
-    563                    {
-    564                      sprintf( (char *)tempBffr2, "Units XML State: ENABLED\r\n\r\n> ");
-   \   000003E6   0x....             LDR.N    R1,??DataTable1_12
-   \   000003E8   0xA801             ADD      R0,SP,#+4
-   \   000003EA   0x.... 0x....      BL       sprintf
-   \   000003EE   0xE003             B.N      ??main_39
-    565                    }
-    566                    else
-    567                    {
-    568                      sprintf( (char *)tempBffr2, "Units XML State: DISABLED\r\n\r\n> ");
-   \                     ??main_38: (+1)
-   \   000003F0   0x....             LDR.N    R1,??DataTable1_13
+   \   000003E8   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
+   \   000003EC   0x2800             CMP      R0,#+0
+   \   000003EE   0xD004             BEQ.N    ??main_38
+    565                    {
+    566                      sprintf( (char *)tempBffr2, "Units XML State: ENABLED\r\n\r\n> ");
+   \   000003F0   0x....             LDR.N    R1,??DataTable1_12
    \   000003F2   0xA801             ADD      R0,SP,#+4
    \   000003F4   0x.... 0x....      BL       sprintf
-    569                    }
-    570          #ifdef REV_L
-    571                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+   \   000003F8   0xE003             B.N      ??main_39
+    567                    }
+    568                    else
+    569                    {
+    570                      sprintf( (char *)tempBffr2, "Units XML State: DISABLED\r\n\r\n> ");
+   \                     ??main_38: (+1)
+   \   000003FA   0x....             LDR.N    R1,??DataTable1_13
+   \   000003FC   0xA801             ADD      R0,SP,#+4
+   \   000003FE   0x.... 0x....      BL       sprintf
+    571                    }
+    572          #ifdef REV_L
+    573                    Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
    \                     ??main_39: (+1)
-   \   000003F8   0xA901             ADD      R1,SP,#+4
-   \   000003FA   0x2000             MOVS     R0,#+0
-   \   000003FC   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   00000400   0x0004             MOVS     R4,R0
-    572                    // Wait for msg to be completed.
-    573                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+   \   00000402   0xA901             ADD      R1,SP,#+4
+   \   00000404   0x2000             MOVS     R0,#+0
+   \   00000406   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   0000040A   0x0004             MOVS     R4,R0
+    574                    // Wait for msg to be completed.
+    575                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
    \                     ??main_40: (+1)
-   \   00000402   0x2000             MOVS     R0,#+0
-   \   00000404   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   00000408   0x2801             CMP      R0,#+1
-   \   0000040A   0xD1FA             BNE.N    ??main_40
-    574                    {
-    575                    }
-    576                    // Clear State for Next Transfer.
-    577                    clrUsartState( NUCLEO_USART );
    \   0000040C   0x2000             MOVS     R0,#+0
-   \   0000040E   0x.... 0x....      BL       clrUsartState
-    578          #else
-    579                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    580          #endif
-    581                    if (Status != HAL_OK)
-   \   00000412   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000414   0x2C00             CMP      R4,#+0
-   \   00000416   0xD001             BEQ.N    ??main_41
-    582                      Error_Handler();
-   \   00000418   0x.... 0x....      BL       Error_Handler
-    583                 #endif
-    584          //      #endif
-    585              #endif
-    586            #endif
-    587            while (1)
-    588            {
-    589            /* USER CODE END WHILE */
-    590          
-    591            /* USER CODE BEGIN 3 */
-    592            /****************************************************************************
-    593              * TEST CODE....Blinks LEDs for both Road Board and Nucleo Board.
-    594              **************************************************************************/
-    595            #ifdef TEST
-    596              #ifdef NUCLEO
-    597                // Turn On NUCLEO_LED_GREEN LED.
-    598                RoadBrd_gpio_On( NUCLEO_LED_GREEN );
-    599                // Wait 500msec.
-    600                RoadBrd_Delay( 500 );
-    601                // Turn Off NUCLEO_LED_GREEN LED.
-    602                RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
-    603              #else
-    604                // Turn On Blue LED and turn off Yellow LED.
-    605                RoadBrd_gpio_On( BLUE_LED );
-    606                RoadBrd_gpio_Off( YELLOW_LED );
-    607                // Wait 500msec.
-    608                RoadBrd_Delay( 500 );
-    609                // Turn On Green LED and turn off Blue LED.
-    610                RoadBrd_gpio_On( GREEN_LED );
-    611                RoadBrd_gpio_Off( BLUE_LED );
-    612                // Wait 500msec.
-    613                RoadBrd_Delay( 500 );
-    614                // Turn On Yellow LED and turn off Green LED.
-    615                RoadBrd_gpio_On( YELLOW_LED );
-    616                RoadBrd_gpio_Off( GREEN_LED );
-    617              #endif
-    618              // Wait 500msec.
-    619              RoadBrd_Delay( 500 );
-    620            //******************Endif TEST
-    621            #else
-    622            //******************Else TEST
-    623          
-    624            /****************************************************************************
-    625             * TEST2 CODE....Reads COM port and translates back to sender. Simple COMM test.
-    626             **************************************************************************/
-    627              #ifdef TEST2
-    628                #ifdef NUCLEO
-    629                  // Turn Off NUCLEO_LED_GREEN LED.
-    630                  RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
-    631                  // Wait on a character from Nucleo COM Port.
-    632          #ifdef REV_L
-    633                  Status = RoadBrd_UART_Receive_IT(NUCLEO_USART, tempBffr, 1);
-    634                  // Wait for msg to be completed.
-    635                  while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    636                  {
-    637                  }
-    638                  // Clear State for Next Transfer.
-    639                  clrUsartState( NUCLEO_USART );
-    640          #else
-    641                  Status = RoadBrd_UART_Receive(NUCLEO_USART, tempBffr, 1);
-    642          #endif
-    643                  // Turn On NUCLEO_LED_GREEN LED.
-    644                  RoadBrd_gpio_On( NUCLEO_LED_GREEN );
-    645                  switch(  Status)
-    646                  {
-    647                    case HAL_OK:
-    648                      // We have a good character. Time to build a response string.
-    649                      tempBffr2[0] = '(';
-    650                      tempBffr2[1] = tempBffr[0];
-    651                      tempBffr2[2] = ')';
-    652                      tempBffr2[3] = 0x00;
-    653                      // Send string to UART..
-    654          #ifdef REV_L
-    655                      Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    656                      // Wait for msg to be completed.
-    657                      while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    658                      {
-    659                      }
-    660                      // Clear State for Next Transfer.
-    661                      clrUsartState( NUCLEO_USART );
-    662          #else
-    663                      Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    664          #endif
-    665                      if (Status != HAL_OK)
-    666                        Error_Handler();
-    667                      /*Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    668                      if (Status != HAL_OK)
-    669                        Error_Handler();
-    670                      // Now wait for completion of Transmit
-    671                      PStatus = RESET;
-    672                      while (PStatus == RESET)
-    673                      {
-    674                        PStatus = RoadBrd_Uart_Status(NUCLEO_USART);
-    675                      } */
-    676                      break;
-    677                    case HAL_ERROR:
-    678                      // ERROR. We are done.
-    679                      Error_Handler();
-    680                      break;
-    681                    case HAL_BUSY:
-    682                      // ERROR. We are done.
-    683                      Error_Handler();
-    684                      break;
-    685                    case HAL_TIMEOUT:
-    686                      // Nothing to do. Try again.
-    687                      break;
-    688                    default:
-    689                      // ERROR. We are done.
-    690                      Error_Handler();
-    691                      break;
-    692                    
-    693                  }
-    694                // Wait 500msec.
-    695                RoadBrd_Delay( 50 );
-    696                #else
-    697                  // Turn Off BGM_LED LED.
-    698                  RoadBrd_gpio_Off( BGM_LED );
-    699                  // Wait on a character from Nucleo COM Port.
-    700           #ifdef REV_L
-    701                  Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tempBffr, 1);
-    702                  // Wait for msg to be completed.
-    703                  while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-    704                  {
-    705                  }
-    706                  // Clear State for Next Transfer.
-    707                  clrUsartState( MONITOR_UART );
-    708          #else
-    709                  Status = RoadBrd_UART_Receive(MONITOR_UART, tempBffr, 1);
-    710          #endif
-    711                  // Turn On BGM_LED LED.
-    712                  RoadBrd_gpio_On( BGM_LED );
-    713                  switch(  Status)
-    714                  {
-    715                    case HAL_OK:
-    716                      // We have a good character. Time to build a response string.
-    717                      tempBffr2[0] = '(';
-    718                      tempBffr2[1] = tempBffr[0];
-    719                      tempBffr2[2] = ')';
-    720                      tempBffr2[3] = 0x00;
-    721                      // Send string to UART..
-    722          #ifdef REV_L
-    723                      Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-    724                      // Wait for msg to be completed.
-    725                      while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-    726                      {
-    727                      }
-    728                      // Clear State for Next Transfer.
-    729                      clrUsartState( MONITOR_UART );
-    730          #else
-    731                      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    732          #endif
-    733                      if (Status != HAL_OK)
-    734                        Error_Handler();
-    735                      /*Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    736                      if (Status != HAL_OK)
-    737                        Error_Handler();
-    738                      // Now wait for completion of Transmit
-    739                      PStatus = RESET;
-    740                      while (PStatus == RESET)
-    741                      {
-    742                        PStatus = RoadBrd_Uart_Status(NUCLEO_USART);
-    743                      } */
-    744                      break;
-    745                    case HAL_ERROR:
-    746                      // ERROR. We are done.
-    747                      Error_Handler();
-    748                      break;
-    749                    case HAL_BUSY:
-    750                      // ERROR. We are done.
-    751                      Error_Handler();
-    752                      break;
-    753                    case HAL_TIMEOUT:
-    754                      // Nothing to do. Try again.
-    755                      break;
-    756                    default:
-    757                      // ERROR. We are done.
-    758                      Error_Handler();
-    759                      break;
-    760                    
-    761                  }
-    762                // Wait 500msec.
-    763                RoadBrd_Delay( 50 );
-    764                #endif
-    765              //******************Endif TEST2
-    766              #else
-    767              //******************Else TEST2
-    768            /*****************************************************************************
-    769             *    NORMAL FLOW HERE
-    770             ****************************************************************************/
-    771          //         RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
-    772          //         Status = RoadBrd_UART_Receive(NUCLEO_USART, tempBffr, 1);
-    773                #ifdef NUCLEO
-    774                
-    775                //************************* NUCLEO VERSION *************************************   
-    776                   // Turn Off NUCLEO_LED_GREEN LED.
-    777                  RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
-    778                  // Wait on a character from Nucleo COM Port.
-    779          #ifdef REV_L
-    780                  tmpSize = Size;
-    781                  pData = tempBffr;
-    782                  while ( tmpSize>0 )
-    783                  {
-    784                    Status = RoadBrd_UART_Receive_IT(NUCLEO_USART, tmpData, 1);
-    785                    // Wait for msg to be completed.
-    786                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    787                    {
-    788                    }
-    789                    // Clear State for Next Transfer.
-    790                    clrUsartState( NUCLEO_USART );
-    791                    if(Status == HAL_OK)
-    792                    {
-    793                      // Watch for termination characters.
-    794                      if((tmpData[0]==0x0a) || (tmpData[0]==0x0d))
-    795                      {
-    796                        *pData = 0x00;
-    797                        // Yes..We are done.
-    798                        return Status;
-    799                      }
-    800                      else
-    801                      {
-    802                        // Move new character into passed buffer.
-    803                        *pData = tmpData[0];
-    804                        tmpSize--;                          // Decrement Count
-    805                        pData++;                            // Move pointer to next buffer location.
-    806                      }
-    807                    }
-    808                    else
-    809                      Error_Handler();
-    810                  } // EndWhile ( tmpSize>0 )
-    811          #else
-    812                  Status = RoadBrd_UART_Receive(NUCLEO_USART, tempBffr, RECEIVE_SZ);
-    813          #endif
-    814                  // Turn On NUCLEO_LED_GREEN LED.
-    815          #ifndef LED_OFF
-    816                  RoadBrd_gpio_On( NUCLEO_LED_GREEN );
-    817          #endif
-    818          #ifdef ASCII
-    819                  // Send <CR><LF> to UART..
-    820                  strcpy( (char *)tempBffr2, "\r\n");
-    821          #ifdef REV_L
-    822                      Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
-    823                      // Wait for msg to be completed.
-    824                      while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
-    825                      {
-    826                      }
-    827                      // Clear State for Next Transfer.
-    828                      clrUsartState( NUCLEO_USART );
-    829          #else
-    830                  Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-    831          #endif
-    832                  if (Status != HAL_OK)
-    833                    Error_Handler();
-    834          #endif
-    835                  switch(  Status )
-    836                  {
-    837                    case HAL_OK:
-    838                      Status = RoadBrd_ParseString((char *)tempBffr);
-    839                      // We have a good Tasking String. Time to determine action.
-    840                      if (Status != HAL_OK)
-    841                        Error_Handler();
-    842                      
-    843                      break;
-    844                    case HAL_ERROR:
-    845                      // ERROR. We are done.
-    846                      Error_Handler();
-    847                      break;
-    848                    case HAL_BUSY:
-    849                      // ERROR. We are done.
-    850                      Error_Handler();
-    851                      break;
-    852                    case HAL_TIMEOUT:
-    853                      // Nothing to do. Try again.
-    854                      break;
-    855                    default:
-    856                      // ERROR. We are done.
-    857                      Error_Handler();
-    858                      break;
-    859                  }
-    860                // Wait 500msec.
-    861                RoadBrd_Delay( 50 );
-    862                //************************* END NUCLEO VERSION *************************************   
-    863                
-    864                #else
-    865          
-    866                //************************* ROAD BRD VERSION *************************************   
-    867                  // Wait on a character from Nucleo COM Port.
-    868          //********************PATCH_UART ACTIVE*******************************************
-    869          #ifdef PATCH_UART
-    870          #ifdef REV_L
-    871                  // Turn Off MICRO_LED LED.
-    872                  RoadBrd_gpio_Off( MICRO_LED );
-    873                  tmpSize = RECEIVE_SZ;
-    874                  pData = tempBffr;
-    875                  while ( tmpSize>0 )
-    876                  {
-    877                    Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
-    878                    // Wait for msg to be completed.
-    879                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-    880                    {
-    881                     }
-    882                    // Clear State for Next Transfer.
-    883                    clrUsartState( MONITOR_UART );
-    884                    if(Status == HAL_OK)
-    885                    {
-    886                      // Watch for termination characters.
-    887                      if((tmpData[0]==0x0a) || (tmpData[0]==0x0d))
-    888                      {
-    889                        *pData = 0x00;
-    890                        // Yes..We are done.
-    891                        break;
-    892                      }
-    893                      else
-    894                      {
-    895                        // Move new character into passed buffer.
-    896                        *pData = tmpData[0];
-    897                        tmpSize--;                          // Decrement Count
-    898                        pData++;                            // Move pointer to next buffer location.
-    899                      }
-    900                    }
-    901                    else
-    902                      Error_Handler();
-    903                  } // EndWhile ( tmpSize>0 )
-    904          #ifndef LED_OFF
-    905                  RoadBrd_gpio_On( MICRO_LED );
-    906          #endif
-    907                  // Send <CR><LF> to UART..
-    908                  strcpy( (char *)tempBffr2, "\r\n");
-    909                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    910                  if (Status != HAL_OK)
-    911                    Error_Handler();
-    912                  switch(  Status )
-    913                  {
-    914                    case HAL_OK:
-    915                      // We have a good Tasking String. Time to determine action.
-    916                      Status = RoadBrd_ParseString((char *)tempBffr);
+   \   0000040E   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   00000412   0x2801             CMP      R0,#+1
+   \   00000414   0xD1FA             BNE.N    ??main_40
+    576                    {
+    577                    }
+    578                    // Clear State for Next Transfer.
+    579                    clrUsartState( NUCLEO_USART );
+   \   00000416   0x2000             MOVS     R0,#+0
+   \   00000418   0x.... 0x....      BL       clrUsartState
+    580          #else
+    581                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    582          #endif
+    583                    if (Status != HAL_OK)
+   \   0000041C   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000041E   0x2C00             CMP      R4,#+0
+   \   00000420   0xD001             BEQ.N    ??main_41
+    584                      Error_Handler();
+   \   00000422   0x.... 0x....      BL       Error_Handler
+    585                 #endif
+    586          //      #endif
+    587              #endif
+    588            #endif
+    589            while (1)
+    590            {
+    591            /* USER CODE END WHILE */
+    592          
+    593            /* USER CODE BEGIN 3 */
+    594            /****************************************************************************
+    595              * TEST CODE....Blinks LEDs for both Road Board and Nucleo Board.
+    596              **************************************************************************/
+    597            #ifdef TEST
+    598              #ifdef NUCLEO
+    599                // Turn On NUCLEO_LED_GREEN LED.
+    600                RoadBrd_gpio_On( NUCLEO_LED_GREEN );
+    601                // Wait 500msec.
+    602                RoadBrd_Delay( 500 );
+    603                // Turn Off NUCLEO_LED_GREEN LED.
+    604                RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
+    605              #else
+    606                // Turn On Blue LED and turn off Yellow LED.
+    607                RoadBrd_gpio_On( BLUE_LED );
+    608                RoadBrd_gpio_Off( YELLOW_LED );
+    609                // Wait 500msec.
+    610                RoadBrd_Delay( 500 );
+    611                // Turn On Green LED and turn off Blue LED.
+    612                RoadBrd_gpio_On( GREEN_LED );
+    613                RoadBrd_gpio_Off( BLUE_LED );
+    614                // Wait 500msec.
+    615                RoadBrd_Delay( 500 );
+    616                // Turn On Yellow LED and turn off Green LED.
+    617                RoadBrd_gpio_On( YELLOW_LED );
+    618                RoadBrd_gpio_Off( GREEN_LED );
+    619              #endif
+    620              // Wait 500msec.
+    621              RoadBrd_Delay( 500 );
+    622            //******************Endif TEST
+    623            #else
+    624            //******************Else TEST
+    625          
+    626            /****************************************************************************
+    627             * TEST2 CODE....Reads COM port and translates back to sender. Simple COMM test.
+    628             **************************************************************************/
+    629              #ifdef TEST2
+    630                #ifdef NUCLEO
+    631                  // Turn Off NUCLEO_LED_GREEN LED.
+    632                  RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
+    633                  // Wait on a character from Nucleo COM Port.
+    634          #ifdef REV_L
+    635                  Status = RoadBrd_UART_Receive_IT(NUCLEO_USART, tempBffr, 1);
+    636                  // Wait for msg to be completed.
+    637                  while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    638                  {
+    639                  }
+    640                  // Clear State for Next Transfer.
+    641                  clrUsartState( NUCLEO_USART );
+    642          #else
+    643                  Status = RoadBrd_UART_Receive(NUCLEO_USART, tempBffr, 1);
+    644          #endif
+    645                  // Turn On NUCLEO_LED_GREEN LED.
+    646                  RoadBrd_gpio_On( NUCLEO_LED_GREEN );
+    647                  switch(  Status)
+    648                  {
+    649                    case HAL_OK:
+    650                      // We have a good character. Time to build a response string.
+    651                      tempBffr2[0] = '(';
+    652                      tempBffr2[1] = tempBffr[0];
+    653                      tempBffr2[2] = ')';
+    654                      tempBffr2[3] = 0x00;
+    655                      // Send string to UART..
+    656          #ifdef REV_L
+    657                      Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    658                      // Wait for msg to be completed.
+    659                      while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    660                      {
+    661                      }
+    662                      // Clear State for Next Transfer.
+    663                      clrUsartState( NUCLEO_USART );
+    664          #else
+    665                      Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    666          #endif
+    667                      if (Status != HAL_OK)
+    668                        Error_Handler();
+    669                      /*Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    670                      if (Status != HAL_OK)
+    671                        Error_Handler();
+    672                      // Now wait for completion of Transmit
+    673                      PStatus = RESET;
+    674                      while (PStatus == RESET)
+    675                      {
+    676                        PStatus = RoadBrd_Uart_Status(NUCLEO_USART);
+    677                      } */
+    678                      break;
+    679                    case HAL_ERROR:
+    680                      // ERROR. We are done.
+    681                      Error_Handler();
+    682                      break;
+    683                    case HAL_BUSY:
+    684                      // ERROR. We are done.
+    685                      Error_Handler();
+    686                      break;
+    687                    case HAL_TIMEOUT:
+    688                      // Nothing to do. Try again.
+    689                      break;
+    690                    default:
+    691                      // ERROR. We are done.
+    692                      Error_Handler();
+    693                      break;
+    694                    
+    695                  }
+    696                // Wait 500msec.
+    697                RoadBrd_Delay( 50 );
+    698                #else
+    699                  // Turn Off BGM_LED LED.
+    700                  RoadBrd_gpio_Off( BGM_LED );
+    701                  // Wait on a character from Nucleo COM Port.
+    702           #ifdef REV_L
+    703                  Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tempBffr, 1);
+    704                  // Wait for msg to be completed.
+    705                  while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+    706                  {
+    707                  }
+    708                  // Clear State for Next Transfer.
+    709                  clrUsartState( MONITOR_UART );
+    710          #else
+    711                  Status = RoadBrd_UART_Receive(MONITOR_UART, tempBffr, 1);
+    712          #endif
+    713                  // Turn On BGM_LED LED.
+    714                  RoadBrd_gpio_On( BGM_LED );
+    715                  switch(  Status)
+    716                  {
+    717                    case HAL_OK:
+    718                      // We have a good character. Time to build a response string.
+    719                      tempBffr2[0] = '(';
+    720                      tempBffr2[1] = tempBffr[0];
+    721                      tempBffr2[2] = ')';
+    722                      tempBffr2[3] = 0x00;
+    723                      // Send string to UART..
+    724          #ifdef REV_L
+    725                      Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+    726                      // Wait for msg to be completed.
+    727                      while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+    728                      {
+    729                      }
+    730                      // Clear State for Next Transfer.
+    731                      clrUsartState( MONITOR_UART );
+    732          #else
+    733                      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    734          #endif
+    735                      if (Status != HAL_OK)
+    736                        Error_Handler();
+    737                      /*Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    738                      if (Status != HAL_OK)
+    739                        Error_Handler();
+    740                      // Now wait for completion of Transmit
+    741                      PStatus = RESET;
+    742                      while (PStatus == RESET)
+    743                      {
+    744                        PStatus = RoadBrd_Uart_Status(NUCLEO_USART);
+    745                      } */
+    746                      break;
+    747                    case HAL_ERROR:
+    748                      // ERROR. We are done.
+    749                      Error_Handler();
+    750                      break;
+    751                    case HAL_BUSY:
+    752                      // ERROR. We are done.
+    753                      Error_Handler();
+    754                      break;
+    755                    case HAL_TIMEOUT:
+    756                      // Nothing to do. Try again.
+    757                      break;
+    758                    default:
+    759                      // ERROR. We are done.
+    760                      Error_Handler();
+    761                      break;
+    762                    
+    763                  }
+    764                // Wait 500msec.
+    765                RoadBrd_Delay( 50 );
+    766                #endif
+    767              //******************Endif TEST2
+    768              #else
+    769              //******************Else TEST2
+    770            /*****************************************************************************
+    771             *    NORMAL FLOW HERE
+    772             ****************************************************************************/
+    773          //         RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
+    774          //         Status = RoadBrd_UART_Receive(NUCLEO_USART, tempBffr, 1);
+    775                #ifdef NUCLEO
+    776                
+    777                //************************* NUCLEO VERSION *************************************   
+    778                   // Turn Off NUCLEO_LED_GREEN LED.
+    779                  RoadBrd_gpio_Off( NUCLEO_LED_GREEN );
+    780                  // Wait on a character from Nucleo COM Port.
+    781          #ifdef REV_L
+    782                  tmpSize = Size;
+    783                  pData = tempBffr;
+    784                  while ( tmpSize>0 )
+    785                  {
+    786                    Status = RoadBrd_UART_Receive_IT(NUCLEO_USART, tmpData, 1);
+    787                    // Wait for msg to be completed.
+    788                    while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    789                    {
+    790                    }
+    791                    // Clear State for Next Transfer.
+    792                    clrUsartState( NUCLEO_USART );
+    793                    if(Status == HAL_OK)
+    794                    {
+    795                      // Watch for termination characters.
+    796                      if((tmpData[0]==0x0a) || (tmpData[0]==0x0d))
+    797                      {
+    798                        *pData = 0x00;
+    799                        // Yes..We are done.
+    800                        return Status;
+    801                      }
+    802                      else
+    803                      {
+    804                        // Move new character into passed buffer.
+    805                        *pData = tmpData[0];
+    806                        tmpSize--;                          // Decrement Count
+    807                        pData++;                            // Move pointer to next buffer location.
+    808                      }
+    809                    }
+    810                    else
+    811                      Error_Handler();
+    812                  } // EndWhile ( tmpSize>0 )
+    813          #else
+    814                  Status = RoadBrd_UART_Receive(NUCLEO_USART, tempBffr, RECEIVE_SZ);
+    815          #endif
+    816                  // Turn On NUCLEO_LED_GREEN LED.
+    817          #ifndef LED_OFF
+    818                  RoadBrd_gpio_On( NUCLEO_LED_GREEN );
+    819          #endif
+    820          #ifdef ASCII
+    821                  // Send <CR><LF> to UART..
+    822                  strcpy( (char *)tempBffr2, "\r\n");
+    823          #ifdef REV_L
+    824                      Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+    825                      // Wait for msg to be completed.
+    826                      while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+    827                      {
+    828                      }
+    829                      // Clear State for Next Transfer.
+    830                      clrUsartState( NUCLEO_USART );
+    831          #else
+    832                  Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+    833          #endif
+    834                  if (Status != HAL_OK)
+    835                    Error_Handler();
+    836          #endif
+    837                  switch(  Status )
+    838                  {
+    839                    case HAL_OK:
+    840                      Status = RoadBrd_ParseString((char *)tempBffr);
+    841                      // We have a good Tasking String. Time to determine action.
+    842                      if (Status != HAL_OK)
+    843                        Error_Handler();
+    844                      
+    845                      break;
+    846                    case HAL_ERROR:
+    847                      // ERROR. We are done.
+    848                      Error_Handler();
+    849                      break;
+    850                    case HAL_BUSY:
+    851                      // ERROR. We are done.
+    852                      Error_Handler();
+    853                      break;
+    854                    case HAL_TIMEOUT:
+    855                      // Nothing to do. Try again.
+    856                      break;
+    857                    default:
+    858                      // ERROR. We are done.
+    859                      Error_Handler();
+    860                      break;
+    861                  }
+    862                // Wait 500msec.
+    863                RoadBrd_Delay( 50 );
+    864                //************************* END NUCLEO VERSION *************************************   
+    865                
+    866                #else
+    867          
+    868                //************************* ROAD BRD VERSION *************************************   
+    869                  // Wait on a character from Nucleo COM Port.
+    870          //********************PATCH_UART ACTIVE*******************************************
+    871          #ifdef PATCH_UART
+    872          #ifdef REV_L
+    873                  // Turn Off MICRO_LED LED.
+    874                  RoadBrd_gpio_Off( MICRO_LED );
+    875                  tmpSize = RECEIVE_SZ;
+    876                  pData = tempBffr;
+    877                  while ( tmpSize>0 )
+    878                  {
+    879                    Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
+    880                    // Wait for msg to be completed.
+    881                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+    882                    {
+    883                     }
+    884                    // Clear State for Next Transfer.
+    885                    clrUsartState( MONITOR_UART );
+    886                    if(Status == HAL_OK)
+    887                    {
+    888                      // Watch for termination characters.
+    889                      if((tmpData[0]==0x0a) || (tmpData[0]==0x0d))
+    890                      {
+    891                        *pData = 0x00;
+    892                        // Yes..We are done.
+    893                        break;
+    894                      }
+    895                      else
+    896                      {
+    897                        // Move new character into passed buffer.
+    898                        *pData = tmpData[0];
+    899                        tmpSize--;                          // Decrement Count
+    900                        pData++;                            // Move pointer to next buffer location.
+    901                      }
+    902                    }
+    903                    else
+    904                      Error_Handler();
+    905                  } // EndWhile ( tmpSize>0 )
+    906          #ifndef LED_OFF
+    907                  RoadBrd_gpio_On( MICRO_LED );
+    908          #endif
+    909                  // Send <CR><LF> to UART..
+    910                  strcpy( (char *)tempBffr2, "\r\n");
+    911                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    912                  if (Status != HAL_OK)
+    913                    Error_Handler();
+    914                  switch(  Status )
+    915                  {
+    916                    case HAL_OK:
     917                      // We have a good Tasking String. Time to determine action.
-    918                      if (Status != HAL_OK)
-    919                        Error_Handler();
-    920                      break;
-    921                    case HAL_ERROR:
-    922                      // ERROR. We are done.
-    923                      Error_Handler();
-    924                      break;
-    925                    case HAL_BUSY:
-    926                      // ERROR. We are done.
-    927                      Error_Handler();
-    928                      break;
-    929                    case HAL_TIMEOUT:
-    930                      // Nothing to do. Try again.
-    931                      break;
-    932                    default:
-    933                      // ERROR. We are done.
-    934                      Error_Handler();
-    935                      break;
-    936                    
-    937                  } // EndSwitch (  Status )
-    938          #else
-    939                  // Turn Off BGM_LED LED.
-    940                  RoadBrd_gpio_Off( MICRO_LED );
-    941                  Status = RoadBrd_UART_Receive(MONITOR_UART, tempBffr, RECEIVE_SZ);
-    942                  // Process Buffer Now.
-    943                  // Turn On BGM_LED LED.
-    944          #ifndef LED_OFF
-    945                  RoadBrd_gpio_On( MICRO_LED );
-    946          #endif
-    947                  // Send <CR><LF> to UART..
-    948                  strcpy( (char *)tempBffr2, "\r\n");
-    949          #ifdef REV_L
-    950                      Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-    951                      // Wait for msg to be completed.
-    952                      while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-    953                      {
-    954                      }
-    955                      // Clear State for Next Transfer.
-    956                      clrUsartState( MONITOR_UART );
-    957          #else
-    958                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    959          #endif
-    960                  if (Status != HAL_OK)
-    961                    Error_Handler();
-    962                  switch(  Status )
-    963                  {
-    964                    case HAL_OK:
-    965                      // We have a good Tasking String. Time to determine action.
-    966                      Status = RoadBrd_ParseString((char *)tempBffr);
+    918                      Status = RoadBrd_ParseString((char *)tempBffr);
+    919                      // We have a good Tasking String. Time to determine action.
+    920                      if (Status != HAL_OK)
+    921                        Error_Handler();
+    922                      break;
+    923                    case HAL_ERROR:
+    924                      // ERROR. We are done.
+    925                      Error_Handler();
+    926                      break;
+    927                    case HAL_BUSY:
+    928                      // ERROR. We are done.
+    929                      Error_Handler();
+    930                      break;
+    931                    case HAL_TIMEOUT:
+    932                      // Nothing to do. Try again.
+    933                      break;
+    934                    default:
+    935                      // ERROR. We are done.
+    936                      Error_Handler();
+    937                      break;
+    938                    
+    939                  } // EndSwitch (  Status )
+    940          #else
+    941                  // Turn Off BGM_LED LED.
+    942                  RoadBrd_gpio_Off( MICRO_LED );
+    943                  Status = RoadBrd_UART_Receive(MONITOR_UART, tempBffr, RECEIVE_SZ);
+    944                  // Process Buffer Now.
+    945                  // Turn On BGM_LED LED.
+    946          #ifndef LED_OFF
+    947                  RoadBrd_gpio_On( MICRO_LED );
+    948          #endif
+    949                  // Send <CR><LF> to UART..
+    950                  strcpy( (char *)tempBffr2, "\r\n");
+    951          #ifdef REV_L
+    952                      Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+    953                      // Wait for msg to be completed.
+    954                      while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+    955                      {
+    956                      }
+    957                      // Clear State for Next Transfer.
+    958                      clrUsartState( MONITOR_UART );
+    959          #else
+    960                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    961          #endif
+    962                  if (Status != HAL_OK)
+    963                    Error_Handler();
+    964                  switch(  Status )
+    965                  {
+    966                    case HAL_OK:
     967                      // We have a good Tasking String. Time to determine action.
-    968                      if (Status != HAL_OK)
-    969                        Error_Handler();
-    970                      break;
-    971                    case HAL_ERROR:
-    972                      // ERROR. We are done.
-    973                      Error_Handler();
-    974                      break;
-    975                    case HAL_BUSY:
-    976                      // ERROR. We are done.
-    977                      Error_Handler();
-    978                      break;
-    979                    case HAL_TIMEOUT:
-    980                      // Nothing to do. Try again.
-    981                      break;
-    982                    default:
-    983                      // ERROR. We are done.
-    984                      Error_Handler();
-    985                      break;
-    986                    
-    987                  } // EndSwitch (  Status )
-    988          #endif
-    989          //********************END PATCH_UART ACTIVE*******************************************
-    990          #else
-    991          //********************PATCH_UART NOT ACTIVE*******************************************
-    992          #ifdef REV_L
-    993                    /* Process BLE input */
-    994                    BGM111_ProcessInput();
+    968                      Status = RoadBrd_ParseString((char *)tempBffr, false);
+    969                      // We have a good Tasking String. Time to determine action.
+    970                      if (Status != HAL_OK)
+    971                        Error_Handler();
+    972                      break;
+    973                    case HAL_ERROR:
+    974                      // ERROR. We are done.
+    975                      Error_Handler();
+    976                      break;
+    977                    case HAL_BUSY:
+    978                      // ERROR. We are done.
+    979                      Error_Handler();
+    980                      break;
+    981                    case HAL_TIMEOUT:
+    982                      // Nothing to do. Try again.
+    983                      break;
+    984                    default:
+    985                      // ERROR. We are done.
+    986                      Error_Handler();
+    987                      break;
+    988                    
+    989                  } // EndSwitch (  Status )
+    990          #endif
+    991          //********************END PATCH_UART ACTIVE*******************************************
+    992          #else
+    993          //********************PATCH_UART NOT ACTIVE*******************************************
+    994          #ifdef REV_L
+    995                    /* Process BLE input */
+    996                    BGM111_ProcessInput();
    \                     ??main_41: (+1)
-   \   0000041C   0x.... 0x....      BL       BGM111_ProcessInput
-    995                  
-    996                    // Process Timer Stimulus for Timer 2.
-    997                    Status = Proc_Timer2();
-   \   00000420   0x.... 0x....      BL       Proc_Timer2
-   \   00000424   0x0004             MOVS     R4,R0
-    998                    if(Status != HAL_OK)
-   \   00000426   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000428   0x2C00             CMP      R4,#+0
-   \   0000042A   0xD00D             BEQ.N    ??main_42
-    999                    {
-   1000                      strcpy( (char *)tempBffr2, "BGM111_ProcessInput ERROR: Sensors reported Background error.\r\n");
-   \   0000042C   0x....             LDR.N    R1,??DataTable1_14
-   \   0000042E   0xA801             ADD      R0,SP,#+4
-   \   00000430   0x.... 0x....      BL       strcpy
-   1001          #ifdef NUCLEO
-   1002                      Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-   1003          #else
-   1004                      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
-   \   00000434   0xA901             ADD      R1,SP,#+4
-   \   00000436   0x2000             MOVS     R0,#+0
-   \   00000438   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000043C   0x0004             MOVS     R4,R0
-   1005          #endif
-   1006                      if (Status != HAL_OK)
-   \   0000043E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000440   0x2C00             CMP      R4,#+0
-   \   00000442   0xD001             BEQ.N    ??main_42
-   1007                        Error_Handler();
-   \   00000444   0x.... 0x....      BL       Error_Handler
-   1008                    }
-   1009                    /* Process the sensor state machine if the BLE module is ready */
-   1010                      if ((BGM111_Ready()) &&
-   1011                          (BGM111_Connected()) &&
-   1012                          (BGM111_DataConnected()) &&
-   1013                          (BGM111_SyncModeTest()) )
+   \   00000426   0x.... 0x....      BL       BGM111_ProcessInput
+    997                  
+    998                    // Process Timer Stimulus for Timer 2.
+    999                    Status = Proc_Timer2();
+   \   0000042A   0x.... 0x....      BL       Proc_Timer2
+   \   0000042E   0x0004             MOVS     R4,R0
+   1000                    if(Status != HAL_OK)
+   \   00000430   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000432   0x2C00             CMP      R4,#+0
+   \   00000434   0xD00D             BEQ.N    ??main_42
+   1001                    {
+   1002                      strcpy( (char *)tempBffr2, "BGM111_ProcessInput ERROR: Sensors reported Background error.\r\n");
+   \   00000436   0x....             LDR.N    R1,??DataTable1_14
+   \   00000438   0xA801             ADD      R0,SP,#+4
+   \   0000043A   0x.... 0x....      BL       strcpy
+   1003          #ifdef NUCLEO
+   1004                      Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+   1005          #else
+   1006                      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+   \   0000043E   0xA901             ADD      R1,SP,#+4
+   \   00000440   0x2000             MOVS     R0,#+0
+   \   00000442   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000446   0x0004             MOVS     R4,R0
+   1007          #endif
+   1008                      if (Status != HAL_OK)
+   \   00000448   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000044A   0x2C00             CMP      R4,#+0
+   \   0000044C   0xD001             BEQ.N    ??main_42
+   1009                        Error_Handler();
+   \   0000044E   0x.... 0x....      BL       Error_Handler
+   1010                    }
+   1011                    // Process any Outstanding Parse Tasks.
+   1012                    RoadBrd_ProcessParserTsk();
    \                     ??main_42: (+1)
-   \   00000448   0x.... 0x....      BL       BGM111_Ready
-   \   0000044C   0x2800             CMP      R0,#+0
-   \   0000044E   0xD00D             BEQ.N    ??main_43
-   \   00000450   0x.... 0x....      BL       BGM111_Connected
-   \   00000454   0x2800             CMP      R0,#+0
-   \   00000456   0xD009             BEQ.N    ??main_43
-   \   00000458   0x.... 0x....      BL       BGM111_DataConnected
-   \   0000045C   0x2800             CMP      R0,#+0
-   \   0000045E   0xD005             BEQ.N    ??main_43
-   \   00000460   0x.... 0x....      BL       BGM111_SyncModeTest
-   \   00000464   0x2800             CMP      R0,#+0
-   \   00000466   0xD001             BEQ.N    ??main_43
-   1014                    {
-   1015                      ProcessSensorState();
-   \   00000468   0x.... 0x....      BL       ProcessSensorState
-   1016                    }
-   1017                    /* Sleep when we have nothing to process */
-   1018                    //PWR_EnterSleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
-   1019                    // Only Process the first Time
-   1020                    if (firstTime)
+   \   00000452   0x.... 0x....      BL       RoadBrd_ProcessParserTsk
+   1013                    
+   1014                    /* Process the sensor state machine if the BLE module is ready */
+   1015                      if ((BGM111_Ready()) &&
+   1016                          (BGM111_Connected()) &&
+   1017                          (BGM111_DataConnected()) &&
+   1018                          (BGM111_SyncModeTest()) )
+   \   00000456   0x.... 0x....      BL       BGM111_Ready
+   \   0000045A   0x2800             CMP      R0,#+0
+   \   0000045C   0xD00D             BEQ.N    ??main_43
+   \   0000045E   0x.... 0x....      BL       BGM111_Connected
+   \   00000462   0x2800             CMP      R0,#+0
+   \   00000464   0xD009             BEQ.N    ??main_43
+   \   00000466   0x.... 0x....      BL       BGM111_DataConnected
+   \   0000046A   0x2800             CMP      R0,#+0
+   \   0000046C   0xD005             BEQ.N    ??main_43
+   \   0000046E   0x.... 0x....      BL       BGM111_SyncModeTest
+   \   00000472   0x2800             CMP      R0,#+0
+   \   00000474   0xD001             BEQ.N    ??main_43
+   1019                    {
+   1020                      ProcessSensorState();
+   \   00000476   0x.... 0x....      BL       ProcessSensorState
+   1021                    }
+   1022                    /* Sleep when we have nothing to process */
+   1023                    //PWR_EnterSleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
+   1024                    // Only Process the first Time
+   1025                    if (firstTime)
    \                     ??main_43: (+1)
-   \   0000046C   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
-   \   0000046E   0x2E00             CMP      R6,#+0
-   \   00000470   0xD00E             BEQ.N    ??main_44
-   1021                    {
-   1022                      firstTime = false;
-   \   00000472   0x2000             MOVS     R0,#+0
-   \   00000474   0x0006             MOVS     R6,R0
-   1023                      Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
-   \   00000476   0x2201             MOVS     R2,#+1
-   \   00000478   0x4669             MOV      R1,SP
-   \   0000047A   0x2000             MOVS     R0,#+0
-   \   0000047C   0x.... 0x....      BL       RoadBrd_UART_Receive_IT
-   \   00000480   0x0004             MOVS     R4,R0
-   1024                      // Enable BGM Serial Traffic.
-   1025                      HAL_UART_EnableBGM_RX();
-   \   00000482   0x.... 0x....      BL       HAL_UART_EnableBGM_RX
-   1026                      RoadBrd_SetBffrFlg();
-   \   00000486   0x.... 0x....      BL       RoadBrd_SetBffrFlg
-   1027                      // Clear bffrFlag..Only Processing one character.
-   1028          //            bffrFlag = false;
-   1029                      // Turn Off BGM_LED and MICRO_LED.
-   1030                      RoadBrd_gpio_Off( MICRO_LED );
-   \   0000048A   0x2002             MOVS     R0,#+2
-   \   0000048C   0x.... 0x....      BL       RoadBrd_gpio_Off
-   1031                    }
-   1032                    // Service Watchdog
-   1033                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+   \   0000047A   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000047C   0x2E00             CMP      R6,#+0
+   \   0000047E   0xD00E             BEQ.N    ??main_44
+   1026                    {
+   1027                      firstTime = false;
+   \   00000480   0x2000             MOVS     R0,#+0
+   \   00000482   0x0006             MOVS     R6,R0
+   1028                      Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
+   \   00000484   0x2201             MOVS     R2,#+1
+   \   00000486   0x4669             MOV      R1,SP
+   \   00000488   0x2000             MOVS     R0,#+0
+   \   0000048A   0x.... 0x....      BL       RoadBrd_UART_Receive_IT
+   \   0000048E   0x0004             MOVS     R4,R0
+   1029                      // Enable BGM Serial Traffic.
+   1030                      HAL_UART_EnableBGM_RX();
+   \   00000490   0x.... 0x....      BL       HAL_UART_EnableBGM_RX
+   1031                      RoadBrd_SetBffrFlg();
+   \   00000494   0x.... 0x....      BL       RoadBrd_SetBffrFlg
+   1032                      // Clear bffrFlag..Only Processing one character.
+   1033          //            bffrFlag = false;
+   1034                      // Turn Off BGM_LED and MICRO_LED.
+   1035                      RoadBrd_gpio_Off( MICRO_LED );
+   \   00000498   0x2002             MOVS     R0,#+2
+   \   0000049A   0x.... 0x....      BL       RoadBrd_gpio_Off
+   1036                    }
+   1037                    // Service Watchdog
+   1038                    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
    \                     ??main_44: (+1)
-   \   00000490   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
-   1034                    // Wait for msg to be completed.
-   1035                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+   \   0000049E   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
+   1039                    // Wait for msg to be completed.
+   1040                    while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
    \                     ??main_45: (+1)
-   \   00000494   0x2000             MOVS     R0,#+0
-   \   00000496   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   0000049A   0x2801             CMP      R0,#+1
-   \   0000049C   0xD028             BEQ.N    ??main_46
-   1036                    {
-   1037                      // Process Timer Stimulus for Timer 2.
-   1038                      Status = Proc_Timer2();
-   \   0000049E   0x.... 0x....      BL       Proc_Timer2
-   \   000004A2   0x0004             MOVS     R4,R0
-   1039                      if(Status != HAL_OK)
-   \   000004A4   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   000004A6   0x2C00             CMP      R4,#+0
-   \   000004A8   0xD00D             BEQ.N    ??main_47
-   1040                      {
-   1041                        strcpy( (char *)tempBffr2, "BGM111_ProcessInput ERROR: Sensors reported Background error.\r\n");
-   \   000004AA   0x....             LDR.N    R1,??DataTable1_14
-   \   000004AC   0xA801             ADD      R0,SP,#+4
-   \   000004AE   0x.... 0x....      BL       strcpy
-   1042          #ifdef NUCLEO
-   1043                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
-   1044          #else
-   1045                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
-   \   000004B2   0xA901             ADD      R1,SP,#+4
-   \   000004B4   0x2000             MOVS     R0,#+0
-   \   000004B6   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   000004BA   0x0004             MOVS     R4,R0
-   1046          #endif
-   1047                        if (Status != HAL_OK)
-   \   000004BC   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   000004BE   0x2C00             CMP      R4,#+0
-   \   000004C0   0xD001             BEQ.N    ??main_47
-   1048                          Error_Handler();
-   \   000004C2   0x.... 0x....      BL       Error_Handler
-   1049                      }
-   1050                      /* Process the sensor state machine if the BLE module is ready */
-   1051                      if ((BGM111_Ready()) &&
-   1052                          (BGM111_Connected()) &&
-   1053                          (BGM111_DataConnected()) &&
-   1054                          (BGM111_SyncModeTest()) )
+   \   000004A2   0x2000             MOVS     R0,#+0
+   \   000004A4   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   000004A8   0x2801             CMP      R0,#+1
+   \   000004AA   0xD02A             BEQ.N    ??main_46
+   1041                    {
+   1042                      // Process Timer Stimulus for Timer 2.
+   1043                      Status = Proc_Timer2();
+   \   000004AC   0x.... 0x....      BL       Proc_Timer2
+   \   000004B0   0x0004             MOVS     R4,R0
+   1044                      if(Status != HAL_OK)
+   \   000004B2   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000004B4   0x2C00             CMP      R4,#+0
+   \   000004B6   0xD00D             BEQ.N    ??main_47
+   1045                      {
+   1046                        strcpy( (char *)tempBffr2, "BGM111_ProcessInput ERROR: Sensors reported Background error.\r\n");
+   \   000004B8   0x....             LDR.N    R1,??DataTable1_14
+   \   000004BA   0xA801             ADD      R0,SP,#+4
+   \   000004BC   0x.... 0x....      BL       strcpy
+   1047          #ifdef NUCLEO
+   1048                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+   1049          #else
+   1050                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+   \   000004C0   0xA901             ADD      R1,SP,#+4
+   \   000004C2   0x2000             MOVS     R0,#+0
+   \   000004C4   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000004C8   0x0004             MOVS     R4,R0
+   1051          #endif
+   1052                        if (Status != HAL_OK)
+   \   000004CA   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000004CC   0x2C00             CMP      R4,#+0
+   \   000004CE   0xD001             BEQ.N    ??main_47
+   1053                          Error_Handler();
+   \   000004D0   0x.... 0x....      BL       Error_Handler
+   1054                      }
+   1055                      // Process any Outstanding Parse Tasks.
+   1056                      RoadBrd_ProcessParserTsk();
    \                     ??main_47: (+1)
-   \   000004C6   0x.... 0x....      BL       BGM111_Ready
-   \   000004CA   0x2800             CMP      R0,#+0
-   \   000004CC   0xD0E2             BEQ.N    ??main_45
-   \   000004CE   0x.... 0x....      BL       BGM111_Connected
-   \   000004D2   0x2800             CMP      R0,#+0
-   \   000004D4   0xD0DE             BEQ.N    ??main_45
-   \   000004D6   0x.... 0x....      BL       BGM111_DataConnected
-   \   000004DA   0x2800             CMP      R0,#+0
-   \   000004DC   0xD0DA             BEQ.N    ??main_45
-   \   000004DE   0x.... 0x....      BL       BGM111_SyncModeTest
-   \   000004E2   0x2800             CMP      R0,#+0
-   \   000004E4   0xD0D6             BEQ.N    ??main_45
-   1055                      {
-   1056                        // Service Watchdog
-   1057                        RoadBrd_WWDG_Refresh();     // Refresh WatchDog
-   \   000004E6   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
-   1058                        ProcessSensorState();
-   \   000004EA   0x.... 0x....      BL       ProcessSensorState
-   \   000004EE   0xE7D1             B.N      ??main_45
-   1059                      }
-   1060                      // Test to see if we have any BGM Traffic to process.
-   1061                      //BGM111_ProcessInput();
-   1062                    }
-   1063                    // Test if BGM or Monitor Character received.
-   1064                    if (RoadBrd_Uart_Status(MONITOR_UART) == SET)
+   \   000004D4   0x.... 0x....      BL       RoadBrd_ProcessParserTsk
+   1057                      
+   1058                      /* Process the sensor state machine if the BLE module is ready */
+   1059                      if ((BGM111_Ready()) &&
+   1060                          (BGM111_Connected()) &&
+   1061                          (BGM111_DataConnected()) &&
+   1062                          (BGM111_SyncModeTest()) )
+   \   000004D8   0x.... 0x....      BL       BGM111_Ready
+   \   000004DC   0x2800             CMP      R0,#+0
+   \   000004DE   0xD0E0             BEQ.N    ??main_45
+   \   000004E0   0x.... 0x....      BL       BGM111_Connected
+   \   000004E4   0x2800             CMP      R0,#+0
+   \   000004E6   0xD0DC             BEQ.N    ??main_45
+   \   000004E8   0x.... 0x....      BL       BGM111_DataConnected
+   \   000004EC   0x2800             CMP      R0,#+0
+   \   000004EE   0xD0D8             BEQ.N    ??main_45
+   \   000004F0   0x.... 0x....      BL       BGM111_SyncModeTest
+   \   000004F4   0x2800             CMP      R0,#+0
+   \   000004F6   0xD0D4             BEQ.N    ??main_45
+   1063                      {
+   1064                        // Service Watchdog
+   1065                        RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+   \   000004F8   0x.... 0x....      BL       RoadBrd_WWDG_Refresh
+   1066                        ProcessSensorState();
+   \   000004FC   0x.... 0x....      BL       ProcessSensorState
+   \   00000500   0xE7CF             B.N      ??main_45
+   1067                      }
+   1068                      // Test to see if we have any BGM Traffic to process.
+   1069                      //BGM111_ProcessInput();
+   1070                    }
+   1071                    // Test if BGM or Monitor Character received.
+   1072                    if (RoadBrd_Uart_Status(MONITOR_UART) == SET)
    \                     ??main_46: (+1)
-   \   000004F0   0x2000             MOVS     R0,#+0
-   \   000004F2   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   000004F6   0x2801             CMP      R0,#+1
-   \   000004F8   0xD178             BNE.N    ??main_48
-   1065                    {
-   1066                      // Clear State for Next Transfer.
-   1067                      clrUsartState( MONITOR_UART );
-   \   000004FA   0x2000             MOVS     R0,#+0
-   \   000004FC   0x.... 0x....      BL       clrUsartState
-   1068                      if(Status == HAL_OK)
-   \   00000500   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000502   0x2C00             CMP      R4,#+0
-   \   00000504   0xD167             BNE.N    ??main_49
-   1069                      {
-   1070                        // Test Bypass Flag...If Set, we ae in special monitor mode.
-   1071                        if (Tst_Bypass())
-   \   00000506   0x.... 0x....      BL       Tst_Bypass
-   \   0000050A   0x2800             CMP      R0,#+0
-   \   0000050C   0xD023             BEQ.N    ??main_50
-   1072                        {
-   1073                          pData[0] = tmpData[0];
-   \   0000050E   0xF89D 0x0000      LDRB     R0,[SP, #+0]
-   \   00000512   0x7038             STRB     R0,[R7, #+0]
-   1074                          pData[1] = 0x00;
-   \   00000514   0x2000             MOVS     R0,#+0
-   \   00000516   0x7078             STRB     R0,[R7, #+1]
-   1075                          // Clear State for Next Transfer.
-   1076                          clrUsartState( MONITOR_UART );
-   \   00000518   0x2000             MOVS     R0,#+0
-   \   0000051A   0x.... 0x....      BL       clrUsartState
-   1077                          if (Status != HAL_OK)
-   \   0000051E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000520   0x2C00             CMP      R4,#+0
-   \   00000522   0xD001             BEQ.N    ??main_51
-   1078                            Error_Handler();
-   \   00000524   0x.... 0x....      BL       Error_Handler
-   1079                          if(Status == HAL_OK)
+   \   00000502   0x2000             MOVS     R0,#+0
+   \   00000504   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   00000508   0x2801             CMP      R0,#+1
+   \   0000050A   0xD17A             BNE.N    ??main_48
+   1073                    {
+   1074                      // Clear State for Next Transfer.
+   1075                      clrUsartState( MONITOR_UART );
+   \   0000050C   0x2000             MOVS     R0,#+0
+   \   0000050E   0x.... 0x....      BL       clrUsartState
+   1076                      if(Status == HAL_OK)
+   \   00000512   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000514   0x2C00             CMP      R4,#+0
+   \   00000516   0xD169             BNE.N    ??main_49
+   1077                      {
+   1078                        // Test Bypass Flag...If Set, we ae in special monitor mode.
+   1079                        if (Tst_Bypass())
+   \   00000518   0x.... 0x....      BL       Tst_Bypass
+   \   0000051C   0x2800             CMP      R0,#+0
+   \   0000051E   0xD024             BEQ.N    ??main_50
+   1080                        {
+   1081                          pData[0] = tmpData[0];
+   \   00000520   0xF89D 0x0000      LDRB     R0,[SP, #+0]
+   \   00000524   0x7038             STRB     R0,[R7, #+0]
+   1082                          pData[1] = 0x00;
+   \   00000526   0x2000             MOVS     R0,#+0
+   \   00000528   0x7078             STRB     R0,[R7, #+1]
+   1083                          // Clear State for Next Transfer.
+   1084                          clrUsartState( MONITOR_UART );
+   \   0000052A   0x2000             MOVS     R0,#+0
+   \   0000052C   0x.... 0x....      BL       clrUsartState
+   1085                          if (Status != HAL_OK)
+   \   00000530   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000532   0x2C00             CMP      R4,#+0
+   \   00000534   0xD001             BEQ.N    ??main_51
+   1086                            Error_Handler();
+   \   00000536   0x.... 0x....      BL       Error_Handler
+   1087                          if(Status == HAL_OK)
    \                     ??main_51: (+1)
-   \   00000528   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000052A   0x2C00             CMP      R4,#+0
-   \   0000052C   0xD10C             BNE.N    ??main_52
-   1080                          {
-   1081                            // We have a good Tasking String. Time to determine action.
-   1082                            // Turn On BGM_LED LED.
-   1083            #ifndef LED_OFF
-   1084                            RoadBrd_gpio_On( GREEN_LED );
-   \   0000052E   0x2002             MOVS     R0,#+2
-   \   00000530   0x.... 0x....      BL       RoadBrd_gpio_On
-   1085            #endif
-   1086                            Status = RoadBrd_ParseString((char *)tempBffr);
-   \   00000534   0xA815             ADD      R0,SP,#+84
-   \   00000536   0x.... 0x....      BL       RoadBrd_ParseString
-   \   0000053A   0x0004             MOVS     R4,R0
-   1087                            // We have a good Tasking String. Time to determine action.
-   1088                            if (Status != HAL_OK)
-   \   0000053C   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000053E   0x2C00             CMP      R4,#+0
-   \   00000540   0xD004             BEQ.N    ??main_53
-   1089                              Error_Handler();
-   \   00000542   0x.... 0x....      BL       Error_Handler
-   \   00000546   0xE001             B.N      ??main_53
-   1090                          }
-   1091                          else
-   1092                            Error_Handler();
+   \   0000053A   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000053C   0x2C00             CMP      R4,#+0
+   \   0000053E   0xD10D             BNE.N    ??main_52
+   1088                          {
+   1089                            // We have a good Tasking String. Time to determine action.
+   1090                            // Turn On BGM_LED LED.
+   1091            #ifndef LED_OFF
+   1092                            RoadBrd_gpio_On( GREEN_LED );
+   \   00000540   0x2002             MOVS     R0,#+2
+   \   00000542   0x.... 0x....      BL       RoadBrd_gpio_On
+   1093            #endif
+   1094                            Status = RoadBrd_ParseString((char *)tempBffr, false);
+   \   00000546   0x2100             MOVS     R1,#+0
+   \   00000548   0xA815             ADD      R0,SP,#+84
+   \   0000054A   0x.... 0x....      BL       RoadBrd_ParseString
+   \   0000054E   0x0004             MOVS     R4,R0
+   1095                            // We have a good Tasking String. Time to determine action.
+   1096                            if (Status != HAL_OK)
+   \   00000550   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000552   0x2C00             CMP      R4,#+0
+   \   00000554   0xD004             BEQ.N    ??main_53
+   1097                              Error_Handler();
+   \   00000556   0x.... 0x....      BL       Error_Handler
+   \   0000055A   0xE001             B.N      ??main_53
+   1098                          }
+   1099                          else
+   1100                            Error_Handler();
    \                     ??main_52: (+1)
-   \   00000548   0x.... 0x....      BL       Error_Handler
-   1093                          tmpSize = RECEIVE_SZ;
+   \   0000055C   0x.... 0x....      BL       Error_Handler
+   1101                          tmpSize = RECEIVE_SZ;
    \                     ??main_53: (+1)
-   \   0000054C   0x201E             MOVS     R0,#+30
-   \   0000054E   0x0005             MOVS     R5,R0
-   1094                          pData = tempBffr;
-   \   00000550   0xA815             ADD      R0,SP,#+84
-   \   00000552   0x0007             MOVS     R7,R0
-   \   00000554   0xE041             B.N      ??main_54
-   1095                        } // EndIf (Tst_Bypass())
-   1096                        else {
-   1097                          // Watch for termination characters.
-   1098                          if((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+   \   00000560   0x201E             MOVS     R0,#+30
+   \   00000562   0x0005             MOVS     R5,R0
+   1102                          pData = tempBffr;
+   \   00000564   0xA815             ADD      R0,SP,#+84
+   \   00000566   0x0007             MOVS     R7,R0
+   \   00000568   0xE042             B.N      ??main_54
+   1103                        } // EndIf (Tst_Bypass())
+   1104                        else {
+   1105                          // Watch for termination characters.
+   1106                          if((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
    \                     ??main_50: (+1)
-   \   00000556   0xF89D 0x0000      LDRB     R0,[SP, #+0]
-   \   0000055A   0x280A             CMP      R0,#+10
-   \   0000055C   0xD006             BEQ.N    ??main_55
-   \   0000055E   0xF89D 0x0000      LDRB     R0,[SP, #+0]
-   \   00000562   0x280D             CMP      R0,#+13
-   \   00000564   0xD002             BEQ.N    ??main_55
-   \   00000566   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
-   \   00000568   0x2D00             CMP      R5,#+0
-   \   0000056A   0xD12E             BNE.N    ??main_56
-   1099                          {
-   1100                            *pData = 0x00;
+   \   0000056A   0xF89D 0x0000      LDRB     R0,[SP, #+0]
+   \   0000056E   0x280A             CMP      R0,#+10
+   \   00000570   0xD006             BEQ.N    ??main_55
+   \   00000572   0xF89D 0x0000      LDRB     R0,[SP, #+0]
+   \   00000576   0x280D             CMP      R0,#+13
+   \   00000578   0xD002             BEQ.N    ??main_55
+   \   0000057A   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
+   \   0000057C   0x2D00             CMP      R5,#+0
+   \   0000057E   0xD12F             BNE.N    ??main_56
+   1107                          {
+   1108                            *pData = 0x00;
    \                     ??main_55: (+1)
-   \   0000056C   0x2000             MOVS     R0,#+0
-   \   0000056E   0x7038             STRB     R0,[R7, #+0]
-   1101                            // Yes..We are done.
-   1102                            // Process Buffer NOW.
-   1103                            // Send <CR><LF> to UART..
-   1104                            strcpy( (char *)tempBffr2, "\r\n");
-   \   00000570   0x....             ADR.N    R1,??DataTable1  ;; 0x0D, 0x0A, 0x00, 0x00
-   \   00000572   0xA801             ADD      R0,SP,#+4
-   \   00000574   0x.... 0x....      BL       strcpy
-   1105                            Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-   \   00000578   0xA901             ADD      R1,SP,#+4
-   \   0000057A   0x2000             MOVS     R0,#+0
-   \   0000057C   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
-   \   00000580   0x0004             MOVS     R4,R0
-   1106                            // Wait for msg to be completed.
-   1107                            while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+   \   00000580   0x2000             MOVS     R0,#+0
+   \   00000582   0x7038             STRB     R0,[R7, #+0]
+   1109                            // Yes..We are done.
+   1110                            // Process Buffer NOW.
+   1111                            // Send <CR><LF> to UART..
+   1112                            strcpy( (char *)tempBffr2, "\r\n");
+   \   00000584   0x....             ADR.N    R1,??DataTable1  ;; 0x0D, 0x0A, 0x00, 0x00
+   \   00000586   0xA801             ADD      R0,SP,#+4
+   \   00000588   0x.... 0x....      BL       strcpy
+   1113                            Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+   \   0000058C   0xA901             ADD      R1,SP,#+4
+   \   0000058E   0x2000             MOVS     R0,#+0
+   \   00000590   0x.... 0x....      BL       RoadBrd_UART_Transmit_IT
+   \   00000594   0x0004             MOVS     R4,R0
+   1114                            // Wait for msg to be completed.
+   1115                            while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
    \                     ??main_57: (+1)
-   \   00000582   0x2000             MOVS     R0,#+0
-   \   00000584   0x.... 0x....      BL       RoadBrd_Uart_Status
-   \   00000588   0x2801             CMP      R0,#+1
-   \   0000058A   0xD1FA             BNE.N    ??main_57
-   1108                            {
-   1109                            }
-   1110                            // Clear State for Next Transfer.
-   1111                            clrUsartState( MONITOR_UART );
-   \   0000058C   0x2000             MOVS     R0,#+0
-   \   0000058E   0x.... 0x....      BL       clrUsartState
-   1112                            if (Status != HAL_OK)
-   \   00000592   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000594   0x2C00             CMP      R4,#+0
-   \   00000596   0xD001             BEQ.N    ??main_58
-   1113                              Error_Handler();
-   \   00000598   0x.... 0x....      BL       Error_Handler
-   1114                            if(Status == HAL_OK)
+   \   00000596   0x2000             MOVS     R0,#+0
+   \   00000598   0x.... 0x....      BL       RoadBrd_Uart_Status
+   \   0000059C   0x2801             CMP      R0,#+1
+   \   0000059E   0xD1FA             BNE.N    ??main_57
+   1116                            {
+   1117                            }
+   1118                            // Clear State for Next Transfer.
+   1119                            clrUsartState( MONITOR_UART );
+   \   000005A0   0x2000             MOVS     R0,#+0
+   \   000005A2   0x.... 0x....      BL       clrUsartState
+   1120                            if (Status != HAL_OK)
+   \   000005A6   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000005A8   0x2C00             CMP      R4,#+0
+   \   000005AA   0xD001             BEQ.N    ??main_58
+   1121                              Error_Handler();
+   \   000005AC   0x.... 0x....      BL       Error_Handler
+   1122                            if(Status == HAL_OK)
    \                     ??main_58: (+1)
-   \   0000059C   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000059E   0x2C00             CMP      R4,#+0
-   \   000005A0   0xD10C             BNE.N    ??main_59
-   1115                            {
-   1116                              // We have a good Tasking String. Time to determine action.
-   1117                              // Turn On BGM_LED LED.
-   1118            #ifndef LED_OFF
-   1119                              RoadBrd_gpio_On( GREEN_LED );
-   \   000005A2   0x2002             MOVS     R0,#+2
-   \   000005A4   0x.... 0x....      BL       RoadBrd_gpio_On
-   1120            #endif
-   1121                              Status = RoadBrd_ParseString((char *)tempBffr);
-   \   000005A8   0xA815             ADD      R0,SP,#+84
-   \   000005AA   0x.... 0x....      BL       RoadBrd_ParseString
-   \   000005AE   0x0004             MOVS     R4,R0
-   1122                              // We have a good Tasking String. Time to determine action.
-   1123                              if (Status != HAL_OK)
    \   000005B0   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   000005B2   0x2C00             CMP      R4,#+0
-   \   000005B4   0xD004             BEQ.N    ??main_60
-   1124                                Error_Handler();
-   \   000005B6   0x.... 0x....      BL       Error_Handler
-   \   000005BA   0xE001             B.N      ??main_60
-   1125                            }
-   1126                            else
-   1127                              Error_Handler();
+   \   000005B4   0xD10D             BNE.N    ??main_59
+   1123                            {
+   1124                              // We have a good Tasking String. Time to determine action.
+   1125                              // Turn On BGM_LED LED.
+   1126            #ifndef LED_OFF
+   1127                              RoadBrd_gpio_On( GREEN_LED );
+   \   000005B6   0x2002             MOVS     R0,#+2
+   \   000005B8   0x.... 0x....      BL       RoadBrd_gpio_On
+   1128            #endif
+   1129                              Status = RoadBrd_ParseString((char *)tempBffr, false);
+   \   000005BC   0x2100             MOVS     R1,#+0
+   \   000005BE   0xA815             ADD      R0,SP,#+84
+   \   000005C0   0x.... 0x....      BL       RoadBrd_ParseString
+   \   000005C4   0x0004             MOVS     R4,R0
+   1130                              // We have a good Tasking String. Time to determine action.
+   1131                              if (Status != HAL_OK)
+   \   000005C6   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000005C8   0x2C00             CMP      R4,#+0
+   \   000005CA   0xD004             BEQ.N    ??main_60
+   1132                                Error_Handler();
+   \   000005CC   0x.... 0x....      BL       Error_Handler
+   \   000005D0   0xE001             B.N      ??main_60
+   1133                            }
+   1134                            else
+   1135                              Error_Handler();
    \                     ??main_59: (+1)
-   \   000005BC   0x.... 0x....      BL       Error_Handler
-   1128                            tmpSize = RECEIVE_SZ;
+   \   000005D2   0x.... 0x....      BL       Error_Handler
+   1136                            tmpSize = RECEIVE_SZ;
    \                     ??main_60: (+1)
-   \   000005C0   0x201E             MOVS     R0,#+30
-   \   000005C2   0x0005             MOVS     R5,R0
-   1129                            pData = tempBffr;
-   \   000005C4   0xA815             ADD      R0,SP,#+84
-   \   000005C6   0x0007             MOVS     R7,R0
-   \   000005C8   0xE007             B.N      ??main_54
-   1130                          } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
-   1131                          else
-   1132                          {
-   1133                            *pData = tmpData[0];
+   \   000005D6   0x201E             MOVS     R0,#+30
+   \   000005D8   0x0005             MOVS     R5,R0
+   1137                            pData = tempBffr;
+   \   000005DA   0xA815             ADD      R0,SP,#+84
+   \   000005DC   0x0007             MOVS     R7,R0
+   \   000005DE   0xE007             B.N      ??main_54
+   1138                          } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+   1139                          else
+   1140                          {
+   1141                            *pData = tmpData[0];
    \                     ??main_56: (+1)
-   \   000005CA   0xF89D 0x0000      LDRB     R0,[SP, #+0]
-   \   000005CE   0x7038             STRB     R0,[R7, #+0]
-   1134                            tmpSize--;                          // Decrement Count
-   \   000005D0   0x1E6D             SUBS     R5,R5,#+1
-   1135                            pData++;                            // Move pointer to next buffer location.
-   \   000005D2   0x1C7F             ADDS     R7,R7,#+1
-   \   000005D4   0xE001             B.N      ??main_54
-   1136                          }
-   1137                        } // EndElse (Tst_Bypass())
-   1138                      }
-   1139                      else
-   1140                        Error_Handler();
+   \   000005E0   0xF89D 0x0000      LDRB     R0,[SP, #+0]
+   \   000005E4   0x7038             STRB     R0,[R7, #+0]
+   1142                            tmpSize--;                          // Decrement Count
+   \   000005E6   0x1E6D             SUBS     R5,R5,#+1
+   1143                            pData++;                            // Move pointer to next buffer location.
+   \   000005E8   0x1C7F             ADDS     R7,R7,#+1
+   \   000005EA   0xE001             B.N      ??main_54
+   1144                          }
+   1145                        } // EndElse (Tst_Bypass())
+   1146                      }
+   1147                      else
+   1148                        Error_Handler();
    \                     ??main_49: (+1)
-   \   000005D6   0x.... 0x....      BL       Error_Handler
-   1141                    Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
+   \   000005EC   0x.... 0x....      BL       Error_Handler
+   1149                    Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
    \                     ??main_54: (+1)
-   \   000005DA   0x2201             MOVS     R2,#+1
-   \   000005DC   0x4669             MOV      R1,SP
-   \   000005DE   0x2000             MOVS     R0,#+0
-   \   000005E0   0x.... 0x....      BL       RoadBrd_UART_Receive_IT
-   \   000005E4   0x0004             MOVS     R4,R0
-   1142                    // Turn Off MICRO_LED.
-   1143                    RoadBrd_gpio_Off( MICRO_LED );
-   \   000005E6   0x2002             MOVS     R0,#+2
-   \   000005E8   0x.... 0x....      BL       RoadBrd_gpio_Off
-   1144                  } // EndIf (RoadBrd_Uart_Status(MONITOR_UART) == SET)
-   1145          
-   1146          #else
-   1147                  // Turn Off BGM_LED LED.
-   1148                  RoadBrd_gpio_Off( MICRO_LED );
-   1149                  Status = RoadBrd_UART_Receive(MONITOR_UART, tempBffr, RECEIVE_SZ);
-   1150                  // Turn On BGM_LED LED.
-   1151          #ifndef LED_OFF
-   1152                  RoadBrd_gpio_On( MICRO_LED );
-   1153          #endif
-   1154                  // Send <CR><LF> to UART..
-   1155                  strcpy( (char *)tempBffr2, "\r\n");
-   1156                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-   1157                  if (Status != HAL_OK)
-   1158                    Error_Handler();
-   1159                  switch(  Status )
-   1160                  {
-   1161                    case HAL_OK:
-   1162                      // We have a good Tasking String. Time to determine action.
-   1163                      Status = RoadBrd_ParseString((char *)tempBffr);
-   1164                      // We have a good Tasking String. Time to determine action.
-   1165                      if (Status != HAL_OK)
-   1166                        Error_Handler();
-   1167                      break;
-   1168                    case HAL_ERROR:
-   1169                      // ERROR. We are done.
-   1170                      Error_Handler();
-   1171                      break;
-   1172                    case HAL_BUSY:
-   1173                      // ERROR. We are done.
-   1174                      Error_Handler();
+   \   000005F0   0x2201             MOVS     R2,#+1
+   \   000005F2   0x4669             MOV      R1,SP
+   \   000005F4   0x2000             MOVS     R0,#+0
+   \   000005F6   0x.... 0x....      BL       RoadBrd_UART_Receive_IT
+   \   000005FA   0x0004             MOVS     R4,R0
+   1150                    // Turn Off MICRO_LED.
+   1151                    RoadBrd_gpio_Off( MICRO_LED );
+   \   000005FC   0x2002             MOVS     R0,#+2
+   \   000005FE   0x.... 0x....      BL       RoadBrd_gpio_Off
+   1152                  } // EndIf (RoadBrd_Uart_Status(MONITOR_UART) == SET)
+   1153          
+   1154          #else
+   1155                  // Turn Off BGM_LED LED.
+   1156                  RoadBrd_gpio_Off( MICRO_LED );
+   1157                  Status = RoadBrd_UART_Receive(MONITOR_UART, tempBffr, RECEIVE_SZ);
+   1158                  // Turn On BGM_LED LED.
+   1159          #ifndef LED_OFF
+   1160                  RoadBrd_gpio_On( MICRO_LED );
+   1161          #endif
+   1162                  // Send <CR><LF> to UART..
+   1163                  strcpy( (char *)tempBffr2, "\r\n");
+   1164                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+   1165                  if (Status != HAL_OK)
+   1166                    Error_Handler();
+   1167                  switch(  Status )
+   1168                  {
+   1169                    case HAL_OK:
+   1170                      // We have a good Tasking String. Time to determine action.
+   1171                      Status = RoadBrd_ParseString((char *)tempBffr, false);
+   1172                      // We have a good Tasking String. Time to determine action.
+   1173                      if (Status != HAL_OK)
+   1174                        Error_Handler();
    1175                      break;
-   1176                    case HAL_TIMEOUT:
-   1177                      // Nothing to do. Try again.
-   1178                      break;
-   1179                    default:
-   1180                      // ERROR. We are done.
-   1181                      Error_Handler();
-   1182                      break;
-   1183                    
-   1184                  } // EndSwitch (  Status )
-   1185          #endif
-   1186          //********************END PATCH_UART NOT ACTIVE*******************************************
-   1187          #endif
-   1188                // Wait 50msec.
-   1189                RoadBrd_Delay( 50 );
+   1176                    case HAL_ERROR:
+   1177                      // ERROR. We are done.
+   1178                      Error_Handler();
+   1179                      break;
+   1180                    case HAL_BUSY:
+   1181                      // ERROR. We are done.
+   1182                      Error_Handler();
+   1183                      break;
+   1184                    case HAL_TIMEOUT:
+   1185                      // Nothing to do. Try again.
+   1186                      break;
+   1187                    default:
+   1188                      // ERROR. We are done.
+   1189                      Error_Handler();
+   1190                      break;
+   1191                    
+   1192                  } // EndSwitch (  Status )
+   1193          #endif
+   1194          //********************END PATCH_UART NOT ACTIVE*******************************************
+   1195          #endif
+   1196                // Wait 50msec.
+   1197                RoadBrd_Delay( 50 );
    \                     ??main_48: (+1)
-   \   000005EC   0x2032             MOVS     R0,#+50
-   \   000005EE   0x.... 0x....      BL       RoadBrd_Delay
-   \   000005F2   0xE713             B.N      ??main_41
-   1190                //************************* END Road BRD VERSION *************************************   
-   1191                #endif
-   1192            /*****************************************************************************
-   1193             *    END NORMAL FLOW HERE
-   1194             ****************************************************************************/
-   1195              //******************EndElse TEST2
-   1196              #endif
-   1197          
-   1198            //******************EndElse TEST
-   1199            #endif
-   1200            } // EndWhile (1)
-   1201          //********************ENDIF TASKING
-   1202          #endif
-   1203            /* USER CODE END 3 */
-   1204          
-   1205          }
-   1206          
-   1207          /** System Clock Configuration
-   1208          */
+   \   00000602   0x2032             MOVS     R0,#+50
+   \   00000604   0x.... 0x....      BL       RoadBrd_Delay
+   \   00000608   0xE70D             B.N      ??main_41
+   1198                //************************* END Road BRD VERSION *************************************   
+   1199                #endif
+   1200            /*****************************************************************************
+   1201             *    END NORMAL FLOW HERE
+   1202             ****************************************************************************/
+   1203              //******************EndElse TEST2
+   1204              #endif
+   1205          
+   1206            //******************EndElse TEST
+   1207            #endif
+   1208            } // EndWhile (1)
+   1209          //********************ENDIF TASKING
+   1210          #endif
+   1211            /* USER CODE END 3 */
+   1212          
+   1213          }
+   1214          
+   1215          /** System Clock Configuration
+   1216          */
 
    \                                 In section .text, align 2, keep-with-next
-   1209          void SystemClock_Config(void)
-   1210          {
+   1217          void SystemClock_Config(void)
+   1218          {
    \                     SystemClock_Config: (+1)
    \   00000000   0xB500             PUSH     {LR}
    \   00000002   0xB093             SUB      SP,SP,#+76
-   1211          
-   1212            RCC_OscInitTypeDef RCC_OscInitStruct;
-   1213            RCC_ClkInitTypeDef RCC_ClkInitStruct;
-   1214          
-   1215            __HAL_RCC_PWR_CLK_ENABLE();
+   1219          
+   1220            RCC_OscInitTypeDef RCC_OscInitStruct;
+   1221            RCC_ClkInitTypeDef RCC_ClkInitStruct;
+   1222          
+   1223            __HAL_RCC_PWR_CLK_ENABLE();
    \   00000004   0x....             LDR.N    R0,??DataTable1_15  ;; 0x40023824
    \   00000006   0x6800             LDR      R0,[R0, #+0]
    \   00000008   0xF050 0x5080      ORRS     R0,R0,#0x10000000
@@ -1916,153 +1930,153 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000014   0xF010 0x5080      ANDS     R0,R0,#0x10000000
    \   00000018   0x9000             STR      R0,[SP, #+0]
    \   0000001A   0x9800             LDR      R0,[SP, #+0]
-   1216          
-   1217            __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+   1224          
+   1225            __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
    \   0000001C   0x....             LDR.N    R0,??DataTable1_16  ;; 0x40007000
    \   0000001E   0x6800             LDR      R0,[R0, #+0]
    \   00000020   0xF430 0x50C0      BICS     R0,R0,#0x1800
    \   00000024   0xF450 0x6000      ORRS     R0,R0,#0x800
    \   00000028   0x....             LDR.N    R1,??DataTable1_16  ;; 0x40007000
    \   0000002A   0x6008             STR      R0,[R1, #+0]
-   1218          
-   1219            RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
+   1226          
+   1227            RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
    \   0000002C   0x2003             MOVS     R0,#+3
    \   0000002E   0x9006             STR      R0,[SP, #+24]
-   1220            RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+   1228            RCC_OscInitStruct.HSEState = RCC_HSE_ON;
    \   00000030   0x2001             MOVS     R0,#+1
    \   00000032   0x9007             STR      R0,[SP, #+28]
-   1221            RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+   1229            RCC_OscInitStruct.HSIState = RCC_HSI_ON;
    \   00000034   0x2001             MOVS     R0,#+1
    \   00000036   0x9009             STR      R0,[SP, #+36]
-   1222            RCC_OscInitStruct.HSICalibrationValue = 16;
+   1230            RCC_OscInitStruct.HSICalibrationValue = 16;
    \   00000038   0x2010             MOVS     R0,#+16
    \   0000003A   0x900A             STR      R0,[SP, #+40]
-   1223            RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+   1231            RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
    \   0000003C   0x2002             MOVS     R0,#+2
    \   0000003E   0x900F             STR      R0,[SP, #+60]
-   1224            RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+   1232            RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
    \   00000040   0xF45F 0x3080      MOVS     R0,#+65536
    \   00000044   0x9010             STR      R0,[SP, #+64]
-   1225            RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
+   1233            RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
    \   00000046   0xF45F 0x1080      MOVS     R0,#+1048576
    \   0000004A   0x9011             STR      R0,[SP, #+68]
-   1226            RCC_OscInitStruct.PLL.PLLDIV = RCC_PLL_DIV3;
+   1234            RCC_OscInitStruct.PLL.PLLDIV = RCC_PLL_DIV3;
    \   0000004C   0xF45F 0x0000      MOVS     R0,#+8388608
    \   00000050   0x9012             STR      R0,[SP, #+72]
-   1227            if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+   1235            if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
    \   00000052   0xA806             ADD      R0,SP,#+24
    \   00000054   0x.... 0x....      BL       HAL_RCC_OscConfig
    \   00000058   0x2800             CMP      R0,#+0
    \   0000005A   0xD001             BEQ.N    ??SystemClock_Config_0
-   1228            {
-   1229              Error_Handler();
+   1236            {
+   1237              Error_Handler();
    \   0000005C   0x.... 0x....      BL       Error_Handler
-   1230            }
-   1231          
-   1232            RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-   1233                                        |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+   1238            }
+   1239          
+   1240            RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+   1241                                        |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
    \                     ??SystemClock_Config_0: (+1)
    \   00000060   0x200F             MOVS     R0,#+15
    \   00000062   0x9001             STR      R0,[SP, #+4]
-   1234            RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+   1242            RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
    \   00000064   0x2003             MOVS     R0,#+3
    \   00000066   0x9002             STR      R0,[SP, #+8]
-   1235            RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+   1243            RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
    \   00000068   0x2000             MOVS     R0,#+0
    \   0000006A   0x9003             STR      R0,[SP, #+12]
-   1236            RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+   1244            RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
    \   0000006C   0x2000             MOVS     R0,#+0
    \   0000006E   0x9004             STR      R0,[SP, #+16]
-   1237            RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+   1245            RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
    \   00000070   0x2000             MOVS     R0,#+0
    \   00000072   0x9005             STR      R0,[SP, #+20]
-   1238            if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
+   1246            if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
    \   00000074   0x2101             MOVS     R1,#+1
    \   00000076   0xA801             ADD      R0,SP,#+4
    \   00000078   0x.... 0x....      BL       HAL_RCC_ClockConfig
    \   0000007C   0x2800             CMP      R0,#+0
    \   0000007E   0xD001             BEQ.N    ??SystemClock_Config_1
-   1239            {
-   1240              Error_Handler();
+   1247            {
+   1248              Error_Handler();
    \   00000080   0x.... 0x....      BL       Error_Handler
-   1241            }
-   1242          
-   1243            HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+   1249            }
+   1250          
+   1251            HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
    \                     ??SystemClock_Config_1: (+1)
    \   00000084   0x.... 0x....      BL       HAL_RCC_GetHCLKFreq
    \   00000088   0xF44F 0x717A      MOV      R1,#+1000
    \   0000008C   0xFBB0 0xF0F1      UDIV     R0,R0,R1
    \   00000090   0x.... 0x....      BL       HAL_SYSTICK_Config
-   1244          
-   1245            HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+   1252          
+   1253            HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
    \   00000094   0x2004             MOVS     R0,#+4
    \   00000096   0x.... 0x....      BL       HAL_SYSTICK_CLKSourceConfig
-   1246          
-   1247            /* SysTick_IRQn interrupt configuration */
-   1248            HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
+   1254          
+   1255            /* SysTick_IRQn interrupt configuration */
+   1256            HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
    \   0000009A   0x2200             MOVS     R2,#+0
    \   0000009C   0x210F             MOVS     R1,#+15
    \   0000009E   0xF05F 0x30FF      MOVS     R0,#-1
    \   000000A2   0x.... 0x....      BL       HAL_NVIC_SetPriority
-   1249          }
+   1257          }
    \   000000A6   0xB013             ADD      SP,SP,#+76
    \   000000A8   0xBD00             POP      {PC}             ;; return
-   1250          
-   1251          /* USER CODE BEGIN 4 */
-   1252          
-   1253          /* USER CODE END 4 */
-   1254          
-   1255          /**
-   1256            * @brief  This function is executed in case of error occurrence.
-   1257            * @param  None
-   1258            * @retval None
-   1259            */
+   1258          
+   1259          /* USER CODE BEGIN 4 */
+   1260          
+   1261          /* USER CODE END 4 */
+   1262          
+   1263          /**
+   1264            * @brief  This function is executed in case of error occurrence.
+   1265            * @param  None
+   1266            * @retval None
+   1267            */
 
    \                                 In section .text, align 2, keep-with-next
-   1260          void Error_Handler(void)
-   1261          {
+   1268          void Error_Handler(void)
+   1269          {
    \                     Error_Handler: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-   1262            /* USER CODE BEGIN Error_Handler */
-   1263            /* User can add his own implementation to report the HAL error return state */
-   1264            // Turn LED2 on
-   1265          #ifdef NUCLEO
-   1266            BSP_LED_On(LED2);
-   1267          #else
-   1268            RoadBrd_LED_On(BLUE_LED);
+   1270            /* USER CODE BEGIN Error_Handler */
+   1271            /* User can add his own implementation to report the HAL error return state */
+   1272            // Turn LED2 on
+   1273          #ifdef NUCLEO
+   1274            BSP_LED_On(LED2);
+   1275          #else
+   1276            RoadBrd_LED_On(BLUE_LED);
    \   00000002   0x2001             MOVS     R0,#+1
    \   00000004   0x.... 0x....      BL       RoadBrd_LED_On
-   1269            RoadBrd_LED_On(GREEN_LED);
+   1277            RoadBrd_LED_On(GREEN_LED);
    \   00000008   0x2002             MOVS     R0,#+2
    \   0000000A   0x.... 0x....      BL       RoadBrd_LED_On
-   1270            RoadBrd_LED_On(YELLOW_LED);
+   1278            RoadBrd_LED_On(YELLOW_LED);
    \   0000000E   0x2003             MOVS     R0,#+3
    \   00000010   0x.... 0x....      BL       RoadBrd_LED_On
-   1271          #endif
-   1272            while(1) 
-   1273            {
-   1274              // Error if LED2 is slowly blinking (1 sec. period)
-   1275          #ifdef NUCLEO
-   1276              BSP_LED_Toggle(LED2); 
-   1277          #else
-   1278              RoadBrd_LED_Toggle(BLUE_LED); 
+   1279          #endif
+   1280            while(1) 
+   1281            {
+   1282              // Error if LED2 is slowly blinking (1 sec. period)
+   1283          #ifdef NUCLEO
+   1284              BSP_LED_Toggle(LED2); 
+   1285          #else
+   1286              RoadBrd_LED_Toggle(BLUE_LED); 
    \                     ??Error_Handler_0: (+1)
    \   00000014   0x2001             MOVS     R0,#+1
    \   00000016   0x.... 0x....      BL       RoadBrd_LED_Toggle
-   1279              RoadBrd_LED_Toggle(GREEN_LED); 
+   1287              RoadBrd_LED_Toggle(GREEN_LED); 
    \   0000001A   0x2002             MOVS     R0,#+2
    \   0000001C   0x.... 0x....      BL       RoadBrd_LED_Toggle
-   1280              RoadBrd_LED_Toggle(YELLOW_LED); 
+   1288              RoadBrd_LED_Toggle(YELLOW_LED); 
    \   00000020   0x2003             MOVS     R0,#+3
    \   00000022   0x.... 0x....      BL       RoadBrd_LED_Toggle
-   1281          #endif
-   1282              HAL_Delay(50); 
+   1289          #endif
+   1290              HAL_Delay(50); 
    \   00000026   0x2032             MOVS     R0,#+50
    \   00000028   0x.... 0x....      BL       HAL_Delay
    \   0000002C   0xE7F2             B.N      ??Error_Handler_0
-   1283            }
-   1284            /* USER CODE END Error_Handler */ 
-   1285          }
+   1291            }
+   1292            /* USER CODE END Error_Handler */ 
+   1293          }
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable1:
@@ -2237,12 +2251,15 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_5:
-   \   00000000   0x53 0x65          DC8 "Sep 9, 2017"
+   \   00000000   0x53 0x65          DC8 "Sep 11, 2017"
    \              0x70 0x20    
-   \              0x39 0x2C    
-   \              0x20 0x32    
-   \              0x30 0x31    
-   \              0x37 0x00    
+   \              0x31 0x31    
+   \              0x2C 0x20    
+   \              0x32 0x30    
+   \              0x31 0x37    
+   \              0x00         
+   \   0000000D   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
 
    \                                 In section .rodata, align 4
    \                     ?_6:
@@ -2400,35 +2417,35 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000000   0x0D 0x0A          DC8 "\015\012"
    \              0x00         
    \   00000003   0x00               DC8 0
-   1286          
-   1287          #ifdef USE_FULL_ASSERT
-   1288          
-   1289          /**
-   1290             * @brief Reports the name of the source file and the source line number
-   1291             * where the assert_param error has occurred.
-   1292             * @param file: pointer to the source file name
-   1293             * @param line: assert_param error line source number
-   1294             * @retval None
-   1295             */
-   1296          void assert_failed(uint8_t* file, uint32_t line)
-   1297          {
-   1298            /* USER CODE BEGIN 6 */
-   1299            /* User can add his own implementation to report the file name and line number,
-   1300              ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-   1301            /* USER CODE END 6 */
-   1302          
-   1303          }
-   1304          #endif
-   1305          
-   1306          /**
-   1307            * @}
-   1308            */ 
-   1309          
-   1310          /**
-   1311            * @}
-   1312          */ 
+   1294          
+   1295          #ifdef USE_FULL_ASSERT
+   1296          
+   1297          /**
+   1298             * @brief Reports the name of the source file and the source line number
+   1299             * where the assert_param error has occurred.
+   1300             * @param file: pointer to the source file name
+   1301             * @param line: assert_param error line source number
+   1302             * @retval None
+   1303             */
+   1304          void assert_failed(uint8_t* file, uint32_t line)
+   1305          {
+   1306            /* USER CODE BEGIN 6 */
+   1307            /* User can add his own implementation to report the file name and line number,
+   1308              ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+   1309            /* USER CODE END 6 */
+   1310          
+   1311          }
+   1312          #endif
    1313          
-   1314          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+   1314          /**
+   1315            * @}
+   1316            */ 
+   1317          
+   1318          /**
+   1319            * @}
+   1320          */ 
+   1321          
+   1322          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
    Maximum stack usage in bytes:
 
@@ -2490,6 +2507,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        168   -> RoadBrd_Init_Barometer
        168   -> RoadBrd_Init_VMonitor
        168   -> RoadBrd_ParseString
+       168   -> RoadBrd_ParserInit
+       168   -> RoadBrd_ProcessParserTsk
        168   -> RoadBrd_RGBInit
        168   -> RoadBrd_ReadTemp
        168   -> RoadBrd_SetBffrFlg
@@ -2498,6 +2517,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        168   -> RoadBrd_UART_Transmit
        168   -> RoadBrd_UART_Transmit_IT
        168   -> RoadBrd_Uart_Status
+       168   -> RoadBrd_WWDG_InitializeDateString
        168   -> RoadBrd_WWDG_InitializeFrmFlash
        168   -> RoadBrd_WWDG_Refresh
        168   -> RoadBrd_WWDG_Start
@@ -2546,21 +2566,21 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        8  ?_2
        8  ?_3
       40  ?_4
-      12  ?_5
+      16  ?_5
       40  ?_6
       40  ?_7
       20  ?_8
       28  ?_9
       46  Error_Handler
      170  SystemClock_Config
-    1524  main
+    1546  main
 
  
-   444 bytes in section .rodata
- 1 808 bytes in section .text
+   448 bytes in section .rodata
+ 1 830 bytes in section .text
  
- 1 808 bytes of CODE  memory
-   444 bytes of CONST memory
+ 1 830 bytes of CODE  memory
+   448 bytes of CONST memory
 
 Errors: none
 Warnings: none

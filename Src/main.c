@@ -281,7 +281,9 @@ int main(void)
   
   // Initialize key app vars.
   InitSensors();
-  
+  RoadBrd_ParserInit();                         // This initializes the Parse Tasking Structure.
+  RoadBrd_WWDG_InitializeDateString();          // Initialize Date Tag From Server as NULL.
+
   //**
   //**
   //** Initialize all Flash Structures.
@@ -963,7 +965,7 @@ int main(void)
         {
           case HAL_OK:
             // We have a good Tasking String. Time to determine action.
-            Status = RoadBrd_ParseString((char *)tempBffr);
+            Status = RoadBrd_ParseString((char *)tempBffr, false);
             // We have a good Tasking String. Time to determine action.
             if (Status != HAL_OK)
               Error_Handler();
@@ -1006,6 +1008,9 @@ int main(void)
             if (Status != HAL_OK)
               Error_Handler();
           }
+          // Process any Outstanding Parse Tasks.
+          RoadBrd_ProcessParserTsk();
+          
           /* Process the sensor state machine if the BLE module is ready */
             if ((BGM111_Ready()) &&
                 (BGM111_Connected()) &&
@@ -1047,6 +1052,9 @@ int main(void)
               if (Status != HAL_OK)
                 Error_Handler();
             }
+            // Process any Outstanding Parse Tasks.
+            RoadBrd_ProcessParserTsk();
+            
             /* Process the sensor state machine if the BLE module is ready */
             if ((BGM111_Ready()) &&
                 (BGM111_Connected()) &&
@@ -1083,7 +1091,7 @@ int main(void)
   #ifndef LED_OFF
                   RoadBrd_gpio_On( GREEN_LED );
   #endif
-                  Status = RoadBrd_ParseString((char *)tempBffr);
+                  Status = RoadBrd_ParseString((char *)tempBffr, false);
                   // We have a good Tasking String. Time to determine action.
                   if (Status != HAL_OK)
                     Error_Handler();
@@ -1118,7 +1126,7 @@ int main(void)
   #ifndef LED_OFF
                     RoadBrd_gpio_On( GREEN_LED );
   #endif
-                    Status = RoadBrd_ParseString((char *)tempBffr);
+                    Status = RoadBrd_ParseString((char *)tempBffr, false);
                     // We have a good Tasking String. Time to determine action.
                     if (Status != HAL_OK)
                       Error_Handler();
@@ -1160,7 +1168,7 @@ int main(void)
         {
           case HAL_OK:
             // We have a good Tasking String. Time to determine action.
-            Status = RoadBrd_ParseString((char *)tempBffr);
+            Status = RoadBrd_ParseString((char *)tempBffr, false);
             // We have a good Tasking String. Time to determine action.
             if (Status != HAL_OK)
               Error_Handler();

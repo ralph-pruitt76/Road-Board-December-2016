@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       09/Sep/2017  15:28:10
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       11/Sep/2017  14:42:47
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -111,410 +111,395 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \                     Save_Frames:
    \   00000000                      DS8 36
      48          
-     49          /* USER CODE END 0 */
-     50          
 
    \                                 In section .bss, align 4
-     51          WWDG_HandleTypeDef hwwdg;
+     49          static char DateString[DATE_STRING_LENGTH];             // Current Date String.
+   \                     DateString:
+   \   00000000                      DS8 32
+     50          
+     51          /* USER CODE END 0 */
+     52          
+
+   \                                 In section .bss, align 4
+     53          WWDG_HandleTypeDef hwwdg;
    \                     hwwdg:
    \   00000000                      DS8 20
-     52          
-     53          // wwdg Save Frame
+     54          
+     55          // wwdg Save Frame
 
    \                                 In section .bss, align 4
-     54          static wwdg_SaveFrame wwdg_Save;
+     56          static wwdg_SaveFrame wwdg_Save;
    \                     wwdg_Save:
    \   00000000                      DS8 4
-     55          
-     56          /* WWDG init function */
+     57          
+     58            /**
+     59            * @brief  This function initializes the Static Current Date String.
+     60            * @param  none
+     61            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+     62            */
 
    \                                 In section .text, align 2, keep-with-next
-     57          void MX_WWDG_Init(void)
-     58          {
+     63          HAL_StatusTypeDef RoadBrd_WWDG_InitializeDateString( void )
+     64          {
+   \                     RoadBrd_WWDG_InitializeDateString: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     65            strcpy(DateString, "---NULL---");
+   \   00000002   0x.... 0x....      LDR.W    R1,??DataTable29
+   \   00000006   0x.... 0x....      LDR.W    R0,??DataTable29_1
+   \   0000000A   0x.... 0x....      BL       strcpy
+     66            return HAL_OK;
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0xBD02             POP      {R1,PC}          ;; return
+     67          }
+     68          
+     69            /**
+     70            * @brief  This function initializes the Static Current Date String.
+     71            * @param  none
+     72            * @retval char *:     Pointer to Date String.
+     73            */
+
+   \                                 In section .text, align 2, keep-with-next
+     74          char *RoadBrd_WWDG_GetDateString( void )
+     75          {
+     76            return &DateString[0];
+   \                     RoadBrd_WWDG_GetDateString: (+1)
+   \   00000000   0x.... 0x....      LDR.W    R0,??DataTable29_1
+   \   00000004   0x4770             BX       LR               ;; return
+     77          }
+     78          
+     79            /**
+     80            * @brief  This function initializes the Static Current Date String.
+     81            * @param  char* parmString: String to be set.
+     82            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+     83            */
+
+   \                                 In section .text, align 2, keep-with-next
+     84          HAL_StatusTypeDef RoadBrd_WWDG_SetDateString( char* parmString )
+     85          {
+   \                     RoadBrd_WWDG_SetDateString: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+     86            strcpy(DateString, parmString);
+   \   00000004   0x0021             MOVS     R1,R4
+   \   00000006   0x.... 0x....      LDR.W    R0,??DataTable29_1
+   \   0000000A   0x.... 0x....      BL       strcpy
+     87            return HAL_OK;
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0xBD10             POP      {R4,PC}          ;; return
+     88          }
+     89          
+     90          /* WWDG init function */
+
+   \                                 In section .text, align 2, keep-with-next
+     91          void MX_WWDG_Init(void)
+     92          {
    \                     MX_WWDG_Init: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-     59          
-     60            /*##-2- Configure the WWDG peripheral ######################################*/
-     61            /* WWDG clock counter = (PCLK1 (32MHz)/4096)/8) = 976.6 Hz (1.02ms) 
-     62               WWDG Window value = 80 means that the WWDG counter should be refreshed only 
-     63               when the counter is below 80 (and greater than 64/0x40) otherwise a reset will 
-     64               be generated. 
-     65               WWDG Counter value = 127, WWDG timeout = ~1024 us * 64 = 65.57 ms */
-     66            hwwdg.Instance = WWDG;
-   \   00000002   0x....             LDR.N    R0,??DataTable26  ;; 0x40002c00
-   \   00000004   0x....             LDR.N    R1,??DataTable26_1
-   \   00000006   0x6008             STR      R0,[R1, #+0]
-     67            hwwdg.Init.Prescaler = WWDG_PRESCALER_8;
-   \   00000008   0xF44F 0x70C0      MOV      R0,#+384
-   \   0000000C   0x....             LDR.N    R1,??DataTable26_1
-   \   0000000E   0x6048             STR      R0,[R1, #+4]
-     68            hwwdg.Init.Window = ROADBRD_HIGHLMIT;               // Set High end of 102.4 ms. 
-   \   00000010   0x2064             MOVS     R0,#+100
-   \   00000012   0x....             LDR.N    R1,??DataTable26_1
-   \   00000014   0x6088             STR      R0,[R1, #+8]
-     69                                                                // Max_Data = 0x80
-     70            hwwdg.Init.Counter = ROADBRD_TIMEOUT;               // Set Timer at 130.048 ms.
-   \   00000016   0x207F             MOVS     R0,#+127
-   \   00000018   0x....             LDR.N    R1,??DataTable26_1
-   \   0000001A   0x60C8             STR      R0,[R1, #+12]
-     71            if (HAL_WWDG_Init(&hwwdg) != HAL_OK)
-   \   0000001C   0x....             LDR.N    R0,??DataTable26_1
-   \   0000001E   0x.... 0x....      BL       HAL_WWDG_Init
-   \   00000022   0x2800             CMP      R0,#+0
-   \   00000024   0xD001             BEQ.N    ??MX_WWDG_Init_0
-     72            {
-     73              Error_Handler();
-   \   00000026   0x.... 0x....      BL       Error_Handler
-     74            }
-     75            // Clear Save Frame.
-     76            wwdg_Save.event = false;
+     93          
+     94            /*##-2- Configure the WWDG peripheral ######################################*/
+     95            /* WWDG clock counter = (PCLK1 (32MHz)/4096)/8) = 976.6 Hz (1.02ms) 
+     96               WWDG Window value = 80 means that the WWDG counter should be refreshed only 
+     97               when the counter is below 80 (and greater than 64/0x40) otherwise a reset will 
+     98               be generated. 
+     99               WWDG Counter value = 127, WWDG timeout = ~1024 us * 64 = 65.57 ms */
+    100            hwwdg.Instance = WWDG;
+   \   00000002   0x.... 0x....      LDR.W    R0,??DataTable29_2  ;; 0x40002c00
+   \   00000006   0x.... 0x....      LDR.W    R1,??DataTable29_3
+   \   0000000A   0x6008             STR      R0,[R1, #+0]
+    101            hwwdg.Init.Prescaler = WWDG_PRESCALER_8;
+   \   0000000C   0xF44F 0x70C0      MOV      R0,#+384
+   \   00000010   0x....             LDR.N    R1,??DataTable29_3
+   \   00000012   0x6048             STR      R0,[R1, #+4]
+    102            hwwdg.Init.Window = ROADBRD_HIGHLMIT;               // Set High end of 102.4 ms. 
+   \   00000014   0x2064             MOVS     R0,#+100
+   \   00000016   0x....             LDR.N    R1,??DataTable29_3
+   \   00000018   0x6088             STR      R0,[R1, #+8]
+    103                                                                // Max_Data = 0x80
+    104            hwwdg.Init.Counter = ROADBRD_TIMEOUT;               // Set Timer at 130.048 ms.
+   \   0000001A   0x207F             MOVS     R0,#+127
+   \   0000001C   0x....             LDR.N    R1,??DataTable29_3
+   \   0000001E   0x60C8             STR      R0,[R1, #+12]
+    105            if (HAL_WWDG_Init(&hwwdg) != HAL_OK)
+   \   00000020   0x....             LDR.N    R0,??DataTable29_3
+   \   00000022   0x.... 0x....      BL       HAL_WWDG_Init
+   \   00000026   0x2800             CMP      R0,#+0
+   \   00000028   0xD001             BEQ.N    ??MX_WWDG_Init_0
+    106            {
+    107              Error_Handler();
+   \   0000002A   0x.... 0x....      BL       Error_Handler
+    108            }
+    109            // Clear Save Frame.
+    110            wwdg_Save.event = false;
    \                     ??MX_WWDG_Init_0: (+1)
-   \   0000002A   0x2000             MOVS     R0,#+0
-   \   0000002C   0x....             LDR.N    R1,??DataTable26_2
-   \   0000002E   0x7008             STRB     R0,[R1, #+0]
-     77          }
-   \   00000030   0xBD01             POP      {R0,PC}          ;; return
-     78          
+   \   0000002E   0x2000             MOVS     R0,#+0
+   \   00000030   0x....             LDR.N    R1,??DataTable29_4
+   \   00000032   0x7008             STRB     R0,[R1, #+0]
+    111          }
+   \   00000034   0xBD01             POP      {R0,PC}          ;; return
+    112          
 
    \                                 In section .text, align 2, keep-with-next
-     79          void HAL_WWDG_MspInit(WWDG_HandleTypeDef* wwdgHandle)
-     80          {
+    113          void HAL_WWDG_MspInit(WWDG_HandleTypeDef* wwdgHandle)
+    114          {
    \                     HAL_WWDG_MspInit: (+1)
    \   00000000   0xB081             SUB      SP,SP,#+4
-     81          
-     82            if(wwdgHandle->Instance==WWDG)
+    115          
+    116            if(wwdgHandle->Instance==WWDG)
    \   00000002   0x6801             LDR      R1,[R0, #+0]
-   \   00000004   0x....             LDR.N    R2,??DataTable26  ;; 0x40002c00
+   \   00000004   0x....             LDR.N    R2,??DataTable29_2  ;; 0x40002c00
    \   00000006   0x4291             CMP      R1,R2
    \   00000008   0xD10B             BNE.N    ??HAL_WWDG_MspInit_0
-     83            {
-     84            /* USER CODE BEGIN WWDG_MspInit 0 */
-     85          
-     86            /* USER CODE END WWDG_MspInit 0 */
-     87              /* Peripheral clock enable */
-     88              __HAL_RCC_WWDG_CLK_ENABLE();
-   \   0000000A   0x....             LDR.N    R1,??DataTable26_3  ;; 0x40023824
+    117            {
+    118            /* USER CODE BEGIN WWDG_MspInit 0 */
+    119          
+    120            /* USER CODE END WWDG_MspInit 0 */
+    121              /* Peripheral clock enable */
+    122              __HAL_RCC_WWDG_CLK_ENABLE();
+   \   0000000A   0x....             LDR.N    R1,??DataTable29_5  ;; 0x40023824
    \   0000000C   0x6809             LDR      R1,[R1, #+0]
    \   0000000E   0xF451 0x6100      ORRS     R1,R1,#0x800
-   \   00000012   0x....             LDR.N    R2,??DataTable26_3  ;; 0x40023824
+   \   00000012   0x....             LDR.N    R2,??DataTable29_5  ;; 0x40023824
    \   00000014   0x6011             STR      R1,[R2, #+0]
-   \   00000016   0x....             LDR.N    R1,??DataTable26_3  ;; 0x40023824
+   \   00000016   0x....             LDR.N    R1,??DataTable29_5  ;; 0x40023824
    \   00000018   0x6809             LDR      R1,[R1, #+0]
    \   0000001A   0xF411 0x6100      ANDS     R1,R1,#0x800
    \   0000001E   0x9100             STR      R1,[SP, #+0]
    \   00000020   0x9900             LDR      R1,[SP, #+0]
-     89            /* USER CODE BEGIN WWDG_MspInit 1 */
-     90          
-     91            /* USER CODE END WWDG_MspInit 1 */
-     92            }
-     93          }
+    123            /* USER CODE BEGIN WWDG_MspInit 1 */
+    124          
+    125            /* USER CODE END WWDG_MspInit 1 */
+    126            }
+    127          }
    \                     ??HAL_WWDG_MspInit_0: (+1)
    \   00000022   0xB001             ADD      SP,SP,#+4
    \   00000024   0x4770             BX       LR               ;; return
-     94          
+    128          
 
    \                                 In section .text, align 2, keep-with-next
-     95          void HAL_WWDG_MspDeInit(WWDG_HandleTypeDef* wwdgHandle)
-     96          {
-     97          
-     98            if(wwdgHandle->Instance==WWDG)
+    129          void HAL_WWDG_MspDeInit(WWDG_HandleTypeDef* wwdgHandle)
+    130          {
+    131          
+    132            if(wwdgHandle->Instance==WWDG)
    \                     HAL_WWDG_MspDeInit: (+1)
    \   00000000   0x6801             LDR      R1,[R0, #+0]
-   \   00000002   0x....             LDR.N    R2,??DataTable26  ;; 0x40002c00
+   \   00000002   0x....             LDR.N    R2,??DataTable29_2  ;; 0x40002c00
    \   00000004   0x4291             CMP      R1,R2
    \   00000006   0xD105             BNE.N    ??HAL_WWDG_MspDeInit_0
-     99            {
-    100            /* USER CODE BEGIN WWDG_MspDeInit 0 */
-    101          
-    102            /* USER CODE END WWDG_MspDeInit 0 */
-    103              /* Peripheral clock disable */
-    104              __HAL_RCC_WWDG_CLK_DISABLE();
-   \   00000008   0x....             LDR.N    R1,??DataTable26_3  ;; 0x40023824
+    133            {
+    134            /* USER CODE BEGIN WWDG_MspDeInit 0 */
+    135          
+    136            /* USER CODE END WWDG_MspDeInit 0 */
+    137              /* Peripheral clock disable */
+    138              __HAL_RCC_WWDG_CLK_DISABLE();
+   \   00000008   0x....             LDR.N    R1,??DataTable29_5  ;; 0x40023824
    \   0000000A   0x6809             LDR      R1,[R1, #+0]
    \   0000000C   0xF431 0x6100      BICS     R1,R1,#0x800
-   \   00000010   0x....             LDR.N    R2,??DataTable26_3  ;; 0x40023824
+   \   00000010   0x....             LDR.N    R2,??DataTable29_5  ;; 0x40023824
    \   00000012   0x6011             STR      R1,[R2, #+0]
-    105            }
-    106            /* USER CODE BEGIN WWDG_MspDeInit 1 */
-    107          
-    108            /* USER CODE END WWDG_MspDeInit 1 */
-    109          } 
+    139            }
+    140            /* USER CODE BEGIN WWDG_MspDeInit 1 */
+    141          
+    142            /* USER CODE END WWDG_MspDeInit 1 */
+    143          } 
    \                     ??HAL_WWDG_MspDeInit_0: (+1)
    \   00000014   0x4770             BX       LR               ;; return
-    110          
-    111          /* USER CODE BEGIN 1 */
-    112          /**
-    113            * @brief  Start WWDG Timer
-    114            * @param  none
-    115            * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
-    116            *                                HAL_ERROR:    Error Log full or Bad Code
-    117            */
+    144          
+    145          /* USER CODE BEGIN 1 */
+    146          /**
+    147            * @brief  Start WWDG Timer
+    148            * @param  none
+    149            * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
+    150            *                                HAL_ERROR:    Error Log full or Bad Code
+    151            */
 
    \                                 In section .text, align 2, keep-with-next
-    118          HAL_StatusTypeDef RoadBrd_WWDG_Start( void )
-    119          {
+    152          HAL_StatusTypeDef RoadBrd_WWDG_Start( void )
+    153          {
    \                     RoadBrd_WWDG_Start: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-    120            //return HAL_WWDG_Start(&hwwdg);
-    121            return HAL_WWDG_Start_IT(&hwwdg);
-   \   00000002   0x....             LDR.N    R0,??DataTable26_1
+    154            //return HAL_WWDG_Start(&hwwdg);
+    155            return HAL_WWDG_Start_IT(&hwwdg);
+   \   00000002   0x....             LDR.N    R0,??DataTable29_3
    \   00000004   0x.... 0x....      BL       HAL_WWDG_Start_IT
    \   00000008   0xBD02             POP      {R1,PC}          ;; return
-    122          }
-    123          
-    124          /**
-    125            * @brief  Refresh WWDG Timer
-    126            * @param  none
-    127            * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
-    128            *                                HAL_ERROR:    Error Log full or Bad Code
-    129            */
+    156          }
+    157          
+    158          /**
+    159            * @brief  Refresh WWDG Timer
+    160            * @param  none
+    161            * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
+    162            *                                HAL_ERROR:    Error Log full or Bad Code
+    163            */
 
    \                                 In section .text, align 2, keep-with-next
-    130          HAL_StatusTypeDef RoadBrd_WWDG_Refresh( void )
-    131          {
+    164          HAL_StatusTypeDef RoadBrd_WWDG_Refresh( void )
+    165          {
    \                     RoadBrd_WWDG_Refresh: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
-    132            uint32_t rfrsh_cnt;
-    133            
-    134            // Let's Only Refresh in Window...
-    135            rfrsh_cnt = RoadBrd_WWDG_GetRefreshCnt();
+    166            uint32_t rfrsh_cnt;
+    167            
+    168            // Let's Only Refresh in Window...
+    169            rfrsh_cnt = RoadBrd_WWDG_GetRefreshCnt();
    \   00000002   0x.... 0x....      BL       RoadBrd_WWDG_GetRefreshCnt
    \   00000006   0x0004             MOVS     R4,R0
-    136            if ( rfrsh_cnt < ROADBRD_HIGHLMIT)
+    170            if ( rfrsh_cnt < ROADBRD_HIGHLMIT)
    \   00000008   0x2C64             CMP      R4,#+100
    \   0000000A   0xD204             BCS.N    ??RoadBrd_WWDG_Refresh_0
-    137              return HAL_WWDG_Refresh(&hwwdg, ROADBRD_TIMEOUT);
+    171              return HAL_WWDG_Refresh(&hwwdg, ROADBRD_TIMEOUT);
    \   0000000C   0x217F             MOVS     R1,#+127
-   \   0000000E   0x....             LDR.N    R0,??DataTable26_1
+   \   0000000E   0x....             LDR.N    R0,??DataTable29_3
    \   00000010   0x.... 0x....      BL       HAL_WWDG_Refresh
    \   00000014   0xE000             B.N      ??RoadBrd_WWDG_Refresh_1
-    138            else
-    139              return HAL_OK;
+    172            else
+    173              return HAL_OK;
    \                     ??RoadBrd_WWDG_Refresh_0: (+1)
    \   00000016   0x2000             MOVS     R0,#+0
    \                     ??RoadBrd_WWDG_Refresh_1: (+1)
    \   00000018   0xBD10             POP      {R4,PC}          ;; return
-    140          }
-    141          
-    142          /**
-    143            * @brief  Refresh WWDG Timer
-    144            * @param  none
-    145            * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
-    146            *                                HAL_ERROR:    Error Log full or Bad Code
-    147            */
+    174          }
+    175          
+    176          /**
+    177            * @brief  Refresh WWDG Timer
+    178            * @param  none
+    179            * @retval HAL_StatusTypeDef:     HAL_OK:       Error Code logged
+    180            *                                HAL_ERROR:    Error Log full or Bad Code
+    181            */
 
    \                                 In section .text, align 2, keep-with-next
-    148          uint32_t RoadBrd_WWDG_GetRefreshCnt( void )
-    149          {
-    150            // Return the 7-Bit Counter Value.
-    151            return(READ_REG(hwwdg.Instance->CR) & 0x7f);                 // hwwdg->Instance->CR
+    182          uint32_t RoadBrd_WWDG_GetRefreshCnt( void )
+    183          {
+    184            // Return the 7-Bit Counter Value.
+    185            return(READ_REG(hwwdg.Instance->CR) & 0x7f);                 // hwwdg->Instance->CR
    \                     RoadBrd_WWDG_GetRefreshCnt: (+1)
-   \   00000000   0x....             LDR.N    R0,??DataTable26_1
+   \   00000000   0x....             LDR.N    R0,??DataTable29_3
    \   00000002   0x6800             LDR      R0,[R0, #+0]
    \   00000004   0x6800             LDR      R0,[R0, #+0]
    \   00000006   0xF010 0x007F      ANDS     R0,R0,#0x7F
    \   0000000A   0x4770             BX       LR               ;; return
-    152          }
-    153          
-    154              
+    186          }
+    187          
+    188              
 
    \                                 In section .text, align 2, keep-with-next
-    155          void HAL_WWDG_WakeupCallback(WWDG_HandleTypeDef* hwwdg)
-    156          {
-    157            //uint8_t tempBffr2[20];
-    158          
-    159            static bool OnceFlg = false;
-    160            
-    161            if ( OnceFlg )
+    189          void HAL_WWDG_WakeupCallback(WWDG_HandleTypeDef* hwwdg)
+    190          {
+    191            //uint8_t tempBffr2[20];
+    192          
+    193            static bool OnceFlg = false;
+    194            
+    195            if ( OnceFlg )
    \                     HAL_WWDG_WakeupCallback: (+1)
-   \   00000000   0x....             LDR.N    R1,??DataTable26_4
+   \   00000000   0x....             LDR.N    R1,??DataTable29_6
    \   00000002   0x7809             LDRB     R1,[R1, #+0]
    \   00000004   0x2900             CMP      R1,#+0
    \   00000006   0xD003             BEQ.N    ??HAL_WWDG_WakeupCallback_0
-    162            {
-    163              wwdg_Save.event = true;   // We have had a wwdg Event...Mark that it did occur.
+    196            {
+    197              wwdg_Save.event = true;   // We have had a wwdg Event...Mark that it did occur.
    \   00000008   0x2101             MOVS     R1,#+1
-   \   0000000A   0x....             LDR.N    R2,??DataTable26_2
+   \   0000000A   0x....             LDR.N    R2,??DataTable29_4
    \   0000000C   0x7011             STRB     R1,[R2, #+0]
    \   0000000E   0xE002             B.N      ??HAL_WWDG_WakeupCallback_1
-    164          //    if (wwdg_Save2.event)
-    165          //      OnceFlg = false;
-    166            }
-    167            else
-    168            {
-    169              OnceFlg = true;
+    198          //    if (wwdg_Save2.event)
+    199          //      OnceFlg = false;
+    200            }
+    201            else
+    202            {
+    203              OnceFlg = true;
    \                     ??HAL_WWDG_WakeupCallback_0: (+1)
    \   00000010   0x2101             MOVS     R1,#+1
-   \   00000012   0x....             LDR.N    R2,??DataTable26_4
+   \   00000012   0x....             LDR.N    R2,??DataTable29_6
    \   00000014   0x7011             STRB     R1,[R2, #+0]
-    170            }
-    171          }
+    204            }
+    205          }
    \                     ??HAL_WWDG_WakeupCallback_1: (+1)
    \   00000016   0x4770             BX       LR               ;; return
 
    \                                 In section .bss, align 1
    \                     `HAL_WWDG_WakeupCallback::OnceFlg`:
    \   00000000                      DS8 1
-    172          
-    173          /**
-    174          * @brief This function handles wwdt global interrupt.
-    175          */
+    206          
+    207          /**
+    208          * @brief This function handles wwdt global interrupt.
+    209          */
 
    \                                 In section .text, align 2, keep-with-next
-    176          void WWDG_IRQHandler(void)
-    177          {
+    210          void WWDG_IRQHandler(void)
+    211          {
    \                     WWDG_IRQHandler: (+1)
    \   00000000   0xB580             PUSH     {R7,LR}
-    178            HAL_WWDG_IRQHandler(&hwwdg);
-   \   00000002   0x....             LDR.N    R0,??DataTable26_1
+    212            HAL_WWDG_IRQHandler(&hwwdg);
+   \   00000002   0x....             LDR.N    R0,??DataTable29_3
    \   00000004   0x.... 0x....      BL       HAL_WWDG_IRQHandler
-    179          }
+    213          }
    \   00000008   0xBD01             POP      {R0,PC}          ;; return
-    180          
+    214          
 
    \                                 In section .text, align 2, keep-with-next
-    181          bool RoadBrd_WWDG_TstEvent( void )
-    182          {
-    183            return wwdg_Save.event;
+    215          bool RoadBrd_WWDG_TstEvent( void )
+    216          {
+    217            return wwdg_Save.event;
    \                     RoadBrd_WWDG_TstEvent: (+1)
-   \   00000000   0x....             LDR.N    R0,??DataTable26_2
+   \   00000000   0x....             LDR.N    R0,??DataTable29_4
    \   00000002   0x7800             LDRB     R0,[R0, #+0]
    \   00000004   0x4770             BX       LR               ;; return
-    184          }
-    185          
-    186            /**
-    187            * @brief  This function verifies the WWDG Flash Frame Structure.
-    188            * @param  none
-    189            * @retval bool:     true:       Valid Frames
-    190            *                   false:      Frame Bad.
-    191            */
+    218          }
+    219          
+    220            /**
+    221            * @brief  This function verifies the WWDG Flash Frame Structure.
+    222            * @param  none
+    223            * @retval bool:     true:       Valid Frames
+    224            *                   false:      Frame Bad.
+    225            */
 
    \                                 In section .text, align 2, keep-with-next
-    192          bool RoadBrd_WWDG_VerifyFrame( void )
-    193          {
+    226          bool RoadBrd_WWDG_VerifyFrame( void )
+    227          {
    \                     RoadBrd_WWDG_VerifyFrame: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
-    194            HAL_StatusTypeDef Status;
-    195            
-    196            Status = HAL_OK;
+    228            HAL_StatusTypeDef Status;
+    229            
+    230            Status = HAL_OK;
    \   00000002   0x2000             MOVS     R0,#+0
    \   00000004   0x0004             MOVS     R4,R0
-    197            // Read Frame from Flash.
-    198            Status = RoadBrd_FlashRead(  (uint32_t)&wwdg_HardFrames, (uint32_t *)&Save_Frames, sizeof(Save_Frames));
+    231            // Read Frame from Flash.
+    232            Status = RoadBrd_FlashRead(  (uint32_t)&wwdg_HardFrames, (uint32_t *)&Save_Frames, sizeof(Save_Frames));
    \   00000006   0x2224             MOVS     R2,#+36
-   \   00000008   0x....             LDR.N    R1,??DataTable26_5
-   \   0000000A   0x....             LDR.N    R0,??DataTable26_6  ;; 0x8070000
+   \   00000008   0x....             LDR.N    R1,??DataTable29_7
+   \   0000000A   0x....             LDR.N    R0,??DataTable29_8  ;; 0x8070000
    \   0000000C   0x.... 0x....      BL       RoadBrd_FlashRead
    \   00000010   0x0004             MOVS     R4,R0
-    199            // Compare SYnc Workd and return status.
-    200            if (Status != HAL_OK)
+    233            // Compare SYnc Workd and return status.
+    234            if (Status != HAL_OK)
    \   00000012   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
    \   00000014   0x2C00             CMP      R4,#+0
    \   00000016   0xD001             BEQ.N    ??RoadBrd_WWDG_VerifyFrame_0
-    201              return false;
+    235              return false;
    \   00000018   0x2000             MOVS     R0,#+0
    \   0000001A   0xE007             B.N      ??RoadBrd_WWDG_VerifyFrame_1
-    202            else
-    203            {
-    204              if (Save_Frames.checksum == FRAME_CHKSUM)
+    236            else
+    237            {
+    238              if (Save_Frames.checksum == FRAME_CHKSUM)
    \                     ??RoadBrd_WWDG_VerifyFrame_0: (+1)
-   \   0000001C   0x....             LDR.N    R0,??DataTable26_5
+   \   0000001C   0x....             LDR.N    R0,??DataTable29_7
    \   0000001E   0x6800             LDR      R0,[R0, #+0]
    \   00000020   0xF1B0 0x3F5A      CMP      R0,#+1515870810
    \   00000024   0xD101             BNE.N    ??RoadBrd_WWDG_VerifyFrame_2
-    205                return true;
+    239                return true;
    \   00000026   0x2001             MOVS     R0,#+1
    \   00000028   0xE000             B.N      ??RoadBrd_WWDG_VerifyFrame_1
-    206              else
-    207                return false;
+    240              else
+    241                return false;
    \                     ??RoadBrd_WWDG_VerifyFrame_2: (+1)
    \   0000002A   0x2000             MOVS     R0,#+0
    \                     ??RoadBrd_WWDG_VerifyFrame_1: (+1)
    \   0000002C   0xBD10             POP      {R4,PC}          ;; return
    \   0000002E                      REQUIRE wwdg_HardFrames
-    208            }
-    209          }
-    210          
-    211            /**
-    212            * @brief  This function initializes the key frame structures needed to track wwdg Frames.
-    213            * @param  none
-    214            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    215            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    216            *                                HAL_BUSY:     Flash is busy.
-    217            *                                HAL_TIMEOUT:  Flash timed out.
-    218            */
-
-   \                                 In section .text, align 2, keep-with-next
-    219          HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
-    220          {
-   \                     RoadBrd_WWDG_InitializeFrmFlash: (+1)
-   \   00000000   0xB510             PUSH     {R4,LR}
-   \   00000002   0xB082             SUB      SP,SP,#+8
-    221            HAL_StatusTypeDef Status;
-    222            
-    223            Status = HAL_OK;
-   \   00000004   0x2000             MOVS     R0,#+0
-   \   00000006   0x0004             MOVS     R4,R0
-    224            // Initialize Key Structures of Frame
-    225            Save_Frames.checksum = FRAME_CHKSUM;
-   \   00000008   0xF05F 0x305A      MOVS     R0,#+1515870810
-   \   0000000C   0x....             LDR.N    R1,??DataTable26_5
-   \   0000000E   0x6008             STR      R0,[R1, #+0]
-    226            Save_Frames.RdSndTickCnt = PROCESS_RD_SND_TIME;
-   \   00000010   0x207B             MOVS     R0,#+123
-   \   00000012   0x....             LDR.N    R1,??DataTable26_5
-   \   00000014   0x6048             STR      R0,[R1, #+4]
-    227            Save_Frames.SnsrTickCnt = PROCESS_SNSR_TIME;
-   \   00000016   0x2064             MOVS     R0,#+100
-   \   00000018   0x....             LDR.N    R1,??DataTable26_5
-   \   0000001A   0x6088             STR      R0,[R1, #+8]
-    228            Save_Frames.TackLimit = TACK_LIMIT;
-   \   0000001C   0x2004             MOVS     R0,#+4
-   \   0000001E   0x....             LDR.N    R1,??DataTable26_5
-   \   00000020   0x60C8             STR      R0,[R1, #+12]
-    229            Save_Frames.BootDelay = BOOT_WAIT;
-   \   00000022   0x200F             MOVS     R0,#+15
-   \   00000024   0x....             LDR.N    R1,??DataTable26_5
-   \   00000026   0x6108             STR      R0,[R1, #+16]
-    230            Save_Frames.Units_flg = false;
-   \   00000028   0x2000             MOVS     R0,#+0
-   \   0000002A   0x....             LDR.N    R1,??DataTable26_5
-   \   0000002C   0x7508             STRB     R0,[R1, #+20]
-    231            Save_Frames.Frame_RdPtr = 0;
-   \   0000002E   0x2000             MOVS     R0,#+0
-   \   00000030   0x....             LDR.N    R1,??DataTable26_5
-   \   00000032   0x7588             STRB     R0,[R1, #+22]
-    232            Save_Frames.Frame_WrtPtr = 0;
-   \   00000034   0x2000             MOVS     R0,#+0
-   \   00000036   0x....             LDR.N    R1,??DataTable26_5
-   \   00000038   0x7548             STRB     R0,[R1, #+21]
-    233            
-    234            // Write Structure to Flash Memory.
-    235            //Status = RoadBrd_FlashInitWrite( 0x00, 
-    236            Status = RoadBrd_FlashWrite( 0x00, 
-    237                                         FLASH_TYPEERASE_PAGES, 
-    238                                         (uint32_t)&wwdg_HardFrames, 
-    239                                         (uint32_t *)&Save_Frames, 
-    240                                         sizeof(Save_Frames));
-   \   0000003A   0x2024             MOVS     R0,#+36
-   \   0000003C   0x9000             STR      R0,[SP, #+0]
-   \   0000003E   0x....             LDR.N    R3,??DataTable26_5
-   \   00000040   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
-   \   00000042   0x2100             MOVS     R1,#+0
-   \   00000044   0x2000             MOVS     R0,#+0
-   \   00000046   0x.... 0x....      BL       RoadBrd_FlashWrite
-   \   0000004A   0x0004             MOVS     R4,R0
-    241            return Status;
-   \   0000004C   0x0020             MOVS     R0,R4
-   \   0000004E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000050   0xBD16             POP      {R1,R2,R4,PC}    ;; return
-   \   00000052                      REQUIRE wwdg_HardFrames
-    242          }
-    243          
-    244          /**
-    245            * @brief  Update Key Tick Counts.
-    246            * @param  uint32_t PassedRdSndTickCnt
-    247            * @param  uint32_t PassedSnsrTickCnt
+    242            }
+    243          }
+    244          
+    245            /**
+    246            * @brief  This function initializes the key frame structures needed to track wwdg Frames.
+    247            * @param  none
     248            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
     249            *                                HAL_ERROR:    Error found in Tasking or data passed.
     250            *                                HAL_BUSY:     Flash is busy.
@@ -522,623 +507,719 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     252            */
 
    \                                 In section .text, align 2, keep-with-next
-    253          HAL_StatusTypeDef RoadBrd_Set_TickCounts( uint32_t PassedRdSndTickCnt, uint32_t PassedSnsrTickCnt )
+    253          HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
     254          {
+   \                     RoadBrd_WWDG_InitializeFrmFlash: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+    255            HAL_StatusTypeDef Status;
+    256            
+    257            Status = HAL_OK;
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x0004             MOVS     R4,R0
+    258            // Initialize Key Structures of Frame
+    259            Save_Frames.checksum = FRAME_CHKSUM;
+   \   00000008   0xF05F 0x305A      MOVS     R0,#+1515870810
+   \   0000000C   0x....             LDR.N    R1,??DataTable29_7
+   \   0000000E   0x6008             STR      R0,[R1, #+0]
+    260            Save_Frames.RdSndTickCnt = PROCESS_RD_SND_TIME;
+   \   00000010   0x207B             MOVS     R0,#+123
+   \   00000012   0x....             LDR.N    R1,??DataTable29_7
+   \   00000014   0x6048             STR      R0,[R1, #+4]
+    261            Save_Frames.SnsrTickCnt = PROCESS_SNSR_TIME;
+   \   00000016   0x2064             MOVS     R0,#+100
+   \   00000018   0x....             LDR.N    R1,??DataTable29_7
+   \   0000001A   0x6088             STR      R0,[R1, #+8]
+    262            Save_Frames.TackLimit = TACK_LIMIT;
+   \   0000001C   0x2004             MOVS     R0,#+4
+   \   0000001E   0x....             LDR.N    R1,??DataTable29_7
+   \   00000020   0x60C8             STR      R0,[R1, #+12]
+    263            Save_Frames.BootDelay = BOOT_WAIT;
+   \   00000022   0x200F             MOVS     R0,#+15
+   \   00000024   0x....             LDR.N    R1,??DataTable29_7
+   \   00000026   0x6108             STR      R0,[R1, #+16]
+    264            Save_Frames.Units_flg = false;
+   \   00000028   0x2000             MOVS     R0,#+0
+   \   0000002A   0x....             LDR.N    R1,??DataTable29_7
+   \   0000002C   0x7508             STRB     R0,[R1, #+20]
+    265            Save_Frames.Frame_RdPtr = 0;
+   \   0000002E   0x2000             MOVS     R0,#+0
+   \   00000030   0x....             LDR.N    R1,??DataTable29_7
+   \   00000032   0x7588             STRB     R0,[R1, #+22]
+    266            Save_Frames.Frame_WrtPtr = 0;
+   \   00000034   0x2000             MOVS     R0,#+0
+   \   00000036   0x....             LDR.N    R1,??DataTable29_7
+   \   00000038   0x7548             STRB     R0,[R1, #+21]
+    267            
+    268            // Write Structure to Flash Memory.
+    269            //Status = RoadBrd_FlashInitWrite( 0x00, 
+    270            Status = RoadBrd_FlashWrite( 0x00, 
+    271                                         FLASH_TYPEERASE_PAGES, 
+    272                                         (uint32_t)&wwdg_HardFrames, 
+    273                                         (uint32_t *)&Save_Frames, 
+    274                                         sizeof(Save_Frames));
+   \   0000003A   0x2024             MOVS     R0,#+36
+   \   0000003C   0x9000             STR      R0,[SP, #+0]
+   \   0000003E   0x....             LDR.N    R3,??DataTable29_7
+   \   00000040   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
+   \   00000042   0x2100             MOVS     R1,#+0
+   \   00000044   0x2000             MOVS     R0,#+0
+   \   00000046   0x.... 0x....      BL       RoadBrd_FlashWrite
+   \   0000004A   0x0004             MOVS     R4,R0
+    275            return Status;
+   \   0000004C   0x0020             MOVS     R0,R4
+   \   0000004E   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000050   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+   \   00000052                      REQUIRE wwdg_HardFrames
+    276          }
+    277          
+    278          
+    279          /**
+    280            * @brief  Update Key Tick Counts.
+    281            * @param  uint32_t PassedRdSndTickCnt
+    282            * @param  uint32_t PassedSnsrTickCnt
+    283            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    284            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    285            *                                HAL_BUSY:     Flash is busy.
+    286            *                                HAL_TIMEOUT:  Flash timed out.
+    287            */
+
+   \                                 In section .text, align 2, keep-with-next
+    288          HAL_StatusTypeDef RoadBrd_Set_TickCounts( uint32_t PassedRdSndTickCnt, uint32_t PassedSnsrTickCnt )
+    289          {
    \                     RoadBrd_Set_TickCounts: (+1)
    \   00000000   0xB570             PUSH     {R4-R6,LR}
    \   00000002   0xB082             SUB      SP,SP,#+8
    \   00000004   0x0004             MOVS     R4,R0
    \   00000006   0x000D             MOVS     R5,R1
-    255            HAL_StatusTypeDef Status;
-    256            
-    257            Status = HAL_OK;
+    290            HAL_StatusTypeDef Status;
+    291            
+    292            Status = HAL_OK;
    \   00000008   0x2000             MOVS     R0,#+0
    \   0000000A   0x0006             MOVS     R6,R0
-    258            Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
-   \   0000000C   0x....             LDR.N    R0,??DataTable26_5
+    293            Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
+   \   0000000C   0x....             LDR.N    R0,??DataTable29_7
    \   0000000E   0x6044             STR      R4,[R0, #+4]
-    259            Save_Frames.SnsrTickCnt = PassedSnsrTickCnt;
-   \   00000010   0x....             LDR.N    R0,??DataTable26_5
+    294            Save_Frames.SnsrTickCnt = PassedSnsrTickCnt;
+   \   00000010   0x....             LDR.N    R0,??DataTable29_7
    \   00000012   0x6085             STR      R5,[R0, #+8]
-    260            Set_TickCounts( PassedRdSndTickCnt, PassedSnsrTickCnt );
+    295            Set_TickCounts( PassedRdSndTickCnt, PassedSnsrTickCnt );
    \   00000014   0x0029             MOVS     R1,R5
    \   00000016   0x0020             MOVS     R0,R4
    \   00000018   0x.... 0x....      BL       Set_TickCounts
-    261            // Write Structure to Flash Memory.
-    262            //Status = RoadBrd_FlashInitWrite( 0x00, 
-    263            Status = RoadBrd_FlashWrite( 0x00, 
-    264                                         FLASH_TYPEERASE_PAGES, 
-    265                                         (uint32_t)&wwdg_HardFrames, 
-    266                                         (uint32_t *)&Save_Frames, 
-    267                                         sizeof(Save_Frames));
+    296            // Write Structure to Flash Memory.
+    297            //Status = RoadBrd_FlashInitWrite( 0x00, 
+    298            Status = RoadBrd_FlashWrite( 0x00, 
+    299                                         FLASH_TYPEERASE_PAGES, 
+    300                                         (uint32_t)&wwdg_HardFrames, 
+    301                                         (uint32_t *)&Save_Frames, 
+    302                                         sizeof(Save_Frames));
    \   0000001C   0x2024             MOVS     R0,#+36
    \   0000001E   0x9000             STR      R0,[SP, #+0]
-   \   00000020   0x....             LDR.N    R3,??DataTable26_5
-   \   00000022   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
+   \   00000020   0x....             LDR.N    R3,??DataTable29_7
+   \   00000022   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
    \   00000024   0x2100             MOVS     R1,#+0
    \   00000026   0x2000             MOVS     R0,#+0
    \   00000028   0x.... 0x....      BL       RoadBrd_FlashWrite
    \   0000002C   0x0006             MOVS     R6,R0
-    268            return Status;
+    303            return Status;
    \   0000002E   0x0030             MOVS     R0,R6
    \   00000030   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000032   0xBD76             POP      {R1,R2,R4-R6,PC}  ;; return
    \   00000034                      REQUIRE wwdg_HardFrames
-    269          }
-    270          
-    271          /**
-    272            * @brief  Update RdSndTickCnt.
-    273            * @param  uint32_t PassedRdSndTickCnt
-    274            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    275            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    276            *                                HAL_BUSY:     Flash is busy.
-    277            *                                HAL_TIMEOUT:  Flash timed out.
-    278            */
+    304          }
+    305          
+    306          /**
+    307            * @brief  Update RdSndTickCnt.
+    308            * @param  uint32_t PassedRdSndTickCnt
+    309            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    310            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    311            *                                HAL_BUSY:     Flash is busy.
+    312            *                                HAL_TIMEOUT:  Flash timed out.
+    313            */
 
    \                                 In section .text, align 2, keep-with-next
-    279          HAL_StatusTypeDef RoadBrd_Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt )
-    280          {
+    314          HAL_StatusTypeDef RoadBrd_Set_RdSndTickCnt( uint32_t PassedRdSndTickCnt )
+    315          {
    \                     RoadBrd_Set_RdSndTickCnt: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    281            HAL_StatusTypeDef Status;
-    282            
-    283            Status = HAL_OK;
+    316            HAL_StatusTypeDef Status;
+    317            
+    318            Status = HAL_OK;
    \   00000004   0x2000             MOVS     R0,#+0
    \   00000006   0x0005             MOVS     R5,R0
-    284            Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
-   \   00000008   0x....             LDR.N    R0,??DataTable26_5
+    319            Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
+   \   00000008   0x....             LDR.N    R0,??DataTable29_7
    \   0000000A   0x6044             STR      R4,[R0, #+4]
-    285            Set_RdSndTickCnt( PassedRdSndTickCnt );
+    320            Set_RdSndTickCnt( PassedRdSndTickCnt );
    \   0000000C   0x0020             MOVS     R0,R4
    \   0000000E   0x.... 0x....      BL       Set_RdSndTickCnt
-    286            // Write Structure to Flash Memory.
-    287            //Status = RoadBrd_FlashInitWrite( 0x00, 
-    288            Status = RoadBrd_FlashWrite( 0x00, 
-    289                                         FLASH_TYPEERASE_PAGES, 
-    290                                         (uint32_t)&wwdg_HardFrames, 
-    291                                         (uint32_t *)&Save_Frames, 
-    292                                         sizeof(Save_Frames));
+    321            // Write Structure to Flash Memory.
+    322            //Status = RoadBrd_FlashInitWrite( 0x00, 
+    323            Status = RoadBrd_FlashWrite( 0x00, 
+    324                                         FLASH_TYPEERASE_PAGES, 
+    325                                         (uint32_t)&wwdg_HardFrames, 
+    326                                         (uint32_t *)&Save_Frames, 
+    327                                         sizeof(Save_Frames));
    \   00000012   0x2024             MOVS     R0,#+36
    \   00000014   0x9000             STR      R0,[SP, #+0]
-   \   00000016   0x....             LDR.N    R3,??DataTable26_5
-   \   00000018   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
+   \   00000016   0x....             LDR.N    R3,??DataTable29_7
+   \   00000018   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
    \   0000001A   0x2100             MOVS     R1,#+0
    \   0000001C   0x2000             MOVS     R0,#+0
    \   0000001E   0x.... 0x....      BL       RoadBrd_FlashWrite
    \   00000022   0x0005             MOVS     R5,R0
-    293            return Status;
+    328            return Status;
    \   00000024   0x0028             MOVS     R0,R5
    \   00000026   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000028   0xBD32             POP      {R1,R4,R5,PC}    ;; return
    \   0000002A                      REQUIRE wwdg_HardFrames
-    294          }
-    295          
-    296          /**
-    297            * @brief  Update RdSndTickCnt.
-    298            * @param  uint32_t PassedRdSndTickCnt
-    299            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    300            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    301            *                                HAL_BUSY:     Flash is busy.
-    302            *                                HAL_TIMEOUT:  Flash timed out.
-    303            */
+    329          }
+    330          
+    331          /**
+    332            * @brief  Update RdSndTickCnt.
+    333            * @param  uint32_t PassedRdSndTickCnt
+    334            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    335            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    336            *                                HAL_BUSY:     Flash is busy.
+    337            *                                HAL_TIMEOUT:  Flash timed out.
+    338            */
 
    \                                 In section .text, align 2, keep-with-next
-    304          HAL_StatusTypeDef RoadBrd_Set_TmpRdSndTickCnt( uint32_t PassedRdSndTickCnt )
-    305          {
+    339          HAL_StatusTypeDef RoadBrd_Set_TmpRdSndTickCnt( uint32_t PassedRdSndTickCnt )
+    340          {
    \                     RoadBrd_Set_TmpRdSndTickCnt: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    306            Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
-   \   00000004   0x....             LDR.N    R0,??DataTable26_5
+    341            Save_Frames.RdSndTickCnt = PassedRdSndTickCnt;
+   \   00000004   0x....             LDR.N    R0,??DataTable29_7
    \   00000006   0x6044             STR      R4,[R0, #+4]
-    307            Set_RdSndTickCnt( PassedRdSndTickCnt );
+    342            Set_RdSndTickCnt( PassedRdSndTickCnt );
    \   00000008   0x0020             MOVS     R0,R4
    \   0000000A   0x.... 0x....      BL       Set_RdSndTickCnt
-    308            return HAL_OK;
+    343            return HAL_OK;
    \   0000000E   0x2000             MOVS     R0,#+0
    \   00000010   0xBD10             POP      {R4,PC}          ;; return
-    309          }
-    310          
-    311          /**
-    312            * @brief  Update SnsrTickCnt.
-    313            * @param  uint32_t PassedSnsrTickCnt
-    314            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    315            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    316            *                                HAL_BUSY:     Flash is busy.
-    317            *                                HAL_TIMEOUT:  Flash timed out.
-    318            */
+    344          }
+    345          
+    346          /**
+    347            * @brief  Update SnsrTickCnt.
+    348            * @param  uint32_t PassedSnsrTickCnt
+    349            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    350            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    351            *                                HAL_BUSY:     Flash is busy.
+    352            *                                HAL_TIMEOUT:  Flash timed out.
+    353            */
 
    \                                 In section .text, align 2, keep-with-next
-    319          HAL_StatusTypeDef RoadBrd_Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt )
-    320          {
+    354          HAL_StatusTypeDef RoadBrd_Set_SnsrTickCnt( uint32_t PassedSnsrTickCnt )
+    355          {
    \                     RoadBrd_Set_SnsrTickCnt: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    321            HAL_StatusTypeDef Status;
-    322            
-    323            Status = HAL_OK;
+    356            HAL_StatusTypeDef Status;
+    357            
+    358            Status = HAL_OK;
    \   00000004   0x2000             MOVS     R0,#+0
    \   00000006   0x0005             MOVS     R5,R0
-    324            Save_Frames.SnsrTickCnt = PassedSnsrTickCnt;
-   \   00000008   0x....             LDR.N    R0,??DataTable26_5
+    359            Save_Frames.SnsrTickCnt = PassedSnsrTickCnt;
+   \   00000008   0x....             LDR.N    R0,??DataTable29_7
    \   0000000A   0x6084             STR      R4,[R0, #+8]
-    325            Set_SnsrTickCnt( PassedSnsrTickCnt );
+    360            Set_SnsrTickCnt( PassedSnsrTickCnt );
    \   0000000C   0x0020             MOVS     R0,R4
    \   0000000E   0x.... 0x....      BL       Set_SnsrTickCnt
-    326            // Write Structure to Flash Memory.
-    327            //Status = RoadBrd_FlashInitWrite( 0x00, 
-    328            Status = RoadBrd_FlashWrite( 0x00, 
-    329                                         FLASH_TYPEERASE_PAGES, 
-    330                                         (uint32_t)&wwdg_HardFrames, 
-    331                                         (uint32_t *)&Save_Frames, 
-    332                                         sizeof(Save_Frames));
+    361            // Write Structure to Flash Memory.
+    362            //Status = RoadBrd_FlashInitWrite( 0x00, 
+    363            Status = RoadBrd_FlashWrite( 0x00, 
+    364                                         FLASH_TYPEERASE_PAGES, 
+    365                                         (uint32_t)&wwdg_HardFrames, 
+    366                                         (uint32_t *)&Save_Frames, 
+    367                                         sizeof(Save_Frames));
    \   00000012   0x2024             MOVS     R0,#+36
    \   00000014   0x9000             STR      R0,[SP, #+0]
-   \   00000016   0x....             LDR.N    R3,??DataTable26_5
-   \   00000018   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
+   \   00000016   0x....             LDR.N    R3,??DataTable29_7
+   \   00000018   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
    \   0000001A   0x2100             MOVS     R1,#+0
    \   0000001C   0x2000             MOVS     R0,#+0
    \   0000001E   0x.... 0x....      BL       RoadBrd_FlashWrite
    \   00000022   0x0005             MOVS     R5,R0
-    333            return Status;
+    368            return Status;
    \   00000024   0x0028             MOVS     R0,R5
    \   00000026   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000028   0xBD32             POP      {R1,R4,R5,PC}    ;; return
    \   0000002A                      REQUIRE wwdg_HardFrames
-    334          }
-    335          
-    336          /**
-    337            * @brief  Update Units_flg.
-    338            * @param  bool PassedUnitsFlag
-    339            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    340            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    341            *                                HAL_BUSY:     Flash is busy.
-    342            *                                HAL_TIMEOUT:  Flash timed out.
-    343            */
+    369          }
+    370          
+    371          /**
+    372            * @brief  Update Units_flg.
+    373            * @param  bool PassedUnitsFlag
+    374            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    375            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    376            *                                HAL_BUSY:     Flash is busy.
+    377            *                                HAL_TIMEOUT:  Flash timed out.
+    378            */
 
    \                                 In section .text, align 2, keep-with-next
-    344          HAL_StatusTypeDef RoadBrd_Set_UnitsFlag( bool PassedUnitsFlag )
-    345          {
+    379          HAL_StatusTypeDef RoadBrd_Set_UnitsFlag( bool PassedUnitsFlag )
+    380          {
    \                     RoadBrd_Set_UnitsFlag: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    346            HAL_StatusTypeDef Status;
-    347            
-    348            Status = HAL_OK;
+    381            HAL_StatusTypeDef Status;
+    382            
+    383            Status = HAL_OK;
    \   00000004   0x2000             MOVS     R0,#+0
    \   00000006   0x0005             MOVS     R5,R0
-    349            Save_Frames.Units_flg = PassedUnitsFlag;
-   \   00000008   0x....             LDR.N    R0,??DataTable26_5
+    384            Save_Frames.Units_flg = PassedUnitsFlag;
+   \   00000008   0x....             LDR.N    R0,??DataTable29_7
    \   0000000A   0x7504             STRB     R4,[R0, #+20]
-    350            // Write Structure to Flash Memory.
-    351            //Status = RoadBrd_FlashInitWrite( 0x00, 
-    352            Status = RoadBrd_FlashWrite( 0x00, 
-    353                                         FLASH_TYPEERASE_PAGES, 
-    354                                         (uint32_t)&wwdg_HardFrames, 
-    355                                         (uint32_t *)&Save_Frames, 
-    356                                         sizeof(Save_Frames));
+    385            // Write Structure to Flash Memory.
+    386            //Status = RoadBrd_FlashInitWrite( 0x00, 
+    387            Status = RoadBrd_FlashWrite( 0x00, 
+    388                                         FLASH_TYPEERASE_PAGES, 
+    389                                         (uint32_t)&wwdg_HardFrames, 
+    390                                         (uint32_t *)&Save_Frames, 
+    391                                         sizeof(Save_Frames));
    \   0000000C   0x2024             MOVS     R0,#+36
    \   0000000E   0x9000             STR      R0,[SP, #+0]
-   \   00000010   0x....             LDR.N    R3,??DataTable26_5
-   \   00000012   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
+   \   00000010   0x....             LDR.N    R3,??DataTable29_7
+   \   00000012   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
    \   00000014   0x2100             MOVS     R1,#+0
    \   00000016   0x2000             MOVS     R0,#+0
    \   00000018   0x.... 0x....      BL       RoadBrd_FlashWrite
    \   0000001C   0x0005             MOVS     R5,R0
-    357            return Status;
+    392            return Status;
    \   0000001E   0x0028             MOVS     R0,R5
    \   00000020   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000022   0xBD32             POP      {R1,R4,R5,PC}    ;; return
    \   00000024                      REQUIRE wwdg_HardFrames
-    358          }
-    359          
-    360          /**
-    361            * @brief  Update TackLimit.
-    362            * @param  uint32_t PassedTackLimit
-    363            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    364            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    365            *                                HAL_BUSY:     Flash is busy.
-    366            *                                HAL_TIMEOUT:  Flash timed out.
-    367            */
+    393          }
+    394          
+    395          /**
+    396            * @brief  Update TackLimit.
+    397            * @param  uint32_t PassedTackLimit
+    398            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    399            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    400            *                                HAL_BUSY:     Flash is busy.
+    401            *                                HAL_TIMEOUT:  Flash timed out.
+    402            */
 
    \                                 In section .text, align 2, keep-with-next
-    368          HAL_StatusTypeDef RoadBrd_Set_TackLimit( uint32_t PassedTackLimit )
-    369          {
+    403          HAL_StatusTypeDef RoadBrd_Set_TackLimit( uint32_t PassedTackLimit )
+    404          {
    \                     RoadBrd_Set_TackLimit: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    370            HAL_StatusTypeDef Status;
-    371            
-    372            Status = HAL_OK;
+    405            HAL_StatusTypeDef Status;
+    406            
+    407            Status = HAL_OK;
    \   00000004   0x2000             MOVS     R0,#+0
    \   00000006   0x0005             MOVS     R5,R0
-    373            Save_Frames.TackLimit = PassedTackLimit;
-   \   00000008   0x....             LDR.N    R0,??DataTable26_5
+    408            Save_Frames.TackLimit = PassedTackLimit;
+   \   00000008   0x....             LDR.N    R0,??DataTable29_7
    \   0000000A   0x60C4             STR      R4,[R0, #+12]
-    374            // Write Structure to Flash Memory.
-    375            //Status = RoadBrd_FlashInitWrite( 0x00, 
-    376            Status = RoadBrd_FlashWrite( 0x00, 
-    377                                         FLASH_TYPEERASE_PAGES, 
-    378                                         (uint32_t)&wwdg_HardFrames, 
-    379                                         (uint32_t *)&Save_Frames, 
-    380                                         sizeof(Save_Frames));
+    409            // Write Structure to Flash Memory.
+    410            //Status = RoadBrd_FlashInitWrite( 0x00, 
+    411            Status = RoadBrd_FlashWrite( 0x00, 
+    412                                         FLASH_TYPEERASE_PAGES, 
+    413                                         (uint32_t)&wwdg_HardFrames, 
+    414                                         (uint32_t *)&Save_Frames, 
+    415                                         sizeof(Save_Frames));
    \   0000000C   0x2024             MOVS     R0,#+36
    \   0000000E   0x9000             STR      R0,[SP, #+0]
-   \   00000010   0x....             LDR.N    R3,??DataTable26_5
-   \   00000012   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
+   \   00000010   0x....             LDR.N    R3,??DataTable29_7
+   \   00000012   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
    \   00000014   0x2100             MOVS     R1,#+0
    \   00000016   0x2000             MOVS     R0,#+0
    \   00000018   0x.... 0x....      BL       RoadBrd_FlashWrite
    \   0000001C   0x0005             MOVS     R5,R0
-    381            return Status;
+    416            return Status;
    \   0000001E   0x0028             MOVS     R0,R5
    \   00000020   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000022   0xBD32             POP      {R1,R4,R5,PC}    ;; return
    \   00000024                      REQUIRE wwdg_HardFrames
-    382          }
-    383          
-    384          /**
-    385            * @brief  Update BootDelay.
-    386            * @param  uint32_t PassedBootDelay
-    387            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    388            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    389            *                                HAL_BUSY:     Flash is busy.
-    390            *                                HAL_TIMEOUT:  Flash timed out.
-    391            */
+    417          }
+    418          
+    419          /**
+    420            * @brief  Update BootDelay.
+    421            * @param  uint32_t PassedBootDelay
+    422            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    423            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    424            *                                HAL_BUSY:     Flash is busy.
+    425            *                                HAL_TIMEOUT:  Flash timed out.
+    426            */
 
    \                                 In section .text, align 2, keep-with-next
-    392          HAL_StatusTypeDef RoadBrd_Set_BootDelay( uint32_t PassedBootDelay )
-    393          {
+    427          HAL_StatusTypeDef RoadBrd_Set_BootDelay( uint32_t PassedBootDelay )
+    428          {
    \                     RoadBrd_Set_BootDelay: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    394            HAL_StatusTypeDef Status;
-    395            
-    396            Status = HAL_OK;
+    429            HAL_StatusTypeDef Status;
+    430            
+    431            Status = HAL_OK;
    \   00000004   0x2000             MOVS     R0,#+0
    \   00000006   0x0005             MOVS     R5,R0
-    397            Save_Frames.BootDelay = PassedBootDelay;
-   \   00000008   0x....             LDR.N    R0,??DataTable26_5
+    432            Save_Frames.BootDelay = PassedBootDelay;
+   \   00000008   0x....             LDR.N    R0,??DataTable29_7
    \   0000000A   0x6104             STR      R4,[R0, #+16]
-    398            // Write Structure to Flash Memory.
-    399            //Status = RoadBrd_FlashInitWrite( 0x00, 
-    400            Status = RoadBrd_FlashWrite( 0x00, 
-    401                                         FLASH_TYPEERASE_PAGES, 
-    402                                         (uint32_t)&wwdg_HardFrames, 
-    403                                         (uint32_t *)&Save_Frames, 
-    404                                         sizeof(Save_Frames));
+    433            // Write Structure to Flash Memory.
+    434            //Status = RoadBrd_FlashInitWrite( 0x00, 
+    435            Status = RoadBrd_FlashWrite( 0x00, 
+    436                                         FLASH_TYPEERASE_PAGES, 
+    437                                         (uint32_t)&wwdg_HardFrames, 
+    438                                         (uint32_t *)&Save_Frames, 
+    439                                         sizeof(Save_Frames));
    \   0000000C   0x2024             MOVS     R0,#+36
    \   0000000E   0x9000             STR      R0,[SP, #+0]
-   \   00000010   0x....             LDR.N    R3,??DataTable26_5
-   \   00000012   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
+   \   00000010   0x....             LDR.N    R3,??DataTable29_7
+   \   00000012   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
    \   00000014   0x2100             MOVS     R1,#+0
    \   00000016   0x2000             MOVS     R0,#+0
    \   00000018   0x.... 0x....      BL       RoadBrd_FlashWrite
    \   0000001C   0x0005             MOVS     R5,R0
-    405            return Status;
+    440            return Status;
    \   0000001E   0x0028             MOVS     R0,R5
    \   00000020   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000022   0xBD32             POP      {R1,R4,R5,PC}    ;; return
    \   00000024                      REQUIRE wwdg_HardFrames
-    406          }
-    407          
-    408          /**
-    409            * @brief  Retrieve RdSndTickCnt.
-    410            * @param  None
-    411            * @retval uint32_t Save_Frames.RdSndTickCnt
-    412            */
+    441          }
+    442          
+    443          /**
+    444            * @brief  Retrieve RdSndTickCnt.
+    445            * @param  None
+    446            * @retval uint32_t Save_Frames.RdSndTickCnt
+    447            */
 
    \                                 In section .text, align 2, keep-with-next
-    413          uint32_t RoadBrd_Get_RdSndTickCnt( void )
-    414          {
-    415            return Save_Frames.RdSndTickCnt;
+    448          uint32_t RoadBrd_Get_RdSndTickCnt( void )
+    449          {
+    450            return Save_Frames.RdSndTickCnt;
    \                     RoadBrd_Get_RdSndTickCnt: (+1)
-   \   00000000   0x....             LDR.N    R0,??DataTable26_5
+   \   00000000   0x....             LDR.N    R0,??DataTable29_7
    \   00000002   0x6840             LDR      R0,[R0, #+4]
    \   00000004   0x4770             BX       LR               ;; return
-    416          }
-    417          
-    418          /**
-    419            * @brief  Retrieve SnsrTickCnt.
-    420            * @param  None
-    421            * @retval uint32_t Save_Frames.SnsrTickCnt
-    422            */
+    451          }
+    452          
+    453          /**
+    454            * @brief  Retrieve SnsrTickCnt.
+    455            * @param  None
+    456            * @retval uint32_t Save_Frames.SnsrTickCnt
+    457            */
 
    \                                 In section .text, align 2, keep-with-next
-    423          uint32_t RoadBrd_Get_SnsrTickCnt( void )
-    424          {
-    425            return Save_Frames.SnsrTickCnt;
+    458          uint32_t RoadBrd_Get_SnsrTickCnt( void )
+    459          {
+    460            return Save_Frames.SnsrTickCnt;
    \                     RoadBrd_Get_SnsrTickCnt: (+1)
-   \   00000000   0x....             LDR.N    R0,??DataTable26_5
+   \   00000000   0x....             LDR.N    R0,??DataTable29_7
    \   00000002   0x6880             LDR      R0,[R0, #+8]
    \   00000004   0x4770             BX       LR               ;; return
-    426          }
-    427          
-    428           /**
-    429            * @brief  Retrieve Units Flag.
-    430            * @param  None
-    431            * @retval bool Save_Frames.Units_flg
-    432            */
+    461          }
+    462          
+    463           /**
+    464            * @brief  Retrieve Units Flag.
+    465            * @param  None
+    466            * @retval bool Save_Frames.Units_flg
+    467            */
 
    \                                 In section .text, align 2, keep-with-next
-    433          bool RoadBrd_Get_UnitsFlag( void )
-    434          {
-    435            return Save_Frames.Units_flg;
+    468          bool RoadBrd_Get_UnitsFlag( void )
+    469          {
+    470            return Save_Frames.Units_flg;
    \                     RoadBrd_Get_UnitsFlag: (+1)
-   \   00000000   0x....             LDR.N    R0,??DataTable26_5
+   \   00000000   0x....             LDR.N    R0,??DataTable29_7
    \   00000002   0x7D00             LDRB     R0,[R0, #+20]
    \   00000004   0x4770             BX       LR               ;; return
-    436          }
-    437          
-    438          /**
-    439            * @brief  Retrieve TackLimit.
-    440            * @param  None
-    441            * @retval uint32_t Save_Frames.TackLimit
-    442            */
+    471          }
+    472          
+    473          /**
+    474            * @brief  Retrieve TackLimit.
+    475            * @param  None
+    476            * @retval uint32_t Save_Frames.TackLimit
+    477            */
 
    \                                 In section .text, align 2, keep-with-next
-    443          uint32_t RoadBrd_Get_TackLimit( void )
-    444          {
-    445            return Save_Frames.TackLimit;
+    478          uint32_t RoadBrd_Get_TackLimit( void )
+    479          {
+    480            return Save_Frames.TackLimit;
    \                     RoadBrd_Get_TackLimit: (+1)
-   \   00000000   0x....             LDR.N    R0,??DataTable26_5
+   \   00000000   0x....             LDR.N    R0,??DataTable29_7
    \   00000002   0x68C0             LDR      R0,[R0, #+12]
    \   00000004   0x4770             BX       LR               ;; return
-    446          }
-    447          
-    448          /**
-    449            * @brief  Retrieve BootDelay.
-    450            * @param  None
-    451            * @retval uint32_t Save_Frames.BootDelay
-    452            */
+    481          }
+    482          
+    483          /**
+    484            * @brief  Retrieve BootDelay.
+    485            * @param  None
+    486            * @retval uint32_t Save_Frames.BootDelay
+    487            */
 
    \                                 In section .text, align 2, keep-with-next
-    453          uint32_t RoadBrd_Get_BootDelay( void )
-    454          {
-    455            return Save_Frames.BootDelay;
+    488          uint32_t RoadBrd_Get_BootDelay( void )
+    489          {
+    490            return Save_Frames.BootDelay;
    \                     RoadBrd_Get_BootDelay: (+1)
-   \   00000000   0x....             LDR.N    R0,??DataTable26_5
+   \   00000000   0x....             LDR.N    R0,??DataTable29_7
    \   00000002   0x6900             LDR      R0,[R0, #+16]
    \   00000004   0x4770             BX       LR               ;; return
-    456          }
-    457          
-    458          /**
-    459            * @brief  This function Reads the key frame Information from Flash..
-    460            * @param  none
-    461            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    462            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    463            *                                HAL_BUSY:     Flash is busy.
-    464            *                                HAL_TIMEOUT:  Flash timed out.
-    465            */
+    491          }
+    492          
+    493          /**
+    494            * @brief  This function Reads the key frame Information from Flash..
+    495            * @param  none
+    496            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    497            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    498            *                                HAL_BUSY:     Flash is busy.
+    499            *                                HAL_TIMEOUT:  Flash timed out.
+    500            */
 
    \                                 In section .text, align 2, keep-with-next
-    466          HAL_StatusTypeDef RoadBrd_WWDG_ReadFrmFlash( void )
-    467          {
+    501          HAL_StatusTypeDef RoadBrd_WWDG_ReadFrmFlash( void )
+    502          {
    \                     RoadBrd_WWDG_ReadFrmFlash: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
-    468            HAL_StatusTypeDef Status;
-    469            
-    470            Status = HAL_OK;
+    503            HAL_StatusTypeDef Status;
+    504            
+    505            Status = HAL_OK;
    \   00000002   0x2000             MOVS     R0,#+0
    \   00000004   0x0004             MOVS     R4,R0
-    471            // Read Structure from Flash Memory.
-    472            Status = RoadBrd_FlashRead(  (uint32_t)&wwdg_HardFrames, 
-    473                                         (uint32_t *)&Save_Frames, 
-    474                                         sizeof(Save_Frames));
+    506            // Read Structure from Flash Memory.
+    507            Status = RoadBrd_FlashRead(  (uint32_t)&wwdg_HardFrames, 
+    508                                         (uint32_t *)&Save_Frames, 
+    509                                         sizeof(Save_Frames));
    \   00000006   0x2224             MOVS     R2,#+36
-   \   00000008   0x....             LDR.N    R1,??DataTable26_5
-   \   0000000A   0x....             LDR.N    R0,??DataTable26_6  ;; 0x8070000
+   \   00000008   0x....             LDR.N    R1,??DataTable29_7
+   \   0000000A   0x....             LDR.N    R0,??DataTable29_8  ;; 0x8070000
    \   0000000C   0x.... 0x....      BL       RoadBrd_FlashRead
    \   00000010   0x0004             MOVS     R4,R0
-    475            return Status;
+    510            return Status;
    \   00000012   0x0020             MOVS     R0,R4
    \   00000014   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   00000016   0xBD10             POP      {R4,PC}          ;; return
    \   00000018                      REQUIRE wwdg_HardFrames
-    476          }
-    477          
-    478            /**
-    479            * @brief  This function writes the key frame Information to Flash..
-    480            * @param  none
-    481            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    482            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    483            *                                HAL_BUSY:     Flash is busy.
-    484            *                                HAL_TIMEOUT:  Flash timed out.
-    485            */
+    511          }
+    512          
+    513            /**
+    514            * @brief  This function writes the key frame Information to Flash..
+    515            * @param  none
+    516            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    517            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    518            *                                HAL_BUSY:     Flash is busy.
+    519            *                                HAL_TIMEOUT:  Flash timed out.
+    520            */
 
    \                                 In section .text, align 2, keep-with-next
-    486          HAL_StatusTypeDef RoadBrd_WWDG_WriteFrmFlash( void )
-    487          {
+    521          HAL_StatusTypeDef RoadBrd_WWDG_WriteFrmFlash( void )
+    522          {
    \                     RoadBrd_WWDG_WriteFrmFlash: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
    \   00000002   0xB082             SUB      SP,SP,#+8
-    488            HAL_StatusTypeDef Status;
-    489            
-    490            Status = HAL_OK;
+    523            HAL_StatusTypeDef Status;
+    524            
+    525            Status = HAL_OK;
    \   00000004   0x2000             MOVS     R0,#+0
    \   00000006   0x0004             MOVS     R4,R0
-    491            // Write Structure to Flash Memory.
-    492            Status = RoadBrd_FlashWrite( 0x00, 
-    493                                         FLASH_TYPEERASE_PAGES, 
-    494                                         (uint32_t)&wwdg_HardFrames, 
-    495                                         (uint32_t *)&Save_Frames, 
-    496                                         sizeof(Save_Frames));
+    526            // Write Structure to Flash Memory.
+    527            Status = RoadBrd_FlashWrite( 0x00, 
+    528                                         FLASH_TYPEERASE_PAGES, 
+    529                                         (uint32_t)&wwdg_HardFrames, 
+    530                                         (uint32_t *)&Save_Frames, 
+    531                                         sizeof(Save_Frames));
    \   00000008   0x2024             MOVS     R0,#+36
    \   0000000A   0x9000             STR      R0,[SP, #+0]
-   \   0000000C   0x....             LDR.N    R3,??DataTable26_5
-   \   0000000E   0x....             LDR.N    R2,??DataTable26_6  ;; 0x8070000
+   \   0000000C   0x....             LDR.N    R3,??DataTable29_7
+   \   0000000E   0x....             LDR.N    R2,??DataTable29_8  ;; 0x8070000
    \   00000010   0x2100             MOVS     R1,#+0
    \   00000012   0x2000             MOVS     R0,#+0
    \   00000014   0x.... 0x....      BL       RoadBrd_FlashWrite
    \   00000018   0x0004             MOVS     R4,R0
-    497            return Status;
+    532            return Status;
    \   0000001A   0x0020             MOVS     R0,R4
    \   0000001C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \   0000001E   0xBD16             POP      {R1,R2,R4,PC}    ;; return
    \   00000020                      REQUIRE wwdg_HardFrames
-    498          }
-    499          
-    500          /**
-    501            * @brief  This function attempts to write the passed Flash frame to the Flash Memory and Save it.
-    502            * @param  wwdg_SaveFrame* Write_Frame: WWDG Frame to be written to flash.
-    503            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    504            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    505            *                                HAL_BUSY:     Flash is busy.
-    506            *                                HAL_TIMEOUT:  Flash timed out.
-    507            */
+    533          }
+    534          
+    535          /**
+    536            * @brief  This function attempts to write the passed Flash frame to the Flash Memory and Save it.
+    537            * @param  wwdg_SaveFrame* Write_Frame: WWDG Frame to be written to flash.
+    538            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    539            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    540            *                                HAL_BUSY:     Flash is busy.
+    541            *                                HAL_TIMEOUT:  Flash timed out.
+    542            */
 
    \                                 In section .text, align 2, keep-with-next
-    508          HAL_StatusTypeDef RoadBrd_WWDG_WriteFlash( wwdg_SaveFrame* Write_Frame )
-    509          {
+    543          HAL_StatusTypeDef RoadBrd_WWDG_WriteFlash( wwdg_SaveFrame* Write_Frame )
+    544          {
    \                     RoadBrd_WWDG_WriteFlash: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    510            // Is Frame Initialized?
-    511            if (!(RoadBrd_WWDG_VerifyFrame()))
+    545            // Is Frame Initialized?
+    546            if (!(RoadBrd_WWDG_VerifyFrame()))
    \   00000004   0x.... 0x....      BL       RoadBrd_WWDG_VerifyFrame
    \   00000008   0x2800             CMP      R0,#+0
    \   0000000A   0xD105             BNE.N    ??RoadBrd_WWDG_WriteFlash_0
-    512              if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
+    547              if (RoadBrd_WWDG_InitializeFrmFlash() != HAL_OK)
    \   0000000C   0x.... 0x....      BL       RoadBrd_WWDG_InitializeFrmFlash
    \   00000010   0x2800             CMP      R0,#+0
    \   00000012   0xD001             BEQ.N    ??RoadBrd_WWDG_WriteFlash_0
-    513                return HAL_ERROR;
+    548                return HAL_ERROR;
    \   00000014   0x2001             MOVS     R0,#+1
    \   00000016   0xE012             B.N      ??RoadBrd_WWDG_WriteFlash_1
-    514            // First, Test to see if there is any room in Current Frame Structure.
-    515            if (Save_Frames.Frame_WrtPtr >= FRAME_SIZE)
+    549            // First, Test to see if there is any room in Current Frame Structure.
+    550            if (Save_Frames.Frame_WrtPtr >= FRAME_SIZE)
    \                     ??RoadBrd_WWDG_WriteFlash_0: (+1)
-   \   00000018   0x....             LDR.N    R0,??DataTable26_5
+   \   00000018   0x....             LDR.N    R0,??DataTable29_7
    \   0000001A   0x7D40             LDRB     R0,[R0, #+21]
    \   0000001C   0x280A             CMP      R0,#+10
    \   0000001E   0xDB01             BLT.N    ??RoadBrd_WWDG_WriteFlash_2
-    516              return HAL_ERROR;
+    551              return HAL_ERROR;
    \   00000020   0x2001             MOVS     R0,#+1
    \   00000022   0xE00C             B.N      ??RoadBrd_WWDG_WriteFlash_1
-    517            else
-    518            {
-    519              // OK, Increment Write Pointer and save data.
-    520              Save_Frames.Frame_WrtPtr++;
+    552            else
+    553            {
+    554              // OK, Increment Write Pointer and save data.
+    555              Save_Frames.Frame_WrtPtr++;
    \                     ??RoadBrd_WWDG_WriteFlash_2: (+1)
-   \   00000024   0x....             LDR.N    R0,??DataTable26_5
+   \   00000024   0x....             LDR.N    R0,??DataTable29_7
    \   00000026   0x7D40             LDRB     R0,[R0, #+21]
    \   00000028   0x1C40             ADDS     R0,R0,#+1
-   \   0000002A   0x....             LDR.N    R1,??DataTable26_5
+   \   0000002A   0x....             LDR.N    R1,??DataTable29_7
    \   0000002C   0x7548             STRB     R0,[R1, #+21]
-    521              Save_Frames.Saved_Frames[Save_Frames.Frame_WrtPtr].event = Write_Frame->event;
+    556              Save_Frames.Saved_Frames[Save_Frames.Frame_WrtPtr].event = Write_Frame->event;
    \   0000002E   0x7820             LDRB     R0,[R4, #+0]
-   \   00000030   0x....             LDR.N    R1,??DataTable26_5
-   \   00000032   0x....             LDR.N    R2,??DataTable26_5
+   \   00000030   0x....             LDR.N    R1,??DataTable29_7
+   \   00000032   0x....             LDR.N    R2,??DataTable29_7
    \   00000034   0x7D52             LDRB     R2,[R2, #+21]
    \   00000036   0x4411             ADD      R1,R1,R2
    \   00000038   0x75C8             STRB     R0,[R1, #+23]
-    522              //Write Contents to Flash Memory.
-    523              return(RoadBrd_WWDG_WriteFrmFlash());
+    557              //Write Contents to Flash Memory.
+    558              return(RoadBrd_WWDG_WriteFrmFlash());
    \   0000003A   0x.... 0x....      BL       RoadBrd_WWDG_WriteFrmFlash
    \                     ??RoadBrd_WWDG_WriteFlash_1: (+1)
    \   0000003E   0xBD10             POP      {R4,PC}          ;; return
-    524            }
-    525          }
-    526          
-    527          /**
-    528            * @brief  This function attempts to read from the Flash Memory to the the passed Flash frame.
-    529            * @param  wwdg_SaveFrame* Write_Frame: WWDG Frame to be written to flash.
-    530            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
-    531            *                                HAL_ERROR:    Error found in Tasking or data passed.
-    532            *                                HAL_BUSY:     Flash is busy.
-    533            *                                HAL_TIMEOUT:  Flash timed out.
-    534            */
+    559            }
+    560          }
+    561          
+    562          /**
+    563            * @brief  This function attempts to read from the Flash Memory to the the passed Flash frame.
+    564            * @param  wwdg_SaveFrame* Write_Frame: WWDG Frame to be written to flash.
+    565            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    566            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    567            *                                HAL_BUSY:     Flash is busy.
+    568            *                                HAL_TIMEOUT:  Flash timed out.
+    569            */
 
    \                                 In section .text, align 2, keep-with-next
-    535          HAL_StatusTypeDef RoadBrd_WWDG_ReadFlash( wwdg_SaveFrame* Read_Frame )
-    536          {
+    570          HAL_StatusTypeDef RoadBrd_WWDG_ReadFlash( wwdg_SaveFrame* Read_Frame )
+    571          {
    \                     RoadBrd_WWDG_ReadFlash: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    537            // Is Frame Initialized?
-    538            if (Save_Frames.checksum != FRAME_CHKSUM)
-   \   00000004   0x....             LDR.N    R0,??DataTable26_5
+    572            // Is Frame Initialized?
+    573            if (Save_Frames.checksum != FRAME_CHKSUM)
+   \   00000004   0x....             LDR.N    R0,??DataTable29_7
    \   00000006   0x6800             LDR      R0,[R0, #+0]
    \   00000008   0xF1B0 0x3F5A      CMP      R0,#+1515870810
    \   0000000C   0xD001             BEQ.N    ??RoadBrd_WWDG_ReadFlash_0
-    539              // Read the Frame.
-    540              RoadBrd_WWDG_ReadFrmFlash();
+    574              // Read the Frame.
+    575              RoadBrd_WWDG_ReadFrmFlash();
    \   0000000E   0x.... 0x....      BL       RoadBrd_WWDG_ReadFrmFlash
-    541            // First, Test to see if there is any room in Current Frame Structure.
-    542            if (Save_Frames.Frame_RdPtr >= FRAME_SIZE)
+    576            // First, Test to see if there is any room in Current Frame Structure.
+    577            if (Save_Frames.Frame_RdPtr >= FRAME_SIZE)
    \                     ??RoadBrd_WWDG_ReadFlash_0: (+1)
-   \   00000012   0x....             LDR.N    R0,??DataTable26_5
+   \   00000012   0x....             LDR.N    R0,??DataTable29_7
    \   00000014   0x7D80             LDRB     R0,[R0, #+22]
    \   00000016   0x280A             CMP      R0,#+10
    \   00000018   0xDB01             BLT.N    ??RoadBrd_WWDG_ReadFlash_1
-    543              return HAL_ERROR;
+    578              return HAL_ERROR;
    \   0000001A   0x2001             MOVS     R0,#+1
    \   0000001C   0xE00B             B.N      ??RoadBrd_WWDG_ReadFlash_2
-    544            else
-    545            {
-    546              // OK, Increment Read Pointer and Read data.
-    547              Save_Frames.Frame_RdPtr++;
+    579            else
+    580            {
+    581              // OK, Increment Read Pointer and Read data.
+    582              Save_Frames.Frame_RdPtr++;
    \                     ??RoadBrd_WWDG_ReadFlash_1: (+1)
-   \   0000001E   0x....             LDR.N    R0,??DataTable26_5
+   \   0000001E   0x....             LDR.N    R0,??DataTable29_7
    \   00000020   0x7D80             LDRB     R0,[R0, #+22]
    \   00000022   0x1C40             ADDS     R0,R0,#+1
-   \   00000024   0x....             LDR.N    R1,??DataTable26_5
+   \   00000024   0x....             LDR.N    R1,??DataTable29_7
    \   00000026   0x7588             STRB     R0,[R1, #+22]
-    548              Read_Frame->event = Save_Frames.Saved_Frames[Save_Frames.Frame_RdPtr].event;
-   \   00000028   0x....             LDR.N    R0,??DataTable26_5
-   \   0000002A   0x....             LDR.N    R1,??DataTable26_5
+    583              Read_Frame->event = Save_Frames.Saved_Frames[Save_Frames.Frame_RdPtr].event;
+   \   00000028   0x....             LDR.N    R0,??DataTable29_7
+   \   0000002A   0x....             LDR.N    R1,??DataTable29_7
    \   0000002C   0x7D89             LDRB     R1,[R1, #+22]
    \   0000002E   0x4408             ADD      R0,R0,R1
    \   00000030   0x7DC0             LDRB     R0,[R0, #+23]
    \   00000032   0x7020             STRB     R0,[R4, #+0]
-    549            }
-    550            return HAL_OK;
+    584            }
+    585            return HAL_OK;
    \   00000034   0x2000             MOVS     R0,#+0
    \                     ??RoadBrd_WWDG_ReadFlash_2: (+1)
    \   00000036   0xBD10             POP      {R4,PC}          ;; return
-    551          }
+    586          }
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable26:
+   \                     ??DataTable29:
+   \   00000000   0x........         DC32     ?_0
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable29_1:
+   \   00000000   0x........         DC32     DateString
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable29_2:
    \   00000000   0x40002C00         DC32     0x40002c00
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable26_1:
+   \                     ??DataTable29_3:
    \   00000000   0x........         DC32     hwwdg
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable26_2:
+   \                     ??DataTable29_4:
    \   00000000   0x........         DC32     wwdg_Save
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable26_3:
+   \                     ??DataTable29_5:
    \   00000000   0x40023824         DC32     0x40023824
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable26_4:
+   \                     ??DataTable29_6:
    \   00000000   0x........         DC32     `HAL_WWDG_WakeupCallback::OnceFlg`
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable26_5:
+   \                     ??DataTable29_7:
    \   00000000   0x........         DC32     Save_Frames
 
    \                                 In section .text, align 4, keep-with-next
-   \                     ??DataTable26_6:
+   \                     ??DataTable29_8:
    \   00000000   0x08070000         DC32     0x8070000
-    552          
-    553          /* USER CODE END 1 */
-    554          
-    555          
-    556          /**
-    557            * @}
-    558            */
-    559          
-    560          /**
-    561            * @}
-    562            */
-    563          
-    564          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x2D 0x2D          DC8 "---NULL---"
+   \              0x2D 0x4E    
+   \              0x55 0x4C    
+   \              0x4C 0x2D    
+   \              0x2D 0x2D    
+   \              0x00         
+   \   0000000B   0x00               DC8 0
+    587          
+    588          /* USER CODE END 1 */
+    589          
+    590          
+    591          /**
+    592            * @}
+    593            */
+    594          
+    595          /**
+    596            * @}
+    597            */
+    598          
+    599          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
    Maximum stack usage in bytes:
 
@@ -1172,7 +1253,10 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
          8   -> Set_RdSndTickCnt
       16   RoadBrd_Set_UnitsFlag
         16   -> RoadBrd_FlashWrite
+       0   RoadBrd_WWDG_GetDateString
        0   RoadBrd_WWDG_GetRefreshCnt
+       8   RoadBrd_WWDG_InitializeDateString
+         8   -> strcpy
       16   RoadBrd_WWDG_InitializeFrmFlash
         16   -> RoadBrd_FlashWrite
        8   RoadBrd_WWDG_ReadFlash
@@ -1182,6 +1266,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        8   RoadBrd_WWDG_Refresh
          8   -> HAL_WWDG_Refresh
          8   -> RoadBrd_WWDG_GetRefreshCnt
+       8   RoadBrd_WWDG_SetDateString
+         8   -> strcpy
        8   RoadBrd_WWDG_Start
          8   -> HAL_WWDG_Start_IT
        0   RoadBrd_WWDG_TstEvent
@@ -1201,17 +1287,21 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    Bytes  Function/Label
    -----  --------------
-       4  ??DataTable26
-       4  ??DataTable26_1
-       4  ??DataTable26_2
-       4  ??DataTable26_3
-       4  ??DataTable26_4
-       4  ??DataTable26_5
-       4  ??DataTable26_6
+       4  ??DataTable29
+       4  ??DataTable29_1
+       4  ??DataTable29_2
+       4  ??DataTable29_3
+       4  ??DataTable29_4
+       4  ??DataTable29_5
+       4  ??DataTable29_6
+       4  ??DataTable29_7
+       4  ??DataTable29_8
+      12  ?_0
+      32  DateString
       22  HAL_WWDG_MspDeInit
       38  HAL_WWDG_MspInit
       24  HAL_WWDG_WakeupCallback
-      50  MX_WWDG_Init
+      54  MX_WWDG_Init
        1  OnceFlg
        6  RoadBrd_Get_BootDelay
        6  RoadBrd_Get_RdSndTickCnt
@@ -1225,11 +1315,14 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
       52  RoadBrd_Set_TickCounts
       18  RoadBrd_Set_TmpRdSndTickCnt
       36  RoadBrd_Set_UnitsFlag
+       6  RoadBrd_WWDG_GetDateString
       12  RoadBrd_WWDG_GetRefreshCnt
+      18  RoadBrd_WWDG_InitializeDateString
       82  RoadBrd_WWDG_InitializeFrmFlash
       56  RoadBrd_WWDG_ReadFlash
       24  RoadBrd_WWDG_ReadFrmFlash
       26  RoadBrd_WWDG_Refresh
+      18  RoadBrd_WWDG_SetDateString
       10  RoadBrd_WWDG_Start
        6  RoadBrd_WWDG_TstEvent
       46  RoadBrd_WWDG_VerifyFrame
@@ -1242,12 +1335,14 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        4  wwdg_Save
 
  
-  61 bytes in section .bss
-  36 bytes in section .bss  (abs)
- 822 bytes in section .text
+  93 bytes in section .bss
+  36 bytes in section .bss    (abs)
+  12 bytes in section .rodata
+ 876 bytes in section .text
  
- 822 bytes of CODE memory
-  97 bytes of DATA memory
+ 876 bytes of CODE  memory
+  12 bytes of CONST memory
+ 129 bytes of DATA  memory
 
 Errors: none
 Warnings: none

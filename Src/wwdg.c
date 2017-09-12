@@ -46,12 +46,46 @@ wwdg_Frames wwdg_HardFrames  @ BASE_FLASH_ADDRESS;
 
 static wwdg_Frames Save_Frames;
 
+static char DateString[DATE_STRING_LENGTH];             // Current Date String.
+
 /* USER CODE END 0 */
 
 WWDG_HandleTypeDef hwwdg;
 
 // wwdg Save Frame
 static wwdg_SaveFrame wwdg_Save;
+
+  /**
+  * @brief  This function initializes the Static Current Date String.
+  * @param  none
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_InitializeDateString( void )
+{
+  strcpy(DateString, "---NULL---");
+  return HAL_OK;
+}
+
+  /**
+  * @brief  This function initializes the Static Current Date String.
+  * @param  none
+  * @retval char *:     Pointer to Date String.
+  */
+char *RoadBrd_WWDG_GetDateString( void )
+{
+  return &DateString[0];
+}
+
+  /**
+  * @brief  This function initializes the Static Current Date String.
+  * @param  char* parmString: String to be set.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_SetDateString( char* parmString )
+{
+  strcpy(DateString, parmString);
+  return HAL_OK;
+}
 
 /* WWDG init function */
 void MX_WWDG_Init(void)
@@ -240,6 +274,7 @@ HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
                                sizeof(Save_Frames));
   return Status;
 }
+
 
 /**
   * @brief  Update Key Tick Counts.

@@ -41,9 +41,85 @@
 #include "wwdg.h"
 #include "Calibration.h"
 
+// Enums
+typedef enum 
+{
+  NOT_INIT = 0,
+  AVAILABLE = 1,
+  BUSY = 2
+} ParseTskFlg;
+
 static bool Bypass = false;
 
-/* Parser function */
+// Parser Structure for tasks.
+struct
+{
+  char          tempBuffer[BUFFER_SIZE];
+  ParseTskFlg   ParseFlg;
+} static ParseString;
+
+/* Parser functions */
+
+/**
+  * @brief  This routine initializes the Parse Task Structure.
+  * @param  *tempBffr: String to be parsed.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+  */
+HAL_StatusTypeDef RoadBrd_ParserInit( void )
+{
+  ParseString.ParseFlg = AVAILABLE;
+  return HAL_OK;
+}
+
+/**
+  * @brief  This routine handles the operation of setting up a Parse Event.
+  * @param  *tempBffr: String to be parsed.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     UART is busy.
+  *                                HAL_TIMEOUT:  UART timed out.
+  */
+HAL_StatusTypeDef RoadBrd_ParserTsk(char *tempBffr)
+{
+  // Test ParseFlg.
+  if (ParseString.ParseFlg == BUSY)
+    return HAL_BUSY;
+  else if (ParseString.ParseFlg == NOT_INIT)
+    return HAL_ERROR;
+  // Next Lets make sure passed string is not too big.
+//  if (strlen((char *)tempBffr) >= BUFFER_SIZE)
+  if (strlen(tempBffr) >= BUFFER_SIZE)
+    return HAL_ERROR;
+  // Copy String into Structure and set as busy.
+//  strcpy( (char *)ParseString.tempBuffer, (char *)tempBffr);
+  strcpy( ParseString.tempBuffer, tempBffr);
+  ParseString.ParseFlg = BUSY;
+  return HAL_OK;
+}
+
+/**
+  * @brief  This routine handles the operation of processing a Parse Event.
+  * @param  *tempBffr: String to be parsed.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     UART is busy.
+  *                                HAL_TIMEOUT:  UART timed out.
+  */
+HAL_StatusTypeDef RoadBrd_ProcessParserTsk( void )
+{
+  HAL_StatusTypeDef Status;
+
+  // Test ParseFlg and process.
+  if (ParseString.ParseFlg == BUSY)
+  {
+    Status = RoadBrd_ParseString(ParseString.tempBuffer, true);
+    ParseString.ParseFlg = AVAILABLE;
+    return Status;
+  }
+  else
+    return HAL_OK;
+}
+
 
 /**
   * @brief  This routine parses the passed string and performs the passed operation
@@ -53,7 +129,7 @@ static bool Bypass = false;
   *                                HAL_BUSY:     UART is busy.
   *                                HAL_TIMEOUT:  UART timed out.
   */
-HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
+HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 {
 #ifdef TEST2
   #define RECEIVE_SZ      5
@@ -147,7 +223,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               Status = RoadBrdSnd_ProcessSound();
               if (Status == HAL_OK)
               {
-                strcpy( (char *)tempBffr2, "Road Sound: Road Sound loaded, processed, and sent to FFT Bins.\r\n");;
+                // Is this a BLE Operation?
+                if ( BLE_Flag )
+                {
+                  // Yes...Build and Send BLE Response NOW.
+                  strcpy( (char *)tempBffr2, "<STATUS>CMD_RDSNDBFFR_FILL</STATUS>");
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
+                strcpy( (char *)tempBffr2, "Road Sound: Road Sound loaded, processed, and sent to FFT Bins.\r\n");
               }
               break;
 //**************************************************************************************************
@@ -162,6 +245,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
               if (Status != HAL_OK)
                 return Status;
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                sprintf( (char *)tempBffr2, "<STATUS>ST_FFT0-15:%s</STATUS>", RSFFTBins.dumpStr );
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
               // NOW, Build Data String..
               sprintf( (char *)tempBffr2, "     FFT Measurements 0-15: " );
               strcat( (char *)tempBffr2, (char *)RSFFTBins.dumpStr );
@@ -179,6 +269,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
               if (Status != HAL_OK)
                 return Status;
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                sprintf( (char *)tempBffr2, "<STATUS>ST_FFT16-31:%s</STATUS>", RSFFTBins.dumpStr );
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
               // NOW, Build Data String..
               sprintf( (char *)tempBffr2, "     FFT Measurements 16-31: " );
               strcat( (char *)tempBffr2, (char *)RSFFTBins.dumpStr );
@@ -196,6 +293,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
               if (Status != HAL_OK)
                 return Status;
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                sprintf( (char *)tempBffr2, "<STATUS>ST_FFT32-47:%s</STATUS>", RSFFTBins.dumpStr );
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
               // NOW, Build Data String..
               sprintf( (char *)tempBffr2, "     FFT Measurements 32-47: " );
               strcat( (char *)tempBffr2, (char *)RSFFTBins.dumpStr );
@@ -213,6 +317,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
               if (Status != HAL_OK)
                 return Status;
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                sprintf( (char *)tempBffr2, "<STATUS>ST_FFT48-63:%s</STATUS>", RSFFTBins.dumpStr );
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
               // NOW, Build Data String..
               sprintf( (char *)tempBffr2, "     FFT Measurements 48-63: " );
               strcat( (char *)tempBffr2, (char *)RSFFTBins.dumpStr );
@@ -231,6 +342,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
               if (Status != HAL_OK)
                 return Status;
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                strcpy( (char *)tempBffr2, "<STATUS>ST_FFTBFFR_DUMP:</STATUS>");
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
               // NOW, Build Data String..
               y=0;
               sprintf( (char *)tempBffr2, "" );
@@ -251,9 +369,12 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
                   if (Status != HAL_OK)
                     return Status;
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                   sprintf( (char *)tempBffr2, "" );
                 }
               }
+              strcpy( (char *)tempBffr2, "</STATUS>");
+              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
               sprintf( (char *)tempBffr2, "     ---COMPLETE---" );
               break;
 //**************************************************************************************************
@@ -261,6 +382,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               // Clear all buffers. 
               Status = HAL_OK;
               RoadBrdSnd_ClrBffrs();
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                strcpy( (char *)tempBffr2, "<STATUS>ST_FFTCLR</STATUS>");
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
               strcpy( (char *)tempBffr2, "Road Sound: All buffers cleared.\r\n");;
               break;
 //**************************************************************************************************
@@ -284,6 +412,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //                    RoadBrd_Delay(500);  
          
                     Status = RoadBrd_Init_Barometer();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                         strcpy( (char *)tempBffr2, "Initialize Barometer Sensor Passed.\r\n");;
@@ -307,6 +442,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #if 0                  
                 case '0':
                     Status = RoadBrd_Enable_Barometer();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                         strcpy( (char *)tempBffr2, "Barometer Sensor: Enable Barometer Passed.\r\n");;
@@ -319,6 +461,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ A1 Command...Disable Barometer     
                   case '1':
                     Status = RoadBrd_Disable_Barometer();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                         strcpy( (char *)tempBffr2, "Barometer Sensor: Disable Barometer Passed.\r\n");;
@@ -341,6 +490,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ A2 Command...Start the Barometer but do not wait.     
                   case '2':
                     Status = RoadBrd_StartSample_Barometer();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                         strcpy( (char *)tempBffr2, "Start the Barometer but do not wait Passed.\r\n");;
@@ -363,6 +519,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ A3 Command...Start the Barometer and wait for response.    
                   case '3':
                     Status = RoadBrd_StartSample_BarometerWait();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                         strcpy( (char *)tempBffr2, "Start the Barometer and wait for response Passed.\r\n");;
@@ -384,6 +547,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     break;
 //------------------ A4 Command...Return Status    
                   case '4':
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     Status = RoadBrd_Barometer_Status( &PRMeasure );
                     if (Status == HAL_OK)
                     {
@@ -395,6 +565,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ A5 Command...Wait for Pressure to be complete. 
                   case '5':
                     Status = RoadBrd_WaitForPressure( (uint16_t)BARO_WAITCNT );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                         strcpy( (char *)tempBffr2, "Wait for Pressure to be complete Passed.\r\n");;
@@ -450,6 +627,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
                       if (Status != HAL_OK)
                         return Status;
+                      // Is this a BLE Operation?
+                      if ( BLE_Flag )
+                      {
+                        // Yes...Build and Send BLE Response NOW.
+                        strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      }
                       // Now show hex value of items.
                       sprintf( (char *)tempBffr2, " PRESSURE:  " );
                       strcat( (char *)tempBffr2, (char *)PRPMeasure.Raw );
@@ -509,6 +693,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
                     if (Status != HAL_OK)
                       return Status;
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     // Now calculate Celcius and Farenheit Temp.
                     sprintf( (char *)tempBffr2, "     TempC: " );
                     strcat( (char *)tempBffr2, (char *)TMeasure.TempC );
@@ -554,6 +745,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ A9 Command...Test and Verify WHO_AM_I     
                   case '9':
                     Status = RoadBrd_TestandRead_Barometer();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                         strcpy( (char *)tempBffr2, "Barometer Sensor: WHO_AM_I Passed.\r\n");
@@ -593,6 +791,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                 else
                   Status = HAL_ERROR;
                 
+                // Is this a BLE Operation?
+                if ( BLE_Flag )
+                {
+                  // Yes...Build and Send BLE Response NOW.
+                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
                 if (Status == HAL_OK)
                 {
                   // Send string to UART..
@@ -726,6 +931,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case 'I':
                     // Initialize Cool Eye/Grid Eye Sensor.
                     Status = RoadBrd_GridEyeInit();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                       strcpy( (char *)tempBffr2, "Cool Eye/Grid Eye Sensor: Initialization Complete.\r\n");;
@@ -748,6 +960,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     }
                     else
                       Status = HAL_ERROR;
+
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
 
                     if (Status == HAL_OK)
                     {
@@ -878,6 +1098,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case '1':
                     // Reset Cool Eye/Grid Eye Sensor.
                     Status = RoadBrd_GridEyeReset();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+
                     if (Status == HAL_OK)
                     {
                       strcpy( (char *)tempBffr2, "Cool Eye/Grid Eye Sensor: Reset Complete.\r\n");;
@@ -922,6 +1150,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 #endif
                 if (Status != HAL_OK)
                   return Status;
+                // Is this a BLE Operation?
+                if ( BLE_Flag )
+                {
+                  // Yes...Build and Send BLE Response NOW.
+                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
                 // Now calculate Bus Voltage.
                 sprintf( (char *)tempBffr2, "     Bus Voltage: %s/%s\r\n", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
               }
@@ -934,6 +1169,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     // Initialize and load Calibration Register.
                     // Read Calibration Value first.
                     Status = RoadBrd_Init_VMonitor();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                       strcpy( (char *)tempBffr2, "Voltage Monitor: Initialization Complete.\r\n");;
@@ -945,6 +1187,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     Status = RoadBrd_VMonitor_RdShntVltg( &VMeasure );
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdShntVltg_Scaled( &VMeasureScaled );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -979,6 +1228,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     Status = RoadBrd_VMonitor_RdCurrent( &CMeasure );
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdCurrent_Scaled( &CMeasureScaled );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1013,6 +1269,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     Status = RoadBrd_VMonitor_RdPower( &PMeasure );
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdPower_Scaled( &PMeasureScaled );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1048,6 +1311,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdVoltage_Scaled( &VMeasureScaled );
                       
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1092,6 +1362,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                 Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
                 if (Status == HAL_OK)
                   Status = RoadBrd_Humidity_ReadHumidity_Scaled( &HMeasureScaled );
+                // Is this a BLE Operation?
+                if ( BLE_Flag )
+                {
+                  // Yes...Build and Send BLE Response NOW.
+                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
                 if (Status == HAL_OK)
                 {
                   // Send string to UART..
@@ -1137,6 +1414,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case 'I':
                     // Initialize Humidity Sensor.
                     Status = RoadBrd_HumidityInit();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+
                     if (Status == HAL_OK)
                     {
                       strcpy( (char *)tempBffr2, "Humidity Sensor: Initialization Complete.\r\n");;
@@ -1146,6 +1431,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case '0':
                     // Read Humidity Sensor sensor and return Humidity results....
                     Status = RoadBrd_Humidity_ReadHumidity( &HMeasure );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1189,6 +1482,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case '1':
                     // Read Humidity Sensor sensor and return Temperature results....
                     Status = RoadBrd_Humidity_ReadTemperature( &TMeasure );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1236,17 +1537,41 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //**************************************************************************************************
             case 'E':
               // Read Temp and Pressure. 
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
+              
               strcpy( (char *)tempBffr2, "TBD: Read Temp and Pressure NOT IMPLEMENTED\r\n");
               break;
 //**************************************************************************************************
             case 'F':
               // NO ACTION. 
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
+              
               strcpy( (char *)tempBffr2, "NO Action...(0x00).\r\n");
               break;
 //**************************************************************************************************
             case 'G':
               // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
               Status = RoadBrd_ReadTemp( &TMeasure );
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
+              
               if (Status == HAL_OK)
                 Status = RoadBrd_ReadTemp_Scaled( &TMeasureScaled );
               if (Status == HAL_OK)
@@ -1298,6 +1623,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ H Command...Read RGB Values and Return as 3 (2 Byte Fields)....REDmsb,REDlsb,GREENmsb,GREENlsb,BLUEmsb,BLUElsb.....     
                 // 1. Time to send Command and collect status.
                 Status = RoadBrd_RGBReadValues( &RGBValues );
+                // Is this a BLE Operation?
+                if ( BLE_Flag )
+                {
+                  // Yes...Build and Send BLE Response NOW.
+                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
+                
                 if (Status == HAL_OK)
                 {
                   // Send string to UART..
@@ -1351,6 +1684,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                       // This is the default init. Assume Default Parms and write them.
                       Status = RoadBrd_RGBInit();
 
+                      // Is this a BLE Operation?
+                      if ( BLE_Flag )
+                      {
+                        // Yes...Build and Send BLE Response NOW.
+                        strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      }
+                      
                       if (Status == HAL_OK)
                       {
                         strcpy( (char *)tempBffr2, "RGB Color Light Sensor: Initialization Complete with DEFAULT Values.\r\n");;
@@ -1359,6 +1700,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     }
                     else
                     {
+                      // Is this a BLE Operation?
+                      if ( BLE_Flag )
+                      {
+                        // Yes...Build and Send BLE Response NOW.
+                        strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      }
+                      
                       // This is the Parameter init. Will have to verify all parameters first.
                       if ( Size != 29 )
                       {
@@ -1491,6 +1840,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case '0':
                     // 1. Time to send Command and collect status.
                     Status = RoadBrd_RGBReadValues( &RGBValues );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1538,6 +1895,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     // 1. Time to send Command and collect status.  RGBSMeasure
                     Status = RoadBrd_RGBReadStatus( &RGBSMeasure );
 
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
                     if (Status == HAL_OK)
                     {
                       // Build Status
@@ -1553,6 +1918,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------ H2 Command...Reset Hardware......     
                   case '2':
                     Status = RoadBrd_RGBReset();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
                     if (Status == HAL_OK)
                     {
                       // Build Status
@@ -1565,6 +1938,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case '3':
                     // 1. Time to send Command and collect status.  IDMeasure
                     Status = RoadBrd_RGBReadID( &IDMeasure );
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
                     if (Status == HAL_OK)
                     {
                       // Build Status
@@ -1592,6 +1973,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                 case 'U':
                   // Turn on 5V Power Supply.
                   RoadBrd_gpio_On( gTAM_PWR );
+                  // Is this a BLE Operation?
+                  if ( BLE_Flag )
+                  {
+                    // Yes...Build and Send BLE Response NOW.
+                    strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                  }
+                  
                   strcpy( (char *)tempBffr2, "5V Power Plane Powered UP.\r\n");
                   break;
                 case 'D':
@@ -1609,7 +1998,17 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               // TEST CMDS. 
               // Test Size to make sure we have enough Characters for this operation
               if (Size <= 1)
+              {
+                // Is this a BLE Operation?
+                if ( BLE_Flag )
+                {
+                  // Yes...Build and Send BLE Response NOW.
+                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
+                
                 strcpy( (char *)tempBffr2, "T ERROR: Not a legal command.\r\n");
+              }
               else
               {
                 switch( tempBffr[1] )
@@ -1619,7 +2018,17 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     // I2C Commands.
                     // Test Size to make sure we have enough Characters for this operation
                     if (Size < 9)
-                    strcpy( (char *)tempBffr2, "TI SYNTAX ERROR: Not correct format.\r\n");
+                    {
+                      // Is this a BLE Operation?
+                      if ( BLE_Flag )
+                      {
+                        // Yes...Build and Send BLE Response NOW.
+                        strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      }
+                      
+                      strcpy( (char *)tempBffr2, "TI SYNTAX ERROR: Not correct format.\r\n");
+                    }
                     else
                     {
                       switch( tempBffr[2] )
@@ -1631,10 +2040,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                           if( (tempBffr[3]!=':') ||
                               (tempBffr[6]!='.') )
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
+                           
                             strcpy( (char *)tempBffr2, "TIS SYNTAX ERROR: Not correct format.\r\n");
                           }
                           else
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
+                            
                             // 2. Grab Address and validate a legal number
                             tempBffr3[0] = tempBffr[4];
                             tempBffr3[1] = tempBffr[5];
@@ -1710,10 +2135,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                               (tempBffr[6]!='.') ||
                               (tempBffr[9]!='.')  )
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
+                            
                             strcpy( (char *)tempBffr2, "TIR SYNTAX ERROR: Not correct format.\r\n");
                           }
                           else
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
+                            
                             // 2. Grab Address and validate a legal number
                             tempBffr3[0] = tempBffr[4];
                             tempBffr3[1] = tempBffr[5];
@@ -1833,10 +2274,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                           if( (tempBffr[3]!=':') ||
                               (tempBffr[6]!='.')  )
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
+                            
                             strcpy( (char *)tempBffr2, "TIQ SYNTAX ERROR: Not correct format.\r\n");
                           }
                           else
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
+                            
                             // 2. Grab Address and validate a legal number
                             tempBffr3[0] = tempBffr[4];
                             tempBffr3[1] = tempBffr[5];
@@ -1919,6 +2376,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                       else
                         Status = HAL_ERROR;
                       
+                      // Is this a BLE Operation?
+                      if ( BLE_Flag )
+                      {
+                        // Yes...Build and Send BLE Response NOW.
+                        strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      }
+                      
                       if (Status == HAL_OK)
                       {
                         // OK Next Sensor.
@@ -1989,10 +2454,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                         // Step 1. Validate format.
                         if(tempBffr[3]!=':')
                         {
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
+                          
                           strcpy( (char *)tempBffr2, "TCS SYNTAX ERROR: Not correct format.\r\n");
                         } // Endif (tempBffr[3]!=':')
                         else
                         {
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
+                          
                           // 2. Verify if remaining string is digits
                           if (Size <= 4)
                           {
@@ -2202,6 +2683,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                         //------------------ TCR Command: Calibration Read Command
                       case 'R':
                         // Build Read Calibration Dump Part I....
+                        // Is this a BLE Operation?
+                        if ( BLE_Flag )
+                        {
+                          // Yes...Build and Send BLE Response NOW.
+                          strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                          BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                        }
+                        
                         // Send string to UART..
                         sprintf( (char *)tempBffr2, "CALIBRATION DATA\r\nDate: %s\r\n",  RoadBrd_CAL_GetTimeString());
 #ifdef NUCLEO
@@ -2376,10 +2865,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                         // Step 1. Validate format.
                         if(tempBffr[3]!=':')
                         {
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
+                          
                           strcpy( (char *)tempBffr2, "TCT SYNTAX ERROR: Not correct format.\r\n");
                         } // Endif (tempBffr[3]!=':')
                         else
                         {
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
+                          
                           // 2. Verify if remaining string is digits
                           if (Size <= 4)
                           {
@@ -2401,6 +2906,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                         //------------------ TCI Command: Calibration Initialize Cal Table(Reset)
                       case 'I':
                         Status = RoadBrd_CAL_InitializeFrmFlash();
+                        // Is this a BLE Operation?
+                        if ( BLE_Flag )
+                        {
+                          // Yes...Build and Send BLE Response NOW.
+                          strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                          BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                        }
+                        
                         if (Status != HAL_OK)
                           return Status;
                         sprintf( (char *)tempBffr2, "\r\n     COMPLETE.\r\n" );
@@ -2412,11 +2925,27 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   case 'D':
                     // Read Driver Status
                     DriverStatus = Get_DriverStatus();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      sprintf( (char *)tempBffr2, "<STATUS>ST_DRIVER:%04x</STATUS>", DriverStatus );
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
                     sprintf( (char *)tempBffr2, "Driver Status: %04x\r\n", DriverStatus );
                     break;
 //++++++++++++++++++++++++++++++++++++++++++  RESET Micro.
                   case 'R':
-                    // Read Driver Status
+                    // RESET
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>ST_RESET_ACK</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      HAL_Delay(100);           // Wait 100ms
+                    }
                     HAL_NVIC_SystemReset();
                     sprintf( (char *)tempBffr2, "RESET CALLED BUT NO RESPONSE!!\r\n" );
                     break;
@@ -2426,7 +2955,16 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     // Test Size to make sure we have enough Characters for this operation
                     Status = HAL_OK;
                     if (Size < 4)
+                    {
+                      // Is this a BLE Operation?
+                      if ( BLE_Flag )
+                      {
+                        // Yes...Build and Send BLE Response NOW.
+                        strcpy( (char *)tempBffr2, "<STATUS>CMD_TK_SYNTAX</STATUS>");
+                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      }
                       strcpy( (char *)tempBffr2, "TK SYNTAX ERROR: Not correct format.\r\n");
+                    }
                     else
                     {
                       switch( tempBffr[2] )
@@ -2442,6 +2980,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                               // Step 1. Validate format.
                               if(tempBffr[4]!=':')
                               {
+                                // Is this a BLE Operation?
+                                if ( BLE_Flag )
+                                {
+                                  // Yes...Build and Send BLE Response NOW.
+                                  strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSR_SYNTAX</STATUS>");
+                                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                }
                                 strcpy( (char *)tempBffr2, "TKSR SYNTAX ERROR: Not correct format.\r\n");
                               } // Endif (tempBffr[4]!=':')
                               else
@@ -2460,6 +3005,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   flag = 0;
                                 if (flag == 0)
                                 {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSR_BADPARAM</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   strcpy( (char *)tempBffr2, "TKSR SYNTAX ERROR: Bad Parameter.\r\n");
                                 }
                                 else
@@ -2471,6 +3023,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   if((new_value > 9999) ||
                                      (new_value < 0))
                                   {
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSR_BADPARAM</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     strcpy( (char *)tempBffr2, "TKSR SYNTAX ERROR: Bad Parameter.\r\n");
                                   }
                                   else
@@ -2478,6 +3037,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                     // Time to set new Road Sound Sample Rate.
                                     RoadBrd_Set_RdSndTickCnt( new_value );
                                     // NOW, Build Data String..
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>ST_TKSR_ACK</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     sprintf( (char *)tempBffr2, "COMPLETE" );
                                   } // EndElse ((new_value > 9999) || (new_value < 0))
                                 } // EndElse (flag == 0)
@@ -2489,6 +3055,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                               // Step 1. Validate format.
                               if(tempBffr[4]!=':')
                               {
+                                // Is this a BLE Operation?
+                                if ( BLE_Flag )
+                                {
+                                  // Yes...Build and Send BLE Response NOW.
+                                  strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSS_SYNTAX</STATUS>");
+                                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                }
                                 strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Not correct format.\r\n");
                               } // Endif (tempBffr[4]!=':')
                               else
@@ -2507,6 +3080,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   flag = 0;
                                 if (flag == 0)
                                 {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSS_BADPARAM</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Bad Parameter.\r\n");
                                 }
                                 else
@@ -2518,12 +3098,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   if((new_value > 9999) ||
                                      (new_value < 0))
                                   {
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSS_BADPARAM</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Bad Parameter.\r\n");
                                   }
                                   else
                                   {
                                     // Time to set new Road Sound Sample Rate.
                                     RoadBrd_Set_SnsrTickCnt( new_value );
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>ST_TKSS_ACK</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     // NOW, Build Data String..
                                     sprintf( (char *)tempBffr2, "COMPLETE" );
                                   } // EndElse ((new_value > 9999) || (new_value < 0))
@@ -2536,6 +3130,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                               // Step 1. Validate format.
                               if(tempBffr[4]!=':')
                               {
+                                // Is this a BLE Operation?
+                                if ( BLE_Flag )
+                                {
+                                  // Yes...Build and Send BLE Response NOW.
+                                  strcpy( (char *)tempBffr2, "<STATUS>CMD_TKST_SYNTAX</STATUS>");
+                                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                }
                                 strcpy( (char *)tempBffr2, "TKST SYNTAX ERROR: Not correct format.\r\n");
                               } // Endif (tempBffr[4]!=':')
                               else
@@ -2554,6 +3155,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   flag = 0;
                                 if (flag == 0)
                                 {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>CMD_TKST_BADPARAM</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   strcpy( (char *)tempBffr2, "TKST SYNTAX ERROR: Bad Parameter.\r\n");
                                 }
                                 else
@@ -2565,12 +3173,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   if((new_value > 9999) ||
                                      (new_value < 0))
                                   {
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>CMD_TKST_BADPARAM</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     strcpy( (char *)tempBffr2, "TKSS SYNTAX ERROR: Bad Parameter.\r\n");
                                   }
                                   else
                                   {
                                     // Time to set new TACK Limit.
                                     RoadBrd_Set_TackLimit( new_value );
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>ST_TKST_ACK</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     // NOW, Build Data String..
                                     sprintf( (char *)tempBffr2, "COMPLETE" );
                                   } // EndElse ((new_value > 9999) || (new_value < 0))
@@ -2578,10 +3200,17 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                               } // EndElse (tempBffr[4]!=':')
                               break;
                             case 'B':
-                              //Key Flash Variable Set Set Boot Delay(Seconds).
+                              //Key Flash Variable Set Boot Delay(Seconds).
                               // Step 1. Validate format.
                               if(tempBffr[4]!=':')
                               {
+                                // Is this a BLE Operation?
+                                if ( BLE_Flag )
+                                {
+                                  // Yes...Build and Send BLE Response NOW.
+                                  strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSB_SYNTAX</STATUS>");
+                                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                }
                                 strcpy( (char *)tempBffr2, "TKSB SYNTAX ERROR: Not correct format.\r\n");
                               } // Endif (tempBffr[4]!=':')
                               else
@@ -2600,6 +3229,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   flag = 0;
                                 if (flag == 0)
                                 {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSB_BADPARAM</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   strcpy( (char *)tempBffr2, "TKSB SYNTAX ERROR: Bad Parameter.\r\n");
                                 }
                                 else
@@ -2611,12 +3247,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                                   if((new_value > 999) ||
                                      (new_value < 0))
                                   {
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSB_BADPARAM</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     strcpy( (char *)tempBffr2, "TKSB SYNTAX ERROR: Bad Parameter.\r\n");
                                   }
                                   else
                                   {
                                     // Time to set new Boot Delay.
                                     RoadBrd_Set_BootDelay( new_value );
+                                    // Is this a BLE Operation?
+                                    if ( BLE_Flag )
+                                    {
+                                      // Yes...Build and Send BLE Response NOW.
+                                      strcpy( (char *)tempBffr2, "<STATUS>ST_TKSB_ACK</STATUS>");
+                                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                    }
                                     // NOW, Build Data String..
                                     sprintf( (char *)tempBffr2, "COMPLETE" );
                                   } // EndElse ((new_value > 999) || (new_value < 0))
@@ -2636,29 +3286,71 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------
                             case 'R':
                               //Key Flash Variable Read Road Sound Sample Rate Command.
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "<STATUS>ST_TKRR:%3.1f</STATUS>", ((float)RoadBrd_Get_RdSndTickCnt()/10));
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "RdSnd Sample Rate:  %3.1f Seconds.\r\n", ((float)RoadBrd_Get_RdSndTickCnt()/10));
                               break;
 //------------------
                             case 'S':
                               //Key Flash Variable Read Sensor Sample Rate Command.
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "<STATUS>ST_TKRS:%3.1f</STATUS>", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
                               break;
 //------------------
                             case 'T':
                               //Key Flash Variable Read TACK Limit(Multiple of Road Sound Throttles).
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "<STATUS>ST_TKRT:%d</STATUS>", RoadBrd_Get_TackLimit());
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n\r\n> ", RoadBrd_Get_TackLimit());
                               break;
 //------------------
                             case 'B':
                               //Key Flash Variable Read Boot Delay.(Seconds).
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "<STATUS>ST_TKRB:%d</STATUS>", RoadBrd_Get_BootDelay());
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "Boot Delay: %d Seconds.\r\n\r\n> ", RoadBrd_Get_BootDelay());
                               break;
                             default:
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                strcpy( (char *)tempBffr2, "<STATUS>CMD_TKR_SYNTAX</STATUS>");
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               strcpy( (char *)tempBffr2, "TKR ERROR: Not a legal command.\r\n");
                               break;
                           } // EndSwitch ( tempBffr[3] )
                           break;
+                          // Is this a BLE Operation?
                         default:
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TK_SYNTAX</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
                           strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
                           break;
                       } //EndSwitch ( tempBffr[2] )
@@ -2670,7 +3362,16 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     // Test Size to make sure we have enough Characters for this operation
                     Status = HAL_OK;
                     if (Size < 3)
+                    {
+                      // Is this a BLE Operation?
+                      if ( BLE_Flag )
+                      {
+                        // Yes...Build and Send BLE Response NOW.
+                        strcpy( (char *)tempBffr2, "<STATUS>CMD_TU_SYNTAX</STATUS>");
+                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      }
                       strcpy( (char *)tempBffr2, "TU SYNTAX ERROR: Not correct format.\r\n");
+                    }
                     else
                     {
                       switch( tempBffr[2] )
@@ -2678,16 +3379,37 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //------------------
                         case 'E':
                           //Units Enable Command.
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>ST_TUE_ACK</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
                           sprintf( (char *)tempBffr2, "Units XML State CHANGED: ENABLED\r\n\r\n> ");
                           Status = RoadBrd_Set_UnitsFlag( true );
                           break;
 //------------------
                         case 'D':
                           //Units Disable Command
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>ST_TUD_ACK</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
                           sprintf( (char *)tempBffr2, "Units XML State CHANGED: DISABLED\r\n\r\n> ");
                           Status = RoadBrd_Set_UnitsFlag( false );
                           break;
                         default:
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TU_SYNTAX</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
                           strcpy( (char *)tempBffr2, "TU SYNTAX ERROR: Not a legal command.\r\n");
                           break;
                       } //EndSwitch ( tempBffr[2] )
@@ -2696,6 +3418,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
 //**************************************************************************************************
 //++++++++++++++++++++++++++++++++++++++++++  Special Monitor Mode to intercept traffic from UART and pass to BGM111
                   case 'M':
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
                     strcpy( (char *)tempBffr2, "BGM111 MONITOR MODE.\r\n\r\n");
 #ifdef NUCLEO
                     Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
@@ -2710,6 +3440,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                     break;
 
                   default:
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
                     // ERROR if we get here.. 
                     strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
                     break;
@@ -2725,6 +3463,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               {
 //++++++++++++++++++++++++++++++++++++++++++  5V Power Supply Commands.
                 case 'S':
+                  // Is this a BLE Operation?
+                  if ( BLE_Flag )
+                  {
+                    // Yes...Build and Send BLE Response NOW.
+                    strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                  }
+                  
                   strcpy( (char *)tempBffr2, "Micro in Sleep Mode NOW.\r\n");
 #ifdef NUCLEO
                   Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
@@ -2737,6 +3483,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
                   //sleep();
                   break;
                 case 'D':
+                  // Is this a BLE Operation?
+                  if ( BLE_Flag )
+                  {
+                    // Yes...Build and Send BLE Response NOW.
+                    strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                  }
+                  
                   // Turn off 5V Power Supply.
                   strcpy( (char *)tempBffr2, "Micro in Deep Sleep Mode NOW.\r\n");
 #ifdef NUCLEO
@@ -2753,6 +3507,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr)
               break;
 #endif
             default:
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
+              
               // ERROR if we get here.. 
               strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
               break;
