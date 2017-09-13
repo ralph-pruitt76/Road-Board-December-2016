@@ -1009,6 +1009,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 void Process_RdSound( void )
 {
 //  uint8_t tempStr[13];
+  char tempstr[30];
   uint8_t tempBffr2[80];
   static uint8_t CMD_Md_Cnt = 0;
 
@@ -1113,7 +1114,11 @@ void Process_RdSound( void )
     //  BGM111_WriteCharacteristic(gattdb_RdSound48,
     //                             strlen((char *)data.FFTBin48.dumpStr), (uint8_t *)data.FFTBin48.dumpStr);
       //sprintf( (char *)tempBffr2, "<TICK>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
-      sprintf( (char *)tempBffr2, "<TICK>RP/%08x</TICK>", HAL_GetTick());
+      // Build Tick String
+      sprintf( tempstr, "%08x", HAL_GetTick());
+      // Save Tick String....
+      RoadBrd_WWDG_SetTickString( tempstr );
+      sprintf( (char *)tempBffr2, "<TICK>RP/%s</TICK>", tempstr);
       RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
       BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
       // Set Sync Flag for Frame.

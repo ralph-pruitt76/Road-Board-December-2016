@@ -1,0 +1,641 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       12/Sep/2017  11:09:14
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\fix_fft.c
+#    Command line =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\fix_fft.c
+#        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
+#        REV_L -D LONG_DELAY -D XML_SHRT -lCN
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\List" -o
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug
+#        --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.4\arm\INC\c\DLib_Config_Full.h" -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/BSP/STM32L1xx_Nucleo\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\..\Middlewares\Third_Party\BgLib\
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.4\arm\CMSIS\Include\"
+#    Locale       =  English_United States.1252
+#    List file    =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\List\fix_fft.lst
+#    Object file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\Obj\fix_fft.o
+#
+###############################################################################
+
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\fix_fft.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : fix_fft.c   Fixed-point in-place Fast Fourier Transform
+      4            * Description        : This file provides code for the processing of the fixed fft 
+      5            *                      needed to process the road sound from the ADC.
+      6            *     All data are fixed-point short integers, in which -32768
+      7            *       to +32768 represent -1.0 to +1.0 respectively. Integer
+      8            *       arithmetic is used for speed, instead of the more natural
+      9            *       floating-point.
+     10            *     
+     11            *       For the forward FFT (time -> freq), fixed scaling is
+     12            *       performed to prevent arithmetic overflow, and to map a 0dB
+     13            *       sine/cosine wave (i.e. amplitude = 32767) to two -6dB freq
+     14            *       coefficients. The return value is always 0.
+     15            *     
+     16            *       For the inverse FFT (freq -> time), fixed scaling cannot be
+     17            *       done, as two 0dB coefficients would sum to a peak amplitude
+     18            *       of 64K, overflowing the 32k range of the fixed-point integers.
+     19            *       Thus, the fix_fft() routine performs variable scaling, and
+     20            *       returns a value which is the number of bits LEFT by which
+     21            *       the output must be shifted to get the actual amplitude
+     22            *       (i.e. if fix_fft() returns 3, each value of fr[] and fi[]
+     23            *       must be multiplied by 8 (2**3) for proper scaling.
+     24            *       Clearly, this cannot be done within fixed-point short
+     25            *       integers. In practice, if the result is to be used as a
+     26            *       filter, the scale_shift can usually be ignored, as the
+     27            *       result will be approximately correctly normalized as is.
+     28            *     
+     29            *       Written by:  Tom Roberts  11/8/89
+     30            *       Made portable:  Malcolm Slaney 12/15/94 malcolm@interval.com
+     31            *       Enhanced:  Dimitrios P. Bouras  14 Jun 2006 dbouras@ieee.org
+     32            *       Modified for 8bit values David Keller  10.10.2010
+     33            ******************************************************************************
+     34            *
+     35            * COPYRIGHT(c) 2016 WeatherCloud
+     36            *
+     37            * Redistribution and use in source and binary forms, with or without modification,
+     38            * are permitted provided that the following conditions are met:
+     39            *   1. Redistributions of source code must retain the above copyright notice,
+     40            *      this list of conditions and the following disclaimer.
+     41            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     42            *      this list of conditions and the following disclaimer in the documentation
+     43            *      and/or other materials provided with the distribution.
+     44            *   3. Neither the name of WeatherCloud nor the names of its contributors
+     45            *      may be used to endorse or promote products derived from this software
+     46            *      without specific prior written permission.
+     47            *
+     48            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     49            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     50            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     51            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     52            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     53            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     54            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     55            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     56            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     57            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     58            *
+     59            ******************************************************************************
+     60            */
+     61          
+     62          /* Includes ------------------------------------------------------------------*/
+     63          //#include <avr/pgmspace.h>
+     64          #include "fix_fft.h"
+     65          //#include <WProgram.h>
+     66          
+     67          // If this is not defined it removes the fix_fftr function
+     68          #define INCLUDE_FFTR
+     69          
+     70          // If this is not defined it removes any code which performs
+     71          // the inverse transform to save on code space.
+     72          #define INCLUDE_INVERSE
+     73          
+     74          #define N_WAVE	256    /* full length of Sinewave[] */
+     75          #define LOG2_N_WAVE  8	/* log2(N_WAVE) */
+     76          
+     77          
+     78          
+     79          
+     80          /*
+     81            Since we only use 3/4 of N_WAVE, we define only
+     82            this many samples, in order to conserve data space.
+     83          */
+     84          
+     85          // This is only 192 bytes. On a 328 chip it might be worth
+     86          // leaving it in sram.
+     87          //const prog_int8_t Sinewave[N_WAVE-N_WAVE/4] PROGMEM = {
+     88          #define ORIGINAL_TABLE
+     89          #ifdef ORIGINAL_TABLE
+     90          //const char Sinewave[N_WAVE-N_WAVE/4] PROGMEM = {
+
+   \                                 In section .rodata, align 4
+     91          const int8_t Sinewave[N_WAVE-N_WAVE/4] = {
+   \                     Sinewave:
+   \   00000000   0x00 0x03          DC8 0, 3, 6, 9, 12, 15, 18, 21, 24, 28, 31, 34, 37, 40, 43, 46, 48, 51
+   \              0x06 0x09    
+   \              0x0C 0x0F    
+   \              0x12 0x15    
+   \              0x18 0x1C    
+   \              0x1F 0x22    
+   \              0x25 0x28    
+   \              0x2B 0x2E    
+   \              0x30 0x33    
+   \   00000012   0x36 0x39          DC8 54, 57, 60, 63, 65, 68, 71, 73, 76, 78, 81, 83, 85, 88, 90, 92, 94
+   \              0x3C 0x3F    
+   \              0x41 0x44    
+   \              0x47 0x49    
+   \              0x4C 0x4E    
+   \              0x51 0x53    
+   \              0x55 0x58    
+   \              0x5A 0x5C    
+   \              0x5E         
+   \   00000023   0x60 0x62          DC8 96, 98, 100, 102, 104, 106, 108, 109, 111, 112, 114, 115, 117, 118
+   \              0x64 0x66    
+   \              0x68 0x6A    
+   \              0x6C 0x6D    
+   \              0x6F 0x70    
+   \              0x72 0x73    
+   \              0x75 0x76    
+   \   00000031   0x77 0x78          DC8 119, 120, 121, 122, 123, 124, 124, 125, 126, 126, 127, 127, 127
+   \              0x79 0x7A    
+   \              0x7B 0x7C    
+   \              0x7C 0x7D    
+   \              0x7E 0x7E    
+   \              0x7F 0x7F    
+   \              0x7F         
+   \   0000003E   0x7F 0x7F          DC8 127, 127, 127, 127, 127, 127, 127, 127, 126, 126, 125, 124, 124
+   \              0x7F 0x7F    
+   \              0x7F 0x7F    
+   \              0x7F 0x7F    
+   \              0x7E 0x7E    
+   \              0x7D 0x7C    
+   \              0x7C         
+   \   0000004B   0x7B 0x7A          DC8 123, 122, 121, 120, 119, 118, 117, 115, 114, 112, 111, 109, 108
+   \              0x79 0x78    
+   \              0x77 0x76    
+   \              0x75 0x73    
+   \              0x72 0x70    
+   \              0x6F 0x6D    
+   \              0x6C         
+   \   00000058   0x6A 0x68          DC8 106, 104, 102, 100, 98, 96, 94, 92, 90, 88, 85, 83, 81, 78, 76, 73
+   \              0x66 0x64    
+   \              0x62 0x60    
+   \              0x5E 0x5C    
+   \              0x5A 0x58    
+   \              0x55 0x53    
+   \              0x51 0x4E    
+   \              0x4C 0x49    
+   \   00000068   0x47 0x44          DC8 71, 68, 65, 63, 60, 57, 54, 51, 48, 46, 43, 40, 37, 34, 31, 28, 24
+   \              0x41 0x3F    
+   \              0x3C 0x39    
+   \              0x36 0x33    
+   \              0x30 0x2E    
+   \              0x2B 0x28    
+   \              0x25 0x22    
+   \              0x1F 0x1C    
+   \              0x18         
+   \   00000079   0x15 0x12          DC8 21, 18, 15, 12, 9, 6, 3, 0, -3, -6, -9, -12, -15, -18, -21, -24
+   \              0x0F 0x0C    
+   \              0x09 0x06    
+   \              0x03 0x00    
+   \              0xFD 0xFA    
+   \              0xF7 0xF4    
+   \              0xF1 0xEE    
+   \              0xEB 0xE8    
+   \   00000089   0xE4 0xE1          DC8 -28, -31, -34, -37, -40, -43, -46, -48, -51, -54, -57, -60, -63
+   \              0xDE 0xDB    
+   \              0xD8 0xD5    
+   \              0xD2 0xD0    
+   \              0xCD 0xCA    
+   \              0xC7 0xC4    
+   \              0xC1         
+   \   00000096   0xBF 0xBC          DC8 -65, -68, -71, -73, -76, -78, -81, -83, -85, -88, -90, -92, -94
+   \              0xB9 0xB7    
+   \              0xB4 0xB2    
+   \              0xAF 0xAD    
+   \              0xAB 0xA8    
+   \              0xA6 0xA4    
+   \              0xA2         
+   \   000000A3   0xA0 0x9E          DC8 -96, -98, -100, -102, -104, -106, -108, -109, -111, -112, -114
+   \              0x9C 0x9A    
+   \              0x98 0x96    
+   \              0x94 0x93    
+   \              0x91 0x90    
+   \              0x8E         
+   \   000000AE   0x8D 0x8B          DC8 -115, -117, -118, -119, -120, -121, -122, -123, -124, -124, -125
+   \              0x8A 0x89    
+   \              0x88 0x87    
+   \              0x86 0x85    
+   \              0x84 0x84    
+   \              0x83         
+   \   000000B9   0x82 0x82          DC8 -126, -126, -127, -127, -127, -127, -127
+   \              0x81 0x81    
+   \              0x81 0x81    
+   \              0x81         
+     92          #else
+     93          const int8_t Sinewave[N_WAVE/2] = {
+     94          //const uint8_t Sinewave[N_WAVE/2] = {
+     95          #endif
+     96          0, 3, 6, 9, 12, 15, 18, 21,
+     97          24, 28, 31, 34, 37, 40, 43, 46,
+     98          48, 51, 54, 57, 60, 63, 65, 68,
+     99          71, 73, 76, 78, 81, 83, 85, 88,
+    100          90, 92, 94, 96, 98, 100, 102, 104,
+    101          106, 108, 109, 111, 112, 114, 115, 117,
+    102          118, 119, 120, 121, 122, 123, 124, 124,
+    103          125, 126, 126, 127, 127, 127, 127, 127,
+    104          
+    105          127, 127, 127, 127, 127, 127, 126, 126,
+    106          125, 124, 124, 123, 122, 121, 120, 119,
+    107          118, 117, 115, 114, 112, 111, 109, 108,
+    108          106, 104, 102, 100, 98, 96, 94, 92,
+    109          90, 88, 85, 83, 81, 78, 76, 73,
+    110          71, 68, 65, 63, 60, 57, 54, 51,
+    111          48, 46, 43, 40, 37, 34, 31, 28,
+    112          24, 21, 18, 15, 12, 9, 6, 3,
+    113          #ifdef ORIGINAL_TABLE
+    114          0, -3, -6, -9, -12, -15, -18, -21,
+    115          -24, -28, -31, -34, -37, -40, -43, -46,
+    116          -48, -51, -54, -57, -60, -63, -65, -68,
+    117          -71, -73, -76, -78, -81, -83, -85, -88,
+    118          -90, -92, -94, -96, -98, -100, -102, -104,
+    119          -106, -108, -109, -111, -112, -114, -115, -117,
+    120          -118, -119, -120, -121, -122, -123, -124, -124,
+    121          -125, -126, -126, -127, -127, -127, -127, -127,
+    122          #endif
+    123          };
+    124          
+    125          /*
+    126            FIX_MPY() - fixed-point multiplication & scaling.
+    127            Substitute inline assembly for hardware-specific
+    128            optimization suited to a particluar DSP processor.
+    129            Scaling ensures that result remains 16-bit.
+    130          */
+
+   \                                 In section .text, align 2
+    131          inline int8_t FIX_MPY(int8_t a, int8_t b)
+    132          {
+    133              /* shift right one less bit (i.e. 15-1) */
+    134              int c = ((int)a * (int)b) >> 6;
+   \                     FIX_MPY: (+1)
+   \   00000000   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   00000002   0xB249             SXTB     R1,R1            ;; SignExt  R1,R1,#+24,#+24
+   \   00000004   0xFB01 0xF200      MUL      R2,R1,R0
+   \   00000008   0x1192             ASRS     R2,R2,#+6
+    135              /* last bit shifted out = rounding-bit */
+    136              b = c & 0x01;
+   \   0000000A   0xF012 0x0301      ANDS     R3,R2,#0x1
+   \   0000000E   0x0019             MOVS     R1,R3
+    137              /* last shift + rounding bit */
+    138              a = (c >> 1) + b;
+   \   00000010   0xB249             SXTB     R1,R1            ;; SignExt  R1,R1,#+24,#+24
+   \   00000012   0xEB11 0x0362      ADDS     R3,R1,R2, ASR #+1
+   \   00000016   0x0018             MOVS     R0,R3
+    139              return a;
+   \   00000018   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   0000001A   0x4770             BX       LR               ;; return
+    140          }
+    141          
+    142          /*
+    143            fix_fft() - perform forward/inverse fast Fourier transform.
+    144            fr[n],fi[n] are real and imaginary arrays, both INPUT AND
+    145            RESULT (in-place FFT), with 0 <= n < 2**m; set inverse to
+    146            0 for forward transform (FFT), or 1 for iFFT.
+    147          */
+
+   \                                 In section .text, align 4, keep-with-next
+    148          int fix_fft(int8_t fr[], int8_t fi[], int m, int inverse)
+    149          {
+   \                     fix_fft: (+1)
+   \   00000000   0xE92D 0x4FFB      PUSH     {R0,R1,R3-R11,LR}
+   \   00000004   0xB08A             SUB      SP,SP,#+40
+   \   00000006   0x4691             MOV      R9,R2
+    150              int mr, nn, i, j, l, k, istep, n, scale, shift;
+    151              int8_t qr, qi, tr, ti, wr, wi;
+    152          //    int idx;
+    153          
+    154              n = 1 << m;
+   \   00000008   0x2001             MOVS     R0,#+1
+   \   0000000A   0xFA10 0xF009      LSLS     R0,R0,R9
+   \   0000000E   0x9003             STR      R0,[SP, #+12]
+    155          
+    156              /* max FFT size = N_WAVE */
+    157              if (n > N_WAVE)
+   \   00000010   0x9803             LDR      R0,[SP, #+12]
+   \   00000012   0xF5B0 0x7F80      CMP      R0,#+256
+   \   00000016   0xDD02             BLE.N    ??fix_fft_0
+    158          	  return -1;
+   \   00000018   0xF05F 0x30FF      MOVS     R0,#-1
+   \   0000001C   0xE0C1             B.N      ??fix_fft_1
+    159          
+    160              mr = 0;
+   \                     ??fix_fft_0: (+1)
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \   00000020   0x9002             STR      R0,[SP, #+8]
+    161              nn = n - 1;
+   \   00000022   0x9803             LDR      R0,[SP, #+12]
+   \   00000024   0x1E40             SUBS     R0,R0,#+1
+   \   00000026   0x9007             STR      R0,[SP, #+28]
+    162              scale = 0;
+   \   00000028   0x2000             MOVS     R0,#+0
+   \   0000002A   0x9008             STR      R0,[SP, #+32]
+    163          
+    164              /* decimation in time - re-order data */
+    165              for (m=1; m<=nn; ++m) {
+   \   0000002C   0x2001             MOVS     R0,#+1
+   \   0000002E   0x4681             MOV      R9,R0
+   \                     ??fix_fft_2: (+1)
+   \   00000030   0x9807             LDR      R0,[SP, #+28]
+   \   00000032   0x4548             CMP      R0,R9
+   \   00000034   0xDB36             BLT.N    ??fix_fft_3
+    166          	  l = n;
+   \   00000036   0x9803             LDR      R0,[SP, #+12]
+   \   00000038   0x4680             MOV      R8,R0
+    167          	  do {
+    168          		l >>= 1;
+   \                     ??fix_fft_4: (+1)
+   \   0000003A   0xEA5F 0x0868      ASRS     R8,R8,#+1
+    169          	  } while (mr+l > nn);
+   \   0000003E   0x9807             LDR      R0,[SP, #+28]
+   \   00000040   0x9902             LDR      R1,[SP, #+8]
+   \   00000042   0xEB18 0x0101      ADDS     R1,R8,R1
+   \   00000046   0x4288             CMP      R0,R1
+   \   00000048   0xDBF7             BLT.N    ??fix_fft_4
+    170          	  mr = (mr & (l-1)) + l;
+   \   0000004A   0x9802             LDR      R0,[SP, #+8]
+   \   0000004C   0xF1B8 0x0101      SUBS     R1,R8,#+1
+   \   00000050   0x4008             ANDS     R0,R1,R0
+   \   00000052   0xEB18 0x0000      ADDS     R0,R8,R0
+   \   00000056   0x9002             STR      R0,[SP, #+8]
+    171          
+    172          	  if (mr <= m)
+   \   00000058   0x9802             LDR      R0,[SP, #+8]
+   \   0000005A   0x4581             CMP      R9,R0
+   \   0000005C   0xDA1F             BGE.N    ??fix_fft_5
+    173          		continue;
+    174          	  tr = fr[m];
+   \                     ??fix_fft_6: (+1)
+   \   0000005E   0x980A             LDR      R0,[SP, #+40]
+   \   00000060   0xF910 0x0009      LDRSB    R0,[R0, R9]
+   \   00000064   0xF88D 0x0005      STRB     R0,[SP, #+5]
+    175          	  fr[m] = fr[mr];
+   \   00000068   0x980A             LDR      R0,[SP, #+40]
+   \   0000006A   0x9902             LDR      R1,[SP, #+8]
+   \   0000006C   0x5C40             LDRB     R0,[R0, R1]
+   \   0000006E   0x990A             LDR      R1,[SP, #+40]
+   \   00000070   0xF801 0x0009      STRB     R0,[R1, R9]
+    176          	  fr[mr] = tr;
+   \   00000074   0xF89D 0x0005      LDRB     R0,[SP, #+5]
+   \   00000078   0x990A             LDR      R1,[SP, #+40]
+   \   0000007A   0x9A02             LDR      R2,[SP, #+8]
+   \   0000007C   0x5488             STRB     R0,[R1, R2]
+    177          	  ti = fi[m];
+   \   0000007E   0x980B             LDR      R0,[SP, #+44]
+   \   00000080   0xF910 0x0009      LDRSB    R0,[R0, R9]
+   \   00000084   0xF88D 0x0004      STRB     R0,[SP, #+4]
+    178          	  fi[m] = fi[mr];
+   \   00000088   0x980B             LDR      R0,[SP, #+44]
+   \   0000008A   0x9902             LDR      R1,[SP, #+8]
+   \   0000008C   0x5C40             LDRB     R0,[R0, R1]
+   \   0000008E   0x990B             LDR      R1,[SP, #+44]
+   \   00000090   0xF801 0x0009      STRB     R0,[R1, R9]
+    179          	  fi[mr] = ti;
+   \   00000094   0xF89D 0x0004      LDRB     R0,[SP, #+4]
+   \   00000098   0x990B             LDR      R1,[SP, #+44]
+   \   0000009A   0x9A02             LDR      R2,[SP, #+8]
+   \   0000009C   0x5488             STRB     R0,[R1, R2]
+    180              }
+   \                     ??fix_fft_5: (+1)
+   \   0000009E   0xF119 0x0901      ADDS     R9,R9,#+1
+   \   000000A2   0xE7C5             B.N      ??fix_fft_2
+    181          
+    182              l = 1;
+   \                     ??fix_fft_3: (+1)
+   \   000000A4   0x2001             MOVS     R0,#+1
+   \   000000A6   0x4680             MOV      R8,R0
+    183              k = LOG2_N_WAVE-1;
+   \   000000A8   0x2007             MOVS     R0,#+7
+   \   000000AA   0x9004             STR      R0,[SP, #+16]
+    184              while (l < n) {
+   \                     ??fix_fft_7: (+1)
+   \   000000AC   0x9803             LDR      R0,[SP, #+12]
+   \   000000AE   0x4580             CMP      R8,R0
+   \   000000B0   0xDA76             BGE.N    ??fix_fft_8
+    185          // I had this split into two ifdefs with one around the
+    186          // shift=1 statement but a bug in the preprocessor makes
+    187          // it omit that statement altogether so I'm doing it this
+    188          // way.
+    189          
+    190                shift = 1;
+   \   000000B2   0x2001             MOVS     R0,#+1
+   \   000000B4   0x9005             STR      R0,[SP, #+20]
+    191          	  /*
+    192          	    it may not be obvious, but the shift will be
+    193          	    performed on each data point exactly once,
+    194          	    during this pass.
+    195          	  */
+    196          	  istep = l << 1;
+   \   000000B6   0xEA5F 0x0048      LSLS     R0,R8,#+1
+   \   000000BA   0x9006             STR      R0,[SP, #+24]
+    197          	  for (m=0; m<l; ++m) {
+   \   000000BC   0x2000             MOVS     R0,#+0
+   \   000000BE   0x4681             MOV      R9,R0
+   \                     ??fix_fft_9: (+1)
+   \   000000C0   0x45C1             CMP      R9,R8
+   \   000000C2   0xDA67             BGE.N    ??fix_fft_10
+    198          		j = m << k;
+   \   000000C4   0x9804             LDR      R0,[SP, #+16]
+   \   000000C6   0xFA19 0xF000      LSLS     R0,R9,R0
+   \   000000CA   0x0005             MOVS     R5,R0
+    199          		/* 0 <= j < N_WAVE/2 */
+    200          #ifdef ORIGINAL_TABLE
+    201          //		wr =  pgm_read_byte_near(Sinewave + j+N_WAVE/4);
+    202          		wr =  Sinewave[j+N_WAVE/4];
+   \   000000CC   0x4836             LDR.N    R0,??fix_fft_11
+   \   000000CE   0x4428             ADD      R0,R0,R5
+   \   000000D0   0xF990 0x0040      LDRSB    R0,[R0, #+64]
+   \   000000D4   0x4682             MOV      R10,R0
+    203          //		wi =  -pgm_read_byte_near(Sinewave + j);
+    204          		wi =  -Sinewave[j];
+   \   000000D6   0x4834             LDR.N    R0,??fix_fft_11
+   \   000000D8   0x5740             LDRSB    R0,[R0, R5]
+   \   000000DA   0x4240             RSBS     R0,R0,#+0
+   \   000000DC   0x4683             MOV      R11,R0
+    205          #else
+    206          		if((idx = j+N_WAVE/4) >= 128)
+    207          			wr =  -pgm_read_byte_near(Sinewave + idx - 128);
+    208          //                  wr =  -Sinewave[idx - 128];
+    209          		else
+    210          			wr =  pgm_read_byte_near(Sinewave + idx);
+    211          //                  wr =  Sinewave[idx];
+    212          		if(j >= 128)
+    213          			wi = pgm_read_byte_near(Sinewave + j);
+    214          //                  wi = Sinewave[j];
+    215          		else
+    216          //			wi = -pgm_read_byte_near(Sinewave + j);
+    217                            wi = -Sinewave[j];
+    218          #endif
+    219          
+    220          		if (shift) {
+   \   000000DE   0x9805             LDR      R0,[SP, #+20]
+   \   000000E0   0x2800             CMP      R0,#+0
+   \   000000E2   0xD007             BEQ.N    ??fix_fft_12
+    221          		    wr >>= 1;
+   \   000000E4   0xFA4F 0xFA8A      SXTB     R10,R10          ;; SignExt  R10,R10,#+24,#+24
+   \   000000E8   0xEA5F 0x0A6A      ASRS     R10,R10,#+1
+    222          		    wi >>= 1;
+   \   000000EC   0xFA4F 0xFB8B      SXTB     R11,R11          ;; SignExt  R11,R11,#+24,#+24
+   \   000000F0   0xEA5F 0x0B6B      ASRS     R11,R11,#+1
+    223          		}
+    224          		for (i=m; i<n; i+=istep) {
+   \                     ??fix_fft_12: (+1)
+   \   000000F4   0x464C             MOV      R4,R9
+   \                     ??fix_fft_13: (+1)
+   \   000000F6   0x9803             LDR      R0,[SP, #+12]
+   \   000000F8   0x4284             CMP      R4,R0
+   \   000000FA   0xDA48             BGE.N    ??fix_fft_14
+    225          		    j = i + l;
+   \   000000FC   0xEB18 0x0004      ADDS     R0,R8,R4
+   \   00000100   0x0005             MOVS     R5,R0
+    226          		    tr = FIX_MPY(wr,fr[j]) - FIX_MPY(wi,fi[j]);
+   \   00000102   0x980A             LDR      R0,[SP, #+40]
+   \   00000104   0x5741             LDRSB    R1,[R0, R5]
+   \   00000106   0x4650             MOV      R0,R10
+   \   00000108   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   0000010A   0x.... 0x....      BL       FIX_MPY
+   \   0000010E   0x9000             STR      R0,[SP, #+0]
+   \   00000110   0x980B             LDR      R0,[SP, #+44]
+   \   00000112   0x5741             LDRSB    R1,[R0, R5]
+   \   00000114   0x4658             MOV      R0,R11
+   \   00000116   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   00000118   0x.... 0x....      BL       FIX_MPY
+   \   0000011C   0x9900             LDR      R1,[SP, #+0]
+   \   0000011E   0x1A08             SUBS     R0,R1,R0
+   \   00000120   0xF88D 0x0005      STRB     R0,[SP, #+5]
+    227          		    ti = FIX_MPY(wr,fi[j]) + FIX_MPY(wi,fr[j]);
+   \   00000124   0x980B             LDR      R0,[SP, #+44]
+   \   00000126   0x5741             LDRSB    R1,[R0, R5]
+   \   00000128   0x4650             MOV      R0,R10
+   \   0000012A   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   0000012C   0x.... 0x....      BL       FIX_MPY
+   \   00000130   0x9000             STR      R0,[SP, #+0]
+   \   00000132   0x980A             LDR      R0,[SP, #+40]
+   \   00000134   0x5741             LDRSB    R1,[R0, R5]
+   \   00000136   0x4658             MOV      R0,R11
+   \   00000138   0xB240             SXTB     R0,R0            ;; SignExt  R0,R0,#+24,#+24
+   \   0000013A   0x.... 0x....      BL       FIX_MPY
+   \   0000013E   0x9900             LDR      R1,[SP, #+0]
+   \   00000140   0x1840             ADDS     R0,R0,R1
+   \   00000142   0xF88D 0x0004      STRB     R0,[SP, #+4]
+    228          		    qr = fr[i];
+   \   00000146   0x980A             LDR      R0,[SP, #+40]
+   \   00000148   0x5700             LDRSB    R0,[R0, R4]
+   \   0000014A   0x0006             MOVS     R6,R0
+    229          		    qi = fi[i];
+   \   0000014C   0x980B             LDR      R0,[SP, #+44]
+   \   0000014E   0x5700             LDRSB    R0,[R0, R4]
+   \   00000150   0x0007             MOVS     R7,R0
+    230          		    if (shift) {
+   \   00000152   0x9805             LDR      R0,[SP, #+20]
+   \   00000154   0x2800             CMP      R0,#+0
+   \   00000156   0xD003             BEQ.N    ??fix_fft_15
+    231          			  qr >>= 1;
+   \   00000158   0xB276             SXTB     R6,R6            ;; SignExt  R6,R6,#+24,#+24
+   \   0000015A   0x1076             ASRS     R6,R6,#+1
+    232          			  qi >>= 1;
+   \   0000015C   0xB27F             SXTB     R7,R7            ;; SignExt  R7,R7,#+24,#+24
+   \   0000015E   0x107F             ASRS     R7,R7,#+1
+    233          		    }
+    234          		    fr[j] = qr - tr;
+   \                     ??fix_fft_15: (+1)
+   \   00000160   0xF89D 0x0005      LDRB     R0,[SP, #+5]
+   \   00000164   0x1A30             SUBS     R0,R6,R0
+   \   00000166   0x990A             LDR      R1,[SP, #+40]
+   \   00000168   0x5548             STRB     R0,[R1, R5]
+    235          		    fi[j] = qi - ti;
+   \   0000016A   0xF89D 0x0004      LDRB     R0,[SP, #+4]
+   \   0000016E   0x1A38             SUBS     R0,R7,R0
+   \   00000170   0x990B             LDR      R1,[SP, #+44]
+   \   00000172   0x5548             STRB     R0,[R1, R5]
+    236          		    fr[i] = qr + tr;
+   \   00000174   0xF89D 0x0005      LDRB     R0,[SP, #+5]
+   \   00000178   0x1980             ADDS     R0,R0,R6
+   \   0000017A   0x990A             LDR      R1,[SP, #+40]
+   \   0000017C   0x5508             STRB     R0,[R1, R4]
+    237          		    fi[i] = qi + ti;
+   \   0000017E   0xF89D 0x0004      LDRB     R0,[SP, #+4]
+   \   00000182   0x19C0             ADDS     R0,R0,R7
+   \   00000184   0x990B             LDR      R1,[SP, #+44]
+   \   00000186   0x5508             STRB     R0,[R1, R4]
+    238          		}
+   \   00000188   0x9806             LDR      R0,[SP, #+24]
+   \   0000018A   0x1904             ADDS     R4,R0,R4
+   \   0000018C   0xE7B3             B.N      ??fix_fft_13
+    239          	  }
+   \                     ??fix_fft_14: (+1)
+   \   0000018E   0xF119 0x0901      ADDS     R9,R9,#+1
+   \   00000192   0xE795             B.N      ??fix_fft_9
+    240          	  --k;
+   \                     ??fix_fft_10: (+1)
+   \   00000194   0x9804             LDR      R0,[SP, #+16]
+   \   00000196   0x1E40             SUBS     R0,R0,#+1
+   \   00000198   0x9004             STR      R0,[SP, #+16]
+    241          	  l = istep;
+   \   0000019A   0x9806             LDR      R0,[SP, #+24]
+   \   0000019C   0x4680             MOV      R8,R0
+   \   0000019E   0xE785             B.N      ??fix_fft_7
+    242              }
+    243              return scale;
+   \                     ??fix_fft_8: (+1)
+   \   000001A0   0x9808             LDR      R0,[SP, #+32]
+   \                     ??fix_fft_1: (+1)
+   \   000001A2   0xB00D             ADD      SP,SP,#+52
+   \   000001A4   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
+   \                     ??fix_fft_11:
+   \   000001A8   0x........         DC32     Sinewave
+    244          }
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   FIX_MPY
+      88   fix_fft
+        88   -> FIX_MPY
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      28  FIX_MPY
+     192  Sinewave
+     428  fix_fft
+
+ 
+ 192 bytes in section .rodata
+ 456 bytes in section .text
+ 
+ 428 bytes of CODE  memory (+ 28 bytes shared)
+ 192 bytes of CONST memory
+
+Errors: none
+Warnings: none

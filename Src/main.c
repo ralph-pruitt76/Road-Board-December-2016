@@ -283,7 +283,7 @@ int main(void)
   InitSensors();
   RoadBrd_ParserInit();                         // This initializes the Parse Tasking Structure.
   RoadBrd_WWDG_InitializeDateString();          // Initialize Date Tag From Server as NULL.
-
+  RoadBrd_WWDG_InitializeTickString();          // Initialize Tick Tag From as NULL.
   //**
   //**
   //** Initialize all Flash Structures.

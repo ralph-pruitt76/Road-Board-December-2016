@@ -658,7 +658,9 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
   static uint8_t tempBffr2[60];
   char* tempPstr;
   char tempstr[60];
+#ifndef XML_SHRT  
   char tempstr2[60];
+#endif
 //  int x;
 
   uint8_t tempBffr3[60];
@@ -779,6 +781,57 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
           BGM111_SetSyncFlg( SYNC_PROC );
       }
       // OK...Now we need to process what is in the TACK Section.
+#ifdef XML_SHRT      
+      //********************************************************************************
+      //*
+      //*  Abbreviate XML Code Processing here for Platinum Initial Release
+      //*
+      //********************************************************************************
+      // A. Strip off Opening <TACK>.
+      tempPstr = (char *)&tempBffr2[6];
+      strcpy(tempstr, tempPstr);
+      //************************ SEQUENCE OF TEST TO TYPE OF OPERATION
+      // B. Time to Test String
+      // Is this a <CMD>/Monitor Command
+      tempPstr = strstr( tempstr, "</TACK>" );
+      if (tempPstr  != NULL)
+      {
+        // Now NULL Out where Tag is at.
+        *tempPstr = NULL;
+        // Is this a Monitor Command?
+        if (strlen(tempstr) > 0)
+        {
+          // Finally, Send string to Parser.
+          Status = RoadBrd_ParserTsk(tempstr);
+          if (Status == HAL_BUSY)
+          {
+            sprintf( (char *)tempBffr3, "<STATUS>CMD_BUSY</STATUS>" );
+            Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+          }
+          else if (Status != HAL_OK)
+          {
+            sprintf( (char *)tempBffr3, "<STATUS>CMD_ERROR</STATUS>" );
+            Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+          }
+        }
+      }
+      // Generate an ACK Report.
+      sprintf( (char *)tempBffr2, "<STATUS>ST_ACK:%s</STATUS>", RoadBrd_WWDG_GetTickString() );
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+      if (Status != HAL_OK)
+        return Status;
+      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+      //********************************************************************************
+      //*  END OF CUSTOM SECTION...Abbreviate XML Code Processing here for Platinum Initial Release
+      //********************************************************************************
+#else      
+      //********************************************************************************
+      //*
+      //*  Normal XML Code Processing here for Platinum Release
+      //*
+      //********************************************************************************
       // A. Strip off Opening <TACK>.
       tempPstr = (char *)&tempBffr2[6];
       strcpy(tempstr, tempPstr);
@@ -809,7 +862,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
         // Now Strip out /DATE Tag and Get Date.
         tempPstr = (char *)&tempstr[7];
         strcpy(tempstr, tempPstr);
-      }
+      } 
       //************************ SEQUENCE OF TEST TO TYPE OF OPERATION
       // B. Time to Test String
       // Is this a <CMD>/Monitor Command
@@ -842,7 +895,11 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
           return Status;
         BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
       }
-    }
+      //********************************************************************************
+      //*  END OF CUSTOM SECTION...Normal XML Code Processing here for Platinum Release
+      //********************************************************************************
+#endif      
+    } // EndIf (strncmp((char *)tempBffr2,"<TACK>",6) == 0)
     // NOW TEST ERROR CONDITIONS!!!
     // OVERFLOW?
     else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)

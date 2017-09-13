@@ -1,0 +1,1046 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       12/Sep/2017  11:09:13
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\adc.c
+#    Command line =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\adc.c
+#        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
+#        REV_L -D LONG_DELAY -D XML_SHRT -lCN
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\List" -o
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug
+#        --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.4\arm\INC\c\DLib_Config_Full.h" -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/BSP/STM32L1xx_Nucleo\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\..\Middlewares\Third_Party\BgLib\
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.4\arm\CMSIS\Include\"
+#    Locale       =  English_United States.1252
+#    List file    =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\List\adc.lst
+#    Object file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\Obj\adc.o
+#
+###############################################################################
+
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\adc.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : ADC.c
+      4            * Description        : This file provides code for the configuration
+      5            *                      of the ADC instances.
+      6            ******************************************************************************
+      7            *
+      8            * COPYRIGHT(c) 2016 STMicroelectronics
+      9            *
+     10            * Redistribution and use in source and binary forms, with or without modification,
+     11            * are permitted provided that the following conditions are met:
+     12            *   1. Redistributions of source code must retain the above copyright notice,
+     13            *      this list of conditions and the following disclaimer.
+     14            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     15            *      this list of conditions and the following disclaimer in the documentation
+     16            *      and/or other materials provided with the distribution.
+     17            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     18            *      may be used to endorse or promote products derived from this software
+     19            *      without specific prior written permission.
+     20            *
+     21            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     22            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     23            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     24            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     25            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     26            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     27            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     28            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     29            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     30            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     31            *
+     32            ******************************************************************************
+     33            */
+     34          
+     35          /* Includes ------------------------------------------------------------------*/
+     36          #include "adc.h"
+     37          
+     38          #include "gpio.h"
+     39          #include "dma.h"
+     40          
+     41          /* USER CODE BEGIN 0 */
+     42          /* Variable to report ADC sequencer status */
+
+   \                                 In section .bss, align 1
+     43          uint8_t         ubSequenceCompleted = RESET;     /* Set when all ranks of the sequence have been converted */
+   \                     ubSequenceCompleted:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     44          uint8_t         adcActive = RESET;               /* If this flag is set, we currently have an active ADC event. */
+   \                     adcActive:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     45          static RoadBrd_adc_TypeDef ADC_Channel = DEFAULT_AUDIO; /* Set selection to default Adudio Channel 0. */
+   \                     ADC_Channel:
+   \   00000000                      DS8 1
+
+   \                                 In section .bss, align 1
+     46          static RoadBrd_adc_TypeDef Old_ADC_Channel = DEFAULT_AUDIO; /* Set selection to default Adudio Channel 0. */
+   \                     Old_ADC_Channel:
+   \   00000000                      DS8 1
+     47          
+     48          /* Lookup for ADC Channel Type. */
+
+   \                                 In section .data, align 4
+     49          uint32_t RoadBrd_ADC_PORT[RoadBrd_ADCn] = {ADCx_CHANNEL_Audio, 
+   \                     RoadBrd_ADC_PORT:
+   \   00000000   0x00000000         DC32 0, 3, 4
+   \              0x00000003   
+   \              0x00000004   
+     50                                                     ADCx_CHANNEL_3, 
+     51                                                     ADCx_CHANNEL_4};
+     52          
+     53          /* USER CODE END 0 */
+     54          
+
+   \                                 In section .bss, align 4
+     55          ADC_HandleTypeDef hadc;
+   \                     hadc:
+   \   00000000                      DS8 84
+
+   \                                 In section .bss, align 4
+     56          DMA_HandleTypeDef hdma_adc;
+   \                     hdma_adc:
+   \   00000000                      DS8 56
+
+   \                                 In section .bss, align 4
+     57          ADC_ChannelConfTypeDef sConfig;
+   \                     sConfig:
+   \   00000000                      DS8 12
+     58            
+     59          
+     60          /**
+     61            * @brief  Configure the global features of the ADC (Clock, Resolution, Data 
+     62            * Alignment and number of conversion. Configure for the selected ADC regular 
+     63            * channel its corresponding rank in the sequencer and its sample time.
+     64            *     ClockPrescaler = ADC_CLOCK_ASYNC_DIV1   ((uint32_t)0x00000000) 
+     65            *                            Select ADC clock source (asynchronous clock derived from HSI RC oscillator) and clock prescaler.
+     66            *                            This parameter can be a value of @ref ADC_ClockPrescaler
+     67            *                            Note: In case of usage of channels on injected group, ADC frequency should be lower than AHB clock frequency /4 for resolution 12 or 10 bits, 
+     68            *                            AHB clock frequency /3 for resolution 8 bits, AHB clock frequency /2 for resolution 6 bits.
+     69            *                            Note: HSI RC oscillator must be preliminarily enabled at RCC top level.
+     70            *     Resolution = ADC_RESOLUTION_12B         ((uint32_t)0x00000000)          !<  ADC 12-bit resolution 
+     71            *     ChannelsBank = ADC_CHANNELS_BANK_A    
+     72            *     NbrOfConversion = 1     Specifies the number of ranks that will be converted within the regular group sequencer.
+     73            *                             To use regular group sequencer and convert several ranks, parameter 'ScanConvMode' must be enabled.
+     74            *                             This parameter must be a number between Min_Data = 1 and Max_Data = 28.
+     75            *     Channel = ADC_CHANNEL_0
+     76            *                             Specifies the channel to configure into ADC regular group.
+     77            *                                        This parameter can be a value of @ref ADC_channels
+     78            *                                        Note: Depending on devices, some channels may not be available on package pins. Refer to device datasheet for channels availability.
+     79            *                                              Maximum number of channels by device category (without taking in account each device package constraints): 
+     80            *                                              STM32L1 category 1, 2: 24 channels on external pins + 3 channels on internal measurement paths (VrefInt, Temp sensor, Vcomp): Channel 0 to channel 26.
+     81            *                                              STM32L1 category 3:    25 channels on external pins + 3 channels on internal measurement paths (VrefInt, Temp sensor, Vcomp): Channel 0 to channel 26, 1 additional channel in bank B. Note: OPAMP1 and OPAMP2 are connected internally but not increasing internal channels number: they are sharing ADC input with external channels ADC_IN3 and ADC_IN8.
+     82            *                                              STM32L1 category 4, 5: 40 channels on external pins + 3 channels on internal measurement paths (VrefInt, Temp sensor, Vcomp): Channel 0 to channel 31, 11 additional channels in bank B. Note: OPAMP1 and OPAMP2 are connected internally but not increasing internal channels number: they are sharing ADC input with external channels ADC_IN3 and ADC_IN8.
+     83            *                                        Note: In case of peripherals OPAMPx not used: 3 channels (3, 8, 13) can be configured as direct channels (fast channels). Refer to macro ' __HAL_ADC_CHANNEL_SPEED_FAST() '.
+     84            *                                        Note: In case of peripheral OPAMP3 and ADC channel OPAMP3 used (OPAMP3 available on STM32L1 devices Cat.4 only): the analog switch COMP1_SW1 must be closed. Refer to macro: ' __HAL_OPAMP_OPAMP3OUT_CONNECT_ADC_COMP1() '.
+     85            *     Rank = 1
+     86            *     SamplingTime = ADC_SAMPLETIME_4CYCLES
+     87            *     
+     88            * @param  UartHandle: UART handle
+     89            * @note   This example shows a simple way to report end of DMA Rx transfer, and 
+     90            *         you can add your own implementation.
+     91            * @retval None
+     92            */
+
+   \                                 In section .text, align 2, keep-with-next
+     93          void MX_ADC_Init(void)
+     94          {
+   \                     MX_ADC_Init: (+1)
+   \   00000000   0xB5E0             PUSH     {R5-R7,LR}
+     95            ADC_ChannelConfTypeDef sConfig;
+     96          
+     97              /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
+     98              */
+     99            hadc.Instance = ADC1;
+   \   00000002   0x....             LDR.N    R0,??DataTable7  ;; 0x40012400
+   \   00000004   0x....             LDR.N    R1,??DataTable7_1
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+    100            hadc.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
+   \   00000008   0x2000             MOVS     R0,#+0
+   \   0000000A   0x....             LDR.N    R1,??DataTable7_1
+   \   0000000C   0x6048             STR      R0,[R1, #+4]
+    101            hadc.Init.Resolution = ADC_RESOLUTION_12B;
+   \   0000000E   0x2000             MOVS     R0,#+0
+   \   00000010   0x....             LDR.N    R1,??DataTable7_1
+   \   00000012   0x6088             STR      R0,[R1, #+8]
+    102            hadc.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+   \   00000014   0x2000             MOVS     R0,#+0
+   \   00000016   0x....             LDR.N    R1,??DataTable7_1
+   \   00000018   0x60C8             STR      R0,[R1, #+12]
+    103            hadc.Init.ScanConvMode = ADC_SCAN_DISABLE;
+   \   0000001A   0x2000             MOVS     R0,#+0
+   \   0000001C   0x....             LDR.N    R1,??DataTable7_1
+   \   0000001E   0x6108             STR      R0,[R1, #+16]
+    104            hadc.Init.EOCSelection = ADC_EOC_SEQ_CONV;
+   \   00000020   0x2000             MOVS     R0,#+0
+   \   00000022   0x....             LDR.N    R1,??DataTable7_1
+   \   00000024   0x6148             STR      R0,[R1, #+20]
+    105            hadc.Init.LowPowerAutoWait = ADC_AUTOWAIT_DISABLE;
+   \   00000026   0x2000             MOVS     R0,#+0
+   \   00000028   0x....             LDR.N    R1,??DataTable7_1
+   \   0000002A   0x6188             STR      R0,[R1, #+24]
+    106            hadc.Init.LowPowerAutoPowerOff = ADC_AUTOPOWEROFF_DISABLE;
+   \   0000002C   0x2000             MOVS     R0,#+0
+   \   0000002E   0x....             LDR.N    R1,??DataTable7_1
+   \   00000030   0x61C8             STR      R0,[R1, #+28]
+    107            hadc.Init.ChannelsBank = ADC_CHANNELS_BANK_A;
+   \   00000032   0x2000             MOVS     R0,#+0
+   \   00000034   0x....             LDR.N    R1,??DataTable7_1
+   \   00000036   0x6208             STR      R0,[R1, #+32]
+    108            hadc.Init.ContinuousConvMode = DISABLE;
+   \   00000038   0x2000             MOVS     R0,#+0
+   \   0000003A   0x....             LDR.N    R1,??DataTable7_1
+   \   0000003C   0x6248             STR      R0,[R1, #+36]
+    109            hadc.Init.NbrOfConversion = 1;
+   \   0000003E   0x2001             MOVS     R0,#+1
+   \   00000040   0x....             LDR.N    R1,??DataTable7_1
+   \   00000042   0x6288             STR      R0,[R1, #+40]
+    110            hadc.Init.DiscontinuousConvMode = DISABLE;
+   \   00000044   0x2000             MOVS     R0,#+0
+   \   00000046   0x....             LDR.N    R1,??DataTable7_1
+   \   00000048   0x62C8             STR      R0,[R1, #+44]
+    111            hadc.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+   \   0000004A   0x2010             MOVS     R0,#+16
+   \   0000004C   0x....             LDR.N    R1,??DataTable7_1
+   \   0000004E   0x6348             STR      R0,[R1, #+52]
+    112            hadc.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+   \   00000050   0x2000             MOVS     R0,#+0
+   \   00000052   0x....             LDR.N    R1,??DataTable7_1
+   \   00000054   0x6388             STR      R0,[R1, #+56]
+    113            hadc.Init.DMAContinuousRequests = DISABLE;
+   \   00000056   0x2000             MOVS     R0,#+0
+   \   00000058   0x....             LDR.N    R1,??DataTable7_1
+   \   0000005A   0x63C8             STR      R0,[R1, #+60]
+    114            if (HAL_ADC_Init(&hadc) != HAL_OK)
+   \   0000005C   0x....             LDR.N    R0,??DataTable7_1
+   \   0000005E   0x.... 0x....      BL       HAL_ADC_Init
+   \   00000062   0x2800             CMP      R0,#+0
+   \   00000064   0xD001             BEQ.N    ??MX_ADC_Init_0
+    115            {
+    116              Error_Handler();
+   \   00000066   0x.... 0x....      BL       Error_Handler
+    117            }
+    118          
+    119              /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+    120              */
+    121            sConfig.Channel = ADC_CHANNEL_0;
+   \                     ??MX_ADC_Init_0: (+1)
+   \   0000006A   0x2000             MOVS     R0,#+0
+   \   0000006C   0x9000             STR      R0,[SP, #+0]
+    122            sConfig.Rank = 1;
+   \   0000006E   0x2001             MOVS     R0,#+1
+   \   00000070   0x9001             STR      R0,[SP, #+4]
+    123            sConfig.SamplingTime = ADC_SAMPLETIME_4CYCLES;
+   \   00000072   0x2000             MOVS     R0,#+0
+   \   00000074   0x9002             STR      R0,[SP, #+8]
+    124            if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
+   \   00000076   0x4669             MOV      R1,SP
+   \   00000078   0x....             LDR.N    R0,??DataTable7_1
+   \   0000007A   0x.... 0x....      BL       HAL_ADC_ConfigChannel
+   \   0000007E   0x2800             CMP      R0,#+0
+   \   00000080   0xD001             BEQ.N    ??MX_ADC_Init_1
+    125            {
+    126              Error_Handler();
+   \   00000082   0x.... 0x....      BL       Error_Handler
+    127            }
+    128          
+    129          }
+   \                     ??MX_ADC_Init_1: (+1)
+   \   00000086   0xBD07             POP      {R0-R2,PC}       ;; return
+    130          
+
+   \                                 In section .text, align 2, keep-with-next
+    131          void HAL_ADC_MspInit(ADC_HandleTypeDef* adcHandle)
+    132          {
+   \                     HAL_ADC_MspInit: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB086             SUB      SP,SP,#+24
+   \   00000004   0x0004             MOVS     R4,R0
+    133          
+    134            GPIO_InitTypeDef GPIO_InitStruct;
+    135            if(adcHandle->Instance==ADC1)
+   \   00000006   0x6820             LDR      R0,[R4, #+0]
+   \   00000008   0x....             LDR.N    R1,??DataTable7  ;; 0x40012400
+   \   0000000A   0x4288             CMP      R0,R1
+   \   0000000C   0xD139             BNE.N    ??HAL_ADC_MspInit_0
+    136            {
+    137            /* USER CODE BEGIN ADC1_MspInit 0 */
+    138          
+    139            /* USER CODE END ADC1_MspInit 0 */
+    140              /* Peripheral clock enable */
+    141              __HAL_RCC_ADC1_CLK_ENABLE();
+   \   0000000E   0x....             LDR.N    R0,??DataTable7_2  ;; 0x40023820
+   \   00000010   0x6800             LDR      R0,[R0, #+0]
+   \   00000012   0xF450 0x7000      ORRS     R0,R0,#0x200
+   \   00000016   0x....             LDR.N    R1,??DataTable7_2  ;; 0x40023820
+   \   00000018   0x6008             STR      R0,[R1, #+0]
+   \   0000001A   0x....             LDR.N    R0,??DataTable7_2  ;; 0x40023820
+   \   0000001C   0x6800             LDR      R0,[R0, #+0]
+   \   0000001E   0xF410 0x7000      ANDS     R0,R0,#0x200
+   \   00000022   0x9000             STR      R0,[SP, #+0]
+   \   00000024   0x9800             LDR      R0,[SP, #+0]
+    142            
+    143              /**ADC GPIO Configuration    
+    144              PA0-WKUP1     ------> ADC_IN0
+    145              PA4     ------> ADC_IN4 
+    146              */
+    147              GPIO_InitStruct.Pin = AUD_Pin|AUDA4_Pin;
+   \   00000026   0x2011             MOVS     R0,#+17
+   \   00000028   0x9001             STR      R0,[SP, #+4]
+    148              GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+   \   0000002A   0x2003             MOVS     R0,#+3
+   \   0000002C   0x9002             STR      R0,[SP, #+8]
+    149              GPIO_InitStruct.Pull = GPIO_NOPULL;
+   \   0000002E   0x2000             MOVS     R0,#+0
+   \   00000030   0x9003             STR      R0,[SP, #+12]
+    150              HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+   \   00000032   0xA901             ADD      R1,SP,#+4
+   \   00000034   0x....             LDR.N    R0,??DataTable7_3  ;; 0x40020000
+   \   00000036   0x.... 0x....      BL       HAL_GPIO_Init
+    151          
+    152              /* Peripheral DMA init*/
+    153            
+    154              hdma_adc.Instance = DMA1_Channel1;
+   \   0000003A   0x....             LDR.N    R0,??DataTable7_4  ;; 0x40026008
+   \   0000003C   0x....             LDR.N    R1,??DataTable7_5
+   \   0000003E   0x6008             STR      R0,[R1, #+0]
+    155              hdma_adc.Init.Direction = DMA_PERIPH_TO_MEMORY;
+   \   00000040   0x2000             MOVS     R0,#+0
+   \   00000042   0x....             LDR.N    R1,??DataTable7_5
+   \   00000044   0x6048             STR      R0,[R1, #+4]
+    156              hdma_adc.Init.PeriphInc = DMA_PINC_DISABLE;
+   \   00000046   0x2000             MOVS     R0,#+0
+   \   00000048   0x....             LDR.N    R1,??DataTable7_5
+   \   0000004A   0x6088             STR      R0,[R1, #+8]
+    157              hdma_adc.Init.MemInc = DMA_MINC_ENABLE;
+   \   0000004C   0x2080             MOVS     R0,#+128
+   \   0000004E   0x....             LDR.N    R1,??DataTable7_5
+   \   00000050   0x60C8             STR      R0,[R1, #+12]
+    158              hdma_adc.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+   \   00000052   0x2000             MOVS     R0,#+0
+   \   00000054   0x....             LDR.N    R1,??DataTable7_5
+   \   00000056   0x6108             STR      R0,[R1, #+16]
+    159              hdma_adc.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+   \   00000058   0x2000             MOVS     R0,#+0
+   \   0000005A   0x....             LDR.N    R1,??DataTable7_5
+   \   0000005C   0x6148             STR      R0,[R1, #+20]
+    160              hdma_adc.Init.Mode = DMA_NORMAL;
+   \   0000005E   0x2000             MOVS     R0,#+0
+   \   00000060   0x....             LDR.N    R1,??DataTable7_5
+   \   00000062   0x6188             STR      R0,[R1, #+24]
+    161              hdma_adc.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+   \   00000064   0xF44F 0x5040      MOV      R0,#+12288
+   \   00000068   0x....             LDR.N    R1,??DataTable7_5
+   \   0000006A   0x61C8             STR      R0,[R1, #+28]
+    162              if (HAL_DMA_Init(&hdma_adc) != HAL_OK)
+   \   0000006C   0x....             LDR.N    R0,??DataTable7_5
+   \   0000006E   0x.... 0x....      BL       HAL_DMA_Init
+   \   00000072   0x2800             CMP      R0,#+0
+   \   00000074   0xD001             BEQ.N    ??HAL_ADC_MspInit_1
+    163              {
+    164                Error_Handler();
+   \   00000076   0x.... 0x....      BL       Error_Handler
+    165              }
+    166          
+    167              __HAL_LINKDMA(adcHandle,DMA_Handle,hdma_adc);
+   \                     ??HAL_ADC_MspInit_1: (+1)
+   \   0000007A   0x....             LDR.N    R0,??DataTable7_5
+   \   0000007C   0x6460             STR      R0,[R4, #+68]
+   \   0000007E   0x....             LDR.N    R0,??DataTable7_5
+   \   00000080   0x6244             STR      R4,[R0, #+36]
+    168          
+    169            /* USER CODE BEGIN ADC1_MspInit 1 */
+    170          
+    171            /* USER CODE END ADC1_MspInit 1 */
+    172            }
+    173          }
+   \                     ??HAL_ADC_MspInit_0: (+1)
+   \   00000082   0xB006             ADD      SP,SP,#+24
+   \   00000084   0xBD10             POP      {R4,PC}          ;; return
+    174          
+
+   \                                 In section .text, align 2, keep-with-next
+    175          void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
+    176          {
+   \                     HAL_ADC_MspDeInit: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    177          
+    178            if(adcHandle->Instance==ADC1)
+   \   00000004   0x6820             LDR      R0,[R4, #+0]
+   \   00000006   0x....             LDR.N    R1,??DataTable7  ;; 0x40012400
+   \   00000008   0x4288             CMP      R0,R1
+   \   0000000A   0xD10C             BNE.N    ??HAL_ADC_MspDeInit_0
+    179            {
+    180            /* USER CODE BEGIN ADC1_MspDeInit 0 */
+    181          
+    182            /* USER CODE END ADC1_MspDeInit 0 */
+    183              /* Peripheral clock disable */
+    184              __HAL_RCC_ADC1_CLK_DISABLE();
+   \   0000000C   0x....             LDR.N    R0,??DataTable7_2  ;; 0x40023820
+   \   0000000E   0x6800             LDR      R0,[R0, #+0]
+   \   00000010   0xF430 0x7000      BICS     R0,R0,#0x200
+   \   00000014   0x....             LDR.N    R1,??DataTable7_2  ;; 0x40023820
+   \   00000016   0x6008             STR      R0,[R1, #+0]
+    185            
+    186              /**ADC GPIO Configuration    
+    187              PA0-WKUP1     ------> ADC_IN0
+    188              PA4     ------> ADC_IN4 
+    189              */
+    190              HAL_GPIO_DeInit(GPIOA, AUD_Pin|AUDA4_Pin);
+   \   00000018   0x2111             MOVS     R1,#+17
+   \   0000001A   0x....             LDR.N    R0,??DataTable7_3  ;; 0x40020000
+   \   0000001C   0x.... 0x....      BL       HAL_GPIO_DeInit
+    191          
+    192              /* Peripheral DMA DeInit*/
+    193              HAL_DMA_DeInit(adcHandle->DMA_Handle);
+   \   00000020   0x6C60             LDR      R0,[R4, #+68]
+   \   00000022   0x.... 0x....      BL       HAL_DMA_DeInit
+    194            }
+    195            /* USER CODE BEGIN ADC1_MspDeInit 1 */
+    196          
+    197            /* USER CODE END ADC1_MspDeInit 1 */
+    198          } 
+   \                     ??HAL_ADC_MspDeInit_0: (+1)
+   \   00000026   0xBD10             POP      {R4,PC}          ;; return
+    199          
+    200          /* USER CODE BEGIN 1 */
+    201          /**
+    202            * @brief  ADC configuration
+    203            * @param  None
+    204            * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+    205            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    206            *                                HAL_BUSY:     UART is busy.
+    207            *                                HAL_TIMEOUT:  UART timed out.
+    208            */
+
+   \                                 In section .text, align 2, keep-with-next
+    209          HAL_StatusTypeDef ADC_Config(void)
+    210          {
+   \                     ADC_Config: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    211            /* Configuration of AdcHandle init structure: ADC parameters and regular group */
+    212            hadc.Instance = ADCx;
+   \   00000002   0x....             LDR.N    R0,??DataTable7  ;; 0x40012400
+   \   00000004   0x....             LDR.N    R1,??DataTable7_1
+   \   00000006   0x6008             STR      R0,[R1, #+0]
+    213            
+    214            HAL_StatusTypeDef Status;
+    215            
+    216            Status = HAL_ADC_DeInit(&hadc);
+   \   00000008   0x....             LDR.N    R0,??DataTable7_1
+   \   0000000A   0x.... 0x....      BL       HAL_ADC_DeInit
+   \   0000000E   0x0004             MOVS     R4,R0
+    217            if (Status != HAL_OK)
+   \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000012   0x2C00             CMP      R4,#+0
+   \   00000014   0xD002             BEQ.N    ??ADC_Config_0
+    218            {
+    219              /* ADC initialization error */
+    220              return Status;
+   \   00000016   0x0020             MOVS     R0,R4
+   \   00000018   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000001A   0xE04F             B.N      ??ADC_Config_1
+    221            }
+    222          
+    223            hadc.Init.ClockPrescaler        = ADC_CLOCK_ASYNC_DIV4;
+   \                     ??ADC_Config_0: (+1)
+   \   0000001C   0xF45F 0x3000      MOVS     R0,#+131072
+   \   00000020   0x....             LDR.N    R1,??DataTable7_1
+   \   00000022   0x6048             STR      R0,[R1, #+4]
+    224          //  hadc.Init.Resolution            = ADC_RESOLUTION_12B;  ADC_RESOLUTION_8B
+    225            hadc.Init.Resolution            = ADC_RESOLUTION_8B;
+   \   00000024   0xF05F 0x7000      MOVS     R0,#+33554432
+   \   00000028   0x....             LDR.N    R1,??DataTable7_1
+   \   0000002A   0x6088             STR      R0,[R1, #+8]
+    226            hadc.Init.DataAlign             = ADC_DATAALIGN_RIGHT;
+   \   0000002C   0x2000             MOVS     R0,#+0
+   \   0000002E   0x....             LDR.N    R1,??DataTable7_1
+   \   00000030   0x60C8             STR      R0,[R1, #+12]
+    227          //  hadc.Init.ScanConvMode          = ADC_SCAN_ENABLE;               /* Sequencer enabled (ADC conversion on several channels, successively, following settings below) */
+    228            hadc.Init.ScanConvMode          = ADC_SCAN_DISABLE;                /* Sequencer disabled (ADC conversion on only one channel. RP 7/16/16 */
+   \   00000032   0x2000             MOVS     R0,#+0
+   \   00000034   0x....             LDR.N    R1,??DataTable7_1
+   \   00000036   0x6108             STR      R0,[R1, #+16]
+    229            hadc.Init.EOCSelection          = ADC_EOC_SINGLE_CONV;
+   \   00000038   0xF44F 0x6080      MOV      R0,#+1024
+   \   0000003C   0x....             LDR.N    R1,??DataTable7_1
+   \   0000003E   0x6148             STR      R0,[R1, #+20]
+    230            hadc.Init.LowPowerAutoWait      = ADC_AUTOWAIT_DISABLE;
+   \   00000040   0x2000             MOVS     R0,#+0
+   \   00000042   0x....             LDR.N    R1,??DataTable7_1
+   \   00000044   0x6188             STR      R0,[R1, #+24]
+    231            hadc.Init.LowPowerAutoPowerOff  = ADC_AUTOPOWEROFF_DISABLE;
+   \   00000046   0x2000             MOVS     R0,#+0
+   \   00000048   0x....             LDR.N    R1,??DataTable7_1
+   \   0000004A   0x61C8             STR      R0,[R1, #+28]
+    232            hadc.Init.ChannelsBank          = ADC_CHANNELS_BANK_A;
+   \   0000004C   0x2000             MOVS     R0,#+0
+   \   0000004E   0x....             LDR.N    R1,??DataTable7_1
+   \   00000050   0x6208             STR      R0,[R1, #+32]
+    233          //  hadc.Init.ContinuousConvMode    = DISABLE;                       /* Continuous mode disabled to have only 1 rank converted at each conversion trig, and because discontinuous mode is enabled */
+    234            hadc.Init.ContinuousConvMode    = ENABLE;                       /* Continuous mode enabled to have only 1 channel converted continuously. RP 7/16/16 */
+   \   00000052   0x2001             MOVS     R0,#+1
+   \   00000054   0x....             LDR.N    R1,??DataTable7_1
+   \   00000056   0x6248             STR      R0,[R1, #+36]
+    235          //  hadc.Init.NbrOfConversion       = 3;                             /* Sequencer of regular group will convert the 3 first ranks: rank1, rank2, rank3 */
+    236            hadc.Init.NbrOfConversion       = 1;                             /* Sequencer of regular group will convert the first rank: rank1 */
+   \   00000058   0x2001             MOVS     R0,#+1
+   \   0000005A   0x....             LDR.N    R1,??DataTable7_1
+   \   0000005C   0x6288             STR      R0,[R1, #+40]
+    237          //  hadc.Init.DiscontinuousConvMode = ENABLE;                        /* Sequencer of regular group will convert the sequence in several sub-divided sequences */
+    238            hadc.Init.DiscontinuousConvMode = DISABLE;                        /* Will be using Continuous mode on only one channel. RP 7/16/16 */
+   \   0000005E   0x2000             MOVS     R0,#+0
+   \   00000060   0x....             LDR.N    R1,??DataTable7_1
+   \   00000062   0x62C8             STR      R0,[R1, #+44]
+    239          //  hadc.Init.NbrOfDiscConversion   = 1;                             /* Sequencer of regular group will convert ranks one by one, at each conversion trig */
+    240            hadc.Init.ExternalTrigConv      = ADC_SOFTWARE_START;            /* Trig of conversion start done manually by software, without external event */
+   \   00000064   0x2010             MOVS     R0,#+16
+   \   00000066   0x....             LDR.N    R1,??DataTable7_1
+   \   00000068   0x6348             STR      R0,[R1, #+52]
+    241            hadc.Init.ExternalTrigConvEdge  = ADC_EXTERNALTRIGCONVEDGE_NONE;
+   \   0000006A   0x2000             MOVS     R0,#+0
+   \   0000006C   0x....             LDR.N    R1,??DataTable7_1
+   \   0000006E   0x6388             STR      R0,[R1, #+56]
+    242            hadc.Init.DMAContinuousRequests = ENABLE;                        /* ADC-DMA continuous requests to match with DMA configured in circular mode */
+   \   00000070   0x2001             MOVS     R0,#+1
+   \   00000072   0x....             LDR.N    R1,??DataTable7_1
+   \   00000074   0x63C8             STR      R0,[R1, #+60]
+    243            
+    244            Status = HAL_ADC_Init(&hadc);
+   \   00000076   0x....             LDR.N    R0,??DataTable7_1
+   \   00000078   0x.... 0x....      BL       HAL_ADC_Init
+   \   0000007C   0x0004             MOVS     R4,R0
+    245            if (Status != HAL_OK)
+   \   0000007E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000080   0x2C00             CMP      R4,#+0
+   \   00000082   0xD002             BEQ.N    ??ADC_Config_2
+    246            {
+    247              /* ADC initialization error */
+    248                  return Status;
+   \   00000084   0x0020             MOVS     R0,R4
+   \   00000086   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000088   0xE018             B.N      ??ADC_Config_1
+    249            }
+    250            
+    251            /* Configuration of channel on ADCx regular group on sequencer rank 1 */
+    252            /* Note: Considering IT occurring after each ADC conversion (IT by DMA end  */
+    253            /*       of transfer), select sampling time and ADC clock with sufficient   */
+    254            /*       duration to not create an overhead situation in IRQHandler.        */
+    255            /* Note: Set long sampling time due to internal channels (VrefInt,          */
+    256            /*       temperature sensor) constraints.                                   */
+    257            /*       For example, sampling time of temperature sensor must be higher    */
+    258            /*       than 4us. Refer to device datasheet for min/typ/max values.        */
+    259            sConfig.Channel      = RoadBrd_ADC_PORT[ADC_Channel];
+   \                     ??ADC_Config_2: (+1)
+   \   0000008A   0x....             LDR.N    R0,??DataTable7_6
+   \   0000008C   0x....             LDR.N    R1,??DataTable7_7
+   \   0000008E   0x7809             LDRB     R1,[R1, #+0]
+   \   00000090   0xF850 0x0021      LDR      R0,[R0, R1, LSL #+2]
+   \   00000094   0x....             LDR.N    R1,??DataTable7_8
+   \   00000096   0x6008             STR      R0,[R1, #+0]
+    260            sConfig.Rank         = ADC_REGULAR_RANK_1;
+   \   00000098   0x2001             MOVS     R0,#+1
+   \   0000009A   0x....             LDR.N    R1,??DataTable7_8
+   \   0000009C   0x6048             STR      R0,[R1, #+4]
+    261            sConfig.SamplingTime = ADC_SAMPLETIME_96CYCLES;
+   \   0000009E   0x2005             MOVS     R0,#+5
+   \   000000A0   0x....             LDR.N    R1,??DataTable7_8
+   \   000000A2   0x6088             STR      R0,[R1, #+8]
+    262            
+    263            Status = HAL_ADC_ConfigChannel(&hadc, &sConfig);
+   \   000000A4   0x....             LDR.N    R1,??DataTable7_8
+   \   000000A6   0x....             LDR.N    R0,??DataTable7_1
+   \   000000A8   0x.... 0x....      BL       HAL_ADC_ConfigChannel
+   \   000000AC   0x0004             MOVS     R4,R0
+    264            if (Status != HAL_OK)
+   \   000000AE   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   000000B0   0x2C00             CMP      R4,#+0
+   \   000000B2   0xD002             BEQ.N    ??ADC_Config_3
+    265            {
+    266              /* Channel Configuration Error */
+    267              return Status;
+   \   000000B4   0x0020             MOVS     R0,R4
+   \   000000B6   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   000000B8   0xE000             B.N      ??ADC_Config_1
+    268            }
+    269            
+    270            /* Configuration of channel on ADCx regular group on sequencer rank 2 */
+    271            /* Replicate previous rank settings, change only channel and rank */
+    272            //sConfig.Channel      = ADC_CHANNEL_VREFINT;
+    273            //sConfig.Rank         = ADC_REGULAR_RANK_2;
+    274          
+    275            //if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
+    276            //{
+    277            //  /* Channel Configuration Error */
+    278            //  Error_Handler();
+    279            //}
+    280            
+    281            /* Configuration of channel on ADCx regular group on sequencer rank 3 */
+    282            /* Replicate previous rank settings, change only channel and rank */
+    283            //sConfig.Channel      = ADC_CHANNEL_TEMPSENSOR;
+    284            //sConfig.Rank         = ADC_REGULAR_RANK_3;
+    285          
+    286            //if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK)
+    287            //{
+    288            //  /* Channel Configuration Error */
+    289            //  Error_Handler();
+    290            //}
+    291            return HAL_OK;
+   \                     ??ADC_Config_3: (+1)
+   \   000000BA   0x2000             MOVS     R0,#+0
+   \                     ??ADC_Config_1: (+1)
+   \   000000BC   0xBD10             POP      {R4,PC}          ;; return
+    292          }
+    293          
+    294          /**
+    295            * @brief  Enables ADC, starts conversion of regular group.
+    296            *         Interruptions enabled in this function: None.
+    297            * @param  hadc: ADC handle
+    298            * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+    299            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    300            *                                HAL_BUSY:     UART is busy.
+    301            *                                HAL_TIMEOUT:  UART timed out.
+    302            */
+
+   \                                 In section .text, align 2, keep-with-next
+    303          HAL_StatusTypeDef RoadBrd_ADC_Start(uint32_t* pData, uint32_t Length)
+    304          {
+   \                     RoadBrd_ADC_Start: (+1)
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    305            HAL_StatusTypeDef Status;
+    306            
+    307            // 0. Test Flg to determine if we are currently busy.
+    308            if (adcActive == RESET)
+   \   00000006   0x....             LDR.N    R0,??DataTable7_9
+   \   00000008   0x7800             LDRB     R0,[R0, #+0]
+   \   0000000A   0x2800             CMP      R0,#+0
+   \   0000000C   0xD12D             BNE.N    ??RoadBrd_ADC_Start_0
+    309            {
+    310              // 1. Stop DMA if started.
+    311              Status = HAL_ADC_Stop_DMA( &hadc );
+   \   0000000E   0x....             LDR.N    R0,??DataTable7_1
+   \   00000010   0x.... 0x....      BL       HAL_ADC_Stop_DMA
+   \   00000014   0x0006             MOVS     R6,R0
+    312              if (Status == HAL_OK)
+   \   00000016   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000018   0x2E00             CMP      R6,#+0
+   \   0000001A   0xD123             BNE.N    ??RoadBrd_ADC_Start_1
+    313              {
+    314                // 2. Re-start DMA with passed parameters.
+    315                Status = HAL_ADC_Start_DMA(&hadc, pData, Length );
+   \   0000001C   0x002A             MOVS     R2,R5
+   \   0000001E   0x0021             MOVS     R1,R4
+   \   00000020   0x....             LDR.N    R0,??DataTable7_1
+   \   00000022   0x.... 0x....      BL       HAL_ADC_Start_DMA
+   \   00000026   0x0006             MOVS     R6,R0
+    316                if (Status == HAL_OK)
+   \   00000028   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   0000002A   0x2E00             CMP      R6,#+0
+   \   0000002C   0xD117             BNE.N    ??RoadBrd_ADC_Start_2
+    317                {
+    318                  // 3. Reset tracking flag so that we can continue operation.
+    319                  adcActive = SET;                        // We are now busy with ADC event.
+   \   0000002E   0x2001             MOVS     R0,#+1
+   \   00000030   0x....             LDR.N    R1,??DataTable7_9
+   \   00000032   0x7008             STRB     R0,[R1, #+0]
+    320                  ubSequenceCompleted = RESET;            // Ready to start event.
+   \   00000034   0x2000             MOVS     R0,#+0
+   \   00000036   0x....             LDR.N    R1,??DataTable7_10
+   \   00000038   0x7008             STRB     R0,[R1, #+0]
+    321                  // 4. Start ADC operation.
+    322                  Status = HAL_ADC_Start(&hadc);
+   \   0000003A   0x....             LDR.N    R0,??DataTable7_1
+   \   0000003C   0x.... 0x....      BL       HAL_ADC_Start
+   \   00000040   0x0006             MOVS     R6,R0
+    323                  if (Status == HAL_OK)
+   \   00000042   0xB2F6             UXTB     R6,R6            ;; ZeroExt  R6,R6,#+24,#+24
+   \   00000044   0x2E00             CMP      R6,#+0
+   \   00000046   0xD104             BNE.N    ??RoadBrd_ADC_Start_3
+    324                  {
+    325                    adcActive = SET;
+   \   00000048   0x2001             MOVS     R0,#+1
+   \   0000004A   0x....             LDR.N    R1,??DataTable7_9
+   \   0000004C   0x7008             STRB     R0,[R1, #+0]
+    326                    return HAL_OK;              // ADC Tasked with no errors.
+   \   0000004E   0x2000             MOVS     R0,#+0
+   \   00000050   0xE00C             B.N      ??RoadBrd_ADC_Start_4
+    327                  }
+    328                  else
+    329                  {
+    330                    adcActive = RESET;          // Event never started. Reset.
+   \                     ??RoadBrd_ADC_Start_3: (+1)
+   \   00000052   0x2000             MOVS     R0,#+0
+   \   00000054   0x....             LDR.N    R1,??DataTable7_9
+   \   00000056   0x7008             STRB     R0,[R1, #+0]
+    331                    return Status;
+   \   00000058   0x0030             MOVS     R0,R6
+   \   0000005A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000005C   0xE006             B.N      ??RoadBrd_ADC_Start_4
+    332                  }
+    333                } //Endif (Status == HAL_OK)
+    334                else
+    335                  return Status;
+   \                     ??RoadBrd_ADC_Start_2: (+1)
+   \   0000005E   0x0030             MOVS     R0,R6
+   \   00000060   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000062   0xE003             B.N      ??RoadBrd_ADC_Start_4
+    336              } //Endif (Status == HAL_OK)
+    337              else
+    338                return Status;
+   \                     ??RoadBrd_ADC_Start_1: (+1)
+   \   00000064   0x0030             MOVS     R0,R6
+   \   00000066   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000068   0xE000             B.N      ??RoadBrd_ADC_Start_4
+    339            } //Endif (adcActive == RESET)
+    340            else
+    341              return HAL_BUSY;            // ADC Busy.
+   \                     ??RoadBrd_ADC_Start_0: (+1)
+   \   0000006A   0x2002             MOVS     R0,#+2
+   \                     ??RoadBrd_ADC_Start_4: (+1)
+   \   0000006C   0xBD70             POP      {R4-R6,PC}       ;; return
+    342          }
+    343          
+    344          /**
+    345            * @brief  Returns status of the ADC Channel that is selected.
+    346            * @param  none.
+    347            * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+    348            *                                HAL_BUSY:     UART is busy.
+    349            */
+
+   \                                 In section .text, align 2, keep-with-next
+    350          HAL_StatusTypeDef RoadBrd_ADC_Status( void )
+    351          {
+    352            if (adcActive == SET)
+   \                     RoadBrd_ADC_Status: (+1)
+   \   00000000   0x....             LDR.N    R0,??DataTable7_9
+   \   00000002   0x7800             LDRB     R0,[R0, #+0]
+   \   00000004   0x2801             CMP      R0,#+1
+   \   00000006   0xD101             BNE.N    ??RoadBrd_ADC_Status_0
+    353              return HAL_BUSY;
+   \   00000008   0x2002             MOVS     R0,#+2
+   \   0000000A   0xE000             B.N      ??RoadBrd_ADC_Status_1
+    354            else
+    355              return HAL_OK;
+   \                     ??RoadBrd_ADC_Status_0: (+1)
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \                     ??RoadBrd_ADC_Status_1: (+1)
+   \   0000000E   0x4770             BX       LR               ;; return
+    356          }
+    357          
+    358          /**
+    359            * @brief  Sets the new Channel and initializes the Channel
+    360            * @param  RoadBrd_adc_TypeDef NewChannel: New Channel to be used for sampling.
+    361            * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+    362            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    363            *                                HAL_BUSY:     UART is busy.
+    364            *                                HAL_TIMEOUT:  UART timed out.
+    365            */
+
+   \                                 In section .text, align 2, keep-with-next
+    366          HAL_StatusTypeDef RoadBrd_ADC_SetChannel( RoadBrd_adc_TypeDef NewChannel )
+    367          {
+   \                     RoadBrd_ADC_SetChannel: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    368            HAL_StatusTypeDef Status;
+    369            
+    370            if (NewChannel != Old_ADC_Channel)
+   \   00000004   0x0020             MOVS     R0,R4
+   \   00000006   0x....             LDR.N    R1,??DataTable7_11
+   \   00000008   0x7809             LDRB     R1,[R1, #+0]
+   \   0000000A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000000C   0x4288             CMP      R0,R1
+   \   0000000E   0xD01A             BEQ.N    ??RoadBrd_ADC_SetChannel_0
+    371            {
+    372              // Set Channel Variable.
+    373              ADC_Channel = NewChannel;
+   \   00000010   0x....             LDR.N    R0,??DataTable7_7
+   \   00000012   0x7004             STRB     R4,[R0, #+0]
+    374              // Now, attempt to reinitialize with new settings.
+    375              Status = ADC_Config();
+   \   00000014   0x.... 0x....      BL       ADC_Config
+   \   00000018   0x0005             MOVS     R5,R0
+    376              if (Status != HAL_OK)
+   \   0000001A   0xB2ED             UXTB     R5,R5            ;; ZeroExt  R5,R5,#+24,#+24
+   \   0000001C   0x2D00             CMP      R5,#+0
+   \   0000001E   0xD006             BEQ.N    ??RoadBrd_ADC_SetChannel_1
+    377              {
+    378                // Reset ADC_Channel to original value.
+    379                ADC_Channel = Old_ADC_Channel;
+   \   00000020   0x....             LDR.N    R0,??DataTable7_11
+   \   00000022   0x7800             LDRB     R0,[R0, #+0]
+   \   00000024   0x....             LDR.N    R1,??DataTable7_7
+   \   00000026   0x7008             STRB     R0,[R1, #+0]
+    380          
+    381                /* ADC initialization error */
+    382                return Status;
+   \   00000028   0x0028             MOVS     R0,R5
+   \   0000002A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000002C   0xE00C             B.N      ??RoadBrd_ADC_SetChannel_2
+    383              }
+    384              // OK. Update Old_ADC_Channel.
+    385              Old_ADC_Channel = ADC_Channel;
+   \                     ??RoadBrd_ADC_SetChannel_1: (+1)
+   \   0000002E   0x....             LDR.N    R0,??DataTable7_7
+   \   00000030   0x7800             LDRB     R0,[R0, #+0]
+   \   00000032   0x....             LDR.N    R1,??DataTable7_11
+   \   00000034   0x7008             STRB     R0,[R1, #+0]
+    386              // Reset flags.
+    387              ubSequenceCompleted = RESET;     /* Set when all ranks of the sequence have been converted */
+   \   00000036   0x2000             MOVS     R0,#+0
+   \   00000038   0x....             LDR.N    R1,??DataTable7_10
+   \   0000003A   0x7008             STRB     R0,[R1, #+0]
+    388              adcActive = RESET;               /* If this flag is set, we currently have an active ADC event. */
+   \   0000003C   0x2000             MOVS     R0,#+0
+   \   0000003E   0x....             LDR.N    R1,??DataTable7_9
+   \   00000040   0x7008             STRB     R0,[R1, #+0]
+    389              return HAL_OK;
+   \   00000042   0x2000             MOVS     R0,#+0
+   \   00000044   0xE000             B.N      ??RoadBrd_ADC_SetChannel_2
+    390            }
+    391            else
+    392              return HAL_OK;
+   \                     ??RoadBrd_ADC_SetChannel_0: (+1)
+   \   00000046   0x2000             MOVS     R0,#+0
+   \                     ??RoadBrd_ADC_SetChannel_2: (+1)
+   \   00000048   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+    393          }
+    394          
+    395          /**
+    396            * @brief  Conversion complete callback in non blocking mode
+    397            * @param  AdcHandle : ADC handle
+    398            * @note   This example shows a simple way to report end of conversion
+    399            *         and get conversion result. You can add your own implementation.
+    400            * @retval None
+    401            */
+
+   \                                 In section .text, align 2, keep-with-next
+    402          void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *AdcHandle)
+    403          {
+    404            /* Report to main program that ADC sequencer has reached its end */
+    405            ubSequenceCompleted = SET;
+   \                     HAL_ADC_ConvCpltCallback: (+1)
+   \   00000000   0x2101             MOVS     R1,#+1
+   \   00000002   0x....             LDR.N    R2,??DataTable7_10
+   \   00000004   0x7011             STRB     R1,[R2, #+0]
+    406            adcActive = RESET;
+   \   00000006   0x2100             MOVS     R1,#+0
+   \   00000008   0x....             LDR.N    R2,??DataTable7_9
+   \   0000000A   0x7011             STRB     R1,[R2, #+0]
+    407          }
+   \   0000000C   0x4770             BX       LR               ;; return
+    408          
+    409          /**
+    410            * @brief  Conversion DMA half-transfer callback in non blocking mode 
+    411            * @param  hadc: ADC handle
+    412            * @retval None
+    413            */
+
+   \                                 In section .text, align 2, keep-with-next
+    414          void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef* hadc)
+    415          {
+    416          
+    417          }
+   \                     HAL_ADC_ConvHalfCpltCallback: (+1)
+   \   00000000   0x4770             BX       LR               ;; return
+    418          
+    419          /**
+    420            * @brief  ADC error callback in non blocking mode
+    421            *        (ADC conversion with interruption or transfer by DMA)
+    422            * @param  hadc: ADC handle
+    423            * @retval None
+    424            */
+
+   \                                 In section .text, align 2, keep-with-next
+    425          void HAL_ADC_ErrorCallback(ADC_HandleTypeDef *hadc)
+    426          {
+   \                     HAL_ADC_ErrorCallback: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    427            /* In case of ADC error, call main error handler */
+    428            Error_Handler();
+   \   00000004   0x.... 0x....      BL       Error_Handler
+    429          }
+   \   00000008   0xBD10             POP      {R4,PC}          ;; return
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7:
+   \   00000000   0x40012400         DC32     0x40012400
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_1:
+   \   00000000   0x........         DC32     hadc
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_2:
+   \   00000000   0x40023820         DC32     0x40023820
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_3:
+   \   00000000   0x40020000         DC32     0x40020000
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_4:
+   \   00000000   0x40026008         DC32     0x40026008
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_5:
+   \   00000000   0x........         DC32     hdma_adc
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_6:
+   \   00000000   0x........         DC32     RoadBrd_ADC_PORT
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_7:
+   \   00000000   0x........         DC32     ADC_Channel
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_8:
+   \   00000000   0x........         DC32     sConfig
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_9:
+   \   00000000   0x........         DC32     adcActive
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_10:
+   \   00000000   0x........         DC32     ubSequenceCompleted
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable7_11:
+   \   00000000   0x........         DC32     Old_ADC_Channel
+    430          
+    431          
+    432          /* USER CODE END 1 */
+    433          
+    434          /**
+    435            * @}
+    436            */
+    437          
+    438          /**
+    439            * @}
+    440            */
+    441          
+    442          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   ADC_Config
+         8   -> HAL_ADC_ConfigChannel
+         8   -> HAL_ADC_DeInit
+         8   -> HAL_ADC_Init
+       0   HAL_ADC_ConvCpltCallback
+       0   HAL_ADC_ConvHalfCpltCallback
+       8   HAL_ADC_ErrorCallback
+         8   -> Error_Handler
+       8   HAL_ADC_MspDeInit
+         8   -> HAL_DMA_DeInit
+         8   -> HAL_GPIO_DeInit
+      32   HAL_ADC_MspInit
+        32   -> Error_Handler
+        32   -> HAL_DMA_Init
+        32   -> HAL_GPIO_Init
+      16   MX_ADC_Init
+        16   -> Error_Handler
+        16   -> HAL_ADC_ConfigChannel
+        16   -> HAL_ADC_Init
+      16   RoadBrd_ADC_SetChannel
+        16   -> ADC_Config
+      16   RoadBrd_ADC_Start
+        16   -> HAL_ADC_Start
+        16   -> HAL_ADC_Start_DMA
+        16   -> HAL_ADC_Stop_DMA
+       0   RoadBrd_ADC_Status
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable7
+       4  ??DataTable7_1
+       4  ??DataTable7_10
+       4  ??DataTable7_11
+       4  ??DataTable7_2
+       4  ??DataTable7_3
+       4  ??DataTable7_4
+       4  ??DataTable7_5
+       4  ??DataTable7_6
+       4  ??DataTable7_7
+       4  ??DataTable7_8
+       4  ??DataTable7_9
+       1  ADC_Channel
+     190  ADC_Config
+      14  HAL_ADC_ConvCpltCallback
+       2  HAL_ADC_ConvHalfCpltCallback
+      10  HAL_ADC_ErrorCallback
+      40  HAL_ADC_MspDeInit
+     134  HAL_ADC_MspInit
+     136  MX_ADC_Init
+       1  Old_ADC_Channel
+      12  RoadBrd_ADC_PORT
+      74  RoadBrd_ADC_SetChannel
+     110  RoadBrd_ADC_Start
+      16  RoadBrd_ADC_Status
+       1  adcActive
+      84  hadc
+      56  hdma_adc
+      12  sConfig
+       1  ubSequenceCompleted
+
+ 
+ 156 bytes in section .bss
+  12 bytes in section .data
+ 774 bytes in section .text
+ 
+ 774 bytes of CODE memory
+ 168 bytes of DATA memory
+
+Errors: none
+Warnings: none

@@ -1,0 +1,875 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       12/Sep/2017  11:30:01
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\Calibration.c
+#    Command line =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\Calibration.c
+#        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
+#        REV_L -D LONG_DELAY -D XML_SHRT -lCN
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\List" -o
+#        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --no_clustering --no_scheduling --debug
+#        --endian=little --cpu=Cortex-M3 -e --fpu=None --dlib_config
+#        "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        7.4\arm\INC\c\DLib_Config_Full.h" -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/BSP/STM32L1xx_Nucleo\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\..\Middlewares\Third_Party\BgLib\
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.4\arm\CMSIS\Include\"
+#    Locale       =  English_United States.1252
+#    List file    =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\List\Calibration.lst
+#    Object file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
+#        XMLShrt Long Always\Obj\Calibration.o
+#
+###############################################################################
+
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\Calibration.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : Calibration.c
+      4            * Description        : This file provides code for the implementation of the 
+      5            * Calibration code used to calibrate the Sensors and measurements.
+      6            ******************************************************************************
+      7            *
+      8            * COPYRIGHT(c) 2016 WeatherCloud
+      9            *
+     10            * Redistribution and use in source and binary forms, with or without modification,
+     11            * are permitted provided that the following conditions are met:
+     12            *   1. Redistributions of source code must retain the above copyright notice,
+     13            *      this list of conditions and the following disclaimer.
+     14            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     15            *      this list of conditions and the following disclaimer in the documentation
+     16            *      and/or other materials provided with the distribution.
+     17            *   3. Neither the name of WeatherCloud nor the names of its contributors
+     18            *      may be used to endorse or promote products derived from this software
+     19            *      without specific prior written permission.
+     20            *
+     21            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     22            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     23            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     24            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     25            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     26            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     27            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     28            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     29            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     30            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     31            *
+     32            ******************************************************************************
+     33            */
+     34          
+     35          /* Includes ------------------------------------------------------------------*/
+     36          #include "Calibration.h"
+     37          #include "Flash.h"
+     38          #include "wwdg.h"
+     39          
+     40          /* Variables and buffer definitions */
+     41          
+     42          // Frame Structure Define
+     43          // Will base new Flash Structure to be a modulo 256 to align to a second Flash Page to ensure it works with the previous structure.
+     44          // The previous structure is wwdg_Frames and must be an even Page length.
+
+   \                                 In section .bss, at 0x8070100
+     45          Calibration_Frames Calibration_HardFrames  @ (BASE_FLASH_ADDRESS + ((sizeof(wwdg_Frames) - (sizeof(wwdg_Frames)%256)) + 256));
+   \                     Calibration_HardFrames:
+   \   00000000                      DS8 200
+
+   \                                 In section .bss, align 4
+     46          static Calibration_Frames Cal_Save_Frames;
+   \                     Cal_Save_Frames:
+   \   00000000                      DS8 200
+     47          
+     48          // Constant Strings Definition
+
+   \                                 In section .rodata, align 4
+     49          const char * const SensorStrings[] = { "Shnt_Vltg	",          // CODE 000: CAL_SHNT_VLTG/ Calibration Shunt Voltage String
+   \                     SensorStrings:
+   \   00000000   0x........         DC32 ?_0, ?_1, ?_2, ?_3, ?_4, ?_5, ?_6, ?_7, ?_8, ?_9, ?_10, ?_11, ?_12
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \   00000034   0x........         DC32 ?_13, ?_14, ?_15, ?_16, ?_17, ?_18, ?_19, ?_20, ?_21, ?_22, ?_22
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \              0x........   
+   \   00000060   0x........         DC32 ?_22
+     50                                              "Current	",                  // CODE 001: CAL_CURRENT/ Calibration Current String
+     51                                              "Power		",          // CODE 002: CAL_POWER/ Calibration Power String
+     52                                              "Voltage	",                  // CODE 003: CAL_VOLTAGE/ Calibration Voltage String
+     53                                              "TempC		",          // CODE 004: CAL_TEMPC/ Calibration Temperature C String
+     54                                              "TempF		",          // CODE 005: CAL_TEMPF/ Calibration Temperature F String
+     55                                              "Pressure	",                  // CODE 006: CAL_PRESSURE/ Calibration Pressure String
+     56                                              "Humidity	",                  // CODE 007: CAL_HUMIDITY/ Calibration Humidity String
+     57                                              "Hum_TempC	",                  // CODE 008: CAL_HUM_TEMPC/ Calibration Humidity Temperature C String
+     58                                              "Hum_TempF	",                  // CODE 009: CAL_HUM_TEMPF/ Calibration Humidity Temperature F String
+     59                                              "RGB_Red	",                  // CODE 010: CAL_RGB_RED/ Calibration RGB Sensor Red String
+     60                                              "RGB_Green	",                  // CODE 011: CAL_RGB_GREEN/ Calibration RGB Sensor Green String
+     61                                              "RGB_Blue	",                  // CODE 012: CAL_RGB_BLUE/ Calibration RGB Sensor Blue String
+     62                                              "Therm_C	",                  // CODE 013: CAL_THERM_C/ Calibration Thermistor String
+     63                                              "RoadT_1C	",                  // CODE 014: CAL_ROADT_1C/ Calibration Road Temperature Sensor 1 String
+     64                                              "RoadT_2C	",                  // CODE 015: CAL_ROADT_1C/ Calibration Road Temperature Sensor 2 String
+     65                                              "RoadT_3C	",                  // CODE 016: CAL_ROADT_1C/ Calibration Road Temperature Sensor 3 String
+     66                                              "RoadT_4C	",                  // CODE 017: CAL_ROADT_1C/ Calibration Road Temperature Sensor 4 String
+     67                                              "RoadT_5C	",                  // CODE 018: CAL_ROADT_1C/ Calibration Road Temperature Sensor 5 String
+     68                                              "RoadT_6C	",                  // CODE 019: CAL_ROADT_1C/ Calibration Road Temperature Sensor 6 String
+     69                                              "RoadT_7C	",                  // CODE 020: CAL_ROADT_1C/ Calibration Road Temperature Sensor 7 String
+     70                                              "RoadT_8C	",                  // CODE 021: CAL_ROADT_1C/ Calibration Road Temperature Sensor 8 String
+     71                                              "       ",                      // CODE 022: NULL...
+     72                                              "       ",                      // CODE 023: NULL...
+     73                                              "       " };                    // CODE 024: NULL...
+     74          
+     75          /**
+     76          * @brief  This function verifies the WWDG Flash Frame Structure.
+     77          * @param  none
+     78          * @retval bool:     true:       Valid Frames
+     79          *                   false:      Frame Bad.
+     80          */
+
+   \                                 In section .text, align 2, keep-with-next
+     81          bool RoadBrd_CAL_VerifyFrame( void )
+     82          {
+   \                     RoadBrd_CAL_VerifyFrame: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+     83            HAL_StatusTypeDef Status;
+     84            
+     85            Status = HAL_OK;
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x0004             MOVS     R4,R0
+     86            // Read Frame from Flash.
+     87            Status = RoadBrd_FlashRead(  (uint32_t)&Calibration_HardFrames, (uint32_t *)&Cal_Save_Frames, sizeof(Cal_Save_Frames));
+   \   00000006   0x22C8             MOVS     R2,#+200
+   \   00000008   0x....             LDR.N    R1,??DataTable9
+   \   0000000A   0x....             LDR.N    R0,??DataTable9_1  ;; 0x8070100
+   \   0000000C   0x.... 0x....      BL       RoadBrd_FlashRead
+   \   00000010   0x0004             MOVS     R4,R0
+     88            // Compare SYnc Workd and return status.
+     89            if (Status != HAL_OK)
+   \   00000012   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000014   0x2C00             CMP      R4,#+0
+   \   00000016   0xD001             BEQ.N    ??RoadBrd_CAL_VerifyFrame_0
+     90              return false;
+   \   00000018   0x2000             MOVS     R0,#+0
+   \   0000001A   0xE007             B.N      ??RoadBrd_CAL_VerifyFrame_1
+     91            else
+     92            {
+     93              if (Cal_Save_Frames.checksum == CALIBRATION_CHKSUM)
+   \                     ??RoadBrd_CAL_VerifyFrame_0: (+1)
+   \   0000001C   0x....             LDR.N    R0,??DataTable9
+   \   0000001E   0x6800             LDR      R0,[R0, #+0]
+   \   00000020   0xF1B0 0x3F5A      CMP      R0,#+1515870810
+   \   00000024   0xD101             BNE.N    ??RoadBrd_CAL_VerifyFrame_2
+     94                return true;
+   \   00000026   0x2001             MOVS     R0,#+1
+   \   00000028   0xE000             B.N      ??RoadBrd_CAL_VerifyFrame_1
+     95              else
+     96                return false;
+   \                     ??RoadBrd_CAL_VerifyFrame_2: (+1)
+   \   0000002A   0x2000             MOVS     R0,#+0
+   \                     ??RoadBrd_CAL_VerifyFrame_1: (+1)
+   \   0000002C   0xBD10             POP      {R4,PC}          ;; return
+   \   0000002E                      REQUIRE Calibration_HardFrames
+     97            }
+     98          }
+     99          
+    100          /**
+    101          * @brief  This function initializes the Calibration Structure.
+    102          * @param  none
+    103          * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    104          *                                HAL_ERROR:    Error found in Tasking or data passed.
+    105          *                                HAL_BUSY:     Flash is busy.
+    106          *                                HAL_TIMEOUT:  Flash timed out.
+    107          */
+
+   \                                 In section .text, align 2, keep-with-next
+    108          HAL_StatusTypeDef RoadBrd_CAL_InitializeFrmFlash( void )
+    109          {
+   \                     RoadBrd_CAL_InitializeFrmFlash: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+    110            HAL_StatusTypeDef Status;
+    111            int x;
+    112            
+    113            Status = HAL_OK;
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x0004             MOVS     R4,R0
+    114            // Initialize Key Structures of Frame
+    115            Cal_Save_Frames.checksum = CALIBRATION_CHKSUM;
+   \   00000006   0xF05F 0x305A      MOVS     R0,#+1515870810
+   \   0000000A   0x....             LDR.N    R1,??DataTable9
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+    116            strcpy( (char *)Cal_Save_Frames.TimeString, "-------EMPTY-------");
+   \   0000000E   0x....             LDR.N    R1,??DataTable9_2
+   \   00000010   0x....             LDR.N    R0,??DataTable9_3
+   \   00000012   0x.... 0x....      BL       strcpy
+    117            for (x=0; x<CALIBRATION_DATA_SIZE; x++)
+   \   00000016   0x2000             MOVS     R0,#+0
+   \   00000018   0x0005             MOVS     R5,R0
+   \                     ??RoadBrd_CAL_InitializeFrmFlash_0: (+1)
+   \   0000001A   0x2D16             CMP      R5,#+22
+   \   0000001C   0xDA0C             BGE.N    ??RoadBrd_CAL_InitializeFrmFlash_1
+    118            {
+    119              Cal_Save_Frames.Cal_Entry[x].offset = 0.0;
+   \   0000001E   0x2000             MOVS     R0,#+0
+   \   00000020   0x....             LDR.N    R1,??DataTable9
+   \   00000022   0xEB01 0x01C5      ADD      R1,R1,R5, LSL #+3
+   \   00000026   0x6088             STR      R0,[R1, #+8]
+    120              Cal_Save_Frames.Cal_Entry[x].slope = 1.0;
+   \   00000028   0xF05F 0x507E      MOVS     R0,#+1065353216
+   \   0000002C   0x....             LDR.N    R1,??DataTable9
+   \   0000002E   0xEB01 0x01C5      ADD      R1,R1,R5, LSL #+3
+   \   00000032   0x6048             STR      R0,[R1, #+4]
+    121            }
+   \   00000034   0x1C6D             ADDS     R5,R5,#+1
+   \   00000036   0xE7F0             B.N      ??RoadBrd_CAL_InitializeFrmFlash_0
+    122            // Write Structure to Flash Memory.
+    123            Status = RoadBrd_FlashWrite( 0x00, 
+    124                                         FLASH_TYPEERASE_PAGES, 
+    125                                         (uint32_t)&Calibration_HardFrames, 
+    126                                         (uint32_t *)&Cal_Save_Frames, 
+    127                                         sizeof(Cal_Save_Frames));
+   \                     ??RoadBrd_CAL_InitializeFrmFlash_1: (+1)
+   \   00000038   0x20C8             MOVS     R0,#+200
+   \   0000003A   0x9000             STR      R0,[SP, #+0]
+   \   0000003C   0x....             LDR.N    R3,??DataTable9
+   \   0000003E   0x....             LDR.N    R2,??DataTable9_1  ;; 0x8070100
+   \   00000040   0x2100             MOVS     R1,#+0
+   \   00000042   0x2000             MOVS     R0,#+0
+   \   00000044   0x.... 0x....      BL       RoadBrd_FlashWrite
+   \   00000048   0x0004             MOVS     R4,R0
+    128            return Status;
+   \   0000004A   0x0020             MOVS     R0,R4
+   \   0000004C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000004E   0xBD32             POP      {R1,R4,R5,PC}    ;; return
+   \   00000050                      REQUIRE Calibration_HardFrames
+    129          }
+    130          
+    131            /**
+    132            * @brief  This function Reads the Calibration Structure from Flash..
+    133            * @param  none
+    134            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    135            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    136            *                                HAL_BUSY:     Flash is busy.
+    137            *                                HAL_TIMEOUT:  Flash timed out.
+    138            */
+
+   \                                 In section .text, align 2, keep-with-next
+    139          HAL_StatusTypeDef RoadBrd_CAL_ReadFrmFlash( void )
+    140          {
+   \                     RoadBrd_CAL_ReadFrmFlash: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+    141            HAL_StatusTypeDef Status;
+    142            
+    143            Status = HAL_OK;
+   \   00000002   0x2000             MOVS     R0,#+0
+   \   00000004   0x0004             MOVS     R4,R0
+    144            // Read Structure from Flash Memory.
+    145            Status = RoadBrd_FlashRead(  (uint32_t)&Calibration_HardFrames, 
+    146                                         (uint32_t *)&Cal_Save_Frames, 
+    147                                         sizeof(Cal_Save_Frames));
+   \   00000006   0x22C8             MOVS     R2,#+200
+   \   00000008   0x....             LDR.N    R1,??DataTable9
+   \   0000000A   0x....             LDR.N    R0,??DataTable9_1  ;; 0x8070100
+   \   0000000C   0x.... 0x....      BL       RoadBrd_FlashRead
+   \   00000010   0x0004             MOVS     R4,R0
+    148            return Status;
+   \   00000012   0x0020             MOVS     R0,R4
+   \   00000014   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000016   0xBD10             POP      {R4,PC}          ;; return
+   \   00000018                      REQUIRE Calibration_HardFrames
+    149          }
+    150          
+    151            /**
+    152            * @brief  This function writes the Calibration Structure to Flash..
+    153            * @param  none
+    154            * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+    155            *                                HAL_ERROR:    Error found in Tasking or data passed.
+    156            *                                HAL_BUSY:     Flash is busy.
+    157            *                                HAL_TIMEOUT:  Flash timed out.
+    158            */
+
+   \                                 In section .text, align 2, keep-with-next
+    159          HAL_StatusTypeDef RoadBrd_CAL_WriteFrmFlash( void )
+    160          {
+   \                     RoadBrd_CAL_WriteFrmFlash: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0xB082             SUB      SP,SP,#+8
+    161            HAL_StatusTypeDef Status;
+    162            
+    163            Status = HAL_OK;
+   \   00000004   0x2000             MOVS     R0,#+0
+   \   00000006   0x0004             MOVS     R4,R0
+    164            // Write Structure to Flash Memory.
+    165            Status = RoadBrd_FlashWrite( 0x00, 
+    166                                         FLASH_TYPEERASE_PAGES, 
+    167                                         (uint32_t)&Calibration_HardFrames, 
+    168                                         (uint32_t *)&Cal_Save_Frames, 
+    169                                         sizeof(Cal_Save_Frames));
+   \   00000008   0x20C8             MOVS     R0,#+200
+   \   0000000A   0x9000             STR      R0,[SP, #+0]
+   \   0000000C   0x....             LDR.N    R3,??DataTable9
+   \   0000000E   0x....             LDR.N    R2,??DataTable9_1  ;; 0x8070100
+   \   00000010   0x2100             MOVS     R1,#+0
+   \   00000012   0x2000             MOVS     R0,#+0
+   \   00000014   0x.... 0x....      BL       RoadBrd_FlashWrite
+   \   00000018   0x0004             MOVS     R4,R0
+    170            return Status;
+   \   0000001A   0x0020             MOVS     R0,R4
+   \   0000001C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000001E   0xBD16             POP      {R1,R2,R4,PC}    ;; return
+   \   00000020                      REQUIRE Calibration_HardFrames
+    171          }
+    172          
+    173          /**
+    174            * @brief  This function initializes the Calibration Structure.
+    175            * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    176            * @param  float Offset:                Offset to be set into indexed Cal Item.
+    177            * @param  float Slope:                 Slope to be set into indexed Cal Item.
+    178            * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    179            * @retval HAL_StatusTypeDef:     HAL_OK:       Operation success.
+    180            *                                HAL_ERROR:    found in Tasking or data passed.
+    181            */
+
+   \                                 In section .text, align 2, keep-with-next
+    182          float RoadBrd_CAL_ScaleValue( Cal_Characteristic Cal_Item, float Old_value)
+    183          {
+   \                     RoadBrd_CAL_ScaleValue: (+1)
+   \   00000000   0xB570             PUSH     {R4-R6,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+    184            return ( (RoadBrd_CAL_GetSlope(Cal_Item) * Old_value) + RoadBrd_CAL_GetOffset(Cal_Item));
+   \   00000006   0x0020             MOVS     R0,R4
+   \   00000008   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000000A   0x.... 0x....      BL       RoadBrd_CAL_GetSlope
+   \   0000000E   0x0029             MOVS     R1,R5
+   \   00000010   0x.... 0x....      BL       __aeabi_fmul
+   \   00000014   0x0006             MOVS     R6,R0
+   \   00000016   0x0020             MOVS     R0,R4
+   \   00000018   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000001A   0x.... 0x....      BL       RoadBrd_CAL_GetOffset
+   \   0000001E   0x0031             MOVS     R1,R6
+   \   00000020   0x.... 0x....      BL       __aeabi_fadd
+   \   00000024   0xBD70             POP      {R4-R6,PC}       ;; return
+    185          }
+    186          
+    187          /**
+    188            * @brief  This function initializes the Calibration Structure.
+    189            * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    190            * @param  float Offset:                Offset to be set into indexed Cal Item.
+    191            * @param  float Slope:                 Slope to be set into indexed Cal Item.
+    192            * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    193            * @retval HAL_StatusTypeDef:     HAL_OK:       Operation success.
+    194            *                                HAL_ERROR:    found in Tasking or data passed.
+    195            */
+
+   \                                 In section .text, align 2, keep-with-next
+    196          HAL_StatusTypeDef RoadBrd_CAL_Set_CalItem( Cal_Characteristic Cal_Item,
+    197                                                     float Offset, 
+    198                                                     float Slope)
+    199          {
+   \                     RoadBrd_CAL_Set_CalItem: (+1)
+   \   00000000   0xB5F8             PUSH     {R3-R7,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+   \   00000004   0x000D             MOVS     R5,R1
+   \   00000006   0x0016             MOVS     R6,R2
+    200            if (Cal_Item < CAL_LAST_VALUE)
+   \   00000008   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000000A   0x2C16             CMP      R4,#+22
+   \   0000000C   0xDA0F             BGE.N    ??RoadBrd_CAL_Set_CalItem_0
+    201            {
+    202              HAL_StatusTypeDef Status;
+    203          
+    204              Cal_Save_Frames.Cal_Entry[Cal_Item].offset = Offset;
+   \   0000000E   0x....             LDR.N    R0,??DataTable9
+   \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000012   0xEB00 0x00C4      ADD      R0,R0,R4, LSL #+3
+   \   00000016   0x6085             STR      R5,[R0, #+8]
+    205              Cal_Save_Frames.Cal_Entry[Cal_Item].slope = Slope;
+   \   00000018   0x....             LDR.N    R0,??DataTable9
+   \   0000001A   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   0000001C   0xEB00 0x00C4      ADD      R0,R0,R4, LSL #+3
+   \   00000020   0x6046             STR      R6,[R0, #+4]
+    206              // OK...Time to update Flash.
+    207              Status = RoadBrd_CAL_WriteFrmFlash();
+   \   00000022   0x.... 0x....      BL       RoadBrd_CAL_WriteFrmFlash
+   \   00000026   0x0007             MOVS     R7,R0
+    208              return Status;
+   \   00000028   0x0038             MOVS     R0,R7
+   \   0000002A   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   0000002C   0xE000             B.N      ??RoadBrd_CAL_Set_CalItem_1
+    209            }
+    210            return HAL_ERROR;
+   \                     ??RoadBrd_CAL_Set_CalItem_0: (+1)
+   \   0000002E   0x2001             MOVS     R0,#+1
+   \                     ??RoadBrd_CAL_Set_CalItem_1: (+1)
+   \   00000030   0xBDF2             POP      {R1,R4-R7,PC}    ;; return
+    211          }
+    212          
+    213          /**
+    214            * @brief  This function Sets the Time string.
+    215            * @param  uint8_t *time_stringP: Pointer to Time string to set.
+    216            * @retval HAL_StatusTypeDef:     HAL_OK:       Operation success.
+    217            *                                HAL_ERROR:    found in Tasking or data passed.
+    218            */
+
+   \                                 In section .text, align 2, keep-with-next
+    219          HAL_StatusTypeDef RoadBrd_CAL_Set_TimeString( uint8_t *time_stringP )
+    220          {
+   \                     RoadBrd_CAL_Set_TimeString: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    221            strcpy( (char *)Cal_Save_Frames.TimeString, (char *)time_stringP);
+   \   00000004   0x0021             MOVS     R1,R4
+   \   00000006   0x....             LDR.N    R0,??DataTable9_3
+   \   00000008   0x.... 0x....      BL       strcpy
+    222            return HAL_OK;
+   \   0000000C   0x2000             MOVS     R0,#+0
+   \   0000000E   0xBD10             POP      {R4,PC}          ;; return
+    223          }
+    224          
+    225          /**
+    226            * @brief  This function returns the indexed Calibration Item Offset.
+    227            * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    228            * @retval float:     Indexed Item Stored Offset.
+    229            */
+
+   \                                 In section .text, align 2, keep-with-next
+    230          float RoadBrd_CAL_GetOffset( Cal_Characteristic Cal_Item )
+    231          {
+    232            return ( Cal_Save_Frames.Cal_Entry[Cal_Item].offset );
+   \                     RoadBrd_CAL_GetOffset: (+1)
+   \   00000000   0x....             LDR.N    R1,??DataTable9
+   \   00000002   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000004   0xEB01 0x00C0      ADD      R0,R1,R0, LSL #+3
+   \   00000008   0x6880             LDR      R0,[R0, #+8]
+   \   0000000A   0x4770             BX       LR               ;; return
+    233          }
+    234          
+    235          /**
+    236          * @brief  This function returns the indexed Calibration Item slope.
+    237          * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    238          * @retval float:     Indexed Item Stored slope.
+    239          */
+
+   \                                 In section .text, align 2, keep-with-next
+    240          float RoadBrd_CAL_GetSlope( Cal_Characteristic Cal_Item )
+    241          {
+    242            return ( Cal_Save_Frames.Cal_Entry[Cal_Item].slope );
+   \                     RoadBrd_CAL_GetSlope: (+1)
+   \   00000000   0x....             LDR.N    R1,??DataTable9
+   \   00000002   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000004   0xEB01 0x00C0      ADD      R0,R1,R0, LSL #+3
+   \   00000008   0x6840             LDR      R0,[R0, #+4]
+   \   0000000A   0x4770             BX       LR               ;; return
+    243          }
+    244          
+    245          /**
+    246          * @brief  This function returns a Pointer to a String for the indicated Characteristic.
+    247          * @param  Cal_Characteristic Cal_Item: Indexed Calibration Item.
+    248          * @retval char *:     Points to a constant string for the indicated characteristic.
+    249          */
+
+   \                                 In section .text, align 2, keep-with-next
+    250          char *RdBrd_CAL_GetStr( Cal_Characteristic StringCds )
+    251          {
+    252            return ((char *)SensorStrings[StringCds]);
+   \                     RdBrd_CAL_GetStr: (+1)
+   \   00000000   0x....             LDR.N    R1,??DataTable9_4
+   \   00000002   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000004   0xF851 0x0020      LDR      R0,[R1, R0, LSL #+2]
+   \   00000008   0x4770             BX       LR               ;; return
+    253          }
+    254          
+    255          /**
+    256            * @brief  This function Sets the Time string.
+    257            * @param  None
+    258            * @retval uint8_t *time_stringP: Pointer to returned Time String.
+    259            */
+
+   \                                 In section .text, align 2, keep-with-next
+    260          uint8_t *RoadBrd_CAL_GetTimeString( void )
+    261          {
+    262            return Cal_Save_Frames.TimeString;
+   \                     RoadBrd_CAL_GetTimeString: (+1)
+   \   00000000   0x....             LDR.N    R0,??DataTable9_3
+   \   00000002   0x4770             BX       LR               ;; return
+    263          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9:
+   \   00000000   0x........         DC32     Cal_Save_Frames
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_1:
+   \   00000000   0x08070100         DC32     0x8070100
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_2:
+   \   00000000   0x........         DC32     ?_23
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_3:
+   \   00000000   0x........         DC32     Cal_Save_Frames+0xB4
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable9_4:
+   \   00000000   0x........         DC32     SensorStrings
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x53 0x68          DC8 "Shnt_Vltg\t"
+   \              0x6E 0x74    
+   \              0x5F 0x56    
+   \              0x6C 0x74    
+   \              0x67 0x09    
+   \              0x00         
+   \   0000000B   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_1:
+   \   00000000   0x43 0x75          DC8 "Current\t"
+   \              0x72 0x72    
+   \              0x65 0x6E    
+   \              0x74 0x09    
+   \              0x00         
+   \   00000009   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_2:
+   \   00000000   0x50 0x6F          DC8 "Power\t\t"
+   \              0x77 0x65    
+   \              0x72 0x09    
+   \              0x09 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_3:
+   \   00000000   0x56 0x6F          DC8 "Voltage\t"
+   \              0x6C 0x74    
+   \              0x61 0x67    
+   \              0x65 0x09    
+   \              0x00         
+   \   00000009   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_4:
+   \   00000000   0x54 0x65          DC8 "TempC\t\t"
+   \              0x6D 0x70    
+   \              0x43 0x09    
+   \              0x09 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_5:
+   \   00000000   0x54 0x65          DC8 "TempF\t\t"
+   \              0x6D 0x70    
+   \              0x46 0x09    
+   \              0x09 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_6:
+   \   00000000   0x50 0x72          DC8 "Pressure\t"
+   \              0x65 0x73    
+   \              0x73 0x75    
+   \              0x72 0x65    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_7:
+   \   00000000   0x48 0x75          DC8 "Humidity\t"
+   \              0x6D 0x69    
+   \              0x64 0x69    
+   \              0x74 0x79    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_8:
+   \   00000000   0x48 0x75          DC8 "Hum_TempC\t"
+   \              0x6D 0x5F    
+   \              0x54 0x65    
+   \              0x6D 0x70    
+   \              0x43 0x09    
+   \              0x00         
+   \   0000000B   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_9:
+   \   00000000   0x48 0x75          DC8 "Hum_TempF\t"
+   \              0x6D 0x5F    
+   \              0x54 0x65    
+   \              0x6D 0x70    
+   \              0x46 0x09    
+   \              0x00         
+   \   0000000B   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_10:
+   \   00000000   0x52 0x47          DC8 "RGB_Red\t"
+   \              0x42 0x5F    
+   \              0x52 0x65    
+   \              0x64 0x09    
+   \              0x00         
+   \   00000009   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_11:
+   \   00000000   0x52 0x47          DC8 "RGB_Green\t"
+   \              0x42 0x5F    
+   \              0x47 0x72    
+   \              0x65 0x65    
+   \              0x6E 0x09    
+   \              0x00         
+   \   0000000B   0x00               DC8 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_12:
+   \   00000000   0x52 0x47          DC8 "RGB_Blue\t"
+   \              0x42 0x5F    
+   \              0x42 0x6C    
+   \              0x75 0x65    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_13:
+   \   00000000   0x54 0x68          DC8 "Therm_C\t"
+   \              0x65 0x72    
+   \              0x6D 0x5F    
+   \              0x43 0x09    
+   \              0x00         
+   \   00000009   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
+
+   \                                 In section .rodata, align 4
+   \                     ?_14:
+   \   00000000   0x52 0x6F          DC8 "RoadT_1C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x31 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_15:
+   \   00000000   0x52 0x6F          DC8 "RoadT_2C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x32 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_16:
+   \   00000000   0x52 0x6F          DC8 "RoadT_3C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x33 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_17:
+   \   00000000   0x52 0x6F          DC8 "RoadT_4C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x34 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_18:
+   \   00000000   0x52 0x6F          DC8 "RoadT_5C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x35 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_19:
+   \   00000000   0x52 0x6F          DC8 "RoadT_6C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x36 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_20:
+   \   00000000   0x52 0x6F          DC8 "RoadT_7C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x37 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_21:
+   \   00000000   0x52 0x6F          DC8 "RoadT_8C\t"
+   \              0x61 0x64    
+   \              0x54 0x5F    
+   \              0x38 0x43    
+   \              0x09 0x00    
+   \   0000000A   0x00 0x00          DC8 0, 0
+
+   \                                 In section .rodata, align 4
+   \                     ?_22:
+   \   00000000   0x20 0x20          DC8 "       "
+   \              0x20 0x20    
+   \              0x20 0x20    
+   \              0x20 0x00    
+
+   \                                 In section .rodata, align 4
+   \                     ?_23:
+   \   00000000   0x2D 0x2D          DC8 "-------EMPTY-------"
+   \              0x2D 0x2D    
+   \              0x2D 0x2D    
+   \              0x2D 0x45    
+   \              0x4D 0x50    
+   \              0x54 0x59    
+   \              0x2D 0x2D    
+   \              0x2D 0x2D    
+   \              0x2D 0x2D    
+   \              0x2D 0x00    
+    264          
+    265          
+    266          
+    267          /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/
+    268          
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       0   RdBrd_CAL_GetStr
+       0   RoadBrd_CAL_GetOffset
+       0   RoadBrd_CAL_GetSlope
+       0   RoadBrd_CAL_GetTimeString
+      16   RoadBrd_CAL_InitializeFrmFlash
+        16   -> RoadBrd_FlashWrite
+        16   -> strcpy
+       8   RoadBrd_CAL_ReadFrmFlash
+         8   -> RoadBrd_FlashRead
+      16   RoadBrd_CAL_ScaleValue
+        16   -> RoadBrd_CAL_GetOffset
+        16   -> RoadBrd_CAL_GetSlope
+        16   -> __aeabi_fadd
+        16   -> __aeabi_fmul
+      24   RoadBrd_CAL_Set_CalItem
+        24   -> RoadBrd_CAL_WriteFrmFlash
+       8   RoadBrd_CAL_Set_TimeString
+         8   -> strcpy
+       8   RoadBrd_CAL_VerifyFrame
+         8   -> RoadBrd_FlashRead
+      16   RoadBrd_CAL_WriteFrmFlash
+        16   -> RoadBrd_FlashWrite
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable9
+       4  ??DataTable9_1
+       4  ??DataTable9_2
+       4  ??DataTable9_3
+       4  ??DataTable9_4
+      12  ?_0
+      12  ?_1
+      12  ?_10
+      12  ?_11
+      12  ?_12
+      12  ?_13
+      12  ?_14
+      12  ?_15
+      12  ?_16
+      12  ?_17
+      12  ?_18
+      12  ?_19
+       8  ?_2
+      12  ?_20
+      12  ?_21
+       8  ?_22
+      20  ?_23
+      12  ?_3
+       8  ?_4
+       8  ?_5
+      12  ?_6
+      12  ?_7
+      12  ?_8
+      12  ?_9
+     200  Cal_Save_Frames
+     200  Calibration_HardFrames
+      10  RdBrd_CAL_GetStr
+      12  RoadBrd_CAL_GetOffset
+      12  RoadBrd_CAL_GetSlope
+       4  RoadBrd_CAL_GetTimeString
+      80  RoadBrd_CAL_InitializeFrmFlash
+      24  RoadBrd_CAL_ReadFrmFlash
+      38  RoadBrd_CAL_ScaleValue
+      50  RoadBrd_CAL_Set_CalItem
+      16  RoadBrd_CAL_Set_TimeString
+      46  RoadBrd_CAL_VerifyFrame
+      32  RoadBrd_CAL_WriteFrmFlash
+     100  SensorStrings
+
+ 
+ 200 bytes in section .bss
+ 200 bytes in section .bss    (abs)
+ 380 bytes in section .rodata
+ 344 bytes in section .text
+ 
+ 344 bytes of CODE  memory
+ 380 bytes of CONST memory
+ 400 bytes of DATA  memory
+
+Errors: none
+Warnings: none

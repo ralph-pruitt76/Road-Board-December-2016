@@ -47,6 +47,7 @@ wwdg_Frames wwdg_HardFrames  @ BASE_FLASH_ADDRESS;
 static wwdg_Frames Save_Frames;
 
 static char DateString[DATE_STRING_LENGTH];             // Current Date String.
+static char TickString[DATE_STRING_LENGTH];             // Current Tick String.
 
 /* USER CODE END 0 */
 
@@ -84,6 +85,38 @@ char *RoadBrd_WWDG_GetDateString( void )
 HAL_StatusTypeDef RoadBrd_WWDG_SetDateString( char* parmString )
 {
   strcpy(DateString, parmString);
+  return HAL_OK;
+}
+
+  /**
+  * @brief  This function initializes the Static Current Date String.
+  * @param  none
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_InitializeTickString( void )
+{
+  strcpy(TickString, "---NULL---");
+  return HAL_OK;
+}
+
+  /**
+  * @brief  This function initializes the Static Current Date String.
+  * @param  none
+  * @retval char *:     Pointer to Date String.
+  */
+char *RoadBrd_WWDG_GetTickString( void )
+{
+  return &TickString[0];
+}
+
+  /**
+  * @brief  This function initializes the Static Current Date String.
+  * @param  char* parmString: String to be set.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  */
+HAL_StatusTypeDef RoadBrd_WWDG_SetTickString( char* parmString )
+{
+  strcpy(TickString, parmString);
   return HAL_OK;
 }
 
