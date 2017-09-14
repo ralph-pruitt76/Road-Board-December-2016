@@ -654,10 +654,12 @@ uint16_t USART_ReceiveData(UART_HandleTypeDef *huart)
 HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
 {
 //  static uint8_t header_cnt, payload_cnt, payload_len;
+#define TEMP_BUFF_LENGTH        60
   HAL_StatusTypeDef Status;
-  static uint8_t tempBffr2[60];
+  static uint8_t tempBffr2[TEMP_BUFF_LENGTH];
   char* tempPstr;
   char tempstr[60];
+  int x;
 #ifndef XML_SHRT  
   char tempstr2[60];
 #endif
@@ -914,7 +916,12 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
     {
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<UNKNOWN STATUS> ");
     }
-  }
+    // Finally Clear the Buffer. We have completed the parsing of this event.
+    for (x=0; x<TEMP_BUFF_LENGTH; x++)
+    {
+      tempBffr2[x]= NULL;
+    }
+  } // EndIf ( (c == 0x0a)  || (c == '?') )
   //tempBffr2[0] = c;
   //tempBffr2[1] = 0x00;
   //Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
