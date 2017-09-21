@@ -82,4 +82,6 @@ void ClrDataStructure(void);
 void ClrAnalyticsRepeat( void );
 bool TstDataReady( void );
 void ClrDataReady( void );
+void Clr_CMD_Md_Cnt( void );
+
 #endif

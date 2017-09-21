@@ -382,13 +382,16 @@ void BGM111_SetCMD_Mode(bool NewMode)
 bool BGM111_SyncModeTest(void)
 {
   uint8_t tempBffr2[20];
+  bool Status = false;
 
   // Is Sync Mode armed? Yes.. Then Need to test SyncFlag
   if (ble.TackArmed == TACK_SYNC)
   {
     // If SyncFlag is SYNC_PROC, then allow Frame send.
     if (ble.SyncFlag == SYNC_PROC)
-      return true;
+    {
+      Status = true;
+    }
     // NO, then Incrment count, We are one step closer to Reset Code.
     else
     {
@@ -413,12 +416,14 @@ bool BGM111_SyncModeTest(void)
           HAL_NVIC_SystemReset();
         } // EndIf (ble.TackCnt >TACK_LIMIT)
       } // EndIf ( TstDataReady() )
-      return false;
+      Status = false;
     } // EndElse (ble.SyncFlag == SYNC_PROC)
   } // EndIf (ble.TackArmed == TACK_SYNC)
   // No....Then we can continue process. Return true.
   else
-    return true;
+    Status = true;
+  
+  return Status;
 }
 
 /**
@@ -713,6 +718,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       ble.CMD_Mode = false;
       ble.TackArmed = TACK_ARMED;
       ble.TackCnt = 0;
+      Clr_CMD_Md_Cnt();
       RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
       ClrDataStructure();                           // Clear Backup data structure.
       ClrAnalyticsRepeat();                          // Clear Frame Repeat Count.

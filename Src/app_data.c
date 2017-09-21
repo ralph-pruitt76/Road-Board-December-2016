@@ -119,6 +119,7 @@ struct
   bool  HrtBeat_Flg;
   uint16_t HrtBeat_Cnt;
   uint16_t FrmRpt_Cnt;
+  uint8_t CMD_Md_Cnt;
 } static analytics;
 
 /* App data measurment structure */
@@ -163,6 +164,7 @@ void InitSensors(void)
   analytics.HrtBeat_Flg = false;                // Set flasg to clear before using it.
   analytics.HrtBeat_Cnt = 0;                    // Clear count before using it.
   analytics.FrmRpt_Cnt = 0;                     // Clear Frame Repeat Count.
+  analytics.CMD_Md_Cnt = 0;                     // Clear CMD_Md_Cnt.
 }
 
 void ClrDataStructure(void)
@@ -1011,7 +1013,7 @@ void Process_RdSound( void )
 //  uint8_t tempStr[13];
   char tempstr[30];
   uint8_t tempBffr2[80];
-  static uint8_t CMD_Md_Cnt = 0;
+  //static uint8_t analytics.CMD_Md_Cnt = 0;
 
   // Is CMD_Mode active?
   if ((BGM111_Ready()) &&
@@ -1019,16 +1021,16 @@ void Process_RdSound( void )
       (BGM111_CMD_Mode()) )
   {
     // 1. Increment CMD_Mode Count
-    CMD_Md_Cnt++;
-    sprintf( (char *)tempBffr2, "<<%d", CMD_Md_Cnt );
+    analytics.CMD_Md_Cnt++;
+    sprintf( (char *)tempBffr2, "<<%d", analytics.CMD_Md_Cnt );
     RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
     
     // Test Cnt against Limit.
-    if ( CMD_Md_Cnt >= RoadBrd_Get_BootDelay())
+    if ( analytics.CMD_Md_Cnt >= RoadBrd_Get_BootDelay())
     {
       RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)">>\r\n");
       // Clear Count for Next Event.
-      CMD_Md_Cnt = 0;
+      analytics.CMD_Md_Cnt = 0;
       // Send String to Server to indicate new CMD Mode.
       sprintf( (char *)tempBffr2, "<STATUS>DATA_ASYNC</STATUS>" );
       RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
@@ -1456,6 +1458,18 @@ void Clr_HeartBeat( void )
 {
   analytics.HrtBeat_Flg = false;
 }
+
+  /**
+  * @brief  This function clears the CMD_Md_Cnt.
+  * @param  None
+  * @retval None
+  */
+void Clr_CMD_Md_Cnt( void )
+{
+  analytics.CMD_Md_Cnt = 0;                     // Clear CMD_Md_Cnt.
+}
+
+
 
   /**
   * @brief  This function clears Frame Repeat Count.
