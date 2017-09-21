@@ -404,7 +404,8 @@ bool BGM111_SyncModeTest(void)
         ble.TackCnt++;
         sprintf( (char *)tempBffr2, "<TACK Strike:%d/%d>", ble.TackCnt, RoadBrd_Get_TackLimit() );
         RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-
+        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+        
         if (ble.TackCnt > RoadBrd_Get_TackLimit())
         {
           // Time to process error and reset code....NO Choice.
@@ -728,7 +729,23 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
     else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
     {
       // 1. Send String to Server to indicate new CMD Mode.
-      sprintf( (char *)tempBffr2, "<STATUS>CMD</STATUS>" );
+      //sprintf( (char *)tempBffr2, "<STATUS>CMD</STATUS>" );
+      if (RoadBrd_Get_UnitsFlag())
+      {
+        sprintf( (char *)tempBffr2, "<STATUS>CMD|%3.1f|%3.1f|%d|%d|ENABLED</STATUS>",
+                ((float)RoadBrd_Get_RdSndTickCnt()/10),
+                ((float)RoadBrd_Get_SnsrTickCnt()/10),
+                RoadBrd_Get_TackLimit(),
+                RoadBrd_Get_BootDelay());
+      }
+      else
+      {
+        sprintf( (char *)tempBffr2, "<STATUS>CMD|%3.1f|%3.1f|%d|%d|DISABLED</STATUS>",
+                ((float)RoadBrd_Get_RdSndTickCnt()/10),
+                ((float)RoadBrd_Get_SnsrTickCnt()/10),
+                RoadBrd_Get_TackLimit(),
+                RoadBrd_Get_BootDelay());
+      }
       Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
       if (Status != HAL_OK)
         return Status;
