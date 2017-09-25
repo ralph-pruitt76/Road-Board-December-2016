@@ -267,4 +267,48 @@ void delay_1ms( void )
   }
 }
 
+//*****************************************************************************************************
+//*
+//* Exception Processing Code Here
+//*
+//*****************************************************************************************************
+
+/**
+  * @brief  Hard Fault Exception Handler
+  * @param  none
+  * @retval none
+  */
+void HardFault_Handler(void)
+{ 
+  SystemInit();
+  RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
+  HAL_NVIC_SystemReset();
+}
+
+/**
+  * @brief  Hard Fault Exception Handler
+  * @param  none
+  * @retval none
+  */
+void MemManage_Handler(void)
+{ 
+  SystemInit();
+  RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
+  HAL_NVIC_SystemReset();
+}
+
+/**
+  * @brief  Useage Fault Exception Handler
+  * @param  none
+  * @retval none
+  */
+void UsageFault_Handler(void)
+{ 
+  SystemInit();
+  RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
+  HAL_NVIC_SystemReset();
+}
+
+
+
 /************************ (C) COPYRIGHT WeatherCloud *****END OF FILE****/

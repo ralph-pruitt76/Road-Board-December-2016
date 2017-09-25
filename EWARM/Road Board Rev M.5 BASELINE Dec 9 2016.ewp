@@ -192,7 +192,6 @@
           <state>REV_L</state>
           <state>LONG_DELAY</state>
           <state>XML_SHRT</state>
-          <state>BUG_ENABLE</state>
         </option>
         <option>
           <name>CCPreprocFile</name>

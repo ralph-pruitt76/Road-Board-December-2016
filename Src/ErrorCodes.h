@@ -98,6 +98,9 @@ void RdBrd_BlinkErrCd( ErrorCodes ErrorCd );
 void delay_1ms( void );
 void RoadBrd_Delay2( __IO uint32_t Delay );
 
+void HardFault_Handler(void);
+void MemManage_Handler(void);
+void UsageFault_Handler(void);
 #ifdef __cplusplus
 }
 #endif
