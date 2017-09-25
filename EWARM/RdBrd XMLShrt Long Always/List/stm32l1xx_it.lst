@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       24/Sep/2017  16:57:56
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       24/Sep/2017  17:07:56
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -10,7 +10,7 @@
 #    Command line =  
 #        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\stm32l1xx_it.c
 #        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
-#        REV_L -D LONG_DELAY -D XML_SHRT -lCN
+#        REV_L -D LONG_DELAY -D XML_SHRT -D BUG_ENABLE -lCN
 #        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd
 #        XMLShrt Long Always\List" -o
 #        "D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\RdBrd

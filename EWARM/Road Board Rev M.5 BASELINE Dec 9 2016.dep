@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>1433598771</fileChecksum>
+  <fileChecksum>2060781921</fileChecksum>
   <configuration>
     <name>Nucleo Board</name>
     <outputs/>
@@ -512,10 +512,6 @@
         </tool>
       </outputs>
       <inputs>
-        <tool>
-          <name>BICOMP</name>
-          <file> 329 362 21 197 378 322 303 369 1 353 333 280 283 308 312 124 161 345 339 289 162 285 298 295 176 321 338 204 364 292 335 220 357 148 393 328 387 344 34 396 330 381 143 25 379 147 20 30 319 150 358 370 16 138</file>
-        </tool>
         <tool>
           <name>ICCARM</name>
           <file> 34 369 161 21 345 322 330 364 143 308 303 357 333 379 147 220 329 335 20 280 25 292 353 381 148 30 396 339 319 289 150 162 285 393 298 358 328 362 295 387 176 370 321 338 204 16 283 312 197 1 378 124 344 138</file>

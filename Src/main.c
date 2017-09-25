@@ -582,6 +582,25 @@ int main(void)
 #endif
           if (Status != HAL_OK)
             Error_Handler();
+#ifdef BUG_ENABLE
+          SCB->CCR |= 0x10;
+          int a = 10;
+          int b = 0;
+          int c;
+          c = a/b;
+          sprintf( (char *)tempBffr2, "Bug Value Dump: %d\r\n\r\n> ",c);
+  #ifdef REV_L
+          Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
+          // Wait for msg to be completed.
+          while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
+          {
+          }
+          // Clear State for Next Transfer.
+          clrUsartState( NUCLEO_USART );
+  #else
+          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);
+  #endif
+#endif          
        #endif
 //      #endif
     #endif

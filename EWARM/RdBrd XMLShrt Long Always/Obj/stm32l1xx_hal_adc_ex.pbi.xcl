@@ -64,6 +64,7 @@ C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.4\arm\CMSIS\Include
 -DREV_L=1
 -DLONG_DELAY=1
 -DXML_SHRT=1
+-DBUG_ENABLE=1
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
