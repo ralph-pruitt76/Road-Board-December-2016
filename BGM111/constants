@@ -1,1 +1,3 @@
-xgatt_spp_data 13
+ota_control 8
+ota_data 10
+xgatt_spp_data 18

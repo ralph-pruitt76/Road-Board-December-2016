@@ -30,6 +30,7 @@ const led1_bank      = 5
 const led1_pin_mask  = $80
 
 # Variables:
+dim boot_into_dfu
 dim ticker
 
 dim string(6)
@@ -43,7 +44,7 @@ dim res
 dim n
 dim temp
 
-dim tx_fifo(4096)
+dim tx_fifo(256)
 dim tx_wr # write index
 dim tx_rd # read index
 dim tx_num # number of bytes in buffer
@@ -148,6 +149,21 @@ event le_connection_parameters(connection,interval,latency,timeout,security_mode
     call print_int32(interval)
     call endpoint_send(uart_ep, 2, "\r\n")
     
+end 
+
+# This event indicates that a remote GATT client is attempting to write a value of 
+# an attribute of type "user" into the local GATT database
+event gatt_server_user_write_request(connection, characteristic, att_opcode, offset, value_len, value_data)
+
+    if characteristic = ota_control then
+        boot_into_dfu = 1
+        call endpoint_close(connection)
+        call endpoint_send(uart_ep, 26, "booting into OTA mode...\r\n")
+    
+        # we will enter DFU mode when the connection_closed event is raised
+        
+    end if 
+        
 end 
 
 # This event indicates either that a local Client Characteristic Configuration descriptor has 

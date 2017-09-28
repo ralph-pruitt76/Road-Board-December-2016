@@ -15,6 +15,5 @@
 	
 	<!-- Firmware output file -->
     <image out="output.bin" />
-
-	<build dfu="ota_proj_1"/>
+	
 </project>

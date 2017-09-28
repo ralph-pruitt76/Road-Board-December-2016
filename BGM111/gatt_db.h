@@ -9,6 +9,8 @@
 
 extern const struct bg_gattdb_def bg_gattdb_data;
 
-#define xgatt_spp_data                         13
+#define ota_control                             8
+#define ota_data                               10
+#define xgatt_spp_data                         18
 
 #endif
