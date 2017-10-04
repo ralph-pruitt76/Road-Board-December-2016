@@ -1,0 +1,165 @@
+#-----------------------------------------------------------------------------
+#  WSTK Thermometer and Over-The-Air Firmware Upgrade example for BGScript
+# (C) Copyright 2016 Silicon Labs, http://www.silabs.com
+#
+# This file is licensed under the Silabs License Agreement. See the file
+# "Silabs_License_Agreement.txt" for details. Before using this software for
+# any purpose, you must agree to the terms of that agreement.
+#-----------------------------------------------------------------------------
+
+# This Thermometer and OTA example allows the user to measure temperature
+# using the temperature sensor on the WSTK. The values can be read with the 
+# Health Thermometer reader on the Blue Gecko smart phone app. The HTM reader 
+# on the app works by enabling indications on the Temperature Characteristic 
+# of the Health Thermometer Service (defined in GATT) and reading the values 
+# sent as indications by the board. 
+# This example also enables Over-The-Air device firmware upgrading.
+
+# Variable definitions
+dim result			# Variable for checking whether the I2C temperature read was successful
+dim len				# Length variable needed for the I2C temperature read
+dim buffer(4)		# Temporary buffer for placing the temperature data that is read from I2C.
+dim data			# Variable for converting the temperature from big-endian to little-endian
+dim temperature(5)	# Buffer to set the temperature characteristic in the correct format
+dim timeout			# Timeout variable to ensure I2C read does not end up in an infinite loop
+const sensor_slave_addr	= $40 # Slave address of the Temperature sensor on WSTK is 0x40
+
+dim boot_into_dfu	# Variable for checking whether to boot into Device Firmware Upgrade (DFU) mode.
+#-----------------------------------------------------------------------------
+
+# This boot event is generated when the system boots up after reset. 
+# Here the system is set to start advertising immediately after boot procedure.
+event system_boot(major,minor,patch,build,bootloader,hw)
+
+	# Initialise the variable that determines if the system should be reset into DFU mode.
+	boot_into_dfu = 0
+
+	# Set advertising parameters. 100ms advertisement interval. All channels used.
+	# The first two parameters are minimum and maximum advertising interval, both in
+	# units of (milliseconds * 1.6). The third parameter '7' sets advertising on all channels.
+	call le_gap_set_adv_parameters(160,160,7)
+
+	# Start general advertising and enable connections.
+	call le_gap_set_mode(le_gap_general_discoverable,le_gap_undirected_connectable)
+	
+end 
+
+# This event is generated when a connected client has either 
+# 1) changed a Characteristic Client Configuration, meaning that they have enabled
+# or disabled Notifications or Indications, or 
+# 2) sent a confirmation upon a successful reception of the indication.
+#-----------------------------------------------------------------------------
+# In this example this does the following: If the Indications for the temperature 
+# characteristic have been enabled, the software timer is started. The timer event
+# (below this event) is set to read temperature and send an Indication of this to 
+# the client every 1 second.
+event gatt_server_characteristic_status(connection,characteristic,status_flags,client_config_flags) 
+
+	# Check that the characteristic in question is the temperature - its ID 
+	# is defined in gatt.xml as "temperature_char".
+	# Also check that status_flags = 1, meaning that the characteristic client 
+	# configuration was changed (notifications or indications enabled or disabled).
+	if (characteristic = temperature_char) && (status_flags = 1) then
+	
+		if (client_config_flags = 2) then
+			# Indications have been turned ON - start the repeating timer. 
+			# The 1st parameter '32768' tells the timer to run for 1 second 
+			# (32.768 kHz oscillator) and the 3rd parameter '0' tells the 
+			# timer to repeat continuously until stopped manually.  
+			call hardware_set_soft_timer(32768,0,0)
+		end if
+	
+		if (client_config_flags = 0) then
+			# Indications have been turned OFF - stop the timer.
+			call hardware_set_soft_timer(0,0,0)
+		end if
+		
+	end if
+		
+end 
+
+# This event is generated when the software timer has ticked. 
+# In this example the temperature is read after every 1 second and then the 
+# indication of that is sent to the listening client.
+event hardware_soft_timer(handle)
+	
+	# Start a single temperature measurement from I2C thermometer.
+	# The command to read the temperature is 0xF3.
+    call hardware_write_i2c(0,sensor_slave_addr,1,$f3)
+	
+	# Read 2 bytes of temperature data from I2C until a 
+	# value is read successfully (result = 0).
+	result = 1
+	timeout = 0
+	while (result != 0) && (timeout < 50)
+		call hardware_read_i2c(0,sensor_slave_addr,2)(result,len,buffer(0:len))
+		timeout = timeout + 1
+	end while
+	
+	# Stop I2C transmission.
+    call hardware_stop_i2c(0)
+	
+	if(timeout < 50) then
+		# Check that the I2C was read properly and the while loop didn't 
+		# end because of the timeout.
+		# Measurement from the I2C read is in big endian format and must be 
+		# converted to little-endian by swapping bytes.
+		data=buffer(0:1)<<8|buffer(1:1)
+	else
+		data = 0
+	end if
+		
+	# Convert the value to temperature in Celsius as explained in the Si7021 
+	# data sheet so that it can be written to the temperature characteristic 
+	# in correct format. The first byte of the Health Thermometer characteristic 
+	# must be 0 to indicate that it is in Celsius format.
+	temperature(0:1)=0
+	temperature(1:4)=float(data*1757/65536-469, -1)
+
+	# Write the temperature to the local GATT database 
+	# Temperature Measurement attribute (temperature_char).
+    call gatt_server_write_attribute_value(temperature_char,0,5,temperature(0:5))(result)
+	
+	# Send indication to all "listening" clients. This enables the Health 
+	# Thermometer in the Blue Gecko app to display the temperature.
+	# 0xFF as connection ID will send indications to all connections.
+	call gatt_server_send_characteristic_notification($ff, temperature_char,5,temperature(0:5))(result)
+end
+
+
+
+# Events related to OTA upgrading
+#-----------------------------------------------------------------------------
+
+# This event indicates that a remote client is attempting to write a value of 
+# an attribute in the local GATT database, where the attribute was defined 
+# in the gatt.xml file to have type = "user".
+event gatt_server_user_write_request(connection, characteristic, att_opcode, offset, value_len, value_data)
+
+	# Check if the user-type OTA Control Characteristic was written. 
+    if characteristic = ota_control then
+        boot_into_dfu = 1
+		call endpoint_close(connection)
+        # After the connection is closed, the "le_connection_closed" event is raised 
+		# which then boots the device into DFU mode.
+    end if 
+        
+end 
+
+# This event indicates that the client has disconnected. Stop the timer and restart 
+# advertising so that the device can again be found and connected to.
+event le_connection_closed(reason,connection)
+
+	if boot_into_dfu = 0 then
+		# Stop software timer, since no one is listening for the indications
+		call hardware_set_soft_timer(0,0,0)
+		
+		# Restart advertising
+		call le_gap_set_mode(le_gap_general_discoverable,le_gap_undirected_connectable)
+		
+    else
+        # DFU boot has been requested, so reset the system in DFU mode with system_reset(1)
+        call system_reset(1)
+    end if 
+	
+end

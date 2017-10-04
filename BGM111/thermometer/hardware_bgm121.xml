@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<hardware>
+
+	<!-- EM2 sleep mode -->
+	<sleep enable="true" />
+
+	<!-- I2C configuration -->
+	<!-- Settings: SCL pin is PC10 and SDA pin is PC11 -->
+	<i2c scl_pin="PC10" sda_pin="PC11"/>
+	
+	<!-- drive SENSOR_ENABLE pin high -->
+	<gpio port="D" pin="9" mode="pushpull" out="1"/>
+	
+</hardware>
+

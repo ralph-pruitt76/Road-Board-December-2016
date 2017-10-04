@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- This .bgproj should be used if the board is EFR32BG or EFR32MG (BRD41xx)-->
+
+<project>
+
+	<!-- GATT service database -->
+	<gatt in="gatt.xml" />
+
+	<!-- Local hardware configuration file -->
+	<hardware in="hardware_efr32.xml" />
+	
+	<!-- Script file -->
+	<scripting>
+		<script in="thermometer.bgs" />
+	</scripting>
+
+    <!-- Firmware output file in EBL format -->
+    <build ebl="thermometer"/>
+
+    <bootloader type="ota" />
+	
+	<!-- BIN Firmware output file -->
+	<image out="thermometer.bin" />
+
+
+
+</project>

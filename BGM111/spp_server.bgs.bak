@@ -138,8 +138,13 @@ event le_connection_closed(reason, connection)
     connected = 0
     conn_handle = -1
 
-    # Start Bluetooth LE advertisements and enable connections
-    call le_gap_set_mode(2,2)
+    if boot_into_dfu = 0 then
+        # Start Bluetooth LE advertisements and enable connections
+        call le_gap_set_mode(2,2)
+    else
+        # DFU boot has been requested 
+        call system_reset(1)
+    end if 
     
 end
 

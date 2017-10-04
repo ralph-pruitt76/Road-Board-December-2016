@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       27/Sep/2017  08:33:55
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       28/Sep/2017  08:42:15
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -299,7 +299,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      59            bool data_Connection;
      60            bool CMD_Mode;
      61            uint8_t TackArmed;
-     62            uint8_t TackCnt;
+     62            uint16_t TackCnt;
      63            uint8_t SyncFlag;
      64            struct gecko_cmd_packet *evt;
 
@@ -343,11 +343,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      78            ble.TackCnt = 0;
    \   0000003C   0x2000             MOVS     R0,#+0
    \   0000003E   0x.... 0x....      LDR.W    R1,??DataTable23_4
-   \   00000042   0xF881 0x019B      STRB     R0,[R1, #+411]
+   \   00000042   0xF8A1 0x019C      STRH     R0,[R1, #+412]
      79            ble.SyncFlag = SYNC_PROC;
    \   00000046   0x2001             MOVS     R0,#+1
    \   00000048   0x.... 0x....      LDR.W    R1,??DataTable23_4
-   \   0000004C   0xF881 0x019C      STRB     R0,[R1, #+412]
+   \   0000004C   0xF881 0x019E      STRB     R0,[R1, #+414]
      80          }
    \   00000050   0x4770             BX       LR               ;; return
      81          
@@ -1027,8 +1027,8 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     383          {
    \                     BGM111_SyncModeTest: (+1)
    \   00000000   0xB510             PUSH     {R4,LR}
-   \   00000002   0xB086             SUB      SP,SP,#+24
-    384            uint8_t tempBffr2[20];
+   \   00000002   0xB08A             SUB      SP,SP,#+40
+    384            uint8_t tempBffr2[40];
     385            bool Status = false;
    \   00000004   0x2400             MOVS     R4,#+0
     386          
@@ -1042,7 +1042,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     390              // If SyncFlag is SYNC_PROC, then allow Frame send.
     391              if (ble.SyncFlag == SYNC_PROC)
    \   00000012   0x.... 0x....      LDR.W    R0,??DataTable23_4
-   \   00000016   0xF890 0x019C      LDRB     R0,[R0, #+412]
+   \   00000016   0xF890 0x019E      LDRB     R0,[R0, #+414]
    \   0000001A   0x2801             CMP      R0,#+1
    \   0000001C   0xD102             BNE.N    ??BGM111_SyncModeTest_1
     392              {
@@ -1067,15 +1067,15 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     403                  // Increment Cnt and Report...
     404                  ble.TackCnt++;
    \   00000030   0x.... 0x....      LDR.W    R0,??DataTable23_4
-   \   00000034   0xF890 0x019B      LDRB     R0,[R0, #+411]
+   \   00000034   0xF8B0 0x019C      LDRH     R0,[R0, #+412]
    \   00000038   0x1C40             ADDS     R0,R0,#+1
    \   0000003A   0x.... 0x....      LDR.W    R1,??DataTable23_4
-   \   0000003E   0xF881 0x019B      STRB     R0,[R1, #+411]
+   \   0000003E   0xF8A1 0x019C      STRH     R0,[R1, #+412]
     405                  sprintf( (char *)tempBffr2, "<TACK Strike:%d/%d>", ble.TackCnt, RoadBrd_Get_TackLimit() );
    \   00000042   0x.... 0x....      BL       RoadBrd_Get_TackLimit
    \   00000046   0x0003             MOVS     R3,R0
    \   00000048   0x.... 0x....      LDR.W    R0,??DataTable23_4
-   \   0000004C   0xF890 0x219B      LDRB     R2,[R0, #+411]
+   \   0000004C   0xF8B0 0x219C      LDRH     R2,[R0, #+412]
    \   00000050   0x.... 0x....      LDR.W    R1,??DataTable23_29
    \   00000054   0x4668             MOV      R0,SP
    \   00000056   0x.... 0x....      BL       sprintf
@@ -1092,7 +1092,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     409                  if (ble.TackCnt > RoadBrd_Get_TackLimit())
    \   0000006E   0x.... 0x....      BL       RoadBrd_Get_TackLimit
    \   00000072   0x.... 0x....      LDR.W    R1,??DataTable23_4
-   \   00000076   0xF891 0x119B      LDRB     R1,[R1, #+411]
+   \   00000076   0xF8B1 0x119C      LDRH     R1,[R1, #+412]
    \   0000007A   0x4288             CMP      R0,R1
    \   0000007C   0xD20F             BCS.N    ??BGM111_SyncModeTest_3
     410                  {
@@ -1133,7 +1133,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \                     ??BGM111_SyncModeTest_2: (+1)
    \   000000A8   0x0020             MOVS     R0,R4
    \   000000AA   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   000000AC   0xB006             ADD      SP,SP,#+24
+   \   000000AC   0xB00A             ADD      SP,SP,#+40
    \   000000AE   0xBD10             POP      {R4,PC}          ;; return
     428          }
     429          
@@ -1157,7 +1157,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     440              // If SyncFlag is SYNC_PROC, then allow Frame send.
     441              if (ble.SyncFlag == SYNC_PROC)
    \   0000000C   0x.... 0x....      LDR.W    R0,??DataTable23_4
-   \   00000010   0xF890 0x019C      LDRB     R0,[R0, #+412]
+   \   00000010   0xF890 0x019E      LDRB     R0,[R0, #+414]
    \   00000014   0x2801             CMP      R0,#+1
    \   00000016   0xD101             BNE.N    ??BGM111_SyncModeTestNoInc_1
     442                return true;
@@ -1191,7 +1191,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     459            ble.SyncFlag = NewFlag;
    \                     BGM111_SetSyncFlg: (+1)
    \   00000000   0x.... 0x....      LDR.W    R1,??DataTable23_4
-   \   00000004   0xF881 0x019C      STRB     R0,[R1, #+412]
+   \   00000004   0xF881 0x019E      STRB     R0,[R1, #+414]
     460          }
    \   00000008   0x4770             BX       LR               ;; return
     461          
@@ -1215,7 +1215,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     472            {
     473              ble.SyncFlag = NewFlag;
    \   0000000C   0x.... 0x....      LDR.W    R1,??DataTable23_4
-   \   00000010   0xF881 0x019C      STRB     R0,[R1, #+412]
+   \   00000010   0xF881 0x019E      STRB     R0,[R1, #+414]
     474            }
     475          }
    \                     ??BGM111_cntrlSetSyncFlg_0: (+1)
@@ -1730,7 +1730,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     708                ble.TackCnt = 0;
    \   000000C0   0x2000             MOVS     R0,#+0
    \   000000C2   0x.... 0x....      LDR.W    R1,??DataTable23_4
-   \   000000C6   0xF881 0x019B      STRB     R0,[R1, #+411]
+   \   000000C6   0xF8A1 0x019C      STRH     R0,[R1, #+412]
     709                RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
    \   000000CA   0x.... 0x....      LDR.W    R1,??DataTable23_37
    \   000000CE   0x2000             MOVS     R0,#+0
@@ -1773,7 +1773,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     721                ble.TackCnt = 0;
    \   00000114   0x2000             MOVS     R0,#+0
    \   00000116   0x....             LDR.N    R1,??DataTable23_4
-   \   00000118   0xF881 0x019B      STRB     R0,[R1, #+411]
+   \   00000118   0xF8A1 0x019C      STRH     R0,[R1, #+412]
     722                Clr_CMD_Md_Cnt();
    \   0000011C   0x.... 0x....      BL       Clr_CMD_Md_Cnt
     723                RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
@@ -1980,7 +1980,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     787                  ble.TackCnt = 0;
    \   00000296   0x2000             MOVS     R0,#+0
    \   00000298   0x....             LDR.N    R1,??DataTable23_4
-   \   0000029A   0xF881 0x019B      STRB     R0,[R1, #+411]
+   \   0000029A   0xF8A1 0x019C      STRH     R0,[R1, #+412]
     788                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
    \   0000029E   0x....             LDR.N    R1,??DataTable23_48
    \   000002A0   0x2000             MOVS     R0,#+0
@@ -2002,7 +2002,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     793                  ble.TackCnt = 0;
    \   000002BC   0x2000             MOVS     R0,#+0
    \   000002BE   0x....             LDR.N    R1,??DataTable23_4
-   \   000002C0   0xF881 0x019B      STRB     R0,[R1, #+411]
+   \   000002C0   0xF8A1 0x019C      STRH     R0,[R1, #+412]
     794                  sprintf( (char *)tempBffr3, "<STATUS>DATA_SYNC</STATUS>" );
    \   000002C4   0x....             LDR.N    R1,??DataTable23_47
    \   000002C6   0xA804             ADD      R0,SP,#+16
@@ -2043,7 +2043,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     803                  ble.TackCnt = 0;
    \   00000304   0x2000             MOVS     R0,#+0
    \   00000306   0x....             LDR.N    R1,??DataTable23_4
-   \   00000308   0xF881 0x019B      STRB     R0,[R1, #+411]
+   \   00000308   0xF8A1 0x019C      STRH     R0,[R1, #+412]
     804                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
    \   0000030C   0x....             LDR.N    R1,??DataTable23_49
    \   0000030E   0x2000             MOVS     R0,#+0
@@ -3205,18 +3205,18 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        0   BGM111_SetDataConnected
        0   BGM111_SetSyncFlg
        0   BGM111_SetTackState
-      32   BGM111_SyncModeTest
-        32   -> BGM111_Transmit
-        32   -> ClrDataReady
-        32   -> Clr_HrtBeat_Cnt
-        32   -> HAL_NVIC_SystemReset
-        32   -> RdBrd_BlinkErrCd
-        32   -> RdBrd_ErrCdLogErrCd
-        32   -> RoadBrd_Get_TackLimit
-        32   -> RoadBrd_UART_Transmit
-        32   -> TstDataReady
-        32   -> sprintf
-        32   -> strlen
+      48   BGM111_SyncModeTest
+        48   -> BGM111_Transmit
+        48   -> ClrDataReady
+        48   -> Clr_HrtBeat_Cnt
+        48   -> HAL_NVIC_SystemReset
+        48   -> RdBrd_BlinkErrCd
+        48   -> RdBrd_ErrCdLogErrCd
+        48   -> RoadBrd_Get_TackLimit
+        48   -> RoadBrd_UART_Transmit
+        48   -> TstDataReady
+        48   -> sprintf
+        48   -> strlen
        0   BGM111_SyncModeTestNoInc
       24   BGM111_Transmit
         24   -> HAL_NVIC_DisableIRQ

@@ -156,13 +156,18 @@ event le_connection_parameters(connection,interval,latency,timeout,security_mode
     
 end 
 
+# Events related to OTA upgrading
+#-----------------------------------------------------------------------------
+
 # This event indicates that a remote GATT client is attempting to write a value of 
 # an attribute of type "user" into the local GATT database
 event gatt_server_user_write_request(connection, characteristic, att_opcode, offset, value_len, value_data)
 
+	# Check if the user-type OTA Control Characteristic was written. 
     if characteristic = ota_control then
         boot_into_dfu = 1
         call endpoint_close(connection)
+		# After the connection is closed, the "le_connection_closed" event is raised 
         call endpoint_send(uart_ep, 26, "booting into OTA mode...\r\n")
     
         # we will enter DFU mode when the connection_closed event is raised

@@ -3415,7 +3415,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                       } //EndSwitch ( tempBffr[2] )
                     } //EndElse (Size < 3)
                     break;
-//**************************************************************************************************
 //++++++++++++++++++++++++++++++++++++++++++  Special Monitor Mode to intercept traffic from UART and pass to BGM111
                   case 'M':
                     // Is this a BLE Operation?
@@ -3438,7 +3437,55 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     // Set Bypass Flag
                     Bypass = true;
                     break;
+//++++++++++++++++++++++++++++++++++++++++++  Reset Flash Frame Variables(Factory).
+                  case 'F':
+                    // Reset Flash Frame Variables.
+                    RoadBrd_WWDG_InitializeFrmFlash();
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      sprintf( (char *)tempBffr2, "<STATUS>TF_ACK</STATUS>" );
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
+                    sprintf( (char *)tempBffr2, "Flash Frame Variables Reset to Factory Values.\r\n" );
+                    break;
+//++++++++++++++++++++++++++++++++++++++++++  Lock Code to allow stable Program of BLE Module.
+                  case 'L':
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      sprintf( (char *)tempBffr2, "<STATUS>TL_ERROR</STATUS>" );
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    else
+                    {
+                      sprintf( (char *)tempBffr2, "Code Locked for Programming!\r\n\r\n" );
+#ifdef NUCLEO
+                      Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                      if (Status != HAL_OK)
+                        return Status;
+                      sprintf( (char *)tempBffr2, "   HARD RESET NEEDED TO EXIT MODE\r\n" );
+#ifdef NUCLEO
+                      Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                      if (Status != HAL_OK)
+                        return Status;
+                      // Start Hard Loop
+                      for (;;)
+                      {
+                      }
+                    }
+                    break;
 
+//**************************************************************************************************
                   default:
                     // Is this a BLE Operation?
                     if ( BLE_Flag )
@@ -3506,6 +3553,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
               }
               break;
 #endif
+//++++++++++++++++++++++++++++++++++++++++++  Unknown Command.
             default:
               // Is this a BLE Operation?
               if ( BLE_Flag )

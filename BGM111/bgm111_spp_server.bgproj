@@ -13,8 +13,12 @@
 		<script in="spp_server.bgs" />
     </scripting>
 	
+    <bootloader type="ota" />
+	
 	<!-- Firmware output file -->
     <image out="output.bin" />
 
-	<build dfu="ota_proj_1"/>
+	<!-- Firmware output file..OLD -->
+	<!-- <build dfu="ota_proj_1"/> -->
+	<build ebl="ota_proj_1"/>
 </project>
