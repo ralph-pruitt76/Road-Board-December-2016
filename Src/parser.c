@@ -2377,13 +2377,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                         Status = HAL_ERROR;
                       
                       // Is this a BLE Operation?
-                      if ( BLE_Flag )
-                      {
-                        // Yes...Build and Send BLE Response NOW.
-                        strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                        BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                      }
-                      
                       if (Status == HAL_OK)
                       {
                         // OK Next Sensor.
@@ -2401,6 +2394,25 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                             Status = RoadBrd_Baro_ReadPressure_Scaled( &PRPMeasure );
                             if (Status == HAL_OK)
                             {
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "<STATUS>%s//%s//%s//%s//%s//%s//%s//%s//%s//%s//%s//%s</STATUS>", (char *)GridMeasure.GridEye1.TempC,
+                                        (char *)GridMeasure.GridEye2.TempC,
+                                        (char *)GridMeasure.GridEye3.TempC,
+                                        (char *)GridMeasure.GridEye4.TempC,
+                                        (char *)GridMeasure.GridEye5.TempC,
+                                        (char *)GridMeasure.GridEye6.TempC,
+                                        (char *)GridMeasure.GridEye7.TempC,
+                                        (char *)GridMeasure.GridEye8.TempC,
+                                        (char *)GridMeasure.Thermistor.TempC,
+                                        (char *)TMeasure.TempC,
+                                        (char *)HMeasure.Humidity,
+                                        (char *)PRPMeasure.Pressure);
+                                strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
+                              
                               //sprintf( (char *)tempBffr2, "Driver Status: %04x\r\n", DriverStatus );
                               sprintf( (char *)tempBffr2, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\r\n", (char *)GridMeasure.GridEye1.TempC,
                                       (char *)GridMeasure.GridEye2.TempC,
@@ -2427,21 +2439,49 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                             } // Endif (Status == HAL_OK) RoadBrd_Baro_ReadPressure
                             else
                             {
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                strcpy( (char *)tempBffr2, "<STATUS>CMD_TC_HWERR_PRESSUE</STATUS>");
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
+                              
                               sprintf( (char *)tempBffr2, "Pressure TASKING ERROR!" );
                             } // EndElse (Status == HAL_OK) RoadBrd_Baro_ReadPressure
                           } // Endif (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
                           else
                           {
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_TC_HWERR_HUMIDITY</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
+                            
                             sprintf( (char *)tempBffr2, "Humidity TASKING ERROR!" );
                           } // EndElse (Status == HAL_OK) RoadBrd_Humidity_ReadHumidity
                         } // Endif (Status == HAL_OK) RoadBrd_ReadTemp
                         else
                         {
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TC_HWERR_TEMPERATURE</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
+                          
                           sprintf( (char *)tempBffr2, "AMBIENT TEMPERATURE TASKING ERROR!" );
                         } // EndElse (Status == HAL_OK) RoadBrd_ReadTemp
                       } // Endif (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
                       else
                       {
+                        if ( BLE_Flag )
+                        {
+                          // Yes...Build and Send BLE Response NOW.
+                          strcpy( (char *)tempBffr2, "<STATUS>CMD_TC_HWERR_IRTEMP</STATUS>");
+                          BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                        }
+                        
                         sprintf( (char *)tempBffr2, "GRID EYE/COOL EYE TASKING ERROR!" );
                       } // EndElse (Status == HAL_OK) RoadBrd_CoolEye_ReadValues
                     }
@@ -2458,7 +2498,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                           if ( BLE_Flag )
                           {
                             // Yes...Build and Send BLE Response NOW.
-                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TCS_SYNTAX</STATUS>");
                             BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                           }
                           
@@ -2470,13 +2510,20 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                           if ( BLE_Flag )
                           {
                             // Yes...Build and Send BLE Response NOW.
-                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TCS_BADPARAM</STATUS>");
                             BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                           }
                           
                           // 2. Verify if remaining string is digits
                           if (Size <= 4)
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_TCS_BADPARAM</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
                             strcpy( (char *)tempBffr2, "TCS SYNTAX ERROR: Bad Parameter.\r\n");
                           } // EndIf (Size > 4)
                           else
@@ -2495,180 +2542,582 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_SHNT_VLTG, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_SHNT_VLTG</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Shnt_Vltg Set COMPLETE.\r\n" );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_SHNT_VLTG_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0004",4) == 0) // Current
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_CURRENT, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_CURRENT</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Current Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_CURRENT_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0006",4) == 0) // Power
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_POWER, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_POWER</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Power Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_POWER_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0008",4) == 0) // Voltage
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_VOLTAGE, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_VOLTAGE</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Voltage Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_VOLTAGE_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"000A",4) == 0) // TempC
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_TEMPC, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_TEMPC</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TempC Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_TEMPC_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"000B",4) == 0) // TempF
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_TEMPF, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_TEMPF</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TempF Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_TEMPF_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0011",4) == 0) // Pressure
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_PRESSURE, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_PRESSURE</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Pressure Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_PRESSURE_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0030",4) == 0) // Humidity
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_HUMIDITY, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_HUMIDITY</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Humidity Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_HUMIDITY_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0032",4) == 0) // Hum_TempC
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_HUM_TEMPC, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_HUM_TEMPC</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Hum_TempC Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_HUM_TEMPC_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0033",4) == 0) // Hum_TempF
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_HUM_TEMPF, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_HUM_TEMPF</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Hum_TempF Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_HUM_TEMPF_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"000D",4) == 0) // RGB_Red
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_RGB_RED, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_RGB_RED</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RGB_Red Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_RGB_RED_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"000E",4) == 0) // RGB_Green
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_RGB_GREEN, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_RGB_GREEN</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RGB_Green Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_RGB_GREEN_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"000F",4) == 0) // RGB_Blue
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_RGB_BLUE, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_RGB_BLUE</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RGB_Blue Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_RGB_BLUE_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0017",4) == 0) // Therm_C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_THERM_C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_THERM_C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "Therm_C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_THERM_C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0019",4) == 0) // RoadT_1C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_1C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_1C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_1C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_1C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"001B",4) == 0) // RoadT_2C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_2C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_2C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_2C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_2C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"001D",4) == 0) // RoadT_3C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_3C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_3C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_3C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_3C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"001F",4) == 0) // RoadT_4C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_4C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_4C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_4C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_4C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0021",4) == 0) // RoadT_5C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_5C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_5C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_5C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_5C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0023",4) == 0) // RoadT_6C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_6C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_6C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_6C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_6C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0025",4) == 0) // RoadT_7C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_7C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_7C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_7C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_7C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else if (strncmp((char *)uuid,"0027",4) == 0) // RoadT_8C
                               {
                                 Status = RoadBrd_CAL_Set_CalItem( CAL_ROADT_8C, Offset, Scale);
                                 if (Status == HAL_OK)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_8C</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "RoadT_8C Set COMPLETE." );
+                                }
                                 else
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TCS_ROADT_8C_ERR</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
                                   sprintf( (char *)tempBffr2, "TCS SET ERROR: FAILED.\r\n" );
+                                }
                               }
                               else
                               {
+                                // Is this a BLE Operation?
+                                if ( BLE_Flag )
+                                {
+                                  // Yes...Build and Send BLE Response NOW.
+                                  strcpy( (char *)tempBffr2, "<STATUS>CMD_TCS_BADUUID</STATUS>");
+                                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                }
                                 sprintf( (char *)tempBffr2, "TCS SYNTAX ERROR: Bad UUID.\r\n" );
                               }
                               Status = HAL_OK;

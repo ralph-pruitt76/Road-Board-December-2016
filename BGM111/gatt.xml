@@ -61,7 +61,7 @@
 	
 	<!-- The OTA service definition -->
 	<!-- http://community.silabs.com/t5/Bluetooth-Wi-Fi-Knowledge-Base/BGScript-OTA-example-for-BGM111/ta-p/170665 -->
-	<service uuid="1d14d6ee-fd63-4fa1-bfa4-8f47b42119f0">
+	<!--service uuid="1d14d6ee-fd63-4fa1-bfa4-8f47b42119f0">
 			<description>Silicon Labs OTA</description>
 			<characteristic uuid="f7bf3564-fb6d-4e53-88a4-5e37e0326063" id="ota_control">
 				<properties write="true" />
@@ -71,6 +71,6 @@
 				<properties write_no_response="true" />
 				<value length="20" />
 			</characteristic>
-	</service>
+	</service-->
 	
 </gatt>

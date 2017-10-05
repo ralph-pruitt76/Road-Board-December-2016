@@ -1155,6 +1155,17 @@ int main(void)
                   tmpSize = RECEIVE_SZ;
                   pData = tempBffr;
                 } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+                // Is this a BackSpace Character?
+                else if(tmpData[0]==0x08)
+                {
+                  // YES...Are there any chars to undo?
+                  if (tmpSize < RECEIVE_SZ)
+                  {
+                    // YES...Undo Previous Character.
+                    tmpSize++;                          // Decrement Count
+                    pData--;                            // Move pointer to Previous buffer location.
+                  } //endif (tmpSize < RECEIVE_SZ)
+                } //endif (tmpData[0]==0x08)
                 else
                 {
                   *pData = tmpData[0];
