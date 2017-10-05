@@ -3136,7 +3136,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                         if ( BLE_Flag )
                         {
                           // Yes...Build and Send BLE Response NOW.
-                          strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                          sprintf( (char *)tempBffr2, "<STATUS>TCR:%s\\",  RoadBrd_CAL_GetTimeString());
                           BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                         }
                         
@@ -3166,132 +3166,352 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                           switch(x)
                           {
                             case CAL_SHNT_VLTG: //CAL_SHNT_VLTG Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0002//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0002		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_CURRENT: //CAL_CURRENT Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0004//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	        0004		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_POWER: //CAL_POWER Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0006//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0006		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_VOLTAGE: //CAL_VOLTAGE Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0008//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	        0008		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_TEMPC: //CAL_TEMPC Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:000A//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	000A		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_TEMPF: //CAL_TEMPF Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:000B//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	000B		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_PRESSURE: //CAL_PRESSURE Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0011//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0011		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_HUMIDITY: //CAL_HUMIDITY Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0030//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0030		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_HUM_TEMPC: //CAL_HUM_TEMPC Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0032//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0032		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_HUM_TEMPF: //CAL_HUM_TEMPF Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0033//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0033		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_RGB_RED: //CAL_RGB_RED Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:000D//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	        000D		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_RGB_GREEN: //CAL_RGB_GREEN Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:000E//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	000E		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_RGB_BLUE: //CAL_RGB_BLUE Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:000F//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	000F		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_THERM_C: //CAL_THERM_C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0017//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	        0017		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_1C: //CAL_ROADT_1C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0019//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0019		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_2C: //CAL_ROADT_2C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:001B//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	001B		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_3C: //CAL_ROADT_3C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:001D//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	001D		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_4C: //CAL_ROADT_4C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:001F//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	001F		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_5C: //CAL_ROADT_5C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0021//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0021		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_6C: //CAL_ROADT_6C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0023//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0023		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_7C: //CAL_ROADT_7C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0025//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0025		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
                               break;
                             case CAL_ROADT_8C: //CAL_ROADT_8C Values
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "%s:0027//%1.4f//%2.3f//", 
+                                        (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
+                                        RoadBrd_CAL_GetOffset( (Cal_Characteristic)x ) );
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               sprintf( (char *)tempBffr2, "%s	0027		%1.4f		%2.3f\r\n", 
                                       (char *)RdBrd_CAL_GetStr( (Cal_Characteristic)x ),
                                       RoadBrd_CAL_GetSlope( (Cal_Characteristic)x ),
@@ -3307,6 +3527,13 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                           if (Status != HAL_OK)
                             return Status;
                         } // EndFor(x=0; x<CAL_LAST_VALUE; x++)
+                        // Is this a BLE Operation?
+                        if ( BLE_Flag )
+                        {
+                          // Yes...Build and Send BLE Response NOW.
+                          strcpy( (char *)tempBffr2, "</STATUS>");
+                          BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                        }
                         sprintf( (char *)tempBffr2, "\r\n     COMPLETE.\r\n" );
                         break;
                         //------------------ TCT Command: Calibration Set Time Command
@@ -3318,7 +3545,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                           if ( BLE_Flag )
                           {
                             // Yes...Build and Send BLE Response NOW.
-                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TCT_SYNTAX</STATUS>");
                             BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                           }
                           
@@ -3326,17 +3553,16 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                         } // Endif (tempBffr[3]!=':')
                         else
                         {
-                          // Is this a BLE Operation?
-                          if ( BLE_Flag )
-                          {
-                            // Yes...Build and Send BLE Response NOW.
-                            strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                          }
-                          
                           // 2. Verify if remaining string is digits
                           if (Size <= 4)
                           {
+                            // Is this a BLE Operation?
+                            if ( BLE_Flag )
+                            {
+                              // Yes...Build and Send BLE Response NOW.
+                              strcpy( (char *)tempBffr2, "<STATUS>CMD_TCT_BADPARAM</STATUS>");
+                              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                            }
                             strcpy( (char *)tempBffr2, "TCT SYNTAX ERROR: Bad Parameter.\r\n");
                           } // EndIf (Size > 4)
                           else
@@ -3347,7 +3573,26 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                             // NOW...Save it.
                             Status = RoadBrd_CAL_Set_TimeString( (uint8_t *)tempPstr );
                             if (Status != HAL_OK)
+                            {
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                strcpy( (char *)tempBffr2, "<STATUS>CMD_TCT_ERR</STATUS>");
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
                               return Status;
+                            }
+                            else
+                            {
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                strcpy( (char *)tempBffr2, "<STATUS>ST_TCT_ACK</STATUS>");
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
+                            }
                             sprintf( (char *)tempBffr2, "\r\n     COMPLETE.\r\n" );
                           } // EndElse (Size > 4)
                         } // EndElse (tempBffr[3]!=':')
@@ -3355,16 +3600,27 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                         //------------------ TCI Command: Calibration Initialize Cal Table(Reset)
                       case 'I':
                         Status = RoadBrd_CAL_InitializeFrmFlash();
-                        // Is this a BLE Operation?
-                        if ( BLE_Flag )
-                        {
-                          // Yes...Build and Send BLE Response NOW.
-                          strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                          BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                        }
-                        
                         if (Status != HAL_OK)
+                        {
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TCI_ERR</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
                           return Status;
+                        }
+                        else
+                        {
+                          // Is this a BLE Operation?
+                          if ( BLE_Flag )
+                          {
+                            // Yes...Build and Send BLE Response NOW.
+                            strcpy( (char *)tempBffr2, "<STATUS>ST_TCI_ACK</STATUS>");
+                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                          }
+                        }
                         sprintf( (char *)tempBffr2, "\r\n     COMPLETE.\r\n" );
                         break;
                       } //EndSwitch
