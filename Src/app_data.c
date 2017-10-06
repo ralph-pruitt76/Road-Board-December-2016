@@ -15,6 +15,7 @@
 #include "ErrorCodes.h"
 #include "wwdg.h"
 #include "tim.h"
+#include <time.h>
 
 /* Characteristic handles */
 /*
@@ -1117,7 +1118,7 @@ void Process_RdSound( void )
     //                             strlen((char *)data.FFTBin48.dumpStr), (uint8_t *)data.FFTBin48.dumpStr);
       //sprintf( (char *)tempBffr2, "<TICK>RP/%08x/%04x/%04x</TICK>", HAL_GetTick(), HeartBeat_Cnt, connection_cnt);
       // Build Tick String
-      sprintf( tempstr, "%08x", HAL_GetTick());
+      sprintf( tempstr, "%s", getTickString());
       // Save Tick String....
       RoadBrd_WWDG_SetTickString( tempstr );
       sprintf( (char *)tempBffr2, "<TICK>RP/%s</TICK>", tempstr);
@@ -1481,4 +1482,29 @@ void ClrAnalyticsRepeat( void )
       analytics.FrmRpt_Cnt = 0;                     // Clear Frame Repeat Count.
 }
 
+  /**
+  * @brief  This function returns a formatted System String.
+  * @param  None
+  * @retval char *: Pointer to System Time String.
+  */
+char *getTickString( void )
+{
+  static char tempstr[15];
+  int   hours, minutes, seconds, milliseconds;
+  uint32_t TickCnt;
+  
+  TickCnt = HAL_GetTick();
+  
+  seconds = (int)floor((float)TickCnt/1000);
+  milliseconds = TickCnt % 1000;
+  
+  minutes = (int)floor((float)seconds/60);
+  seconds = seconds % 60;
+  
+  hours = (int)floor((float)minutes/60);
+  minutes = minutes % 60;
+  
+  sprintf( tempstr, "%02d:%02d:%02d.%03d", hours, minutes, seconds, milliseconds);
+  return tempstr;
+}
 
