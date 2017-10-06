@@ -161,7 +161,7 @@ end
 
 # This event indicates that a remote GATT client is attempting to write a value of 
 # an attribute of type "user" into the local GATT database
-event gatt_server_user_write_request(connection, characteristic, att_opcode, offset, value_len, value_data)
+#event gatt_server_user_write_request(connection, characteristic, att_opcode, offset, value_len, value_data)
 
 	# Check if the user-type OTA Control Characteristic was written. 
     if characteristic = ota_control then
@@ -183,6 +183,9 @@ event gatt_server_characteristic_status(connection,characteristic,status_flags,c
     if (characteristic = xgatt_spp_data &&  status_flags = gatt_server_client_config && client_config_flags = gatt_notification) then
         # notifications enabled -> transparent data mode
         call endpoint_send(uart_ep, 6, "DATA\r\n")
+	# Set Mode Not discoverable/Undirected connectable
+	call le_gap_set_mode(0,2)
+
     end if 
 
 end 

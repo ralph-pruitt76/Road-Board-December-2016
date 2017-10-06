@@ -149,6 +149,8 @@
 0:0	le_gap_scannable_non_connectable
 0:0	le_gap_undirected_connectable
 0:0	le_gap_user_data
+0:0	ota_control
+0:0	ota_data
 0:0	sm_bonding_key_addr_public
 0:0	sm_bonding_key_addr_static
 0:0	sm_bonding_key_csrk

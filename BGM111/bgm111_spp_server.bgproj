@@ -13,7 +13,7 @@
 		<script in="spp_server.bgs" />
     </scripting>
 	
-    <!--bootloader type="ota" /-->
+    <bootloader type="ota" />
 	
 	<!-- Firmware output file -->
     <image out="output.bin" />
