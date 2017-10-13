@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gatt generic_attribute_service="true" header="gatt_db.h" name="Custom BLE GATT" out="gatt_db.c" prefix="gattdb_">
+  <service advertise="false" name="Generic Access" requirement="mandatory" sourceId="org.bluetooth.service.generic_access" type="primary" uuid="1800"><informativeText>Abstract: The generic_access service contains generic information about the device. All available Characteristics are readonly. </informativeText><characteristic id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
+      <informativeText></informativeText>
+      <value length="19" type="utf-8" variable_length="false">RdPkHD</value>
+      <properties const="true" const_requirement="optional" read="true" read_requirement="optional"/>
+    </characteristic><characteristic name="Appearance" sourceId="org.bluetooth.characteristic.gap.appearance" uuid="2A01">
+      <informativeText>Abstract: The external appearance of this device. The values are composed of a category (10-bits) and sub-categories (6-bits). </informativeText>
+      <value length="2" type="hex" variable_length="false">0000</value>
+      <properties const="true" const_requirement="optional" read="true" read_requirement="optional"/>
+    </characteristic></service>
+  <service advertise="false" name="Device Information" requirement="mandatory" sourceId="org.bluetooth.service.device_information" type="primary" uuid="180A"><informativeText>Abstract: The Device Information Service exposes manufacturer and/or vendor information about a device. Summary: This service exposes manufacturer information about a device. The Device Information Service is instantiated as a Primary Service. Only one instance of the Device Information Service is exposed on a device. </informativeText><characteristic name="Manufacturer Name String" sourceId="org.bluetooth.characteristic.manufacturer_name_string" uuid="2A29">
+      <informativeText>Abstract: The value of this characteristic is a UTF-8 string representing the name of the manufacturer of the device. </informativeText>
+      <value length="12" type="utf-8" variable_length="false">Silicon Labs</value>
+      <properties const="true" const_requirement="optional" read="true" read_requirement="optional"/>
+    </characteristic><characteristic id="model_number_string" name="Model Number String" sourceId="org.bluetooth.characteristic.model_number_string" uuid="2A24">
+      <informativeText>Abstract:  The value of this characteristic is a UTF-8 string representing the model number assigned by the device vendor.  </informativeText>
+      <value length="1" type="utf-8" variable_length="false">BGM111</value>
+      <properties const="true" const_requirement="optional" read="true" read_requirement="optional"/>
+    </characteristic></service>
+  <service advertise="true" name="SPP Service" requirement="mandatory" sourceId="https://www.guidgenerator.com/" type="primary" uuid="0bd51666-e7cb-469b-8e4d-2742f1ba77cc"><informativeText>Abstract:  This service exposes user-related data in the sports and fitness environment. This allows remote access and update of user data by a Client as well as the synchronization of user data between a Server and a Client.  Summary:  The User Data Service (UDS) exposes user-related data in the sports and fitness environment. This allows remote access and update of user data by a Client as well as the synchronization of user data between a Server and a Client.  </informativeText><characteristic id="xgatt_spp_data" name="SPP Data" sourceId="https://www.guidgenerator.com/" uuid="e7add780-b042-4876-aae1-112855353cc1">
+      <informativeText>Abstract:  First name of the user. See Note below.  </informativeText>
+      <value length="20" type="hex" variable_length="true"></value>
+      <properties notify="false" notify_requirement="excluded" write="true" write_requirement="mandatory"/>
+    </characteristic></service>
+  <service advertise="false" id="ota" name="Silicon Labs OTA" requirement="mandatory" sourceId="com.silabs.service.ota" type="primary" uuid="1D14D6EE-FD63-4FA1-BFA4-8F47B42119F0"><informativeText>Abstract:  The Silicon Labs OTA Service enables over-the-air firmware update of the device.  </informativeText><characteristic id="ota_control" name="Silicon Labs OTA Control" sourceId="com.silabs.characteristic.ota_control" uuid="F7BF3564-FB6D-4E53-88A4-5E37E0326063">
+      <informativeText>Abstract:  Silicon Labs OTA Control.  </informativeText>
+      <value length="1" type="hex" variable_length="false"></value>
+      <properties indicate="false" indicate_requirement="excluded" notify="false" notify_requirement="excluded" read="false" read_requirement="excluded" reliable_write="false" reliable_write_requirement="excluded" write="true" write_no_response="false" write_no_response_requirement="excluded" write_requirement="mandatory"/>
+    </characteristic><characteristic id="ota_data" name="Silicon Labs OTA Data" sourceId="com.silabs.characteristic.ota_data" uuid="984227F3-34FC-4045-A5D0-2C581F81A153">
+      <informativeText>Abstract:  Silicon Labs OTA Data.  </informativeText>
+      <value length="20" type="hex" variable_length="false"></value>
+      <properties indicate="false" indicate_requirement="excluded" notify="false" notify_requirement="excluded" read="false" read_requirement="excluded" reliable_write="false" reliable_write_requirement="excluded" write="false" write_no_response="true" write_no_response_requirement="mandatory" write_requirement="excluded"/>
+    </characteristic></service>
+</gatt>

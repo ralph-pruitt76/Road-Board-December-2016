@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>.externalFiles</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>D__SiliconLabs_SimplicityStudio_v4___developer_sdks_gecko_sdk_suite_v1.1_hardware_kit_EFR3_BG1_BRD43__A_config_bspconfig.h</name>
+			<type>1</type>
+			<location>D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/hardware/kit/EFR32BG1_BRD4300A/config/bspconfig.h</location>
+		</link>
+		<link>
+			<name>D__SiliconLabs_SimplicityStudio_v4___developer_sdks_gecko_sdk_suite_v1.1_platform_emlib_inc_em_chip.h</name>
+			<type>1</type>
+			<location>D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/inc/em_chip.h</location>
+		</link>
+		<link>
+			<name>D__SiliconLabs_SimplicityStudio_v4___developer_sdks_gecko_sdk_suite_v1.1_platform_emlib_inc_em_timer.h</name>
+			<type>1</type>
+			<location>D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/inc/em_timer.h</location>
+		</link>
+		<link>
+			<name>D__SiliconLabs_SimplicityStudio_v4___developer_sdks_gecko_sdk_suite_v1.1_protocol_bluetooth__.4_ble_stack_inc_soc_native_gecko.h</name>
+			<type>1</type>
+			<location>D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/protocol/bluetooth_2.4/ble_stack/inc/soc/native_gecko.h</location>
+		</link>
+	</linkedResources>
+</projectDescription>

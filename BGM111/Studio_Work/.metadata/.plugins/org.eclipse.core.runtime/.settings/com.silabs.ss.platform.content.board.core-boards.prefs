@@ -1,0 +1,5 @@
+defaultSelection=brd4300a\:0.0.0.A03\u0000brd8006a\:0.0.0\u0000brd4001a\:0.0.0.A01\u0000
+disabledIDs=\u0000
+eclipse.preferences.version=1
+enabledIDs=brd4001a\:0.0.0.A01\u0000brd4300a\:0.0.0.A03\u0000
+knownParentDescs_com.silabs.ss.platform.content.core-metadataConfigs=Built In\u0000D\:\\SiliconLabs\\SimplicityStudio\\v4_2\\configuration\\studio\\metadata
