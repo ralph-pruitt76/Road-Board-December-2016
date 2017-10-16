@@ -2489,3 +2489,100 @@ java.lang.NullPointerException
 
 !ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-13 13:06:19.068
 !MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+!SESSION 2017-10-16 08:36:15.012 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 08:37:13.988
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 08:37:14.041
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 08:37:14.126
+!MESSAGE Unknown architecture(s) [EFR32MG13P832F512GM48+iar, EFR32MG13P932F512GM48+iar, EFR32MG13P932F512IM48+iar, EFR32MG13P832F512GM48+gcc, EFR32MG13P932F512GM48+gcc, EFR32MG13P932F512IM48+gcc] in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 08:37:14.135
+!MESSAGE Unknown board 'BRD4165A' in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 08:37:14.142
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-16 08:37:36.747
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.installer.core 4 0 2017-10-16 08:39:46.152
+!MESSAGE Communication with repository at https://devtools.silabs.com/studio/v4/updates/ failed.
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: Communication with repository at https://devtools.silabs.com/studio/v4/updates/ failed.
+	at org.eclipse.equinox.internal.p2.repository.CacheManager.createCache(CacheManager.java:202)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepositoryFactory.getLocalFile(SimpleArtifactRepositoryFactory.java:65)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepositoryFactory.load(SimpleArtifactRepositoryFactory.java:88)
+	at org.eclipse.equinox.internal.p2.artifact.repository.simple.SimpleArtifactRepositoryFactory.load(SimpleArtifactRepositoryFactory.java:76)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.factoryLoad(ArtifactRepositoryManager.java:73)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:768)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:668)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.basicRefreshRepository(AbstractRepositoryManager.java:203)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.refreshRepository(ArtifactRepositoryManager.java:108)
+	at com.silabs.ss.platform.internal.api.installer.core.SLSP2UpdateSites.ensureStudioReposLoaded(SLSP2UpdateSites.java:627)
+	at com.silabs.ss.platform.internal.installer.core.scripting.SLSInstallerModule.createSession(SLSInstallerModule.java:537)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.updatePackageMetadata(UpdateManager.java:206)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.ensureUpdatesFetched(UpdateManager.java:283)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager.access$5(UpdateManager.java:274)
+	at com.silabs.ss.platform.internal.installer.core.updates.UpdateManager$1.run(UpdateManager.java:166)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+	at org.apache.http.conn.ssl.SSLSocketFactory.connectSocket(SSLSocketFactory.java:535)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.SNIAwareHttpClient$1.connectSocket(SNIAwareHttpClient.java:63)
+	at org.apache.http.conn.ssl.SSLSocketFactory.connectSocket(SSLSocketFactory.java:403)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:177)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:304)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:611)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:446)
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:863)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:259)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:69)
+	... 1 more
+!SUBENTRY 1 org.eclipse.equinox.p2.repository 4 1002 2017-10-16 08:39:46.202
+!MESSAGE Communication with repository at https://devtools.silabs.com/studio/v4/updates/ failed.
+!STACK 0
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.performInitialHandshake(SSLSocketImpl.java:1375)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1403)
+	at sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:1387)
+	at org.apache.http.conn.ssl.SSLSocketFactory.connectSocket(SSLSocketFactory.java:535)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.SNIAwareHttpClient$1.connectSocket(SNIAwareHttpClient.java:63)
+	at org.apache.http.conn.ssl.SSLSocketFactory.connectSocket(SSLSocketFactory.java:403)
+	at org.apache.http.impl.conn.DefaultClientConnectionOperator.openConnection(DefaultClientConnectionOperator.java:177)
+	at org.apache.http.impl.conn.ManagedClientConnectionImpl.open(ManagedClientConnectionImpl.java:304)
+	at org.apache.http.impl.client.DefaultRequestDirector.tryConnect(DefaultRequestDirector.java:611)
+	at org.apache.http.impl.client.DefaultRequestDirector.execute(DefaultRequestDirector.java:446)
+	at org.apache.http.impl.client.AbstractHttpClient.doExecute(AbstractHttpClient.java:863)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientFileSystemBrowser.runRequest(HttpClientFileSystemBrowser.java:259)
+	at org.eclipse.ecf.provider.filetransfer.browse.AbstractFileSystemBrowser$DirectoryJob.run(AbstractFileSystemBrowser.java:69)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-16 08:40:05.501
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
