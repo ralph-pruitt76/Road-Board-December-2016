@@ -1,6 +1,4 @@
 service_changed_char 3
 device_name 7
-model_number_string 14
-xgatt_spp_data 17
-ota_control 21
-ota_data 23
+temp_measurement 15
+ota_control 19

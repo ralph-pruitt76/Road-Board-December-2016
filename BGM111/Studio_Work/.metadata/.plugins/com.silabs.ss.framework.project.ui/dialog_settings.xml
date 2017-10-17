@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="com.silabs.ss.framework.ide.project.core.cdtMbsProjectType">
+		<item value="com.silabs.ss.framework.ide.project.ui.exampleWizardType" key="projectTypeId"/>
+		<item value="LINK_LIBRARIES" key="settingImportModeOption"/>
+		<item value="true" key="filterTemplatesByPartSdk"/>
+		<item value="template.esf.com.silabs.template.external.com.silabs.sdk.stack.super.ble.Bluetooth SDK.SOC_-_Thermometer_1.1.1._1426710922.2.4.2._503295320" key="selectedTemplateId"/>
+		<item value="true" key="filterTemplatesByToolchain"/>
+	</section>
+</section>

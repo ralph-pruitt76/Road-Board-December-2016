@@ -194,7 +194,7 @@ Discarded input sections
                 0x00000000       0x98 ./bgapi/em_adc.o
  .debug_ranges  0x00000000       0x88 ./bgapi/em_adc.o
  .debug_line    0x00000000      0x570 ./bgapi/em_adc.o
- .debug_str     0x00000000     0x2a73 ./bgapi/em_adc.o
+ .debug_str     0x00000000     0x2a92 ./bgapi/em_adc.o
  .comment       0x00000000       0x71 ./bgapi/em_adc.o
  .debug_frame   0x00000000      0x270 ./bgapi/em_adc.o
  .ARM.attributes
@@ -235,7 +235,7 @@ Discarded input sections
                 0x00000000       0x80 ./bgapi/em_ldma.o
  .debug_ranges  0x00000000       0x70 ./bgapi/em_ldma.o
  .debug_line    0x00000000      0x494 ./bgapi/em_ldma.o
- .debug_str     0x00000000      0xa90 ./bgapi/em_ldma.o
+ .debug_str     0x00000000      0xaaf ./bgapi/em_ldma.o
  .comment       0x00000000       0x71 ./bgapi/em_ldma.o
  .debug_frame   0x00000000      0x1f4 ./bgapi/em_ldma.o
  .ARM.attributes
@@ -278,7 +278,7 @@ Discarded input sections
                 0x00000000       0x88 ./bgapi/em_leuart.o
  .debug_ranges  0x00000000       0x78 ./bgapi/em_leuart.o
  .debug_line    0x00000000      0x45c ./bgapi/em_leuart.o
- .debug_str     0x00000000      0x728 ./bgapi/em_leuart.o
+ .debug_str     0x00000000      0x747 ./bgapi/em_leuart.o
  .comment       0x00000000       0x71 ./bgapi/em_leuart.o
  .debug_frame   0x00000000      0x21c ./bgapi/em_leuart.o
  .ARM.attributes
@@ -343,7 +343,7 @@ Discarded input sections
                 0x00000000       0x30 ./emlib/em_cryotimer.o
  .debug_ranges  0x00000000       0x20 ./emlib/em_cryotimer.o
  .debug_line    0x00000000      0x337 ./emlib/em_cryotimer.o
- .debug_str     0x00000000      0x662 ./emlib/em_cryotimer.o
+ .debug_str     0x00000000      0x681 ./emlib/em_cryotimer.o
  .comment       0x00000000       0x71 ./emlib/em_cryotimer.o
  .debug_frame   0x00000000       0x80 ./emlib/em_cryotimer.o
  .ARM.attributes
@@ -405,7 +405,7 @@ Discarded input sections
                 0x00000000       0x70 ./emlib/em_i2c.o
  .debug_ranges  0x00000000       0x60 ./emlib/em_i2c.o
  .debug_line    0x00000000      0x4c7 ./emlib/em_i2c.o
- .debug_str     0x00000000      0x7e6 ./emlib/em_i2c.o
+ .debug_str     0x00000000      0x805 ./emlib/em_i2c.o
  .comment       0x00000000       0x71 ./emlib/em_i2c.o
  .debug_frame   0x00000000      0x1b0 ./emlib/em_i2c.o
  .ARM.attributes
@@ -427,7 +427,7 @@ Discarded input sections
                 0x00000000       0x70 ./emlib/em_msc.o
  .debug_ranges  0x00000000       0x60 ./emlib/em_msc.o
  .debug_line    0x00000000      0x4c8 ./emlib/em_msc.o
- .debug_str     0x00000000      0x533 ./emlib/em_msc.o
+ .debug_str     0x00000000      0x552 ./emlib/em_msc.o
  .comment       0x00000000       0x71 ./emlib/em_msc.o
  .debug_frame   0x00000000      0x198 ./emlib/em_msc.o
  .ARM.attributes
@@ -517,7 +517,7 @@ Discarded input sections
                 0x00000000       0x50 ./kit/BRD4300ArevA03/bsp_bcc.o
  .debug_ranges  0x00000000       0x40 ./kit/BRD4300ArevA03/bsp_bcc.o
  .debug_line    0x00000000      0x3f5 ./kit/BRD4300ArevA03/bsp_bcc.o
- .debug_str     0x00000000      0xaa9 ./kit/BRD4300ArevA03/bsp_bcc.o
+ .debug_str     0x00000000      0xac8 ./kit/BRD4300ArevA03/bsp_bcc.o
  .comment       0x00000000       0x71 ./kit/BRD4300ArevA03/bsp_bcc.o
  .debug_frame   0x00000000      0x114 ./kit/BRD4300ArevA03/bsp_bcc.o
  .ARM.attributes
@@ -548,7 +548,7 @@ Discarded input sections
                 0x00000000       0x58 ./kit/BRD4300ArevA03/bsp_stk.o
  .debug_ranges  0x00000000       0x48 ./kit/BRD4300ArevA03/bsp_stk.o
  .debug_line    0x00000000      0x2aa ./kit/BRD4300ArevA03/bsp_stk.o
- .debug_str     0x00000000      0x35a ./kit/BRD4300ArevA03/bsp_stk.o
+ .debug_str     0x00000000      0x379 ./kit/BRD4300ArevA03/bsp_stk.o
  .comment       0x00000000       0x71 ./kit/BRD4300ArevA03/bsp_stk.o
  .debug_frame   0x00000000      0x120 ./kit/BRD4300ArevA03/bsp_stk.o
  .ARM.attributes
@@ -593,7 +593,7 @@ Discarded input sections
                 0x00000000       0x88 ./kit/BRD4300ArevA03/bsp_stk_leds.o
  .debug_ranges  0x00000000       0x78 ./kit/BRD4300ArevA03/bsp_stk_leds.o
  .debug_line    0x00000000      0x52e ./kit/BRD4300ArevA03/bsp_stk_leds.o
- .debug_str     0x00000000      0x787 ./kit/BRD4300ArevA03/bsp_stk_leds.o
+ .debug_str     0x00000000      0x7a6 ./kit/BRD4300ArevA03/bsp_stk_leds.o
  .comment       0x00000000       0x71 ./kit/BRD4300ArevA03/bsp_stk_leds.o
  .debug_frame   0x00000000      0x218 ./kit/BRD4300ArevA03/bsp_stk_leds.o
  .ARM.attributes
@@ -620,7 +620,7 @@ Discarded input sections
                 0x00000000       0x48 ./kit/BRD4300ArevA03/i2cspm.o
  .debug_ranges  0x00000000       0x38 ./kit/BRD4300ArevA03/i2cspm.o
  .debug_line    0x00000000      0x431 ./kit/BRD4300ArevA03/i2cspm.o
- .debug_str     0x00000000      0x95c ./kit/BRD4300ArevA03/i2cspm.o
+ .debug_str     0x00000000      0x97b ./kit/BRD4300ArevA03/i2cspm.o
  .comment       0x00000000       0x71 ./kit/BRD4300ArevA03/i2cspm.o
  .debug_frame   0x00000000       0xf0 ./kit/BRD4300ArevA03/i2cspm.o
  .ARM.attributes
@@ -655,7 +655,7 @@ Discarded input sections
                 0x00000000       0x68 ./kit/BRD4300ArevA03/si7013.o
  .debug_ranges  0x00000000       0x58 ./kit/BRD4300ArevA03/si7013.o
  .debug_line    0x00000000      0x409 ./kit/BRD4300ArevA03/si7013.o
- .debug_str     0x00000000      0x4bb ./kit/BRD4300ArevA03/si7013.o
+ .debug_str     0x00000000      0x4da ./kit/BRD4300ArevA03/si7013.o
  .comment       0x00000000       0x71 ./kit/BRD4300ArevA03/si7013.o
  .debug_frame   0x00000000      0x178 ./kit/BRD4300ArevA03/si7013.o
  .ARM.attributes
@@ -678,7 +678,7 @@ Discarded input sections
                 0x00000000       0x38 ./kit/BRD4300ArevA03/tempsens.o
  .debug_ranges  0x00000000       0x28 ./kit/BRD4300ArevA03/tempsens.o
  .debug_line    0x00000000      0x373 ./kit/BRD4300ArevA03/tempsens.o
- .debug_str     0x00000000      0x482 ./kit/BRD4300ArevA03/tempsens.o
+ .debug_str     0x00000000      0x4a1 ./kit/BRD4300ArevA03/tempsens.o
  .comment       0x00000000       0x71 ./kit/BRD4300ArevA03/tempsens.o
  .debug_frame   0x00000000       0xa4 ./kit/BRD4300ArevA03/tempsens.o
  .ARM.attributes
@@ -708,7 +708,7 @@ Discarded input sections
                 0x00000000       0x50 ./kit/BRD4300ArevA03/udelay.o
  .debug_ranges  0x00000000       0x40 ./kit/BRD4300ArevA03/udelay.o
  .debug_line    0x00000000      0x452 ./kit/BRD4300ArevA03/udelay.o
- .debug_str     0x00000000      0xd50 ./kit/BRD4300ArevA03/udelay.o
+ .debug_str     0x00000000      0xd6f ./kit/BRD4300ArevA03/udelay.o
  .comment       0x00000000       0x71 ./kit/BRD4300ArevA03/udelay.o
  .debug_frame   0x00000000      0x110 ./kit/BRD4300ArevA03/udelay.o
  .ARM.attributes
@@ -1855,31 +1855,31 @@ OUTPUT(soc-CRP.axf elf32-littlearm)
  .debug_line    0x00002db5      0x5ec ./emlib/em_usart.o
  .debug_line    0x000033a1      0x6bd ./src/InitDevice.o
 
-.debug_str      0x00000000     0xac22
- .debug_str     0x00000000      0x293 ./application_properties.o
-                                0x2ea (size before relaxing)
- .debug_str     0x00000293      0x619 ./gatt_db.o
-                                0x84f (size before relaxing)
- .debug_str     0x000008ac     0x5f5d ./main.o
-                               0x65c4 (size before relaxing)
- .debug_str     0x00006809      0xea7 ./bgapi/dmadrv.o
-                               0x10c6 (size before relaxing)
- .debug_str     0x000076b0       0xee ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
-                                0x2a1 (size before relaxing)
- .debug_str     0x0000779e     0x114c ./emlib/em_cmu.o
-                               0x13dd (size before relaxing)
- .debug_str     0x000088ea      0x3e0 ./emlib/em_gpio.o
-                                0x82e (size before relaxing)
- .debug_str     0x00008cca      0x5d6 ./emlib/em_rtcc.o
-                                0x7f6 (size before relaxing)
- .debug_str     0x000092a0      0x129 ./emlib/em_system.o
-                                0x2fb (size before relaxing)
- .debug_str     0x000093c9      0x7b1 ./emlib/em_timer.o
-                                0x9d1 (size before relaxing)
- .debug_str     0x00009b7a      0x9fd ./emlib/em_usart.o
-                                0xdfc (size before relaxing)
- .debug_str     0x0000a577      0x6ab ./src/InitDevice.o
-                               0x243a (size before relaxing)
+.debug_str      0x00000000     0xac41
+ .debug_str     0x00000000      0x2b2 ./application_properties.o
+                                0x309 (size before relaxing)
+ .debug_str     0x000002b2      0x619 ./gatt_db.o
+                                0x86e (size before relaxing)
+ .debug_str     0x000008cb     0x5f5d ./main.o
+                               0x65e3 (size before relaxing)
+ .debug_str     0x00006828      0xea7 ./bgapi/dmadrv.o
+                               0x10e5 (size before relaxing)
+ .debug_str     0x000076cf       0xee ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+                                0x2c0 (size before relaxing)
+ .debug_str     0x000077bd     0x114c ./emlib/em_cmu.o
+                               0x13fc (size before relaxing)
+ .debug_str     0x00008909      0x3e0 ./emlib/em_gpio.o
+                                0x84d (size before relaxing)
+ .debug_str     0x00008ce9      0x5d6 ./emlib/em_rtcc.o
+                                0x815 (size before relaxing)
+ .debug_str     0x000092bf      0x129 ./emlib/em_system.o
+                                0x31a (size before relaxing)
+ .debug_str     0x000093e8      0x7b1 ./emlib/em_timer.o
+                                0x9f0 (size before relaxing)
+ .debug_str     0x00009b99      0x9fd ./emlib/em_usart.o
+                                0xe1b (size before relaxing)
+ .debug_str     0x0000a596      0x6ab ./src/InitDevice.o
+                               0x2459 (size before relaxing)
 
 .debug_loc      0x00000000     0x311e
  .debug_loc     0x00000000      0x30a ./main.o

@@ -1,0 +1,44 @@
+15:05:54 **** Build of configuration GNU ARM v4.9.3 - Debug for project soc-CRP2 ****
+make -j4 all 
+Building file: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_system.c
+Building file: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/Device/SiliconLabs/EFR32BG1B/Source/system_efr32bg1b.c
+Building file: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/Device/SiliconLabs/EFR32BG1B/Source/GCC/startup_efr32bg1b.S
+Building file: ../src/main.c
+Invoking: GNU ARM C Compiler
+Invoking: GNU ARM C Compiler
+arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DEFR32BG1B232F256GM48=1' '-DDEBUG=1' -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" -O0 -Wall -c -fmessage-length=0 -mno-sched-prolog -fno-builtin -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -MMD -MP -MF"CMSIS/EFR32BG1B/system_efr32bg1b.d" -MT"CMSIS/EFR32BG1B/system_efr32bg1b.o" -o "CMSIS/EFR32BG1B/system_efr32bg1b.o" "D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/Device/SiliconLabs/EFR32BG1B/Source/system_efr32bg1b.c"
+arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DEFR32BG1B232F256GM48=1' '-DDEBUG=1' -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" -O0 -Wall -c -fmessage-length=0 -mno-sched-prolog -fno-builtin -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -MMD -MP -MF"emlib/em_system.d" -MT"emlib/em_system.o" -o "emlib/em_system.o" "D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_system.c"
+Invoking: GNU ARM Assembler
+Invoking: GNU ARM C Compiler
+arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -c -x assembler-with-cpp -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" '-DEFR32BG1B232F256GM48=1' -o "CMSIS/EFR32BG1B/startup_efr32bg1b.o" "D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/Device/SiliconLabs/EFR32BG1B/Source/GCC/startup_efr32bg1b.S"
+arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DEFR32BG1B232F256GM48=1' '-DDEBUG=1' -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" -O0 -Wall -c -fmessage-length=0 -mno-sched-prolog -fno-builtin -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+Finished building: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/Device/SiliconLabs/EFR32BG1B/Source/GCC/startup_efr32bg1b.S
+ 
+Finished building: ../src/main.c
+Finished building: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_system.c
+Finished building: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/Device/SiliconLabs/EFR32BG1B/Source/system_efr32bg1b.c
+ 
+ 
+ 
+Building target: soc-CRP2.axf
+Invoking: GNU ARM C Linker
+arm-none-eabi-gcc -g -gdwarf-2 -mcpu=cortex-m4 -mthumb -T "soc-CRP2.ld" -Xlinker --gc-sections -Xlinker -Map="soc-CRP2.map" -mfpu=fpv4-sp-d16 -mfloat-abi=softfp --specs=nano.specs -o soc-CRP2.axf "./CMSIS/EFR32BG1B/startup_efr32bg1b.o" "./CMSIS/EFR32BG1B/system_efr32bg1b.o" "./emlib/em_system.o" "./src/main.o" -Wl,--start-group -lgcc -lc -lnosys -Wl,--end-group
+Finished building target: soc-CRP2.axf
+ 
+Building hex file: soc-CRP2.hex
+arm-none-eabi-objcopy -O ihex "soc-CRP2.axf" "soc-CRP2.hex"
+ 
+Building bin file: soc-CRP2.bin
+arm-none-eabi-objcopy -O binary "soc-CRP2.axf" "soc-CRP2.bin"
+ 
+Building s37 file: soc-CRP2.s37
+arm-none-eabi-objcopy -O srec "soc-CRP2.axf" "soc-CRP2.s37"
+ 
+Running size tool
+arm-none-eabi-size "soc-CRP2.axf"
+   text	   data	    bss	    dec	    hex	filename
+   1108	    108	     28	   1244	    4dc	soc-CRP2.axf
+ 
+
+15:05:56 Build Finished (took 2s.240ms)
+

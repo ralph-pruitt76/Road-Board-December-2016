@@ -2586,3 +2586,811 @@ java.net.SocketTimeoutException: Read timed out
 
 !ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-16 08:40:05.501
 !MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+!SESSION 2017-10-16 10:23:55.892 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 10:24:52.601
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 10:24:52.665
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 10:24:52.749
+!MESSAGE Unknown architecture(s) [EFR32MG13P832F512GM48+iar, EFR32MG13P932F512GM48+iar, EFR32MG13P932F512IM48+iar, EFR32MG13P832F512GM48+gcc, EFR32MG13P932F512GM48+gcc, EFR32MG13P932F512IM48+gcc] in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 10:24:52.758
+!MESSAGE Unknown board 'BRD4165A' in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 10:24:52.769
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-16 10:25:12.185
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-16 10:25:44.227
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 10:33:33.087
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 10:38:11.445
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2017-10-16 10:38:15.784
+!MESSAGE Error while reading 285 bytes from 0x00020ee3
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2017-10-16 10:38:15.799
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@944e1c): Status ERROR: com.silabs.ss.support.mcu.part.core code=0 Error while reading 285 bytes from 0x00020ee3 null' resulted in an error.
+!SUBENTRY 1 com.silabs.ss.support.mcu.part.core 4 0 2017-10-16 10:38:15.799
+!MESSAGE Error while reading 285 bytes from 0x00020ee3
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2017-10-16 10:38:15.814
+!MESSAGE Error while reading 285 bytes from 0x00020ee3
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 10:39:58.127
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2017-10-16 10:40:06.093
+!MESSAGE Error while reading 285 bytes from 0x00020ee3
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2017-10-16 10:40:06.117
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitorWithProgress@191dbf9): Status ERROR: com.silabs.ss.support.mcu.part.core code=0 Error while reading 285 bytes from 0x00020ee3 null' resulted in an error.
+!SUBENTRY 1 com.silabs.ss.support.mcu.part.core 4 0 2017-10-16 10:40:06.117
+!MESSAGE Error while reading 285 bytes from 0x00020ee3
+
+!ENTRY com.silabs.ss.support.mcu.part.core 4 0 2017-10-16 10:40:06.133
+!MESSAGE Error while reading 285 bytes from 0x00020ee3
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 10:42:32.242
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 10:46:59.702
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 10:47:52.288
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 13:55:28.887
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 13:55:28.895
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 14:04:12.712
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 14:09:45.676
+!MESSAGE Demo information file is empty at D:\SiliconLabs\SimplicityStudio\v4_2\configuration\org.eclipse.osgi\276\0\.cp\demos\demos.xml
+
+!ENTRY com.silabs.ss.platform.demos.core 4 0 2017-10-16 14:09:45.730
+!MESSAGE Failed to load demo from file: D:\SiliconLabs\SimplicityStudio\v4_2\developer\sdks\gecko_sdk_suite\v1.0\app\bluetooth_2.3\appbuilder\sample-apps-bin\demos-homekit.xml
+!STACK 0
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException: org.xml.sax.SAXParseExceptionpublicId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.0/app/bluetooth_2.3/appbuilder/sample-apps-bin/demos-homekit.xml; systemId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.0/app/bluetooth_2.3/appbuilder/sample-apps-bin/demos-homekit.xml; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+	at com.silabs.ss.platform.api.demos.core.DemoModelUtils.createDescriptorsFromFile(DemoModelUtils.java:41)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.loadDemoFile(SDKDemosDetector.java:100)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.lambda$0(SDKDemosDetector.java:37)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.loadTemplates(SDKProtocolLoader.java:80)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.doLoadForProtocols(SDKProtocolLoader.java:60)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.loadForProtocols(SDKProtocolLoader.java:48)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.scanForSDK(SDKDemosDetector.java:93)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.quickScan(SDKDemosDetector.java:55)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDetector.doDetectDescriptors(BaseDetector.java:59)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDetector.detectDescriptors(BaseDetector.java:43)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.detectDescriptors(SDKDemosDetector.java:82)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.detectDescriptors(SDKDemosDetector.java:1)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.detectDescriptors(BaseRegistry.java:673)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.detectDescriptors(BaseRegistry.java:644)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.scanForNewDescriptors(BaseRegistry.java:616)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.autoDetectDescriptors(BaseRegistry.java:604)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.loadInternalDescriptors(BaseRegistry.java:557)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.lambda$9(BaseRegistry.java:536)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDatabaseRegistry.invokeBatchOperation(BaseDatabaseRegistry.java:258)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.doEnsureSync(BaseRegistry.java:532)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.ensureSync(BaseRegistry.java:506)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDatabaseRegistry.getAllDescriptors(BaseDatabaseRegistry.java:497)
+	at com.silabs.ss.platform.internal.demos.ui.DemosLaunchElementsProvider.getLaunchElements(DemosLaunchElementsProvider.java:44)
+	at com.silabs.ss.platform.api.launcher.core.LaunchElementsManager.lambda$1(LaunchElementsManager.java:75)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+	at java.util.stream.ReduceOps$ReduceTask.doLeaf(ReduceOps.java:747)
+	at java.util.stream.ReduceOps$ReduceTask.doLeaf(ReduceOps.java:721)
+	at java.util.stream.AbstractTask.compute(AbstractTask.java:316)
+	at java.util.concurrent.CountedCompleter.exec(CountedCompleter.java:731)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.execLocalTasks(ForkJoinPool.java:1040)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1058)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.0/app/bluetooth_2.3/appbuilder/sample-apps-bin/demos-homekit.xml; systemId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.0/app/bluetooth_2.3/appbuilder/sample-apps-bin/demos-homekit.xml; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1438)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:999)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:606)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:510)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:848)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:777)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:327)
+	at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:175)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1297)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoad(ResourceSetImpl.java:259)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:274)
+	... 39 more
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:46.544
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Smart Phone App
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:46.965
+!MESSAGE No capability active_scan found for Sniffer
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.181
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Thermometer
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.236
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - DTM
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.297
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app NCP target - Empty
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.374
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar] in sample app NCP target - Switched Multiprotocol Trust Center
+
+!ENTRY com.silabs.ss.platform.demos.core 4 0 2017-10-16 14:09:47.409
+!MESSAGE Failed to load demo from file: D:\SiliconLabs\SimplicityStudio\v4_2\developer\stacks\ble\v2.1.0.0\app\bluetooth_2.1\appbuilder\sample-apps-bin\demos-homekit.xml
+!STACK 0
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException: org.xml.sax.SAXParseExceptionpublicId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.0.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; systemId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.0.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+	at com.silabs.ss.platform.api.demos.core.DemoModelUtils.createDescriptorsFromFile(DemoModelUtils.java:41)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.loadDemoFile(SDKDemosDetector.java:100)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.lambda$0(SDKDemosDetector.java:37)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.loadTemplates(SDKProtocolLoader.java:80)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.doLoadForProtocols(SDKProtocolLoader.java:60)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.loadForProtocols(SDKProtocolLoader.java:48)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.scanForSDK(SDKDemosDetector.java:93)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.quickScan(SDKDemosDetector.java:55)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDetector.doDetectDescriptors(BaseDetector.java:59)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDetector.detectDescriptors(BaseDetector.java:43)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.detectDescriptors(SDKDemosDetector.java:82)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.detectDescriptors(SDKDemosDetector.java:1)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.detectDescriptors(BaseRegistry.java:673)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.detectDescriptors(BaseRegistry.java:644)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.scanForNewDescriptors(BaseRegistry.java:616)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.autoDetectDescriptors(BaseRegistry.java:604)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.loadInternalDescriptors(BaseRegistry.java:557)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.lambda$9(BaseRegistry.java:536)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDatabaseRegistry.invokeBatchOperation(BaseDatabaseRegistry.java:258)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.doEnsureSync(BaseRegistry.java:532)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.ensureSync(BaseRegistry.java:506)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDatabaseRegistry.getAllDescriptors(BaseDatabaseRegistry.java:497)
+	at com.silabs.ss.platform.internal.demos.ui.DemosLaunchElementsProvider.getLaunchElements(DemosLaunchElementsProvider.java:44)
+	at com.silabs.ss.platform.api.launcher.core.LaunchElementsManager.lambda$1(LaunchElementsManager.java:75)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+	at java.util.stream.ReduceOps$ReduceTask.doLeaf(ReduceOps.java:747)
+	at java.util.stream.ReduceOps$ReduceTask.doLeaf(ReduceOps.java:721)
+	at java.util.stream.AbstractTask.compute(AbstractTask.java:316)
+	at java.util.concurrent.CountedCompleter.exec(CountedCompleter.java:731)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.execLocalTasks(ForkJoinPool.java:1040)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1058)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.0.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; systemId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.0.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1438)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:999)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:606)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:510)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:848)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:777)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:327)
+	at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:175)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1297)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoad(ResourceSetImpl.java:259)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:274)
+	... 39 more
+
+!ENTRY com.silabs.ss.platform.demos.core 4 0 2017-10-16 14:09:47.431
+!MESSAGE Failed to load demo from file: D:\SiliconLabs\SimplicityStudio\v4_2\developer\stacks\ble\v2.1.1.0\app\bluetooth_2.1\appbuilder\sample-apps-bin\demos-homekit.xml
+!STACK 0
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl$1DiagnosticWrappedException: org.xml.sax.SAXParseExceptionpublicId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.1.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; systemId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.1.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+	at com.silabs.ss.platform.api.demos.core.DemoModelUtils.createDescriptorsFromFile(DemoModelUtils.java:41)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.loadDemoFile(SDKDemosDetector.java:100)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.lambda$0(SDKDemosDetector.java:37)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.loadTemplates(SDKProtocolLoader.java:80)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.doLoadForProtocols(SDKProtocolLoader.java:60)
+	at com.silabs.ss.platform.api.sdk.core.SDKProtocolLoader.loadForProtocols(SDKProtocolLoader.java:48)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.scanForSDK(SDKDemosDetector.java:93)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.quickScan(SDKDemosDetector.java:55)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDetector.doDetectDescriptors(BaseDetector.java:59)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDetector.detectDescriptors(BaseDetector.java:43)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.detectDescriptors(SDKDemosDetector.java:82)
+	at com.silabs.ss.platform.internal.demos.core.SDKDemosDetector.detectDescriptors(SDKDemosDetector.java:1)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.detectDescriptors(BaseRegistry.java:673)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.detectDescriptors(BaseRegistry.java:644)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.scanForNewDescriptors(BaseRegistry.java:616)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.autoDetectDescriptors(BaseRegistry.java:604)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.loadInternalDescriptors(BaseRegistry.java:557)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.lambda$9(BaseRegistry.java:536)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDatabaseRegistry.invokeBatchOperation(BaseDatabaseRegistry.java:258)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.doEnsureSync(BaseRegistry.java:532)
+	at com.silabs.ss.platform.api.content.core.registry.BaseRegistry.ensureSync(BaseRegistry.java:506)
+	at com.silabs.ss.platform.api.content.core.registry.BaseDatabaseRegistry.getAllDescriptors(BaseDatabaseRegistry.java:497)
+	at com.silabs.ss.platform.internal.demos.ui.DemosLaunchElementsProvider.getLaunchElements(DemosLaunchElementsProvider.java:44)
+	at com.silabs.ss.platform.api.launcher.core.LaunchElementsManager.lambda$1(LaunchElementsManager.java:75)
+	at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193)
+	at java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:175)
+	at java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1374)
+	at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481)
+	at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471)
+	at java.util.stream.ReduceOps$ReduceTask.doLeaf(ReduceOps.java:747)
+	at java.util.stream.ReduceOps$ReduceTask.doLeaf(ReduceOps.java:721)
+	at java.util.stream.AbstractTask.compute(AbstractTask.java:316)
+	at java.util.concurrent.CountedCompleter.exec(CountedCompleter.java:731)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.execLocalTasks(ForkJoinPool.java:1040)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1058)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+Caused by: org.xml.sax.SAXParseExceptionpublicId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.1.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; systemId: file:/D:/SiliconLabs/SimplicityStudio/v4_2/developer/stacks/ble/v2.1.1.0/app/bluetooth_2.1/appbuilder/sample-apps-bin/demos-homekit.xml; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1438)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl$PrologDriver.next(XMLDocumentScannerImpl.java:999)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:606)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:510)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:848)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:777)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser.parse(AbstractSAXParser.java:1213)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl$JAXPSAXParser.parse(SAXParserImpl.java:643)
+	at com.sun.org.apache.xerces.internal.jaxp.SAXParserImpl.parse(SAXParserImpl.java:327)
+	at org.eclipse.emf.ecore.xmi.impl.XMLLoadImpl.load(XMLLoadImpl.java:175)
+	at org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl.doLoad(XMLResourceImpl.java:261)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
+	at org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1297)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoad(ResourceSetImpl.java:259)
+	at org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:274)
+	... 39 more
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.708
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Smart Phone App
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.742
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Thermometer
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.765
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - DTM
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.790
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app NCP target - Empty
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:47.810
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar] in sample app NCP target - Switched Multiprotocol Trust Center
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:48.055
+!MESSAGE Unknown architecture(s) [BRD4165B] in sample app RAIL: Range Test
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-16 14:09:48.068
+!MESSAGE Unknown architecture(s) [BRD4165B] in sample app RAIL: Range Test - PHY: 250k, 2gfsk, base
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 14:35:22.600
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 14:35:22.609
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:188)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 14:37:01.221
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 14:37:01.230
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:188)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:06.550
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:06.557
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:06.996
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:07.004
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:09.893
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:09.901
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:20.222
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:20.230
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:26.979
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:45:26.987
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-16 14:46:06.793
+!MESSAGE Indexed 'BGM111_CRP2' (24 sources, 116 headers) in 5.22 sec: 7,943 declarations; 22,504 references; 0 unresolved inclusions; 107 syntax errors; 11 unresolved names (0.036%)
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:15.783
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:15.793
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:16.796
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:16.804
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:17.138
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:17.145
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:19.324
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:19.332
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:26.693
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 14:56:26.708
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-16 14:56:45.622
+!MESSAGE Indexed 'BGM111_CRP2' (24 sources, 116 headers) in 3.97 sec: 7,943 declarations; 22,504 references; 0 unresolved inclusions; 107 syntax errors; 11 unresolved names (0.036%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-16 15:05:31.281
+!MESSAGE Indexed 'soc-CRP2' (3 sources, 58 headers) in 1.55 sec: 1,824 declarations; 4,285 references; 0 unresolved inclusions; 102 syntax errors; 0 unresolved names (0%)
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:08.362
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:08.368
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:08.675
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:08.682
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:09.006
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:09.012
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:10.089
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:10.096
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:16.907
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:07:16.915
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-16 15:07:32.020
+!MESSAGE Indexed 'soc-thermometer_2' (24 sources, 118 headers) in 5.08 sec: 7,943 declarations; 22,644 references; 0 unresolved inclusions; 107 syntax errors; 11 unresolved names (0.036%)
+
+!ENTRY org.eclipse.ltk.ui.refactoring 4 10000 2017-10-16 15:08:10.414
+!MESSAGE Internal Error
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:794)
+	at org.eclipse.core.internal.resources.Project.delete(Project.java:323)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:160)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:258)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:306)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:92)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:218)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:87)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Could not delete '/soc-thermometer_2/linker'.
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:354)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteProject(ResourceTree.java:393)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteProject(ResourceTree.java:850)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1835)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:781)
+	at org.eclipse.core.internal.resources.Project.delete(Project.java:323)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:160)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:258)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:306)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:92)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:218)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:87)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2\linker\IAR.
+Contains: Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2\linker.
+Contains: Could not delete 'D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2'.
+!SUBENTRY 1 org.eclipse.core.resources 4 273 2017-10-16 15:08:10.434
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2017-10-16 15:08:10.434
+!MESSAGE Could not delete '/soc-thermometer_2/linker'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:354)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteProject(ResourceTree.java:393)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteProject(ResourceTree.java:850)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1835)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:781)
+	at org.eclipse.core.internal.resources.Project.delete(Project.java:323)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:160)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:258)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:306)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:92)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:218)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:87)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2\linker\IAR.
+Contains: Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2\linker.
+!SUBENTRY 3 org.eclipse.core.resources 4 273 2017-10-16 15:08:10.434
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 4 org.eclipse.core.filesystem 4 273 2017-10-16 15:08:10.434
+!MESSAGE Problems encountered while deleting files.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2017-10-16 15:08:10.434
+!MESSAGE Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2\linker\IAR.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2017-10-16 15:08:10.434
+!MESSAGE Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2\linker.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2017-10-16 15:08:10.434
+!MESSAGE Could not delete 'D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-thermometer_2'.
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:56.886
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:56.895
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:57.219
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:57.228
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:57.659
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:57.669
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:58.660
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:10:58.670
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:11:05.631
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:11:05.642
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-16 15:11:23.653
+!MESSAGE Indexed 'BGM111_CRP2' (24 sources, 118 headers) in 4.13 sec: 7,943 declarations; 22,644 references; 0 unresolved inclusions; 107 syntax errors; 11 unresolved names (0.036%)
+
+!ENTRY org.eclipse.ltk.ui.refactoring 4 10000 2017-10-16 15:11:58.248
+!MESSAGE Internal Error
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:794)
+	at org.eclipse.core.internal.resources.Project.delete(Project.java:323)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:160)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:258)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:306)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:92)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:218)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:87)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Could not delete '/BGM111_CRP2'.
+org.eclipse.core.runtime.CoreException: Problems encountered while deleting files.
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:135)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteProject(ResourceTree.java:867)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1835)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:781)
+	at org.eclipse.core.internal.resources.Project.delete(Project.java:323)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:160)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:258)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:306)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:92)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:218)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:87)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\BGM111_CRP2\.internal_hwconfig.
+!SUBENTRY 1 org.eclipse.core.resources 4 273 2017-10-16 15:11:58.250
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2017-10-16 15:11:58.250
+!MESSAGE Could not delete '/BGM111_CRP2'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: Problems encountered while deleting files.
+	at org.eclipse.core.internal.filesystem.local.LocalFile.delete(LocalFile.java:135)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteProject(ResourceTree.java:867)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1835)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:781)
+	at org.eclipse.core.internal.resources.Project.delete(Project.java:323)
+	at org.eclipse.ltk.core.refactoring.resource.DeleteResourceChange.perform(DeleteResourceChange.java:160)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.CompositeChange.perform(CompositeChange.java:278)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation$1.run(PerformChangeOperation.java:258)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.executeChange(PerformChangeOperation.java:306)
+	at org.eclipse.ltk.internal.ui.refactoring.UIPerformChangeOperation.executeChange(UIPerformChangeOperation.java:92)
+	at org.eclipse.ltk.core.refactoring.PerformChangeOperation.run(PerformChangeOperation.java:218)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:87)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\BGM111_CRP2\.internal_hwconfig.
+!SUBENTRY 3 org.eclipse.core.filesystem 4 273 2017-10-16 15:11:58.250
+!MESSAGE Problems encountered while deleting files.
+!SUBENTRY 4 org.eclipse.core.filesystem 4 273 2017-10-16 15:11:58.250
+!MESSAGE Could not delete: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\BGM111_CRP2\.internal_hwconfig.
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:16.726
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:16.734
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:17.030
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:17.043
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:17.461
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:17.472
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:18.372
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:18.380
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:25.321
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-16 15:13:25.360
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-16 15:13:43.426
+!MESSAGE Indexed 'BGM111_CRP2' (24 sources, 118 headers) in 3.88 sec: 7,943 declarations; 22,644 references; 0 unresolved inclusions; 107 syntax errors; 11 unresolved names (0.036%)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-16 15:18:59.188
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 15:23:57.704
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 15:23:57.715
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:188)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 15:26:13.897
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.foundation.core_rcp 4 0 2017-10-16 15:26:13.906
+!MESSAGE Connection: error reading data
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:170)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.net.SocketInputStream.read(SocketInputStream.java:127)
+	at com.silabs.pti.adapter.Connection.run(Connection.java:262)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.ss.support.hwtools.core 4 0 2017-10-16 16:09:34.408
+!MESSAGE Silicon Labs Kit not detected.
+
+!ENTRY com.silabs.ss.support.hwtools.core 4 0 2017-10-17 07:57:13.562
+!MESSAGE Silicon Labs Kit not detected.
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:29:44.744
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:32:35.681
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:33:36.993
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2017-10-17 08:34:05.601
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 6739 DebugAdapter disconnect "root.000059306692"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2017-10-17 08:34:05.613
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2017-10-17 08:34:05.641
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:34:13.365
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:35:53.259
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:39:45.823
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:40:18.146
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:40:53.371
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:46:12.900
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:47:50.047
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:50:15.355
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-17 08:51:32.557
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)

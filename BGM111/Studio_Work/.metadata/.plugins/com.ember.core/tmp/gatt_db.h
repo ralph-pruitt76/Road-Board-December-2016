@@ -11,9 +11,7 @@ extern const struct bg_gattdb_def bg_gattdb_data;
 
 #define gattdb_service_changed_char             3
 #define gattdb_device_name                      7
-#define gattdb_model_number_string             14
-#define gattdb_xgatt_spp_data                  17
-#define gattdb_ota_control                     21
-#define gattdb_ota_data                        23
+#define gattdb_temp_measurement                15
+#define gattdb_ota_control                     19
 
 #endif
