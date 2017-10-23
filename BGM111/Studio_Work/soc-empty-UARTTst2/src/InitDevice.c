@@ -354,15 +354,15 @@ extern void USART1_enter_DefaultMode_from_RESET(void) {
 			| USART_ROUTELOC0_CSLOC_LOC12;
 	USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_CSPEN;
 
-	/* Disable CTS pin */
+	/* Set up CTS pin */
 	USART1->ROUTELOC1 = (USART1->ROUTELOC1 & (~_USART_ROUTELOC1_CTSLOC_MASK))
 			| USART_ROUTELOC1_CTSLOC_LOC7;
-	USART1->ROUTEPEN = USART1->ROUTEPEN & (~USART_ROUTEPEN_CTSPEN);
+	USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_CTSPEN;
 
-	/* Disable RTS pin */
+	/* Set up RTS pin */
 	USART1->ROUTELOC1 = (USART1->ROUTELOC1 & (~_USART_ROUTELOC1_RTSLOC_MASK))
 			| USART_ROUTELOC1_RTSLOC_LOC7;
-	USART1->ROUTEPEN = USART1->ROUTEPEN & (~USART_ROUTEPEN_RTSPEN);
+	USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_RTSPEN;
 
 	/* Set up RX pin */
 	USART1->ROUTELOC0 = (USART1->ROUTELOC0 & (~_USART_ROUTELOC0_RXLOC_MASK))
@@ -377,8 +377,8 @@ extern void USART1_enter_DefaultMode_from_RESET(void) {
 	// [USART_InitIO]$
 
 	// $[USART_Misc]
-	/* Disable CTS */
-	USART1->CTRLX = USART1->CTRLX & (~USART_CTRLX_CTSEN);
+	/* Enable CTS */
+	USART1->CTRLX = USART1->CTRLX | USART_CTRLX_CTSEN;
 	/* Set CTS active low */
 	USART1->CTRLX = USART1->CTRLX & (~USART_CTRLX_CTSINV);
 	/* Set RTS active low */
@@ -674,6 +674,9 @@ extern void PORTIO_enter_DefaultMode_from_RESET(void) {
 	// [Port B Configuration]$
 
 	// $[Port C Configuration]
+
+	/* Pin PC6 is configured to Input enabled with pull-down */
+	GPIO_PinModeSet(gpioPortC, 6, gpioModeInputPull, 0);
 
 	/* Pin PC7 is configured to Push-pull */
 	GPIO_PinModeSet(gpioPortC, 7, gpioModePushPull, 1);

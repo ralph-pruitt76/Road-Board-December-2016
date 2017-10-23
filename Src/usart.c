@@ -97,7 +97,7 @@ void MX_USART3_UART_Init(void)
   #else
     huart3.Init.HwFlowCtl = UART_HWCONTROL_RTS_CTS;
   #endif
-  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+//  huart3.Init.HwFlowCtl = UART_HWCONTROL_NONE;
 #endif
   huart3.Init.OverSampling = UART_OVERSAMPLING_16;
   if (HAL_UART_Init(&huart3) != HAL_OK)

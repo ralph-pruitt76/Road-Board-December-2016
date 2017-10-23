@@ -31,6 +31,7 @@
     <property object="PC10" propertyId="ports.settings.pinmode" value="Push-pull"/>
     <property object="PC11" propertyId="ports.settings.custompinname" value=""/>
     <property object="PC11" propertyId="ports.settings.pinmode" value="Wired-and pullup filter"/>
+    <property object="PC6" propertyId="ports.settings.pinmode" value="Input pull"/>
     <property object="PC7" propertyId="ports.settings.dout" value="1"/>
     <property object="PC7" propertyId="ports.settings.filter" value="Enabled"/>
     <property object="PC7" propertyId="ports.settings.pinmode" value="Push-pull"/>
@@ -54,6 +55,8 @@
     <property object="PORTIO" propertyId="portio.lfxo.enable.p" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart0.location.usart0_rtsloc" value="1"/>
     <property object="PORTIO" propertyId="portio.usart1.enable.cs" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart1.enable.cts" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart1.enable.rts" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart1.enable.rx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart1.enable.tx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart1.location.usart1_csloc" value="12"/>
@@ -73,6 +76,8 @@
     <property object="USART0" propertyId="usart.outputsettings.cts" value="Active high"/>
     <property object="USART0" propertyId="usart.outputsettings.rts" value="Active low"/>
     <property object="USART1" propertyId="ABPeripheral.included" value="true"/>
+    <property object="USART1" propertyId="usart.outputsettings.cts" value="Active low"/>
+    <property object="USART1" propertyId="usart.outputsettings.rts" value="Active low"/>
   </mode>
   <modeTransition>
     <property object="RESET &#x2192; DefaultMode" propertyId="modeTransition.source" value="RESET"/>
