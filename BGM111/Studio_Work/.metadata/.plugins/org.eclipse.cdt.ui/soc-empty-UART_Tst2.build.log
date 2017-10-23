@@ -1,0 +1,897 @@
+11:35:05 **** Build of configuration GNU ARM v4.9.3 - Default for project soc-empty-UART_Tst2 ****
+make -j4 all 
+Building file: ../src/InitDevice.c
+Building file: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_cmu.c
+Building file: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_cryotimer.c
+Building file: D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_gpio.c
+Invoking: GNU ARM C Compiler
+Invoking: GNU ARM C Compiler
+arm-none-eabi-gcc -g3 -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DSILABS_AF_USE_HWCONF=1' -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/common" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/gpiointerrupt/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\src" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32/rf/common/cortex" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/sleep/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/EFR32BG1_BRD4302A/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/common/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/common" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/soc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/bootloader/api" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" -O0 -fno-short-enums -Wall -c -fmessage-length=0 -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=hard -MMD -MP -MF"src/InitDevice.d" -MT"src/InitDevice.o" -o "src/InitDevice.o" "../src/InitDevice.c"
+arm-none-eabi-gcc -g3 -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DSILABS_AF_USE_HWCONF=1' -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/common" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/gpiointerrupt/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\src" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32/rf/common/cortex" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/sleep/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/EFR32BG1_BRD4302A/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/common/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/common" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/soc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/bootloader/api" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" -O0 -fno-short-enums -Wall -c -fmessage-length=0 -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=hard -MMD -MP -MF"emlib/em_cmu.d" -MT"emlib/em_cmu.o" -o "emlib/em_cmu.o" "D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_cmu.c"
+Invoking: GNU ARM C Compiler
+Invoking: GNU ARM C Compiler
+arm-none-eabi-gcc -g3 -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DSILABS_AF_USE_HWCONF=1' -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/common" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/gpiointerrupt/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\src" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32/rf/common/cortex" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/sleep/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/EFR32BG1_BRD4302A/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/common/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/common" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/soc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/bootloader/api" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" -O0 -fno-short-enums -Wall -c -fmessage-length=0 -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=hard -MMD -MP -MF"emlib/em_gpio.d" -MT"emlib/em_gpio.o" -o "emlib/em_gpio.o" "D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_gpio.c"
+arm-none-eabi-gcc -g3 -gdwarf-2 -mcpu=cortex-m4 -mthumb -std=c99 '-DSILABS_AF_USE_HWCONF=1' -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/bsp" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/CMSIS/Include" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/common/drivers" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/common" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/gpiointerrupt/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/spidrv/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\src" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/rtcdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/radio/rail_lib/chip/efr32/rf/common/cortex" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/ustimer/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/dmadrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/uartdrv/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/tempdrv/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/config" -I"D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-empty-UART_Tst2\inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/sleep/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//hardware/kit/EFR32BG1_BRD4302A/config" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/nvm/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emdrv/common/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/common" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/ble_stack/inc/soc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/bootloader/api" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/emlib/inc" -I"D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//platform/Device/SiliconLabs/EFR32BG1B/Include" -O0 -fno-short-enums -Wall -c -fmessage-length=0 -ffunction-sections -fdata-sections -mfpu=fpv4-sp-d16 -mfloat-abi=hard -MMD -MP -MF"emlib/em_cryotimer.d" -MT"emlib/em_cryotimer.o" -o "emlib/em_cryotimer.o" "D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_cryotimer.c"
+In file included from d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_cmu.h:35:0,
+                 from D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_cmu.c:33:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\device\siliconlabs\efr32bg1b\include\em_device.h:96:2: error: #error "em_device.h: PART NUMBER undefined"
+ #error "em_device.h: PART NUMBER undefined"
+  ^
+In file included from d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:37:0,
+                 from ../src/InitDevice.c:16:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\device\siliconlabs\efr32bg1b\include\em_device.h:96:2: error: #error "em_device.h: PART NUMBER undefined"
+ #error "em_device.h: PART NUMBER undefined"
+  ^
+In file included from ../src/InitDevice.c:16:0:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:262:3: error: unknown type name 'uint8_t'
+   uint8_t minor; /**< Minor revision number */
+   ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:263:3: error: unknown type name 'uint8_t'
+   uint8_t major; /**< Major revision number */
+   ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:264:3: error: unknown type name 'uint8_t'
+   uint8_t family;/**< Device family number  */
+   ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:279:3: error: unknown type name 'uint32_t'
+   uint32_t address;                       /**< Peripheral calibration register address */
+   ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:280:3: error: unknown type name 'uint32_t'
+   uint32_t calValue;                      /**< Calibration value for register at address */
+   ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:289:42: error: unknown type name 'uint32_t'
+ bool SYSTEM_GetCalibrationValue(volatile uint32_t *regAddress);
+                                          ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:313:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint64_t SYSTEM_GetUnique(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:313:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetUnique'
+ __STATIC_INLINE uint64_t SYSTEM_GetUnique(void)
+                          ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:326:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint8_t SYSTEM_GetProdRev(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:326:25: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetProdRev'
+ __STATIC_INLINE uint8_t SYSTEM_GetProdRev(void)
+                         ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:344:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint16_t SYSTEM_GetSRAMSize(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:344:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetSRAMSize'
+ __STATIC_INLINE uint16_t SYSTEM_GetSRAMSize(void)
+                          ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:378:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint16_t SYSTEM_GetFlashSize(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:378:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetFlashSize'
+ __STATIC_INLINE uint16_t SYSTEM_GetFlashSize(void)
+                          ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:403:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint32_t SYSTEM_GetFlashPageSize(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:403:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetFlashPageSize'
+ __STATIC_INLINE uint32_t SYSTEM_GetFlashPageSize(void)
+                          ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:447:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint16_t SYSTEM_GetPartNumber(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:447:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetPartNumber'
+ __STATIC_INLINE uint16_t SYSTEM_GetPartNumber(void)
+                          ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:467:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE SYSTEM_PartFamily_TypeDef SYSTEM_GetFamily(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:467:43: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetFamily'
+ __STATIC_INLINE SYSTEM_PartFamily_TypeDef SYSTEM_GetFamily(void)
+                                           ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:481:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint8_t SYSTEM_GetCalibrationTemperature(void)
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_system.h:481:25: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'SYSTEM_GetCalibrationTemperature'
+ __STATIC_INLINE uint8_t SYSTEM_GetCalibrationTemperature(void)
+                         ^
+In file included from d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_chip.h:39:0,
+                 from ../src/InitDevice.c:20:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:75:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RamBitWrite(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:113:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'unsigned'
+ __STATIC_INLINE unsigned int BUS_RamBitRead(volatile const uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:146:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegBitWrite(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:184:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'unsigned'
+ __STATIC_INLINE unsigned int BUS_RegBitRead(volatile const uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:217:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegMaskedSet(volatile uint32_t *addr,
+                 ^
+In file included from d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_cryotimer.h:37:0,
+                 from D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_cryotimer.c:33:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\device\siliconlabs\efr32bg1b\include\em_device.h:96:2: error: #error "em_device.h: PART NUMBER undefined"
+ #error "em_device.h: PART NUMBER undefined"
+  ^
+In file included from d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_cryotimer.h:38:0,
+                 from D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_cryotimer.c:33:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:75:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RamBitWrite(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:113:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'unsigned'
+ __STATIC_INLINE unsigned int BUS_RamBitRead(volatile const uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:248:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegMaskedClear(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:146:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegBitWrite(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:282:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegMaskedWrite(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:184:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'unsigned'
+ __STATIC_INLINE unsigned int BUS_RegBitRead(volatile const uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:311:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint32_t BUS_RegMaskedRead(volatile const uint32_t *addr,
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:217:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegMaskedSet(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:311:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'BUS_RegMaskedRead'
+ __STATIC_INLINE uint32_t BUS_RegMaskedRead(volatile const uint32_t *addr,
+                          ^
+In file included from ../src/InitDevice.c:20:0:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_chip.h:70:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void CHIP_Init(void)
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:248:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegMaskedClear(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:282:17: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
+ __STATIC_INLINE void BUS_RegMaskedWrite(volatile uint32_t *addr,
+                 ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:311:1: error: unknown type name '__STATIC_INLINE'
+ __STATIC_INLINE uint32_t BUS_RegMaskedRead(volatile const uint32_t *addr,
+ ^
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_bus.h:311:26: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'BUS_RegMaskedRead'
+ __STATIC_INLINE uint32_t BUS_RegMaskedRead(volatile const uint32_t *addr,
+                          ^
+make: *** [emlib/em_cmu.o] Error 1
+make: *** Waiting for unfinished jobs....
+../src/InitDevice.c: In function 'enter_DefaultMode_from_RESET':
+../src/InitDevice.c:37:2: warning: implicit declaration of function 'CHIP_Init' [-Wimplicit-function-declaration]
+  CHIP_Init();
+  ^
+../src/InitDevice.c: In function 'EMU_enter_DefaultMode_from_RESET':
+../src/InitDevice.c:60:2: error: unknown type name 'EMU_DCDCInit_TypeDef'
+  EMU_DCDCInit_TypeDef dcdcInit = EMU_DCDCINIT_DEFAULT;
+  ^
+../src/InitDevice.c:60:34: error: 'EMU_DCDCINIT_DEFAULT' undeclared (first use in this function)
+  EMU_DCDCInit_TypeDef dcdcInit = EMU_DCDCINIT_DEFAULT;
+                                  ^
+../src/InitDevice.c:60:34: note: each undeclared identifier is reported only once for each function it appears in
+../src/InitDevice.c:62:10: error: request for member 'powerConfig' in something not a structure or union
+  dcdcInit.powerConfig = emuPowerConfig_DcdcToDvdd;
+          ^
+../src/InitDevice.c:62:25: error: 'emuPowerConfig_DcdcToDvdd' undeclared (first use in this function)
+  dcdcInit.powerConfig = emuPowerConfig_DcdcToDvdd;
+                         ^
+../src/InitDevice.c:63:10: error: request for member 'dcdcMode' in something not a structure or union
+  dcdcInit.dcdcMode = emuDcdcMode_LowNoise;
+          ^
+../src/InitDevice.c:63:22: error: 'emuDcdcMode_LowNoise' undeclared (first use in this function)
+  dcdcInit.dcdcMode = emuDcdcMode_LowNoise;
+                      ^
+../src/InitDevice.c:64:10: error: request for member 'mVout' in something not a structure or union
+  dcdcInit.mVout = 1800;
+          ^
+../src/InitDevice.c:65:10: error: request for member 'em01LoadCurrent_mA' in something not a structure or union
+  dcdcInit.em01LoadCurrent_mA = 15;
+          ^
+../src/InitDevice.c:66:10: error: request for member 'em234LoadCurrent_uA' in something not a structure or union
+  dcdcInit.em234LoadCurrent_uA = 10;
+          ^
+../src/InitDevice.c:67:10: error: request for member 'maxCurrent_mA' in something not a structure or union
+  dcdcInit.maxCurrent_mA = 200;
+          ^
+../src/InitDevice.c:68:10: error: request for member 'anaPeripheralPower' in something not a structure or union
+  dcdcInit.anaPeripheralPower = emuDcdcAnaPeripheralPower_DCDC;
+          ^
+../src/InitDevice.c:68:32: error: 'emuDcdcAnaPeripheralPower_DCDC' undeclared (first use in this function)
+  dcdcInit.anaPeripheralPower = emuDcdcAnaPeripheralPower_DCDC;
+                                ^
+../src/InitDevice.c:69:10: error: request for member 'reverseCurrentControl' in something not a structure or union
+  dcdcInit.reverseCurrentControl = 160;
+          ^
+../src/InitDevice.c:71:2: warning: implicit declaration of function 'EMU_DCDCInit' [-Wimplicit-function-declaration]
+  EMU_DCDCInit(&dcdcInit);
+  ^
+../src/InitDevice.c:73:2: error: unknown type name 'EMU_EM23Init_TypeDef'
+  EMU_EM23Init_TypeDef em23Init = EMU_EM23INIT_DEFAULT;
+  ^
+../src/InitDevice.c:73:34: error: 'EMU_EM23INIT_DEFAULT' undeclared (first use in this function)
+  EMU_EM23Init_TypeDef em23Init = EMU_EM23INIT_DEFAULT;
+                                  ^
+../src/InitDevice.c:75:10: error: request for member 'em23VregFullEn' in something not a structure or union
+  em23Init.em23VregFullEn = 0;
+          ^
+../src/InitDevice.c:77:2: warning: implicit declaration of function 'EMU_EM23Init' [-Wimplicit-function-declaration]
+  EMU_EM23Init(&em23Init);
+  ^
+../src/InitDevice.c:79:2: error: unknown type name 'EMU_EM4Init_TypeDef'
+  EMU_EM4Init_TypeDef em4Init = EMU_EM4INIT_DEFAULT;
+  ^
+../src/InitDevice.c:79:32: error: 'EMU_EM4INIT_DEFAULT' undeclared (first use in this function)
+  EMU_EM4Init_TypeDef em4Init = EMU_EM4INIT_DEFAULT;
+                                ^
+../src/InitDevice.c:81:9: error: request for member 'retainLfrco' in something not a structure or union
+  em4Init.retainLfrco = 0;
+         ^
+../src/InitDevice.c:82:9: error: request for member 'retainLfxo' in something not a structure or union
+  em4Init.retainLfxo = 0;
+         ^
+../src/InitDevice.c:83:9: error: request for member 'retainUlfrco' in something not a structure or union
+  em4Init.retainUlfrco = 0;
+         ^
+../src/InitDevice.c:84:9: error: request for member 'em4State' in something not a structure or union
+  em4Init.em4State = emuEM4Shutoff;
+         ^
+../src/InitDevice.c:84:21: error: 'emuEM4Shutoff' undeclared (first use in this function)
+  em4Init.em4State = emuEM4Shutoff;
+                     ^
+../src/InitDevice.c:85:9: error: request for member 'pinRetentionMode' in something not a structure or union
+  em4Init.pinRetentionMode = emuPinRetentionDisable;
+         ^
+../src/InitDevice.c:85:29: error: 'emuPinRetentionDisable' undeclared (first use in this function)
+  em4Init.pinRetentionMode = emuPinRetentionDisable;
+                             ^
+../src/InitDevice.c:87:2: warning: implicit declaration of function 'EMU_EM4Init' [-Wimplicit-function-declaration]
+  EMU_EM4Init(&em4Init);
+  ^
+../src/InitDevice.c: In function 'CMU_enter_DefaultMode_from_RESET':
+../src/InitDevice.c:106:2: error: unknown type name 'CMU_HFXOInit_TypeDef'
+  CMU_HFXOInit_TypeDef hfxoInit = CMU_HFXOINIT_DEFAULT;
+  ^
+../src/InitDevice.c:106:34: error: 'CMU_HFXOINIT_DEFAULT' undeclared (first use in this function)
+  CMU_HFXOInit_TypeDef hfxoInit = CMU_HFXOINIT_DEFAULT;
+                                  ^
+../src/InitDevice.c:108:2: warning: implicit declaration of function 'CMU_HFXOInit' [-Wimplicit-function-declaration]
+  CMU_HFXOInit(&hfxoInit);
+  ^
+../src/InitDevice.c:111:2: warning: implicit declaration of function 'SystemHFXOClockSet' [-Wimplicit-function-declaration]
+  SystemHFXOClockSet(38400000);
+  ^
+../src/InitDevice.c:114:2: warning: implicit declaration of function 'CMU_OscillatorEnable' [-Wimplicit-function-declaration]
+  CMU_OscillatorEnable(cmuOsc_HFXO, true, true);
+  ^
+../src/InitDevice.c:114:23: error: 'cmuOsc_HFXO' undeclared (first use in this function)
+  CMU_OscillatorEnable(cmuOsc_HFXO, true, true);
+                       ^
+../src/InitDevice.c:120:2: warning: implicit declaration of function 'CMU_HFXOAutostartEnable' [-Wimplicit-function-declaration]
+  CMU_HFXOAutostartEnable(0, true, true);
+  ^
+../src/InitDevice.c:123:23: error: 'cmuOsc_HFRCO' undeclared (first use in this function)
+  CMU_OscillatorEnable(cmuOsc_HFRCO, false, false);
+                       ^
+../src/InitDevice.c:129:2: warning: implicit declaration of function 'CMU_ClockEnable' [-Wimplicit-function-declaration]
+  CMU_ClockEnable(cmuClock_CORELE, true);
+  ^
+../src/InitDevice.c:129:18: error: 'cmuClock_CORELE' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_CORELE, true);
+                  ^
+../src/InitDevice.c:131:2: error: unknown type name 'CMU_LFXOInit_TypeDef'
+  CMU_LFXOInit_TypeDef lfxoInit = CMU_LFXOINIT_DEFAULT;
+  ^
+../src/InitDevice.c:131:34: error: 'CMU_LFXOINIT_DEFAULT' undeclared (first use in this function)
+  CMU_LFXOInit_TypeDef lfxoInit = CMU_LFXOINIT_DEFAULT;
+                                  ^
+../src/InitDevice.c:133:10: error: request for member 'ctune' in something not a structure or union
+  lfxoInit.ctune = 32;
+          ^
+../src/InitDevice.c:135:2: warning: implicit declaration of function 'CMU_LFXOInit' [-Wimplicit-function-declaration]
+  CMU_LFXOInit(&lfxoInit);
+  ^
+../src/InitDevice.c:138:23: error: 'cmuOsc_LFXO' undeclared (first use in this function)
+  CMU_OscillatorEnable(cmuOsc_LFXO, true, true);
+                       ^
+../src/InitDevice.c:141:2: warning: implicit declaration of function 'SystemLFXOClockSet' [-Wimplicit-function-declaration]
+  SystemLFXOClockSet(32768);
+  ^
+../src/InitDevice.c:147:2: warning: implicit declaration of function 'CMU_ClockSelectSet' [-Wimplicit-function-declaration]
+  CMU_ClockSelectSet(cmuClock_LFA, cmuSelect_LFXO);
+  ^
+In file included from d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_gpio.h:36:0,
+                 from D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/platform/emlib/src/em_gpio.c:34:
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\device\siliconlabs\efr32bg1b\include\em_device.h:96:2: error: #error "em_device.h: PART NUMBER undefined"
+ #error "em_device.h: PART NUMBER undefined"
+  ^
+make: *** [emlib/em_cryotimer.o] Error 1
+../src/InitDevice.c:147:21: error: 'cmuClock_LFA' undeclared (first use in this function)
+  CMU_ClockSelectSet(cmuClock_LFA, cmuSelect_LFXO);
+                     ^
+../src/InitDevice.c:147:35: error: 'cmuSelect_LFXO' undeclared (first use in this function)
+  CMU_ClockSelectSet(cmuClock_LFA, cmuSelect_LFXO);
+                                   ^
+../src/InitDevice.c:152:21: error: 'cmuClock_LFB' undeclared (first use in this function)
+  CMU_ClockSelectSet(cmuClock_LFB, cmuSelect_LFXO);
+                     ^
+../src/InitDevice.c:157:21: error: 'cmuClock_LFE' undeclared (first use in this function)
+  CMU_ClockSelectSet(cmuClock_LFE, cmuSelect_LFXO);
+                     ^
+../src/InitDevice.c:162:18: error: 'cmuClock_HFPER' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_HFPER, true);
+                  ^
+../src/InitDevice.c:165:18: error: 'cmuClock_GPCRC' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_GPCRC, true);
+                  ^
+../src/InitDevice.c:168:18: error: 'cmuClock_LDMA' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_LDMA, true);
+                  ^
+../src/InitDevice.c:171:18: error: 'cmuClock_PRS' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_PRS, true);
+                  ^
+../src/InitDevice.c:174:18: error: 'cmuClock_RTCC' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_RTCC, true);
+                  ^
+../src/InitDevice.c:177:18: error: 'cmuClock_TIMER0' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_TIMER0, true);
+                  ^
+../src/InitDevice.c:180:18: error: 'cmuClock_USART1' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_USART1, true);
+                  ^
+../src/InitDevice.c:183:18: error: 'cmuClock_GPIO' undeclared (first use in this function)
+  CMU_ClockEnable(cmuClock_GPIO, true);
+                  ^
+../src/InitDevice.c:189:2: error: 'CMU' undeclared (first use in this function)
+  CMU->CTRL = (CMU->CTRL & ~_CMU_CTRL_CLKOUTSEL0_MASK)
+  ^
+../src/InitDevice.c:189:28: error: '_CMU_CTRL_CLKOUTSEL0_MASK' undeclared (first use in this function)
+  CMU->CTRL = (CMU->CTRL & ~_CMU_CTRL_CLKOUTSEL0_MASK)
+                            ^
+../src/InitDevice.c:190:6: error: 'CMU_CTRL_CLKOUTSEL0_DISABLED' undeclared (first use in this function)
+    | CMU_CTRL_CLKOUTSEL0_DISABLED;
+      ^
+../src/InitDevice.c:192:28: error: '_CMU_CTRL_CLKOUTSEL1_MASK' undeclared (first use in this function)
+  CMU->CTRL = (CMU->CTRL & ~_CMU_CTRL_CLKOUTSEL1_MASK)
+                            ^
+../src/InitDevice.c:193:6: error: 'CMU_CTRL_CLKOUTSEL1_DISABLED' undeclared (first use in this function)
+    | CMU_CTRL_CLKOUTSEL1_DISABLED;
+      ^
+../src/InitDevice.c:199:20: error: 'CMU_ROUTEPEN_CLKOUT0PEN' undeclared (first use in this function)
+  CMU->ROUTEPEN &= ~CMU_ROUTEPEN_CLKOUT0PEN;
+                    ^
+make: *** [emlib/em_gpio.o] Error 1
+../src/InitDevice.c:202:20: error: 'CMU_ROUTEPEN_CLKOUT1PEN' undeclared (first use in this function)
+  CMU->ROUTEPEN &= ~CMU_ROUTEPEN_CLKOUT1PEN;
+                    ^
+../src/InitDevice.c: In function 'RTCC_enter_DefaultMode_from_RESET':
+../src/InitDevice.c:269:2: error: unknown type name 'RTCC_Init_TypeDef'
+  RTCC_Init_TypeDef rtccInit = RTCC_INIT_DEFAULT;
+  ^
+../src/InitDevice.c:269:31: error: 'RTCC_INIT_DEFAULT' undeclared (first use in this function)
+  RTCC_Init_TypeDef rtccInit = RTCC_INIT_DEFAULT;
+                               ^
+../src/InitDevice.c:271:10: error: request for member 'enable' in something not a structure or union
+  rtccInit.enable = true;
+          ^
+../src/InitDevice.c:272:10: error: request for member 'debugRun' in something not a structure or union
+  rtccInit.debugRun = false;
+          ^
+../src/InitDevice.c:273:10: error: request for member 'precntWrapOnCCV0' in something not a structure or union
+  rtccInit.precntWrapOnCCV0 = false;
+          ^
+../src/InitDevice.c:274:10: error: request for member 'cntWrapOnCCV1' in something not a structure or union
+  rtccInit.cntWrapOnCCV1 = false;
+          ^
+../src/InitDevice.c:275:10: error: request for member 'prescMode' in something not a structure or union
+  rtccInit.prescMode = rtccCntTickPresc;
+          ^
+../src/InitDevice.c:275:23: error: 'rtccCntTickPresc' undeclared (first use in this function)
+  rtccInit.prescMode = rtccCntTickPresc;
+                       ^
+../src/InitDevice.c:276:10: error: request for member 'presc' in something not a structure or union
+  rtccInit.presc = rtccCntPresc_32;
+          ^
+../src/InitDevice.c:276:19: error: 'rtccCntPresc_32' undeclared (first use in this function)
+  rtccInit.presc = rtccCntPresc_32;
+                   ^
+../src/InitDevice.c:277:10: error: request for member 'enaOSCFailDetect' in something not a structure or union
+  rtccInit.enaOSCFailDetect = false;
+          ^
+../src/InitDevice.c:278:10: error: request for member 'cntMode' in something not a structure or union
+  rtccInit.cntMode = rtccCntModeNormal;
+          ^
+../src/InitDevice.c:278:21: error: 'rtccCntModeNormal' undeclared (first use in this function)
+  rtccInit.cntMode = rtccCntModeNormal;
+                     ^
+../src/InitDevice.c:280:2: warning: implicit declaration of function 'RTCC_Init' [-Wimplicit-function-declaration]
+  RTCC_Init(&rtccInit);
+  ^
+../src/InitDevice.c: In function 'USART1_enter_DefaultMode_from_RESET':
+../src/InitDevice.c:316:2: error: unknown type name 'USART_InitAsync_TypeDef'
+  USART_InitAsync_TypeDef initasync = USART_INITASYNC_DEFAULT;
+  ^
+../src/InitDevice.c:316:38: error: 'USART_INITASYNC_DEFAULT' undeclared (first use in this function)
+  USART_InitAsync_TypeDef initasync = USART_INITASYNC_DEFAULT;
+                                      ^
+../src/InitDevice.c:318:11: error: request for member 'enable' in something not a structure or union
+  initasync.enable = usartDisable;
+           ^
+../src/InitDevice.c:318:21: error: 'usartDisable' undeclared (first use in this function)
+  initasync.enable = usartDisable;
+                     ^
+../src/InitDevice.c:319:11: error: request for member 'baudrate' in something not a structure or union
+  initasync.baudrate = 115200;
+           ^
+../src/InitDevice.c:320:11: error: request for member 'databits' in something not a structure or union
+  initasync.databits = usartDatabits8;
+           ^
+../src/InitDevice.c:320:23: error: 'usartDatabits8' undeclared (first use in this function)
+  initasync.databits = usartDatabits8;
+                       ^
+../src/InitDevice.c:321:11: error: request for member 'parity' in something not a structure or union
+  initasync.parity = usartNoParity;
+           ^
+../src/InitDevice.c:321:21: error: 'usartNoParity' undeclared (first use in this function)
+  initasync.parity = usartNoParity;
+                     ^
+../src/InitDevice.c:322:11: error: request for member 'stopbits' in something not a structure or union
+  initasync.stopbits = usartStopbits1;
+           ^
+../src/InitDevice.c:322:23: error: 'usartStopbits1' undeclared (first use in this function)
+  initasync.stopbits = usartStopbits1;
+                       ^
+../src/InitDevice.c:323:11: error: request for member 'oversampling' in something not a structure or union
+  initasync.oversampling = usartOVS16;
+           ^
+../src/InitDevice.c:323:27: error: 'usartOVS16' undeclared (first use in this function)
+  initasync.oversampling = usartOVS16;
+                           ^
+../src/InitDevice.c:330:2: warning: implicit declaration of function 'USART_InitAsync' [-Wimplicit-function-declaration]
+  USART_InitAsync(USART1, &initasync);
+  ^
+../src/InitDevice.c:330:18: error: 'USART1' undeclared (first use in this function)
+  USART_InitAsync(USART1, &initasync);
+                  ^
+../src/InitDevice.c:337:2: error: unknown type name 'USART_PrsTriggerInit_TypeDef'
+  USART_PrsTriggerInit_TypeDef initprs = USART_INITPRSTRIGGER_DEFAULT;
+  ^
+../src/InitDevice.c:337:41: error: 'USART_INITPRSTRIGGER_DEFAULT' undeclared (first use in this function)
+  USART_PrsTriggerInit_TypeDef initprs = USART_INITPRSTRIGGER_DEFAULT;
+                                         ^
+../src/InitDevice.c:339:9: error: request for member 'rxTriggerEnable' in something not a structure or union
+  initprs.rxTriggerEnable = 0;
+         ^
+../src/InitDevice.c:340:9: error: request for member 'txTriggerEnable' in something not a structure or union
+  initprs.txTriggerEnable = 0;
+         ^
+../src/InitDevice.c:341:9: error: request for member 'prsTriggerChannel' in something not a structure or union
+  initprs.prsTriggerChannel = usartPrsTriggerCh0;
+         ^
+../src/InitDevice.c:341:30: error: 'usartPrsTriggerCh0' undeclared (first use in this function)
+  initprs.prsTriggerChannel = usartPrsTriggerCh0;
+                              ^
+../src/InitDevice.c:343:2: warning: implicit declaration of function 'USART_InitPrsTrigger' [-Wimplicit-function-declaration]
+  USART_InitPrsTrigger(USART1, &initprs);
+  ^
+../src/InitDevice.c:348:45: error: '_USART_ROUTELOC0_CLKLOC_MASK' undeclared (first use in this function)
+  USART1->ROUTELOC0 = (USART1->ROUTELOC0 & (~_USART_ROUTELOC0_CLKLOC_MASK))
+                                             ^
+../src/InitDevice.c:349:6: error: 'USART_ROUTELOC0_CLKLOC_LOC0' undeclared (first use in this function)
+    | USART_ROUTELOC0_CLKLOC_LOC0;
+      ^
+../src/InitDevice.c:350:42: error: 'USART_ROUTEPEN_CLKPEN' undeclared (first use in this function)
+  USART1->ROUTEPEN = USART1->ROUTEPEN & (~USART_ROUTEPEN_CLKPEN);
+                                          ^
+../src/InitDevice.c:353:45: error: '_USART_ROUTELOC0_CSLOC_MASK' undeclared (first use in this function)
+  USART1->ROUTELOC0 = (USART1->ROUTELOC0 & (~_USART_ROUTELOC0_CSLOC_MASK))
+                                             ^
+../src/InitDevice.c:354:6: error: 'USART_ROUTELOC0_CSLOC_LOC12' undeclared (first use in this function)
+    | USART_ROUTELOC0_CSLOC_LOC12;
+      ^
+../src/InitDevice.c:355:40: error: 'USART_ROUTEPEN_CSPEN' undeclared (first use in this function)
+  USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_CSPEN;
+                                        ^
+../src/InitDevice.c:358:45: error: '_USART_ROUTELOC1_CTSLOC_MASK' undeclared (first use in this function)
+  USART1->ROUTELOC1 = (USART1->ROUTELOC1 & (~_USART_ROUTELOC1_CTSLOC_MASK))
+                                             ^
+../src/InitDevice.c:359:6: error: 'USART_ROUTELOC1_CTSLOC_LOC7' undeclared (first use in this function)
+    | USART_ROUTELOC1_CTSLOC_LOC7;
+      ^
+../src/InitDevice.c:360:40: error: 'USART_ROUTEPEN_CTSPEN' undeclared (first use in this function)
+  USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_CTSPEN;
+                                        ^
+../src/InitDevice.c:363:45: error: '_USART_ROUTELOC1_RTSLOC_MASK' undeclared (first use in this function)
+  USART1->ROUTELOC1 = (USART1->ROUTELOC1 & (~_USART_ROUTELOC1_RTSLOC_MASK))
+                                             ^
+../src/InitDevice.c:364:6: error: 'USART_ROUTELOC1_RTSLOC_LOC7' undeclared (first use in this function)
+    | USART_ROUTELOC1_RTSLOC_LOC7;
+      ^
+../src/InitDevice.c:365:40: error: 'USART_ROUTEPEN_RTSPEN' undeclared (first use in this function)
+  USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_RTSPEN;
+                                        ^
+../src/InitDevice.c:368:45: error: '_USART_ROUTELOC0_RXLOC_MASK' undeclared (first use in this function)
+  USART1->ROUTELOC0 = (USART1->ROUTELOC0 & (~_USART_ROUTELOC0_RXLOC_MASK))
+                                             ^
+../src/InitDevice.c:369:6: error: 'USART_ROUTELOC0_RXLOC_LOC12' undeclared (first use in this function)
+    | USART_ROUTELOC0_RXLOC_LOC12;
+      ^
+../src/InitDevice.c:370:40: error: 'USART_ROUTEPEN_RXPEN' undeclared (first use in this function)
+  USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_RXPEN;
+                                        ^
+../src/InitDevice.c:373:45: error: '_USART_ROUTELOC0_TXLOC_MASK' undeclared (first use in this function)
+  USART1->ROUTELOC0 = (USART1->ROUTELOC0 & (~_USART_ROUTELOC0_TXLOC_MASK))
+                                             ^
+../src/InitDevice.c:374:6: error: 'USART_ROUTELOC0_TXLOC_LOC14' undeclared (first use in this function)
+    | USART_ROUTELOC0_TXLOC_LOC14;
+      ^
+../src/InitDevice.c:375:40: error: 'USART_ROUTEPEN_TXPEN' undeclared (first use in this function)
+  USART1->ROUTEPEN = USART1->ROUTEPEN | USART_ROUTEPEN_TXPEN;
+                                        ^
+../src/InitDevice.c:381:34: error: 'USART_CTRLX_CTSEN' undeclared (first use in this function)
+  USART1->CTRLX = USART1->CTRLX | USART_CTRLX_CTSEN;
+                                  ^
+../src/InitDevice.c:383:34: error: 'USART_CTRLX_CTSINV' undeclared (first use in this function)
+  USART1->CTRLX = USART1->CTRLX | USART_CTRLX_CTSINV;
+                                  ^
+../src/InitDevice.c:385:34: error: 'USART_CTRLX_RTSINV' undeclared (first use in this function)
+  USART1->CTRLX = USART1->CTRLX | USART_CTRLX_RTSINV;
+                                  ^
+../src/InitDevice.c:387:34: error: 'USART_CTRL_CSINV' undeclared (first use in this function)
+  USART1->CTRL = USART1->CTRL & (~USART_CTRL_CSINV);
+                                  ^
+../src/InitDevice.c:389:34: error: 'USART_CTRL_TXINV' undeclared (first use in this function)
+  USART1->CTRL = USART1->CTRL & (~USART_CTRL_TXINV);
+                                  ^
+../src/InitDevice.c:391:34: error: 'USART_CTRL_RXINV' undeclared (first use in this function)
+  USART1->CTRL = USART1->CTRL & (~USART_CTRL_RXINV);
+                                  ^
+../src/InitDevice.c:397:2: warning: implicit declaration of function 'USART_Enable' [-Wimplicit-function-declaration]
+  USART_Enable(USART1, usartEnable);
+  ^
+../src/InitDevice.c:397:23: error: 'usartEnable' undeclared (first use in this function)
+  USART_Enable(USART1, usartEnable);
+                       ^
+../src/InitDevice.c: In function 'TIMER0_enter_DefaultMode_from_RESET':
+../src/InitDevice.c:456:2: error: 'TIMER0' undeclared (first use in this function)
+  TIMER0->ROUTELOC0 = (TIMER0->ROUTELOC0 & (~_TIMER_ROUTELOC0_CC0LOC_MASK))
+  ^
+../src/InitDevice.c:456:45: error: '_TIMER_ROUTELOC0_CC0LOC_MASK' undeclared (first use in this function)
+  TIMER0->ROUTELOC0 = (TIMER0->ROUTELOC0 & (~_TIMER_ROUTELOC0_CC0LOC_MASK))
+                                             ^
+../src/InitDevice.c:457:6: error: 'TIMER_ROUTELOC0_CC0LOC_LOC0' undeclared (first use in this function)
+    | TIMER_ROUTELOC0_CC0LOC_LOC0;
+      ^
+../src/InitDevice.c:458:42: error: 'TIMER_ROUTEPEN_CC0PEN' undeclared (first use in this function)
+  TIMER0->ROUTEPEN = TIMER0->ROUTEPEN & (~TIMER_ROUTEPEN_CC0PEN);
+                                          ^
+../src/InitDevice.c:460:45: error: '_TIMER_ROUTELOC0_CC1LOC_MASK' undeclared (first use in this function)
+  TIMER0->ROUTELOC0 = (TIMER0->ROUTELOC0 & (~_TIMER_ROUTELOC0_CC1LOC_MASK))
+                                             ^
+../src/InitDevice.c:461:6: error: 'TIMER_ROUTELOC0_CC1LOC_LOC0' undeclared (first use in this function)
+    | TIMER_ROUTELOC0_CC1LOC_LOC0;
+      ^
+../src/InitDevice.c:462:42: error: 'TIMER_ROUTEPEN_CC1PEN' undeclared (first use in this function)
+  TIMER0->ROUTEPEN = TIMER0->ROUTEPEN & (~TIMER_ROUTEPEN_CC1PEN);
+                                          ^
+../src/InitDevice.c:464:45: error: '_TIMER_ROUTELOC0_CC2LOC_MASK' undeclared (first use in this function)
+  TIMER0->ROUTELOC0 = (TIMER0->ROUTELOC0 & (~_TIMER_ROUTELOC0_CC2LOC_MASK))
+                                             ^
+../src/InitDevice.c:465:6: error: 'TIMER_ROUTELOC0_CC2LOC_LOC0' undeclared (first use in this function)
+    | TIMER_ROUTELOC0_CC2LOC_LOC0;
+      ^
+../src/InitDevice.c:466:42: error: 'TIMER_ROUTEPEN_CC2PEN' undeclared (first use in this function)
+  TIMER0->ROUTEPEN = TIMER0->ROUTEPEN & (~TIMER_ROUTEPEN_CC2PEN);
+                                          ^
+../src/InitDevice.c:468:45: error: '_TIMER_ROUTELOC2_CDTI0LOC_MASK' undeclared (first use in this function)
+  TIMER0->ROUTELOC2 = (TIMER0->ROUTELOC2 & (~_TIMER_ROUTELOC2_CDTI0LOC_MASK))
+                                             ^
+../src/InitDevice.c:469:6: error: 'TIMER_ROUTELOC2_CDTI0LOC_LOC0' undeclared (first use in this function)
+    | TIMER_ROUTELOC2_CDTI0LOC_LOC0;
+      ^
+../src/InitDevice.c:470:42: error: 'TIMER_ROUTEPEN_CDTI0PEN' undeclared (first use in this function)
+  TIMER0->ROUTEPEN = TIMER0->ROUTEPEN & (~TIMER_ROUTEPEN_CDTI0PEN);
+                                          ^
+../src/InitDevice.c:472:45: error: '_TIMER_ROUTELOC2_CDTI1LOC_MASK' undeclared (first use in this function)
+  TIMER0->ROUTELOC2 = (TIMER0->ROUTELOC2 & (~_TIMER_ROUTELOC2_CDTI1LOC_MASK))
+                                             ^
+../src/InitDevice.c:473:6: error: 'TIMER_ROUTELOC2_CDTI1LOC_LOC0' undeclared (first use in this function)
+    | TIMER_ROUTELOC2_CDTI1LOC_LOC0;
+      ^
+../src/InitDevice.c:474:42: error: 'TIMER_ROUTEPEN_CDTI1PEN' undeclared (first use in this function)
+  TIMER0->ROUTEPEN = TIMER0->ROUTEPEN & (~TIMER_ROUTEPEN_CDTI1PEN);
+                                          ^
+../src/InitDevice.c:476:45: error: '_TIMER_ROUTELOC2_CDTI2LOC_MASK' undeclared (first use in this function)
+  TIMER0->ROUTELOC2 = (TIMER0->ROUTELOC2 & (~_TIMER_ROUTELOC2_CDTI2LOC_MASK))
+                                             ^
+../src/InitDevice.c:477:6: error: 'TIMER_ROUTELOC2_CDTI2LOC_LOC0' undeclared (first use in this function)
+    | TIMER_ROUTELOC2_CDTI2LOC_LOC0;
+      ^
+../src/InitDevice.c:478:42: error: 'TIMER_ROUTEPEN_CDTI2PEN' undeclared (first use in this function)
+  TIMER0->ROUTEPEN = TIMER0->ROUTEPEN & (~TIMER_ROUTEPEN_CDTI2PEN);
+                                          ^
+../src/InitDevice.c:482:2: error: unknown type name 'TIMER_Init_TypeDef'
+  TIMER_Init_TypeDef init = TIMER_INIT_DEFAULT;
+  ^
+../src/InitDevice.c:482:28: error: 'TIMER_INIT_DEFAULT' undeclared (first use in this function)
+  TIMER_Init_TypeDef init = TIMER_INIT_DEFAULT;
+                            ^
+../src/InitDevice.c:484:6: error: request for member 'enable' in something not a structure or union
+  init.enable = 1;
+      ^
+../src/InitDevice.c:485:6: error: request for member 'debugRun' in something not a structure or union
+  init.debugRun = 0;
+      ^
+../src/InitDevice.c:486:6: error: request for member 'dmaClrAct' in something not a structure or union
+  init.dmaClrAct = 0;
+      ^
+../src/InitDevice.c:487:6: error: request for member 'sync' in something not a structure or union
+  init.sync = 0;
+      ^
+../src/InitDevice.c:488:6: error: request for member 'clkSel' in something not a structure or union
+  init.clkSel = timerClkSelHFPerClk;
+      ^
+../src/InitDevice.c:488:16: error: 'timerClkSelHFPerClk' undeclared (first use in this function)
+  init.clkSel = timerClkSelHFPerClk;
+                ^
+../src/InitDevice.c:489:6: error: request for member 'prescale' in something not a structure or union
+  init.prescale = timerPrescale1;
+      ^
+../src/InitDevice.c:489:18: error: 'timerPrescale1' undeclared (first use in this function)
+  init.prescale = timerPrescale1;
+                  ^
+../src/InitDevice.c:490:6: error: request for member 'fallAction' in something not a structure or union
+  init.fallAction = timerInputActionNone;
+      ^
+../src/InitDevice.c:490:20: error: 'timerInputActionNone' undeclared (first use in this function)
+  init.fallAction = timerInputActionNone;
+                    ^
+../src/InitDevice.c:491:6: error: request for member 'riseAction' in something not a structure or union
+  init.riseAction = timerInputActionNone;
+      ^
+../src/InitDevice.c:492:6: error: request for member 'mode' in something not a structure or union
+  init.mode = timerModeUp;
+      ^
+../src/InitDevice.c:492:14: error: 'timerModeUp' undeclared (first use in this function)
+  init.mode = timerModeUp;
+              ^
+../src/InitDevice.c:493:6: error: request for member 'quadModeX4' in something not a structure or union
+  init.quadModeX4 = 0;
+      ^
+../src/InitDevice.c:494:6: error: request for member 'oneShot' in something not a structure or union
+  init.oneShot = 0;
+      ^
+../src/InitDevice.c:495:6: error: request for member 'count2x' in something not a structure or union
+  init.count2x = 0;
+      ^
+../src/InitDevice.c:496:6: error: request for member 'ati' in something not a structure or union
+  init.ati = 0;
+      ^
+../src/InitDevice.c:497:2: warning: implicit declaration of function 'TIMER_Init' [-Wimplicit-function-declaration]
+  TIMER_Init(TIMER0, &init);
+  ^
+../src/InitDevice.c:501:2: error: unknown type name 'TIMER_InitCC_TypeDef'
+  TIMER_InitCC_TypeDef initCC0 = TIMER_INITCC_DEFAULT;
+  ^
+../src/InitDevice.c:501:33: error: 'TIMER_INITCC_DEFAULT' undeclared (first use in this function)
+  TIMER_InitCC_TypeDef initCC0 = TIMER_INITCC_DEFAULT;
+                                 ^
+../src/InitDevice.c:503:9: error: request for member 'prsInput' in something not a structure or union
+  initCC0.prsInput = false;
+         ^
+../src/InitDevice.c:504:9: error: request for member 'prsSel' in something not a structure or union
+  initCC0.prsSel = timerPRSSELCh0;
+         ^
+../src/InitDevice.c:504:19: error: 'timerPRSSELCh0' undeclared (first use in this function)
+  initCC0.prsSel = timerPRSSELCh0;
+                   ^
+../src/InitDevice.c:505:9: error: request for member 'edge' in something not a structure or union
+  initCC0.edge = timerEdgeRising;
+         ^
+../src/InitDevice.c:505:17: error: 'timerEdgeRising' undeclared (first use in this function)
+  initCC0.edge = timerEdgeRising;
+                 ^
+../src/InitDevice.c:506:9: error: request for member 'mode' in something not a structure or union
+  initCC0.mode = timerCCModeOff;
+         ^
+../src/InitDevice.c:506:17: error: 'timerCCModeOff' undeclared (first use in this function)
+  initCC0.mode = timerCCModeOff;
+                 ^
+../src/InitDevice.c:507:9: error: request for member 'eventCtrl' in something not a structure or union
+  initCC0.eventCtrl = timerEventEveryEdge;
+         ^
+../src/InitDevice.c:507:22: error: 'timerEventEveryEdge' undeclared (first use in this function)
+  initCC0.eventCtrl = timerEventEveryEdge;
+                      ^
+../src/InitDevice.c:508:9: error: request for member 'filter' in something not a structure or union
+  initCC0.filter = 0;
+         ^
+../src/InitDevice.c:509:9: error: request for member 'cofoa' in something not a structure or union
+  initCC0.cofoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:509:18: error: 'timerOutputActionNone' undeclared (first use in this function)
+  initCC0.cofoa = timerOutputActionNone;
+                  ^
+../src/InitDevice.c:510:9: error: request for member 'cufoa' in something not a structure or union
+  initCC0.cufoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:511:9: error: request for member 'cmoa' in something not a structure or union
+  initCC0.cmoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:512:9: error: request for member 'coist' in something not a structure or union
+  initCC0.coist = 0;
+         ^
+../src/InitDevice.c:513:9: error: request for member 'outInvert' in something not a structure or union
+  initCC0.outInvert = 0;
+         ^
+../src/InitDevice.c:514:2: warning: implicit declaration of function 'TIMER_InitCC' [-Wimplicit-function-declaration]
+  TIMER_InitCC(TIMER0, 0, &initCC0);
+  ^
+../src/InitDevice.c:518:2: error: unknown type name 'TIMER_InitCC_TypeDef'
+  TIMER_InitCC_TypeDef initCC1 = TIMER_INITCC_DEFAULT;
+  ^
+../src/InitDevice.c:520:9: error: request for member 'prsInput' in something not a structure or union
+  initCC1.prsInput = false;
+         ^
+../src/InitDevice.c:521:9: error: request for member 'prsSel' in something not a structure or union
+  initCC1.prsSel = timerPRSSELCh0;
+         ^
+../src/InitDevice.c:522:9: error: request for member 'edge' in something not a structure or union
+  initCC1.edge = timerEdgeRising;
+         ^
+../src/InitDevice.c:523:9: error: request for member 'mode' in something not a structure or union
+  initCC1.mode = timerCCModeOff;
+         ^
+../src/InitDevice.c:524:9: error: request for member 'eventCtrl' in something not a structure or union
+  initCC1.eventCtrl = timerEventEveryEdge;
+         ^
+../src/InitDevice.c:525:9: error: request for member 'filter' in something not a structure or union
+  initCC1.filter = 0;
+         ^
+../src/InitDevice.c:526:9: error: request for member 'cofoa' in something not a structure or union
+  initCC1.cofoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:527:9: error: request for member 'cufoa' in something not a structure or union
+  initCC1.cufoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:528:9: error: request for member 'cmoa' in something not a structure or union
+  initCC1.cmoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:529:9: error: request for member 'coist' in something not a structure or union
+  initCC1.coist = 0;
+         ^
+../src/InitDevice.c:530:9: error: request for member 'outInvert' in something not a structure or union
+  initCC1.outInvert = 0;
+         ^
+../src/InitDevice.c:535:2: error: unknown type name 'TIMER_InitCC_TypeDef'
+  TIMER_InitCC_TypeDef initCC2 = TIMER_INITCC_DEFAULT;
+  ^
+../src/InitDevice.c:537:9: error: request for member 'prsInput' in something not a structure or union
+  initCC2.prsInput = false;
+         ^
+../src/InitDevice.c:538:9: error: request for member 'prsSel' in something not a structure or union
+  initCC2.prsSel = timerPRSSELCh0;
+         ^
+../src/InitDevice.c:539:9: error: request for member 'edge' in something not a structure or union
+  initCC2.edge = timerEdgeRising;
+         ^
+../src/InitDevice.c:540:9: error: request for member 'mode' in something not a structure or union
+  initCC2.mode = timerCCModeOff;
+         ^
+../src/InitDevice.c:541:9: error: request for member 'eventCtrl' in something not a structure or union
+  initCC2.eventCtrl = timerEventEveryEdge;
+         ^
+../src/InitDevice.c:542:9: error: request for member 'filter' in something not a structure or union
+  initCC2.filter = 0;
+         ^
+../src/InitDevice.c:543:9: error: request for member 'cofoa' in something not a structure or union
+  initCC2.cofoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:544:9: error: request for member 'cufoa' in something not a structure or union
+  initCC2.cufoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:545:9: error: request for member 'cmoa' in something not a structure or union
+  initCC2.cmoa = timerOutputActionNone;
+         ^
+../src/InitDevice.c:546:9: error: request for member 'coist' in something not a structure or union
+  initCC2.coist = 0;
+         ^
+../src/InitDevice.c:547:9: error: request for member 'outInvert' in something not a structure or union
+  initCC2.outInvert = 0;
+         ^
+../src/InitDevice.c:552:2: error: unknown type name 'TIMER_InitDTI_TypeDef'
+  TIMER_InitDTI_TypeDef initDTI = TIMER_INITDTI_DEFAULT;
+  ^
+../src/InitDevice.c:552:34: error: 'TIMER_INITDTI_DEFAULT' undeclared (first use in this function)
+  TIMER_InitDTI_TypeDef initDTI = TIMER_INITDTI_DEFAULT;
+                                  ^
+../src/InitDevice.c:554:9: error: request for member 'enable' in something not a structure or union
+  initDTI.enable = 0;
+         ^
+../src/InitDevice.c:555:9: error: request for member 'activeLowOut' in something not a structure or union
+  initDTI.activeLowOut = 0;
+         ^
+../src/InitDevice.c:556:9: error: request for member 'invertComplementaryOut' in something not a structure or union
+  initDTI.invertComplementaryOut = 0;
+         ^
+../src/InitDevice.c:557:9: error: request for member 'autoRestart' in something not a structure or union
+  initDTI.autoRestart = 0;
+         ^
+../src/InitDevice.c:558:9: error: request for member 'enablePrsSource' in something not a structure or union
+  initDTI.enablePrsSource = 0;
+         ^
+../src/InitDevice.c:559:9: error: request for member 'prsSel' in something not a structure or union
+  initDTI.prsSel = timerPRSSELCh0;
+         ^
+../src/InitDevice.c:560:9: error: request for member 'prescale' in something not a structure or union
+  initDTI.prescale = timerPrescale1;
+         ^
+../src/InitDevice.c:561:9: error: request for member 'riseTime' in something not a structure or union
+  initDTI.riseTime = 1;
+         ^
+../src/InitDevice.c:562:9: error: request for member 'fallTime' in something not a structure or union
+  initDTI.fallTime = 1;
+         ^
+../src/InitDevice.c:563:9: error: request for member 'enableFaultSourceCoreLockup' in something not a structure or union
+  initDTI.enableFaultSourceCoreLockup = 1;
+         ^
+../src/InitDevice.c:564:9: error: request for member 'enableFaultSourceDebugger' in something not a structure or union
+  initDTI.enableFaultSourceDebugger = 1;
+         ^
+../src/InitDevice.c:565:9: error: request for member 'faultSourcePrsSel0' in something not a structure or union
+  initDTI.faultSourcePrsSel0 = 0;
+         ^
+../src/InitDevice.c:566:9: error: request for member 'faultSourcePrsSel0' in something not a structure or union
+  initDTI.faultSourcePrsSel0 = timerPRSSELCh0;
+         ^
+../src/InitDevice.c:567:9: error: request for member 'faultSourcePrsSel1' in something not a structure or union
+  initDTI.faultSourcePrsSel1 = 0;
+         ^
+../src/InitDevice.c:568:9: error: request for member 'faultSourcePrsSel1' in something not a structure or union
+  initDTI.faultSourcePrsSel1 = timerPRSSELCh0;
+         ^
+../src/InitDevice.c:569:9: error: request for member 'faultAction' in something not a structure or union
+  initDTI.faultAction = timerDtiFaultActionInactive;
+         ^
+../src/InitDevice.c:569:24: error: 'timerDtiFaultActionInactive' undeclared (first use in this function)
+  initDTI.faultAction = timerDtiFaultActionInactive;
+                        ^
+../src/InitDevice.c:570:9: error: request for member 'outputsEnableMask' in something not a structure or union
+  initDTI.outputsEnableMask = 0;
+         ^
+../src/InitDevice.c:571:2: warning: implicit declaration of function 'TIMER_InitDTI' [-Wimplicit-function-declaration]
+  TIMER_InitDTI(TIMER0, &initDTI);
+  ^
+../src/InitDevice.c: In function 'PRS_enter_DefaultMode_from_RESET':
+../src/InitDevice.c:653:2: error: 'PRS' undeclared (first use in this function)
+  PRS->DMAREQ0 |= PRS_DMAREQ0_PRSSEL_PRSCH0;
+  ^
+../src/InitDevice.c:653:18: error: 'PRS_DMAREQ0_PRSSEL_PRSCH0' undeclared (first use in this function)
+  PRS->DMAREQ0 |= PRS_DMAREQ0_PRSSEL_PRSCH0;
+                  ^
+../src/InitDevice.c:654:18: error: 'PRS_DMAREQ1_PRSSEL_PRSCH0' undeclared (first use in this function)
+  PRS->DMAREQ1 |= PRS_DMAREQ1_PRSSEL_PRSCH0;
+                  ^
+../src/InitDevice.c: In function 'PORTIO_enter_DefaultMode_from_RESET':
+../src/InitDevice.c:667:2: warning: implicit declaration of function 'GPIO_PinModeSet' [-Wimplicit-function-declaration]
+  GPIO_PinModeSet(gpioPortA, 3, gpioModePushPull, 0);
+  ^
+../src/InitDevice.c:667:18: error: 'gpioPortA' undeclared (first use in this function)
+  GPIO_PinModeSet(gpioPortA, 3, gpioModePushPull, 0);
+                  ^
+../src/InitDevice.c:667:32: error: 'gpioModePushPull' undeclared (first use in this function)
+  GPIO_PinModeSet(gpioPortA, 3, gpioModePushPull, 0);
+                                ^
+../src/InitDevice.c:679:18: error: 'gpioPortC' undeclared (first use in this function)
+  GPIO_PinModeSet(gpioPortC, 6, gpioModeInputPull, 0);
+                  ^
+../src/InitDevice.c:679:32: error: 'gpioModeInputPull' undeclared (first use in this function)
+  GPIO_PinModeSet(gpioPortC, 6, gpioModeInputPull, 0);
+                                ^
+../src/InitDevice.c:703:18: error: 'gpioPortF' undeclared (first use in this function)
+  GPIO_PinModeSet(gpioPortF, 2, gpioModePushPull, 0);
+                  ^
+make: *** [src/InitDevice.o] Error 1
+
+11:35:06 Build Finished (took 1s.162ms)
+

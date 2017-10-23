@@ -1,0 +1,7 @@
+14:08:56 **** Clean-only build of configuration GNU ARM v4.9.3 - Default for project soc-empty-UART ****
+make -j4 clean 
+rm -rf  ./src/InitDevice.o  ./kit_flashpwr/BRD4302A/mx25flash_spi.o  ./emlib/em_cmu.o ./emlib/em_cryotimer.o ./emlib/em_gpio.o ./emlib/em_i2c.o ./emlib/em_msc.o ./emlib/em_rtcc.o ./emlib/em_system.o ./emlib/em_usart.o  ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o  ./bgapi/dmadrv.o ./bgapi/em_adc.o ./bgapi/em_ldma.o ./bgapi/em_leuart.o  ./application_properties.o ./gatt_db.o ./gpiointerrupt.o ./main.o ./uart_echo.o ./uartdrv.o  ./src/InitDevice.d  ./kit_flashpwr/BRD4302A/mx25flash_spi.d  ./emlib/em_cmu.d ./emlib/em_cryotimer.d ./emlib/em_gpio.d ./emlib/em_i2c.d ./emlib/em_msc.d ./emlib/em_rtcc.d ./emlib/em_system.d ./emlib/em_usart.d  ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.d  ./bgapi/dmadrv.d ./bgapi/em_adc.d ./bgapi/em_ldma.d ./bgapi/em_leuart.d  ./application_properties.d ./gatt_db.d ./gpiointerrupt.d ./main.d ./uart_echo.d ./uartdrv.d  soc-empty-UART.axf
+ 
+
+14:08:57 Build Finished (took 463ms)
+

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
+	<item value="D:\SiliconLabs\SimplicityStudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\protocol\bluetooth_2.4\ble_stack\inc\soc" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
 	<item value="Default C header template" key="LastUsedHeaderTemplate"/>
 	<section name="org.eclipse.cdt.internal.ui.browser.opentype.OpenTypeActionSettings">
 		<item value="true" key="show_enums"/>
@@ -19,7 +19,14 @@
 		<item value="true" key="show_variables"/>
 		<item value="881" key="height"/>
 	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration.internal">
+		<item value="180" key="size.height"/>
+		<item value="512" key="size.width"/>
+	</section>
 	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+	<section name="OptionalMessageDialog.hide.">
+		<item value="0" key="askReindex.detail"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>

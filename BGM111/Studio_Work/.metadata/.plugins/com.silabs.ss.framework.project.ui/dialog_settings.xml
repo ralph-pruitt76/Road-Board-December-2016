@@ -5,6 +5,9 @@
 		<item value="LINK_LIBRARIES" key="settingImportModeOption"/>
 		<item value="true" key="filterTemplatesByPartSdk"/>
 		<item value="template.esf.com.silabs.template.external.com.silabs.sdk.stack.super.ble.Bluetooth SDK.SOC_-_Thermometer_1.1.1._1426710922.2.4.2._503295320" key="selectedTemplateId"/>
+		<item value="LINK" key="importOption"/>
 		<item value="true" key="filterTemplatesByToolchain"/>
+		<list key="fileLocationHistory">
+		</list>
 	</section>
 </section>
