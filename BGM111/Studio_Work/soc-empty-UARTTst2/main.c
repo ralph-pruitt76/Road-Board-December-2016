@@ -101,8 +101,8 @@ int main(void)
   /* Initialize stack */
   gecko_init(&config);
 
-  /* Uart init*/
-  UART_Init();
+  /* Uart Test*/
+  UART_Test();
 
   while (1) {
     /* Event pointer for handling events */

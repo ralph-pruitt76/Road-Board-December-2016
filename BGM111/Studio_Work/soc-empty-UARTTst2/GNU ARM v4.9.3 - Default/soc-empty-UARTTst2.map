@@ -67,7 +67,7 @@ d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin
 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memcmp.o)
                               D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/lib/EFR32BG1B/GCC/bgapi.a(gatt_client.c.obj) (memcmp)
 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memcpy.o)
-                              ./uartdrv.o (memcpy)
+                              D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/lib/EFR32BG1B/GCC/bgapi.a(gatt_client.c.obj) (memcpy)
 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memset.o)
                               d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o (memset)
 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-__call_atexit.o)
@@ -381,21 +381,6 @@ Discarded input sections
  .text          0x00000000        0x0 ./uart_echo.o
  .data          0x00000000        0x0 ./uart_echo.o
  .bss           0x00000000        0x0 ./uart_echo.o
- .bss.uartHandle0
-                0x00000000       0x50 ./uart_echo.o
- .data.testHandle0
-                0x00000000        0x4 ./uart_echo.o
- .bss.rxByte    0x00000000        0x1 ./uart_echo.o
- .text.UART_tx_callback
-                0x00000000       0x30 ./uart_echo.o
- .text.UART_rx_callback
-                0x00000000       0x68 ./uart_echo.o
- .bss.txCnt.8135
-                0x00000000        0x1 ./uart_echo.o
- .bss.txByte.8143
-                0x00000000        0x1 ./uart_echo.o
- .bss.rxCnt.8142
-                0x00000000        0x1 ./uart_echo.o
  .debug_macro   0x00000000      0x886 ./uart_echo.o
  .debug_macro   0x00000000       0x22 ./uart_echo.o
  .debug_macro   0x00000000       0xe8 ./uart_echo.o
@@ -451,271 +436,6 @@ Discarded input sections
  .debug_macro   0x00000000       0x43 ./uart_echo.o
  .debug_macro   0x00000000      0x180 ./uart_echo.o
  .debug_macro   0x00000000       0x35 ./uart_echo.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .group         0x00000000        0x8 ./uartdrv.o
- .text          0x00000000        0x0 ./uartdrv.o
- .data          0x00000000        0x0 ./uartdrv.o
- .bss           0x00000000        0x0 ./uartdrv.o
- .text.USART_IntClear
-                0x00000000       0x1c ./uartdrv.o
- .text.LEUART_IntClear
-                0x00000000       0x1c ./uartdrv.o
- .text.BUS_RegBitRead
-                0x00000000       0x2c ./uartdrv.o
- .text.BUS_RegMaskedSet
-                0x00000000       0x24 ./uartdrv.o
- .text.BUS_RegMaskedClear
-                0x00000000       0x24 ./uartdrv.o
- .text.GPIO_PinInGet
-                0x00000000       0x54 ./uartdrv.o
- .text.GPIO_PinOutClear
-                0x00000000       0x58 ./uartdrv.o
- .text.GPIO_PinOutSet
-                0x00000000       0x58 ./uartdrv.o
- .text.GPIO_IntConfig
-                0x00000000       0x34 ./uartdrv.o
- .text.EMU_EnterEM1
-                0x00000000       0x20 ./uartdrv.o
- .bss.uartdrvHandleIsInitialized
-                0x00000000        0x1 ./uartdrv.o
- .bss.uartdrvHandle
-                0x00000000       0x10 ./uartdrv.o
- .text.HwFcCtsIrqGetDrvHandle
-                0x00000000       0x4c ./uartdrv.o
- .text.HwFcGetClearToSendPin
-                0x00000000       0x30 ./uartdrv.o
- .text.HwFcManageClearToSend
-                0x00000000       0x9c ./uartdrv.o
- .text.FcApplyState
-                0x00000000       0xd0 ./uartdrv.o
- .text.EnqueueBuffer
-                0x00000000       0xa8 ./uartdrv.o
- .text.DequeueBuffer
-                0x00000000       0x84 ./uartdrv.o
- .text.GetTailBuffer
-                0x00000000       0x58 ./uartdrv.o
- .text.EnableTransmitter
-                0x00000000       0x84 ./uartdrv.o
- .text.DisableTransmitter
-                0x00000000       0x64 ./uartdrv.o
- .text.EnableReceiver
-                0x00000000       0x84 ./uartdrv.o
- .text.DisableReceiver
-                0x00000000       0x64 ./uartdrv.o
- .text.StartReceiveDma
-                0x00000000       0x78 ./uartdrv.o
- .text.StartTransmitDma
-                0x00000000       0x80 ./uartdrv.o
- .text.ReceiveDmaComplete
-                0x00000000      0x190 ./uartdrv.o
- .text.TransmitDmaComplete
-                0x00000000       0xb0 ./uartdrv.o
- .text.CheckParams
-                0x00000000       0x44 ./uartdrv.o
- .text.SetupGpioUart
-                0x00000000      0xd58 ./uartdrv.o
- .text.SetupGpioLeuart
-                0x00000000      0x6cc ./uartdrv.o
- .text.ConfigGpio
-                0x00000000      0x180 ./uartdrv.o
- .text.SetHandleIndex
-                0x00000000       0xa4 ./uartdrv.o
- .text.InitializeQueues
-                0x00000000       0x6c ./uartdrv.o
- .text.InitializeGpioFlowControl
-                0x00000000       0x3c ./uartdrv.o
- .text.InitializeDma
-                0x00000000       0x48 ./uartdrv.o
- .rodata        0x00000000       0x40 ./uartdrv.o
- .text.UARTDRV_InitUart
-                0x00000000      0x248 ./uartdrv.o
- .text.UARTDRV_InitLeuart
-                0x00000000      0x218 ./uartdrv.o
- .text.UARTDRV_DeInit
-                0x00000000       0xe8 ./uartdrv.o
- .text.UARTDRV_Abort
-                0x00000000      0x1c4 ./uartdrv.o
- .text.UARTDRV_GetPeripheralStatus
-                0x00000000       0xbc ./uartdrv.o
- .text.UARTDRV_GetReceiveDepth
-                0x00000000       0x20 ./uartdrv.o
- .text.UARTDRV_GetReceiveStatus
-                0x00000000       0x94 ./uartdrv.o
- .text.UARTDRV_GetTransmitDepth
-                0x00000000       0x20 ./uartdrv.o
- .text.UARTDRV_GetTransmitStatus
-                0x00000000       0x94 ./uartdrv.o
- .text.UARTDRV_FlowControlSet
-                0x00000000       0x3c ./uartdrv.o
- .text.UARTDRV_FlowControlSetPeerStatus
-                0x00000000       0x54 ./uartdrv.o
- .text.UARTDRV_FlowControlGetPeerStatus
-                0x00000000       0x18 ./uartdrv.o
- .text.UARTDRV_FlowControlGetSelfStatus
-                0x00000000       0x18 ./uartdrv.o
- .text.UARTDRV_FlowControlIgnoreRestrain
-                0x00000000       0x20 ./uartdrv.o
- .text.UARTDRV_ForceReceive
-                0x00000000      0x108 ./uartdrv.o
- .text.UARTDRV_ForceTransmit
-                0x00000000      0x11c ./uartdrv.o
- .text.UARTDRV_PauseTransmit
-                0x00000000       0x54 ./uartdrv.o
- .text.UARTDRV_Receive
-                0x00000000       0xa0 ./uartdrv.o
- .text.UARTDRV_ReceiveB
-                0x00000000       0xb0 ./uartdrv.o
- .text.UARTDRV_ResumeTransmit
-                0x00000000       0x68 ./uartdrv.o
- .text.UARTDRV_Transmit
-                0x00000000       0xa4 ./uartdrv.o
- .text.UARTDRV_TransmitB
-                0x00000000       0xa0 ./uartdrv.o
- .debug_info    0x00000000     0x29e8 ./uartdrv.o
- .debug_abbrev  0x00000000      0x2fe ./uartdrv.o
- .debug_loc     0x00000000     0x1222 ./uartdrv.o
- .debug_aranges
-                0x00000000      0x1d0 ./uartdrv.o
- .debug_ranges  0x00000000      0x1c0 ./uartdrv.o
- .debug_macro   0x00000000      0x36e ./uartdrv.o
- .debug_macro   0x00000000      0x886 ./uartdrv.o
- .debug_macro   0x00000000       0x58 ./uartdrv.o
- .debug_macro   0x00000000       0x22 ./uartdrv.o
- .debug_macro   0x00000000       0x35 ./uartdrv.o
- .debug_macro   0x00000000       0x9c ./uartdrv.o
- .debug_macro   0x00000000      0x166 ./uartdrv.o
- .debug_macro   0x00000000       0x4a ./uartdrv.o
- .debug_macro   0x00000000       0x52 ./uartdrv.o
- .debug_macro   0x00000000       0x16 ./uartdrv.o
- .debug_macro   0x00000000       0x43 ./uartdrv.o
- .debug_macro   0x00000000      0x180 ./uartdrv.o
- .debug_macro   0x00000000      0x29d ./uartdrv.o
- .debug_macro   0x00000000       0x10 ./uartdrv.o
- .debug_macro   0x00000000       0x35 ./uartdrv.o
- .debug_macro   0x00000000      0x335 ./uartdrv.o
- .debug_macro   0x00000000       0xe3 ./uartdrv.o
- .debug_macro   0x00000000       0x22 ./uartdrv.o
- .debug_macro   0x00000000      0x1df ./uartdrv.o
- .debug_macro   0x00000000       0x35 ./uartdrv.o
- .debug_macro   0x00000000       0x50 ./uartdrv.o
- .debug_macro   0x00000000      0xe66 ./uartdrv.o
- .debug_macro   0x00000000      0xa6c ./uartdrv.o
- .debug_macro   0x00000000     0x199a ./uartdrv.o
- .debug_macro   0x00000000      0x32c ./uartdrv.o
- .debug_macro   0x00000000     0x2a51 ./uartdrv.o
- .debug_macro   0x00000000     0x1b31 ./uartdrv.o
- .debug_macro   0x00000000     0x2175 ./uartdrv.o
- .debug_macro   0x00000000     0x1772 ./uartdrv.o
- .debug_macro   0x00000000      0xbf0 ./uartdrv.o
- .debug_macro   0x00000000      0x347 ./uartdrv.o
- .debug_macro   0x00000000      0x29e ./uartdrv.o
- .debug_macro   0x00000000     0x2766 ./uartdrv.o
- .debug_macro   0x00000000     0x31cf ./uartdrv.o
- .debug_macro   0x00000000     0x136e ./uartdrv.o
- .debug_macro   0x00000000      0xde5 ./uartdrv.o
- .debug_macro   0x00000000      0x23d ./uartdrv.o
- .debug_macro   0x00000000     0x1045 ./uartdrv.o
- .debug_macro   0x00000000     0x1608 ./uartdrv.o
- .debug_macro   0x00000000     0x38e6 ./uartdrv.o
- .debug_macro   0x00000000     0x2292 ./uartdrv.o
- .debug_macro   0x00000000      0x61a ./uartdrv.o
- .debug_macro   0x00000000      0xfb2 ./uartdrv.o
- .debug_macro   0x00000000      0x6b8 ./uartdrv.o
- .debug_macro   0x00000000     0x117e ./uartdrv.o
- .debug_macro   0x00000000       0x40 ./uartdrv.o
- .debug_macro   0x00000000      0x1d2 ./uartdrv.o
- .debug_macro   0x00000000      0x1ed ./uartdrv.o
- .debug_macro   0x00000000       0xc4 ./uartdrv.o
- .debug_macro   0x00000000       0x35 ./uartdrv.o
- .debug_macro   0x00000000      0x15a ./uartdrv.o
- .debug_macro   0x00000000      0x15a ./uartdrv.o
- .debug_macro   0x00000000       0x22 ./uartdrv.o
- .debug_macro   0x00000000       0x27 ./uartdrv.o
- .debug_macro   0x00000000       0x10 ./uartdrv.o
- .debug_macro   0x00000000       0x10 ./uartdrv.o
- .debug_macro   0x00000000       0xe4 ./uartdrv.o
- .debug_macro   0x00000000      0x2bd ./uartdrv.o
- .debug_macro   0x00000000       0x64 ./uartdrv.o
- .debug_macro   0x00000000       0x2e ./uartdrv.o
- .debug_macro   0x00000000       0x16 ./uartdrv.o
- .debug_macro   0x00000000       0xb9 ./uartdrv.o
- .debug_macro   0x00000000       0x1c ./uartdrv.o
- .debug_macro   0x00000000       0x3b ./uartdrv.o
- .debug_macro   0x00000000       0x95 ./uartdrv.o
- .debug_macro   0x00000000       0x73 ./uartdrv.o
- .debug_macro   0x00000000       0x50 ./uartdrv.o
- .debug_macro   0x00000000       0xba ./uartdrv.o
- .debug_line    0x00000000     0x237b ./uartdrv.o
- .debug_str     0x00000000    0xec90e ./uartdrv.o
- .comment       0x00000000       0x71 ./uartdrv.o
- .debug_frame   0x00000000      0x844 ./uartdrv.o
- .ARM.attributes
-                0x00000000       0x39 ./uartdrv.o
  .group         0x00000000        0x8 ./bgapi/dmadrv.o
  .group         0x00000000        0x8 ./bgapi/dmadrv.o
  .group         0x00000000        0x8 ./bgapi/dmadrv.o
@@ -1413,7 +1133,6 @@ Discarded input sections
  .debug_macro   0x00000000      0x2b7 ./emlib/em_cmu.o
  .debug_macro   0x00000000      0x166 ./emlib/em_cmu.o
  .debug_macro   0x00000000       0x58 ./emlib/em_cmu.o
- .debug_macro   0x00000000       0x73 ./emlib/em_cmu.o
  .debug_macro   0x00000000       0x50 ./emlib/em_cmu.o
  .group         0x00000000        0x8 ./emlib/em_cryotimer.o
  .group         0x00000000        0x8 ./emlib/em_cryotimer.o
@@ -2541,7 +2260,6 @@ LOAD ./gatt_db.o
 LOAD ./gpiointerrupt.o
 LOAD ./main.o
 LOAD ./uart_echo.o
-LOAD ./uartdrv.o
 LOAD ./bgapi/dmadrv.o
 LOAD ./bgapi/em_adc.o
 LOAD ./bgapi/em_ldma.o
@@ -2673,9 +2391,9 @@ LOAD d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q
                 0x00021708       0x48 ./main.o
  .text.main     0x00021750       0xb8 ./main.o
                 0x00021750                main
- .text.UART_Init
+ .text.UART_Test
                 0x00021808       0x48 ./uart_echo.o
-                0x00021808                UART_Init
+                0x00021808                UART_Test
  .text.LDMA_IRQHandler
                 0x00021850       0xe0 ./bgapi/dmadrv.o
                 0x00021850                LDMA_IRQHandler
@@ -3455,39 +3173,39 @@ OUTPUT(soc-empty-UARTTst2.axf elf32-littlearm)
  .comment       0x00000000       0x6f D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/lib/EFR32BG1B/GCC/bgapi.a(ubt_gatt_client.c.obj)
  .comment       0x00000000       0x6f D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1//protocol/bluetooth_2.4/lib/EFR32BG1B/GCC/bgapi.a(att_client.c.obj)
 
-.debug_info     0x00000000     0xe32f
+.debug_info     0x00000000     0xda76
  .debug_info    0x00000000      0x16c ./application_properties.o
  .debug_info    0x0000016c      0x592 ./gatt_db.o
  .debug_info    0x000006fe      0x7b3 ./gpiointerrupt.o
  .debug_info    0x00000eb1     0x46d7 ./main.o
- .debug_info    0x00005588      0xbce ./uart_echo.o
- .debug_info    0x00006156     0x13f4 ./bgapi/dmadrv.o
- .debug_info    0x0000754a      0x1b4 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
- .debug_info    0x000076fe     0x1b9c ./emlib/em_cmu.o
- .debug_info    0x0000929a      0xa05 ./emlib/em_gpio.o
- .debug_info    0x00009c9f      0x6b8 ./emlib/em_rtcc.o
- .debug_info    0x0000a357      0x276 ./emlib/em_system.o
- .debug_info    0x0000a5cd      0x94f ./emlib/em_timer.o
- .debug_info    0x0000af1c      0xf55 ./emlib/em_usart.o
- .debug_info    0x0000be71     0x24be ./src/InitDevice.o
+ .debug_info    0x00005588      0x315 ./uart_echo.o
+ .debug_info    0x0000589d     0x13f4 ./bgapi/dmadrv.o
+ .debug_info    0x00006c91      0x1b4 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+ .debug_info    0x00006e45     0x1b9c ./emlib/em_cmu.o
+ .debug_info    0x000089e1      0xa05 ./emlib/em_gpio.o
+ .debug_info    0x000093e6      0x6b8 ./emlib/em_rtcc.o
+ .debug_info    0x00009a9e      0x276 ./emlib/em_system.o
+ .debug_info    0x00009d14      0x94f ./emlib/em_timer.o
+ .debug_info    0x0000a663      0xf55 ./emlib/em_usart.o
+ .debug_info    0x0000b5b8     0x24be ./src/InitDevice.o
 
-.debug_abbrev   0x00000000     0x176c
+.debug_abbrev   0x00000000     0x1694
  .debug_abbrev  0x00000000       0x9a ./application_properties.o
  .debug_abbrev  0x0000009a       0xc0 ./gatt_db.o
  .debug_abbrev  0x0000015a      0x24d ./gpiointerrupt.o
  .debug_abbrev  0x000003a7      0x233 ./main.o
- .debug_abbrev  0x000005da      0x1b9 ./uart_echo.o
- .debug_abbrev  0x00000793      0x260 ./bgapi/dmadrv.o
- .debug_abbrev  0x000009f3       0xdc ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
- .debug_abbrev  0x00000acf      0x2df ./emlib/em_cmu.o
- .debug_abbrev  0x00000dae      0x1db ./emlib/em_gpio.o
- .debug_abbrev  0x00000f89      0x178 ./emlib/em_rtcc.o
- .debug_abbrev  0x00001101      0x10a ./emlib/em_system.o
- .debug_abbrev  0x0000120b      0x175 ./emlib/em_timer.o
- .debug_abbrev  0x00001380      0x1da ./emlib/em_usart.o
- .debug_abbrev  0x0000155a      0x212 ./src/InitDevice.o
+ .debug_abbrev  0x000005da       0xe1 ./uart_echo.o
+ .debug_abbrev  0x000006bb      0x260 ./bgapi/dmadrv.o
+ .debug_abbrev  0x0000091b       0xdc ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+ .debug_abbrev  0x000009f7      0x2df ./emlib/em_cmu.o
+ .debug_abbrev  0x00000cd6      0x1db ./emlib/em_gpio.o
+ .debug_abbrev  0x00000eb1      0x178 ./emlib/em_rtcc.o
+ .debug_abbrev  0x00001029      0x10a ./emlib/em_system.o
+ .debug_abbrev  0x00001133      0x175 ./emlib/em_timer.o
+ .debug_abbrev  0x000012a8      0x1da ./emlib/em_usart.o
+ .debug_abbrev  0x00001482      0x212 ./src/InitDevice.o
 
-.debug_aranges  0x00000000      0x680
+.debug_aranges  0x00000000      0x670
  .debug_aranges
                 0x00000000       0x18 ./application_properties.o
  .debug_aranges
@@ -3497,27 +3215,27 @@ OUTPUT(soc-empty-UARTTst2.axf elf32-littlearm)
  .debug_aranges
                 0x00000098       0x50 ./main.o
  .debug_aranges
-                0x000000e8       0x30 ./uart_echo.o
+                0x000000e8       0x20 ./uart_echo.o
  .debug_aranges
-                0x00000118       0xa0 ./bgapi/dmadrv.o
+                0x00000108       0xa0 ./bgapi/dmadrv.o
  .debug_aranges
-                0x000001b8       0x28 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+                0x000001a8       0x28 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
  .debug_aranges
-                0x000001e0      0x1a8 ./emlib/em_cmu.o
+                0x000001d0      0x1a8 ./emlib/em_cmu.o
  .debug_aranges
-                0x00000388       0x88 ./emlib/em_gpio.o
+                0x00000378       0x88 ./emlib/em_gpio.o
  .debug_aranges
-                0x00000410       0x50 ./emlib/em_rtcc.o
+                0x00000400       0x50 ./emlib/em_rtcc.o
  .debug_aranges
-                0x00000460       0x28 ./emlib/em_system.o
+                0x00000450       0x28 ./emlib/em_system.o
  .debug_aranges
-                0x00000488       0x58 ./emlib/em_timer.o
+                0x00000478       0x58 ./emlib/em_timer.o
  .debug_aranges
-                0x000004e0       0xb8 ./emlib/em_usart.o
+                0x000004d0       0xb8 ./emlib/em_usart.o
  .debug_aranges
-                0x00000598       0xe8 ./src/InitDevice.o
+                0x00000588       0xe8 ./src/InitDevice.o
 
-.debug_macro    0x00000000    0x252cd
+.debug_macro    0x00000000    0x25340
  .debug_macro   0x00000000       0x84 ./application_properties.o
  .debug_macro   0x00000084      0x886 ./application_properties.o
  .debug_macro   0x0000090a       0x22 ./application_properties.o
@@ -3625,112 +3343,113 @@ OUTPUT(soc-empty-UARTTst2.axf elf32-littlearm)
  .debug_macro   0x00023e8f      0x2fc ./emlib/em_cmu.o
  .debug_macro   0x0002418b       0x25 ./emlib/em_cmu.o
  .debug_macro   0x000241b0       0xee ./emlib/em_cmu.o
- .debug_macro   0x0002429e      0x239 ./emlib/em_gpio.o
- .debug_macro   0x000244d7      0x22d ./emlib/em_rtcc.o
- .debug_macro   0x00024704       0x20 ./emlib/em_rtcc.o
- .debug_macro   0x00024724      0x227 ./emlib/em_system.o
- .debug_macro   0x0002494b      0x227 ./emlib/em_timer.o
- .debug_macro   0x00024b72       0x25 ./emlib/em_timer.o
- .debug_macro   0x00024b97      0x26a ./emlib/em_usart.o
- .debug_macro   0x00024e01      0x2ae ./src/InitDevice.o
- .debug_macro   0x000250af      0x1bc ./src/InitDevice.o
- .debug_macro   0x0002526b       0x11 ./src/InitDevice.o
- .debug_macro   0x0002527c       0x26 ./src/InitDevice.o
- .debug_macro   0x000252a2       0x2b ./src/InitDevice.o
+ .debug_macro   0x0002429e       0x73 ./emlib/em_cmu.o
+ .debug_macro   0x00024311      0x239 ./emlib/em_gpio.o
+ .debug_macro   0x0002454a      0x22d ./emlib/em_rtcc.o
+ .debug_macro   0x00024777       0x20 ./emlib/em_rtcc.o
+ .debug_macro   0x00024797      0x227 ./emlib/em_system.o
+ .debug_macro   0x000249be      0x227 ./emlib/em_timer.o
+ .debug_macro   0x00024be5       0x25 ./emlib/em_timer.o
+ .debug_macro   0x00024c0a      0x26a ./emlib/em_usart.o
+ .debug_macro   0x00024e74      0x2ae ./src/InitDevice.o
+ .debug_macro   0x00025122      0x1bc ./src/InitDevice.o
+ .debug_macro   0x000252de       0x11 ./src/InitDevice.o
+ .debug_macro   0x000252ef       0x26 ./src/InitDevice.o
+ .debug_macro   0x00025315       0x2b ./src/InitDevice.o
 
-.debug_line     0x00000000     0x80ed
+.debug_line     0x00000000     0x80c5
  .debug_line    0x00000000      0x335 ./application_properties.o
  .debug_line    0x00000335      0x2c9 ./gatt_db.o
  .debug_line    0x000005fe      0x91b ./gpiointerrupt.o
  .debug_line    0x00000f19      0xcea ./main.o
- .debug_line    0x00001c03      0xbd9 ./uart_echo.o
- .debug_line    0x000027dc      0xb55 ./bgapi/dmadrv.o
- .debug_line    0x00003331      0x2d7 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
- .debug_line    0x00003608     0x10c3 ./emlib/em_cmu.o
- .debug_line    0x000046cb      0x9a9 ./emlib/em_gpio.o
- .debug_line    0x00005074      0x85e ./emlib/em_rtcc.o
- .debug_line    0x000058d2      0x7c9 ./emlib/em_system.o
- .debug_line    0x0000609b      0xa51 ./emlib/em_timer.o
- .debug_line    0x00006aec      0xa98 ./emlib/em_usart.o
- .debug_line    0x00007584      0xb69 ./src/InitDevice.o
+ .debug_line    0x00001c03      0xbb1 ./uart_echo.o
+ .debug_line    0x000027b4      0xb55 ./bgapi/dmadrv.o
+ .debug_line    0x00003309      0x2d7 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+ .debug_line    0x000035e0     0x10c3 ./emlib/em_cmu.o
+ .debug_line    0x000046a3      0x9a9 ./emlib/em_gpio.o
+ .debug_line    0x0000504c      0x85e ./emlib/em_rtcc.o
+ .debug_line    0x000058aa      0x7c9 ./emlib/em_system.o
+ .debug_line    0x00006073      0xa51 ./emlib/em_timer.o
+ .debug_line    0x00006ac4      0xa98 ./emlib/em_usart.o
+ .debug_line    0x0000755c      0xb69 ./src/InitDevice.o
 
-.debug_str      0x00000000   0x1026be
+.debug_str      0x00000000   0x102339
  .debug_str     0x00000000     0x3497 ./application_properties.o
                                0x361a (size before relaxing)
  .debug_str     0x00003497      0x866 ./gatt_db.o
                                0x3ae6 (size before relaxing)
  .debug_str     0x00003cfd    0xe0d78 ./gpiointerrupt.o
                               0xe3f9f (size before relaxing)
- .debug_str     0x000e4a75    0x1175b ./main.o
+ .debug_str     0x000e4a75    0x11761 ./main.o
                               0xf526a (size before relaxing)
- .debug_str     0x000f61d0     0x4e7e ./uart_echo.o
-                              0xec1ed (size before relaxing)
- .debug_str     0x000fb04e      0x97f ./bgapi/dmadrv.o
+ .debug_str     0x000f61d6     0x4442 ./uart_echo.o
+                              0xeb6eb (size before relaxing)
+ .debug_str     0x000fa618      0xe70 ./bgapi/dmadrv.o
                               0xe825d (size before relaxing)
- .debug_str     0x000fb9cd      0x12c ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+ .debug_str     0x000fb488      0x12c ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
                                0x32af (size before relaxing)
- .debug_str     0x000fbaf9     0x146a ./emlib/em_cmu.o
+ .debug_str     0x000fb5b4     0x162a ./emlib/em_cmu.o
                               0xe5855 (size before relaxing)
- .debug_str     0x000fcf63      0x504 ./emlib/em_gpio.o
+ .debug_str     0x000fcbde      0x504 ./emlib/em_gpio.o
                               0xe3a2a (size before relaxing)
- .debug_str     0x000fd467      0x7b4 ./emlib/em_rtcc.o
+ .debug_str     0x000fd0e2      0x7b4 ./emlib/em_rtcc.o
                               0xe33a7 (size before relaxing)
- .debug_str     0x000fdc1b      0x129 ./emlib/em_system.o
+ .debug_str     0x000fd896      0x129 ./emlib/em_system.o
                               0xe2fb6 (size before relaxing)
- .debug_str     0x000fdd44      0xa57 ./emlib/em_timer.o
+ .debug_str     0x000fd9bf      0xa57 ./emlib/em_timer.o
                               0xe3640 (size before relaxing)
- .debug_str     0x000fe79b      0xa24 ./emlib/em_usart.o
+ .debug_str     0x000fe416      0xa24 ./emlib/em_usart.o
                               0xe475b (size before relaxing)
- .debug_str     0x000ff1bf     0x34ff ./src/InitDevice.o
+ .debug_str     0x000fee3a     0x34ff ./src/InitDevice.o
                               0xec639 (size before relaxing)
 
-.debug_loc      0x00000000     0x3448
+.debug_loc      0x00000000     0x339c
  .debug_loc     0x00000000      0x338 ./gpiointerrupt.o
  .debug_loc     0x00000338      0x218 ./main.o
- .debug_loc     0x00000550       0xe4 ./uart_echo.o
- .debug_loc     0x00000634      0x568 ./bgapi/dmadrv.o
- .debug_loc     0x00000b9c       0x64 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
- .debug_loc     0x00000c00     0x1000 ./emlib/em_cmu.o
- .debug_loc     0x00001c00      0x4b4 ./emlib/em_gpio.o
- .debug_loc     0x000020b4      0x23c ./emlib/em_rtcc.o
- .debug_loc     0x000022f0       0xb8 ./emlib/em_system.o
- .debug_loc     0x000023a8      0x2b0 ./emlib/em_timer.o
- .debug_loc     0x00002658      0x6d2 ./emlib/em_usart.o
- .debug_loc     0x00002d2a      0x71e ./src/InitDevice.o
+ .debug_loc     0x00000550       0x38 ./uart_echo.o
+ .debug_loc     0x00000588      0x568 ./bgapi/dmadrv.o
+ .debug_loc     0x00000af0       0x64 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+ .debug_loc     0x00000b54     0x1000 ./emlib/em_cmu.o
+ .debug_loc     0x00001b54      0x4b4 ./emlib/em_gpio.o
+ .debug_loc     0x00002008      0x23c ./emlib/em_rtcc.o
+ .debug_loc     0x00002244       0xb8 ./emlib/em_system.o
+ .debug_loc     0x000022fc      0x2b0 ./emlib/em_timer.o
+ .debug_loc     0x000025ac      0x6d2 ./emlib/em_usart.o
+ .debug_loc     0x00002c7e      0x71e ./src/InitDevice.o
 
-.debug_ranges   0x00000000      0x590
+.debug_ranges   0x00000000      0x580
  .debug_ranges  0x00000000       0x58 ./gpiointerrupt.o
  .debug_ranges  0x00000058       0x40 ./main.o
- .debug_ranges  0x00000098       0x20 ./uart_echo.o
- .debug_ranges  0x000000b8       0x90 ./bgapi/dmadrv.o
- .debug_ranges  0x00000148       0x18 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
- .debug_ranges  0x00000160      0x198 ./emlib/em_cmu.o
- .debug_ranges  0x000002f8       0x78 ./emlib/em_gpio.o
- .debug_ranges  0x00000370       0x40 ./emlib/em_rtcc.o
- .debug_ranges  0x000003b0       0x18 ./emlib/em_system.o
- .debug_ranges  0x000003c8       0x48 ./emlib/em_timer.o
- .debug_ranges  0x00000410       0xa8 ./emlib/em_usart.o
- .debug_ranges  0x000004b8       0xd8 ./src/InitDevice.o
+ .debug_ranges  0x00000098       0x10 ./uart_echo.o
+ .debug_ranges  0x000000a8       0x90 ./bgapi/dmadrv.o
+ .debug_ranges  0x00000138       0x18 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+ .debug_ranges  0x00000150      0x198 ./emlib/em_cmu.o
+ .debug_ranges  0x000002e8       0x78 ./emlib/em_gpio.o
+ .debug_ranges  0x00000360       0x40 ./emlib/em_rtcc.o
+ .debug_ranges  0x000003a0       0x18 ./emlib/em_system.o
+ .debug_ranges  0x000003b8       0x48 ./emlib/em_timer.o
+ .debug_ranges  0x00000400       0xa8 ./emlib/em_usart.o
+ .debug_ranges  0x000004a8       0xd8 ./src/InitDevice.o
 
-.debug_frame    0x00000000     0x1a38
+.debug_frame    0x00000000     0x19ec
  .debug_frame   0x00000000      0x184 ./gpiointerrupt.o
  .debug_frame   0x00000184      0x108 ./main.o
- .debug_frame   0x0000028c       0x7c ./uart_echo.o
- .debug_frame   0x00000308      0x280 ./bgapi/dmadrv.o
- .debug_frame   0x00000588       0x48 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
- .debug_frame   0x000005d0      0x74c ./emlib/em_cmu.o
- .debug_frame   0x00000d1c      0x224 ./emlib/em_gpio.o
- .debug_frame   0x00000f40      0x110 ./emlib/em_rtcc.o
- .debug_frame   0x00001050       0x60 ./emlib/em_system.o
- .debug_frame   0x000010b0      0x140 ./emlib/em_timer.o
- .debug_frame   0x000011f0      0x310 ./emlib/em_usart.o
- .debug_frame   0x00001500      0x380 ./src/InitDevice.o
- .debug_frame   0x00001880       0x28 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-exit.o)
- .debug_frame   0x000018a8       0x2c d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-init.o)
- .debug_frame   0x000018d4       0x38 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memcmp.o)
- .debug_frame   0x0000190c       0x34 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memset.o)
- .debug_frame   0x00001940       0x50 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00001990       0x20 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-atexit.o)
- .debug_frame   0x000019b0       0x34 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-fini.o)
- .debug_frame   0x000019e4       0x34 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-__atexit.o)
- .debug_frame   0x00001a18       0x20 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libnosys.a(_exit.o)
+ .debug_frame   0x0000028c       0x30 ./uart_echo.o
+ .debug_frame   0x000002bc      0x280 ./bgapi/dmadrv.o
+ .debug_frame   0x0000053c       0x48 ./device/EFR32_B_1_1_B/gcc/startup_efr32bg1b.o
+ .debug_frame   0x00000584      0x74c ./emlib/em_cmu.o
+ .debug_frame   0x00000cd0      0x224 ./emlib/em_gpio.o
+ .debug_frame   0x00000ef4      0x110 ./emlib/em_rtcc.o
+ .debug_frame   0x00001004       0x60 ./emlib/em_system.o
+ .debug_frame   0x00001064      0x140 ./emlib/em_timer.o
+ .debug_frame   0x000011a4      0x310 ./emlib/em_usart.o
+ .debug_frame   0x000014b4      0x380 ./src/InitDevice.o
+ .debug_frame   0x00001834       0x28 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-exit.o)
+ .debug_frame   0x0000185c       0x2c d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-init.o)
+ .debug_frame   0x00001888       0x38 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memcmp.o)
+ .debug_frame   0x000018c0       0x34 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-memset.o)
+ .debug_frame   0x000018f4       0x50 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00001944       0x20 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-atexit.o)
+ .debug_frame   0x00001964       0x34 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-fini.o)
+ .debug_frame   0x00001998       0x34 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libc.a(lib_a-__atexit.o)
+ .debug_frame   0x000019cc       0x20 d:/siliconlabs/simplicitystudio/v4_2/developer/toolchains/gnu_arm/4.9_2015q3/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7e-m/fpu\libnosys.a(_exit.o)

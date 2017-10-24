@@ -8,6 +8,6 @@
 #ifndef UART_ECHO_H_
 #define UART_ECHO_H_
 
-void UART_Init(void);
+void UART_Test(void);
 
 #endif /* UART_ECHO_H_ */

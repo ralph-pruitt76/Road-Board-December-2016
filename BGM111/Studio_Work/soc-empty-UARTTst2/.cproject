@@ -141,7 +141,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="device|emlib/BRD4160A|emlib/RD-0057-0101|kit_flashpwr|CMSIS|emlib(/.*){0,1}/em_cmu.c|emlib(/.*){0,1}/em_system.c|emlib(/.*){0,1}/em_gpio.c|emlib(/.*){0,1}/em_i2c.c|emlib(/.*){0,1}/em_rtcc.c|emlib(/.*){0,1}/em_usart.c|emlib(/.*){0,1}/em_msc.c|emlib(/.*){0,1}/em_cryotimer.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
+						<entry excluding="uartdrv.c|device|emlib/BRD4160A|emlib/RD-0057-0101|kit_flashpwr|CMSIS|emlib(/.*){0,1}/em_cmu.c|emlib(/.*){0,1}/em_system.c|emlib(/.*){0,1}/em_gpio.c|emlib(/.*){0,1}/em_i2c.c|emlib(/.*){0,1}/em_rtcc.c|emlib(/.*){0,1}/em_usart.c|emlib(/.*){0,1}/em_msc.c|emlib(/.*){0,1}/em_cryotimer.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name=""/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="device/EFR32_B_1_1_B"/>
 					</sourceEntries>
 				</configuration>

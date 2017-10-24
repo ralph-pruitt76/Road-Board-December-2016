@@ -8056,3 +8056,30 @@ Caused by: org.eclipse.swt.SWTException: Device is disposed
 	at org.eclipse.swt.widgets.Display.asyncExec(Display.java:709)
 	at org.eclipse.cdt.dsf.ui.concurrent.SimpleDisplayExecutor.execute(SimpleDisplayExecutor.java:77)
 	... 15 more
+!SESSION 2017-10-23 13:13:03.249 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-23 13:13:34.907
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-23 13:13:34.929
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-23 13:13:35.013
+!MESSAGE Unknown architecture(s) [EFR32MG13P832F512GM48+iar, EFR32MG13P932F512GM48+iar, EFR32MG13P932F512IM48+iar, EFR32MG13P832F512GM48+gcc, EFR32MG13P932F512GM48+gcc, EFR32MG13P932F512IM48+gcc] in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-23 13:13:35.021
+!MESSAGE Unknown board 'BRD4165A' in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-23 13:13:35.031
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-23 13:13:48.715
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-23 13:14:15.949
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp

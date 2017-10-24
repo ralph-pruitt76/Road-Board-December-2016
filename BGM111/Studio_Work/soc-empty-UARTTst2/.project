@@ -31,11 +31,6 @@
 			<locationURI>STUDIO_SDK_LOC/platform/emdrv/gpiointerrupt/src/gpiointerrupt.c</locationURI>
 		</link>
 		<link>
-			<name>uartdrv.c</name>
-			<type>1</type>
-			<locationURI>STUDIO_SDK_LOC/platform/emdrv/uartdrv/src/uartdrv.c</locationURI>
-		</link>
-		<link>
 			<name>bgapi/dmadrv.c</name>
 			<type>1</type>
 			<locationURI>STUDIO_SDK_LOC/platform/emdrv/dmadrv/src/dmadrv.c</locationURI>
