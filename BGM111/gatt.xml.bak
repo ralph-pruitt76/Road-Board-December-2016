@@ -46,6 +46,20 @@
 
 	</service>
 	
+	<!-- The OTA service definition -->
+	<!-- http://community.silabs.com/t5/Bluetooth-Wi-Fi-Knowledge-Base/BGScript-OTA-example-for-BGM111/ta-p/170665 -->
+	<service uuid="1d14d6ee-fd63-4fa1-bfa4-8f47b42119f0">
+			<description>Silicon Labs OTA</description>
+			<characteristic uuid="f7bf3564-fb6d-4e53-88a4-5e37e0326063" id="ota_control">
+				<properties write="true" />
+				<value length="1" type="user" />
+			</characteristic>
+			<characteristic uuid="984227f3-34fc-4045-a5d0-2c581f81a153" id="ota_data">
+				<properties write_no_response="true" />
+				<value length="20" />
+			</characteristic>
+	</service>
+	
 	<!-- Our custom accelerometer service is declared here -->	 
 	<!-- UUID values generated with https://www.guidgenerator.com/ --> 
 	<service uuid="0bd51666-e7cb-469b-8e4d-2742f1ba77cc" advertise="true">
@@ -58,19 +72,5 @@
 		</characteristic>
 		
     </service>
-	
-	<!-- The OTA service definition -->
-	<!-- http://community.silabs.com/t5/Bluetooth-Wi-Fi-Knowledge-Base/BGScript-OTA-example-for-BGM111/ta-p/170665 -->
-	<!--service uuid="1d14d6ee-fd63-4fa1-bfa4-8f47b42119f0">
-			<description>Silicon Labs OTA</description>
-			<characteristic uuid="f7bf3564-fb6d-4e53-88a4-5e37e0326063" id="ota_control">
-				<properties write="true" />
-				<value length="1" type="user" />
-			</characteristic>
-			<characteristic uuid="984227f3-34fc-4045-a5d0-2c581f81a153" id="ota_data">
-				<properties write_no_response="true" />
-				<value length="20" />
-			</characteristic>
-	</service-->
 	
 </gatt>
