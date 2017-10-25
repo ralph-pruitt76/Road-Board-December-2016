@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.silabs.ss.tool.ide.arm.debug.launch">
+<stringAttribute key="com.silabs.ss.framework.debugger.core.BOARDS" value=""/>
+<stringAttribute key="com.silabs.ss.framework.debugger.core.DEFAULT_ADAPTER" value=""/>
+<stringAttribute key="com.silabs.ss.framework.debugger.core.ERASE_METHOD" value="page"/>
+<stringAttribute key="com.silabs.ss.framework.debugger.core.MCU" value=""/>
+<booleanAttribute key="com.silabs.ss.framework.debugger.core.RUN_FROM_RESET" value="true"/>
+<booleanAttribute key="com.silabs.ss.framework.debugger.core.SMART_DOWNLOAD" value="false"/>
+<stringAttribute key="com.silabs.ss.tool.ide.arm.debug.CONNECT_METHOD" value="normal"/>
+<stringAttribute key="com.silabs.ss.tool.ide.arm.debug.CORE_CLOCK" value="14.000000"/>
+<booleanAttribute key="com.silabs.ss.tool.ide.arm.debug.ENABLE_TRACE" value="true"/>
+<intAttribute key="com.silabs.ss.tool.ide.arm.debug.EXCEPTIONS_TO_CATCH" value="0"/>
+<booleanAttribute key="com.silabs.ss.tool.ide.arm.debug.SWO_AUTO_SWOCLOCK" value="false"/>
+<stringAttribute key="com.silabs.ss.tool.ide.arm.debug.SWO_CLOCK" value="875"/>
+<intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="run"/>
+<booleanAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_MAIN" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_MAIN_SYMBOL" value="main"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="GNU ARM v4.9.3 - Default/soc-CRP2.axf"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="soc-CRP2"/>
+<booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="false"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value=""/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/soc-CRP2"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="com.silabs.ss.framework.debugger.ui.launchGroup.attach"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.dsf.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList context=&quot;reserved-for-future-use&quot;/&gt;&#13;&#10;"/>
+<stringAttribute key="sysview.enabled" value="false"/>
+<stringAttribute key="sysview.instance.port" value="64780"/>
+<stringAttribute key="sysview.jlink.connection" value="usb"/>
+<stringAttribute key="sysview.launch.mode" value="profileRunDebugSession"/>
+<stringAttribute key="sysview.project.sourcecode" value="linkSource"/>
+<stringAttribute key="sysview.rtos.name" value="MicriumOSKernel"/>
+<stringAttribute key="sysview.rttdetect" value="searchRange"/>
+<stringAttribute key="sysview.rttdetect.address" value="0x00000000"/>
+<stringAttribute key="sysview.rttdetect.searchRange" value="0x00000000 0x0000"/>
+<stringAttribute key="sysview.stopDebugSession" value="stopProfilingSession"/>
+<stringAttribute key="sysview.target.speed" value="8000"/>
+<stringAttribute key="sysview.tif" value="swd"/>
+</launchConfiguration>

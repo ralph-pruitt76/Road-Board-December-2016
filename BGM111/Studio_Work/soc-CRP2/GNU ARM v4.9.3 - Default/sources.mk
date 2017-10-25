@@ -16,7 +16,6 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
-bgapi \
 device/EFR32_B_1_1_B/gcc \
 emlib \
 src \
