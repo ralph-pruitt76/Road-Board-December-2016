@@ -73,7 +73,7 @@
     <characteristic id="xgatt_spp_data" name="SPP Data" sourceId="org.bluetooth.characteristic.humidity" uuid="e7add780-b042-4876-aae1-112855353cc1">
       <description>SPP Data</description>
       <informativeText/>
-      <value length="2" type="hex" variable_length="true"/>
+      <value length="20" type="hex" variable_length="true"/>
       <properties notify="true" notify_requirement="optional" write="true" write_requirement="optional"/>
     </characteristic>
   </service>

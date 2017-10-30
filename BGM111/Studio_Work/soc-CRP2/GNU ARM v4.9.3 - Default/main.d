@@ -65,7 +65,14 @@ main.o: ../main.c ../boards.h ../ble-configuration.h ../board_features.h \
  d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_usart.h \
  d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\hardware\kit\common\drivers\mx25flash_spi.h \
  d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\hardware\kit\efr32bg1_brd4302a\config\mx25flash_config.h \
- ../main.h ../uart_echo.h
+ ../main.h ../uart_echo.h \
+ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\uartdrv\inc\uartdrv.h \
+ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_leuart.h \
+ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\common\inc\ecode.h \
+ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\uartdrv\config\uartdrv_config.h \
+ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\dmadrv\inc\dmadrv.h \
+ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_ldma.h \
+ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\dmadrv\config\dmadrv_config.h
 
 ../boards.h:
 
@@ -208,3 +215,17 @@ d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\hardwar
 ../main.h:
 
 ../uart_echo.h:
+
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\uartdrv\inc\uartdrv.h:
+
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_leuart.h:
+
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\common\inc\ecode.h:
+
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\uartdrv\config\uartdrv_config.h:
+
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\dmadrv\inc\dmadrv.h:
+
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emlib\inc\em_ldma.h:
+
+d:\siliconlabs\simplicitystudio\v4_2\developer\sdks\gecko_sdk_suite\v1.1\platform\emdrv\dmadrv\config\dmadrv_config.h:

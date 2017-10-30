@@ -10042,3 +10042,549 @@ Because some files were skipped, it is possible that the resulting code will not
 
 !ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-25 13:57:03.465
 !MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+!SESSION 2017-10-26 13:17:16.288 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:18:09.306
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:18:09.429
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:18:09.512
+!MESSAGE Unknown architecture(s) [EFR32MG13P832F512GM48+iar, EFR32MG13P932F512GM48+iar, EFR32MG13P932F512IM48+iar, EFR32MG13P832F512GM48+gcc, EFR32MG13P932F512GM48+gcc, EFR32MG13P932F512IM48+gcc] in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:18:09.519
+!MESSAGE Unknown board 'BRD4165A' in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:18:09.524
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-26 13:18:27.319
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-10-26 13:18:54.564
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-26 13:40:54.794
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.145
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.244
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.381
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Smart Phone App
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.493
+!MESSAGE No capability active_scan found for Sniffer
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.569
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Thermometer
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.580
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - DTM
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.596
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app NCP target - Empty
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-10-26 13:51:36.611
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar] in sample app NCP target - Switched Multiprotocol Trust Center
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2017-10-27 04:22:30.941
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2017-10-27 04:24:34.497
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2017-10-27 04:26:39.424
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 07:36:29.425
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2017-10-27 07:39:25.335
+!MESSAGE Error in variable formatter: org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.debug.edc.internal.services.dsf.Modules$ModuleDMC cannot be cast to org.eclipse.cdt.dsf.debug.service.IMemory$IMemoryDMContext
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getValueString(AbstractStringFormatter.java:129)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getSummaryValue(AbstractStringFormatter.java:54)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractVariableConverter.getValue(AbstractVariableConverter.java:38)
+	at org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter.addVariableFields(DefaultCompositeFormatter.java:107)
+	at org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter.getSummaryValue(DefaultCompositeFormatter.java:41)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractVariableConverter.getValue(AbstractVariableConverter.java:38)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.getFormattedExpressionValue(Expressions.java:1487)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.access$3(Expressions.java:1465)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions$8.run(Expressions.java:1448)
+	at org.eclipse.cdt.debug.edc.services.AbstractEDCService$SafeRunner.run(AbstractEDCService.java:193)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2017-10-27 07:39:25.411
+!MESSAGE Error in variable formatter: org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.debug.edc.internal.services.dsf.Modules$ModuleDMC cannot be cast to org.eclipse.cdt.dsf.debug.service.IMemory$IMemoryDMContext
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getValueString(AbstractStringFormatter.java:129)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getSummaryValue(AbstractStringFormatter.java:54)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractVariableConverter.getValue(AbstractVariableConverter.java:38)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.getFormattedExpressionValue(Expressions.java:1487)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.access$3(Expressions.java:1465)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions$8.run(Expressions.java:1448)
+	at org.eclipse.cdt.debug.edc.services.AbstractEDCService$SafeRunner.run(AbstractEDCService.java:193)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 08:29:56.242
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2017-10-27 08:30:48.027
+!MESSAGE Error in variable formatter: org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.debug.edc.internal.services.dsf.Modules$ModuleDMC cannot be cast to org.eclipse.cdt.dsf.debug.service.IMemory$IMemoryDMContext
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getValueString(AbstractStringFormatter.java:129)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getSummaryValue(AbstractStringFormatter.java:54)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractVariableConverter.getValue(AbstractVariableConverter.java:38)
+	at org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter.addVariableFields(DefaultCompositeFormatter.java:107)
+	at org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter.getSummaryValue(DefaultCompositeFormatter.java:41)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractVariableConverter.getValue(AbstractVariableConverter.java:38)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.getFormattedExpressionValue(Expressions.java:1487)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.access$3(Expressions.java:1465)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions$8.run(Expressions.java:1448)
+	at org.eclipse.cdt.debug.edc.services.AbstractEDCService$SafeRunner.run(AbstractEDCService.java:193)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 08:37:44.623
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 08:42:02.280
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 08:50:41.058
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 08:56:37.226
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 09:00:31.498
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 09:04:49.633
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 09:15:30.682
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 09:32:31.467
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 09:35:28.112
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2017-10-27 09:36:44.533
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2017-10-27 09:36:44.540
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitor@d8defc): Status ERROR: org.eclipse.cdt.debug.edc code=10004 Resume failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.debug.edc 4 10004 2017-10-27 09:36:44.540
+!MESSAGE Resume failed.
+
+!ENTRY org.eclipse.tcf 4 0 2017-10-27 09:36:44.546
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2017-10-27 09:36:44.553
+!MESSAGE Lost connection to debugger agent "Silicon Labs TCF Agent". It's usually because the agent died abnormally.
+
+The debug session "Silicon Labs ARM MCU: EFR32BG1B232F256GM48" will be terminated.
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2017-10-27 09:36:47.188
+!MESSAGE TCF task failed
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:83)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$2.<init>(DebugAdapterProxy.java:52)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy.disconnect(DebugAdapterProxy.java:52)
+	at com.silabs.ss.framework.debugger.api.tcf.services.TCFTaskFactory$2.run(TCFTaskFactory.java:78)
+	at org.eclipse.tcf.util.TCFTask$1.run(TCFTask.java:55)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:875)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:79)
+	... 6 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 09:37:18.697
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2017-10-27 09:38:11.276
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 14081 DebugAdapter disconnect "root.000059306692"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2017-10-27 09:38:11.293
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2017-10-27 09:38:11.299
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 09:43:09.112
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2017-10-27 09:44:09.054
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 14961 DebugAdapter disconnect "root.000059306692"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2017-10-27 09:44:09.069
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2017-10-27 09:44:09.076
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 10:01:30.904
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2017-10-27 10:04:07.435
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 15839 DebugAdapter disconnect "root.000059306692"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2017-10-27 10:04:07.452
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2017-10-27 10:04:07.458
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-27 10:05:10.062
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2017-10-27 10:06:31.068
+!MESSAGE Error in variable formatter: org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter
+!STACK 0
+java.lang.ClassCastException: org.eclipse.cdt.debug.edc.internal.services.dsf.Modules$ModuleDMC cannot be cast to org.eclipse.cdt.dsf.debug.service.IMemory$IMemoryDMContext
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getValueString(AbstractStringFormatter.java:129)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractStringFormatter$DefaultNullTerminatedStringConverter.getSummaryValue(AbstractStringFormatter.java:54)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractVariableConverter.getValue(AbstractVariableConverter.java:38)
+	at org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter.addVariableFields(DefaultCompositeFormatter.java:107)
+	at org.eclipse.cdt.debug.edc.formatter.DefaultCompositeFormatter$DefaultCompositeConverter.getSummaryValue(DefaultCompositeFormatter.java:41)
+	at org.eclipse.cdt.debug.edc.formatter.AbstractVariableConverter.getValue(AbstractVariableConverter.java:38)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.getFormattedExpressionValue(Expressions.java:1487)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions.access$3(Expressions.java:1465)
+	at org.eclipse.cdt.debug.edc.internal.services.dsf.Expressions$8.run(Expressions.java:1448)
+	at org.eclipse.cdt.debug.edc.services.AbstractEDCService$SafeRunner.run(AbstractEDCService.java:193)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2017-10-27 10:45:43.162
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2017-10-27 10:45:43.171
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2017-10-27 10:45:43.176
+!MESSAGE Lost connection to debugger agent "Silicon Labs TCF Agent". It's usually because the agent died abnormally.
+
+The debug session "Silicon Labs ARM MCU: EFR32BG1B232F256GM48" will be terminated.
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.platform.apack.ip 2 0 2017-10-28 07:46:44.504
+!MESSAGE No network interfaces found.
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2017-10-28 07:52:30.848
+!MESSAGE TCF task failed
+!STACK 0
+java.lang.Exception: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.Command.<init>(Command.java:83)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy$2.<init>(DebugAdapterProxy.java:52)
+	at com.silabs.ss.framework.debugger.internal.api.tcf.services.DebugAdapterProxy.disconnect(DebugAdapterProxy.java:52)
+	at com.silabs.ss.framework.debugger.api.tcf.services.TCFTaskFactory$2.run(TCFTaskFactory.java:78)
+	at org.eclipse.tcf.util.TCFTask$1.run(TCFTask.java:55)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.Error: Channel is closed
+	at org.eclipse.tcf.core.AbstractChannel.sendCommand(AbstractChannel.java:875)
+	at org.eclipse.tcf.core.Command.<init>(Command.java:79)
+	... 6 more
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-29 09:22:08.974
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.core 4 0 2017-10-29 09:22:35.385
+!MESSAGE TCF task failed
+!STACK 0
+java.io.IOException: Command [C 17638 DebugAdapter disconnect "root.000059306692"] aborted
+	at org.eclipse.tcf.core.AbstractChannel$9.run(AbstractChannel.java:753)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 4 0 2017-10-29 09:22:35.437
+!MESSAGE Lost connection to agent
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY org.eclipse.tcf 4 0 2017-10-29 09:22:35.446
+!MESSAGE Cannot close channel streams
+!STACK 0
+java.net.SocketException: Socket closed
+	at java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:116)
+	at java.net.SocketOutputStream.write(SocketOutputStream.java:153)
+	at java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:82)
+	at java.io.BufferedOutputStream.flush(BufferedOutputStream.java:140)
+	at java.io.FilterOutputStream.close(FilterOutputStream.java:158)
+	at org.eclipse.tcf.core.ChannelTCP.stop(ChannelTCP.java:200)
+	at org.eclipse.tcf.core.AbstractChannel$8.run(AbstractChannel.java:716)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 0 2017-10-29 09:22:35.452
+!MESSAGE Lost connection to debugger agent "Silicon Labs TCF Agent". It's usually because the agent died abnormally.
+
+The debug session "Silicon Labs ARM MCU: EFR32BG1B232F256GM48" will be terminated.
+!STACK 0
+java.net.SocketException: Connection reset
+	at java.net.SocketInputStream.read(SocketInputStream.java:209)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at java.io.BufferedInputStream.read1(BufferedInputStream.java:284)
+	at java.io.BufferedInputStream.read(BufferedInputStream.java:345)
+	at java.io.FilterInputStream.read(FilterInputStream.java:107)
+	at org.eclipse.tcf.core.ChannelTCP.get(ChannelTCP.java:162)
+	at org.eclipse.tcf.core.StreamChannel.read(StreamChannel.java:84)
+	at org.eclipse.tcf.core.AbstractChannel$1.run(AbstractChannel.java:254)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-29 09:23:39.446
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-29 09:38:09.715
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-29 09:49:43.123
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-29 09:49:43.197
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-29 09:49:53.421
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-29 09:49:53.427
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-29 09:49:58.644
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.inputsource
+
+!ENTRY com.silabs.ss.framework.hwconfig.core 2 0 2017-10-29 09:49:58.651
+!MESSAGE Value for enum default index: 0 is hidden, id:timer.capturecomparech3.ccmode
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-29 09:50:57.343
+!MESSAGE Indexed 'soc-CRP2' (20 sources, 127 headers) in 4.27 sec: 9,219 declarations; 23,699 references; 0 unresolved inclusions; 108 syntax errors; 11 unresolved names (0.033%)
+
+!ENTRY com.silabs.foundation.core_rcp 1 0 2017-10-29 09:50:59.597
+!MESSAGE Generation successful!
+
+Files backed up:
+   gatt.xml backed up to gatt.xml.bak
+   gatt_db.c backed up to gatt_db.c.bak
+
+Files generated:
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\gatt.xml
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\gatt_db.c
+
+Files always updated:
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2
+
+Unmodified files:
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\gatt_db.h
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\BgBuild_Log.txt
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\ble-configuration.h
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\create_bl_files.bat
+
+Files skipped by user:
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\efr32bg1b232f256gm56.hwconf
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\src\InitDevice.c
+   D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\soc-CRP2\.\inc\InitDevice.h
+
+Because some files were skipped, it is possible that the resulting code will not compile. For example, if you have skipped the callbacks file regeneration, after adding some more callbacks, then you need to add those manually to your existing callbacks file.
+
+!ENTRY org.eclipse.cdt.core 1 0 2017-10-29 09:53:17.908
+!MESSAGE Indexed 'soc-CRP2' (8 sources, 119 headers) in 2.16 sec: 7,482 declarations; 16,049 references; 0 unresolved inclusions; 108 syntax errors; 4 unresolved names (0.017%)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-29 09:55:12.293
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-10-29 10:01:20.996
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
