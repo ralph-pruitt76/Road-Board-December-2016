@@ -1,5 +1,4 @@
 service_changed_char 3
 device_name 7
 ota_control 19
-ota_data 21
-xgatt_spp_data 24
+xgatt_spp_data 22

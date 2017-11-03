@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;soc-CRP2/soc-empty-UART.isc&apos; to &apos;soc-CRP2.isc&apos;" description="Rename resource &apos;soc-empty-UART.isc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="soc-empty-UART.isc" name="soc-CRP2.isc" stamp="1508950935083" updateReferences="true"/>
-</session>

@@ -2506,14 +2506,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                         } // Endif (tempBffr[3]!=':')
                         else
                         {
-                          // Is this a BLE Operation?
-                          if ( BLE_Flag )
-                          {
-                            // Yes...Build and Send BLE Response NOW.
-                            strcpy( (char *)tempBffr2, "<STATUS>CMD_TCS_BADPARAM</STATUS>");
-                            BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                          }
-                          
                           // 2. Verify if remaining string is digits
                           if (Size <= 4)
                           {
@@ -3124,6 +3116,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                             }
                             else
                             {
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                strcpy( (char *)tempBffr2, "<STATUS>CMD_TCS_BADPARAM</STATUS>");
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
+                              
                               strcpy( (char *)tempBffr2, "TCS SYNTAX ERROR: Wrong Number of Parameters.\r\n");
                             }
                           } // EndElse (flag == 0)

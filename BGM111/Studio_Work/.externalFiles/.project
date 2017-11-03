@@ -10,6 +10,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>D__SiliconLabs_SimplicityStudio_v4___configuration_org.eclipse.osgi_38____.cp_data_PROFILER_README.txt</name>
+			<type>1</type>
+			<location>D:/SiliconLabs/SimplicityStudio/v4_2/configuration/org.eclipse.osgi/380/0/.cp/data/PROFILER_README.txt</location>
+		</link>
+		<link>
 			<name>D__SiliconLabs_SimplicityStudio_v4___developer_sdks_gecko_sdk_suite_v1.1_hardware_kit_EFR3_BG1_BRD43__A_config_bspconfig.h</name>
 			<type>1</type>
 			<location>D:/SiliconLabs/SimplicityStudio/v4_2/developer/sdks/gecko_sdk_suite/v1.1/hardware/kit/EFR32BG1_BRD4300A/config/bspconfig.h</location>
