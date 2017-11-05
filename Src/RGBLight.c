@@ -341,11 +341,11 @@ HAL_StatusTypeDef RoadBrd_RGBReadValues( RGBLghtPtr LPtr )
   
   // Now calculate Each RGB Value.
   CalcValue = i2cData[0] + (i2cData[1] * 256);
-  sprintf( (char *)LPtr->Red, "%5d", CalcValue);
+  sprintf( (char *)LPtr->Red, "%05.2f", ((float)CalcValue/6.6));
   CalcValue = i2cData[2] + (i2cData[3] * 256);
-  sprintf( (char *)LPtr->Green, "%5d", CalcValue);
+  sprintf( (char *)LPtr->Green, "%05.2f", ((float)CalcValue/6.6));
   CalcValue = i2cData[4] + (i2cData[5] * 256);
-  sprintf( (char *)LPtr->Blue, "%5d", CalcValue);
+  sprintf( (char *)LPtr->Blue, "%05.2f", ((float)CalcValue/6.6));
   return Status;
 }
 

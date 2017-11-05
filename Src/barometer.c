@@ -365,7 +365,7 @@ HAL_StatusTypeDef RoadBrd_Baro_ReadPressure_Scaled( PRPrsPtr PRPtr )
   sprintf( (char *)PRPtr->Raw, "%08x", legacyValue);
   PRPtr->RawC = legacyValue;
   // Build Clean Result.
-  sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
+  sprintf( (char *)PRPtr->Pressure,"%06.3f",PressureResult);
 
   return Status;
 }
@@ -409,7 +409,7 @@ HAL_StatusTypeDef RoadBrd_Baro_ReadPressure( PRPrsPtr PRPtr )
   sprintf( (char *)PRPtr->Raw, "%08x", legacyValue);
   PRPtr->RawC = legacyValue;
   // Build Clean Result.
-  sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
+  sprintf( (char *)PRPtr->Pressure,"%06.3f",PressureResult);
 
   return Status;
 }

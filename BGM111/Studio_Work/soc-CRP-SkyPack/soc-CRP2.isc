@@ -91,11 +91,6 @@ PATH(PROJECT_RELATIVE):main.c
       <value length="1" type="user" variable_length="false"/>
       <properties write="true" write_requirement="optional"/>
     </characteristic>
-    <characteristic id="ota_data" name="Silicon Labs OTA Data" sourceId="com.silabs.characteristic.ota_data" uuid="984227F3-34FC-4045-A5D0-2C581F81A153">
-      <informativeText>Abstract:  Silicon Labs OTA Data.  </informativeText>
-      <value length="20" type="hex" variable_length="false"/>
-      <properties write_no_response="true" write_no_response_requirement="optional"/>
-    </characteristic>
   </service>
   <service advertise="false" id="SPP Service" name="SPP Service" requirement="mandatory" sourceId="org.bluetooth.service.generic_attribute" type="primary" uuid="0bd51666-e7cb-469b-8e4d-2742f1ba77cc">
     <informativeText/>

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       26/Oct/2017  12:54:14
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       03/Nov/2017  17:33:13
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -774,7 +774,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     366            PRPtr->RawC = legacyValue;
    \   00000070   0x61A5             STR      R5,[R4, #+24]
     367            // Build Clean Result.
-    368            sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
+    368            sprintf( (char *)PRPtr->Pressure,"%06.3f",PressureResult);
    \   00000072   0x0030             MOVS     R0,R6
    \   00000074   0x.... 0x....      BL       __aeabi_f2d
    \   00000078   0x0002             MOVS     R2,R0
@@ -874,7 +874,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     410            PRPtr->RawC = legacyValue;
    \   00000066   0x61A6             STR      R6,[R4, #+24]
     411            // Build Clean Result.
-    412            sprintf( (char *)PRPtr->Pressure,"%6.3f",PressureResult);
+    412            sprintf( (char *)PRPtr->Pressure,"%06.3f",PressureResult);
    \   00000068   0x4648             MOV      R0,R9
    \   0000006A   0x.... 0x....      BL       __aeabi_f2d
    \   0000006E   0x0002             MOVS     R2,R0
@@ -1198,10 +1198,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_2:
-   \   00000000   0x25 0x36          DC8 "%6.3f"
-   \              0x2E 0x33    
-   \              0x66 0x00    
-   \   00000006   0x00 0x00          DC8 0, 0
+   \   00000000   0x25 0x30          DC8 "%06.3f"
+   \              0x36 0x2E    
+   \              0x33 0x66    
+   \              0x00         
+   \   00000007   0x00               DC8 0
 
    \                                 In section .rodata, align 4
    \                     ?_3:

@@ -8,7 +8,7 @@
     <!--Device Name-->
     <characteristic id="device_name" name="Device Name" sourceId="org.bluetooth.characteristic.gap.device_name" uuid="2A00">
       <informativeText/>
-      <value length="6" type="utf-8" variable_length="false">SkyPkHD</value>
+      <value length="7" type="utf-8" variable_length="false">SkyPkHD</value>
       <properties const="true" const_requirement="optional" read="true" read_requirement="optional"/>
     </characteristic>
     
