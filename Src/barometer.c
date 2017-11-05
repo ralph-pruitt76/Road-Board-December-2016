@@ -326,12 +326,9 @@ HAL_StatusTypeDef RoadBrd_WaitForPressure( uint16_t WaitCnt )
 }
 
 /**
-  * @brief  RoadBrd_Baro_ReadPressure_Scaled( uint8_t *pData  ): This routine reads the Pressure and returns as a string of 3 bytes 
-  * as follows.....PRESS_OUT_XL...PRESS_OUT_L...PRESS_OUT_H
+  * @brief  This routine reads the Pressure and returns scaled values into passed Structure.
+  * @param  PRPrsPtr PRPtr: Pointer to structure receiving results.
   * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
-  *                                HAL_ERROR:    Error found in Tasking or data passed.
-  *                                HAL_BUSY:     UART is busy.
-  *                                HAL_TIMEOUT:  UART timed out.
   */
 HAL_StatusTypeDef RoadBrd_Baro_ReadPressure_Scaled( PRPrsPtr PRPtr )
 //HAL_StatusTypeDef RoadBrd_Baro_ReadPressure( uint8_t *pData )
@@ -371,12 +368,9 @@ HAL_StatusTypeDef RoadBrd_Baro_ReadPressure_Scaled( PRPrsPtr PRPtr )
 }
 
 /**
-  * @brief  RoadBrd_Baro_ReadPressure( uint8_t *pData  ): This routine reads the Pressure and returns as a string of 3 bytes 
-  * as follows.....PRESS_OUT_XL...PRESS_OUT_L...PRESS_OUT_H
+  * @brief  This routine reads the Pressure and returns values into passed Structure.
+  * @param  PRPrsPtr PRPtr: Pointer to structure receiving results.
   * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
-  *                                HAL_ERROR:    Error found in Tasking or data passed.
-  *                                HAL_BUSY:     UART is busy.
-  *                                HAL_TIMEOUT:  UART timed out.
   */
 HAL_StatusTypeDef RoadBrd_Baro_ReadPressure( PRPrsPtr PRPtr )
 //HAL_StatusTypeDef RoadBrd_Baro_ReadPressure( uint8_t *pData )

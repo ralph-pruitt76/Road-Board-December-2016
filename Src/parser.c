@@ -346,7 +346,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
               if ( BLE_Flag )
               {
                 // Yes...Build and Send BLE Response NOW.
-                strcpy( (char *)tempBffr2, "<STATUS>ST_FFTBFFR_DUMP:</STATUS>");
+                strcpy( (char *)tempBffr2, "<STATUS>ST_FFTBFFR_DUMP:");
                 BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
               }
               // NOW, Build Data String..
@@ -369,12 +369,18 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 #endif
                   if (Status != HAL_OK)
                     return Status;
-                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                  if ( BLE_Flag )
+                  {
+                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                  }
                   sprintf( (char *)tempBffr2, "" );
                 }
               }
-              strcpy( (char *)tempBffr2, "</STATUS>");
-              BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              if ( BLE_Flag )
+              {
+                strcpy( (char *)tempBffr2, "</STATUS>");
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
               sprintf( (char *)tempBffr2, "     ---COMPLETE---" );
               break;
 //**************************************************************************************************
@@ -631,7 +637,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                       if ( BLE_Flag )
                       {
                         // Yes...Build and Send BLE Response NOW.
-                        strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                        sprintf( (char *)tempBffr2, "<STATUS>PRESSURE: %s/%s</STATUS>", (char *)PRPMeasure.Pressure, (char *)PRPMeasureScaled.Pressure );
                         BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                       }
                       // Now show hex value of items.
@@ -795,7 +801,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                 if ( BLE_Flag )
                 {
                   // Yes...Build and Send BLE Response NOW.
-                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                  strcpy( (char *)tempBffr2, "<STATUS>ST_THERMAL_DUMP:");
                   BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                 }
                 if (Status == HAL_OK)
@@ -906,6 +912,10 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 //                                                                                               GridMeasure.GridEye8.RawC );
                         break;
                     } // EndSwitch(x)
+                    if ( BLE_Flag )
+                    {
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     // Now Print String.
  #ifdef NUCLEO
                     Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
@@ -921,6 +931,11 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                 } //Endif(Status == HAL_OK)
                 else
                   break;
+                if ( BLE_Flag )
+                {
+                  strcpy( (char *)tempBffr2, "</STATUS>");
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
                 sprintf( (char *)tempBffr2, "     COMPLETE.\r\n" );
               }
               else
@@ -1154,7 +1169,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                 if ( BLE_Flag )
                 {
                   // Yes...Build and Send BLE Response NOW.
-                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                  sprintf( (char *)tempBffr2, "<STATUS>BUS_VLTG:%s/%s</STATUS>", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
                   BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                 }
                 // Now calculate Bus Voltage.
@@ -1188,12 +1203,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdShntVltg_Scaled( &VMeasureScaled );
                     // Is this a BLE Operation?
-                    if ( BLE_Flag )
-                    {
-                      // Yes...Build and Send BLE Response NOW.
-                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1220,6 +1229,12 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Shunt Voltage.
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      sprintf( (char *)tempBffr2, "<STATUS>SHNT_VLTG:%s/%s</STATUS>", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     sprintf( (char *)tempBffr2, "     Shunt Voltage: %s/%s\r\n", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
                     break;
 //------------------ C1 Command...Read Current and return results..... 
@@ -1229,12 +1244,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdCurrent_Scaled( &CMeasureScaled );
                     // Is this a BLE Operation?
-                    if ( BLE_Flag )
-                    {
-                      // Yes...Build and Send BLE Response NOW.
-                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1261,6 +1270,12 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Current.
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      sprintf( (char *)tempBffr2, "<STATUS>SHNT_CRNT:%s/%s</STATUS>", (char *)CMeasure.Current, (char *)CMeasureScaled.Current );
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     sprintf( (char *)tempBffr2, "     Current: %s/%s\r\n", (char *)CMeasure.Current, (char *)CMeasureScaled.Current );
                     break;
 //------------------ C2 Command...Read Power and return results.....     
@@ -1270,12 +1285,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdPower_Scaled( &PMeasureScaled );
                     // Is this a BLE Operation?
-                    if ( BLE_Flag )
-                    {
-                      // Yes...Build and Send BLE Response NOW.
-                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1302,6 +1311,12 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Power.
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      sprintf( (char *)tempBffr2, "<STATUS>POWER:%s/%s</STATUS>", (char *)PMeasure.Power, (char *)PMeasureScaled.Power );
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     sprintf( (char *)tempBffr2, "     Power: %s/%s\r\n", (char *)PMeasure.Power, (char *)PMeasureScaled.Power );
                     break;
 //------------------ C3 Command...Read Bus Voltage and return results.....
@@ -1311,13 +1326,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status == HAL_OK)
                       Status = RoadBrd_VMonitor_RdVoltage_Scaled( &VMeasureScaled );
                       
-                    // Is this a BLE Operation?
-                    if ( BLE_Flag )
-                    {
-                      // Yes...Build and Send BLE Response NOW.
-                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                    }
                     if (Status == HAL_OK)
                     {
                       // Send string to UART..
@@ -1344,9 +1352,22 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Status != HAL_OK)
                       return Status;
                     // Now calculate Bus Voltage.
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      sprintf( (char *)tempBffr2, "<STATUS>BUS_VLTG:%s/%s</STATUS>", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     sprintf( (char *)tempBffr2, "     Bus Voltage: %s/%s\r\n", (char *)VMeasure.Voltage, (char *)VMeasureScaled.Voltage );
                     break;
                   default:
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_C_SYNTAX</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
                     strcpy( (char *)tempBffr2, "ERROR: Not a legal command.\r\n");
                     break;
                 } //EndSwitch
@@ -1363,12 +1384,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                 if (Status == HAL_OK)
                   Status = RoadBrd_Humidity_ReadHumidity_Scaled( &HMeasureScaled );
                 // Is this a BLE Operation?
-                if ( BLE_Flag )
-                {
-                  // Yes...Build and Send BLE Response NOW.
-                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                }
                 if (Status == HAL_OK)
                 {
                   // Send string to UART..
@@ -1404,6 +1419,12 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                 if (Status != HAL_OK)
                   return Status;
                 // Now calculate Celcius and Farenheit Temp.
+                if ( BLE_Flag )
+                {
+                  // Yes...Build and Send BLE Response NOW.
+                  sprintf( (char *)tempBffr2, "<STATUS>HUMIDITY:%s/%s</STATUS>", (char *)HMeasure.Humidity, (char *)HMeasureScaled.Humidity );
+                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                }
                 sprintf( (char *)tempBffr2, "     Humidity: %s/%s\r\n", (char *)HMeasure.Humidity, (char *)HMeasureScaled.Humidity );
               }
               else
@@ -1564,14 +1585,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
             case 'G':
               // Read Temperature sensor and return results....Temperature Sensor U10(PCT2075GVJ).  Addr: 0x94
               Status = RoadBrd_ReadTemp( &TMeasure );
-              // Is this a BLE Operation?
-              if ( BLE_Flag )
-              {
-                // Yes...Build and Send BLE Response NOW.
-                strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-              }
-              
               if (Status == HAL_OK)
                 Status = RoadBrd_ReadTemp_Scaled( &TMeasureScaled );
               if (Status == HAL_OK)
@@ -1608,6 +1621,18 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 #endif
               if (Status != HAL_OK)
                 return Status;
+              // Is this a BLE Operation?
+              if ( BLE_Flag )
+              {
+                // Yes...Build and Send BLE Response NOW.
+                sprintf( (char *)tempBffr2, "<STATUS>TEMPC:%s/%s//TEMPF:%s/%s</STATUS>", 
+                        (char *)TMeasure.TempC, 
+                        (char *)TMeasureScaled.TempC,
+                        (char *)TMeasure.TempF, 
+                        (char *)TMeasureScaled.TempF);
+                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+              }
+              
               // Now calculate Celcius and Farenheit Temp.
               sprintf( (char *)tempBffr2, "     TempC: %s/%s     TempF: %s/%s\r\n", 
                       (char *)TMeasure.TempC, 
@@ -1623,14 +1648,6 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 //------------------ H Command...Read RGB Values and Return as 3 (2 Byte Fields)....REDmsb,REDlsb,GREENmsb,GREENlsb,BLUEmsb,BLUElsb.....     
                 // 1. Time to send Command and collect status.
                 Status = RoadBrd_RGBReadValues( &RGBValues );
-                // Is this a BLE Operation?
-                if ( BLE_Flag )
-                {
-                  // Yes...Build and Send BLE Response NOW.
-                  strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
-                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
-                }
-                
                 if (Status == HAL_OK)
                 {
                   // Send string to UART..
@@ -1661,6 +1678,17 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 #endif
                   if (Status != HAL_OK)
                     return Status;
+                  // Is this a BLE Operation?
+                  if ( BLE_Flag )
+                  {
+                    // Yes...Build and Send BLE Response NOW.
+                    sprintf( (char *)tempBffr2, "<STATUS>RED:%s/GREEN:%s/BLUE:%s</STATUS>", 
+                            (char *)RGBValues.Red, 
+                            (char *)RGBValues.Green,
+                            (char *)RGBValues.Blue);
+                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                  }
+                  
                   // Now DisplayEach Value Calculated.
                   strcpy( (char *)tempBffr2, "    Red: ");
                   strcat( (char *)tempBffr2, (char *)RGBValues.Red );

@@ -2083,3 +2083,60 @@ Because some files were skipped, it is possible that the resulting code will not
 
 !ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-11-03 08:45:36.847
 !MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+!SESSION 2017-11-05 10:02:50.164 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-11-05 10:02:53.018
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:03:24.687
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:03:24.724
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:03:24.798
+!MESSAGE Unknown architecture(s) [EFR32MG13P832F512GM48+iar, EFR32MG13P932F512GM48+iar, EFR32MG13P932F512IM48+iar, EFR32MG13P832F512GM48+gcc, EFR32MG13P932F512GM48+gcc, EFR32MG13P932F512IM48+gcc] in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:03:24.802
+!MESSAGE Unknown board 'BRD4165A' in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:03:24.806
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-11-05 10:03:39.154
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2017-11-05 10:04:16.396
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:31.787
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:31.793
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:31.883
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Smart Phone App
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:32.021
+!MESSAGE No capability active_scan found for Sniffer
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:32.091
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - Thermometer
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:32.100
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app SOC - DTM
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:32.114
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar, efr32mg13p832f512im48+brd4165b+gcc] in sample app NCP target - Empty
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2017-11-05 10:04:32.127
+!MESSAGE Unknown architecture(s) [efr32mg13p832f512im48+brd4165b+iar] in sample app NCP target - Switched Multiprotocol Trust Center
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2017-11-05 10:05:02.595
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
