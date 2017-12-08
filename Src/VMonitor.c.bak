@@ -188,7 +188,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdShntVltg_Scaled( VoltagePtr VPtr )
   // Now calculate Shunt Voltage.
   Shunt_V = (i2cData[0]*256 + i2cData[1]) * SHNT_VLTG_TICK * MV_SCALE_ADJUST;
   Shunt_V = RoadBrd_CAL_ScaleValue( CAL_SHNT_VLTG, Shunt_V);
-  sprintf( (char *)VPtr->Voltage, "%02.3f", Shunt_V );
+  sprintf( (char *)VPtr->Voltage, "%2.3f", Shunt_V );
   return Status;
 }
 
@@ -261,7 +261,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdShntVltg( VoltagePtr VPtr )
     return Status;
   // Now calculate Shunt Voltage.
   Shunt_V = (i2cData[0]*256 + i2cData[1]) * SHNT_VLTG_TICK * MV_SCALE_ADJUST;
-  sprintf( (char *)VPtr->Voltage, "%02.3f", Shunt_V );
+  sprintf( (char *)VPtr->Voltage, "%2.3f", Shunt_V );
   return Status;
 }
 
@@ -335,7 +335,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdCurrent_Scaled( CurrentPtr CPtr )
   // Now calculate Current.
   Crrnt = (i2cData[0]*256 + i2cData[1]) * CURRENT_TICK * MA_SCALE_ADJUST;
   Crrnt = RoadBrd_CAL_ScaleValue( CAL_CURRENT, Crrnt);
-  sprintf( (char *)CPtr->Current, "%04.1f", Crrnt );
+  sprintf( (char *)CPtr->Current, "%4.1f", Crrnt );
   return Status;
 }
 
@@ -408,7 +408,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdCurrent( CurrentPtr CPtr )
     return Status;
   // Now calculate Current.
   Crrnt = (i2cData[0]*256 + i2cData[1]) * CURRENT_TICK * MA_SCALE_ADJUST;
-  sprintf( (char *)CPtr->Current, "%04.1f", Crrnt );
+  sprintf( (char *)CPtr->Current, "%4.1f", Crrnt );
   return Status;
 }
 
@@ -482,7 +482,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdPower_Scaled( PowerPtr PPtr )
   // Now calculate Power.
   Power = (i2cData[0]*256 + i2cData[1]) * POWER_TICK * POWER_ADJUST * MW_SCALE_ADJUST;
   Power = RoadBrd_CAL_ScaleValue( CAL_POWER, Power);
-  sprintf( (char *)PPtr->Power, "%04.1f", Power );
+  sprintf( (char *)PPtr->Power, "%4.1f", Power );
   return Status;
 }
 
@@ -555,7 +555,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdPower( PowerPtr PPtr )
     return Status;
   // Now calculate Power.
   Power = (i2cData[0]*256 + i2cData[1]) * POWER_TICK * POWER_ADJUST * MW_SCALE_ADJUST;
-  sprintf( (char *)PPtr->Power, "%04.1f", Power );
+  sprintf( (char *)PPtr->Power, "%4.1f", Power );
   return Status;
 }
 
@@ -631,7 +631,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdVoltage_Scaled( VoltagePtr VPtr )
   // Now calculate Bus Voltage.
   Bus_V = ((i2cData[0]*256 + i2cData[1])/4) * VOLT_TICK;
   Bus_V = RoadBrd_CAL_ScaleValue( CAL_VOLTAGE, Bus_V);
-  sprintf( (char *)VPtr->Voltage, "%04.1f", Bus_V );
+  sprintf( (char *)VPtr->Voltage, "%4.1f", Bus_V );
   return Status;
 }
 
@@ -706,7 +706,7 @@ HAL_StatusTypeDef RoadBrd_VMonitor_RdVoltage( VoltagePtr VPtr )
 
   // Now calculate Bus Voltage.
   Bus_V = ((i2cData[0]*256 + i2cData[1])/4) * VOLT_TICK;
-  sprintf( (char *)VPtr->Voltage, "%04.1f", Bus_V );
+  sprintf( (char *)VPtr->Voltage, "%4.1f", Bus_V );
   return Status;
 }
 

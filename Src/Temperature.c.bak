@@ -205,7 +205,7 @@ HAL_StatusTypeDef RoadBrd_ReadTemp( TempPtr TPtr )
       // No...Nothing to Do.
       nativeInt = smallInt;
     
-    Temp_C = nativeInt * 0.125;
+    Temp_C = (float)nativeInt * 0.125;
     tempC = (uint16_t)(round(Temp_C * 10));
     Temp_F = (Temp_C * 1.8) + 32;
     TPtr->RawC = tempC;

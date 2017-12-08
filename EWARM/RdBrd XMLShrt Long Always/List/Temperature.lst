@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       07/Dec/2017  20:12:28
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       07/Dec/2017  20:36:22
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -287,7 +287,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     120          
     121              TPtr->RawC = tempC;
    \   00000100   0x82E6             STRH     R6,[R4, #+22]
-    122              sprintf( (char *)TPtr->TempC, "%3.1f", Temp_C );
+    122              sprintf( (char *)TPtr->TempC, "%03.1f", Temp_C );
    \   00000102   0x0028             MOVS     R0,R5
    \   00000104   0x.... 0x....      BL       __aeabi_f2d
    \   00000108   0x0002             MOVS     R2,R0
@@ -295,7 +295,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000010C   0x....             LDR.N    R1,??DataTable1_5
    \   0000010E   0x0020             MOVS     R0,R4
    \   00000110   0x.... 0x....      BL       sprintf
-    123              sprintf( (char *)TPtr->TempF, "%3.1f", Temp_F );
+    123              sprintf( (char *)TPtr->TempF, "%03.1f", Temp_F );
    \   00000114   0x4648             MOV      R0,R9
    \   00000116   0x.... 0x....      BL       __aeabi_f2d
    \   0000011A   0x0002             MOVS     R2,R0
@@ -515,7 +515,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000E6   0x4682             MOV      R10,R0
     211              TPtr->RawC = tempC;
    \   000000E8   0x82E5             STRH     R5,[R4, #+22]
-    212              sprintf( (char *)TPtr->TempC, "%3.1f", Temp_C );
+    212              sprintf( (char *)TPtr->TempC, "%03.1f", Temp_C );
    \   000000EA   0x4640             MOV      R0,R8
    \   000000EC   0x.... 0x....      BL       __aeabi_f2d
    \   000000F0   0x0002             MOVS     R2,R0
@@ -523,7 +523,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000F4   0x....             LDR.N    R1,??DataTable1_5
    \   000000F6   0x0020             MOVS     R0,R4
    \   000000F8   0x.... 0x....      BL       sprintf
-    213              sprintf( (char *)TPtr->TempF, "%3.1f", Temp_F );
+    213              sprintf( (char *)TPtr->TempF, "%03.1f", Temp_F );
    \   000000FC   0x4650             MOV      R0,R10
    \   000000FE   0x.... 0x....      BL       __aeabi_f2d
    \   00000102   0x0002             MOVS     R2,R0
@@ -590,10 +590,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_0:
-   \   00000000   0x25 0x33          DC8 "%3.1f"
-   \              0x2E 0x31    
-   \              0x66 0x00    
-   \   00000006   0x00 0x00          DC8 0, 0
+   \   00000000   0x25 0x30          DC8 "%03.1f"
+   \              0x33 0x2E    
+   \              0x31 0x66    
+   \              0x00         
+   \   00000007   0x00               DC8 0
 
    \                                 In section .rodata, align 4
    \                     ?_1:

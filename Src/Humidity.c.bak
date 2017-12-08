@@ -298,7 +298,7 @@ HAL_StatusTypeDef RoadBrd_Humidity_ReadHumidity_Scaled( HumidtyPtr HPtr )
   
   // Now Build results.
   HPtr->HRawC = (uint16_t)(tmp);
-  sprintf( (char *)HPtr->Humidity, "%02.1f", (float)(tmp/10) );
+  sprintf( (char *)HPtr->Humidity, "%2.1f", (float)(tmp/10) );
   // NOW, Build Raw Data String..
   sprintf( (char *)HPtr->HRaw, "%02x", ((HPtr->HRawC & 0xff00)>>8));
   sprintf( (char *)tempBffr2, "%02x", (HPtr->HRawC & 0x00ff));
@@ -515,7 +515,7 @@ HAL_StatusTypeDef RoadBrd_Humidity_ReadHumidity( HumidtyPtr HPtr )
   
   // Now Build results.
   HPtr->HRawC = (uint16_t)(tmp);
-  sprintf( (char *)HPtr->Humidity, "%02.1f", (float)(tmp/10) );
+  sprintf( (char *)HPtr->Humidity, "%2.1f", (float)(tmp/10) );
   // NOW, Build Raw Data String..
   sprintf( (char *)HPtr->HRaw, "%02x", ((HPtr->HRawC & 0xff00)>>8));
   sprintf( (char *)tempBffr2, "%02x", (HPtr->HRawC & 0x00ff));

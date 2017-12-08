@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       07/Dec/2017  20:12:30
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       07/Dec/2017  20:36:23
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -419,7 +419,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000CC   0x2000             MOVS     R0,#+0
    \   000000CE   0x.... 0x....      BL       RoadBrd_CAL_ScaleValue
    \   000000D2   0x0005             MOVS     R5,R0
-    191            sprintf( (char *)VPtr->Voltage, "%2.3f", Shunt_V );
+    191            sprintf( (char *)VPtr->Voltage, "%02.3f", Shunt_V );
    \   000000D4   0x0028             MOVS     R0,R5
    \   000000D6   0x.... 0x....      BL       __aeabi_f2d
    \   000000DA   0x0002             MOVS     R2,R0
@@ -591,7 +591,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000C0   0x.... 0x....      BL       __aeabi_dmul
    \   000000C4   0x.... 0x....      BL       __aeabi_d2f
    \   000000C8   0x4680             MOV      R8,R0
-    264            sprintf( (char *)VPtr->Voltage, "%2.3f", Shunt_V );
+    264            sprintf( (char *)VPtr->Voltage, "%02.3f", Shunt_V );
    \   000000CA   0x4640             MOV      R0,R8
    \   000000CC   0x.... 0x....      BL       __aeabi_f2d
    \   000000D0   0x0002             MOVS     R2,R0
@@ -768,7 +768,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000CC   0x2001             MOVS     R0,#+1
    \   000000CE   0x.... 0x....      BL       RoadBrd_CAL_ScaleValue
    \   000000D2   0x0005             MOVS     R5,R0
-    338            sprintf( (char *)CPtr->Current, "%4.1f", Crrnt );
+    338            sprintf( (char *)CPtr->Current, "%04.1f", Crrnt );
    \   000000D4   0x0028             MOVS     R0,R5
    \   000000D6   0x.... 0x....      BL       __aeabi_f2d
    \   000000DA   0x0002             MOVS     R2,R0
@@ -940,7 +940,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000C0   0x.... 0x....      BL       __aeabi_dmul
    \   000000C4   0x.... 0x....      BL       __aeabi_d2f
    \   000000C8   0x4680             MOV      R8,R0
-    411            sprintf( (char *)CPtr->Current, "%4.1f", Crrnt );
+    411            sprintf( (char *)CPtr->Current, "%04.1f", Crrnt );
    \   000000CA   0x4640             MOV      R0,R8
    \   000000CC   0x.... 0x....      BL       __aeabi_f2d
    \   000000D0   0x0002             MOVS     R2,R0
@@ -1120,7 +1120,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000CA   0x2002             MOVS     R0,#+2
    \   000000CC   0x.... 0x....      BL       RoadBrd_CAL_ScaleValue
    \   000000D0   0x0005             MOVS     R5,R0
-    485            sprintf( (char *)PPtr->Power, "%4.1f", Power );
+    485            sprintf( (char *)PPtr->Power, "%04.1f", Power );
    \   000000D2   0x0028             MOVS     R0,R5
    \   000000D4   0x.... 0x....      BL       __aeabi_f2d
    \   000000D8   0x0002             MOVS     R2,R0
@@ -1295,7 +1295,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000BE   0x.... 0x....      BL       __aeabi_dmul
    \   000000C2   0x.... 0x....      BL       __aeabi_d2f
    \   000000C6   0x4680             MOV      R8,R0
-    558            sprintf( (char *)PPtr->Power, "%4.1f", Power );
+    558            sprintf( (char *)PPtr->Power, "%04.1f", Power );
    \   000000C8   0x4640             MOV      R0,R8
    \   000000CA   0x.... 0x....      BL       __aeabi_f2d
    \   000000CE   0x0002             MOVS     R2,R0
@@ -1476,7 +1476,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000C8   0x2003             MOVS     R0,#+3
    \   000000CA   0x.... 0x....      BL       RoadBrd_CAL_ScaleValue
    \   000000CE   0x0005             MOVS     R5,R0
-    634            sprintf( (char *)VPtr->Voltage, "%4.1f", Bus_V );
+    634            sprintf( (char *)VPtr->Voltage, "%04.1f", Bus_V );
    \   000000D0   0x0028             MOVS     R0,R5
    \   000000D2   0x.... 0x....      BL       __aeabi_f2d
    \   000000D6   0x0002             MOVS     R2,R0
@@ -1652,7 +1652,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000BC   0x.... 0x....      BL       __aeabi_dmul
    \   000000C0   0x.... 0x....      BL       __aeabi_d2f
    \   000000C4   0x4680             MOV      R8,R0
-    709            sprintf( (char *)VPtr->Voltage, "%4.1f", Bus_V );
+    709            sprintf( (char *)VPtr->Voltage, "%04.1f", Bus_V );
    \   000000C6   0x4640             MOV      R0,R8
    \   000000C8   0x.... 0x....      BL       __aeabi_f2d
    \   000000CC   0x0002             MOVS     R2,R0
@@ -1739,17 +1739,19 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_1:
-   \   00000000   0x25 0x32          DC8 "%2.3f"
-   \              0x2E 0x33    
-   \              0x66 0x00    
-   \   00000006   0x00 0x00          DC8 0, 0
+   \   00000000   0x25 0x30          DC8 "%02.3f"
+   \              0x32 0x2E    
+   \              0x33 0x66    
+   \              0x00         
+   \   00000007   0x00               DC8 0
 
    \                                 In section .rodata, align 4
    \                     ?_2:
-   \   00000000   0x25 0x34          DC8 "%4.1f"
-   \              0x2E 0x31    
-   \              0x66 0x00    
-   \   00000006   0x00 0x00          DC8 0, 0
+   \   00000000   0x25 0x30          DC8 "%04.1f"
+   \              0x34 0x2E    
+   \              0x31 0x66    
+   \              0x00         
+   \   00000007   0x00               DC8 0
 
    \                                 In section .rodata, align 4
    \   00000000   0x0D 0x0A          DC8 "\015\012"
