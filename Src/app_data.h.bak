@@ -21,7 +21,6 @@
 #define PROCESS_RD_SND_TIME     123      // Process all Road Sound every Second(123 * 100ms tick)...12.3 Seconds
 #define PROCESS_LEDOFF_TIME     1       // Process and turn off all active LEDs. Controls the Blink rate of the LEDs(1 * 50ms tick)
 #define FRM_REPEAT_CNT          5       // Repeat the full set of data at least this many times.
-#define RATIO_THRESHOLD         10      // Ratio of Road Sound Frames Verses Sensor Frames before Error Generated.
 
 #ifdef LONG_DELAY
 //  #define CONNECTION_CNT          180      // 15 Minutes.
@@ -85,10 +84,5 @@ bool TstDataReady( void );
 void ClrDataReady( void );
 void Clr_CMD_Md_Cnt( void );
 char *getTickString( void );
-void Clr_Frame_Ratio( void );
-bool TstRdSndReady( void );
-void SetRdSndReady( void );
-void ClrRdSndReady( void );
-void Process_CmdMode( void );
 
 #endif

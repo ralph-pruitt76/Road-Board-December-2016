@@ -396,10 +396,10 @@ bool BGM111_SyncModeTest(void)
     else
     {
       // Test to see if we have had a timing tick yet...
-      if ( TstDataReady() )
+      if ( TstRdSndReady() )
       {
         // Clear Flag for next Tick Event.
-        ClrDataReady();
+        ClrRdSndReady();
         // Increment Cnt and Report...
         ble.TackCnt++;
         sprintf( (char *)tempBffr2, "<TACK Strike:%d/%d>", ble.TackCnt, RoadBrd_Get_TackLimit() );
@@ -720,6 +720,7 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       ble.TackArmed = TACK_ARMED;
       ble.TackCnt = 0;
       Clr_CMD_Md_Cnt();
+      Clr_Frame_Ratio();
       RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed = TACK_ARMED>");
       ClrDataStructure();                           // Clear Backup data structure.
       ClrAnalyticsRepeat();                          // Clear Frame Repeat Count.

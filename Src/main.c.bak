@@ -1030,9 +1030,6 @@ int main(void)
           // Process any Outstanding Parse Tasks.
           RoadBrd_ProcessParserTsk();
           
-          // Test to process CMD mode.
-          Process_CmdMode();
-          
           /* Process the sensor state machine if the BLE module is ready */
             if ((BGM111_Ready()) &&
                 (BGM111_Connected()) &&
@@ -1040,7 +1037,6 @@ int main(void)
                 (BGM111_SyncModeTest()) )
           {
             ProcessSensorState();
-            Process_RdSound();
           }
           /* Sleep when we have nothing to process */
           //PWR_EnterSleepMode(PWR_Regulator_ON, PWR_SLEEPEntry_WFI);
@@ -1078,9 +1074,6 @@ int main(void)
             // Process any Outstanding Parse Tasks.
             RoadBrd_ProcessParserTsk();
             
-            // Test to process CMD mode.
-            Process_CmdMode();
-            
             /* Process the sensor state machine if the BLE module is ready */
             if ((BGM111_Ready()) &&
                 (BGM111_Connected()) &&
@@ -1090,7 +1083,6 @@ int main(void)
               // Service Watchdog
               RoadBrd_WWDG_Refresh();     // Refresh WatchDog
               ProcessSensorState();
-              Process_RdSound();
             }
             // Test to see if we have any BGM Traffic to process.
             //BGM111_ProcessInput();

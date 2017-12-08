@@ -15,10 +15,10 @@
 /* Definition for USARTx's NVIC */
 #define USARTx_IRQn        USART3_IRQn
 #define BRD_REV         "Rev M"               // PCB Revision          
-#define VERSION_NUM     "N.8.17"                 // Monitor Revision
-#define REL_DATE        "Nov 5, 2017"
+#define VERSION_NUM     "N.8.18"                 // Monitor Revision
+#define REL_DATE        "Nov 15, 2017"
 //#define LEGACY_BANNER   "Rev G+ REV C"        // OLD.....Needed to allow Legacy Design to work
-#define LEGACY_BANNER   "N.8.17 11/5/17"        // Needed to allow Legacy Design to work
+#define LEGACY_BANNER   "N.8.18 11/15/17"        // Needed to allow Legacy Design to work
 
 /* Prototypes */
 //int isHexNum(char *ptr);

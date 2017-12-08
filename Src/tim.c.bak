@@ -270,8 +270,7 @@ HAL_StatusTypeDef Proc_Timer2( void )
       RdSndTickCnt = RoadBrd_Get_RdSndTickCnt();
       // TBD...Processing code for Road Sound goes here.
       // This will be a tasks start here in the future. For now, Will execute the FFT here(Set Time window at least 300msec out of sync to 1 sec timer and at least 5 Seconds.
-      // Process_RdSound();  // This code is now deactivated to force tasking of Road Sound.
-      SetRdSndReady();
+      Process_RdSound();
       // This code checks to determine if we have an active connection.
       Test_Connection();
     }
