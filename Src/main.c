@@ -152,11 +152,30 @@ int main(void)
   HAL_NVIC_EnableIRQ(USART2_IRQn);
   HAL_NVIC_EnableIRQ(USART3_IRQn);
 
+  // Flush I2C Channel before testing...
+  RoadBrd_I2CRepair();
+  
   // Test I2C Channel and see if we even have a working I2C.
   RoadBrd_TestI2C();
   
-  // Test I2C Status and Task init I2C if Active driver.
-  if ( Get_DriverStates( I2C_STATE ) )
+  // Test for I2C Failure then attempt a repair.
+  if ( !(Get_DriverStates( I2C_STATE )) )
+  {
+    if ((RoadBrd_I2CRepair()) == HAL_OK)
+    {
+      RdBrd_ErrCdLogErrCd( REPAIR_I2C, MODULE_main );
+      Set_DriverStates( I2C_STATE, DRIVER_ON );
+      // Now..Initialize I2C and test Drivers.
+      MX_I2C1_Init();
+    }
+    else
+    {
+      // OK...It is hung.
+      Set_DriverStates( I2C_STATE, DRIVER_OFF );
+      RdBrd_ErrCdLogErrCd( ERROR_I2CBUSY, MODULE_main );
+    }
+  }
+  else
   {
     // Now..Initialize I2C and test Drivers.
     MX_I2C1_Init();
@@ -175,12 +194,25 @@ int main(void)
   // Test I2C State.
 
   // Test I2C Status and Task init I2C if Active driver.
-  if ( Get_DriverStates( I2C_STATE ) )
+  if ( !(Get_DriverStates( I2C_STATE )) )
   {
     // Wait 35  ms. For Busy flag to drop.
     if(I2C_WaitBusyFlag() != HAL_OK)
     {
-      RdBrd_ErrCdLogErrCd( ERROR_I2CBUSY, MODULE_main );
+      // One More try at repairing hung I2C Channel.
+      if ((RoadBrd_I2CRepair()) == HAL_OK)
+      {
+        Set_DriverStates( I2C_STATE, DRIVER_ON );
+        RdBrd_ErrCdLogErrCd( REPAIR_I2C, MODULE_main );
+        // Now..Initialize I2C and test Drivers.
+        MX_I2C1_Init();
+      }
+      else
+      {
+        // OK...It is hung.
+        Set_DriverStates( I2C_STATE, DRIVER_OFF );
+        RdBrd_ErrCdLogErrCd( ERROR_I2CBUSY, MODULE_main );
+      }
     }
   }
 

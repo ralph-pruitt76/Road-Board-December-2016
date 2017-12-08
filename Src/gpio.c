@@ -43,7 +43,8 @@ GPIO_TypeDef* RoadBrd_LED_PORT[RoadBrd_LEDn] = {LED2_GPIO_PORT,
                                                 VDD_PWR_GPIO_PORT,
                                                 RESET_BGM111_GPIO_PORT,
                                                 CHARGE_ON_GPIO_PORT,
-                                                HEAT_ON_GPIO_PORT};
+                                                HEAT_ON_GPIO_PORT,
+                                                GPIOB};
 
 const uint16_t RoadBrd_LED_PIN[RoadBrd_LEDn] = {LED2_PIN, 
                                                 BLUE_PIN, 
@@ -53,7 +54,8 @@ const uint16_t RoadBrd_LED_PIN[RoadBrd_LEDn] = {LED2_PIN,
                                                 VDD_PWR_PIN,
                                                 RESET_BGM111_PIN,
                                                 CHARGE_ON_PIN,
-                                                HEAT_ON_PIN};
+                                                HEAT_ON_PIN,
+                                                I2C_SCL_Pin};
 
 /* USER CODE END 0 */
 

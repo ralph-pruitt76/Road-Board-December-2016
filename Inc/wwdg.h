@@ -64,7 +64,7 @@ extern WWDG_HandleTypeDef hwwdg;
 #define FRAME_SIZE       10              // Will Save 10 Frames
 #define FRAME_CHKSUM     0x5a5a5a5a      // Code to determine if frame ha been Initialized
 #define BASE_FLASH_ADDRESS      0x08070000      // Base Address to place all key Flash Structures.
-#define BOOT_WAIT               15      // Default Wait time for Boot Sequence...15 Seconds.
+#define BOOT_WAIT               50      // Default Wait time for Boot Sequence...50 Seconds.
 #define DATE_STRING_LENGTH      30      // Length of Saved Date String.
 
 // Private Structure

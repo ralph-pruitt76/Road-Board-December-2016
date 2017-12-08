@@ -67,6 +67,7 @@ typedef enum
   ERROR_BGM_OVERFLOW    = 0x0011,               // BGM111 processing code has detected Serial Stream Overflow.
   ERROR_BGM_SYNCCNCT    = 0x0012,               // BGM111 processing code has detected a SYNC Connection Dropped Event.
   ERROR_CAL_INIT        = 0x0013,               // Could not Initialize Calibration Flash Structure.
+  REPAIR_I2C            = 0x0014,               // I2C Bus has been repaired.
 
   ERROR_MISC            = 0xffff,       	// End Of Error Code List
 }ErrorCodes;
@@ -77,6 +78,7 @@ typedef enum
   MODULE_main		= 0x0001,	// module: main.c
   MODULE_bgm111		= 0x0002,	// module: bgm111.c
   MODULE_i2c		= 0x0003,	// module: i2c.c
+  MODULE_AppData        = 0x0004,       // module: app_data.c
   MODULE_MISC           = 0xffff,	// End Of Device Code List
 }ModuleCodes;
 

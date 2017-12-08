@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       07/Dec/2017  20:36:22
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       08/Dec/2017  07:22:56
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -108,12 +108,12 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \                                 In section .data, align 4
      42          static uint32_t SnsrTickCnt = PROCESS_SNSR_TIME;
    \                     SnsrTickCnt:
-   \   00000000   0x00000064         DC32 100
+   \   00000000   0x00000005         DC32 5
 
    \                                 In section .data, align 4
      43          static uint32_t RdSndTickCnt = PROCESS_RD_SND_TIME;
    \                     RdSndTickCnt:
-   \   00000000   0x0000007B         DC32 123
+   \   00000000   0x00000005         DC32 5
 
    \                                 In section .data, align 4
      44          static uint32_t ledOffCnt = PROCESS_LEDOFF_TIME;

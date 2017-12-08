@@ -62,16 +62,18 @@ const char * const CodesArray[] = { "       ",                      // CODE 000:
                                     "BGMOVFL",                      // CODE 017: BGM111 processing code has detected Serial Stream Overflow.
                                     "BGMSCNC",                      // CODE 018: BGM111 processing code has detected a SYNC Connection Dropped Event.
                                     "CALINIT",                      // CODE 019: Could not Initialize Calibration Flash Structure.
-                                    "       ",                      // CODE 020: NULL...
+                                    "RPR_I2C",                      // CODE 020: I2C Bus has been repaired.
                                     "       ",                      // CODE 021: NULL...
-                                    "       " };                    // CODE 022: NULL...
+                                    "       ",                      // CODE 022: NULL...
+                                    "       " };                    // CODE 023: NULL...
 const char * const ModuleArray[] = { "       ",                     // CODE 000: NULL...NO Device Code
                                      "   main",                     // CODE 001: module: main.c
                                      " bgm111",                     // CODE 002: module: bgm111.c
                                      "    i2c",                     // CODE 003: module: i2c.c...
-                                     "       ",                     // CODE 004: module: NULL...
+                                     "AppData",                     // CODE 004: module: app_data.c
                                      "       ",                     // CODE 005: module: NULL...
-                                     "       " };                   // CODE 006: module: NULL...
+                                     "       ",                     // CODE 006: module: NULL...
+                                     "       " };                   // CODE 007: module: NULL...
     
 /* Error Code structure */
 struct
@@ -208,6 +210,22 @@ HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd 
   clrUsartState( MONITOR_UART );
 #else */
   Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+  // Only Generate BLEHD messages once BLEHD Channel active.
+  if ( BGM111_DataConnected())
+  {
+    // Generate BLEHD Status Message
+    sprintf( (char *)tempBffr2, "<STATUS>%s ERROR: %s</STATUS>",
+            ModuleArray[DeviceCd],
+            CodesArray[ErrorCd]);
+    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    if (Status != HAL_OK)
+      return Status;
+    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"\r\n\r\n");
+    if (Status != HAL_OK)
+      return Status;
+    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+  }
+
 //#endif
   
   return Status;

@@ -267,6 +267,7 @@ HAL_StatusTypeDef  ProcessSensorState(void)
 {
   HAL_StatusTypeDef Status;
   uint8_t tmpBuffer[40];
+  Temperature   Temp;
   
   Status = HAL_OK;
 
@@ -1032,6 +1033,107 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       {
         analytics.FrmRpt_Cnt++;
         ClrDataStructure();                           // Clear Backup data structure.
+        
+        // Test for failed I2C Bus and attempt to repair...If Drivers are ALL NULL....I2C has failed.
+        if ( (Get_DriverStatus() & 0x00FF) == 0x0000 )
+        {
+          if ((RoadBrd_I2CRepair()) == HAL_OK)
+          {
+            RdBrd_ErrCdLogErrCd( REPAIR_I2C, MODULE_AppData );
+            // Enable I2C_STATE.
+            Set_DriverStates( I2C_STATE, DRIVER_ON );
+            // Now Reinit I2C Bus.
+            MX_I2C1_Init();
+
+            // Re-Init All I2C Drivers again.
+            
+            Status = RoadBrd_RGBInit();
+            if (Status == HAL_OK)
+            {
+              Set_DriverStates( IRRADIANCE_MNTR_TASK, DRIVER_ON );
+            }
+            else
+            {
+              RdBrd_ErrCdLogErrCd( ERROR_RGB_INIT, MODULE_main );
+              Set_DriverStates( IRRADIANCE_MNTR_TASK, DRIVER_OFF );
+            }
+            
+            // Initialize Voltage Monitor Hardware
+            Status = RoadBrd_Init_VMonitor();
+            if (Status == HAL_OK)
+            {
+              Set_DriverStates( VOLTAGE_MNTR_TASK, DRIVER_ON );
+            }
+            else
+            {
+              RdBrd_ErrCdLogErrCd( ERROR_VMNTR_INIT, MODULE_main );
+              Set_DriverStates( VOLTAGE_MNTR_TASK, DRIVER_OFF );
+            }
+            
+            // Initialize Grid Eye Hardware
+            Status = RoadBrd_GridEyeInit();
+            if (Status == HAL_OK)
+            {
+              Set_DriverStates( GRIDEYE_MNTR_TASK, DRIVER_ON );
+            }
+            else
+            {
+              RdBrd_ErrCdLogErrCd( ERROR_GDEYE_INIT, MODULE_main );
+              Set_DriverStates( GRIDEYE_MNTR_TASK, DRIVER_OFF );
+              // OK, We have no Grid Eye...Do we have a Cool Eye?
+              Status = RoadBrd_CoolEyeInit();
+              if (Status == HAL_OK)
+              {
+                Set_DriverStates( COOLEYE_MNTR_TASK, DRIVER_ON );
+              }
+              else
+              {
+                RdBrd_ErrCdLogErrCd( ERROR_CLEYE_INIT, MODULE_main );
+                Set_DriverStates( COOLEYE_MNTR_TASK, DRIVER_OFF );
+              }
+            }
+            // Initialize Pressure Sensor Hardware
+            Status = RoadBrd_Init_Barometer();
+            if (Status == HAL_OK)
+            {
+              Set_DriverStates( PRESSURE_MNTR_TASK, DRIVER_ON );
+            }
+            else
+            {
+              RdBrd_ErrCdLogErrCd( ERROR_PRESSURE_INIT, MODULE_main );
+              Set_DriverStates( PRESSURE_MNTR_TASK, DRIVER_OFF );
+            }
+            
+            // Initialize Humidity Sensor Hardware
+            Status = RoadBrd_HumidityInit();
+            if (Status == HAL_OK)
+            {
+              Set_DriverStates( HUMIDITY_MNTR_TASK, DRIVER_ON );
+            }
+            else
+            {
+              RdBrd_ErrCdLogErrCd( ERROR_HUMIDITY_INIT, MODULE_main );
+              Set_DriverStates( HUMIDITY_MNTR_TASK, DRIVER_OFF );
+            }
+            
+            // Test Temperature Sensor Hardware
+            Status = RoadBrd_ReadTemp( &Temp );
+            if (Status == HAL_OK)
+            {
+              Set_DriverStates( TEMPERATURE_MNTR_TASK, DRIVER_ON );
+            }
+            else
+            {
+              RdBrd_ErrCdLogErrCd( ERROR_TEMP_INIT, MODULE_main );
+              Set_DriverStates( TEMPERATURE_MNTR_TASK, DRIVER_OFF );
+            }
+          } // EndIf ((SkyPack_I2CRepair()) == HAL_OK)
+          else
+          {
+            RdBrd_ErrCdLogErrCd( ERROR_I2CBUSY, MODULE_AppData );
+          } // EndElse ((SkyPack_I2CRepair()) == HAL_OK)
+        } // EndIf ( !(Get_DriverStates( I2C_STATE )) )
+        
       } //EndIf (analytics.FrmRpt_Cnt < FRM_REPEAT_CNT)
       // Reset Count
       data.task_item = VOLTAGE_MNTR_TASK;

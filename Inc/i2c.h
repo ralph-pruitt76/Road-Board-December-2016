@@ -60,6 +60,8 @@ extern I2C_HandleTypeDef hi2c1;
 #define NULL_SIZE                         0
 //#define I2C_MAX_TRIES                     100
 #define I2C_MAX_TRIES                     1
+#define I2C_CLKRPRCNT           20                          // Pulse Count for I2C Chennel.
+#define I2C_LOOPCNT             5                           // Number of attempts to try to fix stuck I2C Channel.
 
 /* Exported macro ------------------------------------------------------------*/
 #define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
@@ -85,6 +87,7 @@ void RoadBrd_Delay( __IO uint32_t Delay );
 uint32_t RoadBrd_I2C_GetError( void );
 HAL_StatusTypeDef I2C_WaitBusyFlag(void);
 HAL_StatusTypeDef RoadBrd_TestI2C( void );
+HAL_StatusTypeDef RoadBrd_I2CRepair( void );
 
 /* USER CODE END Prototypes */
 

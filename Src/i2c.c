@@ -42,6 +42,7 @@
 #include "stm32l1xx_hal.h"
 #include "ErrorCodes.h"
 #include "app_data.h"
+#include "usart.h"
 
 #define I2C_TIMEOUT_FLAG          ((uint32_t)35)      /* 35 ms */
 
@@ -531,6 +532,84 @@ static HAL_StatusTypeDef RdBrdI2C_WaitOnFlagUntilTimeout(I2C_HandleTypeDef *hi2c
     }
   }
   return HAL_OK;
+}
+
+
+/**
+  * @brief  Attempts to Clear I2C channel Data Pin by pulsing SDA Line 9 times.
+  * @param None.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to I2C success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  */
+HAL_StatusTypeDef RoadBrd_I2CRepair( void )
+{
+  GPIO_InitTypeDef GPIO_InitStructure;
+  HAL_StatusTypeDef Status;
+  int x, loop_cnt;
+  char tempBffr2[8];
+  
+  Status = HAL_OK;
+
+  GPIO_InitStructure.Pin = I2C_SDA_Pin;
+  GPIO_InitStructure.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStructure.Pull = GPIO_NOPULL;
+  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_MEDIUM;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+  // Wait for Hardware to stabilize....10ms
+  RoadBrd_Delay( 10 );
+  
+  GPIO_InitStructure.Pin = I2C_SCL_Pin;
+  GPIO_InitStructure.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStructure.Pull = GPIO_NOPULL;
+  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_MEDIUM;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+  // Wait for Hardware to stabilize....100ms
+  RoadBrd_Delay( 100 );
+  for (loop_cnt=0; loop_cnt<I2C_LOOPCNT; loop_cnt++)
+  {
+    // Print Loop Count
+    sprintf( (char *)tempBffr2, "**%02d.", loop_cnt);
+    RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    RoadBrd_WWDG_Refresh();     // Refresh WatchDog
+    
+    // Now...Pulse SDA Pin I2C_CLKRPRCNT Times.
+    for (x=0; x<I2C_CLKRPRCNT; x++)
+    {
+      RoadBrd_gpio_Off( gI2C_CLK );
+      RoadBrd_Delay( 10 );               // Wait 10ms;
+      RoadBrd_gpio_On(gI2C_CLK);   // Set Clock High.
+      RoadBrd_Delay( 10 );               // Wait 10ms;
+    } // EndFor (x=0; x<I2C_CLKRPRCNT; x++)
+    
+    // Finally Reset Clock LOW.
+    RoadBrd_gpio_Off(gI2C_CLK);  // Set Clock Low.
+    
+    // Wait for Hardware to stabilize....100ms
+    RoadBrd_Delay( 100 );
+    
+    // Test Data Pin State.
+    if ( HAL_GPIO_ReadPin( GPIOB, I2C_SDA_Pin) == GPIO_PIN_RESET)
+    {
+      Status = HAL_ERROR;
+    }
+    else
+    {
+      // If High, Then we have been succesful. Time to Indicate Repaired and Init I2C BUS.
+      //SkPck_ErrCdLogErrCd( REPAIR_I2C, MODULE_i2c );
+      // Enable all I2C Sensors.
+      //Set_DriverStates( I2C_STATE, DRIVER_ON );
+      //Set_DriverStates( IMU_STATE_TASK, DRIVER_ON );
+      //Set_DriverStates( IRRADIANCE_MNTR_TASK, DRIVER_ON );
+      //Set_DriverStates( PRESSURE_MNTR_TASK, DRIVER_ON );
+      // Now Reinit I2C Bus.
+      //I2C_LowLevel_Init();
+      return HAL_OK;
+    }
+    RoadBrd_Delay( 100 );
+  } // EndFor (loop_cnt=0; loop_cnt<I2C_LOOPCNT; loop_cnt++)
+  return Status;
 }
 
 /**
