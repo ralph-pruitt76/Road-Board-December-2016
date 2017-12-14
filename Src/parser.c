@@ -156,11 +156,14 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
     uint16_t DriverStatus;
     int8_t tempBffr2[120];
     int8_t tempBffr3[10];
+    int8_t s_cmd[5];
+    int8_t s_recrd[80];
     int8_t* BufferPntr;
     HAL_StatusTypeDef Status, Save_Status;
     uint8_t Size;
     int Address;
     int num_bytes;
+    int Numbr_Rcrds;
     int num_bytes_received;
     uint8_t i2cData[80];
     int Error, x, y;
@@ -4218,6 +4221,29 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     }
                     break;
 
+//++++++++++++++++++++++++++++++++++++++++++  S-Record Test Monitor.
+                  case 'S':
+                    // S-Record Test Monitor.
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                      HAL_Delay(100);           // Wait 100ms
+                    }
+                    // Parse Data and extract S-Record.
+                    Numbr_Rcrds = sscanf (tempBffr, "%s %s", s_cmd, s_recrd);
+//                    if (sscanf (tempBffr, "%s %s", s_cmd, s_recrd) == 2)
+                    if (Numbr_Rcrds == 2)
+                    {
+                      sprintf( (char *)tempBffr2, "TS: %s\r\n", s_recrd );
+                    }
+                    else
+                    {
+                      strcpy( (char *)tempBffr2, "TS SYNTAX ERROR: Too many parameters.\r\n");
+                    }
+                    break;
 //**************************************************************************************************
                   default:
                     // Is this a BLE Operation?

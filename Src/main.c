@@ -89,7 +89,7 @@ int main(void)
     #define RECEIVE_SZ      5
   #else
 //HERE
-    #define RECEIVE_SZ      30
+    #define RECEIVE_SZ      85
     uint8_t tempBffr[RECEIVE_SZ];
     uint8_t tempBffr2[80];
     HAL_StatusTypeDef Status;

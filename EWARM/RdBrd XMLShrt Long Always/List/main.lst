@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       08/Dec/2017  07:36:57
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       13/Dec/2017  13:16:34
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -139,7 +139,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      80          {
    \                     main: (+1)
    \   00000000   0xE92D 0x41F0      PUSH     {R4-R8,LR}
-   \   00000004   0xB0A4             SUB      SP,SP,#+144
+   \   00000004   0xB0B2             SUB      SP,SP,#+200
      81            /* USER CODE BEGIN 1 */
      82          #ifdef TEST2
      83            #define RECEIVE_SZ      5
@@ -151,7 +151,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      89              #define RECEIVE_SZ      5
      90            #else
      91          //HERE
-     92              #define RECEIVE_SZ      30
+     92              #define RECEIVE_SZ      85
      93              uint8_t tempBffr[RECEIVE_SZ];
      94              uint8_t tempBffr2[80];
      95              HAL_StatusTypeDef Status;
@@ -160,7 +160,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      98          
      99          #ifdef REV_L
     100            uint16_t tmpSize = RECEIVE_SZ;
-   \   00000006   0x251E             MOVS     R5,#+30
+   \   00000006   0x2555             MOVS     R5,#+85
     101            uint8_t tmpData[2];
     102          //  uint8_t tmpData[RECEIVE_SZ];
     103            Temperature   Temp;
@@ -169,7 +169,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000008   0x2601             MOVS     R6,#+1
     106          #endif
     107            uint8_t *pData = tempBffr;
-   \   0000000A   0xAF15             ADD      R7,SP,#+84
+   \   0000000A   0xAF1B             ADD      R7,SP,#+108
     108          #endif
     109          
     110          //ITStatus PStatus;
@@ -556,7 +556,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     301              // Test Temperature Sensor Hardware
     302              Status = RoadBrd_ReadTemp( &Temp );
    \                     ??main_16: (+1)
-   \   000001F0   0xA81D             ADD      R0,SP,#+116
+   \   000001F0   0xA815             ADD      R0,SP,#+84
    \   000001F2   0x.... 0x....      BL       RoadBrd_ReadTemp
    \   000001F6   0x0004             MOVS     R4,R0
     303              if (Status == HAL_OK)
@@ -1796,7 +1796,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1152            #endif
    1153                            Status = RoadBrd_ParseString((char *)tempBffr, false);
    \   000005B6   0x2100             MOVS     R1,#+0
-   \   000005B8   0xA815             ADD      R0,SP,#+84
+   \   000005B8   0xA81B             ADD      R0,SP,#+108
    \   000005BA   0x.... 0x....      BL       RoadBrd_ParseString
    \   000005BE   0x0004             MOVS     R4,R0
    1154                            // We have a good Tasking String. Time to determine action.
@@ -1814,10 +1814,10 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000005CC   0x.... 0x....      BL       Error_Handler
    1160                          tmpSize = RECEIVE_SZ;
    \                     ??main_56: (+1)
-   \   000005D0   0x201E             MOVS     R0,#+30
+   \   000005D0   0x2055             MOVS     R0,#+85
    \   000005D2   0x0005             MOVS     R5,R0
    1161                          pData = tempBffr;
-   \   000005D4   0xA815             ADD      R0,SP,#+84
+   \   000005D4   0xA81B             ADD      R0,SP,#+108
    \   000005D6   0x0007             MOVS     R7,R0
    \   000005D8   0xE04C             B.N      ??main_57
    1162                        } // EndIf (Tst_Bypass())
@@ -1885,7 +1885,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1187            #endif
    1188                              Status = RoadBrd_ParseString((char *)tempBffr, false);
    \   0000062C   0x2100             MOVS     R1,#+0
-   \   0000062E   0xA815             ADD      R0,SP,#+84
+   \   0000062E   0xA81B             ADD      R0,SP,#+108
    \   00000630   0x.... 0x....      BL       RoadBrd_ParseString
    \   00000634   0x0004             MOVS     R4,R0
    1189                              // We have a good Tasking String. Time to determine action.
@@ -1903,10 +1903,10 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000642   0x.... 0x....      BL       Error_Handler
    1195                            tmpSize = RECEIVE_SZ;
    \                     ??main_63: (+1)
-   \   00000646   0x201E             MOVS     R0,#+30
+   \   00000646   0x2055             MOVS     R0,#+85
    \   00000648   0x0005             MOVS     R5,R0
    1196                            pData = tempBffr;
-   \   0000064A   0xA815             ADD      R0,SP,#+84
+   \   0000064A   0xA81B             ADD      R0,SP,#+108
    \   0000064C   0x0007             MOVS     R7,R0
    \   0000064E   0xE011             B.N      ??main_57
    1197                          } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
@@ -1920,7 +1920,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    1201                            // YES...Are there any chars to undo?
    1202                            if (tmpSize < RECEIVE_SZ)
    \   00000658   0xB2AD             UXTH     R5,R5            ;; ZeroExt  R5,R5,#+16,#+16
-   \   0000065A   0x2D1E             CMP      R5,#+30
+   \   0000065A   0x2D55             CMP      R5,#+85
    \   0000065C   0xDA0A             BGE.N    ??main_57
    1203                            {
    1204                              // YES...Undo Previous Character.
@@ -2334,11 +2334,10 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_2:
-   \   00000000   0x4E 0x2E          DC8 "N.8.19"
-   \              0x38 0x2E    
-   \              0x31 0x39    
-   \              0x00         
-   \   00000007   0x00               DC8 0
+   \   00000000   0x4E 0x2E          DC8 "N.9.0"
+   \              0x39 0x2E    
+   \              0x30 0x00    
+   \   00000006   0x00 0x00          DC8 0, 0
 
    \                                 In section .rodata, align 4
    \                     ?_3:
@@ -2373,12 +2372,15 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .rodata, align 4
    \                     ?_5:
-   \   00000000   0x44 0x65          DC8 "Dec 8, 2017"
+   \   00000000   0x44 0x65          DC8 "Dec 13, 2017"
    \              0x63 0x20    
-   \              0x38 0x2C    
-   \              0x20 0x32    
-   \              0x30 0x31    
-   \              0x37 0x00    
+   \              0x31 0x33    
+   \              0x2C 0x20    
+   \              0x32 0x30    
+   \              0x31 0x37    
+   \              0x00         
+   \   0000000D   0x00 0x00          DC8 0, 0, 0
+   \              0x00         
 
    \                                 In section .rodata, align 4
    \                     ?_6:
@@ -2582,81 +2584,81 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
         80   -> HAL_RCC_OscConfig
         80   -> HAL_SYSTICK_CLKSourceConfig
         80   -> HAL_SYSTICK_Config
-     168   main
-       168   -> ADC_Config
-       168   -> BGM111_Connected
-       168   -> BGM111_DataConnected
-       168   -> BGM111_Init
-       168   -> BGM111_ProcessInput
-       168   -> BGM111_Ready
-       168   -> BGM111_SyncModeTest
-       168   -> Error_Handler
-       168   -> Get_DriverStates
-       168   -> HAL_Init
-       168   -> HAL_NVIC_EnableIRQ
-       168   -> HAL_TIM_StartTimer2
-       168   -> HAL_TIM_StartTimer3
-       168   -> HAL_UART_EnableBGM_RX
-       168   -> I2C_WaitBusyFlag
-       168   -> InitSensors
-       168   -> MX_ADC_Init
-       168   -> MX_DMA_Init
-       168   -> MX_GPIO_Init
-       168   -> MX_I2C1_Init
-       168   -> MX_TIM2_Init
-       168   -> MX_TIM3_Init
-       168   -> MX_USART2_UART_Init
-       168   -> MX_USART3_UART_Init
-       168   -> MX_WWDG_Init
-       168   -> Proc_Timer2
-       168   -> ProcessSensorState
-       168   -> Process_CmdMode
-       168   -> Process_RdSound
-       168   -> RdBrd_ErrCdLogErrCd
-       168   -> Reset_DriverStates
-       168   -> RoadBrd_CAL_InitializeFrmFlash
-       168   -> RoadBrd_CAL_VerifyFrame
-       168   -> RoadBrd_CoolEyeInit
-       168   -> RoadBrd_Delay
-       168   -> RoadBrd_Get_BootDelay
-       168   -> RoadBrd_Get_RdSndTickCnt
-       168   -> RoadBrd_Get_SnsrTickCnt
-       168   -> RoadBrd_Get_TackLimit
-       168   -> RoadBrd_Get_UnitsFlag
-       168   -> RoadBrd_GridEyeInit
-       168   -> RoadBrd_HumidityInit
-       168   -> RoadBrd_I2CRepair
-       168   -> RoadBrd_Init_Barometer
-       168   -> RoadBrd_Init_VMonitor
-       168   -> RoadBrd_ParseString
-       168   -> RoadBrd_ParserInit
-       168   -> RoadBrd_ProcessParserTsk
-       168   -> RoadBrd_RGBInit
-       168   -> RoadBrd_ReadTemp
-       168   -> RoadBrd_SetBffrFlg
-       168   -> RoadBrd_TestI2C
-       168   -> RoadBrd_UART_Receive_IT
-       168   -> RoadBrd_UART_Transmit
-       168   -> RoadBrd_UART_Transmit_IT
-       168   -> RoadBrd_Uart_Status
-       168   -> RoadBrd_WWDG_InitializeDateString
-       168   -> RoadBrd_WWDG_InitializeFrmFlash
-       168   -> RoadBrd_WWDG_InitializeTickString
-       168   -> RoadBrd_WWDG_Refresh
-       168   -> RoadBrd_WWDG_Start
-       168   -> RoadBrd_WWDG_VerifyFrame
-       168   -> RoadBrd_gpio_Off
-       168   -> RoadBrd_gpio_On
-       168   -> Set_DriverStates
-       168   -> Set_TickCounts
-       168   -> SystemClock_Config
-       168   -> Tst_Bypass
-       168   -> __aeabi_f2d
-       168   -> __aeabi_fdiv
-       168   -> __aeabi_ui2f
-       168   -> clrUsartState
-       168   -> sprintf
-       168   -> strcpy
+     224   main
+       224   -> ADC_Config
+       224   -> BGM111_Connected
+       224   -> BGM111_DataConnected
+       224   -> BGM111_Init
+       224   -> BGM111_ProcessInput
+       224   -> BGM111_Ready
+       224   -> BGM111_SyncModeTest
+       224   -> Error_Handler
+       224   -> Get_DriverStates
+       224   -> HAL_Init
+       224   -> HAL_NVIC_EnableIRQ
+       224   -> HAL_TIM_StartTimer2
+       224   -> HAL_TIM_StartTimer3
+       224   -> HAL_UART_EnableBGM_RX
+       224   -> I2C_WaitBusyFlag
+       224   -> InitSensors
+       224   -> MX_ADC_Init
+       224   -> MX_DMA_Init
+       224   -> MX_GPIO_Init
+       224   -> MX_I2C1_Init
+       224   -> MX_TIM2_Init
+       224   -> MX_TIM3_Init
+       224   -> MX_USART2_UART_Init
+       224   -> MX_USART3_UART_Init
+       224   -> MX_WWDG_Init
+       224   -> Proc_Timer2
+       224   -> ProcessSensorState
+       224   -> Process_CmdMode
+       224   -> Process_RdSound
+       224   -> RdBrd_ErrCdLogErrCd
+       224   -> Reset_DriverStates
+       224   -> RoadBrd_CAL_InitializeFrmFlash
+       224   -> RoadBrd_CAL_VerifyFrame
+       224   -> RoadBrd_CoolEyeInit
+       224   -> RoadBrd_Delay
+       224   -> RoadBrd_Get_BootDelay
+       224   -> RoadBrd_Get_RdSndTickCnt
+       224   -> RoadBrd_Get_SnsrTickCnt
+       224   -> RoadBrd_Get_TackLimit
+       224   -> RoadBrd_Get_UnitsFlag
+       224   -> RoadBrd_GridEyeInit
+       224   -> RoadBrd_HumidityInit
+       224   -> RoadBrd_I2CRepair
+       224   -> RoadBrd_Init_Barometer
+       224   -> RoadBrd_Init_VMonitor
+       224   -> RoadBrd_ParseString
+       224   -> RoadBrd_ParserInit
+       224   -> RoadBrd_ProcessParserTsk
+       224   -> RoadBrd_RGBInit
+       224   -> RoadBrd_ReadTemp
+       224   -> RoadBrd_SetBffrFlg
+       224   -> RoadBrd_TestI2C
+       224   -> RoadBrd_UART_Receive_IT
+       224   -> RoadBrd_UART_Transmit
+       224   -> RoadBrd_UART_Transmit_IT
+       224   -> RoadBrd_Uart_Status
+       224   -> RoadBrd_WWDG_InitializeDateString
+       224   -> RoadBrd_WWDG_InitializeFrmFlash
+       224   -> RoadBrd_WWDG_InitializeTickString
+       224   -> RoadBrd_WWDG_Refresh
+       224   -> RoadBrd_WWDG_Start
+       224   -> RoadBrd_WWDG_VerifyFrame
+       224   -> RoadBrd_gpio_Off
+       224   -> RoadBrd_gpio_On
+       224   -> Set_DriverStates
+       224   -> Set_TickCounts
+       224   -> SystemClock_Config
+       224   -> Tst_Bypass
+       224   -> __aeabi_f2d
+       224   -> __aeabi_fdiv
+       224   -> __aeabi_ui2f
+       224   -> clrUsartState
+       224   -> sprintf
+       224   -> strcpy
 
 
    Section sizes:
@@ -2689,7 +2691,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        8  ?_2
        8  ?_3
       40  ?_4
-      12  ?_5
+      16  ?_5
       40  ?_6
       40  ?_7
       20  ?_8
@@ -2699,11 +2701,11 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     1678  main
 
  
-   444 bytes in section .rodata
+   448 bytes in section .rodata
  1 962 bytes in section .text
  
  1 962 bytes of CODE  memory
-   444 bytes of CONST memory
+   448 bytes of CONST memory
 
 Errors: none
 Warnings: none
