@@ -89,7 +89,7 @@ int main(void)
     #define RECEIVE_SZ      5
   #else
 //HERE
-    #define RECEIVE_SZ      85
+    #define RECEIVE_SZ      125
     uint8_t tempBffr[RECEIVE_SZ];
     uint8_t tempBffr2[80];
     HAL_StatusTypeDef Status;
@@ -97,14 +97,14 @@ int main(void)
 #endif
 
 #ifdef REV_L
-  uint16_t tmpSize = RECEIVE_SZ;
-  uint8_t tmpData[2];
+  //N uint16_t tmpSize = RECEIVE_SZ;
+  //N uint8_t tmpData[2];
 //  uint8_t tmpData[RECEIVE_SZ];
   Temperature   Temp;
 #ifndef PATCH_UART
   bool firstTime = true;
 #endif
-  uint8_t *pData = tempBffr;
+  //N uint8_t *pData = tempBffr;
 #endif
 
 //ITStatus PStatus;
@@ -834,7 +834,7 @@ int main(void)
         pData = tempBffr;
         while ( tmpSize>0 )
         {
-          Status = RoadBrd_UART_Receive_IT(NUCLEO_USART, tmpData, 1);
+          Status = RoadBrd_UART_Receive_IT(NUCLEO_USART, tempBffr, RECEIVE_SZ);
           // Wait for msg to be completed.
           while (RoadBrd_Uart_Status(NUCLEO_USART) != SET)
           {
@@ -927,7 +927,7 @@ int main(void)
         pData = tempBffr;
         while ( tmpSize>0 )
         {
-          Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
+          Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tempBffr, RECEIVE_SZ);
           // Wait for msg to be completed.
           while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
           {
@@ -1080,7 +1080,7 @@ int main(void)
           if (firstTime)
           {
             firstTime = false;
-            Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
+            Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tempBffr, RECEIVE_SZ);
             // Enable BGM Serial Traffic.
             HAL_UART_EnableBGM_RX();
             RoadBrd_SetBffrFlg();
@@ -1134,11 +1134,30 @@ int main(void)
             clrUsartState( MONITOR_UART );
             if(Status == HAL_OK)
             {
+//***** START HERE
               // Test Bypass Flag...If Set, we ae in special monitor mode.
               if (Tst_Bypass())
               {
-                pData[0] = tmpData[0];
-                pData[1] = 0x00;
+                // We have a good Tasking String. Time to determine action.
+                // Turn On BGM_LED LED.
+  #ifndef LED_OFF
+                RoadBrd_gpio_On( GREEN_LED );
+  #endif
+                Status = RoadBrd_ParseString((char *)tempBffr, false);
+                // We have a good Tasking String. Time to determine action.
+                if (Status != HAL_OK)
+                  Error_Handler();
+              } // EndIf (Tst_Bypass())
+              else {
+                // Yes..We are done.
+                // Process Buffer NOW.
+                // Send <CR><LF> to UART..
+                strcpy( (char *)tempBffr2, "\r\n");
+                Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
+                // Wait for msg to be completed.
+                while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
+                {
+                }
                 // Clear State for Next Transfer.
                 clrUsartState( MONITOR_UART );
                 if (Status != HAL_OK)
@@ -1157,66 +1176,12 @@ int main(void)
                 }
                 else
                   Error_Handler();
-                tmpSize = RECEIVE_SZ;
-                pData = tempBffr;
-              } // EndIf (Tst_Bypass())
-              else {
-                // Watch for termination characters.
-                if((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
-                {
-                  *pData = 0x00;
-                  // Yes..We are done.
-                  // Process Buffer NOW.
-                  // Send <CR><LF> to UART..
-                  strcpy( (char *)tempBffr2, "\r\n");
-                  Status = RoadBrd_UART_Transmit_IT(MONITOR_UART, (uint8_t *)tempBffr2);
-                  // Wait for msg to be completed.
-                  while (RoadBrd_Uart_Status(MONITOR_UART) != SET)
-                  {
-                  }
-                  // Clear State for Next Transfer.
-                  clrUsartState( MONITOR_UART );
-                  if (Status != HAL_OK)
-                    Error_Handler();
-                  if(Status == HAL_OK)
-                  {
-                    // We have a good Tasking String. Time to determine action.
-                    // Turn On BGM_LED LED.
-  #ifndef LED_OFF
-                    RoadBrd_gpio_On( GREEN_LED );
-  #endif
-                    Status = RoadBrd_ParseString((char *)tempBffr, false);
-                    // We have a good Tasking String. Time to determine action.
-                    if (Status != HAL_OK)
-                      Error_Handler();
-                  }
-                  else
-                    Error_Handler();
-                  tmpSize = RECEIVE_SZ;
-                  pData = tempBffr;
-                } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
-                // Is this a BackSpace Character?
-                else if(tmpData[0]==0x08)
-                {
-                  // YES...Are there any chars to undo?
-                  if (tmpSize < RECEIVE_SZ)
-                  {
-                    // YES...Undo Previous Character.
-                    tmpSize++;                          // Decrement Count
-                    pData--;                            // Move pointer to Previous buffer location.
-                  } //endif (tmpSize < RECEIVE_SZ)
-                } //endif (tmpData[0]==0x08)
-                else
-                {
-                  *pData = tmpData[0];
-                  tmpSize--;                          // Decrement Count
-                  pData++;                            // Move pointer to next buffer location.
-                }
               } // EndElse (Tst_Bypass())
             }
+//***** END HERE
             else
               Error_Handler();
-          Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tmpData, 1);
+          Status = RoadBrd_UART_Receive_IT(MONITOR_UART, tempBffr, RECEIVE_SZ);
           // Turn Off MICRO_LED.
           RoadBrd_gpio_Off( MICRO_LED );
         } // EndIf (RoadBrd_Uart_Status(MONITOR_UART) == SET)

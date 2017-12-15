@@ -35,6 +35,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
 #include <string.h>
+#include "parser.h"
 
 #include "gpio.h"
 
@@ -48,6 +49,11 @@ uint8_t aRxBuffer[RXBUFFERSIZE];
 __IO ITStatus Uart2Ready = RESET;
 __IO ITStatus Uart3Ready = RESET;
 
+static uint8_t          *save_Ptr;
+static uint16_t         Save_Size;
+static uint16_t         tmpSize;
+static uint8_t          *tmpPdata;
+static uint8_t          tmpData[2];
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart2;
@@ -533,6 +539,23 @@ HAL_StatusTypeDef RoadBrd_UART_Receive_IT(RoadBrd_uart_TypeDef Port, uint8_t *pD
       return HAL_BUSY;
     else
     {
+      // Initialize all Key Vars from Passes Parameters
+      save_Ptr = pData;
+      Save_Size = Size;
+      tmpSize = Save_Size;
+      tmpPdata = save_Ptr;
+      
+      // Task Usart for First Transfer.
+      Status = HAL_UART_Receive_IT(&huart2, (uint8_t*)tmpData, 1);
+      if(Status != HAL_OK)
+      {
+        return Status;
+      }
+      else
+      {
+         return Status;
+      }
+      /* OLD............................................
       Status = HAL_UART_Receive_IT(&huart2, (uint8_t*)pData, Size);
       if(Status != HAL_OK)
       {
@@ -542,6 +565,7 @@ HAL_StatusTypeDef RoadBrd_UART_Receive_IT(RoadBrd_uart_TypeDef Port, uint8_t *pD
       {
          return Status;
       }
+      */
     }
   }
   else if (Port == USART_3)
@@ -551,6 +575,23 @@ HAL_StatusTypeDef RoadBrd_UART_Receive_IT(RoadBrd_uart_TypeDef Port, uint8_t *pD
       return HAL_BUSY;
     else
     {
+      // Initialize all Key Vars from Passes Parameters
+      save_Ptr = pData;
+      Save_Size = Size;
+      tmpSize = Save_Size;
+      tmpPdata = save_Ptr;
+      
+      // Task Usart for First Transfer.
+      Status = HAL_UART_Receive_IT(&huart3, (uint8_t*)tmpData, 1);
+      if(Status != HAL_OK)
+      {
+        return Status;
+      }
+      else
+      {
+         return Status;
+      }
+      /* OLD............................................
       Status = HAL_UART_Receive_IT(&huart3, (uint8_t*)pData, Size);
       if(Status != HAL_OK)
       {
@@ -560,6 +601,7 @@ HAL_StatusTypeDef RoadBrd_UART_Receive_IT(RoadBrd_uart_TypeDef Port, uint8_t *pD
       {
          return Status;
       }
+    */
     }
   }
   else 
@@ -757,8 +799,48 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* uartHandle)
   /* Set transmission flag: trasfer complete for correct USART*/
    if(uartHandle->Instance==USART2)
   {
-    Uart2Ready = SET;
+//***** START HERE
+    // Test Bypass Flag...If Set, we ae in special monitor mode.
+    if (Tst_Bypass())
+    {
+      tmpPdata[0] = tmpData[0];
+      tmpPdata[1] = 0x00;
+      // Set Complete Flag.
+      Uart2Ready = SET;        
+    } // EndIf (Tst_Bypass())
+    else {
+      // Watch for termination characters.
+      if((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+      {
+        *tmpPdata = 0x00;
+        // Yes..We are done.
+        // Set Complete Flag.
+        Uart2Ready = SET;        
+      } // EndIf ((tmpData[0]==0x0a) || (tmpData[0]==0x0d) || (tmpSize<=0) )
+      // Is this a BackSpace Character?
+      else if(tmpData[0]==0x08)
+      {
+        // YES...Are there any chars to undo?
+        if (tmpSize < Save_Size)
+        {
+          // YES...Undo Previous Character.
+          tmpSize++;                          // Decrement Count
+          tmpPdata--;                            // Move pointer to Previous buffer location.
+          //Time to retask for next Character.
+          HAL_UART_Receive_IT(&huart2, (uint8_t*)tmpData, 1);
+        } //endif (tmpSize < RECEIVE_SZ)
+      } //endif (tmpData[0]==0x08)
+      else
+      {
+        *tmpPdata = tmpData[0];
+        tmpSize--;                          // Decrement Count
+        tmpPdata++;                            // Move pointer to next buffer location.
+        //Time to retask for next Character.
+        HAL_UART_Receive_IT(&huart2, (uint8_t*)tmpData, 1);
+      }
+    } // EndElse (Tst_Bypass())
   }
+//***** END HERE
   else if(uartHandle->Instance==USART3)
   {
 #ifndef TEST2

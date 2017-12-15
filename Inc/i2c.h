@@ -54,7 +54,7 @@ extern I2C_HandleTypeDef hi2c1;
 #define FIVE_SECOND_DELAY       1000            // 1000 5msec ticks.
 
 /* Size of Transmission buffer */
-#define TXBUFFERSIZE                      120
+#define TXBUFFERSIZE                      130
 /* Size of Reception buffer */
 #define RXBUFFERSIZE                      TXBUFFERSIZE
 #define NULL_SIZE                         0

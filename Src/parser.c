@@ -157,7 +157,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
     int8_t tempBffr2[120];
     int8_t tempBffr3[10];
     int8_t s_cmd[5];
-    int8_t s_recrd[80];
+    int8_t s_recrd[120];
     int8_t* BufferPntr;
     HAL_StatusTypeDef Status, Save_Status;
     uint8_t Size;
@@ -191,6 +191,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 #endif
 
     Size = strlen((char *)tempBffr);
+    Status = HAL_OK;
     
     // Test Bypass. If set, then we are in streaming mode.
     if ( Bypass )
