@@ -40,6 +40,7 @@
 #include <stdlib.h>
 #include "wwdg.h"
 #include "Calibration.h"
+#include "s_record.h"
 
 // Enums
 typedef enum 
@@ -176,6 +177,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
     RGBIdent IDMeasure;
     RGBStatus RGBSMeasure;
     RGBLight RGBValues;
+    SrecElement Srec_Elem;
     char uuid[10];
     float Scale, Offset;
 //    PRStatus PRMeasure;
@@ -4239,11 +4241,138 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if (Numbr_Rcrds == 2)
                     {
                       sprintf( (char *)tempBffr2, "TS: %s\r\n", s_recrd );
-                    }
+#ifdef NUCLEO
+                      Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                      if (Status != HAL_OK)
+                        return Status;
+                      // Pass to S-Record Parser..
+                      Status = Parse_srecord( (char *)s_recrd, &Srec_Elem );
+                      if (Status != HAL_OK)
+                      {
+                        // Report Failed Parse Operation
+                        switch(Srec_Elem.Srec_Err)
+                        {
+                          case NO_ERROR:
+                            sprintf( (char *)tempBffr2, "NO ERROR FOUND.\r\n" );
+                            break;
+                          case ILLEGAL_SREC:
+                            sprintf( (char *)tempBffr2, "ERROR: ILLEGAL S-Record.\r\n" );
+                            break;
+                          case ILLEGAL_RECORD:
+                            sprintf( (char *)tempBffr2, "ERROR: ILLEGAL Record.\r\n" );
+                            break;
+                          case RESERVED_RECORD:
+                            sprintf( (char *)tempBffr2, "ERROR: Reserved S-Record Type.\r\n" );
+                            break;
+                          case ILLEGAL_BYTE_CNT:
+                            sprintf( (char *)tempBffr2, "ERROR: Illegal Byte Count.\r\n" );
+                            break;
+                          case ILLEGAL_BYTE_DATA:
+                            sprintf( (char *)tempBffr2, "ERROR: Reserved S-Record Type.\r\n" );
+                            break;
+                          case BAD_CHECKSUM:
+                            sprintf( (char *)tempBffr2, "ERROR: Illegal Byte Data.\r\n" );
+                            break;
+                          default:
+                            sprintf( (char *)tempBffr2, "ERROR: Checksum did not match data.\r\n" );
+                            break;
+                        } // EndSwitch (Srec_Elem.Srec_Err)
+                      } // EndIf (Status != HAL_OK)..Parse_srecord
+                      else
+                      {
+                        // Display Type of S-Record
+                        switch(Srec_Elem.RecordType)
+                        {
+                          case S0_HEADER:
+                            sprintf( (char *)tempBffr2, "Record Type: S0_HEADER: Vendor specific ASCII text.\r\n" );
+                            break;
+                          case S1_DATA:
+                            sprintf( (char *)tempBffr2, "Record Type: S1_DATA: Data that starts at the 16-bit address field.\r\n" );
+                            break;
+                          case S2_DATA:
+                            sprintf( (char *)tempBffr2, "Record Type: S2_DATA: Data that starts at the 24-bit address field.\r\n" );
+                            break;
+                          case S3_DATA:
+                            sprintf( (char *)tempBffr2, "Record Type: S3_DATA: Data that starts at the 32-bit address field.\r\n" );
+                            break;
+                          case S4_RESERVED:
+                            sprintf( (char *)tempBffr2, "Record Type: S4_RESERVED\r\n" );
+                            break;
+                          case S5_COUNT:
+                            sprintf( (char *)tempBffr2, "Record Type: S5_COUNT: 16-bit count of S1 / S2 / S3 records.\r\n" );
+                            break;
+                          case S6_COUNT:
+                            sprintf( (char *)tempBffr2, "Record Type: S6_COUNT: 24-bit count of S1 / S2 / S3 records.\r\n" );
+                            break;
+                          case S7_START:
+                            sprintf( (char *)tempBffr2, "Record Type: S7_START: Starting execution location at a 32-bit address.\r\n" );
+                            break;
+                          case S8_START:
+                            sprintf( (char *)tempBffr2, "Record Type: S8_START: Starting execution location at a 24-bit address.\r\n" );
+                            break;
+                          case S9_START:
+                            sprintf( (char *)tempBffr2, "Record Type: S9_START: Starting execution location at a 16-bit address.\r\n" );
+                            break;
+                          default:
+                            sprintf( (char *)tempBffr2, "Record Type: UNKNOWN.\r\n" );
+                            break;
+                        } // EndSwitch (Srec_Elem.RecordType)
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                          return Status;
+                        // Display Byte Count Field.
+                        sprintf( (char *)tempBffr2, "Byte Count: %08x\r\n", Srec_Elem.ByteCount );
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        if (Status != HAL_OK)
+                          return Status;
+                        // Display Address Field.
+                        sprintf( (char *)tempBffr2, "Address: %08x\r\n", Srec_Elem.Address );
+#ifdef NUCLEO
+                        Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                        Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                        // Dump Buffer of S-Record.
+                        y=0;
+                        sprintf( (char *)tempBffr2, "" );
+                        for (x=0; x<BYTE_BFFR_SIZE; x++)
+                        {
+                          sprintf( (char *)tempBffr3, "%02x ", Srec_Elem.Data[x]);
+                          strcat( (char *)tempBffr2, (char *)tempBffr3 );
+                          y++;
+                          if (y>=16)
+                          {
+                            strcat( (char *)tempBffr2, "\r\n" );
+                            y=0;
+ #ifdef NUCLEO
+                            Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                            Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                            if (Status != HAL_OK)
+                              return Status;
+                            sprintf( (char *)tempBffr2, "" );
+                          }
+                        }
+                        // Finally Display Checksum.
+                        sprintf( (char *)tempBffr2, "Checksum: %02x\r\n", Srec_Elem.Checksum );
+                      }// EndElse (Status != HAL_OK)..Parse_srecord
+                    } // EndIf (Numbr_Rcrds == 2)
                     else
                     {
                       strcpy( (char *)tempBffr2, "TS SYNTAX ERROR: Too many parameters.\r\n");
-                    }
+                    } // EndElse (Numbr_Rcrds == 2)
                     break;
 //**************************************************************************************************
                   default:

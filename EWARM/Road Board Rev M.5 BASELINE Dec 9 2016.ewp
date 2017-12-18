@@ -13724,6 +13724,9 @@
         </excluded>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Src\s_record.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Src\stm32l1xx_hal_msp.c</name>
       </file>
       <file>

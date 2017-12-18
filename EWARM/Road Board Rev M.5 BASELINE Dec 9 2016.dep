@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>1433598771</fileChecksum>
+  <fileChecksum>3919381262</fileChecksum>
   <configuration>
     <name>Nucleo Board</name>
     <outputs/>
@@ -430,6 +430,11 @@
       <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
       <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\List\GridEye.lst</file>
       <file>$PROJ_DIR$\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_rcc_ex.h</file>
+      <file>$PROJ_DIR$\..\Src\s_record.h</file>
+      <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\List\s_record.lst</file>
+      <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\Obj\s_record.o</file>
+      <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\Obj\s_record.pbi</file>
+      <file>$PROJ_DIR$\..\Src\s_record.c</file>
     </outputs>
     <file>
       <name>[ROOT_NODE]</name>
@@ -455,7 +460,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 127 389 112 384 228 203 229 113 158 170 97 83 298 21 194 240 268 373 192 167 193 82 86 117 78 91 262 36 41 55 142 18 242 146 77 73 376 126 109 273 204 93 157 119 236 396 293 45 153 32 9 256 8 394 39 379 162 279 111 183 132 260 165 149 43 286 259 173 134 85 25 239 53 145</file>
+          <file> 127 389 112 384 228 203 229 113 158 170 97 83 298 21 194 240 268 373 192 167 193 82 86 117 78 91 262 36 41 402 55 142 18 242 146 77 73 376 126 109 273 204 93 157 119 236 396 293 45 153 32 9 256 8 394 39 379 162 279 111 183 132 260 165 149 43 286 259 173 134 85 25 239 53 145</file>
         </tool>
       </inputs>
     </file>
@@ -1035,11 +1040,7 @@
       <inputs>
         <tool>
           <name>ICCARM</name>
-          <file> 182 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 377 303 391 252 47 168 95 63 218 11 17 138 71 184 287 191 49 72 269 216 20 27 175 295 87 234 223 251 15 190 263 284 96 60 265 154</file>
-        </tool>
-        <tool>
-          <name>BICOMP</name>
-          <file> 303 257 70 166 144 181 391 184 280 125 51 15 265 17 102 301 101 208 62 37 397 219 138 234 47 191 269 255 34 66 186 22 105 195 386 81 104 289 275 147 182 216 175 263 96 87 190 154 377 11 287 49 72 171 399 14 185 215 169 237 61 155 206 23 3 69 266 71 251 60 282 179 252 20 27 295 95 223 284</file>
+          <file> 182 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 377 303 391 252 47 168 95 63 218 11 17 138 71 184 287 191 49 72 269 216 20 27 175 295 87 234 223 251 15 190 263 284 96 60 265 154 400</file>
         </tool>
       </inputs>
     </file>
@@ -1082,6 +1083,10 @@
         <tool>
           <name>ICCARM</name>
           <file> 168 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 144 257 171 255 166 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 95 391 252 177 224 163 94 58 187 74 47 63 218 11 377 87 303 265 150 182 17 138 71 184 287 191 49 72 269 216 20 27 175 295</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 295 184 206 144 216 265 14 61 166 303 397 47 215 181 289 182 177 87 95 169 237 155 171 399 219 179 252 17 138 391 11 150 195 386 81 62 104 51 37 185 275 147 282 163 74 94 187 377 186 191 269 71 168 257 255 280 34 102 66 70 301 22 125 105 101 208 23 3 69 266 224 58 287 49 72 20 27 175</file>
         </tool>
       </inputs>
     </file>
@@ -2017,6 +2022,25 @@
         <tool>
           <name>BICOMP</name>
           <file> 397 289 181 302 61 276 30 104 118 37 244 133 46 62 51 155 169 171 272 190 94 44 267 281</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Src\s_record.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 401 402</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 403</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 400 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 95 47 168 63 218 11 377 303 391 252</file>
         </tool>
       </inputs>
     </file>
@@ -4072,6 +4096,10 @@
         </tool>
       </inputs>
     </file>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
   </configuration>
   <configuration>
     <name>Road Brd MSTR Rev L PATCH</name>
