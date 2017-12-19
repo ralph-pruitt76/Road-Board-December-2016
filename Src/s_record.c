@@ -101,6 +101,11 @@ HAL_StatusTypeDef Parse_srecord( char *tempBffr, SrecElmentPtr SrecPtr )
     case '0':
       // S0: Header: vendor specific ASCII text represented as a series of hex digit pairs
       SrecPtr->RecordType = S0_HEADER;
+      // Now Get Address Field...
+      SrecPtr->Address = (uint32_t)(ByteBffr[1]<<8) + ByteBffr[2];
+      // Populate Data Field
+      for (x=3; x<SrecPtr->ByteCount; x++)
+        SrecPtr->Data[x-3] = ByteBffr[x];
       break;
     case '1':
       // S1: Data: data that starts at the 16-bit address field.

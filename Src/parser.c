@@ -4343,26 +4343,39 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
 #else
                         Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
 #endif
-                        // Dump Buffer of S-Record.
-                        y=0;
-                        sprintf( (char *)tempBffr2, "" );
-                        for (x=0; x<BYTE_BFFR_SIZE; x++)
+                        // If S-Record Type is type 0 then display Buffer as String terminated by nulls.
+                        if (Srec_Elem.RecordType == S0_HEADER)
                         {
-                          sprintf( (char *)tempBffr3, "%02x ", Srec_Elem.Data[x]);
-                          strcat( (char *)tempBffr2, (char *)tempBffr3 );
-                          y++;
-                          if (y>=16)
-                          {
-                            strcat( (char *)tempBffr2, "\r\n" );
-                            y=0;
- #ifdef NUCLEO
-                            Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+                          sprintf( (char *)tempBffr2, "Header: %s\r\n", (char *)Srec_Elem.Data);
+#ifdef NUCLEO
+                          Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
 #else
-                            Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+                          Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
 #endif
-                            if (Status != HAL_OK)
-                              return Status;
-                            sprintf( (char *)tempBffr2, "" );
+                        }
+                        else
+                        {
+                          // Dump Buffer of S-Record.
+                          y=0;
+                          sprintf( (char *)tempBffr2, "" );
+                          for (x=0; x<BYTE_BFFR_SIZE; x++)
+                          {
+                            sprintf( (char *)tempBffr3, "%02x ", Srec_Elem.Data[x]);
+                            strcat( (char *)tempBffr2, (char *)tempBffr3 );
+                            y++;
+                            if (y>=16)
+                            {
+                              strcat( (char *)tempBffr2, "\r\n" );
+                              y=0;
+#ifdef NUCLEO
+                              Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                              Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                              if (Status != HAL_OK)
+                                return Status;
+                              sprintf( (char *)tempBffr2, "" );
+                            }
                           }
                         }
                         // Finally Display Checksum.
