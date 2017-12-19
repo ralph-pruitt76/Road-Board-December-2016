@@ -41,6 +41,7 @@
 #include "wwdg.h"
 #include "Calibration.h"
 #include "s_record.h"
+#include "BootMonitor.h"
 
 // Enums
 typedef enum 
@@ -4222,6 +4223,29 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                       {
                       }
                     }
+                    break;
+
+//++++++++++++++++++++++++++++++++++++++++++  Special Monitor Mode to intercept traffic from UART and pass to BGM111
+                  case 'B':
+                    // Is this a BLE Operation?
+                    if ( BLE_Flag )
+                    {
+                      // Yes...Build and Send BLE Response NOW.
+                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                    }
+                    
+                    strcpy( (char *)tempBffr2, "Boot Loader MONITOR MODE.\r\n\r\n");
+#ifdef NUCLEO
+                    Status = RoadBrd_UART_Transmit(NUCLEO_USART, (uint8_t *)tempBffr2);                   
+#else
+                    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);                   
+#endif
+                    if (Status != HAL_OK)
+                      return Status;
+                    strcpy( (char *)tempBffr2, "Use <ESC> followed by <CR> to exit mode.\r\n\r\n");
+                    // Set Bypass Flag
+                    Set_Boot_Bypass();
                     break;
 
 //++++++++++++++++++++++++++++++++++++++++++  S-Record Test Monitor.

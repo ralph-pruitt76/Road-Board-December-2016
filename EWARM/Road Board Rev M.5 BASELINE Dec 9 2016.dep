@@ -2,7 +2,7 @@
 
 <project>
   <fileVersion>2</fileVersion>
-  <fileChecksum>3919381262</fileChecksum>
+  <fileChecksum>309065044</fileChecksum>
   <configuration>
     <name>Nucleo Board</name>
     <outputs/>
@@ -430,11 +430,16 @@
       <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
       <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\List\GridEye.lst</file>
       <file>$PROJ_DIR$\..\Drivers\STM32L1xx_HAL_Driver\Inc\stm32l1xx_hal_rcc_ex.h</file>
+      <file>$PROJ_DIR$\..\Src\BootMonitor.h</file>
       <file>$PROJ_DIR$\..\Src\s_record.h</file>
+      <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\List\BootMonitor.lst</file>
       <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\List\s_record.lst</file>
       <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\Obj\s_record.o</file>
       <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\Obj\s_record.pbi</file>
       <file>$PROJ_DIR$\..\Src\s_record.c</file>
+      <file>$PROJ_DIR$\..\Src\BootMonitor.c</file>
+      <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\Obj\BootMonitor.pbi</file>
+      <file>$PROJ_DIR$\RdBrd XMLShrt Long Always\Obj\BootMonitor.o</file>
     </outputs>
     <file>
       <name>[ROOT_NODE]</name>
@@ -460,7 +465,7 @@
       <inputs>
         <tool>
           <name>ILINK</name>
-          <file> 127 389 112 384 228 203 229 113 158 170 97 83 298 21 194 240 268 373 192 167 193 82 86 117 78 91 262 36 41 402 55 142 18 242 146 77 73 376 126 109 273 204 93 157 119 236 396 293 45 153 32 9 256 8 394 39 379 162 279 111 183 132 260 165 149 43 286 259 173 134 85 25 239 53 145</file>
+          <file> 127 389 112 384 228 409 203 229 113 158 170 97 83 298 21 194 240 268 373 192 167 193 82 86 117 78 91 262 36 41 404 55 142 18 242 146 77 73 376 126 109 273 204 93 157 119 236 396 293 45 153 32 9 256 8 394 39 379 162 279 111 183 132 260 165 149 43 286 259 173 134 85 25 239 53 145</file>
         </tool>
       </inputs>
     </file>
@@ -714,7 +719,7 @@
       <inputs>
         <tool>
           <name>ICCARM</name>
-          <file> 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 202 94 30 44 276 267 281 118 272 133 244 302 246 299 46 216 377 65 303 150 95 63 168 218 11 47 28 290 131 190 391 252 265 29 154 27 175 295 182 17 138 71 184 287 191 49 72 269 20 87</file>
+          <file> 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 202 94 30 44 276 267 281 118 272 133 244 302 246 299 46 216 377 65 303 150 95 63 168 218 11 47 28 290 131 190 391 252 265 29 154 27 175 295 182 17 138 71 184 287 191 49 72 269 20 400 87</file>
         </tool>
       </inputs>
     </file>
@@ -1028,7 +1033,7 @@
       <inputs>
         <tool>
           <name>ICCARM</name>
-          <file> 182 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 377 303 391 252 47 168 95 63 218 11 17 138 71 184 287 191 49 72 269 216 20 27 175 295 87 234 223 251 15 190 263 284 96 60 265 154 400</file>
+          <file> 182 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 377 303 391 252 47 168 95 63 218 11 17 138 71 184 287 191 49 72 269 216 20 27 175 295 87 234 223 251 15 190 263 284 96 60 265 154 401 400</file>
         </tool>
       </inputs>
     </file>
@@ -2018,17 +2023,36 @@
       <outputs>
         <tool>
           <name>ICCARM</name>
-          <file> 401 402</file>
+          <file> 403 404</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 403</file>
+          <file> 405</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>ICCARM</name>
-          <file> 400 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 95 47 168 63 218 11 377 303 391 252</file>
+          <file> 401 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 95 47 168 63 218 11 377 303 391 252</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\Src\BootMonitor.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 402 409</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 408</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 400 144 257 171 255 166 14 195 215 169 181 397 62 61 155 104 51 81 206 37 237 386 208 185 289 23 399 280 219 34 275 102 66 3 70 147 69 186 301 266 22 282 125 105 101 179 377 303 391 252 47 168 95 63 218 11 184 182 17 138 71 287 191 49 72 269 216 20 27 175 295 87 234 223 251 15 190 263 284 96 60 265 154 401</file>
         </tool>
       </inputs>
     </file>

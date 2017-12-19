@@ -51,6 +51,7 @@
 #include "gpio.h"
 #include "main.h"
 #include "parser.h"
+#include "BootMonitor.h"
 #include "stdbool.h"
 #include "ErrorCodes.h"
     
@@ -1135,8 +1136,21 @@ int main(void)
             if(Status == HAL_OK)
             {
 //***** START HERE
+              // Test Boot Monitor Flag...If Set, we ae in special Boot monitor mode.
+              if (Tst_Boot_Bypass())
+              {
+                // We have a good Tasking String. Time to determine action.
+                // Turn On BGM_LED LED.
+  #ifndef LED_OFF
+                RoadBrd_gpio_On( GREEN_LED );
+  #endif
+                Status = Parse_BootString((char *)tempBffr, false);
+                // We have a good Tasking String. Time to determine action.
+                if (Status != HAL_OK)
+                  Error_Handler();
+              } // EndIf (Tst_Bypass())
               // Test Bypass Flag...If Set, we ae in special monitor mode.
-              if (Tst_Bypass())
+              else if (Tst_Bypass())
               {
                 // We have a good Tasking String. Time to determine action.
                 // Turn On BGM_LED LED.
