@@ -114,7 +114,18 @@ HAL_StatusTypeDef RoadBrd_ProcessParserTsk( void )
   // Test ParseFlg and process.
   if (ParseString.ParseFlg == BUSY)
   {
-    Status = RoadBrd_ParseString(ParseString.tempBuffer, true);
+    // Next We need to see if OTA Parser is active...
+    // Test Boot Monitor Flag...If Set, we ae in special Boot monitor mode.
+    if (Tst_Boot_Bypass())
+    {
+      // Yes...Task to Boot Monitor.
+      Status = Parse_BootString(ParseString.tempBuffer, true);
+    }
+    else
+    {
+      // Else...Normal Monitor Tasking.
+      Status = RoadBrd_ParseString(ParseString.tempBuffer, true);
+    }
     ParseString.ParseFlg = AVAILABLE;
     return Status;
   }
@@ -4231,7 +4242,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                     if ( BLE_Flag )
                     {
                       // Yes...Build and Send BLE Response NOW.
-                      strcpy( (char *)tempBffr2, "<STATUS>CMD_NOSUPPORT</STATUS>");
+                      strcpy( (char *)tempBffr2, "<STATUS>ST_OTAMD_ACK</STATUS>");
                       BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                     }
                     

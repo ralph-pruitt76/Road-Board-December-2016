@@ -122,7 +122,8 @@ HAL_StatusTypeDef Parse_BootString(char *tempBffr, bool BLE_Flag)
   Status = HAL_OK;
   
     // Test esc. If set, then exit mode.
-    if (tempBffr[0] == 0x1B)
+    if ((tempBffr[0] == 0x1B) ||
+        (tempBffr[0] == 'X'))
     {
       Boot_Bypass = false;
       strcpy( (char *)tempBffr2, "\r\n\r\n T........TERMINATING BOOT-MONITOR MODE.........\r\n\r\n> ");
