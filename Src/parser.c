@@ -60,16 +60,53 @@ struct
   ParseTskFlg   ParseFlg;
 } static ParseString;
 
+// BGM Structure for tasks.
+struct
+{
+  char          tempBuffer[BUFFER_SIZE];
+  ParseTskFlg   ParseFlg;
+} static BGMString;
+
 /* Parser functions */
 
 /**
-  * @brief  This routine initializes the Parse Task Structure.
+  * @brief  This routine initializes the Parse Task Structure and the BGM Task Structure.
   * @param  *tempBffr: String to be parsed.
   * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
   */
 HAL_StatusTypeDef RoadBrd_ParserInit( void )
 {
   ParseString.ParseFlg = AVAILABLE;
+  BGMString.ParseFlg = AVAILABLE;
+  return HAL_OK;
+}
+
+/**
+  * @brief  This routine handles the operation of setting up a BGM Event.
+  * @param  *tempBffr: String to be parsed.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     UART is busy.
+  *                                HAL_TIMEOUT:  UART timed out.
+  */
+HAL_StatusTypeDef RoadBrd_BGMTsk(char *tempBffr)
+{
+  int x;
+  
+  // Test ParseFlg.
+  if (BGMString.ParseFlg == BUSY)
+    return HAL_BUSY;
+  else if (BGMString.ParseFlg == NOT_INIT)
+    return HAL_ERROR;
+  // Next Lets make sure passed string is not too big.
+  if (strlen(tempBffr) >= BUFFER_SIZE)
+    return HAL_ERROR;
+  // Clear Buffer before copying new string.
+  for (x=0; x<BUFFER_SIZE; x++)
+    BGMString.tempBuffer[x] = 0x00;
+  // Copy String into Structure and set as busy.
+  strcpy( BGMString.tempBuffer, tempBffr);
+  BGMString.ParseFlg = BUSY;
   return HAL_OK;
 }
 
@@ -83,17 +120,20 @@ HAL_StatusTypeDef RoadBrd_ParserInit( void )
   */
 HAL_StatusTypeDef RoadBrd_ParserTsk(char *tempBffr)
 {
+  int x;
+  
   // Test ParseFlg.
   if (ParseString.ParseFlg == BUSY)
     return HAL_BUSY;
   else if (ParseString.ParseFlg == NOT_INIT)
     return HAL_ERROR;
   // Next Lets make sure passed string is not too big.
-//  if (strlen((char *)tempBffr) >= BUFFER_SIZE)
   if (strlen(tempBffr) >= BUFFER_SIZE)
     return HAL_ERROR;
+  // Clear Buffer before copying new string.
+  for (x=0; x<BUFFER_SIZE; x++)
+    ParseString.tempBuffer[x] = 0x00;
   // Copy String into Structure and set as busy.
-//  strcpy( (char *)ParseString.tempBuffer, (char *)tempBffr);
   strcpy( ParseString.tempBuffer, tempBffr);
   ParseString.ParseFlg = BUSY;
   return HAL_OK;
@@ -110,7 +150,20 @@ HAL_StatusTypeDef RoadBrd_ParserTsk(char *tempBffr)
 HAL_StatusTypeDef RoadBrd_ProcessParserTsk( void )
 {
   HAL_StatusTypeDef Status;
+  uint8_t tempBffr2[80];
 
+  // Test BGMString ParseFlg and process.
+  if (BGMString.ParseFlg == BUSY)
+  {
+    sprintf( (char *)tempBffr2, "<SENT:%s>\r\n\r\n", BGMString.tempBuffer);
+
+    Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    if (Status != HAL_OK)
+      return Status;
+    BGM111_Transmit((uint32_t)(strlen(BGMString.tempBuffer)), (uint8_t *)BGMString.tempBuffer);
+    BGMString.ParseFlg = AVAILABLE;
+  }
+  
   // Test ParseFlg and process.
   if (ParseString.ParseFlg == BUSY)
   {

@@ -58,11 +58,12 @@
 /* Defines */
 #define I2C_TIMEOUT     500            // Set as 500msec
 #define SCALE_DELAY     10             // Scale Delay.
-#define BUFFER_SIZE     40             // Maximum Buffer Size
+#define BUFFER_SIZE     80             // Maximum Buffer Size
 
 /* Prototypes */
 HAL_StatusTypeDef RoadBrd_ParserInit( void );
 HAL_StatusTypeDef RoadBrd_ParserTsk(char *tempBffr);
+HAL_StatusTypeDef RoadBrd_BGMTsk(char *tempBffr);
 HAL_StatusTypeDef RoadBrd_ProcessParserTsk( void );
 HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag);
 bool Tst_Bypass( void);

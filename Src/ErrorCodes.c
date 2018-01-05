@@ -37,6 +37,7 @@
 #include "usart.h"
 #include "gpio.h"
 #include "i2c.h"
+#include "parser.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -217,6 +218,8 @@ HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd 
     sprintf( (char *)tempBffr2, "<STATUS>%s ERROR: %s</STATUS>",
             ModuleArray[DeviceCd],
             CodesArray[ErrorCd]);
+    // Task String to BGM Task to syncronously send error.
+    RoadBrd_BGMTsk((char *)tempBffr2);
     Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
     if (Status != HAL_OK)
       return Status;

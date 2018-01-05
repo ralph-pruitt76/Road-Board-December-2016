@@ -444,6 +444,8 @@ HAL_StatusTypeDef  ProcessSensorState(void)
         //                                 strlen((char *)data.Voltage.Voltage), (uint8_t *)data.Voltage.Voltage);
       }
 #endif
+      // Test Code to generate an event for Testing Tasked Error Msgs...Uncomment to Test..
+      //RdBrd_ErrCdLogErrCd( REPAIR_I2C, MODULE_AppData );
       //..Temperature
       if(strcmp( (char *)TmpData.Temp.Raw, (char *)data.Temp.Raw) != 0 )
       {
