@@ -226,7 +226,6 @@ HAL_StatusTypeDef RdBrd_ErrCdLogErrCd( ErrorCodes ErrorCd, ModuleCodes DeviceCd 
     Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"\r\n\r\n");
     if (Status != HAL_OK)
       return Status;
-    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
   }
 
 //#endif
