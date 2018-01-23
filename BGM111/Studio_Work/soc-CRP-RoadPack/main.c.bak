@@ -309,8 +309,6 @@ void BGM_Send(char *test_string)
 			sprintf( tempBffr2, "<|WR_OVL|>");
 			//Send Msg back to Micro.
 			UART_Send2( tempBffr2 );
-			// Terminate with ? to allow Buffer to process.
-			UART_Send2( "?" );
 			// Place Msg into Write Buffer.
 			sprintf( tx_Buffr.string, tempBffr2);
 			tx_Buffr.tx_wr = NextBufIdxIncr(tx_Buffr.tx_wr, strlen(tempBffr2));
@@ -455,8 +453,6 @@ int main(void)
 						sprintf( tempBffr2, "<|RFG:%02d|WFG:%02d|>", Percent_rd, Percent_wrt);
 						//Send Msg back to Micro.
 						UART_Send2( tempBffr2 );
-						// Terminate with ? to allow Buffer to process.
-						UART_Send2( "?" );
 						// Place msg into BGM Buffer;
 						BGM_Send( tempBffr2 );
 
@@ -470,8 +466,6 @@ int main(void)
 				    		sprintf( tempBffr2, "<|RD_OVL|>");
 							//Send Msg back to Micro.
 							UART_Send2( tempBffr2 );
-							// Terminate with ? to allow Buffer to process.
-							UART_Send2( "?" );
 							// Place msg into BGM Buffer;
 							BGM_Send( tempBffr2 );
 							// Clear Flag.
@@ -491,8 +485,6 @@ int main(void)
 					sprintf( tempBffr2, "<|WR_OVL|>");
 					//Send Msg back to Micro.
 					UART_Send2( tempBffr2 );
-					// Terminate with ? to allow Buffer to process.
-					UART_Send2( "?" );
 					// Place Msg into Write Buffer.
 					sprintf( tx_Buffr.string, tempBffr2);
 					tx_Buffr.tx_wr = NextBufIdxIncr(tx_Buffr.tx_wr, strlen(tempBffr2));
@@ -554,8 +546,6 @@ int main(void)
 
 					// Send Key Msgs to UART Channel.
 					UART_Send2( "RP SPP server..." );
-					// Terminate with ? to allow Buffer to process.
-					UART_Send2( "?" );
 		    		// Clear Buffer.
 		    		for (x=0; x<BUFFER_LNGTH; x++)
 		    			tempBffr2[x] = 0x00;
@@ -563,7 +553,6 @@ int main(void)
 					UART_Send2( tempBffr2 );
 					sprintf(tempBffr2, "Boot. Build number: %ld\r\n", evt->data.evt_dfu_boot.version);
 					UART_Send2( tempBffr2 );
-
 					/* Set advertising parameters. 100ms advertisement interval. All channels used.
 					 * The first two parameters are minimum and maximum advertising interval, both in
 					 * units of (milliseconds * 1.6). The third parameter '7' sets advertising on all channels. */
@@ -604,9 +593,6 @@ int main(void)
 					{
 						// Data Channel is now active. TIme to setup for processing of data.
 						Data_Active = true;
-			    		// Clear Buffer.
-			    		for (x=0; x<BUFFER_LNGTH; x++)
-			    			tempBffr2[x] = 0x00;
 						sprintf( tempBffr2, "DATA N\r\n" );
 						UART_Send2( tempBffr2 );
 						// Set Mode Not discoverable/Undirected connectable(Comment out Next Line to allow Discoverable)
@@ -615,9 +601,6 @@ int main(void)
 					break;
 
 				case gecko_evt_le_connection_opened_id:
-		    		// Clear Buffer.
-		    		for (x=0; x<BUFFER_LNGTH; x++)
-		    			tempBffr2[x] = 0x00;
 					// Send Key Msgs to UART Channel.
 					sprintf( tempBffr2, "Connected\r\n" );
 					UART_Send2( tempBffr2 );
@@ -637,17 +620,11 @@ int main(void)
 					break;
 
 				case gecko_evt_le_connection_parameters_id:
-		    		// Clear Buffer.
-		    		for (x=0; x<BUFFER_LNGTH; x++)
-		    			tempBffr2[x] = 0x00;
 					sprintf( tempBffr2, "conn.interval %d\r\n", evt->data.evt_le_connection_parameters.interval );
 					UART_Send2( tempBffr2 );
 					break;
 
 				case gecko_evt_le_connection_closed_id:
-		    		// Clear Buffer.
-		    		for (x=0; x<BUFFER_LNGTH; x++)
-		    			tempBffr2[x] = 0x00;
 					sprintf( tempBffr2, "Disconnected\r\n" );
 					UART_Send2( tempBffr2 );
 
@@ -690,7 +667,7 @@ int main(void)
 								break;
 
 							// max number of bytes that can be read from FIFO before wrap around
-							max_len = BUFFSIZE - tx_Buffr.tx_rd;
+							max_len = 256 - tx_Buffr.tx_rd;
 
 							// this could be optimized for speed? now optimizing for simplicity..
 							if (max_len < tx_size)
@@ -716,9 +693,6 @@ int main(void)
 
 							if (result_ptr->result != 0)
 							{
-					    		// Clear Buffer.
-					    		for (x=0; x<BUFFER_LNGTH; x++)
-					    			tempBffr2[x] = 0x00;
 								sprintf( tempBffr2, "Write BLE Error: %04x\r\n", result_ptr->result );
 								UART_Send2( tempBffr2 );
 								// Bad Transfer...Shutdown Channel...
@@ -755,9 +729,6 @@ int main(void)
 					break;
 
 				default:
-		    		// Clear Buffer.
-		    		for (x=0; x<BUFFER_LNGTH; x++)
-		    			tempBffr2[x] = 0x00;
 					sprintf(tempBffr2, "UNKNOWN EVT %lx\r\n", BGLIB_MSG_ID(evt->header));
 					UART_Send2( tempBffr2 );
 					break;
