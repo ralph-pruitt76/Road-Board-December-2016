@@ -4003,6 +4003,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                                 } // EndElse (flag == 0)
                               } // EndElse (tempBffr[4]!=':')
                               break;
+//------------------
                             case 'B':
                               //Key Flash Variable Set Boot Delay(Seconds).
                               // Step 1. Validate format.
@@ -4077,6 +4078,59 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                                 } // EndElse (flag == 0)
                               } // EndElse (tempBffr[4]!=':')
                               break;
+//------------------
+                            case 'V':
+                              //Key Flash Variable Set Version String.
+                              // Step 1. Validate format.
+                              if(tempBffr[4]!=':')
+                              {
+                                // Is this a BLE Operation?
+                                if ( BLE_Flag )
+                                {
+                                  // Yes...Build and Send BLE Response NOW.
+                                  strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSV_SYNTAX</STATUS>");
+                                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                }
+                                strcpy( (char *)tempBffr2, "TKSV SYNTAX ERROR: Not correct format.\r\n");
+                              } // Endif (tempBffr[4]!=':')
+                              else
+                              {
+                                // 2. Verify if remaining string is digits
+                                if (Size > 5)
+                                {
+                                  flag = 1;
+                                } // EndIf (Size > 5)
+                                else
+                                  flag = 0;
+                                if (flag == 0)
+                                {
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>CMD_TKSV_BADPARAM</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
+                                  strcpy( (char *)tempBffr2, "TKSV SYNTAX ERROR: Bad Parameter.\r\n");
+                                }
+                                else
+                                {
+                                  // 3. Grab remaining string and convert to integer.
+                                  tempPstr = &tempBffr[5];
+                                  // Time to set new Version String.
+                                  RoadBrd_Set_VersionString( tempPstr );
+                                  // Is this a BLE Operation?
+                                  if ( BLE_Flag )
+                                  {
+                                    // Yes...Build and Send BLE Response NOW.
+                                    strcpy( (char *)tempBffr2, "<STATUS>ST_TKSV_ACK</STATUS>");
+                                    BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                                  }
+                                  // NOW, Build Data String..
+                                  sprintf( (char *)tempBffr2, "COMPLETE" );
+                                } // EndElse (flag == 0)
+                              } // EndElse (tempBffr[4]!=':')
+                              break;
                             default:
                               strcpy( (char *)tempBffr2, "TKS ERROR: Not a legal command.\r\n");
                               break;
@@ -4109,7 +4163,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                                 sprintf( (char *)tempBffr2, "<STATUS>ST_TKRS:%3.1f</STATUS>", ((float)RoadBrd_Get_SnsrTickCnt()/10));
                                 BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                               }
-                              sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n\r\n> ", ((float)RoadBrd_Get_SnsrTickCnt()/10));
+                              sprintf( (char *)tempBffr2, "Sensor Sample Rate: %3.1f Seconds.\r\n", ((float)RoadBrd_Get_SnsrTickCnt()/10));
                               break;
 //------------------
                             case 'T':
@@ -4121,7 +4175,7 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                                 sprintf( (char *)tempBffr2, "<STATUS>ST_TKRT:%d</STATUS>", RoadBrd_Get_TackLimit());
                                 BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                               }
-                              sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n\r\n> ", RoadBrd_Get_TackLimit());
+                              sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n", RoadBrd_Get_TackLimit());
                               break;
 //------------------
                             case 'B':
@@ -4133,7 +4187,19 @@ HAL_StatusTypeDef RoadBrd_ParseString(char *tempBffr, bool BLE_Flag)
                                 sprintf( (char *)tempBffr2, "<STATUS>ST_TKRB:%d</STATUS>", RoadBrd_Get_BootDelay());
                                 BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
                               }
-                              sprintf( (char *)tempBffr2, "Boot Delay: %d Seconds.\r\n\r\n> ", RoadBrd_Get_BootDelay());
+                              sprintf( (char *)tempBffr2, "Boot Delay: %d Seconds.\r\n", RoadBrd_Get_BootDelay());
+                              break;
+//------------------
+                            case 'V':
+                              //Key Flash Variable Read Version String.
+                              // Is this a BLE Operation?
+                              if ( BLE_Flag )
+                              {
+                                // Yes...Build and Send BLE Response NOW.
+                                sprintf( (char *)tempBffr2, "<STATUS>ST_TKRB:%s</STATUS>", RoadBrd_Get_VersionString());
+                                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), (uint8_t *)tempBffr2);
+                              }
+                              sprintf( (char *)tempBffr2, "Version String: %s\r\n", RoadBrd_Get_VersionString());
                               break;
                             default:
                               // Is this a BLE Operation?

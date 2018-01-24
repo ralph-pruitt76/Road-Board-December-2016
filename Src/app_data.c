@@ -265,9 +265,11 @@ bool TstRdSndReady( void )
 
 HAL_StatusTypeDef  ProcessSensorState(void)
 {
+#define TMPBUFFER_LNGTH 80
   HAL_StatusTypeDef Status;
-  uint8_t tmpBuffer[40];
+  uint8_t tmpBuffer[TMPBUFFER_LNGTH];
   Temperature   Temp;
+  int x;
   
   Status = HAL_OK;
 
@@ -1012,17 +1014,32 @@ HAL_StatusTypeDef  ProcessSensorState(void)
       {
         // Clear Flag...We are done.
         data.Legacy_OneTime = false;
+        // Clean out Buffer.
+        for (x=0; x<TMPBUFFER_LNGTH; x++)
+          tmpBuffer[x] = 0x00;
         // Update BLE Characteristics
-        sprintf( (char *)tmpBuffer, "<UAEAE>%s</UAEAE>", (uint8_t *)LEGACY_BANNER);
+        sprintf( (char *)tmpBuffer, "<UAEAE>B:%s", get_BGMBanner());
+        RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
+        BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
+        // Clean out Buffer.
+        for (x=0; x<TMPBUFFER_LNGTH; x++)
+          tmpBuffer[x] = 0x00;
+        sprintf( (char *)tmpBuffer, " M:%s</UAEAE>", (uint8_t *)LEGACY_BANNER);
         RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
         BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
         //**HERE      BGM111_WriteCharacteristic(gattdb_xgatt_rev,
         //                                 strlen((char *)LEGACY_BANNER), (uint8_t *)LEGACY_BANNER);
       }
+      // Clean out Buffer.
+      for (x=0; x<TMPBUFFER_LNGTH; x++)
+        tmpBuffer[x] = 0x00;
       // Send </FRM> String.
       sprintf( (char *)tmpBuffer, "</FRM>");
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       BGM111_Transmit((uint32_t)(strlen((char *)tmpBuffer)), tmpBuffer);
+      // Clean out Buffer.
+      for (x=0; x<TMPBUFFER_LNGTH; x++)
+        tmpBuffer[x] = 0x00;
       sprintf( (char *)tmpBuffer, "\r\n\r\n" );
       RoadBrd_UART_Transmit(MONITOR_UART, tmpBuffer);
       if (data.task_item == VOLTAGE_MNTR_TASK)

@@ -2769,3 +2769,22 @@ Command-line arguments:  -os win32 -ws win32 -arch x86 -data D:\GoogleDriveCLT\G
 
 !ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2018-01-23 07:32:11.308
 !MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY com.silabs.ss.framework.debugger.tcf.agent 1 0 2018-01-23 07:55:48.510
+!MESSAGE Launching SiAgent (Silicon Labs TCF Agent)
+
+!ENTRY org.eclipse.cdt.debug.edc 4 10005 2018-01-23 07:55:58.573
+!MESSAGE Fail to read memory.
+!STACK 0
+org.eclipse.tcf.internal.services.remote.MemoryProxy$MemoryErrorReport: TCF command exception:
+Command: Memory get "rc.root.000059306692.m.C", 138596, 1, 112, 0
+Exception: No memory context available (ensure 'deviceDescriptorPaths' was passed in DebugAdapter#connect)
+Error code: 131073
+	at org.eclipse.tcf.internal.services.remote.MemoryProxy$MemoryCommand.toMemoryError(MemoryProxy.java:379)
+	at org.eclipse.tcf.internal.services.remote.MemoryProxy$MemContext$2.done(MemoryProxy.java:257)
+	at org.eclipse.tcf.core.Command.result(Command.java:111)
+	at org.eclipse.tcf.core.AbstractChannel.handleInput(AbstractChannel.java:997)
+	at org.eclipse.tcf.core.AbstractChannel.access$0(AbstractChannel.java:943)
+	at org.eclipse.tcf.core.AbstractChannel$1$1.run(AbstractChannel.java:293)
+	at org.eclipse.tcf.EventQueue.run(EventQueue.java:95)
+	at java.lang.Thread.run(Thread.java:745)

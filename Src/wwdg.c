@@ -286,8 +286,19 @@ bool RoadBrd_WWDG_VerifyFrame( void )
 HAL_StatusTypeDef RoadBrd_WWDG_InitializeFrmFlash( void )
 {
   HAL_StatusTypeDef Status;
+  int x;
   
   Status = HAL_OK;
+  // Initialize Version String.
+  strcpy( Save_Frames.Version_String, "--NULL--");
+  // Initialize Boot Variables
+  Save_Frames.Load_Active = NO_CODE;
+  for (x=0;x<2;x++)
+  {
+    Save_Frames.Boot_Addr[x] = 0x00000000;
+    Save_Frames.Boot_Vector[x] = 0x00000000;
+    Save_Frames.Boot_Chksum[x] = 0x00000000;
+  }
   // Initialize Key Structures of Frame
   Save_Frames.checksum = FRAME_CHKSUM;
   Save_Frames.RdSndTickCnt = PROCESS_RD_SND_TIME;
@@ -474,6 +485,32 @@ HAL_StatusTypeDef RoadBrd_Set_BootDelay( uint32_t PassedBootDelay )
 }
 
 /**
+  * @brief  Update Version String.
+  * @param  char *PassedVersionString
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Flash Operation success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  *                                HAL_BUSY:     Flash is busy.
+  *                                HAL_TIMEOUT:  Flash timed out.
+  */
+HAL_StatusTypeDef RoadBrd_Set_VersionString( char *PassedVersionString )
+{
+  HAL_StatusTypeDef Status;
+  
+  Status = HAL_OK;
+  strcpy( Save_Frames.Version_String, PassedVersionString);
+
+  // Write Structure to Flash Memory.
+  //Status = RoadBrd_FlashInitWrite( 0x00, 
+  Status = RoadBrd_FlashWrite( 0x00, 
+                               FLASH_TYPEERASE_PAGES, 
+                               (uint32_t)&wwdg_HardFrames, 
+                               (uint32_t *)&Save_Frames, 
+                               sizeof(Save_Frames));
+  return Status;
+}
+
+
+/**
   * @brief  Retrieve RdSndTickCnt.
   * @param  None
   * @retval uint32_t Save_Frames.RdSndTickCnt
@@ -521,6 +558,16 @@ uint32_t RoadBrd_Get_TackLimit( void )
 uint32_t RoadBrd_Get_BootDelay( void )
 {
   return Save_Frames.BootDelay;
+}
+
+/**
+  * @brief  Retrieve pointer to Version String.
+  * @param  None
+  * @retval uint32_t Save_Frames.BootDelay
+  */
+char *RoadBrd_Get_VersionString( void )
+{
+  return Save_Frames.Version_String;
 }
 
 /**

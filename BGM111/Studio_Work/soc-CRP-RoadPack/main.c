@@ -444,6 +444,8 @@ int main(void)
 			    	if (Test_Frm(rx_Byte))
 			    	{
 			    		// We Found FRM Tag...Send Quick Msg back to Micro.
+			    		// Ok...Clear Previous Buffer OVerflow count. We made it to a new FRM Tag.
+			    		tx_Buffr.WrtBffr_Errcnt = 0;	// Set Error Cnt to zero.
 			    		// Get Percent Write and Percent Rd
 			    		//Percent_wrt = (float)(((float)(BufFree(tx_Buffr.tx_wr, tx_Buffr.tx_rd))/ (float)BUFFSIZE)) * 100.0;
 			    		Percent_wrt = (BufUsed(tx_Buffr.tx_wr, tx_Buffr.tx_rd)* 100)/ BUFFSIZE;

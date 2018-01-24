@@ -25,7 +25,10 @@ BGLIB_DEFINE();
  * even if that means we need to wait in a loop */
 
 #define BG_DATA_LOW_WATERMARK   5
+#define BGM_BANNER_LENGTH       40
 
+static char bgm_Bannerstr[BGM_BANNER_LENGTH];
+   
 /* BG reception states */
 
 enum BgRxState
@@ -660,34 +663,48 @@ uint16_t USART_ReceiveData(UART_HandleTypeDef *huart)
 HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
 {
 //  static uint8_t header_cnt, payload_cnt, payload_len;
-#define TEMP_BUFF_LENGTH        60
+#define TEMP_BUFF_LENGTH        RX_BFFR_MAX_LNGTH
   HAL_StatusTypeDef Status;
   static uint8_t tempBffr2[TEMP_BUFF_LENGTH];
   char* tempPstr;
-  char tempstr[60];
+  char tempstr[RX_BFFR_MAX_LNGTH];
   int x;
+  static bool bgm_BannerFlg = false;
 #ifndef XML_SHRT  
-  char tempstr2[60];
+  char tempstr2[RX_BFFR_MAX_LNGTH];
 #endif
 //  int x;
 
-  uint8_t tempBffr3[60];
-  static uint8_t in_ptr = 0;
+  uint8_t tempBffr3[80];
+  static uint16_t in_ptr = 0;
   
   // First pull new character into buffer.
   tempBffr2[in_ptr++] = c;
   // Now, Did we get a termination character?
   if( (c == 0x0a)  ||
-      (c == '?') )
+      (c == '?') ||
+      (in_ptr >= (uint16_t)RX_BFFR_MAX_LNGTH))
   {
     // Reset Ptr.
     in_ptr = 0;
 
     // Yes...We will now test contents of buffer. And then reset ptr back to 0.
-    sprintf( (char *)tempBffr3, "\r\n<<FULL STRING>>: %s \r\n", tempBffr2);
+    sprintf( (char *)tempBffr3, "\r\n<<FULL STRING>>: ");
+    Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+    Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+    sprintf( (char *)tempBffr3, " \r\n");
     Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
     if (Status != HAL_OK)
       return Status;
+    // Test bgm_BannerFlg to determine if we have a new Banner.
+    if ( bgm_BannerFlg )
+    {
+      // Strip off Termination of string.
+      tempBffr2[(strlen((char *)tempBffr2)-2)] = 0x00;
+      
+      set_BGMBanner( (char *)tempBffr2 );
+      bgm_BannerFlg = false;
+    }
     // Test Strings for Key items.
     // Boot String?
     if (strncmp((char *)tempBffr2,"Boot",4) == 0)
@@ -762,6 +779,14 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       //ble.data_Connection = true;
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
     }
+    // "RP SPP server..." Tag?
+    else if (strncmp((char *)tempBffr2,"RP SPP server...",16) == 0)
+    {
+      // Ok Set Flag so that Next String is grabbed as BGM Banner Tag."
+      bgm_BannerFlg = true;
+      Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM Banner Tag Found.> ");
+    }
+    
     // TACK String?
     else if (strncmp((char *)tempBffr2,"<TACK>",6) == 0)
     {
@@ -1108,4 +1133,34 @@ bool RoadBrd_tstReqexec( void )
   return ble.req_exec;
 }
 
+/**
+  * @brief  This routine tests the passed string and then updates bgm_Bannerstr.
+  * @param  char *string1: Character string to be saved.
+  * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+  *                                HAL_ERROR:    Error found in Tasking or data passed.
+  */
+HAL_StatusTypeDef set_BGMBanner( char *string1 )
+{
+  int x;
+  
+  // Check Length of passed String
+  if (strlen(string1) > BGM_BANNER_LENGTH)
+    return HAL_ERROR;
+  else
+  {
+    for (x=0; x<BGM_BANNER_LENGTH; x++)
+      bgm_Bannerstr[x] = 0x00;
+    // Copy Passed string into bgm_Bannerstr
+    strcpy( bgm_Bannerstr, string1 );
+    return HAL_OK;
+  }
+}
 
+/**
+  * @brief  This routine returns a pointer to the BGM Banner String.
+  * @retval char *string1: Character string to be saved.
+  */
+char *get_BGMBanner( void )
+{
+  return ( bgm_Bannerstr );
+}

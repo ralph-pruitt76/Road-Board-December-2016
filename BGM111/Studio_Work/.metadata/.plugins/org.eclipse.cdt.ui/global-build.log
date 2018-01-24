@@ -1,4 +1,4 @@
-07:31:46 **** Incremental Build of configuration GNU ARM v4.9.3 - Default for project soc-CRP-RoadPack ****
+07:55:13 **** Incremental Build of configuration GNU ARM v4.9.3 - Default for project soc-CRP-RoadPack ****
 make -j4 all 
 Building file: ../main.c
 Invoking: GNU ARM C Compiler
@@ -22,5 +22,5 @@ arm-none-eabi-objcopy -O srec "soc-CRP-RoadPack.axf" "soc-CRP-RoadPack.s37"
 Running size tool
 arm-none-eabi-size "soc-CRP-RoadPack.axf"
    text	   data	    bss	    dec	    hex	filename
- 183247	   2188	   9953	 195388	  2fb3c	soc-CRP-RoadPack.axf
+ 183255	   2188	   9953	 195396	  2fb44	soc-CRP-RoadPack.axf
  

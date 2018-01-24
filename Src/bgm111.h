@@ -59,6 +59,7 @@ typedef enum
 #define TX_TIMEOUT_CNT                   2000           // Loop 2000 Times for Timeout
 #define TACK_LIMIT                       50              // Set limit at 25 seconds before dropping as reset.
 #define CMD_TIME                         10             // Set as a 1 Second Timer for Report.
+#define RX_BFFR_MAX_LNGTH                256            // Controls the Maximum number of chars that can be tracked by Input buffer.
 /* Initialize the BGM111 module and BGLib */
 void BGM111_Init(void);
 
@@ -87,5 +88,7 @@ bool BGM111_DataConnected(void);
 void BGM111_SetCMD_Mode(bool NewMode);
 bool BGM111_CMD_Mode(void);
 void BGM111_SetDataConnected(bool NewMode);
+HAL_StatusTypeDef set_BGMBanner( char *string1 );
+char *get_BGMBanner( void );
 
 #endif

@@ -48,6 +48,15 @@
 extern WWDG_HandleTypeDef hwwdg;
 
 /* USER CODE BEGIN Private defines */
+
+// Enums
+typedef enum Code_ld
+{
+  NO_CODE       = 0, 
+  SLOT0_CD      = 1,
+  SLOT1_CD      = 2,
+  SLOT2_CD      = 3,
+} Code_load;
   /* WWDG clock counter = (PCLK1 (32MHz)/4096)/8) = 4 MHz (250ns) 
      WWDG Window value = 80 means that the WWDG counter should be refreshed only 
      when the counter is below 80 (and greater than 64/0x40) otherwise a reset will 
@@ -66,6 +75,7 @@ extern WWDG_HandleTypeDef hwwdg;
 #define BASE_FLASH_ADDRESS      0x08070000      // Base Address to place all key Flash Structures.
 #define BOOT_WAIT               50      // Default Wait time for Boot Sequence...50 Seconds.
 #define DATE_STRING_LENGTH      30      // Length of Saved Date String.
+#define VERSION_STRING_LENGTH   40      // Version String Length
 
 // Private Structure
 // wwdg Save Frame
@@ -79,6 +89,13 @@ typedef struct wwdg_SaveFrm *wwdg_SaveFrmPtr;
 typedef struct wwdg_Frmes
 {
   uint32_t checksum;
+  // Version String
+  char  Version_String[VERSION_STRING_LENGTH];  // Version String.
+  // Boot Variables
+  Code_load Load_Active;                // Code Load that is currently active.
+  uint32_t      Boot_Addr[3];           // Boot Address Lookup Table.
+  uint32_t      Boot_Vector[3];         // Boot Vector Lookup Table.
+  uint32_t      Boot_Chksum[3];         // Boot Chksum Lookup Table.
   // Key Misc Variables
   uint32_t      RdSndTickCnt;
   uint32_t      SnsrTickCnt;
@@ -127,6 +144,8 @@ bool RoadBrd_Get_UnitsFlag( void );
 uint32_t RoadBrd_Get_TackLimit( void );
 HAL_StatusTypeDef RoadBrd_Set_BootDelay( uint32_t PassedBootDelay );
 uint32_t RoadBrd_Get_BootDelay( void );
+char *RoadBrd_Get_VersionString( void );
+HAL_StatusTypeDef RoadBrd_Set_VersionString( char *PassedVersionString );
 
 /* USER CODE END Prototypes */
 
