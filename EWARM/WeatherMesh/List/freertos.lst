@@ -1,0 +1,261 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       29/Jan/2018  07:47:26
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\freertos.c
+#    Command line =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\freertos.c
+#        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
+#        REV_L -D LONG_DELAY -D XML_SHRT -D WM -lCN
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\List
+#        -o
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 7.4\arm\INC\c\DLib_Config_Full.h"
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/BSP/STM32L1xx_Nucleo\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\..\Middlewares\Third_Party\BgLib\
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.4\arm\CMSIS\Include\"
+#    Locale       =  English_United States.1252
+#    List file    =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\List\freertos.lst
+#    Object file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\Obj\freertos.o
+#
+###############################################################################
+
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\freertos.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : freertos.c
+      4            * Description        : Code for freertos applications
+      5            ******************************************************************************
+      6            *
+      7            * COPYRIGHT(c) 2016 STMicroelectronics
+      8            *
+      9            * Redistribution and use in source and binary forms, with or without modification,
+     10            * are permitted provided that the following conditions are met:
+     11            *   1. Redistributions of source code must retain the above copyright notice,
+     12            *      this list of conditions and the following disclaimer.
+     13            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     14            *      this list of conditions and the following disclaimer in the documentation
+     15            *      and/or other materials provided with the distribution.
+     16            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     17            *      may be used to endorse or promote products derived from this software
+     18            *      without specific prior written permission.
+     19            *
+     20            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     21            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     22            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     23            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     24            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     25            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     26            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     27            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     28            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     29            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     30            *
+     31            ******************************************************************************
+     32            */
+     33          
+     34          /* Includes ------------------------------------------------------------------*/
+     35          #include "FreeRTOS.h"
+     36          #include "task.h"
+     37          #include "cmsis_os.h"
+     38          
+     39          /* USER CODE BEGIN Includes */     
+     40          
+     41          /* USER CODE END Includes */
+     42          
+     43          /* Variables -----------------------------------------------------------------*/
+
+   \                                 In section .bss, align 4
+     44          osThreadId defaultTaskHandle;
+   \                     defaultTaskHandle:
+   \   00000000                      DS8 4
+     45          
+     46          /* USER CODE BEGIN Variables */
+     47          
+     48          /* USER CODE END Variables */
+     49          
+     50          /* Function prototypes -------------------------------------------------------*/
+     51          void StartDefaultTask(void const * argument);
+     52          
+     53          extern void MX_USB_DEVICE_Init(void);
+     54          void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
+     55          
+     56          /* USER CODE BEGIN FunctionPrototypes */
+     57          
+     58          /* USER CODE END FunctionPrototypes */
+     59          
+     60          /* Hook prototypes */
+     61          
+     62          /* Init FreeRTOS */
+     63          
+
+   \                                 In section .text, align 2, keep-with-next
+     64          void MX_FREERTOS_Init(void) {
+   \                     MX_FREERTOS_Init: (+1)
+   \   00000000   0xB500             PUSH     {LR}
+   \   00000002   0xB085             SUB      SP,SP,#+20
+     65            /* USER CODE BEGIN Init */
+     66                 
+     67            /* USER CODE END Init */
+     68          
+     69            /* USER CODE BEGIN RTOS_MUTEX */
+     70            /* add mutexes, ... */
+     71            /* USER CODE END RTOS_MUTEX */
+     72          
+     73            /* USER CODE BEGIN RTOS_SEMAPHORES */
+     74            /* add semaphores, ... */
+     75            /* USER CODE END RTOS_SEMAPHORES */
+     76          
+     77            /* USER CODE BEGIN RTOS_TIMERS */
+     78            /* start timers, add new ones, ... */
+     79            /* USER CODE END RTOS_TIMERS */
+     80          
+     81            /* Create the thread(s) */
+     82            /* definition and creation of defaultTask */
+     83            osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+   \   00000004   0x4668             MOV      R0,SP
+   \   00000006   0x....             LDR.N    R1,??DataTable0
+   \   00000008   0x2214             MOVS     R2,#+20
+   \   0000000A   0x.... 0x....      BL       __aeabi_memcpy4
+     84            defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+   \   0000000E   0x2100             MOVS     R1,#+0
+   \   00000010   0x4668             MOV      R0,SP
+   \   00000012   0x.... 0x....      BL       osThreadCreate
+   \   00000016   0x....             LDR.N    R1,??DataTable0_1
+   \   00000018   0x6008             STR      R0,[R1, #+0]
+     85          
+     86            /* USER CODE BEGIN RTOS_THREADS */
+     87            /* add threads, ... */
+     88            /* USER CODE END RTOS_THREADS */
+     89          
+     90            /* USER CODE BEGIN RTOS_QUEUES */
+     91            /* add queues, ... */
+     92            /* USER CODE END RTOS_QUEUES */
+     93          }
+   \   0000001A   0xB005             ADD      SP,SP,#+20
+   \   0000001C   0xBD00             POP      {PC}             ;; return
+
+   \                                 In section .rodata, align 4
+   \                     ?_1:
+   \   00000000   0x........         DC32 ?_0, StartDefaultTask
+   \              0x........   
+   \   00000008   0x0000             DC16 0
+   \   0000000A   0x00 0x00          DC8 0, 0
+   \   0000000C   0x00000000         DC32 0, 128
+   \              0x00000080   
+     94          
+     95          /* StartDefaultTask function */
+
+   \                                 In section .text, align 2, keep-with-next
+     96          void StartDefaultTask(void const * argument)
+     97          {
+   \                     StartDefaultTask: (+1)
+   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+     98            /* init code for USB_DEVICE */
+     99            MX_USB_DEVICE_Init();
+   \   00000004   0x.... 0x....      BL       MX_USB_DEVICE_Init
+    100          
+    101            /* USER CODE BEGIN StartDefaultTask */
+    102            /* Infinite loop */
+    103            for(;;)
+    104            {
+    105              osDelay(1);
+   \                     ??StartDefaultTask_0: (+1)
+   \   00000008   0x2001             MOVS     R0,#+1
+   \   0000000A   0x.... 0x....      BL       osDelay
+   \   0000000E   0xE7FB             B.N      ??StartDefaultTask_0
+    106            }
+    107            /* USER CODE END StartDefaultTask */
+    108          }
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable0:
+   \   00000000   0x........         DC32     ?_1
+
+   \                                 In section .text, align 4, keep-with-next
+   \                     ??DataTable0_1:
+   \   00000000   0x........         DC32     defaultTaskHandle
+
+   \                                 In section .rodata, align 4
+   \                     ?_0:
+   \   00000000   0x64 0x65          DC8 "defaultTask"
+   \              0x66 0x61    
+   \              0x75 0x6C    
+   \              0x74 0x54    
+   \              0x61 0x73    
+   \              0x6B 0x00    
+    109          
+    110          /* USER CODE BEGIN Application */
+    111               
+    112          /* USER CODE END Application */
+    113          
+    114          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+      24   MX_FREERTOS_Init
+        24   -> __aeabi_memcpy4
+        24   -> osThreadCreate
+       8   StartDefaultTask
+         8   -> MX_USB_DEVICE_Init
+         8   -> osDelay
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       4  ??DataTable0
+       4  ??DataTable0_1
+      12  ?_0
+      20  ?_1
+      30  MX_FREERTOS_Init
+      16  StartDefaultTask
+       4  defaultTaskHandle
+
+ 
+  4 bytes in section .bss
+ 32 bytes in section .rodata
+ 54 bytes in section .text
+ 
+ 54 bytes of CODE  memory
+ 32 bytes of CONST memory
+  4 bytes of DATA  memory
+
+Errors: none
+Warnings: none

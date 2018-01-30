@@ -1,0 +1,176 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       29/Jan/2018  07:47:35
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\usb_device.c
+#    Command line =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\usb_device.c
+#        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
+#        REV_L -D LONG_DELAY -D XML_SHRT -D WM -lCN
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\List
+#        -o
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 7.4\arm\INC\c\DLib_Config_Full.h"
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/BSP/STM32L1xx_Nucleo\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\..\Middlewares\Third_Party\BgLib\
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.4\arm\CMSIS\Include\"
+#    Locale       =  English_United States.1252
+#    List file    =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\List\usb_device.lst
+#    Object file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\Obj\usb_device.o
+#
+###############################################################################
+
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\usb_device.c
+      1          /**
+      2            ******************************************************************************
+      3            * @file           : USB_DEVICE  
+      4            * @version        : v1.0_Cube
+      5            * @brief          : This file implements the USB Device 
+      6            ******************************************************************************
+      7            *
+      8            * COPYRIGHT(c) 2016 STMicroelectronics
+      9            *
+     10            * Redistribution and use in source and binary forms, with or without modification,
+     11            * are permitted provided that the following conditions are met:
+     12            * 1. Redistributions of source code must retain the above copyright notice,
+     13            * this list of conditions and the following disclaimer.
+     14            * 2. Redistributions in binary form must reproduce the above copyright notice,
+     15            * this list of conditions and the following disclaimer in the documentation
+     16            * and/or other materials provided with the distribution.
+     17            * 3. Neither the name of STMicroelectronics nor the names of its contributors
+     18            * may be used to endorse or promote products derived from this software
+     19            * without specific prior written permission.
+     20            *
+     21            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     22            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     23            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     24            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     25            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     26            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     27            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     28            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     29            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     30            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     31            *
+     32            ******************************************************************************
+     33          */
+     34          
+     35          /* Includes ------------------------------------------------------------------*/
+     36          
+     37          #include "usb_device.h"
+     38          #include "usbd_core.h"
+     39          #include "usbd_desc.h"
+     40          #include "usbd_cdc.h"
+     41          #include "usbd_cdc_if.h"
+     42          
+     43          /* USB Device Core handle declaration */
+
+   \                                 In section .bss, align 4
+     44          USBD_HandleTypeDef hUsbDeviceFS;
+   \                     hUsbDeviceFS:
+   \   00000000                      DS8 548
+     45          
+     46          /* init function */				        
+
+   \                                 In section .text, align 4, keep-with-next
+     47          void MX_USB_DEVICE_Init(void)
+     48          {
+   \                     MX_USB_DEVICE_Init: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     49            /* Init Device Library,Add Supported Class and Start the library*/
+     50            USBD_Init(&hUsbDeviceFS, &FS_Desc, DEVICE_FS);
+   \   00000002   0x2200             MOVS     R2,#+0
+   \   00000004   0x4907             LDR.N    R1,??MX_USB_DEVICE_Init_0
+   \   00000006   0x4808             LDR.N    R0,??MX_USB_DEVICE_Init_0+0x4
+   \   00000008   0x.... 0x....      BL       USBD_Init
+     51          
+     52            USBD_RegisterClass(&hUsbDeviceFS, &USBD_CDC);
+   \   0000000C   0x4907             LDR.N    R1,??MX_USB_DEVICE_Init_0+0x8
+   \   0000000E   0x4806             LDR.N    R0,??MX_USB_DEVICE_Init_0+0x4
+   \   00000010   0x.... 0x....      BL       USBD_RegisterClass
+     53          
+     54            USBD_CDC_RegisterInterface(&hUsbDeviceFS, &USBD_Interface_fops_FS);
+   \   00000014   0x4906             LDR.N    R1,??MX_USB_DEVICE_Init_0+0xC
+   \   00000016   0x4804             LDR.N    R0,??MX_USB_DEVICE_Init_0+0x4
+   \   00000018   0x.... 0x....      BL       USBD_CDC_RegisterInterface
+     55          
+     56            USBD_Start(&hUsbDeviceFS);
+   \   0000001C   0x4802             LDR.N    R0,??MX_USB_DEVICE_Init_0+0x4
+   \   0000001E   0x.... 0x....      BL       USBD_Start
+     57          
+     58          }
+   \   00000022   0xBD01             POP      {R0,PC}          ;; return
+   \                     ??MX_USB_DEVICE_Init_0:
+   \   00000024   0x........         DC32     FS_Desc
+   \   00000028   0x........         DC32     hUsbDeviceFS
+   \   0000002C   0x........         DC32     USBD_CDC
+   \   00000030   0x........         DC32     USBD_Interface_fops_FS
+     59          /**
+     60            * @}
+     61            */
+     62          
+     63          /**
+     64            * @}
+     65            */
+     66          
+     67          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   MX_USB_DEVICE_Init
+         8   -> USBD_CDC_RegisterInterface
+         8   -> USBD_Init
+         8   -> USBD_RegisterClass
+         8   -> USBD_Start
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      52  MX_USB_DEVICE_Init
+     548  hUsbDeviceFS
+
+ 
+ 548 bytes in section .bss
+  52 bytes in section .text
+ 
+  52 bytes of CODE memory
+ 548 bytes of DATA memory
+
+Errors: none
+Warnings: none

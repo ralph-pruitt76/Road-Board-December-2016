@@ -1,0 +1,226 @@
+###############################################################################
+#
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       29/Jan/2018  07:47:32
+# Copyright 1999-2016 IAR Systems AB.
+#
+#    Cpu mode     =  thumb
+#    Endian       =  little
+#    Source file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\stm32l1xx_hal_msp.c
+#    Command line =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\stm32l1xx_hal_msp.c
+#        -D USE_HAL_DRIVER -D STM32L152xE -D USE_STM32L1XX_NUCLEO -D ASCII -D
+#        REV_L -D LONG_DELAY -D XML_SHRT -D WM -lCN
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\List
+#        -o
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\Obj
+#        --no_cse --no_unroll --no_inline --no_code_motion --no_tbaa
+#        --no_clustering --no_scheduling --debug --endian=little
+#        --cpu=Cortex-M3 -e --fpu=None --dlib_config "C:\Program Files
+#        (x86)\IAR Systems\Embedded Workbench 7.4\arm\INC\c\DLib_Config_Full.h"
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/BSP/STM32L1xx_Nucleo\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/portable/IAR/ARM_CM3\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM/../Drivers/CMSIS/Device/ST/STM32L1xx/Include\
+#        -I
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\..\Middlewares\Third_Party\BgLib\
+#        -On --use_c++_inline -I "C:\Program Files (x86)\IAR Systems\Embedded
+#        Workbench 7.4\arm\CMSIS\Include\"
+#    Locale       =  English_United States.1252
+#    List file    =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\List\stm32l1xx_hal_msp.lst
+#    Object file  =  
+#        D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\EWARM\WeatherMesh\Obj\stm32l1xx_hal_msp.o
+#
+###############################################################################
+
+D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\Src\stm32l1xx_hal_msp.c
+      1          /**
+      2            ******************************************************************************
+      3            * File Name          : stm32l1xx_hal_msp.c
+      4            * Description        : This file provides code for the MSP Initialization 
+      5            *                      and de-Initialization codes.
+      6            ******************************************************************************
+      7            *
+      8            * COPYRIGHT(c) 2016 STMicroelectronics
+      9            *
+     10            * Redistribution and use in source and binary forms, with or without modification,
+     11            * are permitted provided that the following conditions are met:
+     12            *   1. Redistributions of source code must retain the above copyright notice,
+     13            *      this list of conditions and the following disclaimer.
+     14            *   2. Redistributions in binary form must reproduce the above copyright notice,
+     15            *      this list of conditions and the following disclaimer in the documentation
+     16            *      and/or other materials provided with the distribution.
+     17            *   3. Neither the name of STMicroelectronics nor the names of its contributors
+     18            *      may be used to endorse or promote products derived from this software
+     19            *      without specific prior written permission.
+     20            *
+     21            * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+     22            * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     23            * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     24            * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+     25            * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     26            * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+     27            * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+     28            * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+     29            * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+     30            * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     31            *
+     32            ******************************************************************************
+     33            */
+     34          /* Includes ------------------------------------------------------------------*/
+     35          #include "stm32l1xx_hal.h"
+     36          
+     37          extern void Error_Handler(void);
+     38          /* USER CODE BEGIN 0 */
+     39          
+     40          /* USER CODE END 0 */
+     41          
+     42          /**
+     43            * Initializes the Global MSP.
+     44            */
+
+   \                                 In section .text, align 4, keep-with-next
+     45          void HAL_MspInit(void)
+     46          {
+   \                     HAL_MspInit: (+1)
+   \   00000000   0xB580             PUSH     {R7,LR}
+     47            /* USER CODE BEGIN MspInit 0 */
+     48          
+     49            /* USER CODE END MspInit 0 */
+     50          
+     51            __HAL_RCC_COMP_CLK_ENABLE();
+   \   00000002   0x4823             LDR.N    R0,??HAL_MspInit_0  ;; 0x40023824
+   \   00000004   0x6800             LDR      R0,[R0, #+0]
+   \   00000006   0xF050 0x4000      ORRS     R0,R0,#0x80000000
+   \   0000000A   0x4921             LDR.N    R1,??HAL_MspInit_0  ;; 0x40023824
+   \   0000000C   0x6008             STR      R0,[R1, #+0]
+   \   0000000E   0x4820             LDR.N    R0,??HAL_MspInit_0  ;; 0x40023824
+   \   00000010   0x6800             LDR      R0,[R0, #+0]
+   \   00000012   0xF010 0x4000      ANDS     R0,R0,#0x80000000
+   \   00000016   0x9000             STR      R0,[SP, #+0]
+   \   00000018   0x9800             LDR      R0,[SP, #+0]
+     52            __HAL_RCC_SYSCFG_CLK_ENABLE();
+   \   0000001A   0x481E             LDR.N    R0,??HAL_MspInit_0+0x4  ;; 0x40023820
+   \   0000001C   0x6800             LDR      R0,[R0, #+0]
+   \   0000001E   0xF050 0x0001      ORRS     R0,R0,#0x1
+   \   00000022   0x491C             LDR.N    R1,??HAL_MspInit_0+0x4  ;; 0x40023820
+   \   00000024   0x6008             STR      R0,[R1, #+0]
+   \   00000026   0x481B             LDR.N    R0,??HAL_MspInit_0+0x4  ;; 0x40023820
+   \   00000028   0x6800             LDR      R0,[R0, #+0]
+   \   0000002A   0xF010 0x0001      ANDS     R0,R0,#0x1
+   \   0000002E   0x9000             STR      R0,[SP, #+0]
+   \   00000030   0x9800             LDR      R0,[SP, #+0]
+     53          
+     54            HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+   \   00000032   0x2003             MOVS     R0,#+3
+   \   00000034   0x.... 0x....      BL       HAL_NVIC_SetPriorityGrouping
+     55          
+     56            /* System interrupt init*/
+     57            /* MemoryManagement_IRQn interrupt configuration */
+     58            HAL_NVIC_SetPriority(MemoryManagement_IRQn, 0, 0);
+   \   00000038   0x2200             MOVS     R2,#+0
+   \   0000003A   0x2100             MOVS     R1,#+0
+   \   0000003C   0xF07F 0x000B      MVNS     R0,#+11
+   \   00000040   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     59            /* BusFault_IRQn interrupt configuration */
+     60            HAL_NVIC_SetPriority(BusFault_IRQn, 0, 0);
+   \   00000044   0x2200             MOVS     R2,#+0
+   \   00000046   0x2100             MOVS     R1,#+0
+   \   00000048   0xF07F 0x000A      MVNS     R0,#+10
+   \   0000004C   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     61            /* UsageFault_IRQn interrupt configuration */
+     62            HAL_NVIC_SetPriority(UsageFault_IRQn, 0, 0);
+   \   00000050   0x2200             MOVS     R2,#+0
+   \   00000052   0x2100             MOVS     R1,#+0
+   \   00000054   0xF07F 0x0009      MVNS     R0,#+9
+   \   00000058   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     63            /* SVC_IRQn interrupt configuration */
+     64            HAL_NVIC_SetPriority(SVC_IRQn, 0, 0);
+   \   0000005C   0x2200             MOVS     R2,#+0
+   \   0000005E   0x2100             MOVS     R1,#+0
+   \   00000060   0xF07F 0x0004      MVNS     R0,#+4
+   \   00000064   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     65            /* DebugMonitor_IRQn interrupt configuration */
+     66            HAL_NVIC_SetPriority(DebugMonitor_IRQn, 0, 0);
+   \   00000068   0x2200             MOVS     R2,#+0
+   \   0000006A   0x2100             MOVS     R1,#+0
+   \   0000006C   0xF07F 0x0003      MVNS     R0,#+3
+   \   00000070   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     67            /* PendSV_IRQn interrupt configuration */
+     68            HAL_NVIC_SetPriority(PendSV_IRQn, 15, 0);
+   \   00000074   0x2200             MOVS     R2,#+0
+   \   00000076   0x210F             MOVS     R1,#+15
+   \   00000078   0xF07F 0x0001      MVNS     R0,#+1
+   \   0000007C   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     69            /* SysTick_IRQn interrupt configuration */
+     70            HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
+   \   00000080   0x2200             MOVS     R2,#+0
+   \   00000082   0x210F             MOVS     R1,#+15
+   \   00000084   0xF05F 0x30FF      MOVS     R0,#-1
+   \   00000088   0x.... 0x....      BL       HAL_NVIC_SetPriority
+     71          
+     72            /* USER CODE BEGIN MspInit 1 */
+     73          
+     74            /* USER CODE END MspInit 1 */
+     75          }
+   \   0000008C   0xBD01             POP      {R0,PC}          ;; return
+   \   0000008E   0xBF00             Nop      
+   \                     ??HAL_MspInit_0:
+   \   00000090   0x40023824         DC32     0x40023824
+   \   00000094   0x40023820         DC32     0x40023820
+     76          
+     77          /* USER CODE BEGIN 1 */
+     78          
+     79          /* USER CODE END 1 */
+     80          
+     81          /**
+     82            * @}
+     83            */
+     84          
+     85          /**
+     86            * @}
+     87            */
+     88          
+     89          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
+   Maximum stack usage in bytes:
+
+   .cstack Function
+   ------- --------
+       8   HAL_MspInit
+         8   -> HAL_NVIC_SetPriority
+         8   -> HAL_NVIC_SetPriorityGrouping
+
+
+   Section sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+     152  HAL_MspInit
+
+ 
+ 152 bytes in section .text
+ 
+ 152 bytes of CODE memory
+
+Errors: none
+Warnings: none
