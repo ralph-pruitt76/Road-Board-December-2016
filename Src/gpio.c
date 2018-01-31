@@ -35,7 +35,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
 /* USER CODE BEGIN 0 */
-const uint32_t RoadBrd_LED_PORT[16] = {(uint32_t)LED2_GPIO_PORT, 
+const uint32_t RoadBrd_LED_PORT[RoadBrd_LEDn] = {(uint32_t)LED2_GPIO_PORT, 
                                                 (uint32_t)BLUE_GPIO_PORT, 
                                                 (uint32_t)GREEN_GPIO_PORT, 
                                                 (uint32_t)YELLOW_GPIO_PORT,
@@ -60,7 +60,12 @@ const uint16_t RoadBrd_LED_PIN[RoadBrd_LEDn] = {LED2_PIN,
                                                 RESET_BGM111_PIN,
                                                 CHARGE_ON_PIN,
                                                 HEAT_ON_PIN,
-                                                I2C_SCL_Pin};
+                                                I2C_SCL_Pin,
+                                                PC0_PIN,
+                                                PC1_PIN,
+                                                PC2_PIN,
+                                                PC3_PIN,
+                                                PC4_PIN};
 
 /* USER CODE END 0 */
 
@@ -69,6 +74,56 @@ const uint16_t RoadBrd_LED_PIN[RoadBrd_LEDn] = {LED2_PIN,
 /*----------------------------------------------------------------------------*/
 /* USER CODE BEGIN 1 */
 
+#ifdef WM
+//****************************************************************************************
+// WEATHERMESH User Code starts here. Custom GPIO Initialization
+// Configure PC0, PC1, PC2, PC3, and PC4 as Input or Output here.
+// CURRENT CONFIGURATION
+//      PC0: Input, Analog, No Pullup
+//      PC1: Input, Analog, No Pullup
+//      PC2: Input, Analog, No Pullup
+//      PC3: Input, Analog, No Pullup
+//      PC4: Output, Speed:Low, Push-Pull, No Pullup, Output=LOW
+//
+/** Configure pins as 
+        * Analog 
+        * Input 
+        * Output
+        * EVENT_OUT
+        * EXTI
+        * Free pins are configured automatically as Analog (this feature is enabled through 
+        * the Code Generation settings)
+*/
+void WM_GPIO_Init(void)
+{
+
+  GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+
+  /*Configure GPIO pins : PC0 PC1 PC2 PC3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PC4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  //GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOC, PC4_PIN, GPIO_PIN_RESET);
+
+}
+
+// END OF ALL User Code for WM Here.
+//*****************************************************************************************     
+#endif
 /* USER CODE END 1 */
 
 /** Configure pins as 

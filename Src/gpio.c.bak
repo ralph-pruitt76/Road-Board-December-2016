@@ -35,16 +35,21 @@
 /* Includes ------------------------------------------------------------------*/
 #include "gpio.h"
 /* USER CODE BEGIN 0 */
-GPIO_TypeDef* RoadBrd_LED_PORT[RoadBrd_LEDn] = {LED2_GPIO_PORT, 
-                                                BLUE_GPIO_PORT, 
-                                                GREEN_GPIO_PORT, 
-                                                YELLOW_GPIO_PORT,
-                                                TAM_PWR_GPIO_PORT,
-                                                VDD_PWR_GPIO_PORT,
-                                                RESET_BGM111_GPIO_PORT,
-                                                CHARGE_ON_GPIO_PORT,
-                                                HEAT_ON_GPIO_PORT,
-                                                GPIOB};
+const uint32_t RoadBrd_LED_PORT[16] = {(uint32_t)LED2_GPIO_PORT, 
+                                                (uint32_t)BLUE_GPIO_PORT, 
+                                                (uint32_t)GREEN_GPIO_PORT, 
+                                                (uint32_t)YELLOW_GPIO_PORT,
+                                                (uint32_t)TAM_PWR_GPIO_PORT,
+                                                (uint32_t)VDD_PWR_GPIO_PORT,
+                                                (uint32_t)RESET_BGM111_GPIO_PORT,
+                                                (uint32_t)CHARGE_ON_GPIO_PORT,
+                                                (uint32_t)HEAT_ON_GPIO_PORT,
+                                                (uint32_t)GPIOB,
+                                                (uint32_t)PC0_GPIO_PORT,
+                                                (uint32_t)PC1_GPIO_PORT,
+                                                (uint32_t)PC2_GPIO_PORT,
+                                                (uint32_t)PC3_GPIO_PORT,
+                                                (uint32_t)PC4_GPIO_PORT};
 
 const uint16_t RoadBrd_LED_PIN[RoadBrd_LEDn] = {LED2_PIN, 
                                                 BLUE_PIN, 
@@ -160,7 +165,9 @@ void MX_GPIO_Init(void)
   */
 void RoadBrd_LED_On(RoadBrd_Led_TypeDef Led)
 {
-  HAL_GPIO_WritePin(RoadBrd_LED_PORT[Led], RoadBrd_LED_PIN[Led], GPIO_PIN_SET); 
+  GPIO_TypeDef* temp_GPIOx;
+  temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Led];
+  HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Led], GPIO_PIN_SET); 
 }
 
 /**
@@ -172,7 +179,9 @@ void RoadBrd_LED_On(RoadBrd_Led_TypeDef Led)
   */
 void RoadBrd_LED_Off(RoadBrd_Led_TypeDef Led)
 {
-  HAL_GPIO_WritePin(RoadBrd_LED_PORT[Led], RoadBrd_LED_PIN[Led], GPIO_PIN_RESET); 
+  GPIO_TypeDef* temp_GPIOx;
+  temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Led];
+  HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Led], GPIO_PIN_RESET); 
 }
 
 /**
@@ -184,7 +193,9 @@ void RoadBrd_LED_Off(RoadBrd_Led_TypeDef Led)
   */
 void RoadBrd_LED_Toggle(RoadBrd_Led_TypeDef Led)
 {
-  HAL_GPIO_TogglePin(RoadBrd_LED_PORT[Led], RoadBrd_LED_PIN[Led]);
+  GPIO_TypeDef* temp_GPIOx;
+  temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Led];
+  HAL_GPIO_TogglePin(temp_GPIOx, RoadBrd_LED_PIN[Led]);
 }
 
 /**
@@ -195,7 +206,9 @@ void RoadBrd_LED_Toggle(RoadBrd_Led_TypeDef Led)
   */
 void RoadBrd_gpio_On(RoadBrd_Led_TypeDef Port)
 {
-  HAL_GPIO_WritePin(RoadBrd_LED_PORT[Port], RoadBrd_LED_PIN[Port], GPIO_PIN_SET); 
+  GPIO_TypeDef* temp_GPIOx;
+  temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Port];
+  HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Port], GPIO_PIN_SET); 
 }
 
 /**
@@ -206,7 +219,9 @@ void RoadBrd_gpio_On(RoadBrd_Led_TypeDef Port)
   */
 void RoadBrd_gpio_Off(RoadBrd_Led_TypeDef Port)
 {
-  HAL_GPIO_WritePin(RoadBrd_LED_PORT[Port], RoadBrd_LED_PIN[Port], GPIO_PIN_RESET); 
+  GPIO_TypeDef* temp_GPIOx;
+  temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Port];
+  HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Port], GPIO_PIN_RESET); 
 }
 
 /**
@@ -217,7 +232,9 @@ void RoadBrd_gpio_Off(RoadBrd_Led_TypeDef Port)
   */
 void RoadBrd_gpio_Toggle(RoadBrd_Led_TypeDef Port)
 {
-  HAL_GPIO_TogglePin(RoadBrd_LED_PORT[Port], RoadBrd_LED_PIN[Port]);
+  GPIO_TypeDef* temp_GPIOx;
+  temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Port];
+  HAL_GPIO_TogglePin(temp_GPIOx, RoadBrd_LED_PIN[Port]);
 }
 
 
