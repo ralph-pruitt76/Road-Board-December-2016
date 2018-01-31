@@ -60,11 +60,11 @@ typedef enum
   gCHARGE_ON = 7,
   gHEAT_ON = 8,
   gI2C_CLK = 9,
-//  g_PC0 = 10,
-//  g_PC1 = 11,
-//  g_PC2 = 12,
-//  g_PC3 = 13,
-//  g_PC4 = 14,
+  g_PC0 = 10,
+  g_PC1 = 11,
+  g_PC2 = 12,
+  g_PC3 = 13,
+  g_PC4 = 14,
   
   BGM_LED = BLUE_LED,
   MICRO_LED = GREEN_LED,
@@ -114,6 +114,9 @@ void RoadBrd_LED_Toggle(RoadBrd_Led_TypeDef Led);
 void RoadBrd_gpio_On(RoadBrd_Led_TypeDef Port);
 void RoadBrd_gpio_Off(RoadBrd_Led_TypeDef Port);
 void RoadBrd_gpio_Toggle(RoadBrd_Led_TypeDef Port);
+#ifdef WM
+void WM_GPIO_Init(void);
+#endif
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
