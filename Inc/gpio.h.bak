@@ -60,13 +60,19 @@ typedef enum
   gCHARGE_ON = 7,
   gHEAT_ON = 8,
   gI2C_CLK = 9,
+//  g_PC0 = 10,
+//  g_PC1 = 11,
+//  g_PC2 = 12,
+//  g_PC3 = 13,
+//  g_PC4 = 14,
   
   BGM_LED = BLUE_LED,
   MICRO_LED = GREEN_LED,
   STATUS_LED = YELLOW_LED,
   NUCLEO_LED_GREEN = LED2
 } RoadBrd_Led_TypeDef;
-#define RoadBrd_LEDn                     10
+//#define RoadBrd_LEDn                     10
+#define RoadBrd_LEDn                     15
 
 #define LED2_PIN                         GPIO_PIN_5
 #define LED2_GPIO_PORT                   GPIOA

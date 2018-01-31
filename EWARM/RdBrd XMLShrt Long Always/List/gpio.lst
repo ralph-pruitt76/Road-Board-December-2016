@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       31/Jan/2018  10:16:49
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       31/Jan/2018  11:34:59
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -93,78 +93,93 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
      36          #include "gpio.h"
      37          /* USER CODE BEGIN 0 */
 
-   \                                 In section .data, align 4
-     38          GPIO_TypeDef* RoadBrd_LED_PORT[RoadBrd_LEDn] = {LED2_GPIO_PORT, 
+   \                                 In section .rodata, align 4
+     38          const uint32_t RoadBrd_LED_PORT[16] = {(uint32_t)LED2_GPIO_PORT, 
    \                     RoadBrd_LED_PORT:
-   \   00000000   0x40020000         DC32 40020000H, 40020400H, 40020400H, 40020400H, 40020400H, 40020400H
+   \   00000000   0x40020000         DC32 1073872896, 1073873920, 1073873920, 1073873920, 1073873920
    \              0x40020400   
    \              0x40020400   
    \              0x40020400   
    \              0x40020400   
+   \   00000014   0x40020400         DC32 1073873920, 1073873920, 1073872896, 1073872896, 1073873920
    \              0x40020400   
-   \   00000018   0x40020400         DC32 40020400H, 40020000H, 40020000H, 40020400H
    \              0x40020000   
    \              0x40020000   
    \              0x40020400   
-     39                                                          BLUE_GPIO_PORT, 
-     40                                                          GREEN_GPIO_PORT, 
-     41                                                          YELLOW_GPIO_PORT,
-     42                                                          TAM_PWR_GPIO_PORT,
-     43                                                          VDD_PWR_GPIO_PORT,
-     44                                                          RESET_BGM111_GPIO_PORT,
-     45                                                          CHARGE_ON_GPIO_PORT,
-     46                                                          HEAT_ON_GPIO_PORT,
-     47                                                          GPIOB};
-     48          
+   \   00000028   0x40020800         DC32 1073874944, 1073874944, 1073874944, 1073874944, 1073874944, 0
+   \              0x40020800   
+   \              0x40020800   
+   \              0x40020800   
+   \              0x40020800   
+   \              0x00000000   
+     39                                                          (uint32_t)BLUE_GPIO_PORT, 
+     40                                                          (uint32_t)GREEN_GPIO_PORT, 
+     41                                                          (uint32_t)YELLOW_GPIO_PORT,
+     42                                                          (uint32_t)TAM_PWR_GPIO_PORT,
+     43                                                          (uint32_t)VDD_PWR_GPIO_PORT,
+     44                                                          (uint32_t)RESET_BGM111_GPIO_PORT,
+     45                                                          (uint32_t)CHARGE_ON_GPIO_PORT,
+     46                                                          (uint32_t)HEAT_ON_GPIO_PORT,
+     47                                                          (uint32_t)GPIOB,
+     48                                                          (uint32_t)PC0_GPIO_PORT,
+     49                                                          (uint32_t)PC1_GPIO_PORT,
+     50                                                          (uint32_t)PC2_GPIO_PORT,
+     51                                                          (uint32_t)PC3_GPIO_PORT,
+     52                                                          (uint32_t)PC4_GPIO_PORT};
+     53          
 
    \                                 In section .rodata, align 4
-     49          const uint16_t RoadBrd_LED_PIN[RoadBrd_LEDn] = {LED2_PIN, 
+     54          const uint16_t RoadBrd_LED_PIN[RoadBrd_LEDn] = {LED2_PIN, 
    \                     RoadBrd_LED_PIN:
-   \   00000000   0x0020 0x0200      DC16 32, 512, 4096, 256, 2, 32, 32768, 128, 256, 64
+   \   00000000   0x0020 0x0200      DC16 32, 512, 4096, 256, 2, 32, 32768, 128, 256, 64, 0, 0, 0, 0, 0
    \              0x1000 0x0100
    \              0x0002 0x0020
    \              0x8000 0x0080
    \              0x0100 0x0040
-     50                                                          BLUE_PIN, 
-     51                                                          GREEN_PIN, 
-     52                                                          YELLOW_PIN,
-     53                                                          TAM_PWR_PIN,
-     54                                                          VDD_PWR_PIN,
-     55                                                          RESET_BGM111_PIN,
-     56                                                          CHARGE_ON_PIN,
-     57                                                          HEAT_ON_PIN,
-     58                                                          I2C_SCL_Pin};
-     59          
-     60          /* USER CODE END 0 */
-     61          
-     62          /*----------------------------------------------------------------------------*/
-     63          /* Configure GPIO                                                             */
-     64          /*----------------------------------------------------------------------------*/
-     65          /* USER CODE BEGIN 1 */
+   \              0x0000 0x0000
+   \              0x0000 0x0000
+   \              0x0000       
+   \   0000001E   0x00 0x00          DC8 0, 0
+     55                                                          BLUE_PIN, 
+     56                                                          GREEN_PIN, 
+     57                                                          YELLOW_PIN,
+     58                                                          TAM_PWR_PIN,
+     59                                                          VDD_PWR_PIN,
+     60                                                          RESET_BGM111_PIN,
+     61                                                          CHARGE_ON_PIN,
+     62                                                          HEAT_ON_PIN,
+     63                                                          I2C_SCL_Pin};
+     64          
+     65          /* USER CODE END 0 */
      66          
-     67          /* USER CODE END 1 */
-     68          
-     69          /** Configure pins as 
-     70                  * Analog 
-     71                  * Input 
-     72                  * Output
-     73                  * EVENT_OUT
-     74                  * EXTI
-     75                  * Free pins are configured automatically as Analog (this feature is enabled through 
-     76                  * the Code Generation settings)
-     77          */
+     67          /*----------------------------------------------------------------------------*/
+     68          /* Configure GPIO                                                             */
+     69          /*----------------------------------------------------------------------------*/
+     70          /* USER CODE BEGIN 1 */
+     71          
+     72          /* USER CODE END 1 */
+     73          
+     74          /** Configure pins as 
+     75                  * Analog 
+     76                  * Input 
+     77                  * Output
+     78                  * EVENT_OUT
+     79                  * EXTI
+     80                  * Free pins are configured automatically as Analog (this feature is enabled through 
+     81                  * the Code Generation settings)
+     82          */
 
    \                                 In section .text, align 2, keep-with-next
-     78          void MX_GPIO_Init(void)
-     79          {
+     83          void MX_GPIO_Init(void)
+     84          {
    \                     MX_GPIO_Init: (+1)
    \   00000000   0xB500             PUSH     {LR}
    \   00000002   0xB087             SUB      SP,SP,#+28
-     80          
-     81            GPIO_InitTypeDef GPIO_InitStruct;
-     82          
-     83            /* GPIO Ports Clock Enable */
-     84            __HAL_RCC_GPIOC_CLK_ENABLE();
+     85          
+     86            GPIO_InitTypeDef GPIO_InitStruct;
+     87          
+     88            /* GPIO Ports Clock Enable */
+     89            __HAL_RCC_GPIOC_CLK_ENABLE();
    \   00000004   0x....             LDR.N    R0,??DataTable6  ;; 0x4002381c
    \   00000006   0x6800             LDR      R0,[R0, #+0]
    \   00000008   0xF050 0x0004      ORRS     R0,R0,#0x4
@@ -175,7 +190,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000014   0xF010 0x0004      ANDS     R0,R0,#0x4
    \   00000018   0x9000             STR      R0,[SP, #+0]
    \   0000001A   0x9800             LDR      R0,[SP, #+0]
-     85            __HAL_RCC_GPIOH_CLK_ENABLE();
+     90            __HAL_RCC_GPIOH_CLK_ENABLE();
    \   0000001C   0x....             LDR.N    R0,??DataTable6  ;; 0x4002381c
    \   0000001E   0x6800             LDR      R0,[R0, #+0]
    \   00000020   0xF050 0x0020      ORRS     R0,R0,#0x20
@@ -186,7 +201,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000002C   0xF010 0x0020      ANDS     R0,R0,#0x20
    \   00000030   0x9000             STR      R0,[SP, #+0]
    \   00000032   0x9800             LDR      R0,[SP, #+0]
-     86            __HAL_RCC_GPIOA_CLK_ENABLE();
+     91            __HAL_RCC_GPIOA_CLK_ENABLE();
    \   00000034   0x....             LDR.N    R0,??DataTable6  ;; 0x4002381c
    \   00000036   0x6800             LDR      R0,[R0, #+0]
    \   00000038   0xF050 0x0001      ORRS     R0,R0,#0x1
@@ -197,7 +212,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000044   0xF010 0x0001      ANDS     R0,R0,#0x1
    \   00000048   0x9000             STR      R0,[SP, #+0]
    \   0000004A   0x9800             LDR      R0,[SP, #+0]
-     87            __HAL_RCC_GPIOB_CLK_ENABLE();
+     92            __HAL_RCC_GPIOB_CLK_ENABLE();
    \   0000004C   0x....             LDR.N    R0,??DataTable6  ;; 0x4002381c
    \   0000004E   0x6800             LDR      R0,[R0, #+0]
    \   00000050   0xF050 0x0002      ORRS     R0,R0,#0x2
@@ -208,7 +223,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000005C   0xF010 0x0002      ANDS     R0,R0,#0x2
    \   00000060   0x9000             STR      R0,[SP, #+0]
    \   00000062   0x9800             LDR      R0,[SP, #+0]
-     88            __HAL_RCC_GPIOD_CLK_ENABLE();
+     93            __HAL_RCC_GPIOD_CLK_ENABLE();
    \   00000064   0x....             LDR.N    R0,??DataTable6  ;; 0x4002381c
    \   00000066   0x6800             LDR      R0,[R0, #+0]
    \   00000068   0xF050 0x0008      ORRS     R0,R0,#0x8
@@ -219,300 +234,324 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000074   0xF010 0x0008      ANDS     R0,R0,#0x8
    \   00000078   0x9000             STR      R0,[SP, #+0]
    \   0000007A   0x9800             LDR      R0,[SP, #+0]
-     89          
-     90            /*Configure GPIO pin : PtPin */
-     91            GPIO_InitStruct.Pin = B1_Pin;
+     94          
+     95            /*Configure GPIO pin : PtPin */
+     96            GPIO_InitStruct.Pin = B1_Pin;
    \   0000007C   0xF44F 0x5000      MOV      R0,#+8192
    \   00000080   0x9001             STR      R0,[SP, #+4]
-     92            GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+     97            GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
    \   00000082   0x2000             MOVS     R0,#+0
    \   00000084   0x9002             STR      R0,[SP, #+8]
-     93            GPIO_InitStruct.Pull = GPIO_NOPULL;
+     98            GPIO_InitStruct.Pull = GPIO_NOPULL;
    \   00000086   0x2000             MOVS     R0,#+0
    \   00000088   0x9003             STR      R0,[SP, #+12]
-     94            HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+     99            HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
    \   0000008A   0xA901             ADD      R1,SP,#+4
    \   0000008C   0x....             LDR.N    R0,??DataTable6_1  ;; 0x40020800
    \   0000008E   0x.... 0x....      BL       HAL_GPIO_Init
-     95          
-     96            /*Configure GPIO pins : PC0 PC1 PC2 PC3 
-     97                                     PC4 PC5 PC6 PC7 
-     98                                     PC8 PC9 PC10 PC11 
-     99                                     PC12 */
-    100            GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
-    101                                    |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 
-    102                                    |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11 
-    103                                    |GPIO_PIN_12;
+    100          
+    101            /*Configure GPIO pins : PC0 PC1 PC2 PC3 
+    102                                     PC4 PC5 PC6 PC7 
+    103                                     PC8 PC9 PC10 PC11 
+    104                                     PC12 */
+    105            GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3 
+    106                                    |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7 
+    107                                    |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11 
+    108                                    |GPIO_PIN_12;
    \   00000092   0xF641 0x70FF      MOVW     R0,#+8191
    \   00000096   0x9001             STR      R0,[SP, #+4]
-    104            GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    109            GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
    \   00000098   0x2003             MOVS     R0,#+3
    \   0000009A   0x9002             STR      R0,[SP, #+8]
-    105            GPIO_InitStruct.Pull = GPIO_NOPULL;
+    110            GPIO_InitStruct.Pull = GPIO_NOPULL;
    \   0000009C   0x2000             MOVS     R0,#+0
    \   0000009E   0x9003             STR      R0,[SP, #+12]
-    106            HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+    111            HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
    \   000000A0   0xA901             ADD      R1,SP,#+4
    \   000000A2   0x....             LDR.N    R0,??DataTable6_1  ;; 0x40020800
    \   000000A4   0x.... 0x....      BL       HAL_GPIO_Init
-    107          
-    108            /*Configure GPIO pins : PA1 PA6 PA9 PA10 */
-    109            GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_6|GPIO_PIN_9|GPIO_PIN_10;
+    112          
+    113            /*Configure GPIO pins : PA1 PA6 PA9 PA10 */
+    114            GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_6|GPIO_PIN_9|GPIO_PIN_10;
    \   000000A8   0xF240 0x6042      MOVW     R0,#+1602
    \   000000AC   0x9001             STR      R0,[SP, #+4]
-    110            GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    115            GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
    \   000000AE   0x2003             MOVS     R0,#+3
    \   000000B0   0x9002             STR      R0,[SP, #+8]
-    111            GPIO_InitStruct.Pull = GPIO_NOPULL;
+    116            GPIO_InitStruct.Pull = GPIO_NOPULL;
    \   000000B2   0x2000             MOVS     R0,#+0
    \   000000B4   0x9003             STR      R0,[SP, #+12]
-    112            HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    117            HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
    \   000000B6   0xA901             ADD      R1,SP,#+4
    \   000000B8   0x....             LDR.N    R0,??DataTable6_2  ;; 0x40020000
    \   000000BA   0x.... 0x....      BL       HAL_GPIO_Init
-    113          
-    114            /*Configure GPIO pins : PAPin PAPin PAPin */
-    115            GPIO_InitStruct.Pin = LD2_Pin|CHARGE_ON_Pin|HEAT_ON_Pin;
+    118          
+    119            /*Configure GPIO pins : PAPin PAPin PAPin */
+    120            GPIO_InitStruct.Pin = LD2_Pin|CHARGE_ON_Pin|HEAT_ON_Pin;
    \   000000BE   0xF44F 0x70D0      MOV      R0,#+416
    \   000000C2   0x9001             STR      R0,[SP, #+4]
-    116            GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    121            GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
    \   000000C4   0x2001             MOVS     R0,#+1
    \   000000C6   0x9002             STR      R0,[SP, #+8]
-    117            GPIO_InitStruct.Pull = GPIO_NOPULL;
+    122            GPIO_InitStruct.Pull = GPIO_NOPULL;
    \   000000C8   0x2000             MOVS     R0,#+0
    \   000000CA   0x9003             STR      R0,[SP, #+12]
-    118            GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    123            GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
    \   000000CC   0x2000             MOVS     R0,#+0
    \   000000CE   0x9004             STR      R0,[SP, #+16]
-    119            HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    124            HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
    \   000000D0   0xA901             ADD      R1,SP,#+4
    \   000000D2   0x....             LDR.N    R0,??DataTable6_2  ;; 0x40020000
    \   000000D4   0x.... 0x....      BL       HAL_GPIO_Init
-    120          
-    121            /*Configure GPIO pins : PB0 PB2 PB4 PB5 */
-    122            GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_4|GPIO_PIN_5;
+    125          
+    126            /*Configure GPIO pins : PB0 PB2 PB4 PB5 */
+    127            GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_4|GPIO_PIN_5;
    \   000000D8   0x2035             MOVS     R0,#+53
    \   000000DA   0x9001             STR      R0,[SP, #+4]
-    123            GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    128            GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
    \   000000DC   0x2001             MOVS     R0,#+1
    \   000000DE   0x9002             STR      R0,[SP, #+8]
-    124            GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    129            GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
    \   000000E0   0x2000             MOVS     R0,#+0
    \   000000E2   0x9004             STR      R0,[SP, #+16]
-    125            //GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
-    126            GPIO_InitStruct.Pull = GPIO_NOPULL;
+    130            //GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    131            GPIO_InitStruct.Pull = GPIO_NOPULL;
    \   000000E4   0x2000             MOVS     R0,#+0
    \   000000E6   0x9003             STR      R0,[SP, #+12]
-    127            HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    132            HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
    \   000000E8   0xA901             ADD      R1,SP,#+4
    \   000000EA   0x....             LDR.N    R0,??DataTable6_3  ;; 0x40020400
    \   000000EC   0x.... 0x....      BL       HAL_GPIO_Init
-    128          
-    129            /*Configure GPIO pins : PBPin PBPin PBPin PBPin 
-    130                                     PBPin */
-    131            GPIO_InitStruct.Pin = TAM_PWR_Pin|LED_MICRO_Pin|RESET_BGM111_Pin|LED_STATUS_Pin 
-    132                                    |LED_BGM111_Pin;
+    133          
+    134            /*Configure GPIO pins : PBPin PBPin PBPin PBPin 
+    135                                     PBPin */
+    136            GPIO_InitStruct.Pin = TAM_PWR_Pin|LED_MICRO_Pin|RESET_BGM111_Pin|LED_STATUS_Pin 
+    137                                    |LED_BGM111_Pin;
    \   000000F0   0xF249 0x3002      MOVW     R0,#+37634
    \   000000F4   0x9001             STR      R0,[SP, #+4]
-    133            GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    138            GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
    \   000000F6   0x2001             MOVS     R0,#+1
    \   000000F8   0x9002             STR      R0,[SP, #+8]
-    134            GPIO_InitStruct.Pull = GPIO_NOPULL;
+    139            GPIO_InitStruct.Pull = GPIO_NOPULL;
    \   000000FA   0x2000             MOVS     R0,#+0
    \   000000FC   0x9003             STR      R0,[SP, #+12]
-    135            GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    140            GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
    \   000000FE   0x2000             MOVS     R0,#+0
    \   00000100   0x9004             STR      R0,[SP, #+16]
-    136            HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+    141            HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
    \   00000102   0xA901             ADD      R1,SP,#+4
    \   00000104   0x....             LDR.N    R0,??DataTable6_3  ;; 0x40020400
    \   00000106   0x.... 0x....      BL       HAL_GPIO_Init
-    137          
-    138            /*Configure GPIO pin : PD2 */
-    139            GPIO_InitStruct.Pin = GPIO_PIN_2;
+    142          
+    143            /*Configure GPIO pin : PD2 */
+    144            GPIO_InitStruct.Pin = GPIO_PIN_2;
    \   0000010A   0x2004             MOVS     R0,#+4
    \   0000010C   0x9001             STR      R0,[SP, #+4]
-    140            GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    145            GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
    \   0000010E   0x2003             MOVS     R0,#+3
    \   00000110   0x9002             STR      R0,[SP, #+8]
-    141            GPIO_InitStruct.Pull = GPIO_NOPULL;
+    146            GPIO_InitStruct.Pull = GPIO_NOPULL;
    \   00000112   0x2000             MOVS     R0,#+0
    \   00000114   0x9003             STR      R0,[SP, #+12]
-    142            HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+    147            HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
    \   00000116   0xA901             ADD      R1,SP,#+4
    \   00000118   0x....             LDR.N    R0,??DataTable6_4  ;; 0x40020c00
    \   0000011A   0x.... 0x....      BL       HAL_GPIO_Init
-    143          
-    144            /*Configure GPIO pin Output Level */
-    145            HAL_GPIO_WritePin(GPIOA, LD2_Pin|CHARGE_ON_Pin|HEAT_ON_Pin, GPIO_PIN_RESET);
+    148          
+    149            /*Configure GPIO pin Output Level */
+    150            HAL_GPIO_WritePin(GPIOA, LD2_Pin|CHARGE_ON_Pin|HEAT_ON_Pin, GPIO_PIN_RESET);
    \   0000011E   0x2200             MOVS     R2,#+0
    \   00000120   0xF44F 0x71D0      MOV      R1,#+416
    \   00000124   0x....             LDR.N    R0,??DataTable6_2  ;; 0x40020000
    \   00000126   0x.... 0x....      BL       HAL_GPIO_WritePin
-    146          
-    147            /*Configure GPIO pin Output Level */
-    148            HAL_GPIO_WritePin(GPIOB, TAM_PWR_Pin|LED_MICRO_Pin|RESET_BGM111_Pin|LED_STATUS_Pin 
-    149                                    |LED_BGM111_Pin, GPIO_PIN_RESET);
+    151          
+    152            /*Configure GPIO pin Output Level */
+    153            HAL_GPIO_WritePin(GPIOB, TAM_PWR_Pin|LED_MICRO_Pin|RESET_BGM111_Pin|LED_STATUS_Pin 
+    154                                    |LED_BGM111_Pin, GPIO_PIN_RESET);
    \   0000012A   0x2200             MOVS     R2,#+0
    \   0000012C   0xF249 0x3102      MOVW     R1,#+37634
    \   00000130   0x....             LDR.N    R0,??DataTable6_3  ;; 0x40020400
    \   00000132   0x.... 0x....      BL       HAL_GPIO_WritePin
-    150          
-    151          }
+    155          
+    156          }
    \   00000136   0xB007             ADD      SP,SP,#+28
    \   00000138   0xBD00             POP      {PC}             ;; return
-    152          
-    153          /* USER CODE BEGIN 2 */
-    154          /**
-    155            * @brief  Turns selected LED On.
-    156            * @param  Led: Specifies the Led to be set on. 
-    157            *   This parameter can be one of following parameters:
-    158            *     @arg LED2
-    159            * @retval None
-    160            */
+    157          
+    158          /* USER CODE BEGIN 2 */
+    159          /**
+    160            * @brief  Turns selected LED On.
+    161            * @param  Led: Specifies the Led to be set on. 
+    162            *   This parameter can be one of following parameters:
+    163            *     @arg LED2
+    164            * @retval None
+    165            */
 
    \                                 In section .text, align 2, keep-with-next
-    161          void RoadBrd_LED_On(RoadBrd_Led_TypeDef Led)
-    162          {
+    166          void RoadBrd_LED_On(RoadBrd_Led_TypeDef Led)
+    167          {
    \                     RoadBrd_LED_On: (+1)
-   \   00000000   0xB510             PUSH     {R4,LR}
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    163            HAL_GPIO_WritePin(RoadBrd_LED_PORT[Led], RoadBrd_LED_PIN[Led], GPIO_PIN_SET); 
-   \   00000004   0x2201             MOVS     R2,#+1
-   \   00000006   0x....             LDR.N    R0,??DataTable6_5
-   \   00000008   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000000A   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
-   \   0000000E   0x....             LDR.N    R0,??DataTable6_6
-   \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000012   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
-   \   00000016   0x.... 0x....      BL       HAL_GPIO_WritePin
-    164          }
-   \   0000001A   0xBD10             POP      {R4,PC}          ;; return
-    165          
-    166          /**
-    167            * @brief  Turns selected LED Off.
-    168            * @param  Led: Specifies the Led to be set off. 
-    169            *   This parameter can be one of following parameters:
-    170            *     @arg LED2
-    171            * @retval None
-    172            */
-
-   \                                 In section .text, align 2, keep-with-next
-    173          void RoadBrd_LED_Off(RoadBrd_Led_TypeDef Led)
-    174          {
-   \                     RoadBrd_LED_Off: (+1)
-   \   00000000   0xB510             PUSH     {R4,LR}
-   \   00000002   0x0004             MOVS     R4,R0
-    175            HAL_GPIO_WritePin(RoadBrd_LED_PORT[Led], RoadBrd_LED_PIN[Led], GPIO_PIN_RESET); 
-   \   00000004   0x2200             MOVS     R2,#+0
-   \   00000006   0x....             LDR.N    R0,??DataTable6_5
-   \   00000008   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000000A   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
-   \   0000000E   0x....             LDR.N    R0,??DataTable6_6
-   \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000012   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
-   \   00000016   0x.... 0x....      BL       HAL_GPIO_WritePin
-    176          }
-   \   0000001A   0xBD10             POP      {R4,PC}          ;; return
-    177          
-    178          /**
-    179            * @brief  Toggles the selected LED.
-    180            * @param  Led: Specifies the Led to be toggled. 
-    181            *   This parameter can be one of following parameters:
-    182            *            @arg  LED2
-    183            * @retval None
-    184            */
-
-   \                                 In section .text, align 2, keep-with-next
-    185          void RoadBrd_LED_Toggle(RoadBrd_Led_TypeDef Led)
-    186          {
-   \                     RoadBrd_LED_Toggle: (+1)
-   \   00000000   0xB510             PUSH     {R4,LR}
-   \   00000002   0x0004             MOVS     R4,R0
-    187            HAL_GPIO_TogglePin(RoadBrd_LED_PORT[Led], RoadBrd_LED_PIN[Led]);
+    168            GPIO_TypeDef* temp_GPIOx;
+    169            temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Led];
    \   00000004   0x....             LDR.N    R0,??DataTable6_5
    \   00000006   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000008   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
-   \   0000000C   0x....             LDR.N    R0,??DataTable6_6
-   \   0000000E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000010   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
-   \   00000014   0x.... 0x....      BL       HAL_GPIO_TogglePin
-    188          }
-   \   00000018   0xBD10             POP      {R4,PC}          ;; return
-    189          
-    190          /**
-    191            * @brief  Turns selected gpio On.
-    192            * @param  Led: Specifies the gpio to be set on. 
-    193            *   This parameter can be one of following parameters:
-    194            * @retval None
-    195            */
+   \   00000008   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
+   \   0000000C   0x0005             MOVS     R5,R0
+    170            HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Led], GPIO_PIN_SET); 
+   \   0000000E   0x2201             MOVS     R2,#+1
+   \   00000010   0x....             LDR.N    R0,??DataTable6_6
+   \   00000012   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000014   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
+   \   00000018   0x0028             MOVS     R0,R5
+   \   0000001A   0x.... 0x....      BL       HAL_GPIO_WritePin
+    171          }
+   \   0000001E   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    172          
+    173          /**
+    174            * @brief  Turns selected LED Off.
+    175            * @param  Led: Specifies the Led to be set off. 
+    176            *   This parameter can be one of following parameters:
+    177            *     @arg LED2
+    178            * @retval None
+    179            */
 
    \                                 In section .text, align 2, keep-with-next
-    196          void RoadBrd_gpio_On(RoadBrd_Led_TypeDef Port)
-    197          {
-   \                     RoadBrd_gpio_On: (+1)
-   \   00000000   0xB510             PUSH     {R4,LR}
+    180          void RoadBrd_LED_Off(RoadBrd_Led_TypeDef Led)
+    181          {
+   \                     RoadBrd_LED_Off: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    198            HAL_GPIO_WritePin(RoadBrd_LED_PORT[Port], RoadBrd_LED_PIN[Port], GPIO_PIN_SET); 
-   \   00000004   0x2201             MOVS     R2,#+1
-   \   00000006   0x....             LDR.N    R0,??DataTable6_5
-   \   00000008   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000000A   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
+    182            GPIO_TypeDef* temp_GPIOx;
+    183            temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Led];
+   \   00000004   0x....             LDR.N    R0,??DataTable6_5
+   \   00000006   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000008   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
+   \   0000000C   0x0005             MOVS     R5,R0
+    184            HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Led], GPIO_PIN_RESET); 
+   \   0000000E   0x2200             MOVS     R2,#+0
+   \   00000010   0x....             LDR.N    R0,??DataTable6_6
+   \   00000012   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000014   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
+   \   00000018   0x0028             MOVS     R0,R5
+   \   0000001A   0x.... 0x....      BL       HAL_GPIO_WritePin
+    185          }
+   \   0000001E   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    186          
+    187          /**
+    188            * @brief  Toggles the selected LED.
+    189            * @param  Led: Specifies the Led to be toggled. 
+    190            *   This parameter can be one of following parameters:
+    191            *            @arg  LED2
+    192            * @retval None
+    193            */
+
+   \                                 In section .text, align 2, keep-with-next
+    194          void RoadBrd_LED_Toggle(RoadBrd_Led_TypeDef Led)
+    195          {
+   \                     RoadBrd_LED_Toggle: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    196            GPIO_TypeDef* temp_GPIOx;
+    197            temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Led];
+   \   00000004   0x....             LDR.N    R0,??DataTable6_5
+   \   00000006   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000008   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
+   \   0000000C   0x0005             MOVS     R5,R0
+    198            HAL_GPIO_TogglePin(temp_GPIOx, RoadBrd_LED_PIN[Led]);
    \   0000000E   0x....             LDR.N    R0,??DataTable6_6
    \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000012   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
-   \   00000016   0x.... 0x....      BL       HAL_GPIO_WritePin
+   \   00000012   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
+   \   00000016   0x0028             MOVS     R0,R5
+   \   00000018   0x.... 0x....      BL       HAL_GPIO_TogglePin
     199          }
-   \   0000001A   0xBD10             POP      {R4,PC}          ;; return
+   \   0000001C   0xBD31             POP      {R0,R4,R5,PC}    ;; return
     200          
     201          /**
-    202            * @brief  Turns selected gpio Off.
-    203            * @param  Led: Specifies the gpio to be set off. 
+    202            * @brief  Turns selected gpio On.
+    203            * @param  Led: Specifies the gpio to be set on. 
     204            *   This parameter can be one of following parameters:
     205            * @retval None
     206            */
 
    \                                 In section .text, align 2, keep-with-next
-    207          void RoadBrd_gpio_Off(RoadBrd_Led_TypeDef Port)
+    207          void RoadBrd_gpio_On(RoadBrd_Led_TypeDef Port)
     208          {
-   \                     RoadBrd_gpio_Off: (+1)
-   \   00000000   0xB510             PUSH     {R4,LR}
+   \                     RoadBrd_gpio_On: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-    209            HAL_GPIO_WritePin(RoadBrd_LED_PORT[Port], RoadBrd_LED_PIN[Port], GPIO_PIN_RESET); 
-   \   00000004   0x2200             MOVS     R2,#+0
-   \   00000006   0x....             LDR.N    R0,??DataTable6_5
-   \   00000008   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   0000000A   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
-   \   0000000E   0x....             LDR.N    R0,??DataTable6_6
-   \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000012   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
-   \   00000016   0x.... 0x....      BL       HAL_GPIO_WritePin
-    210          }
-   \   0000001A   0xBD10             POP      {R4,PC}          ;; return
-    211          
-    212          /**
-    213            * @brief  Toggles the selected gpio.
-    214            * @param  Led: Specifies the gpio to be toggled. 
-    215            *   This parameter can be one of following parameters:
-    216            * @retval None
-    217            */
-
-   \                                 In section .text, align 2, keep-with-next
-    218          void RoadBrd_gpio_Toggle(RoadBrd_Led_TypeDef Port)
-    219          {
-   \                     RoadBrd_gpio_Toggle: (+1)
-   \   00000000   0xB510             PUSH     {R4,LR}
-   \   00000002   0x0004             MOVS     R4,R0
-    220            HAL_GPIO_TogglePin(RoadBrd_LED_PORT[Port], RoadBrd_LED_PIN[Port]);
+    209            GPIO_TypeDef* temp_GPIOx;
+    210            temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Port];
    \   00000004   0x....             LDR.N    R0,??DataTable6_5
    \   00000006   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000008   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
-   \   0000000C   0x....             LDR.N    R0,??DataTable6_6
-   \   0000000E   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
-   \   00000010   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
-   \   00000014   0x.... 0x....      BL       HAL_GPIO_TogglePin
-    221          }
-   \   00000018   0xBD10             POP      {R4,PC}          ;; return
+   \   00000008   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
+   \   0000000C   0x0005             MOVS     R5,R0
+    211            HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Port], GPIO_PIN_SET); 
+   \   0000000E   0x2201             MOVS     R2,#+1
+   \   00000010   0x....             LDR.N    R0,??DataTable6_6
+   \   00000012   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000014   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
+   \   00000018   0x0028             MOVS     R0,R5
+   \   0000001A   0x.... 0x....      BL       HAL_GPIO_WritePin
+    212          }
+   \   0000001E   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    213          
+    214          /**
+    215            * @brief  Turns selected gpio Off.
+    216            * @param  Led: Specifies the gpio to be set off. 
+    217            *   This parameter can be one of following parameters:
+    218            * @retval None
+    219            */
+
+   \                                 In section .text, align 2, keep-with-next
+    220          void RoadBrd_gpio_Off(RoadBrd_Led_TypeDef Port)
+    221          {
+   \                     RoadBrd_gpio_Off: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    222            GPIO_TypeDef* temp_GPIOx;
+    223            temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Port];
+   \   00000004   0x....             LDR.N    R0,??DataTable6_5
+   \   00000006   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000008   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
+   \   0000000C   0x0005             MOVS     R5,R0
+    224            HAL_GPIO_WritePin(temp_GPIOx, RoadBrd_LED_PIN[Port], GPIO_PIN_RESET); 
+   \   0000000E   0x2200             MOVS     R2,#+0
+   \   00000010   0x....             LDR.N    R0,??DataTable6_6
+   \   00000012   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000014   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
+   \   00000018   0x0028             MOVS     R0,R5
+   \   0000001A   0x.... 0x....      BL       HAL_GPIO_WritePin
+    225          }
+   \   0000001E   0xBD31             POP      {R0,R4,R5,PC}    ;; return
+    226          
+    227          /**
+    228            * @brief  Toggles the selected gpio.
+    229            * @param  Led: Specifies the gpio to be toggled. 
+    230            *   This parameter can be one of following parameters:
+    231            * @retval None
+    232            */
+
+   \                                 In section .text, align 2, keep-with-next
+    233          void RoadBrd_gpio_Toggle(RoadBrd_Led_TypeDef Port)
+    234          {
+   \                     RoadBrd_gpio_Toggle: (+1)
+   \   00000000   0xB538             PUSH     {R3-R5,LR}
+   \   00000002   0x0004             MOVS     R4,R0
+    235            GPIO_TypeDef* temp_GPIOx;
+    236            temp_GPIOx = (GPIO_TypeDef*)RoadBrd_LED_PORT[Port];
+   \   00000004   0x....             LDR.N    R0,??DataTable6_5
+   \   00000006   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000008   0xF850 0x0024      LDR      R0,[R0, R4, LSL #+2]
+   \   0000000C   0x0005             MOVS     R5,R0
+    237            HAL_GPIO_TogglePin(temp_GPIOx, RoadBrd_LED_PIN[Port]);
+   \   0000000E   0x....             LDR.N    R0,??DataTable6_6
+   \   00000010   0xB2E4             UXTB     R4,R4            ;; ZeroExt  R4,R4,#+24,#+24
+   \   00000012   0xF830 0x1014      LDRH     R1,[R0, R4, LSL #+1]
+   \   00000016   0x0028             MOVS     R0,R5
+   \   00000018   0x.... 0x....      BL       HAL_GPIO_TogglePin
+    238          }
+   \   0000001C   0xBD31             POP      {R0,R4,R5,PC}    ;; return
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6:
@@ -536,24 +575,24 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_5:
-   \   00000000   0x........         DC32     RoadBrd_LED_PIN
+   \   00000000   0x........         DC32     RoadBrd_LED_PORT
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable6_6:
-   \   00000000   0x........         DC32     RoadBrd_LED_PORT
-    222          
-    223          
-    224          /* USER CODE END 2 */
-    225          
-    226          /**
-    227            * @}
-    228            */
-    229          
-    230          /**
-    231            * @}
-    232            */
-    233          
-    234          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+   \   00000000   0x........         DC32     RoadBrd_LED_PIN
+    239          
+    240          
+    241          /* USER CODE END 2 */
+    242          
+    243          /**
+    244            * @}
+    245            */
+    246          
+    247          /**
+    248            * @}
+    249            */
+    250          
+    251          /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 
    Maximum stack usage in bytes:
 
@@ -562,18 +601,18 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
       32   MX_GPIO_Init
         32   -> HAL_GPIO_Init
         32   -> HAL_GPIO_WritePin
-       8   RoadBrd_LED_Off
-         8   -> HAL_GPIO_WritePin
-       8   RoadBrd_LED_On
-         8   -> HAL_GPIO_WritePin
-       8   RoadBrd_LED_Toggle
-         8   -> HAL_GPIO_TogglePin
-       8   RoadBrd_gpio_Off
-         8   -> HAL_GPIO_WritePin
-       8   RoadBrd_gpio_On
-         8   -> HAL_GPIO_WritePin
-       8   RoadBrd_gpio_Toggle
-         8   -> HAL_GPIO_TogglePin
+      16   RoadBrd_LED_Off
+        16   -> HAL_GPIO_WritePin
+      16   RoadBrd_LED_On
+        16   -> HAL_GPIO_WritePin
+      16   RoadBrd_LED_Toggle
+        16   -> HAL_GPIO_TogglePin
+      16   RoadBrd_gpio_Off
+        16   -> HAL_GPIO_WritePin
+      16   RoadBrd_gpio_On
+        16   -> HAL_GPIO_WritePin
+      16   RoadBrd_gpio_Toggle
+        16   -> HAL_GPIO_TogglePin
 
 
    Section sizes:
@@ -588,23 +627,21 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
        4  ??DataTable6_5
        4  ??DataTable6_6
      314  MX_GPIO_Init
-      28  RoadBrd_LED_Off
-      28  RoadBrd_LED_On
-      20  RoadBrd_LED_PIN
-      40  RoadBrd_LED_PORT
-      26  RoadBrd_LED_Toggle
-      28  RoadBrd_gpio_Off
-      28  RoadBrd_gpio_On
-      26  RoadBrd_gpio_Toggle
+      32  RoadBrd_LED_Off
+      32  RoadBrd_LED_On
+      32  RoadBrd_LED_PIN
+      64  RoadBrd_LED_PORT
+      30  RoadBrd_LED_Toggle
+      32  RoadBrd_gpio_Off
+      32  RoadBrd_gpio_On
+      30  RoadBrd_gpio_Toggle
 
  
-  40 bytes in section .data
-  20 bytes in section .rodata
- 506 bytes in section .text
+  96 bytes in section .rodata
+ 530 bytes in section .text
  
- 506 bytes of CODE  memory
-  20 bytes of CONST memory
-  40 bytes of DATA  memory
+ 530 bytes of CODE  memory
+  96 bytes of CONST memory
 
 Errors: none
 Warnings: none

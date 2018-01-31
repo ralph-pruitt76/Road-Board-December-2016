@@ -80,6 +80,8 @@ void MX_FREERTOS_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
+#define TEMP_BUFF2_SZ 80
+  int x;
 #ifdef TEST2
   #define RECEIVE_SZ      5
   uint8_t tempBffr[RECEIVE_SZ];
@@ -92,7 +94,7 @@ int main(void)
 //HERE
     #define RECEIVE_SZ      125
     uint8_t tempBffr[RECEIVE_SZ];
-    uint8_t tempBffr2[80];
+    uint8_t tempBffr2[TEMP_BUFF2_SZ];
     HAL_StatusTypeDef Status;
   #endif
 #endif
@@ -565,6 +567,9 @@ int main(void)
 #endif
           if (Status != HAL_OK)
             Error_Handler();
+          // Clear Buffer
+          for (x=0; x<TEMP_BUFF2_SZ; x++)
+            tempBffr2[x] = 0x00;
           sprintf( (char *)tempBffr2, "TACK Limit: %d.\r\n", RoadBrd_Get_TackLimit() );
 #ifdef REV_L
           Status = RoadBrd_UART_Transmit_IT(NUCLEO_USART, (uint8_t *)tempBffr2);
