@@ -3278,3 +3278,33 @@ java.io.FileNotFoundException: D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadbo
 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:186)
 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:159)
 	at java.lang.Thread.run(Thread.java:745)
+!SESSION 2018-02-01 14:30:39.434 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_92
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86 -data D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2018-02-01 14:30:51.786
+!MESSAGE Unknown architecture(s) [efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[I]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[832]~flash[512K]~temp[G]~package[M]~pins[48]+gcc, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+iar, efr32~family[M]~series[1]~device_configuration[3]~performance[P]~radio[932]~flash[512K]~temp[I]~package[M]~pins[48]+gcc] in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2018-02-01 14:30:51.797
+!MESSAGE Unknown board 'BRD4165B' in framework ble
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2018-02-01 14:30:51.825
+!MESSAGE Unknown architecture(s) [EFR32MG13P832F512GM48+iar, EFR32MG13P932F512GM48+iar, EFR32MG13P932F512IM48+iar, EFR32MG13P832F512GM48+gcc, EFR32MG13P932F512GM48+gcc, EFR32MG13P932F512IM48+gcc] in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2018-02-01 14:30:51.829
+!MESSAGE Unknown board 'BRD4165A' in framework flex
+
+!ENTRY com.silabs.foundation.core_rcp 2 0 2018-02-01 14:30:51.835
+!MESSAGE Unknown board 'BRD4165B' in framework flex
+
+!ENTRY com.silabs.ss.platform.analytics.core 1 0 2018-02-01 14:30:59.347
+!MESSAGE Creating log directoryD:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-December-2016N8\BGM111\Studio_Work\outgoing
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2018-02-01 14:30:59.408
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2018-02-01 14:31:41.581
+!MESSAGE Local timestamp file does not exist: D:\SiliconLabs\SimplicityStudio\v4_2\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp

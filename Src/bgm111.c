@@ -742,6 +742,9 @@ HAL_StatusTypeDef RoadBrd_ProcessBGMChar(uint8_t c)
       ClrDataStructure();                           // Clear Backup data structure.
       ClrAnalyticsRepeat();                          // Clear Frame Repeat Count.
       Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<DISCONNECTED> ");
+      // Kill Pack...THIS IS FATAL!!! RP 2/1/18
+      RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
+      HAL_NVIC_SystemReset();
     }
     // Data String?
     else if (strncmp((char *)tempBffr2,"DATA",4) == 0)

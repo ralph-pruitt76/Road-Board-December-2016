@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       31/Jan/2018  11:46:15
+# IAR ANSI C/C++ Compiler V7.60.2.11341/W32 for ARM       01/Feb/2018  14:55:24
 # Copyright 1999-2016 IAR Systems AB.
 #
 #    Cpu mode     =  thumb
@@ -1661,7 +1661,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000002E   0x.... 0x....      LDR.W    R0,??DataTable25_30
    \   00000032   0x8800             LDRH     R0,[R0, #+0]
    \   00000034   0x28FF             CMP      R0,#+255
-   \   00000036   0xF340 0x822D      BLE.W    ??RoadBrd_ProcessBGMChar_1
+   \   00000036   0xF340 0x8233      BLE.W    ??RoadBrd_ProcessBGMChar_1
     687            {
     688              // Reset Ptr.
     689              in_ptr = 0;
@@ -1686,7 +1686,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000005C   0x.... 0x....      BL       RoadBrd_UART_Transmit
    \   00000060   0x0007             MOVS     R7,R0
     695              sprintf( (char *)tempBffr3, " \r\n");
-   \   00000062   0xA1C8             ADR.N    R1,??RoadBrd_ProcessBGMChar_2  ;; " \r\n"
+   \   00000062   0xA1CB             ADR.N    R1,??RoadBrd_ProcessBGMChar_2  ;; " \r\n"
    \   00000064   0xA804             ADD      R0,SP,#+16
    \   00000066   0x.... 0x....      BL       sprintf
     696              Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
@@ -1701,7 +1701,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
     698                return Status;
    \   0000007A   0x0038             MOVS     R0,R7
    \   0000007C   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   0000007E   0xE20B             B.N      ??RoadBrd_ProcessBGMChar_4
+   \   0000007E   0xE211             B.N      ??RoadBrd_ProcessBGMChar_4
     699              // Test bgm_BannerFlg to determine if we have a new Banner.
     700              if ( bgm_BannerFlg )
    \                     ??RoadBrd_ProcessBGMChar_3: (+1)
@@ -1757,7 +1757,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   000000E2   0x2000             MOVS     R0,#+0
    \   000000E4   0x.... 0x....      BL       RoadBrd_UART_Transmit
    \   000000E8   0x0007             MOVS     R7,R0
-   \   000000EA   0xE1CA             B.N      ??RoadBrd_ProcessBGMChar_7
+   \   000000EA   0xE1D0             B.N      ??RoadBrd_ProcessBGMChar_7
     718              }
     719              // Connection String?
     720              else if (strncmp((char *)tempBffr2,"Connected",9) == 0)
@@ -1791,7 +1791,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000012A   0x2000             MOVS     R0,#+0
    \   0000012C   0x.... 0x....      BL       RoadBrd_UART_Transmit
    \   00000130   0x0007             MOVS     R7,R0
-   \   00000132   0xE1A6             B.N      ??RoadBrd_ProcessBGMChar_7
+   \   00000132   0xE1AC             B.N      ??RoadBrd_ProcessBGMChar_7
     728          
     729              }
     730              // Disconnection String?
@@ -1802,7 +1802,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   0000013A   0x.... 0x....      LDR.W    R0,??DataTable25_29
    \   0000013E   0x.... 0x....      BL       strncmp
    \   00000142   0x2800             CMP      R0,#+0
-   \   00000144   0xD12C             BNE.N    ??RoadBrd_ProcessBGMChar_9
+   \   00000144   0xD131             BNE.N    ??RoadBrd_ProcessBGMChar_9
     732              {
     733                // Yes....Clear Flags.
     734                ble.connection = false;
@@ -1842,696 +1842,702 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \   00000196   0x2000             MOVS     R0,#+0
    \   00000198   0x.... 0x....      BL       RoadBrd_UART_Transmit
    \   0000019C   0x0007             MOVS     R7,R0
-   \   0000019E   0xE170             B.N      ??RoadBrd_ProcessBGMChar_7
-    745              }
-    746              // Data String?
-    747              else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
+    745                // Kill Pack...THIS IS FATAL!!! RP 2/1/18
+    746                RdBrd_BlinkErrCd( ERROR_BGM_CNNCT );
+   \   0000019E   0x200D             MOVS     R0,#+13
+   \   000001A0   0x.... 0x....      BL       RdBrd_BlinkErrCd
+    747                HAL_NVIC_SystemReset();
+   \   000001A4   0x.... 0x....      BL       HAL_NVIC_SystemReset
+   \   000001A8   0xE171             B.N      ??RoadBrd_ProcessBGMChar_7
+    748              }
+    749              // Data String?
+    750              else if (strncmp((char *)tempBffr2,"DATA",4) == 0)
    \                     ??RoadBrd_ProcessBGMChar_9: (+1)
-   \   000001A0   0x2204             MOVS     R2,#+4
-   \   000001A2   0x.... 0x....      LDR.W    R1,??DataTable25_40
-   \   000001A6   0x.... 0x....      LDR.W    R0,??DataTable25_29
-   \   000001AA   0x.... 0x....      BL       strncmp
-   \   000001AE   0x2800             CMP      R0,#+0
-   \   000001B0   0xD174             BNE.N    ??RoadBrd_ProcessBGMChar_10
-    748              {
-    749                // 1. Send String to Server to indicate new CMD Mode.
-    750                //sprintf( (char *)tempBffr2, "<STATUS>CMD</STATUS>" );
-    751                if (RoadBrd_Get_UnitsFlag())
-   \   000001B2   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
-   \   000001B6   0x2800             CMP      R0,#+0
-   \   000001B8   0xD02B             BEQ.N    ??RoadBrd_ProcessBGMChar_11
-    752                {
-    753                  sprintf( (char *)tempBffr2, "<STATUS>CMD|%3.1f|%3.1f|%d|%d|ENABLED</STATUS>",
-    754                          ((float)RoadBrd_Get_RdSndTickCnt()/10),
-    755                          ((float)RoadBrd_Get_SnsrTickCnt()/10),
-    756                          RoadBrd_Get_TackLimit(),
-    757                          RoadBrd_Get_BootDelay());
-   \   000001BA   0x.... 0x....      BL       RoadBrd_Get_BootDelay
-   \   000001BE   0x4681             MOV      R9,R0
-   \   000001C0   0x.... 0x....      BL       RoadBrd_Get_TackLimit
-   \   000001C4   0x4682             MOV      R10,R0
-   \   000001C6   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
-   \   000001CA   0x4683             MOV      R11,R0
-   \   000001CC   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
-   \   000001D0   0x4680             MOV      R8,R0
-   \   000001D2   0xF8CD 0x900C      STR      R9,[SP, #+12]
-   \   000001D6   0xF8CD 0xA008      STR      R10,[SP, #+8]
-   \   000001DA   0x4658             MOV      R0,R11
-   \   000001DC   0x.... 0x....      BL       __aeabi_ui2f
-   \   000001E0   0x.... 0x....      LDR.W    R1,??DataTable25_41  ;; 0x41200000
-   \   000001E4   0x.... 0x....      BL       __aeabi_fdiv
-   \   000001E8   0x.... 0x....      BL       __aeabi_f2d
-   \   000001EC   0xE9CD 0x0100      STRD     R0,R1,[SP, #+0]
-   \   000001F0   0x4640             MOV      R0,R8
-   \   000001F2   0x.... 0x....      BL       __aeabi_ui2f
-   \   000001F6   0x.... 0x....      LDR.W    R1,??DataTable25_41  ;; 0x41200000
-   \   000001FA   0x.... 0x....      BL       __aeabi_fdiv
-   \   000001FE   0x.... 0x....      BL       __aeabi_f2d
-   \   00000202   0x0002             MOVS     R2,R0
-   \   00000204   0x000B             MOVS     R3,R1
-   \   00000206   0x.... 0x....      LDR.W    R1,??DataTable25_42
-   \   0000020A   0x....             LDR.N    R0,??DataTable25_29
-   \   0000020C   0x.... 0x....      BL       sprintf
-   \   00000210   0xE027             B.N      ??RoadBrd_ProcessBGMChar_12
-    758                }
-    759                else
-    760                {
-    761                  sprintf( (char *)tempBffr2, "<STATUS>CMD|%3.1f|%3.1f|%d|%d|DISABLED</STATUS>",
-    762                          ((float)RoadBrd_Get_RdSndTickCnt()/10),
-    763                          ((float)RoadBrd_Get_SnsrTickCnt()/10),
-    764                          RoadBrd_Get_TackLimit(),
-    765                          RoadBrd_Get_BootDelay());
+   \   000001AA   0x2204             MOVS     R2,#+4
+   \   000001AC   0x.... 0x....      LDR.W    R1,??DataTable25_40
+   \   000001B0   0x.... 0x....      LDR.W    R0,??DataTable25_29
+   \   000001B4   0x.... 0x....      BL       strncmp
+   \   000001B8   0x2800             CMP      R0,#+0
+   \   000001BA   0xD175             BNE.N    ??RoadBrd_ProcessBGMChar_10
+    751              {
+    752                // 1. Send String to Server to indicate new CMD Mode.
+    753                //sprintf( (char *)tempBffr2, "<STATUS>CMD</STATUS>" );
+    754                if (RoadBrd_Get_UnitsFlag())
+   \   000001BC   0x.... 0x....      BL       RoadBrd_Get_UnitsFlag
+   \   000001C0   0x2800             CMP      R0,#+0
+   \   000001C2   0xD02C             BEQ.N    ??RoadBrd_ProcessBGMChar_11
+    755                {
+    756                  sprintf( (char *)tempBffr2, "<STATUS>CMD|%3.1f|%3.1f|%d|%d|ENABLED</STATUS>",
+    757                          ((float)RoadBrd_Get_RdSndTickCnt()/10),
+    758                          ((float)RoadBrd_Get_SnsrTickCnt()/10),
+    759                          RoadBrd_Get_TackLimit(),
+    760                          RoadBrd_Get_BootDelay());
+   \   000001C4   0x.... 0x....      BL       RoadBrd_Get_BootDelay
+   \   000001C8   0x4681             MOV      R9,R0
+   \   000001CA   0x.... 0x....      BL       RoadBrd_Get_TackLimit
+   \   000001CE   0x4682             MOV      R10,R0
+   \   000001D0   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
+   \   000001D4   0x4683             MOV      R11,R0
+   \   000001D6   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
+   \   000001DA   0x4680             MOV      R8,R0
+   \   000001DC   0xF8CD 0x900C      STR      R9,[SP, #+12]
+   \   000001E0   0xF8CD 0xA008      STR      R10,[SP, #+8]
+   \   000001E4   0x4658             MOV      R0,R11
+   \   000001E6   0x.... 0x....      BL       __aeabi_ui2f
+   \   000001EA   0x.... 0x....      LDR.W    R1,??DataTable25_41  ;; 0x41200000
+   \   000001EE   0x.... 0x....      BL       __aeabi_fdiv
+   \   000001F2   0x.... 0x....      BL       __aeabi_f2d
+   \   000001F6   0xE9CD 0x0100      STRD     R0,R1,[SP, #+0]
+   \   000001FA   0x4640             MOV      R0,R8
+   \   000001FC   0x.... 0x....      BL       __aeabi_ui2f
+   \   00000200   0x.... 0x....      LDR.W    R1,??DataTable25_41  ;; 0x41200000
+   \   00000204   0x.... 0x....      BL       __aeabi_fdiv
+   \   00000208   0x.... 0x....      BL       __aeabi_f2d
+   \   0000020C   0x0002             MOVS     R2,R0
+   \   0000020E   0x000B             MOVS     R3,R1
+   \   00000210   0x.... 0x....      LDR.W    R1,??DataTable25_42
+   \   00000214   0x.... 0x....      LDR.W    R0,??DataTable25_29
+   \   00000218   0x.... 0x....      BL       sprintf
+   \   0000021C   0xE027             B.N      ??RoadBrd_ProcessBGMChar_12
+    761                }
+    762                else
+    763                {
+    764                  sprintf( (char *)tempBffr2, "<STATUS>CMD|%3.1f|%3.1f|%d|%d|DISABLED</STATUS>",
+    765                          ((float)RoadBrd_Get_RdSndTickCnt()/10),
+    766                          ((float)RoadBrd_Get_SnsrTickCnt()/10),
+    767                          RoadBrd_Get_TackLimit(),
+    768                          RoadBrd_Get_BootDelay());
    \                     ??RoadBrd_ProcessBGMChar_11: (+1)
-   \   00000212   0x.... 0x....      BL       RoadBrd_Get_BootDelay
-   \   00000216   0x4681             MOV      R9,R0
-   \   00000218   0x.... 0x....      BL       RoadBrd_Get_TackLimit
-   \   0000021C   0x4682             MOV      R10,R0
-   \   0000021E   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
-   \   00000222   0x4683             MOV      R11,R0
-   \   00000224   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
-   \   00000228   0x4680             MOV      R8,R0
-   \   0000022A   0xF8CD 0x900C      STR      R9,[SP, #+12]
-   \   0000022E   0xF8CD 0xA008      STR      R10,[SP, #+8]
-   \   00000232   0x4658             MOV      R0,R11
-   \   00000234   0x.... 0x....      BL       __aeabi_ui2f
-   \   00000238   0x....             LDR.N    R1,??DataTable25_41  ;; 0x41200000
-   \   0000023A   0x.... 0x....      BL       __aeabi_fdiv
-   \   0000023E   0x.... 0x....      BL       __aeabi_f2d
-   \   00000242   0xE9CD 0x0100      STRD     R0,R1,[SP, #+0]
-   \   00000246   0x4640             MOV      R0,R8
-   \   00000248   0x.... 0x....      BL       __aeabi_ui2f
-   \   0000024C   0x....             LDR.N    R1,??DataTable25_41  ;; 0x41200000
-   \   0000024E   0x.... 0x....      BL       __aeabi_fdiv
-   \   00000252   0x.... 0x....      BL       __aeabi_f2d
-   \   00000256   0x0002             MOVS     R2,R0
-   \   00000258   0x000B             MOVS     R3,R1
-   \   0000025A   0x....             LDR.N    R1,??DataTable25_43
-   \   0000025C   0x....             LDR.N    R0,??DataTable25_29
-   \   0000025E   0x.... 0x....      BL       sprintf
-    766                }
-    767                Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+   \   0000021E   0x.... 0x....      BL       RoadBrd_Get_BootDelay
+   \   00000222   0x4681             MOV      R9,R0
+   \   00000224   0x.... 0x....      BL       RoadBrd_Get_TackLimit
+   \   00000228   0x4682             MOV      R10,R0
+   \   0000022A   0x.... 0x....      BL       RoadBrd_Get_SnsrTickCnt
+   \   0000022E   0x4683             MOV      R11,R0
+   \   00000230   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
+   \   00000234   0x4680             MOV      R8,R0
+   \   00000236   0xF8CD 0x900C      STR      R9,[SP, #+12]
+   \   0000023A   0xF8CD 0xA008      STR      R10,[SP, #+8]
+   \   0000023E   0x4658             MOV      R0,R11
+   \   00000240   0x.... 0x....      BL       __aeabi_ui2f
+   \   00000244   0x....             LDR.N    R1,??DataTable25_41  ;; 0x41200000
+   \   00000246   0x.... 0x....      BL       __aeabi_fdiv
+   \   0000024A   0x.... 0x....      BL       __aeabi_f2d
+   \   0000024E   0xE9CD 0x0100      STRD     R0,R1,[SP, #+0]
+   \   00000252   0x4640             MOV      R0,R8
+   \   00000254   0x.... 0x....      BL       __aeabi_ui2f
+   \   00000258   0x....             LDR.N    R1,??DataTable25_41  ;; 0x41200000
+   \   0000025A   0x.... 0x....      BL       __aeabi_fdiv
+   \   0000025E   0x.... 0x....      BL       __aeabi_f2d
+   \   00000262   0x0002             MOVS     R2,R0
+   \   00000264   0x000B             MOVS     R3,R1
+   \   00000266   0x....             LDR.N    R1,??DataTable25_43
+   \   00000268   0x....             LDR.N    R0,??DataTable25_29
+   \   0000026A   0x.... 0x....      BL       sprintf
+    769                }
+    770                Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
    \                     ??RoadBrd_ProcessBGMChar_12: (+1)
-   \   00000262   0x....             LDR.N    R1,??DataTable25_29
-   \   00000264   0x2000             MOVS     R0,#+0
-   \   00000266   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000026A   0x0007             MOVS     R7,R0
-    768                if (Status != HAL_OK)
-   \   0000026C   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-   \   0000026E   0x2F00             CMP      R7,#+0
-   \   00000270   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_13
-    769                  return Status;
-   \   00000272   0x0038             MOVS     R0,R7
-   \   00000274   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000276   0xE10F             B.N      ??RoadBrd_ProcessBGMChar_4
-    770                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+   \   0000026E   0x....             LDR.N    R1,??DataTable25_29
+   \   00000270   0x2000             MOVS     R0,#+0
+   \   00000272   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000276   0x0007             MOVS     R7,R0
+    771                if (Status != HAL_OK)
+   \   00000278   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   0000027A   0x2F00             CMP      R7,#+0
+   \   0000027C   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_13
+    772                  return Status;
+   \   0000027E   0x0038             MOVS     R0,R7
+   \   00000280   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000282   0xE10F             B.N      ??RoadBrd_ProcessBGMChar_4
+    773                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
    \                     ??RoadBrd_ProcessBGMChar_13: (+1)
-   \   00000278   0x....             LDR.N    R0,??DataTable25_29
-   \   0000027A   0x.... 0x....      BL       strlen
-   \   0000027E   0x....             LDR.N    R1,??DataTable25_29
-   \   00000280   0x.... 0x....      BL       BGM111_Transmit
-    771                
-    772                // 2. Set the Timer to the RD_Sound at 1 Second Increments.
-    773                RoadBrd_Set_TmpRdSndTickCnt( CMD_TIME );                  // One Second Ticks.
-   \   00000284   0x200A             MOVS     R0,#+10
-   \   00000286   0x.... 0x....      BL       RoadBrd_Set_TmpRdSndTickCnt
+   \   00000284   0x....             LDR.N    R0,??DataTable25_29
+   \   00000286   0x.... 0x....      BL       strlen
+   \   0000028A   0x....             LDR.N    R1,??DataTable25_29
+   \   0000028C   0x.... 0x....      BL       BGM111_Transmit
     774                
-    775                // 3. Set CMD_Mode Active.
-    776                BGM111_SetCMD_Mode( true );
-   \   0000028A   0x2001             MOVS     R0,#+1
-   \   0000028C   0x.... 0x....      BL       BGM111_SetCMD_Mode
+    775                // 2. Set the Timer to the RD_Sound at 1 Second Increments.
+    776                RoadBrd_Set_TmpRdSndTickCnt( CMD_TIME );                  // One Second Ticks.
+   \   00000290   0x200A             MOVS     R0,#+10
+   \   00000292   0x.... 0x....      BL       RoadBrd_Set_TmpRdSndTickCnt
     777                
-    778                // Final Status.
-    779                //ble.data_Connection = true;
-    780                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
-   \   00000290   0x....             LDR.N    R1,??DataTable25_44
-   \   00000292   0x2000             MOVS     R0,#+0
-   \   00000294   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   00000298   0x0007             MOVS     R7,R0
-   \   0000029A   0xE0F2             B.N      ??RoadBrd_ProcessBGMChar_7
-    781              }
-    782              // "RP SPP server..." Tag?
-    783              else if (strncmp((char *)tempBffr2,"RP SPP server...",16) == 0)
+    778                // 3. Set CMD_Mode Active.
+    779                BGM111_SetCMD_Mode( true );
+   \   00000296   0x2001             MOVS     R0,#+1
+   \   00000298   0x.... 0x....      BL       BGM111_SetCMD_Mode
+    780                
+    781                // Final Status.
+    782                //ble.data_Connection = true;
+    783                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.data_Connection> ");
+   \   0000029C   0x....             LDR.N    R1,??DataTable25_44
+   \   0000029E   0x2000             MOVS     R0,#+0
+   \   000002A0   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000002A4   0x0007             MOVS     R7,R0
+   \   000002A6   0xE0F2             B.N      ??RoadBrd_ProcessBGMChar_7
+    784              }
+    785              // "RP SPP server..." Tag?
+    786              else if (strncmp((char *)tempBffr2,"RP SPP server...",16) == 0)
    \                     ??RoadBrd_ProcessBGMChar_10: (+1)
-   \   0000029C   0x2210             MOVS     R2,#+16
-   \   0000029E   0x....             LDR.N    R1,??DataTable25_45
-   \   000002A0   0x....             LDR.N    R0,??DataTable25_29
-   \   000002A2   0x.... 0x....      BL       strncmp
-   \   000002A6   0x2800             CMP      R0,#+0
-   \   000002A8   0xD108             BNE.N    ??RoadBrd_ProcessBGMChar_14
-    784              {
-    785                // Ok Set Flag so that Next String is grabbed as BGM Banner Tag."
-    786                bgm_BannerFlg = true;
-   \   000002AA   0x2001             MOVS     R0,#+1
-   \   000002AC   0x....             LDR.N    R1,??DataTable25_32
-   \   000002AE   0x7008             STRB     R0,[R1, #+0]
-    787                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM Banner Tag Found.> ");
-   \   000002B0   0x....             LDR.N    R1,??DataTable25_46
-   \   000002B2   0x2000             MOVS     R0,#+0
-   \   000002B4   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   000002B8   0x0007             MOVS     R7,R0
-   \   000002BA   0xE0E2             B.N      ??RoadBrd_ProcessBGMChar_7
-    788              }
-    789              
-    790              // TACK String?
-    791              else if (strncmp((char *)tempBffr2,"<TACK>",6) == 0)
+   \   000002A8   0x2210             MOVS     R2,#+16
+   \   000002AA   0x....             LDR.N    R1,??DataTable25_45
+   \   000002AC   0x....             LDR.N    R0,??DataTable25_29
+   \   000002AE   0x.... 0x....      BL       strncmp
+   \   000002B2   0x2800             CMP      R0,#+0
+   \   000002B4   0xD108             BNE.N    ??RoadBrd_ProcessBGMChar_14
+    787              {
+    788                // Ok Set Flag so that Next String is grabbed as BGM Banner Tag."
+    789                bgm_BannerFlg = true;
+   \   000002B6   0x2001             MOVS     R0,#+1
+   \   000002B8   0x....             LDR.N    R1,??DataTable25_32
+   \   000002BA   0x7008             STRB     R0,[R1, #+0]
+    790                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<BGM Banner Tag Found.> ");
+   \   000002BC   0x....             LDR.N    R1,??DataTable25_46
+   \   000002BE   0x2000             MOVS     R0,#+0
+   \   000002C0   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000002C4   0x0007             MOVS     R7,R0
+   \   000002C6   0xE0E2             B.N      ??RoadBrd_ProcessBGMChar_7
+    791              }
+    792              
+    793              // TACK String?
+    794              else if (strncmp((char *)tempBffr2,"<TACK>",6) == 0)
    \                     ??RoadBrd_ProcessBGMChar_14: (+1)
-   \   000002BC   0x2206             MOVS     R2,#+6
-   \   000002BE   0x....             LDR.N    R1,??DataTable25_47
-   \   000002C0   0x....             LDR.N    R0,??DataTable25_29
-   \   000002C2   0x.... 0x....      BL       strncmp
-   \   000002C6   0x2800             CMP      R0,#+0
-   \   000002C8   0xF040 0x80C5      BNE.W    ??RoadBrd_ProcessBGMChar_15
-    792              {
-    793                // CMD_Mode active?
-    794                if ( BGM111_CMD_Mode() )
-   \   000002CC   0x.... 0x....      BL       BGM111_CMD_Mode
-   \   000002D0   0x2800             CMP      R0,#+0
-   \   000002D2   0xD02E             BEQ.N    ??RoadBrd_ProcessBGMChar_16
-    795                {
-    796                  // Send String to Server.
-    797                  sprintf( (char *)tempBffr3, "<STATUS>DATA_SYNC</STATUS>" );
-   \   000002D4   0x....             LDR.N    R1,??DataTable25_48
-   \   000002D6   0xA804             ADD      R0,SP,#+16
-   \   000002D8   0x.... 0x....      BL       sprintf
-    798                  Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
-   \   000002DC   0xA904             ADD      R1,SP,#+16
-   \   000002DE   0x2000             MOVS     R0,#+0
-   \   000002E0   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   000002E4   0x0007             MOVS     R7,R0
-    799                  if (Status != HAL_OK)
-   \   000002E6   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-   \   000002E8   0x2F00             CMP      R7,#+0
-   \   000002EA   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_17
-    800                    return Status;
-   \   000002EC   0x0038             MOVS     R0,R7
-   \   000002EE   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   000002F0   0xE0D2             B.N      ??RoadBrd_ProcessBGMChar_4
-    801                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr3)), tempBffr3);
+   \   000002C8   0x2206             MOVS     R2,#+6
+   \   000002CA   0x....             LDR.N    R1,??DataTable25_47
+   \   000002CC   0x....             LDR.N    R0,??DataTable25_29
+   \   000002CE   0x.... 0x....      BL       strncmp
+   \   000002D2   0x2800             CMP      R0,#+0
+   \   000002D4   0xF040 0x80C5      BNE.W    ??RoadBrd_ProcessBGMChar_15
+    795              {
+    796                // CMD_Mode active?
+    797                if ( BGM111_CMD_Mode() )
+   \   000002D8   0x.... 0x....      BL       BGM111_CMD_Mode
+   \   000002DC   0x2800             CMP      R0,#+0
+   \   000002DE   0xD02E             BEQ.N    ??RoadBrd_ProcessBGMChar_16
+    798                {
+    799                  // Send String to Server.
+    800                  sprintf( (char *)tempBffr3, "<STATUS>DATA_SYNC</STATUS>" );
+   \   000002E0   0x....             LDR.N    R1,??DataTable25_48
+   \   000002E2   0xA804             ADD      R0,SP,#+16
+   \   000002E4   0x.... 0x....      BL       sprintf
+    801                  Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+   \   000002E8   0xA904             ADD      R1,SP,#+16
+   \   000002EA   0x2000             MOVS     R0,#+0
+   \   000002EC   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000002F0   0x0007             MOVS     R7,R0
+    802                  if (Status != HAL_OK)
+   \   000002F2   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   000002F4   0x2F00             CMP      R7,#+0
+   \   000002F6   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_17
+    803                    return Status;
+   \   000002F8   0x0038             MOVS     R0,R7
+   \   000002FA   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   000002FC   0xE0D2             B.N      ??RoadBrd_ProcessBGMChar_4
+    804                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr3)), tempBffr3);
    \                     ??RoadBrd_ProcessBGMChar_17: (+1)
-   \   000002F2   0xA804             ADD      R0,SP,#+16
-   \   000002F4   0x.... 0x....      BL       strlen
-   \   000002F8   0xA904             ADD      R1,SP,#+16
-   \   000002FA   0x.... 0x....      BL       BGM111_Transmit
-    802                  // Clear CMD_Mode.
-    803                  BGM111_SetCMD_Mode( false );
-   \   000002FE   0x2000             MOVS     R0,#+0
-   \   00000300   0x.... 0x....      BL       BGM111_SetCMD_Mode
-    804                  // Set Data_Connection Mode.
-    805                  BGM111_SetDataConnected( true );
-   \   00000304   0x2001             MOVS     R0,#+1
-   \   00000306   0x.... 0x....      BL       BGM111_SetDataConnected
-    806                  // Change RD_Sound Timer to correct value for Data Mode.
-    807                  // First Reload FLASH Frames
-    808                  RoadBrd_WWDG_VerifyFrame();
-   \   0000030A   0x.... 0x....      BL       RoadBrd_WWDG_VerifyFrame
-    809                  // NOW...Reload Active Timer.
-    810                  Set_RdSndTickCnt( RoadBrd_Get_RdSndTickCnt() );
-   \   0000030E   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
-   \   00000312   0x.... 0x....      BL       Set_RdSndTickCnt
-    811                  // Now Set Correct SYNC Mode.
-    812                  ble.TackArmed = TACK_SYNC;
-   \   00000316   0x2003             MOVS     R0,#+3
-   \   00000318   0x....             LDR.N    R1,??DataTable25_2
-   \   0000031A   0xF881 0x019A      STRB     R0,[R1, #+410]
-    813                  ble.TackCnt = 0;
-   \   0000031E   0x2000             MOVS     R0,#+0
-   \   00000320   0x....             LDR.N    R1,??DataTable25_2
-   \   00000322   0xF8A1 0x019C      STRH     R0,[R1, #+412]
-    814                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
-   \   00000326   0x....             LDR.N    R1,??DataTable25_49
-   \   00000328   0x2000             MOVS     R0,#+0
-   \   0000032A   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000032E   0x0007             MOVS     R7,R0
-   \   00000330   0xE03B             B.N      ??RoadBrd_ProcessBGMChar_18
-    815                }
-    816                else if (ble.TackArmed == TACK_ARMED2)
+   \   000002FE   0xA804             ADD      R0,SP,#+16
+   \   00000300   0x.... 0x....      BL       strlen
+   \   00000304   0xA904             ADD      R1,SP,#+16
+   \   00000306   0x.... 0x....      BL       BGM111_Transmit
+    805                  // Clear CMD_Mode.
+    806                  BGM111_SetCMD_Mode( false );
+   \   0000030A   0x2000             MOVS     R0,#+0
+   \   0000030C   0x.... 0x....      BL       BGM111_SetCMD_Mode
+    807                  // Set Data_Connection Mode.
+    808                  BGM111_SetDataConnected( true );
+   \   00000310   0x2001             MOVS     R0,#+1
+   \   00000312   0x.... 0x....      BL       BGM111_SetDataConnected
+    809                  // Change RD_Sound Timer to correct value for Data Mode.
+    810                  // First Reload FLASH Frames
+    811                  RoadBrd_WWDG_VerifyFrame();
+   \   00000316   0x.... 0x....      BL       RoadBrd_WWDG_VerifyFrame
+    812                  // NOW...Reload Active Timer.
+    813                  Set_RdSndTickCnt( RoadBrd_Get_RdSndTickCnt() );
+   \   0000031A   0x.... 0x....      BL       RoadBrd_Get_RdSndTickCnt
+   \   0000031E   0x.... 0x....      BL       Set_RdSndTickCnt
+    814                  // Now Set Correct SYNC Mode.
+    815                  ble.TackArmed = TACK_SYNC;
+   \   00000322   0x2003             MOVS     R0,#+3
+   \   00000324   0x....             LDR.N    R1,??DataTable25_2
+   \   00000326   0xF881 0x019A      STRB     R0,[R1, #+410]
+    816                  ble.TackCnt = 0;
+   \   0000032A   0x2000             MOVS     R0,#+0
+   \   0000032C   0x....             LDR.N    R1,??DataTable25_2
+   \   0000032E   0xF8A1 0x019C      STRH     R0,[R1, #+412]
+    817                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
+   \   00000332   0x....             LDR.N    R1,??DataTable25_49
+   \   00000334   0x2000             MOVS     R0,#+0
+   \   00000336   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000033A   0x0007             MOVS     R7,R0
+   \   0000033C   0xE03B             B.N      ??RoadBrd_ProcessBGMChar_18
+    818                }
+    819                else if (ble.TackArmed == TACK_ARMED2)
    \                     ??RoadBrd_ProcessBGMChar_16: (+1)
-   \   00000332   0x....             LDR.N    R0,??DataTable25_2
-   \   00000334   0xF890 0x019A      LDRB     R0,[R0, #+410]
-   \   00000338   0x2802             CMP      R0,#+2
-   \   0000033A   0xD125             BNE.N    ??RoadBrd_ProcessBGMChar_19
-    817                {
-    818                  ble.TackArmed = TACK_SYNC;
-   \   0000033C   0x2003             MOVS     R0,#+3
-   \   0000033E   0x....             LDR.N    R1,??DataTable25_2
-   \   00000340   0xF881 0x019A      STRB     R0,[R1, #+410]
-    819                  ble.TackCnt = 0;
-   \   00000344   0x2000             MOVS     R0,#+0
-   \   00000346   0x....             LDR.N    R1,??DataTable25_2
-   \   00000348   0xF8A1 0x019C      STRH     R0,[R1, #+412]
-    820                  sprintf( (char *)tempBffr3, "<STATUS>DATA_SYNC</STATUS>" );
-   \   0000034C   0x....             LDR.N    R1,??DataTable25_48
-   \   0000034E   0xA804             ADD      R0,SP,#+16
-   \   00000350   0x.... 0x....      BL       sprintf
-    821                  Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
-   \   00000354   0xA904             ADD      R1,SP,#+16
-   \   00000356   0x2000             MOVS     R0,#+0
-   \   00000358   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000035C   0x0007             MOVS     R7,R0
-    822                  if (Status != HAL_OK)
-   \   0000035E   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-   \   00000360   0x2F00             CMP      R7,#+0
-   \   00000362   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_20
-    823                    return Status;
-   \   00000364   0x0038             MOVS     R0,R7
-   \   00000366   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000368   0xE096             B.N      ??RoadBrd_ProcessBGMChar_4
-    824                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr3)), tempBffr3);
+   \   0000033E   0x....             LDR.N    R0,??DataTable25_2
+   \   00000340   0xF890 0x019A      LDRB     R0,[R0, #+410]
+   \   00000344   0x2802             CMP      R0,#+2
+   \   00000346   0xD125             BNE.N    ??RoadBrd_ProcessBGMChar_19
+    820                {
+    821                  ble.TackArmed = TACK_SYNC;
+   \   00000348   0x2003             MOVS     R0,#+3
+   \   0000034A   0x....             LDR.N    R1,??DataTable25_2
+   \   0000034C   0xF881 0x019A      STRB     R0,[R1, #+410]
+    822                  ble.TackCnt = 0;
+   \   00000350   0x2000             MOVS     R0,#+0
+   \   00000352   0x....             LDR.N    R1,??DataTable25_2
+   \   00000354   0xF8A1 0x019C      STRH     R0,[R1, #+412]
+    823                  sprintf( (char *)tempBffr3, "<STATUS>DATA_SYNC</STATUS>" );
+   \   00000358   0x....             LDR.N    R1,??DataTable25_48
+   \   0000035A   0xA804             ADD      R0,SP,#+16
+   \   0000035C   0x.... 0x....      BL       sprintf
+    824                  Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+   \   00000360   0xA904             ADD      R1,SP,#+16
+   \   00000362   0x2000             MOVS     R0,#+0
+   \   00000364   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000368   0x0007             MOVS     R7,R0
+    825                  if (Status != HAL_OK)
+   \   0000036A   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   0000036C   0x2F00             CMP      R7,#+0
+   \   0000036E   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_20
+    826                    return Status;
+   \   00000370   0x0038             MOVS     R0,R7
+   \   00000372   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000374   0xE096             B.N      ??RoadBrd_ProcessBGMChar_4
+    827                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr3)), tempBffr3);
    \                     ??RoadBrd_ProcessBGMChar_20: (+1)
-   \   0000036A   0xA804             ADD      R0,SP,#+16
-   \   0000036C   0x.... 0x....      BL       strlen
-   \   00000370   0xA904             ADD      R1,SP,#+16
-   \   00000372   0x.... 0x....      BL       BGM111_Transmit
-    825                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
-   \   00000376   0x....             LDR.N    R1,??DataTable25_49
-   \   00000378   0x2000             MOVS     R0,#+0
-   \   0000037A   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000037E   0x0007             MOVS     R7,R0
-   \   00000380   0xE013             B.N      ??RoadBrd_ProcessBGMChar_18
-   \   00000382   0xBF00             Nop      
+   \   00000376   0xA804             ADD      R0,SP,#+16
+   \   00000378   0x.... 0x....      BL       strlen
+   \   0000037C   0xA904             ADD      R1,SP,#+16
+   \   0000037E   0x.... 0x....      BL       BGM111_Transmit
+    828                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<ble.TackArmed=TACK_SYNC>");
+   \   00000382   0x....             LDR.N    R1,??DataTable25_49
+   \   00000384   0x2000             MOVS     R0,#+0
+   \   00000386   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000038A   0x0007             MOVS     R7,R0
+   \   0000038C   0xE013             B.N      ??RoadBrd_ProcessBGMChar_18
+   \   0000038E   0xBF00             Nop      
    \                     ??RoadBrd_ProcessBGMChar_2:
-   \   00000384   0x20 0x0D          DC8      " \r\n"
+   \   00000390   0x20 0x0D          DC8      " \r\n"
    \              0x0A 0x00    
-    826                }
-    827                else if (ble.TackArmed == TACK_SYNC)
+    829                }
+    830                else if (ble.TackArmed == TACK_SYNC)
    \                     ??RoadBrd_ProcessBGMChar_19: (+1)
-   \   00000388   0x....             LDR.N    R0,??DataTable25_2
-   \   0000038A   0xF890 0x019A      LDRB     R0,[R0, #+410]
-   \   0000038E   0x2803             CMP      R0,#+3
-   \   00000390   0xD10B             BNE.N    ??RoadBrd_ProcessBGMChar_18
-    828                {
-    829                  ble.TackCnt = 0;
-   \   00000392   0x2000             MOVS     R0,#+0
-   \   00000394   0x....             LDR.N    R1,??DataTable25_2
-   \   00000396   0xF8A1 0x019C      STRH     R0,[R1, #+412]
-    830                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
-   \   0000039A   0x....             LDR.N    R1,??DataTable25_50
-   \   0000039C   0x2000             MOVS     R0,#+0
-   \   0000039E   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   000003A2   0x0007             MOVS     R7,R0
-    831                  // Set Sync Flag for Frame.
-    832                    BGM111_SetSyncFlg( SYNC_PROC );
-   \   000003A4   0x2001             MOVS     R0,#+1
-   \   000003A6   0x.... 0x....      BL       BGM111_SetSyncFlg
-    833                }
-    834                // OK...Now we need to process what is in the TACK Section.
-    835          #ifdef XML_SHRT      
-    836                //********************************************************************************
-    837                //*
-    838                //*  Abbreviate XML Code Processing here for Platinum Initial Release
-    839                //*
-    840                //********************************************************************************
-    841                // A. Strip off Opening <TACK>.
-    842                tempPstr = (char *)&tempBffr2[6];
+   \   00000394   0x....             LDR.N    R0,??DataTable25_2
+   \   00000396   0xF890 0x019A      LDRB     R0,[R0, #+410]
+   \   0000039A   0x2803             CMP      R0,#+3
+   \   0000039C   0xD10B             BNE.N    ??RoadBrd_ProcessBGMChar_18
+    831                {
+    832                  ble.TackCnt = 0;
+   \   0000039E   0x2000             MOVS     R0,#+0
+   \   000003A0   0x....             LDR.N    R1,??DataTable25_2
+   \   000003A2   0xF8A1 0x019C      STRH     R0,[R1, #+412]
+    833                  Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<TACK Received.>");
+   \   000003A6   0x....             LDR.N    R1,??DataTable25_50
+   \   000003A8   0x2000             MOVS     R0,#+0
+   \   000003AA   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000003AE   0x0007             MOVS     R7,R0
+    834                  // Set Sync Flag for Frame.
+    835                    BGM111_SetSyncFlg( SYNC_PROC );
+   \   000003B0   0x2001             MOVS     R0,#+1
+   \   000003B2   0x.... 0x....      BL       BGM111_SetSyncFlg
+    836                }
+    837                // OK...Now we need to process what is in the TACK Section.
+    838          #ifdef XML_SHRT      
+    839                //********************************************************************************
+    840                //*
+    841                //*  Abbreviate XML Code Processing here for Platinum Initial Release
+    842                //*
+    843                //********************************************************************************
+    844                // A. Strip off Opening <TACK>.
+    845                tempPstr = (char *)&tempBffr2[6];
    \                     ??RoadBrd_ProcessBGMChar_18: (+1)
-   \   000003AA   0x....             LDR.N    R0,??DataTable25_51
-   \   000003AC   0x0005             MOVS     R5,R0
-    843                strcpy(tempstr, tempPstr);
-   \   000003AE   0x0029             MOVS     R1,R5
-   \   000003B0   0xA818             ADD      R0,SP,#+96
-   \   000003B2   0x.... 0x....      BL       strcpy
-    844                //************************ SEQUENCE OF TEST TO TYPE OF OPERATION
-    845                // B. Time to Test String
-    846                // Is this a <CMD>/Monitor Command
-    847                tempPstr = strstr( tempstr, "</TACK>" );
-   \   000003B6   0x....             LDR.N    R1,??DataTable25_52
-   \   000003B8   0xA818             ADD      R0,SP,#+96
-   \   000003BA   0x.... 0x....      BL       strstr
-   \   000003BE   0x0005             MOVS     R5,R0
-    848                if (tempPstr  != NULL)
-   \   000003C0   0x2D00             CMP      R5,#+0
-   \   000003C2   0xD02F             BEQ.N    ??RoadBrd_ProcessBGMChar_21
-    849                {
-    850                  // Now NULL Out where Tag is at.
-    851                  *tempPstr = NULL;
-   \   000003C4   0x2000             MOVS     R0,#+0
-   \   000003C6   0x7028             STRB     R0,[R5, #+0]
-    852                  // Is this a Monitor Command?
-    853                  if (strlen(tempstr) > 0)
-   \   000003C8   0xA818             ADD      R0,SP,#+96
-   \   000003CA   0x.... 0x....      BL       strlen
-   \   000003CE   0x2800             CMP      R0,#+0
-   \   000003D0   0xD028             BEQ.N    ??RoadBrd_ProcessBGMChar_21
-    854                  {
-    855                    // Finally, Send string to Parser.
-    856                    Status = RoadBrd_ParserTsk(tempstr);
-   \   000003D2   0xA818             ADD      R0,SP,#+96
-   \   000003D4   0x.... 0x....      BL       RoadBrd_ParserTsk
-   \   000003D8   0x0007             MOVS     R7,R0
-    857                    if (Status == HAL_BUSY)
-   \   000003DA   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-   \   000003DC   0x2F02             CMP      R7,#+2
-   \   000003DE   0xD10F             BNE.N    ??RoadBrd_ProcessBGMChar_22
-    858                    {
-    859                      sprintf( (char *)tempBffr3, "<STATUS>CMD_BUSY</STATUS>" );
-   \   000003E0   0x....             LDR.N    R1,??DataTable25_53
-   \   000003E2   0xA804             ADD      R0,SP,#+16
-   \   000003E4   0x.... 0x....      BL       sprintf
-    860                      Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
-   \   000003E8   0xA904             ADD      R1,SP,#+16
-   \   000003EA   0x2000             MOVS     R0,#+0
-   \   000003EC   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   000003F0   0x0007             MOVS     R7,R0
-    861                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   000003F2   0x....             LDR.N    R0,??DataTable25_29
-   \   000003F4   0x.... 0x....      BL       strlen
-   \   000003F8   0x....             LDR.N    R1,??DataTable25_29
-   \   000003FA   0x.... 0x....      BL       BGM111_Transmit
-   \   000003FE   0xE011             B.N      ??RoadBrd_ProcessBGMChar_21
-    862                    }
-    863                    else if (Status != HAL_OK)
+   \   000003B6   0x....             LDR.N    R0,??DataTable25_51
+   \   000003B8   0x0005             MOVS     R5,R0
+    846                strcpy(tempstr, tempPstr);
+   \   000003BA   0x0029             MOVS     R1,R5
+   \   000003BC   0xA818             ADD      R0,SP,#+96
+   \   000003BE   0x.... 0x....      BL       strcpy
+    847                //************************ SEQUENCE OF TEST TO TYPE OF OPERATION
+    848                // B. Time to Test String
+    849                // Is this a <CMD>/Monitor Command
+    850                tempPstr = strstr( tempstr, "</TACK>" );
+   \   000003C2   0x....             LDR.N    R1,??DataTable25_52
+   \   000003C4   0xA818             ADD      R0,SP,#+96
+   \   000003C6   0x.... 0x....      BL       strstr
+   \   000003CA   0x0005             MOVS     R5,R0
+    851                if (tempPstr  != NULL)
+   \   000003CC   0x2D00             CMP      R5,#+0
+   \   000003CE   0xD02F             BEQ.N    ??RoadBrd_ProcessBGMChar_21
+    852                {
+    853                  // Now NULL Out where Tag is at.
+    854                  *tempPstr = NULL;
+   \   000003D0   0x2000             MOVS     R0,#+0
+   \   000003D2   0x7028             STRB     R0,[R5, #+0]
+    855                  // Is this a Monitor Command?
+    856                  if (strlen(tempstr) > 0)
+   \   000003D4   0xA818             ADD      R0,SP,#+96
+   \   000003D6   0x.... 0x....      BL       strlen
+   \   000003DA   0x2800             CMP      R0,#+0
+   \   000003DC   0xD028             BEQ.N    ??RoadBrd_ProcessBGMChar_21
+    857                  {
+    858                    // Finally, Send string to Parser.
+    859                    Status = RoadBrd_ParserTsk(tempstr);
+   \   000003DE   0xA818             ADD      R0,SP,#+96
+   \   000003E0   0x.... 0x....      BL       RoadBrd_ParserTsk
+   \   000003E4   0x0007             MOVS     R7,R0
+    860                    if (Status == HAL_BUSY)
+   \   000003E6   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   000003E8   0x2F02             CMP      R7,#+2
+   \   000003EA   0xD10F             BNE.N    ??RoadBrd_ProcessBGMChar_22
+    861                    {
+    862                      sprintf( (char *)tempBffr3, "<STATUS>CMD_BUSY</STATUS>" );
+   \   000003EC   0x....             LDR.N    R1,??DataTable25_53
+   \   000003EE   0xA804             ADD      R0,SP,#+16
+   \   000003F0   0x.... 0x....      BL       sprintf
+    863                      Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+   \   000003F4   0xA904             ADD      R1,SP,#+16
+   \   000003F6   0x2000             MOVS     R0,#+0
+   \   000003F8   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   000003FC   0x0007             MOVS     R7,R0
+    864                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+   \   000003FE   0x....             LDR.N    R0,??DataTable25_29
+   \   00000400   0x.... 0x....      BL       strlen
+   \   00000404   0x....             LDR.N    R1,??DataTable25_29
+   \   00000406   0x.... 0x....      BL       BGM111_Transmit
+   \   0000040A   0xE011             B.N      ??RoadBrd_ProcessBGMChar_21
+    865                    }
+    866                    else if (Status != HAL_OK)
    \                     ??RoadBrd_ProcessBGMChar_22: (+1)
-   \   00000400   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-   \   00000402   0x2F00             CMP      R7,#+0
-   \   00000404   0xD00E             BEQ.N    ??RoadBrd_ProcessBGMChar_21
-    864                    {
-    865                      sprintf( (char *)tempBffr3, "<STATUS>CMD_ERROR</STATUS>" );
-   \   00000406   0x....             LDR.N    R1,??DataTable25_54
-   \   00000408   0xA804             ADD      R0,SP,#+16
-   \   0000040A   0x.... 0x....      BL       sprintf
-    866                      Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
-   \   0000040E   0xA904             ADD      R1,SP,#+16
-   \   00000410   0x2000             MOVS     R0,#+0
-   \   00000412   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   00000416   0x0007             MOVS     R7,R0
-    867                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-   \   00000418   0x....             LDR.N    R0,??DataTable25_29
-   \   0000041A   0x.... 0x....      BL       strlen
-   \   0000041E   0x....             LDR.N    R1,??DataTable25_29
-   \   00000420   0x.... 0x....      BL       BGM111_Transmit
-    868                    }
-    869                  }
-    870                }
-    871                // Generate an ACK Report.
-    872                sprintf( (char *)tempBffr2, "<STATUS>ST_ACK:%s</STATUS>", RoadBrd_WWDG_GetTickString() );
+   \   0000040C   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   0000040E   0x2F00             CMP      R7,#+0
+   \   00000410   0xD00E             BEQ.N    ??RoadBrd_ProcessBGMChar_21
+    867                    {
+    868                      sprintf( (char *)tempBffr3, "<STATUS>CMD_ERROR</STATUS>" );
+   \   00000412   0x....             LDR.N    R1,??DataTable25_54
+   \   00000414   0xA804             ADD      R0,SP,#+16
+   \   00000416   0x.... 0x....      BL       sprintf
+    869                      Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+   \   0000041A   0xA904             ADD      R1,SP,#+16
+   \   0000041C   0x2000             MOVS     R0,#+0
+   \   0000041E   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000422   0x0007             MOVS     R7,R0
+    870                      BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+   \   00000424   0x....             LDR.N    R0,??DataTable25_29
+   \   00000426   0x.... 0x....      BL       strlen
+   \   0000042A   0x....             LDR.N    R1,??DataTable25_29
+   \   0000042C   0x.... 0x....      BL       BGM111_Transmit
+    871                    }
+    872                  }
+    873                }
+    874                // Generate an ACK Report.
+    875                sprintf( (char *)tempBffr2, "<STATUS>ST_ACK:%s</STATUS>", RoadBrd_WWDG_GetTickString() );
    \                     ??RoadBrd_ProcessBGMChar_21: (+1)
-   \   00000424   0x.... 0x....      BL       RoadBrd_WWDG_GetTickString
-   \   00000428   0x0002             MOVS     R2,R0
-   \   0000042A   0x....             LDR.N    R1,??DataTable25_55
-   \   0000042C   0x....             LDR.N    R0,??DataTable25_29
-   \   0000042E   0x.... 0x....      BL       sprintf
-    873                Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-   \   00000432   0x....             LDR.N    R1,??DataTable25_29
-   \   00000434   0x2000             MOVS     R0,#+0
-   \   00000436   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   0000043A   0x0007             MOVS     R7,R0
-    874                if (Status != HAL_OK)
-   \   0000043C   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
-   \   0000043E   0x2F00             CMP      R7,#+0
-   \   00000440   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_23
-    875                  return Status;
-   \   00000442   0x0038             MOVS     R0,R7
-   \   00000444   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
-   \   00000446   0xE027             B.N      ??RoadBrd_ProcessBGMChar_4
-    876                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+   \   00000430   0x.... 0x....      BL       RoadBrd_WWDG_GetTickString
+   \   00000434   0x0002             MOVS     R2,R0
+   \   00000436   0x....             LDR.N    R1,??DataTable25_55
+   \   00000438   0x....             LDR.N    R0,??DataTable25_29
+   \   0000043A   0x.... 0x....      BL       sprintf
+    876                Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+   \   0000043E   0x....             LDR.N    R1,??DataTable25_29
+   \   00000440   0x2000             MOVS     R0,#+0
+   \   00000442   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   00000446   0x0007             MOVS     R7,R0
+    877                if (Status != HAL_OK)
+   \   00000448   0xB2FF             UXTB     R7,R7            ;; ZeroExt  R7,R7,#+24,#+24
+   \   0000044A   0x2F00             CMP      R7,#+0
+   \   0000044C   0xD002             BEQ.N    ??RoadBrd_ProcessBGMChar_23
+    878                  return Status;
+   \   0000044E   0x0038             MOVS     R0,R7
+   \   00000450   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   00000452   0xE027             B.N      ??RoadBrd_ProcessBGMChar_4
+    879                BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
    \                     ??RoadBrd_ProcessBGMChar_23: (+1)
-   \   00000448   0x....             LDR.N    R0,??DataTable25_29
-   \   0000044A   0x.... 0x....      BL       strlen
-   \   0000044E   0x....             LDR.N    R1,??DataTable25_29
-   \   00000450   0x.... 0x....      BL       BGM111_Transmit
-   \   00000454   0xE015             B.N      ??RoadBrd_ProcessBGMChar_7
-    877                //********************************************************************************
-    878                //*  END OF CUSTOM SECTION...Abbreviate XML Code Processing here for Platinum Initial Release
-    879                //********************************************************************************
-    880          #else      
-    881                //********************************************************************************
-    882                //*
-    883                //*  Normal XML Code Processing here for Platinum Release
-    884                //*
-    885                //********************************************************************************
-    886                // A. Strip off Opening <TACK>.
-    887                tempPstr = (char *)&tempBffr2[6];
-    888                strcpy(tempstr, tempPstr);
-    889                // A1. Find if we have a <DATE> Tag.
-    890                tempPstr = strstr( tempstr, "<DATE>" );
-    891                if (tempPstr != NULL)
-    892                {
-    893                  // Found DATE TAG....Set Focus to DATE Tag.
-    894                  strcpy(tempstr, tempPstr);
-    895                  // Now Strip out DATE Tag and Get Date.
-    896                  tempPstr = (char *)&tempstr[6];
-    897                  strcpy(tempstr2, tempPstr);
-    898                  strcpy(tempstr, tempPstr);
-    899                  // Find </DATE>
-    900                  tempPstr = strstr( tempstr2, "</DATE>" );
-    901                  if (tempPstr != NULL)
-    902                  {
-    903                    // Found Second String.....NULL It so that we can get Date
-    904                    //x = (int)tempPstr;
-    905                    //tempstr[x] = NULL;
-    906                    *tempPstr = NULL;
-    907                    //Now save Date String.
-    908                    RoadBrd_WWDG_SetDateString(tempstr2);
-    909                  }
-    910                  // Let's Advance past this date string.
-    911                  tempPstr = strstr( tempstr, "</DATE>" );
-    912                  strcpy(tempstr, tempPstr);
-    913                  // Now Strip out /DATE Tag and Get Date.
-    914                  tempPstr = (char *)&tempstr[7];
+   \   00000454   0x....             LDR.N    R0,??DataTable25_29
+   \   00000456   0x.... 0x....      BL       strlen
+   \   0000045A   0x....             LDR.N    R1,??DataTable25_29
+   \   0000045C   0x.... 0x....      BL       BGM111_Transmit
+   \   00000460   0xE015             B.N      ??RoadBrd_ProcessBGMChar_7
+    880                //********************************************************************************
+    881                //*  END OF CUSTOM SECTION...Abbreviate XML Code Processing here for Platinum Initial Release
+    882                //********************************************************************************
+    883          #else      
+    884                //********************************************************************************
+    885                //*
+    886                //*  Normal XML Code Processing here for Platinum Release
+    887                //*
+    888                //********************************************************************************
+    889                // A. Strip off Opening <TACK>.
+    890                tempPstr = (char *)&tempBffr2[6];
+    891                strcpy(tempstr, tempPstr);
+    892                // A1. Find if we have a <DATE> Tag.
+    893                tempPstr = strstr( tempstr, "<DATE>" );
+    894                if (tempPstr != NULL)
+    895                {
+    896                  // Found DATE TAG....Set Focus to DATE Tag.
+    897                  strcpy(tempstr, tempPstr);
+    898                  // Now Strip out DATE Tag and Get Date.
+    899                  tempPstr = (char *)&tempstr[6];
+    900                  strcpy(tempstr2, tempPstr);
+    901                  strcpy(tempstr, tempPstr);
+    902                  // Find </DATE>
+    903                  tempPstr = strstr( tempstr2, "</DATE>" );
+    904                  if (tempPstr != NULL)
+    905                  {
+    906                    // Found Second String.....NULL It so that we can get Date
+    907                    //x = (int)tempPstr;
+    908                    //tempstr[x] = NULL;
+    909                    *tempPstr = NULL;
+    910                    //Now save Date String.
+    911                    RoadBrd_WWDG_SetDateString(tempstr2);
+    912                  }
+    913                  // Let's Advance past this date string.
+    914                  tempPstr = strstr( tempstr, "</DATE>" );
     915                  strcpy(tempstr, tempPstr);
-    916                } 
-    917                //************************ SEQUENCE OF TEST TO TYPE OF OPERATION
-    918                // B. Time to Test String
-    919                // Is this a <CMD>/Monitor Command
-    920                tempPstr = strstr( tempstr, "<CMD>" );
-    921                if (tempPstr  != NULL)
-    922                {
-    923                  // Yes This is a Monitor CMD... Parse out Key CMD and pass to parser.
-    924                  strcpy((char *)tempBffr2, tempPstr);
-    925                  tempPstr = (char *)&tempBffr2[5];
-    926                  strcpy(tempstr, tempPstr);
-    927                  // Finally, Send string to Parser.
-    928                  Status = RoadBrd_ParserTsk(tempstr);
-    929                  if (Status == HAL_BUSY)
-    930                  {
-    931                    sprintf( (char *)tempBffr3, "<STATUS>CMD_BUSY</STATUS>" );
-    932                    Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
-    933                  }
-    934                  else if (Status != HAL_OK)
-    935                  {
-    936                    sprintf( (char *)tempBffr3, "<STATUS>CMD_ERROR</STATUS>" );
-    937                    Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
-    938                  }
-    939                }
-    940                else
-    941                {
-    942                  // Generate an ACK Report.
-    943                  sprintf( (char *)tempBffr2, "<STATUS>ST_ACK:%s</STATUS>", RoadBrd_WWDG_GetDateString() );
-    944                  Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
-    945                  if (Status != HAL_OK)
-    946                    return Status;
-    947                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
-    948                }
-    949                //********************************************************************************
-    950                //*  END OF CUSTOM SECTION...Normal XML Code Processing here for Platinum Release
-    951                //********************************************************************************
-    952          #endif      
-    953              } // EndIf (strncmp((char *)tempBffr2,"<TACK>",6) == 0)
-    954              // NOW TEST ERROR CONDITIONS!!!
-    955              // OVERFLOW?
-    956              else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)
+    916                  // Now Strip out /DATE Tag and Get Date.
+    917                  tempPstr = (char *)&tempstr[7];
+    918                  strcpy(tempstr, tempPstr);
+    919                } 
+    920                //************************ SEQUENCE OF TEST TO TYPE OF OPERATION
+    921                // B. Time to Test String
+    922                // Is this a <CMD>/Monitor Command
+    923                tempPstr = strstr( tempstr, "<CMD>" );
+    924                if (tempPstr  != NULL)
+    925                {
+    926                  // Yes This is a Monitor CMD... Parse out Key CMD and pass to parser.
+    927                  strcpy((char *)tempBffr2, tempPstr);
+    928                  tempPstr = (char *)&tempBffr2[5];
+    929                  strcpy(tempstr, tempPstr);
+    930                  // Finally, Send string to Parser.
+    931                  Status = RoadBrd_ParserTsk(tempstr);
+    932                  if (Status == HAL_BUSY)
+    933                  {
+    934                    sprintf( (char *)tempBffr3, "<STATUS>CMD_BUSY</STATUS>" );
+    935                    Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+    936                  }
+    937                  else if (Status != HAL_OK)
+    938                  {
+    939                    sprintf( (char *)tempBffr3, "<STATUS>CMD_ERROR</STATUS>" );
+    940                    Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr3);
+    941                  }
+    942                }
+    943                else
+    944                {
+    945                  // Generate an ACK Report.
+    946                  sprintf( (char *)tempBffr2, "<STATUS>ST_ACK:%s</STATUS>", RoadBrd_WWDG_GetDateString() );
+    947                  Status = RoadBrd_UART_Transmit(MONITOR_UART, tempBffr2);
+    948                  if (Status != HAL_OK)
+    949                    return Status;
+    950                  BGM111_Transmit((uint32_t)(strlen((char *)tempBffr2)), tempBffr2);
+    951                }
+    952                //********************************************************************************
+    953                //*  END OF CUSTOM SECTION...Normal XML Code Processing here for Platinum Release
+    954                //********************************************************************************
+    955          #endif      
+    956              } // EndIf (strncmp((char *)tempBffr2,"<TACK>",6) == 0)
+    957              // NOW TEST ERROR CONDITIONS!!!
+    958              // OVERFLOW?
+    959              else if (strncmp((char *)tempBffr2,"OVERFLOW",8) == 0)
    \                     ??RoadBrd_ProcessBGMChar_15: (+1)
-   \   00000456   0x2208             MOVS     R2,#+8
-   \   00000458   0x....             LDR.N    R1,??DataTable25_56
-   \   0000045A   0x....             LDR.N    R0,??DataTable25_29
-   \   0000045C   0x.... 0x....      BL       strncmp
-   \   00000460   0x2800             CMP      R0,#+0
-   \   00000462   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_24
-    957              {
-    958                // Yes....Report Error and Reset.
-    959                // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
-    960                RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
-   \   00000464   0x2102             MOVS     R1,#+2
-   \   00000466   0x2011             MOVS     R0,#+17
-   \   00000468   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
-    961                RdBrd_BlinkErrCd( ERROR_BGM_OVERFLOW );
-   \   0000046C   0x2011             MOVS     R0,#+17
-   \   0000046E   0x.... 0x....      BL       RdBrd_BlinkErrCd
-    962                HAL_NVIC_SystemReset();
-   \   00000472   0x.... 0x....      BL       HAL_NVIC_SystemReset
-   \   00000476   0xE004             B.N      ??RoadBrd_ProcessBGMChar_7
-    963              }
-    964              else
-    965              {
-    966                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<UNKNOWN STATUS> ");
+   \   00000462   0x2208             MOVS     R2,#+8
+   \   00000464   0x....             LDR.N    R1,??DataTable25_56
+   \   00000466   0x....             LDR.N    R0,??DataTable25_29
+   \   00000468   0x.... 0x....      BL       strncmp
+   \   0000046C   0x2800             CMP      R0,#+0
+   \   0000046E   0xD109             BNE.N    ??RoadBrd_ProcessBGMChar_24
+    960              {
+    961                // Yes....Report Error and Reset.
+    962                // We have detected a ERROR_TXBGMBUF_FULL error on BGM111...Log it!
+    963                RdBrd_ErrCdLogErrCd( ERROR_BGM_OVERFLOW, MODULE_bgm111 );
+   \   00000470   0x2102             MOVS     R1,#+2
+   \   00000472   0x2011             MOVS     R0,#+17
+   \   00000474   0x.... 0x....      BL       RdBrd_ErrCdLogErrCd
+    964                RdBrd_BlinkErrCd( ERROR_BGM_OVERFLOW );
+   \   00000478   0x2011             MOVS     R0,#+17
+   \   0000047A   0x.... 0x....      BL       RdBrd_BlinkErrCd
+    965                HAL_NVIC_SystemReset();
+   \   0000047E   0x.... 0x....      BL       HAL_NVIC_SystemReset
+   \   00000482   0xE004             B.N      ??RoadBrd_ProcessBGMChar_7
+    966              }
+    967              else
+    968              {
+    969                Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)"<UNKNOWN STATUS> ");
    \                     ??RoadBrd_ProcessBGMChar_24: (+1)
-   \   00000478   0x....             LDR.N    R1,??DataTable25_57
-   \   0000047A   0x2000             MOVS     R0,#+0
-   \   0000047C   0x.... 0x....      BL       RoadBrd_UART_Transmit
-   \   00000480   0x0007             MOVS     R7,R0
-    967              }
-    968              // Finally Clear the Buffer. We have completed the parsing of this event.
-    969              for (x=0; x<TEMP_BUFF_LENGTH; x++)
+   \   00000484   0x....             LDR.N    R1,??DataTable25_57
+   \   00000486   0x2000             MOVS     R0,#+0
+   \   00000488   0x.... 0x....      BL       RoadBrd_UART_Transmit
+   \   0000048C   0x0007             MOVS     R7,R0
+    970              }
+    971              // Finally Clear the Buffer. We have completed the parsing of this event.
+    972              for (x=0; x<TEMP_BUFF_LENGTH; x++)
    \                     ??RoadBrd_ProcessBGMChar_7: (+1)
-   \   00000482   0x2000             MOVS     R0,#+0
-   \   00000484   0x0006             MOVS     R6,R0
+   \   0000048E   0x2000             MOVS     R0,#+0
+   \   00000490   0x0006             MOVS     R6,R0
    \                     ??RoadBrd_ProcessBGMChar_25: (+1)
-   \   00000486   0x2EFF             CMP      R6,#+255
-   \   00000488   0xDC04             BGT.N    ??RoadBrd_ProcessBGMChar_1
-    970              {
-    971                tempBffr2[x]= NULL;
-   \   0000048A   0x2000             MOVS     R0,#+0
-   \   0000048C   0x....             LDR.N    R1,??DataTable25_29
-   \   0000048E   0x5588             STRB     R0,[R1, R6]
-    972              }
-   \   00000490   0x1C76             ADDS     R6,R6,#+1
-   \   00000492   0xE7F8             B.N      ??RoadBrd_ProcessBGMChar_25
-    973            } // EndIf ( (c == 0x0a)  || (c == '?') )
-    974            //tempBffr2[0] = c;
-    975            //tempBffr2[1] = 0x00;
-    976            //Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
-    977            return Status;
+   \   00000492   0x2EFF             CMP      R6,#+255
+   \   00000494   0xDC04             BGT.N    ??RoadBrd_ProcessBGMChar_1
+    973              {
+    974                tempBffr2[x]= NULL;
+   \   00000496   0x2000             MOVS     R0,#+0
+   \   00000498   0x....             LDR.N    R1,??DataTable25_29
+   \   0000049A   0x5588             STRB     R0,[R1, R6]
+    975              }
+   \   0000049C   0x1C76             ADDS     R6,R6,#+1
+   \   0000049E   0xE7F8             B.N      ??RoadBrd_ProcessBGMChar_25
+    976            } // EndIf ( (c == 0x0a)  || (c == '?') )
+    977            //tempBffr2[0] = c;
+    978            //tempBffr2[1] = 0x00;
+    979            //Status = RoadBrd_UART_Transmit(MONITOR_UART, (uint8_t *)tempBffr2);
+    980            return Status;
    \                     ??RoadBrd_ProcessBGMChar_1: (+1)
-   \   00000494   0x0038             MOVS     R0,R7
-   \   00000496   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
+   \   000004A0   0x0038             MOVS     R0,R7
+   \   000004A2   0xB2C0             UXTB     R0,R0            ;; ZeroExt  R0,R0,#+24,#+24
    \                     ??RoadBrd_ProcessBGMChar_4: (+1)
-   \   00000498   0xB059             ADD      SP,SP,#+356
-   \   0000049A   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
-    978          #if 0
-    979              Status = HAL_OK;
-    980              // Test Buffer. If we are full, An error has occured. Must at least log that.
-    981              if (IsBufFull(ble.rx_wr, ble.rx_rd))
-    982              {
-    983                RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
-    984                Clr_HrtBeat_Cnt();
-    985                RdBrd_BlinkErrCd( ERROR_BGMBUF_FULL );
-    986                //RoadBrd_Delay( 1000 );
-    987                HAL_NVIC_SystemReset();
-    988                return HAL_ERROR;
-    989              }
-    990              /* Execution based on state */
-    991              switch (ble.rx_state)
-    992              {
-    993                /* Waiting for a valid start of header */
-    994                default:
-    995                case BGRX_SYNC:
-    996                  /* Valid start of header? (response or event) */
-    997                  if ((c & 0xF8) ==
-    998                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_rsp) ||
-    999                      (c & 0xF8) ==
-   1000                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_evt))
-   1001                  {
-   1002                    /* Receiving header */
-   1003                    ble.rx_state = BGRX_HDR;
-   1004                    /* Initialize header byte counter */
-   1005                    header_cnt = 0;
-   1006                  }
-   1007                  else
-   1008                  {
-   1009                    /* Stay in sync state until we receive a valid start of header */
-   1010                    // We have detected a SYNC error on BGM111...Log it!
-   1011                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
-   1012                    Clr_HrtBeat_Cnt();
-   1013                    if (ble.booted)
-   1014                      RdBrd_BlinkErrCd( ERROR_BGMSYNC );
-   1015                    //RoadBrd_Delay( 1000 );
-   1016                    HAL_NVIC_SystemReset();
-   1017                    break;
-   1018                  }
-   1019                  /* Fallthrough intentional */
-   1020                /* Receiving header */
-   1021                case BGRX_HDR:
-   1022                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
-   1023                  {
-   1024                    // Oops...Detected a fatal error...RESET!!!
-   1025                    // We have detected a SYNC error on BGM111...Log it!
-   1026                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
-   1027                    /* Indicate we need to execute the BLE stack, it's the
-   1028                     * only way to get more space in the buffer */
-   1029                    ble.req_exec = true;
-   1030                    /* We're back to synchronizing */
-   1031                    ble.rx_state = BGRX_SYNC;
-   1032                  }
-   1033                  else
-   1034                  {
-   1035                    /* Save the received byte */
-   1036                    /* Save the received byte */
-   1037                    ble.rx_buf[ble.rx_wr] = c;
-   1038                    /* Increment the index and header byte counter */
-   1039                    ble.rx_wr = NextBufIdx(ble.rx_wr);
-   1040                    header_cnt++;
-   1041                    /* If this is the second header byte, we can grab the payload
-   1042                     * length.  We ignore the first byte, since the spec says that
-   1043                     * due to memory limitations in the modules, the packet is
-   1044                     * never more than 64 bytes. */
-   1045                    if (header_cnt == 2)
-   1046                    {
-   1047                      /* Get the payload length */
-   1048                      payload_len = c;
-   1049                      /* If we have a payload bigger than 60 bytes, something's wrong */
-   1050                      if (payload_len > 60)
-   1051                      {
-   1052                        // We have detected a SYNC error on BGM111...Log it!
-   1053                        RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
-   1054                        /* Reset receive state to synchronizing */
-   1055                        ble.rx_state = BGRX_SYNC;
-   1056                        /* Indicate we need to execute the BLE stack to free space */
-   1057                        ble.req_exec = true;
-   1058                        Status = HAL_ERROR;
-   1059                      }
-   1060                    } // EndIf (header_cnt == 2)
-   1061                    /* Are we done with the header? */
-   1062                    if (header_cnt >= BGLIB_MSG_HEADER_LEN)
-   1063                    {
-   1064                      /* Is there no payload? */
-   1065                      if (payload_len == 0)
-   1066                      {
-   1067                        /* Reset receive state to synchronizing */
-   1068                        ble.rx_state = BGRX_SYNC;
-   1069                        /* Indicate we need to execute the BLE stack to process 
-   1070                         * the received packet */
-   1071                        ble.req_exec = true;
-   1072                      }
-   1073                      else
-   1074                      {
-   1075                        /* Start receiving payload data */
-   1076                        ble.rx_state = BGRX_DATA;
-   1077                        /* Initialize the payload counter */
-   1078                        payload_cnt = 0;
-   1079                      }
-   1080                    } // EndIf (header_cnt >= BGLIB_MSG_HEADER_LEN)
-   1081                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
-   1082                  break;
-   1083                /* Receiving data */
-   1084                case BGRX_DATA:
-   1085                  /* Did we receive a byte, but the buffer is full? */
-   1086                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
-   1087                  {
-   1088                    /* Indicate we need to execute the BLE stack, it's the
-   1089                     * only way to get more space in the buffer */
-   1090                    ble.req_exec = true;
-   1091                    /* We're back to synchronizing */
-   1092                    ble.rx_state = BGRX_SYNC;
-   1093                  }
-   1094                  else
-   1095                  {
-   1096                    /* Store the byte */
-   1097                    ble.rx_buf[ble.rx_wr] = c;
-   1098                    /* Increment the index and payload byte counter */
-   1099                    ble.rx_wr = NextBufIdx(ble.rx_wr);
-   1100                    payload_cnt++;
-   1101                    /* Is this the end of the packet? */
-   1102                    if (payload_cnt >= payload_len)
-   1103                    {
-   1104                      /* Reset receive state to synchronizing */
-   1105                      ble.rx_state = BGRX_SYNC;
-   1106                      /* Indicate we need to execute the BLE stack to process 
-   1107                       * the received packet */
-   1108                      ble.req_exec = true;
-   1109                    }
-   1110                    /* Is the buffer almost full? */
-   1111                    if (BufFree(ble.rx_wr, ble.rx_rd) <= BG_DATA_LOW_WATERMARK)
-   1112                    {
-   1113                      /* Indicate we need to execute the BLE stack so it can
-   1114                       * start reading data from the buffer */
-   1115                      ble.req_exec = true;
-   1116                    }
-   1117                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
-   1118                  break;
-   1119              } // EndSwitch (ble.rx_state)
-   1120              return Status;
-   1121          #endif
-   1122          }
+   \   000004A4   0xB059             ADD      SP,SP,#+356
+   \   000004A6   0xE8BD 0x8FF0      POP      {R4-R11,PC}      ;; return
+    981          #if 0
+    982              Status = HAL_OK;
+    983              // Test Buffer. If we are full, An error has occured. Must at least log that.
+    984              if (IsBufFull(ble.rx_wr, ble.rx_rd))
+    985              {
+    986                RdBrd_ErrCdLogErrCd( ERROR_BGMBUF_FULL, MODULE_bgm111 );
+    987                Clr_HrtBeat_Cnt();
+    988                RdBrd_BlinkErrCd( ERROR_BGMBUF_FULL );
+    989                //RoadBrd_Delay( 1000 );
+    990                HAL_NVIC_SystemReset();
+    991                return HAL_ERROR;
+    992              }
+    993              /* Execution based on state */
+    994              switch (ble.rx_state)
+    995              {
+    996                /* Waiting for a valid start of header */
+    997                default:
+    998                case BGRX_SYNC:
+    999                  /* Valid start of header? (response or event) */
+   1000                  if ((c & 0xF8) ==
+   1001                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_rsp) ||
+   1002                      (c & 0xF8) ==
+   1003                      ((uint8_t)gecko_dev_type_gecko | (uint8_t)gecko_msg_type_evt))
+   1004                  {
+   1005                    /* Receiving header */
+   1006                    ble.rx_state = BGRX_HDR;
+   1007                    /* Initialize header byte counter */
+   1008                    header_cnt = 0;
+   1009                  }
+   1010                  else
+   1011                  {
+   1012                    /* Stay in sync state until we receive a valid start of header */
+   1013                    // We have detected a SYNC error on BGM111...Log it!
+   1014                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+   1015                    Clr_HrtBeat_Cnt();
+   1016                    if (ble.booted)
+   1017                      RdBrd_BlinkErrCd( ERROR_BGMSYNC );
+   1018                    //RoadBrd_Delay( 1000 );
+   1019                    HAL_NVIC_SystemReset();
+   1020                    break;
+   1021                  }
+   1022                  /* Fallthrough intentional */
+   1023                /* Receiving header */
+   1024                case BGRX_HDR:
+   1025                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
+   1026                  {
+   1027                    // Oops...Detected a fatal error...RESET!!!
+   1028                    // We have detected a SYNC error on BGM111...Log it!
+   1029                    RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+   1030                    /* Indicate we need to execute the BLE stack, it's the
+   1031                     * only way to get more space in the buffer */
+   1032                    ble.req_exec = true;
+   1033                    /* We're back to synchronizing */
+   1034                    ble.rx_state = BGRX_SYNC;
+   1035                  }
+   1036                  else
+   1037                  {
+   1038                    /* Save the received byte */
+   1039                    /* Save the received byte */
+   1040                    ble.rx_buf[ble.rx_wr] = c;
+   1041                    /* Increment the index and header byte counter */
+   1042                    ble.rx_wr = NextBufIdx(ble.rx_wr);
+   1043                    header_cnt++;
+   1044                    /* If this is the second header byte, we can grab the payload
+   1045                     * length.  We ignore the first byte, since the spec says that
+   1046                     * due to memory limitations in the modules, the packet is
+   1047                     * never more than 64 bytes. */
+   1048                    if (header_cnt == 2)
+   1049                    {
+   1050                      /* Get the payload length */
+   1051                      payload_len = c;
+   1052                      /* If we have a payload bigger than 60 bytes, something's wrong */
+   1053                      if (payload_len > 60)
+   1054                      {
+   1055                        // We have detected a SYNC error on BGM111...Log it!
+   1056                        RdBrd_ErrCdLogErrCd( ERROR_BGMSYNC, MODULE_bgm111 );
+   1057                        /* Reset receive state to synchronizing */
+   1058                        ble.rx_state = BGRX_SYNC;
+   1059                        /* Indicate we need to execute the BLE stack to free space */
+   1060                        ble.req_exec = true;
+   1061                        Status = HAL_ERROR;
+   1062                      }
+   1063                    } // EndIf (header_cnt == 2)
+   1064                    /* Are we done with the header? */
+   1065                    if (header_cnt >= BGLIB_MSG_HEADER_LEN)
+   1066                    {
+   1067                      /* Is there no payload? */
+   1068                      if (payload_len == 0)
+   1069                      {
+   1070                        /* Reset receive state to synchronizing */
+   1071                        ble.rx_state = BGRX_SYNC;
+   1072                        /* Indicate we need to execute the BLE stack to process 
+   1073                         * the received packet */
+   1074                        ble.req_exec = true;
+   1075                      }
+   1076                      else
+   1077                      {
+   1078                        /* Start receiving payload data */
+   1079                        ble.rx_state = BGRX_DATA;
+   1080                        /* Initialize the payload counter */
+   1081                        payload_cnt = 0;
+   1082                      }
+   1083                    } // EndIf (header_cnt >= BGLIB_MSG_HEADER_LEN)
+   1084                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
+   1085                  break;
+   1086                /* Receiving data */
+   1087                case BGRX_DATA:
+   1088                  /* Did we receive a byte, but the buffer is full? */
+   1089                  if (IsBufFull(ble.rx_wr, ble.rx_rd))
+   1090                  {
+   1091                    /* Indicate we need to execute the BLE stack, it's the
+   1092                     * only way to get more space in the buffer */
+   1093                    ble.req_exec = true;
+   1094                    /* We're back to synchronizing */
+   1095                    ble.rx_state = BGRX_SYNC;
+   1096                  }
+   1097                  else
+   1098                  {
+   1099                    /* Store the byte */
+   1100                    ble.rx_buf[ble.rx_wr] = c;
+   1101                    /* Increment the index and payload byte counter */
+   1102                    ble.rx_wr = NextBufIdx(ble.rx_wr);
+   1103                    payload_cnt++;
+   1104                    /* Is this the end of the packet? */
+   1105                    if (payload_cnt >= payload_len)
+   1106                    {
+   1107                      /* Reset receive state to synchronizing */
+   1108                      ble.rx_state = BGRX_SYNC;
+   1109                      /* Indicate we need to execute the BLE stack to process 
+   1110                       * the received packet */
+   1111                      ble.req_exec = true;
+   1112                    }
+   1113                    /* Is the buffer almost full? */
+   1114                    if (BufFree(ble.rx_wr, ble.rx_rd) <= BG_DATA_LOW_WATERMARK)
+   1115                    {
+   1116                      /* Indicate we need to execute the BLE stack so it can
+   1117                       * start reading data from the buffer */
+   1118                      ble.req_exec = true;
+   1119                    }
+   1120                  } // EndElse (IsBufFull(ble.rx_wr, ble.rx_rd))
+   1121                  break;
+   1122              } // EndSwitch (ble.rx_state)
+   1123              return Status;
+   1124          #endif
+   1125          }
 
    \                                 In section .bss, align 4
    \                     `RoadBrd_ProcessBGMChar::tempBffr2`:
@@ -2544,90 +2550,90 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
    \                                 In section .bss, align 2
    \                     `RoadBrd_ProcessBGMChar::in_ptr`:
    \   00000000                      DS8 2
-   1123          
-   1124          /**
-   1125            * @brief  This routine returns the status of the ble.req_exec flag
-   1126            *         from the BGM111
-   1127            * @param  None
-   1128            * @retval bool:     true(1):     Processing of packet about to start
-   1129            *                   false(0):      No processing pending.
-   1130            */
+   1126          
+   1127          /**
+   1128            * @brief  This routine returns the status of the ble.req_exec flag
+   1129            *         from the BGM111
+   1130            * @param  None
+   1131            * @retval bool:     true(1):     Processing of packet about to start
+   1132            *                   false(0):      No processing pending.
+   1133            */
 
    \                                 In section .text, align 2, keep-with-next
-   1131          bool RoadBrd_tstReqexec( void )
-   1132          {
-   1133            return ble.req_exec;
+   1134          bool RoadBrd_tstReqexec( void )
+   1135          {
+   1136            return ble.req_exec;
    \                     RoadBrd_tstReqexec: (+1)
    \   00000000   0x....             LDR.N    R0,??DataTable25_2
    \   00000002   0xF890 0x0195      LDRB     R0,[R0, #+405]
    \   00000006   0x4770             BX       LR               ;; return
-   1134          }
-   1135          
-   1136          /**
-   1137            * @brief  This routine tests the passed string and then updates bgm_Bannerstr.
-   1138            * @param  char *string1: Character string to be saved.
-   1139            * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
-   1140            *                                HAL_ERROR:    Error found in Tasking or data passed.
-   1141            */
+   1137          }
+   1138          
+   1139          /**
+   1140            * @brief  This routine tests the passed string and then updates bgm_Bannerstr.
+   1141            * @param  char *string1: Character string to be saved.
+   1142            * @retval HAL_StatusTypeDef:     HAL_OK:       Tasking of block of data to UART success.
+   1143            *                                HAL_ERROR:    Error found in Tasking or data passed.
+   1144            */
 
    \                                 In section .text, align 2, keep-with-next
-   1142          HAL_StatusTypeDef set_BGMBanner( char *string1 )
-   1143          {
+   1145          HAL_StatusTypeDef set_BGMBanner( char *string1 )
+   1146          {
    \                     set_BGMBanner: (+1)
    \   00000000   0xB538             PUSH     {R3-R5,LR}
    \   00000002   0x0004             MOVS     R4,R0
-   1144            int x;
-   1145            
-   1146            // Check Length of passed String
-   1147            if (strlen(string1) > BGM_BANNER_LENGTH)
+   1147            int x;
+   1148            
+   1149            // Check Length of passed String
+   1150            if (strlen(string1) > BGM_BANNER_LENGTH)
    \   00000004   0x0020             MOVS     R0,R4
    \   00000006   0x.... 0x....      BL       strlen
    \   0000000A   0x2829             CMP      R0,#+41
    \   0000000C   0xD301             BCC.N    ??set_BGMBanner_0
-   1148              return HAL_ERROR;
+   1151              return HAL_ERROR;
    \   0000000E   0x2001             MOVS     R0,#+1
    \   00000010   0xE00D             B.N      ??set_BGMBanner_1
-   1149            else
-   1150            {
-   1151              for (x=0; x<BGM_BANNER_LENGTH; x++)
+   1152            else
+   1153            {
+   1154              for (x=0; x<BGM_BANNER_LENGTH; x++)
    \                     ??set_BGMBanner_0: (+1)
    \   00000012   0x2000             MOVS     R0,#+0
    \   00000014   0x0005             MOVS     R5,R0
    \                     ??set_BGMBanner_2: (+1)
    \   00000016   0x2D28             CMP      R5,#+40
    \   00000018   0xDA04             BGE.N    ??set_BGMBanner_3
-   1152                bgm_Bannerstr[x] = 0x00;
+   1155                bgm_Bannerstr[x] = 0x00;
    \   0000001A   0x2000             MOVS     R0,#+0
    \   0000001C   0x....             LDR.N    R1,??DataTable25_58
    \   0000001E   0x5548             STRB     R0,[R1, R5]
    \   00000020   0x1C6D             ADDS     R5,R5,#+1
    \   00000022   0xE7F8             B.N      ??set_BGMBanner_2
-   1153              // Copy Passed string into bgm_Bannerstr
-   1154              strcpy( bgm_Bannerstr, string1 );
+   1156              // Copy Passed string into bgm_Bannerstr
+   1157              strcpy( bgm_Bannerstr, string1 );
    \                     ??set_BGMBanner_3: (+1)
    \   00000024   0x0021             MOVS     R1,R4
    \   00000026   0x....             LDR.N    R0,??DataTable25_58
    \   00000028   0x.... 0x....      BL       strcpy
-   1155              return HAL_OK;
+   1158              return HAL_OK;
    \   0000002C   0x2000             MOVS     R0,#+0
    \                     ??set_BGMBanner_1: (+1)
    \   0000002E   0xBD32             POP      {R1,R4,R5,PC}    ;; return
-   1156            }
-   1157          }
-   1158          
-   1159          /**
-   1160            * @brief  This routine returns a pointer to the BGM Banner String.
-   1161            * @retval char *string1: Character string to be saved.
-   1162            */
+   1159            }
+   1160          }
+   1161          
+   1162          /**
+   1163            * @brief  This routine returns a pointer to the BGM Banner String.
+   1164            * @retval char *string1: Character string to be saved.
+   1165            */
 
    \                                 In section .text, align 2, keep-with-next
-   1163          char *get_BGMBanner( void )
-   1164          {
-   1165            return ( bgm_Bannerstr );
+   1166          char *get_BGMBanner( void )
+   1167          {
+   1168            return ( bgm_Bannerstr );
    \                     get_BGMBanner: (+1)
    \   00000000   0x....             LDR.N    R0,??DataTable25_58
    \   00000002   0x4770             BX       LR               ;; return
-   1166          }
+   1169          }
 
    \                                 In section .text, align 4, keep-with-next
    \                     ??DataTable20:
@@ -3617,7 +3623,7 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
       18  BufUsed
       30  IsBufFull
       14  NextBufIdx
-    1182  RoadBrd_ProcessBGMChar
+    1194  RoadBrd_ProcessBGMChar
        8  RoadBrd_tstReqexec
       10  USART_ReceiveData
       12  USART_SendData
@@ -3649,9 +3655,9 @@ D:\GoogleDriveCLT\GoogleDrive\WeatherCloud\Roadboard\Software\Road-Board-Decembe
  5 771 bytes in section .bss
      8 bytes in section .data
    704 bytes in section .rodata
- 3 510 bytes in section .text
+ 3 522 bytes in section .text
  
- 3 494 bytes of CODE  memory (+ 16 bytes shared)
+ 3 506 bytes of CODE  memory (+ 16 bytes shared)
    704 bytes of CONST memory
  5 779 bytes of DATA  memory
 
